@@ -1,0 +1,13 @@
+#include <Dore.tmpl>
+
+    SRCS = cvtclrout.c xfdi_appatt.c xfdi_camera.c xfdi_data.c xfdi_drom.c \
+           xfdi_geoatt.c xfdi_light.c xfdi_map.c xfdi_modclip.c xfdi_update.c \
+	   xfdidr_output.c
+    OBJS = cvtclrout.o xfdi_appatt.o xfdi_camera.o xfdi_data.o xfdi_drom.o \
+           xfdi_geoatt.o xfdi_light.o xfdi_map.o xfdi_modclip.o xfdi_update.o \
+	   xfdidr_output.o
+
+LibraryObjectRule()
+SubdirLibraryRule($(OBJS))
+
+DependTarget()

@@ -1,0 +1,69 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DoTextureScaleUVW 3D "Dore"
+.SH NAME
+DoTextureScaleUVW \- Create a texture attribute object that sets the scale factors for primitive \f2uvw\fP coordinates
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+DtObject DoTextureScaleUVW(su, sv, sw)
+DtReal su;
+DtReal sv;
+DtReal sw;
+.sp
+.in  -.5i
+FORTRAN:
+.in  +.5i
+INTEGER*4 DOTSW(SU, SV, SW)
+REAL*8 SU
+REAL*8 SV
+REAL*8 SW
+.in  -.5i
+.fi 
+.IX "DoTextureScaleUVW"
+.IX "DOTSW"
+.SH DESCRIPTION
+.LP
+\f2DoTextureScaleUVW\fP creates a texture attribute object that defines
+the scaling values to be applied to the \f2uvw\fP coordinates of a primitive
+object before they are used to access a 3-dimensional texture.
+The parameter \f2su\fP is the scale factor in the \f3u\fP direction, 
+\f2sv\fP is the scale factor in the \f2v\fP direction,
+and \f2sw\fP is the scale factor in the \f2w\fP direction.
+.PP
+\f2DoTextureScaleUVW\fP is used in conjunction with
+\f2DoTextureTranslateUVW\fP <\f2DOTTW\fP>to completely specify how a primitive
+object's \f2uvw\fP coordinates are transformed before they are used to access
+the texture. 
+The \f2DoTextureScaleUVW\fP is always applied before the 
+\f2DoTextureTranslateUVW\fP, regardless of the sequence in the scene database.
+.SH DEFAULTS
+The default value for \f2DoTextureScaleUVW\fP is (1.,1.,1.).
+.SH SEE ALSO
+.nh
+.na
+DoTextureMapDiffuseColor(3D),
+DoTextureMapEnviron(3D),
+DoTextureMapBump(3D),
+DoTextureMapTranspIntens(3D),
+DoTextureScaleUV(3D),
+DoTextureTranslateUVW(3D)
+.ad
+.hy
+\&

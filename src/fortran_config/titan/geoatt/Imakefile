@@ -1,0 +1,9 @@
+#include <Dore.tmpl>
+
+    SRCS = flokatfrm.c fpopmat.c fpshmat.c frot.c fscl.c fshr.c ftfmmat.c ftrs.c
+    OBJS = flokatfrm.o fpopmat.o fpshmat.o frot.o fscl.o fshr.o ftfmmat.o ftrs.o
+
+LibraryObjectRule()
+SubdirLibraryRule($(OBJS))
+
+DependTarget()

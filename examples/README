@@ -1,0 +1,49 @@
+/**************************************************************************
+# Copyright (C) 1994 Kubota Graphics Corp.
+# 
+# Permission to use, copy, modify, and distribute this material for
+# any purpose and without fee is hereby granted, provided that the
+# above copyright notice and this permission notice appear in all
+# copies, and that the name of Kubota Graphics not be used in
+# advertising or publicity pertaining to this material.  Kubota
+# Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+# OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+# "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+# PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+# EXPRESS OR IMPLIED.
+**************************************************************************/
+ 
+This is the Dore examples directory. It contains the source code for
+many working example Dore programs and tools, and the makefile to build them.
+Included here are the following:
+
+	generic: contains two generic main routines "render.c" and run.c".
+		These routines are used by some of the example programs
+		to create working executables.
+
+	programs: contains some complete example programs which demonstrate
+                various Dore features. The example called "simple" is the
+                first example to look at if you are just starting to learn
+                Dore. The example called "fortran" is not automatically
+                built when you type "make" in this directory. However if you
+                have a Fortran compiler, you can "cd" to programs/fortran and
+                build the example by typing "make".
+
+	util:	contains some useful tools built on top of Dore. These
+		utilities are good examples of programming with
+		Dore.  Many of these utility routines are used by the
+		example programs.
+
+	makefile: builds all the example code.
+		Type "make" or "make single" to build everything in
+                single precision, or "make double" for double precision.
+		Type "make clean" to remove all objects and executables.
+
+	README: this file.
+
+
+
+In order to run any Dore programs that draw to the graphics console,
+The environment variable DISPLAY must be set and the X11 server and window
+manager must be running.

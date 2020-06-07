@@ -1,0 +1,11 @@
+#include <Dore.tmpl>
+
+    SRCS = clokatfrm.c cpopmat.c cpshmat.c crot.c cscl.c cshr.c \
+	   ctfmmat.c ctrs.c
+    OBJS = clokatfrm.o cpopmat.o cpshmat.o crot.o cscl.o cshr.o \
+	   ctfmmat.o ctrs.o
+
+LibraryObjectRule()
+SubdirLibraryRule($(OBJS))
+
+DependTarget()

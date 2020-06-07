@@ -1,0 +1,332 @@
+.\"#ident "%W%" %G%
+.\"
+.\" #
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  
+.\" # 
+.\" # KUBOTA GRAPHICS Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\" #
+.\"
+.sc
+.ds BT "\\*(Dd Developer's Guide
+.ds CT "Rendering Process
+.ds h1 5
+.so ../macros/local.me
+.PN 23
+.L1 R ENDERING 
+.L2 P ROCESS
+.CH FIVE
+This chapter offers an overview of the concepts involved in the
+\*(Dd rendering process: updating the renderer state, performing
+the traversal of the studio and display groups, and passing
+output data to a \*(Dd device output module.
+.H1 "Selecting a Renderer
+Application programs using \*(Dd define a scene of displayable objects
+as well as cameras and lights for the scene. 
+The scene is then associated with a view and a device for rendering.
+The \*(Dd system includes multiple renderers, so
+a renderer must be selected before the view can be rendered (or be \f2updated\f1,
+as is sometimes used in this manual).
+This is done by setting the \f2rendering style\f1
+for the view, using \f2DvSetRendStyle\f1.
+The rendering style can be reset at any time, and the view updated
+using a different renderer.
+.lp
+\*(Dd provides at least two renderers. 
+The \f2dynamic renderer\f1 provides interactive display rendering.
+To achieve fast interactive speed, the dynamic renderer takes 
+advantage of the graphics hardware wherever it can.  
+This means that the functionality of the dynamic renderer 
+depends on the underlying platform and how
+much effort was put into
+writing the device driver for that platform.
+The \f2standard production renderer\f1 is less dependent
+of the underlying hardware since it does not use any specialized
+graphics hardware. 
+Using software ray-tracing, this renderer
+can generate high quality images.
+.lp
+Third-party renderers and user-defined renderers can also be
+included in the set of renderers available to an application.
+Once installed, these renderers can be selected using \f2DvSetRendStyle\f1.
+.H1 "The Rendering Process
+A renderer in the \*(Dd system takes a graphical database and
+converts it to a form that can be displayed by an output 
+module of a device.  The renderer gets the graphical database from a
+view object and passes its output to a device object.  
+.lp
+The view includes
+two groups: the studio (or definition) group, and the display group.
+The studio group defines the cameras and lights of a scene.
+The display group
+describes the primitive objects and their characteristics.
+Additionally, the view has
+attributes like background color, active camera, 
+and whether or not the view should be cleared before the update.
+.lp
+The \*(Dd device provides the environment and facilities for writing data
+(pixels or higher level output) to a physical output device, like a
+raster file, an X window, or a printer. The device object provides
+a standard interface to the device hardware.  
+It allows the renderer to query the device's characteristics 
+(like full color or pseudo color, stereo, double buffered, etc.) 
+and write data to the device.
+.lp
+The following sections briefly outline the steps of the rendering
+process, from invocation of the renderer to generation of output.
+.\" Figure 5-1 shows the interaction between the renderer and
+.\" the \*(Dd kernel during rendering.
+.\" .(F
+.\" .sp 2.25i
+.\" .)F "Renderering Execution Control Flow" figref
+.lp
+.H2 "Invoking the Renderer"
+.rs
+.sp -.25v
+Each renderer, when it is installed into the \*(Dd system, provides
+a pointer to a routine to be called by \*(Dd to 
+invoke the renderer.  
+This routine is called when the renderer has been selected with
+\f2DvSetRendStyle\fP and an update is initiated with one of the
+\*(Dd update calls.
+The renderer expects to be passed the following information:
+.lp
+.BU hs
+The view object containing the
+studio and display groups to be rendered.
+.BU hs
+The device object through which output will be directed.
+.BU hs
+A flag that indicates whether the studio environment
+has been modified since the last time the scene was rendered.
+.BU hs
+A flag that indicates whether the view and/or the device
+has been modified since the last time the scene was rendered.
+.rs
+.sp -.25v
+.H2 "Updating Renderer State
+.rs
+.sp -.25v
+To generate an image, a renderer needs to know about the 
+attribute values associated with the view and the device.
+It is the responsibility of the renderer
+to query the view and device objects for the data that it needs to
+perform rendering.
+The renderer can associate and store local data with each 
+device and view object by adding to the private data of the
+device and view object classes.
+For instance, if the renderer stores the studio environment 
+information with the view object, 
+only one studio traversal is needed as long as the studio group
+does not change between updates.
+Chapter 6, \f2Interfacing a Renderer\fP,
+describes how renderers add new data fields 
+to object classes.
+.sp -.25v
+.lp
+As discussed in the \f2\*(Dd Programmer's Guide\f1,
+the \f2Dv-\f1 and \f2Dd-\f1 functions query the 
+value of a number of view and device attributes.
+In addition to these functions, the renderer can also
+use developer's interface functions to
+query other data associated with the device. For example:
+.BU hs
+the device viewport for the view 
+(\f2DDdevice_InqActualViewport\fP)
+.BU hs
+the current clipping list for the device extent
+(\f2DDdevice_InqClipList\fP)
+.BU hs
+the device clipping volume for the current view
+(\f2DDdevice_InqClippingVolume\fP)
+.BU hs
+the frustum-to-device scale and translation factors 
+(\f2DDdevice_InqFrustumScaleTrans\fP)
+.BU hs
+whether or not the device is a stereo device
+(\f2DDdevice_InqStereo\fP)
+.BU hs
+the shade range of the device 
+(\f2DDdevice_InqShadeRange\fP)
+.lp
+Refer to the \f2man\fP pages for a
+description of the functions of the developer's interface.
+.rs
+.sp -.25v
+.H2 "Studio Group Traversal
+.rs
+.sp -.25v
+The traversal of the studio group of the view 
+determines the characteristics of the
+cameras and light sources of the scene.
+The renderer requests the traversal by specifying which method to execute.
+This method was created by the renderer at the time it was installed
+into the \*(Dd system.
+During this traversal, the method routines associated with 
+the studio classes (lights, cameras, and the inherited attributes) are executed.
+.sp -.25v
+.lp
+For studio attributes, the method routines typically
+save and restore the attribute values by pushing and popping
+the corresponding global attribute stacks.
+The studio attributes include:
+.BU hs
+camera type and parameters (parallel, perspective, projection,
+arbitrary)
+.BU hs
+camera sampling attributes for antialiasing
+.BU hs
+stereo switch and parameters
+.BU hs
+light type, color and intensity
+.BU hs
+geometric transformations (scale, translate, rotate, look-at-from,
+shear, arbitrary)
+.sp -.25v
+.lp
+When a camera object is executed, the method routine
+stores the current values of
+the camera attributes that the renderer needs during display traversal.
+There may be multiple cameras in the studio group, but only one is 
+the active camera. 
+If the active camera was not explicitly set by the application,
+the last camera executed is used.
+.sp -.25v
+.lp
+Similarly, when a light object is executed, the method routine
+stores the current values of the light attributes that the 
+renderer needs when generating the image.
+The renderer must keep track of multiple lights since
+there may be several lights in the scene of the same or different
+types. 
+.rs
+.sp -.25v
+.H2 "Display Group Traversal
+.rs
+.sp -.25v
+A traversal of the display group of the view is
+required to determine the geometry and the attribute values that apply
+to the primitive objects of the scene.
+The renderer requests the traversal and specifies the method to
+be executed.
+In some cases, image generation requires multiple traversals of
+the display group of a view.
+For example, a renderer may draw
+all the opaque objects in a scene before drawing any of
+the transparent objects.
+Since the objects can appear in any order in the display group
+this would require at least two passes through the group.
+.lp
+For primitive attribute objects, the method routines typically
+save and restore the attribute values by pushing and popping
+the values onto the corresponding global attribute stacks.
+For primitive objects, method routines vary a lot
+from one renderer to another and
+from primitive to primitive.
+For example, a renderer handles the geometry of
+some primitives directly, while for other geometries 
+an approximating alternate representation of the object 
+is used.
+.lp
+There are two main techniques that can be used for display group
+rendering: \f2direct traversal image generation\fP and \f2secondary
+database image generation\fP. 
+With direct traversal image generation,
+the method routine for each primitive generates part of the image.
+Each primitive method routine
+applies the current values of the attributes that affect the object
+and renders that geometry. 
+An example of this type of behavior is a
+renderer that uses a display 3D graphics hardware pipeline, such as the 
+\*(Dd dynamic renderer.
+.lp
+Secondary database image generation uses the traversal of the display
+group to build an internal renderer specific database.  
+Once the
+traversal is complete the renderer proceeds to generate the
+image with all the primitive objects and their associated attributes.
+This is generally used when a renderer
+needs repeated random access
+to the primitives.  
+An example of this style of renderer is a ray-tracer
+such as the \*(Dd standard production renderer.
+.H2 "Attribute Value Access
+There are two approaches that a renderer can take
+to access the current values of the
+attributes it uses for rendering.
+This applies to both
+studio and primitive attributes.
+Both approaches involve using the global attribute stacks.
+.lp
+A renderer can
+query for the values of attributes as it needs them, or
+it can set up method routines so that it is notified every time
+the value of an attribute changes during a traversal.
+With the first approach, the renderer uses the standard
+global attribute inquiry method provided by \*(Dd 
+("InqGlobalValue").
+A function
+call to the appropriate class method routine returns the
+current value of an attribute.
+The second approach consists of installing a method routine for
+each of the global attribute classes for a traversal
+method. These will
+update data fields that correspond to the attributes and that are
+accessible by the renderer. 
+This way, the renderer can access the current value of an attribute
+without using a direct function call.
+Note that in order to use this technique, one must make sure
+that the global attribute routines are being called whenever
+the value of an attribute changes.
+This is the case if, for instance, the renderer uses copies of the standard
+attribute
+method routines of the "StdRenderDisplay" and "StdRenderStudio" methods.
+Each of these standard method routines calls the global attribute stack of
+the class, which in turn calls the global attribute method routine of the
+class for the method being executed.
+.H2 "Output
+The renderer does not write data directly to a physical output medium
+like a file or a hardware device. 
+Instead, it interacts with a device driver.
+In \*(Dd, the application (rather than the renderer) selects which device to
+access.
+Each renderer may have access to multiple device drivers, and
+the same device may in some cases be accessed by different
+renderers.
+.lp
+The \*(Dd device drivers provide links between the renderers
+and the output devices.
+A renderer accesses an output device through one of several 
+output modules of the corresponding device driver.  
+Each type of output module provides a different level
+of abstraction to the device.  
+For example, the
+production renderer output module (PROM) 
+provides functions to write RGB pixels to the device, 
+while the dynamic renderer output module (DROM) provides access to
+a graphics pipeline.
+Although the two output module types were 
+named after the \*(Dd production and dynamic renderers,
+they can also be used by any other renderers.
+.lp
+The renderer accesses a device driver output module through the
+function pointers of an output module interface.
+\*(Dd defines an interface structure for every type of output module.
+Via a function call, the device object will return an interface 
+structure containing pointers to routines that implement an 
+output module. 
+Not all devices support all output module interfaces, 
+so a device may return 
+a null pointer indicating that it does not support the requested 
+interface.
+For more information on devices and the output modules and interfaces
+see Section III, \f2Device Drivers\fP.

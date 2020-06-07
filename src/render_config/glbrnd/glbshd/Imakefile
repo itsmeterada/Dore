@@ -1,0 +1,9 @@
+#include <Dore.tmpl>
+
+    SRCS = glb_shade.c gshd_ini.c
+    OBJS = glb_shade.o gshd_ini.o
+
+LibraryObjectRule()
+SubdirLibraryRule($(OBJS))
+
+DependTarget()

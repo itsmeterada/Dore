@@ -1,0 +1,25 @@
+#include <Dore.tmpl>
+
+    SRCS = fcmpbndvol.c fexeabt.c fexeobj.c fexertn.c ffilrstrrd.c \
+           fhldobj.c fini.c finirad.c finpval.c finqangunt.c finqclsid.c \
+	   finqcurmet.c finqdrvinf.c finqerrmsg.c finqerrvar.c finqexedep.c \
+	   finqhldobj.c finqmthid.c finqnumdrv.c finqnumrnd.c finqobj.c \
+	   finqobjcid.c finqobjnam.c finqobjtyp.c finqrndid.c finqrndnms.c \
+	   finqrstr.c finqsafflg.c finqvalgrp.c finqver.c fprtobj.c \
+	   frelobj.c frstrupd.c frstrwrt.c fsetangunt.c fseterrvar.c \
+	   fsetexedep.c fsetobjnam.c fsetsafflg.c ftexuvcnt.c ftexuvwcnt.c \
+	   ftrm.c fupdallviw.c fvalobj.c fvalswi.c
+    OBJS = fcmpbndvol.o fexeabt.o fexeobj.o fexertn.o ffilrstrrd.o \
+           fhldobj.o fini.o finirad.o finpval.o finqangunt.o finqclsid.o \
+	   finqcurmet.o finqdrvinf.o finqerrmsg.o finqerrvar.o finqexedep.o \
+	   finqhldobj.o finqmthid.o finqnumdrv.o finqnumrnd.o finqobj.o \
+	   finqobjcid.o finqobjnam.o finqobjtyp.o finqrndid.o finqrndnms.o \
+	   finqrstr.o finqsafflg.o finqvalgrp.o finqver.o fprtobj.o \
+	   frelobj.o frstrupd.o frstrwrt.o fsetangunt.o fseterrvar.o \
+	   fsetexedep.o fsetobjnam.o fsetsafflg.o ftexuvcnt.o ftexuvwcnt.o \
+	   ftrm.o fupdallviw.o fvalobj.o fvalswi.o
+
+LibraryObjectRule()
+SubdirLibraryRule($(OBJS))
+
+DependTarget()

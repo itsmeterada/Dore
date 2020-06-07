@@ -1,0 +1,14 @@
+#include <Dore.tmpl>
+#define IHaveSubdirs
+
+ SUBDIRS = dcm drom prom
+    SRCS = kopengl_extern.c kopengl_math.c kopengl_matrix.c
+    OBJS = kopengl_extern.o kopengl_math.o kopengl_matrix.o
+
+LibraryObjectRule()
+SubdirLibraryRule($(OBJS))
+
+MakeSubdirs($(SUBDIRS))
+DependSubdirs($(SUBDIRS))
+
+DependTarget()

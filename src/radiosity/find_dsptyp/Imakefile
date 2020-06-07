@@ -1,0 +1,9 @@
+#include <Dore.tmpl>
+
+    SRCS = rad_camera.c rfnd_method.c
+    OBJS = rad_camera.o rfnd_method.o
+
+LibraryObjectRule()
+SubdirLibraryRule($(OBJS))
+
+DependTarget()

@@ -1,0 +1,629 @@
+%!PS-Adobe-2.0
+%%Title: 9.8.fhd
+%%Creator: PrintMonitor
+%%CreationDate: Wednesday, October 25, 1989
+%%Pages: (atend)
+%%BoundingBox: ? ? ? ?
+%%PageBoundingBox: 30 31 582 761
+%%For: Paul Ausick
+%%IncludeProcSet: "(AppleDict md)" 68 0
+%%EndComments
+%%EndProlog
+%%BeginDocumentSetup
+md begin
+
+T T -31 -30 761 582 100 72 72 1 F F F F T T T psu
+(Paul Ausick; document: 9.8.fhd)jn
+0 mf
+od
+%%EndDocumentSetup
+%%Page: ? 1
+op
+0 0 730 552 fr
+0 0 xl
+1 1 pen
+32000 32000 gm
+(nc 0 0 730 552 6 rc)kp
+1 setTxMode
+1 fs
+bu fc
+{}mark T /Helvetica-Bold /|______Helvetica-Bold 0 rf
+bn
+12 fz
+bu fc
+2 F /|______Helvetica-Bold fnt
+bn
+(a)show
+-32000 -32000 gm
+0 gr
+-32000 -32000 lin
+32000 32000 gm
+1 setTxMode
+0 fs
+bu fc
+{}mark T /Helvetica /|______Helvetica 0 rf
+bn
+bu fc
+2 F /|______Helvetica fnt
+bn
+(a)show
+-32000 -32000 gm
+0 gr
+-32000 -32000 lin
+statusdict/setpageparams known not{/setpageparams{pop pop pop pop letter}def}if
+% letter for General
+letter
+initgraphics
+%%BeginProcSet: FreeHand_header 2 0
+/FreeHandDict 200 dict def
+FreeHandDict begin
+/currentpacking where{pop true setpacking}if
+/bdf{bind def}bind def
+/bdef{bind def}bdf
+/xdf{exch def}bdf
+/ndf{1 index where{pop pop pop}{dup xcheck{bind}if def}ifelse}bdf
+/min{2 copy gt{exch}if pop}bdf
+/max{2 copy lt{exch}if pop}bdf
+/dr{transform .25 sub round .25 add
+exch .25 sub round .25 add exch itransform}bdf
+/curveto{dr curveto}bdf
+/lineto{dr lineto}bdf
+/moveto{dr moveto}bdf
+/graystep 1 256 div def
+%. Error handling code - don't do this if printing to Lino
+statusdict /product get (Lino) anchorsearch
+{pop pop}
+{pop errordict
+/handleerror{$error begin /prt{dup type /stringtype ne{=string cvs}if show}def
+newerror{/newerror false store grestoreall initgraphics
+30 110 moveto /Helvetica findfont 14 scalefont setfont
+(POSTSCRIPT ERROR: ) prt errorname prt ( ) prt
+(OFFENDING COMMAND: ) prt /command load prt
+(ioerror) errorname ne{showpage}if}if end}put
+}ifelse
+%.
+/overlapmark{-4 xs div 0 rlineto 4 xs div 2 div -7 ys div 2 div rmoveto
+0 7 ys div rlineto 4 xs div 0 rlineto 0 -7 ys div rlineto -4 xs div 0 rlineto
+.2 xs div setlinewidth stroke}bdf
+/am{newpath gsave 4 xs div 0 360 arc .5 xs div setlinewidth currentpoint
+stroke grestore moveto -4 xs div 0 rmoveto
+gsave 4 xs div 0 rmoveto .3 ys div setlinewidth 3 xs div 0 rlineto stroke grestore
+gsave 4 xs div 0 rmoveto .1 ys div setlinewidth -8 xs div 0 rlineto stroke grestore
+gsave -4 xs div 0 rmoveto .3 ys div setlinewidth -3 xs div 0 rlineto stroke grestore
+gsave 0 4 ys div rmoveto .3 xs div setlinewidth 0 3 ys div rlineto stroke grestore
+gsave 0 4 ys div rmoveto .1 xs div setlinewidth 0 -8 ys div rlineto stroke grestore
+gsave 0 -4 ys div rmoveto .3 xs div setlinewidth 0 -3 ys div rlineto stroke grestore}bdf
+/mybleed{bleed 0 eq{wdist 10 sub xs div}{bleed}ifelse}bdf
+/cm{mybleed neg 0 rmoveto -9 xs div 0 rlineto
+9 xs div mybleed add mybleed neg rmoveto 0 -9 ys div rlineto
+.3 xs div setlinewidth stroke}bdf
+/bottom -0 def
+/delta -0 def
+/frac -0 def
+/left -0 def
+/numsteps -0 def
+/numsteps1 -0 def
+/radius -0 def
+/right -0 def
+/top -0 def
+/x -0 def
+/y -0 def
+/df currentflat def
+/tempstr 1 string def
+/clipflatness 3 def
+/inverted?
+0 currenttransfer exec .5 ge def
+/concatprocs{
+/proc2 exch cvlit def/proc1 exch cvlit def
+/newproc proc1 length proc2 length add array def
+newproc 0 proc1 putinterval newproc proc1 length proc2 putinterval
+newproc cvx}bdf
+/storerect{/top xdf/right xdf/bottom xdf/left xdf}bdf
+/rectpath{newpath left bottom moveto left top lineto
+right top lineto right bottom lineto closepath}bdf
+/sf{dup 0 eq{pop df dup 3 mul}{dup} ifelse /clipflatness xdf setflat}bdf
+version cvr 38.0 le
+{/setrgbcolor{
+currenttransfer exec 3 1 roll
+currenttransfer exec 3 1 roll
+currenttransfer exec 3 1 roll
+setrgbcolor}bdf}if
+/gettint{0 get}bdf
+/puttint{0 exch put}bdf
+/vms{/vmsv save def}bdf
+/vmr{vmsv restore}bdf
+/vmrs{vmr vms}bdf
+/CD{/NF exch def
+{exch dup/FID ne{exch NF 3 1 roll put}
+{pop pop}ifelse}forall NF}bdf
+/MN{1 index length/Len exch def
+dup length Len add string dup
+Len 4 -1 roll putinterval dup 0 4 -1 roll putinterval}bdf
+/RC{256 string cvs(|______)anchorsearch
+{1 index MN cvn/NewN exch def cvn
+findfont dup maxlength dict CD dup/FontName NewN put dup
+/Encoding MacVec put NewN exch definefont pop}{pop}ifelse}bdf
+/RF{dup FontDirectory exch known{pop}{RC}ifelse}bdf
+/FF{dup 256 string cvs(|______)exch MN cvn dup FontDirectory exch known
+{exch}if pop findfont}bdf
+userdict begin /BDFontDict 20 dict def end
+BDFontDict begin
+/bu{}def
+/bn{}def
+/setTxMode{pop}def
+/gm{moveto}def
+/show{pop}def
+/gr{pop}def
+/fnt{pop pop pop}def
+/fs{pop}def
+/fz{pop}def
+/lin{pop pop}def
+end
+/MacVec 256 array def
+MacVec 0 /Helvetica findfont
+/Encoding get 0 128 getinterval putinterval
+MacVec 127 /DEL put MacVec 16#27 /quotesingle put MacVec 16#60 /grave put
+/NUL/SOH/STX/ETX/EOT/ENQ/ACK/BEL/BS/HT/LF/VT/FF/CR/SO/SI
+/DLE/DC1/DC2/DC3/DC4/NAK/SYN/ETB/CAN/EM/SUB/ESC/FS/GS/RS/US
+MacVec 0 32 getinterval astore pop
+/Adieresis/Aring/Ccedilla/Eacute/Ntilde/Odieresis/Udieresis/aacute
+/agrave/acircumflex/adieresis/atilde/aring/ccedilla/eacute/egrave
+/ecircumflex/edieresis/iacute/igrave/icircumflex/idieresis/ntilde/oacute
+/ograve/ocircumflex/odieresis/otilde/uacute/ugrave/ucircumflex/udieresis
+/dagger/degree/cent/sterling/section/bullet/paragraph/germandbls
+/register/copyright/trademark/acute/dieresis/notequal/AE/Oslash
+/infinity/plusminus/lessequal/greaterequal/yen/mu/partialdiff/summation
+/product/pi/integral/ordfeminine/ordmasculine/Omega/ae/oslash
+/questiondown/exclamdown/logicalnot/radical/florin/approxequal/Delta/guillemotleft
+/guillemotright/ellipsis/nbspace/Agrave/Atilde/Otilde/OE/oe
+/endash/emdash/quotedblleft/quotedblright/quoteleft/quoteright/divide/lozenge
+/ydieresis/Ydieresis/fraction/currency/guilsinglleft/guilsinglright/fi/fl
+/daggerdbl/periodcentered/quotesinglbase/quotedblbase
+/perthousand/Acircumflex/Ecircumflex/Aacute
+/Edieresis/Egrave/Iacute/Icircumflex/Idieresis/Igrave/Oacute/Ocircumflex
+/apple/Ograve/Uacute/Ucircumflex/Ugrave/dotlessi/circumflex/tilde
+/macron/breve/dotaccent/ring/cedilla/hungarumlaut/ogonek/caron
+MacVec 128 128 getinterval astore pop
+/fps{currentflat exch dup 0 le{pop 1}if
+{dup setflat 3 index stopped
+{1.3 mul dup 3 index gt{pop setflat pop pop stop}if}{exit}ifelse
+}loop pop setflat pop pop
+}bdf
+/fp{100 currentflat fps}bdf
+/rfp{clipflatness currentflat fps}bdf
+/fcp{100 clipflatness fps}bdf
+/fclip{{clip}fcp}bdf
+/feoclip{{eoclip}fcp}bdf
+end %. FreeHandDict
+%%EndProcSet
+%%BeginSetup
+FreeHandDict begin
+% Begin Composite Proof
+/SeparationSave save def
+/ccmyk{dup 5 -1 roll sub 0 max exch}ndf
+/setcmykcolor{1 exch sub ccmyk ccmyk ccmyk pop setrgbcolor}ndf
+/setcmykcoloroverprint{4{dup -1 eq{pop 0}if 4 1 roll}repeat setcmykcolor}ndf
+/findcmykcustomcolor{5 /packedarray where{pop packedarray}{array astore readonly}ifelse}ndf
+/setcustomcolor{exch aload pop pop 4{4 index mul 4 1 roll}repeat setcmykcolor pop}ndf
+/setseparationgray{1 exch sub dup dup dup setcmykcolor}ndf
+/setoverprint{pop}ndf
+/currentoverprint false ndf
+/colorimage{pop pop
+[5 -1 roll/exec cvx 6 -1 roll/exec cvx 7 -1 roll/exec cvx 8 -1 roll/exec cvx
+/exch cvx/pop cvx/exch cvx/pop cvx/exch cvx/pop cvx/invbuf cvx]cvx image}
+%. version 47.1 of Postscript defines colorimage incorrectly (rgb model only)
+version cvr 47.1 le{userdict begin bdf end}{ndf}ifelse
+/customcolorimage{pop image}ndf
+/separationimage{image}ndf
+/newcmykcustomcolor{6 /packedarray where{pop packedarray}{array astore readonly}ifelse}ndf
+/inkoverprint false ndf
+/setinkoverprint{pop}ndf
+/overprintprocess{pop}ndf
+/setspotcolor
+{spots exch get 0 5 getinterval exch setcustomcolor}ndf
+/currentcolortransfer{currenttransfer dup dup dup}ndf
+/setcolortransfer{systemdict begin settransfer end pop pop pop}ndf
+/setimagecmyk{dup length 4 eq
+{aload pop}
+{aload pop spots exch get 0 4 getinterval aload pop 4
+{4 index mul 4 1 roll}repeat 5 -1 roll pop} ifelse
+systemdict /colorimage known{version cvr 47.1 gt}{false}ifelse
+not{pop 1 currentgray sub}if
+/ik xdf /iy xdf /im xdf /ic xdf
+}ndf
+/setcolor{dup length 4 eq
+{aload overprintprocess setcmykcolor}
+{aload 1 get spots exch get 5 get setinkoverprint setspotcolor}
+ifelse}ndf
+/bc2[0 0]def
+/bc4[0 0 0 0]def
+/c1[0 0 0 0]def
+/c2[0 0 0 0]def
+/absmax{2 copy abs exch abs gt{exch}if pop}bdf
+/calcstep
+{c1 length 4 eq
+{
+0 1 3
+{c1 1 index get
+c2 3 -1 roll get
+sub
+}for
+absmax absmax absmax
+}
+{
+bc2 c1 1 get 1 exch put
+c1 gettint c2 gettint
+sub abs
+}ifelse
+graystep div abs round dup 0 eq{pop 1}if
+dup /numsteps xdf 1 sub dup 0 eq{pop 1}if /numsteps1 xdf
+}bdf
+/cblend{
+c1 length 4 eq
+{
+0 1 3
+{bc4 exch
+c1 1 index get
+c2 2 index get
+1 index sub
+frac mul add put
+}for bc4
+}{
+bc2
+c1 gettint
+c2 gettint
+1 index sub
+frac mul add
+puttint bc2
+}ifelse
+setcolor
+}bdf
+/logtaper{/frac frac 9 mul 1 add log def}bdf
+/imbits 1 def
+/iminv false def
+/invbuf{0 1 2 index length 1 sub{dup 2 index exch get 255 exch sub 2 index 3 1 roll put}for}bdf
+/cyanrp{currentfile cyanbuf readhexstring pop iminv{invbuf}if}def
+/magentarp{cyanbuf magentabuf copy}bdf
+/yellowrp{cyanbuf yellowbuf copy}bdf
+/blackrp{cyanbuf blackbuf copy}bdf
+/fixtransfer{
+dup{ic mul ic sub 1 add}concatprocs exch
+dup{im mul im sub 1 add}concatprocs exch
+dup{iy mul iy sub 1 add}concatprocs exch
+{ik mul ik sub 1 add}concatprocs
+currentcolortransfer
+5 -1 roll exch concatprocs 7 1 roll
+4 -1 roll exch concatprocs 6 1 roll
+3 -1 roll exch concatprocs 5 1 roll
+concatprocs 4 1 roll
+setcolortransfer
+}bdf
+/taperfcn{}def
+/recfill{
+11 1 roll
+/c2 xdf
+/c1 xdf
+/taperfcn xdf
+storerect
+/ang xdf
+/y xdf
+/x xdf
+/topsv top def
+currentflat mark 3 -1 roll
+currentflat clipflatness
+calcstep
+/delta top bottom sub numsteps div neg def
+{
+{
+x y translate ang rotate
+x neg y neg translate 
+dup setflat
+2 index exec
+1 index setflat
+/top topsv def
+0 1 numsteps1{
+numsteps1 div/frac xdf
+taperfcn cblend
+/bottom top delta add def
+{
+mark {rectpath fill}stopped
+{cleartomark exch 1.3 mul dup setflat exch 2 copy gt{stop}if}
+{cleartomark exit}ifelse
+}loop
+/top bottom def
+}for
+}
+gsave stopped grestore
+{exch pop 3 index exch 1.3 mul dup 100 gt{cleartomark setflat stop}if}
+{exit}ifelse
+}loop
+cleartomark setflat
+newpath 
+}bdf
+/rectfill{{clip}recfill}bdf
+/eorectfill{{eoclip}recfill}bdf
+/textopf false def
+/curtextmtx{}def
+/otw .25 def
+/msf{dup/curtextmtx xdf makefont setfont}bdf
+/makesetfont/msf load def
+/curtextheight{.707104 .707104 curtextmtx dtransform
+dup mul exch dup mul add sqrt}bdf
+/ta{1 index
+{tempstr 0 2 index put tempstr 2 index
+gsave exec grestore
+tempstr stringwidth rmoveto
+5 index eq{6 index 6 index rmoveto}if
+3 index 3 index rmoveto
+}forall 7{pop}repeat}bdf
+/sts{setcolor textopf setoverprint/ts{awidthshow}def exec}bdf
+/stol{setlinewidth setcolor textopf setoverprint newpath
+/ts{{false charpath stroke}ta}def exec}bdf
+/currentpacking where{pop false setpacking}if
+%%EndSetup
+%%IncludeFont: Symbol
+/f0 /Symbol FF def
+%%IncludeFont: Helvetica-Bold
+/f1 /|______Helvetica-Bold dup RF findfont def
+%%IncludeFont: Helvetica
+/f2 /|______Helvetica dup RF findfont def
+/spots[1 0 0 0 (Process Cyan) false newcmykcustomcolor
+0 1 0 0 (Process Magenta) false newcmykcustomcolor
+0 0 1 0 (Process Yellow) false newcmykcustomcolor
+0 0 0 1 (Process Black) false newcmykcustomcolor
+]def
+% initial setup
+/pagesave save def
+0 setseparationgray
+/imgr{0 0 612 792}def     %image area
+/bleed {0} def       %bleed size
+/wkr{0 0 612 792}def     %work area
+/ppr{0 0 612 792}def     %paper rect
+/prntr{0 0 612 792}def     %print rect
+/clpr{0 0 612 792}def     %clip rect
+/xs 1 def        %scale in x direction
+/ys 1 def        %scale in y direction
+/botx 0 def       %current horizontal position for color
+/overlap 0 def       %overlap for automatic tiling
+/wdist 18 def
+% current translation within imgr
+0 0 translate
+% center on paper
+0 xs div 0 ys div translate
+% set clipping path to image area
+clpr storerect rectpath clip newpath
+vms
+gsave [1 0 0 1 1.5 27.5] concat
+vms
+0 sf
+newpath
+58 734 moveto
+58 507 lineto
+133 734 lineto
+58 734 lineto
+closepath
+gsave
+95.5 620.5 -105 -23.8 554.9 214.9 627.4 {} [0 0 0 0] [0 0 0 1] rectfill
+grestore
+0 sf
+newpath
+286 507 moveto
+59 507 lineto
+286 582 lineto
+286 507 lineto
+closepath
+gsave
+172.5 544.5 20 53 470.4 292.1 548 {} [0 0 0 0] [0 0 0 1] rectfill
+grestore
+0 sf
+newpath
+58 508 moveto
+227 676 lineto
+gsave
+0.5 setlinewidth 0 setlinecap 0 setlinejoin 3.863693 setmiterlimit [0 0 0 1]setcolor  {stroke}fp 
+grestore
+gsave
+%%ChangeFont: Helvetica-Bold
+{
+f1 [14 0 0 14 0 0] makesetfont
+233 676.034912 moveto
+0 0 32 0 0 (Light Direction) ts
+} 
+[0 0 0 1]
+sts
+grestore
+0 sf
+newpath
+228.2 678.2 moveto
+223.3 667.1 lineto
+217.4 672.6 lineto
+228.2 678.2 lineto
+closepath
+gsave
+[0 0 0 1]setcolor  {fill}fp 
+grestore
+gsave
+0.5 setlinewidth 0 setlinecap 0 setlinejoin 3.863693 setmiterlimit [0 0 0 1]setcolor  {stroke}fp 
+grestore
+0 sf
+newpath
+59 508 moveto
+244 508 lineto
+gsave
+%%ChangeFont: Helvetica-Bold
+{
+f1 [14 0 0 14 0 0] makesetfont
+35.599991 478.234894 moveto
+0 0 32 0 0 (Light) ts
+} 
+[0 0 0 1]
+sts
+grestore
+gsave [0.450592 0.284348 -0.450592 0.284348 312.975952 381.006073] concat
+vms
+0 sf
+newpath
+106 667 moveto
+137.6 663.1 152 635 156 618 curveto
+162 592.5 156.5 570.5 141 552 curveto
+gsave
+0.5 setlinewidth 0 setlinecap 0 setlinejoin 3.863693 setmiterlimit [0 0 0 1]setcolor  {stroke}fp 
+grestore
+0 sf
+newpath
+105.7 667.5 moveto
+117.9 667.5 lineto
+115.3 659.9 lineto
+105.7 667.5 lineto
+closepath
+gsave
+[0 0 0 1]setcolor  {fill}fp 
+grestore
+gsave
+0.5 setlinewidth 0 setlinecap 0 setlinejoin 3.863693 setmiterlimit [0 0 0 1]setcolor  {stroke}fp 
+grestore
+0 sf
+newpath
+142.2 551.5 moveto
+144.4 563.5 lineto
+151.4 559.6 lineto
+142.2 551.5 lineto
+closepath
+gsave
+[0 0 0 1]setcolor  {fill}fp 
+grestore
+gsave
+0.5 setlinewidth 0 setlinecap 0 setlinejoin 3.863693 setmiterlimit [0 0 0 1]setcolor  {stroke}fp 
+grestore
+vmr
+grestore
+gsave [0.326874 0.149017 -0.326874 0.149017 242.462082 566.802124] concat
+vms
+0 sf
+newpath
+106 667 moveto
+137.6 663.1 152 635 156 618 curveto
+162 592.5 156.5 570.5 141 552 curveto
+gsave
+0.5 setlinewidth 0 setlinecap 0 setlinejoin 3.863693 setmiterlimit [0 0 0 1]setcolor  {stroke}fp 
+grestore
+0 sf
+newpath
+105.7 667.5 moveto
+117.9 667.5 lineto
+115.3 659.9 lineto
+105.7 667.5 lineto
+closepath
+gsave
+[0 0 0 1]setcolor  {fill}fp 
+grestore
+gsave
+0.5 setlinewidth 0 setlinecap 0 setlinejoin 3.863693 setmiterlimit [0 0 0 1]setcolor  {stroke}fp 
+grestore
+0 sf
+newpath
+142.2 551.5 moveto
+144.4 563.5 lineto
+151.4 559.6 lineto
+142.2 551.5 lineto
+closepath
+gsave
+[0 0 0 1]setcolor  {fill}fp 
+grestore
+gsave
+0.5 setlinewidth 0 setlinecap 0 setlinejoin 3.863693 setmiterlimit [0 0 0 1]setcolor  {stroke}fp 
+grestore
+vmr
+grestore
+gsave
+%%ChangeFont: Helvetica-Bold
+{
+f1 [14 0 0 14 0 0] makesetfont
+62.599991 661.234863 moveto
+0 0 32 0 0 (delta) ts
+} 
+[0 0 0 1]
+sts
+grestore
+gsave
+%%ChangeFont: Helvetica-Bold
+{
+f1 [14 0 0 14 0 0] makesetfont
+85.199997 613.8349 moveto
+0 0 32 0 0 (total - delta) ts
+} 
+[0 0 0 1]
+sts
+grestore
+gsave
+%%ChangeFont: Helvetica-Bold
+{
+f1 [14 0 0 14 0 0] makesetfont
+77.599991 580.234863 moveto
+0 0 32 0 0 (total) ts
+} 
+[0 0 0 1]
+sts
+grestore
+gsave [1 0 0 1 0 0] concat
+vms
+0 sf
+newpath
+99.9 639.3 moveto
+115.3 647.4 133.9 643.4 143.1 639.5 curveto
+156.8 633.8 164 625.6 165.2 615.6 curveto
+gsave
+0.5 setlinewidth 0 setlinecap 0 setlinejoin 3.863693 setmiterlimit [0 0 0 1]setcolor  {stroke}fp 
+grestore
+0 sf
+newpath
+99.5 639.3 moveto
+104.9 642.9 lineto
+107 639.9 lineto
+99.5 639.3 lineto
+closepath
+gsave
+[0 0 0 1]setcolor  {fill}fp 
+grestore
+gsave
+0.5 setlinewidth 0 setlinecap 0 setlinejoin 3.863693 setmiterlimit [0 0 0 1]setcolor  {stroke}fp 
+grestore
+0 sf
+newpath
+165 614.8 moveto
+160.7 619 lineto
+165.5 619.9 lineto
+165 614.8 lineto
+closepath
+gsave
+[0 0 0 1]setcolor  {fill}fp 
+grestore
+gsave
+0.5 setlinewidth 0 setlinecap 0 setlinejoin 3.863693 setmiterlimit [0 0 0 1]setcolor  {stroke}fp 
+grestore
+vmr
+grestore
+gsave
+%%ChangeFont: Helvetica
+{
+f2 [24 0 0 24 0 0] makesetfont
+43.5 494.045532 moveto
+0 0 32 0 0 (x) ts
+} 
+[0 0 0 1]
+sts
+grestore
+vmr
+grestore
+vmr
+% End of Page
+pagesave restore 
+SeparationSave restore
+% End Composite Proof
+end  % FreeHandDict
+F T cp
+%%Trailer
+cd
+end
+%%Pages: 1 0
+%%EOF

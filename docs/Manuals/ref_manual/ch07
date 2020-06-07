@@ -1,0 +1,382 @@
+.\"#ident "%W%" %G%
+.\"
+.\" #
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  
+.\" # 
+.\" # KUBOTA GRAPHICS Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\" #
+.\"
+.\" Process this file by using the command
+.\"             dpx.dieqn FILENAME
+.\" which is identical to /techp/bin/dpx, but with the references
+.\" to 'eqn' replaced by references to 'dieqn'
+.so ../macros/local.me
+.PN 459
+.ds BT "\\*(Dd Reference Manual
+.\".ds CT "Raster Formats
+.ds CT "Raster File and Memory Formats
+.ds h1 7
+.L1 R ASTER " F" ILE
+.L2 "" AND " M" EMORY
+.L3 F ORMATS
+.CH SEVEN
+.EQ
+delim $$
+.EN
+\*(Dd provides raster objects for the representation
+and storage of two- and three-dimensional data.
+Raster objects can be file objects or memory objects.
+This chapter describes the exact file and memory formats 
+used by \*(Dd for raster data.
+Chapter 14 of the \f2\*(Dd Programmer's Guide\fP
+describes how to create and use \*(Dd raster objects.
+It also describes the system functions for reading, writing, and
+maintaining raster data.
+.H1 "Raster Pixels and Voxels"
+A \fIpixel\fP
+(picture element)
+is the set of information associated with a specific
+point in a two-dimensional raster image.
+A \fIvoxel\fP (volume element) is the 
+three-dimensional analog of a pixel, and is used
+when referring to three-dimensional raster objects.
+In \*(Dd, a pixel or voxel consists of certain combinations of
+red, green, blue, alpha, and Z image data.  
+This section describes the meaning
+of the values of these pixel and voxel components.
+.H4 "RGB Data
+RGB color information describes the color of each pixel/voxel,
+and is represented by three 8-bit unsigned integer byte values.
+Each value represents the intensity of light for that color channel.
+A value of 0 means no light, and a value of 
+255 means full intensity light.
+.H4 "Alpha Data
+Alpha information describes the transparency of the pixel/voxel,
+and is represented as a single 8-bit unsigned integer byte value.
+A value of 0 means the pixel/voxel is opaque,
+and a value of 255 means it is completely transparent. Alpha
+information is used in image compositing.
+.H4 "Z Data
+The Z information describes the relative distance of the pixel/voxel
+from a point of reference,
+and is stored as a 32-bit unsigned integer.
+A value of 0 represents a distance as far away as possible,
+and a value of 4,294,967,295 (or $2 sup 32$-1) 
+represents a distance as close as possible.
+For example, if the image is a two-dimensional rendering of
+a three-dimensional scene, then the Z data could be the 
+distance of the visible surface from the eye.
+.H1 "\*(Dd Raster File Format"
+Raster files are used to store \*(Dd image data 
+in computer file systems and to allow other programs to 
+communicate image data to \*(Dd.
+.lp
+The \*(Dd raster file format is described here.
+Raster files of this format can be read and written by
+\*(Dd programs with the \f2DsFileRasterRead <DSFRSR>\fP 
+and \f2DsRasterWrite <DSRSW>\fP calls, respectively.
+The \f2rasterfile\fP device driver also writes image 
+files using this format.
+.lp
+\*(Dd raster files consist of an \s-1ASCII\s+1 header section followed
+by a binary data section.
+.lp
+An example of a raster file (with the binary data 
+shown only as an annotation) is given below:
+.(m
+\# brick texture raster - Dore' Rasterfile
+	rastertype = image
+ 	width = 128
+ 	height = 128
+ 	depth = 1
+ 	pixel = r8g8b8z32
+ 	wordbyteorder = big-endian
+\f3<ff><ff>\fP
+	.
+	.
+   (\f2binary data\fP)
+	.
+	.
+\f3<EOF>\fP
+.)m
+.lp
+The sections below describe the formats of the header and binary
+data sections of raster files in more detail.
+.H2 "Raster File Header"
+.lp
+The ASCII header of a \*(Dd raster file consists of 
+several attribute-value
+pairs followed by an end-of-header marker.
+.lp
+An attribute-value pair is an attribute name followed by an equal
+sign (=),
+followed by a numeric value or an identifier name value.
+Optional white space characters (spaces, tabs, newlines/linefeeds,
+or carriage returns) may precede or follow the = character.
+.rs 
+.sp -.25v
+.lp
+Attribute-value pairs must be separated by white space characters. 
+The convention is to have one attribute-value pair per line.
+.rs
+.sp -.25v
+.lp
+Unknown attribute-value pairs are ignored.
+An attribute may have multiple values, separated by commas, 
+even though this feature is not currently used by \*(Dd.
+.rs
+.sp -.25v
+.lp
+The end-of-header marker is a formfeed character (ASCII character
+0x0c) followed by 0 (zero), or more
+nonformfeed characters followed by a formfeed character.
+The double formfeed end-of-header
+marker allows the header section to be expanded
+to fall at the end of a disk block boundary.
+This improves efficiency on some machines.
+.rs
+.sp -.25v
+.lp
+Comments consist of the pound sign (#) and any number of characters
+to the end of the line.
+.rs
+.sp -.25v
+.lp
+The attributes
+\f2rastertype\fP, \f2width\fP, \f2height\fP, and \f2pixel\fP
+are mandatory.
+The \f2rastertype\fP attribute is required to
+be the first attribute in the header.
+The order of all attributes other than \f2rastertype\fP
+is not restricted.
+Attribute names and value strings are case sensitive.
+.rs
+.sp -.25v
+.lp
+Mandatory and optional attributes are listed below with
+their permissible values.
+.rs
+.sp -.25v
+.ip "\f3rastertype\fP
+(\fImandatory; must be first attribute\fP)
+a character string indicating the type of raster.
+Must have the value \f2image\fP
+to indicate that this is a \*(Dd raster image file.
+.rs
+.sp -.25v
+.ip "\f3width     \fP
+(\fImandatory\fP)
+an unsigned integer value
+indicating the width of the raster image in pixels (or voxels).
+.rs
+.sp -.25v
+.ip "\f3height    \fP
+(\fImandatory\fP)
+an unsigned integer value
+indicating the height of the raster image in pixels (or voxels).
+.rs
+.sp -.25v
+.ip "\f3depth     \fP
+(\fIoptional - defaults to 1\fP)
+an unsigned integer value
+indicating the depth of the raster image. For 2-D rasters, the
+picture elements are pixels and \f2depth\f1 is 1. For 3-D rasters,
+the picture elements are voxels and \f2depth\f1 is greater than 1.
+.ip "\f3wordbyteorder\fP
+(\fIoptional - defaults to big-endian\fP)
+a character string
+indicating the byte order of large unsigned 
+integer binary numbers stored in the file (used for Z values).
+It has one of two values:
+.sp
+\f2big-endian\fP
+.br
+.in +3
+meaning the machine represents words in
+the order of most significant byte to least significant byte.
+.sp
+.in -3
+\f2little-endian\fP
+.br
+.in +3
+meaning the machine represents words in
+the order of least significant byte to most significant byte.
+.in -3
+.ip "\f3pixel     \fP
+(\fImandatory\fP)
+a character string
+indicating the content of each pixel in the raster image. 
+It has one of the following values:
+.sp
+\f2r8g8b8     \fP
+.in +3
+indicates that each pixel in the image consists of
+three 8-bit values, representing the RGB color components of the pixel.
+This is equivalent to the \*(Dd \f2DtRasterType\fP value
+\f2DcRasterRGB\fP <\f2DCRRGB\fP>. 
+.in -3
+.sp
+\f2r8g8b8a8   \fP
+.in +3
+indicates that each pixel in the image consists of
+four 8-bit values, representing the RGB color components
+and the alpha component of the pixel.
+This is equivalent to the \*(Dd \f2DtRasterType\fP value
+\f2DcRasterRGBA\fP <\f2DCRRA\fP>.
+.in -3
+.sp
+\f2a8b8g8r8   \fP
+.in +3
+indicates that each pixel in the image consists of
+four 8-bit values, the alpha component of the pixel, and 
+the color components in BGR order.
+This is equivalent to the \*(Dd \f2DtRasterType\fP value
+\f2DcRasterABGR\fP <\f2DCRAR\fP>.
+.in -3
+.sp
+\f2r8g8b8a8z32\fP
+.in +3
+indicates that each pixel in the image consists of
+four 8-bit values and one 32-bit value,
+representing the RGB color components,
+the alpha component, and the Z depth component of the pixel.
+This is equivalent to the \*(Dd \f2DtRasterType\fP value
+\f2DcRasterRGBAZ\fP <\f2DCRRAZ\fP>.
+.in -3
+.sp
+\f2r8g8b8z32\fP
+.in +3
+indicates that each pixel in the image consists of
+three 8-bit values and one 32-bit value,
+representing the RGB color components,
+and the Z depth component of the pixel.
+This is equivalent to the \*(Dd \f2DtRasterType\fP value
+\f2DcRasterRGBZ\fP <\f2DCRRZ\fP>. 
+.in -3
+.sp
+\f2a8         \fP
+.in +3
+indicates that each pixel in the image consists of
+one 8-bit value representing the alpha component of the pixel.
+This is equivalent to the \*(Dd \f2DtRasterType\fP value
+\f2DcRasterA\fP <\f2DCRA\fP>. 
+.in -3
+\f2z32        \fP
+.in +3
+indicates that each pixel in the image consists of
+one 32-bit value representing the Z depth component of the pixel.
+This is equivalent to the \*(Dd \f2DtRasterType\fP value
+\f2DcRasterZ\fP <\f2DCRZ\fP>. 
+.in -3
+.lp
+The following example shows
+sample values for the minimal header attributes acceptable.
+.(m
+# mountain background raster - Dore' Rasterfile
+ 	rastertype = image
+ 	width = 1280
+ 	height = 1024
+ 	pixel = r8g8b8
+\f3<ff><ff>\fP
+.)m
+.rs
+.sp -1v
+.H2 "Raster File Binary Data"
+Raster image binary data for \*(Dd
+has seven basic formats depending on which of the
+\f2r8g8b8\fP, \f2r8g8b8a8\fP, \f2a8b8g8r8\fP, \f2r8g8b8a8z32\fP,
+\f2r8g8b8z32\fP, \f2a8\fP, or \f2z32\fP
+types were specified for the pixels
+or voxels in the raster.
+.ig HHH
+These strings used as values for the
+\f2pixel\fP attribute in raster file headers
+correspond with 
+.HHH
+.lp
+For file based images, the binary data 
+is logically read from and written to the files
+in a byte-by-byte fashion.
+Since RGB and alpha information is represented as byte values,
+their representation and order in the file is the same for all machines.
+.lp
+Z information, however, consists of an unsigned 32-bit integer.
+While the position of the 32-bit value is the same in the file
+for all machines, the order of the bytes in the value is machine dependent.
+If the word byte order on the machine writing the file goes from
+the most significant byte first down to the least significant byte,
+the order is called \f2big-endian\fP. 
+The ordering may then be optionally indicated in the
+file header with the \f2wordbyteorder = big-endian\fP attribute-value pair.
+If the word byte order on the machine writing the file goes from the least 
+significant byte first up to the most significant byte, the order is called
+\f2little-endian\fP. 
+In that case, the ordering must be indicated in the
+file header with the \f2wordbyteorder = little-endian\fP attribute-value pair.
+\*(Dd can accept raster files written in either fashion.
+.lp
+Binary data in \*(Dd raster files is stored in pixel interleaved fashion,
+meaning that the data is stored pixel by pixel (voxel by voxel).
+All the information related to a pixel (voxel) is
+stored consecutively in the file. 
+.lp
+The order of pixels (voxels) in the binary data section is
+in width, then height, and then depth order.
+The data starts with the upper left hand front corner of the image data
+and scans out in a left to right, top to bottom, front to back order.
+The index related to \f2width\fP varies the fastest,
+the index related to \f2height\fP varies the second fastest,
+and the index related to \f2depth\fP varies the slowest.
+.lp
+.EQ
+delim $$
+.EN
+The following shows the order of the data for a single pixel (voxel)
+for each of the seven formats.
+Each <..> denotes one byte. 
+For big-endian, <$Z sub 1$> is the most significant byte.
+For little-endian, <$Z sub 1$> is the least significant byte.
+.ip "\f2r8g8b8\fP
+<red><green><blue>
+.ip "\f2r8g8b8a8\fP
+<red><green><blue><alpha> 
+.ip "\f2a8b8g8r8\fP
+<alpha><blue><green><red>
+.ip "\f2r8g8b8a8z32\fP
+<red><green><blue><alpha><$Z sub 1$><$Z sub 2$><$Z sub 3$><$Z sub 4$>
+.ip "\f2r8g8b8z32\fP
+<red><green><blue><$Z sub 1$><$Z sub 2$><$Z sub 3$><$Z sub 4$>
+.ip "\f2a8\fP      "
+<alpha>
+.ip "\f2z32\fP     "
+<$Z sub 1$><$Z sub 2$><$Z sub 3$><$Z sub 4$>
+.H1 "Raster Memory Format"
+.lp
+Application programs can also exchange image information
+with \*(Dd through memory rasters.
+The format of the binary data for memory rasters
+is identical to the format for the binary file
+raster data.  Word byte order is not a concern to the
+programmer using memory rasters since the 32-bit
+Z value is in whatever order is native to the
+machine.
+.lp
+Raster memory data of this format is required
+when a \*(Dd \f2DoRaster <DORS>\fP object is created.
+Raster memory data can be obtained from 
+files in the \*(Dd raster file format using the
+\f2DsFileRasterRead <DSFRSR>\fP call, and from some
+\*(Dd devices with the \f2DdInqPixelData <DDQPXD>\fP call.
+A pointer to the binary raster data is passed to and from these 
+\*(Dd routines, along with width, height, depth,
+and type information (a \f2DtRasterType\fP value).

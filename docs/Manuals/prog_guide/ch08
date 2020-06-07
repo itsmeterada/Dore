@@ -1,0 +1,942 @@
+.\"#ident "%W%" %G%
+.\"
+.\" Copyright (C) 1988, 1989, 1990, 1991 by Kubota Pacific Computer Inc.
+.\"         All Rights Reserved
+.\" This program is a trade secret of Kubota Pacific Computer Inc. and
+.\" it is not to be reproduced, published, disclosed to others, copied,
+.\" adapted, distributed, or displayed without the prior authorization
+.\" of Kubota Pacific Computer Inc.  Licensee agrees to attach or embed
+.\" this Notice on all copies of the program, including partial copies
+.\" or modified versions thereof.
+.\"
+.so ../macros/local.me
+.ds CT Cameras and Lights
+.ds BT \*(Dd Programmer's Guide
+.ds h1 8
+.PN 153
+.L1 C AMERAS
+.L2 " " "AND"
+.L3 L IGHTS
+.CH EIGHT
+.rs
+.sp -.5v
+This chapter describes \f2studio
+objects\f1, which comprise \f2cameras\f1 and \f2lights.\f1 
+\f2Studio attribute objects,\f1 which modify studio objects, are
+also discussed.  Cameras can use \f2parallel\f1 or
+\f2perspective\f1 projection or other more complex projections if
+you require them.
+One of the chapter examples shows the use of six different
+camera groups to view the same object, a house.
+Lights can be of a particular type, color, and
+intensity.
+Two primitive attributes are also discussed since they
+are closely related to light sources: \f2DoLightSwitch <DOLTS>\f1
+and \f2DoShadowSwitch <DOSHAS>\f1.
+.lp
+Concepts and
+terms introduced in this chapter include the camera projection
+matrix, camera coordinates, parallel and perspective projections,
+hither and yon clipping planes, global rendering attributes, 
+stereo viewing,
+antialiasing and sampling,
+light sources, and shadows.
+.IX light type
+.IX light color
+.IX light intensity
+.H1 "Studio Objects"
+Chapters 4 through 7 focused on primitive objects and the
+primitive attribute objects that modify them.  You saw how
+primitive objects are first defined in their own modeling space,
+and then are scaled, rotated, and translated into position
+relative to each other in \f2world space\f1.  World space uses
+whatever \f2world coordinates\f1 are convenient to define all
+objects that currently exist in the graphics \f2world\f1 you
+are depicting.
+.lp
+Next, you must choose a position and an angle from which to view
+this \f2world\f1.  Because this procedure is analogous to
+taking a
+picture of a scene in real life, \*(Dd allows you to create a
+\f2camera\f1 for a particular scene.  You position the camera in
+space, specify where to point it,
+indicate its type,
+and set the
+aperture.  You can have any number of cameras in your scene, but
+you can take only one picture at a time, as described in more
+detail later in this chapter.
+.lp
+Just as a photographer in a studio can control the position,
+type, and color of the lights on the subject matter, you can
+create different kinds of lights and position them relative to
+the scene you are about to photograph with your camera. 
+.H2 "Studio Objects and Their Attribute Objects"
+Studio attributes are bound to studio objects
+(cameras and lights) in the same manner as primitive attributes are
+bound to primitive objects. For example, camera
+attribute objects include
+the type of projection and the sampling method
+associated with a camera, and
+whether or not stereo viewing is used.
+Light attribute objects include the type, the intensity and the color
+of a light source.
+.H2 "Studio Objects and Geometric Transformations"
+Geometric transformation attribute objects are bound to studio
+objects just as they are bound to primitive objects.
+By default, a camera is positioned at the origin, looking down the
+negative \f2z\f1 axis.
+For light sources for which position is relevant,
+the default initial position
+is also at the origin.
+Geometric transformations can be applied to change the orientation
+of cameras and lights.
+The \f2DoLookAtFrom <DOLAF>\f1 function is commonly used to position and
+orient studio objects in world coordinates.
+The calling sequence for
+the function is \f2DoLookAtFrom(at, from, up)\f1.
+The parameter
+\f2from\f1 is
+a point that specifies the position of the new origin of the coordinate system.
+The ray between \f2at\f1 and \f2from\f1 specifies the new \f2z\f1 direction.
+The new \f2xy\f1 plane will therefore
+be the plane which
+is perpendicular to the new \f2z\f1 direction, and
+which includes the new origin.
+The projection of the \f2up\f1 vector onto
+the new \f2xy\f1 plane
+specifies the new \f2y\f1 direction.
+Later in this chapter, two code examples show how \f2DoLookAtFrom <DOLAF>\f1
+can be used.
+.sp -.5v
+.H1 "Cameras and Their Attributes"
+A camera is created with \f2DoCamera <DOCM>\f1.
+One of the following camera attribute
+objects is used to describe the type of camera projection:
+.ip "\f3DoParallel <DOPAR>\f1"
+forms a parallel projection.  With this projection, parallel
+lines in the display objects remain parallel in the image.
+.ip "\f3DoPerspective <DOPER>\f1"
+forms a perspective projection.  With this projection,
+foreshortening occurs and distant objects appear smaller than
+near objects.  
+.ip "\f3DoProjection <DOPRJ>\f1"
+forms orthographic or oblique projections.  Use
+\f2DoProjection <DOPRJ>\f1 when you are unable to obtain the desired
+effects with \f2DoParallel <DOPAR>\f1 or \f2DoPerspective <DOPER>\f1.
+.ip"\f3DoCameraMatrix <DOCMX>\f1"
+specifies an arbitrary four-by-four matrix for the camera
+projection matrix attribute.  Since \f2DoCameraMatrix <DOCMX>\f1 is the
+most complex way to specify camera projection, it should be used
+only when you cannot obtain the desired effect using any of the
+other three camera projection functions.
+.H2 "Clipping at View Boundaries"
+Primitive objects are clipped to the view boundaries when the
+camera projection attribute is applied (\f2DoParallel <DOPAR>,
+DoPerspective <DOPER>,
+DoProjection <DOPRJ>,\f1 or \f2DoCameraMatrix <DOCMX>\f1).   
+\f2Clipping\f1 refers to the process of checking to see if any
+part of a primitive object falls outside of the viewing area;
+whatever part lies outside is cut.
+.lp
+In \f2camera projection coordinates\f1, a camera is
+always positioned at the origin, looking down the negative \f2z\f1 axis.
+The parameters to the camera projection functions are
+specified in that coordinate system.
+For the parallel and perspective projections, the C syntax is respectively
+\f2DoParallel (xy_window_size, hither, yon)\f1 and \f2DoPerspective
+(fov_angle, hither, yon)\f1. The parameter \f2xy_window_size\f1 specifies
+the square size of the \f2xy\f1 projection window,
+centered at the origin and
+parallel to the \f2yx\f1 plane (see \*(FT). The \f2xy\f1 window
+defines four clipping planes
+that bound the field of view in \f2x\f1 and \f2y\f1.
+For perspective projections, the angle \f2fov_angle\f1 defines
+four clipping planes forming a tetrahedral field of view (see \*(FT).
+The units used to express \f2fov_angle\f1 are specified with
+\f2DsSetAngleUnits <DSSAU>\f1 (degrees or radians).
+.lp
+For all camera types, primitive objects are also
+clipped in the \f2z\f1 direction, at the \f2hither\f1 and
+\f2yon\f1 planes.
+Any object or parts of objects closer than hither or
+further than yon plane are discarded. The hither and yon
+are specified as negative \f2z\f1 values.
+For improved accuracy in projection calculations, the distance
+between the hither and the yon planes should be minimal.
+Unstable calculations may also result from specifying a hither
+plane too close to the camera position.
+.bp
+\ 
+.(F 
+.\"	"./PS/8.1ps" 2.05i -1
+.sp 2.0i
+.)F "Parallel Projection"
+.(F 
+.\"	"./PS/8.2ps" 2.0i -1
+.sp 2.0i
+.)F "Perspective Projection"
+.H2 "Nonsquare Views      "
+When a camera is associated with a nonsquare view, a single
+parameter (\f2xy_window_size\f1 for a parallel projection, or \f2fov_angle\f1
+for a perspective projection) is not
+sufficient to fully define the extent of a projection.
+For a parallel projection, we need two separate window
+sizes in \f2x\f1 and \f2y\f1 to be specified in camera projection space.
+Similarly, for a perspective projection we need two
+angles defining the field of view both in \f2x\f1 and \f2y\f1.
+In such cases, it is up to the renderer to decide how the single 
+parameter will be interpreted.
+Typically, a renderer will make sure to preserve
+the aspect ratio of the objects in a scene. This can be done by
+initially assuming that the parameter defines a square 
+field of view. Then, the 
+field of view is scaled in \f2x\f1 or in \f2y\f1 such that its aspect
+ratio matches the aspect ratio of the view.
+.H2 "Camera Projection Matrix"
+When any of the camera projection attributes is used,
+the value of the current camera projection matrix is \f2replaced\f1.
+Unlike geometric transformations, 
+camera projection attribute objects are not additive. 
+This is intuitively obvious, since one camera would not
+be able to function in two different ways at the same time.
+.H1 "Example"
+\*(FT shows the same object, a house, added to six different
+views, each with a different camera.  
+.(F
+.sp 3.5i
+.)F "Examples of Perspective and Parallel Camera Projections"
+The top three views use
+perspective cameras, and the bottom three views use parallel
+cameras.  All cameras are positioned at the same location and oriented in
+the same direction using 
+\f2DoLookAtFrom <DOLAF>\f1.
+In the perspective projections, as
+the field of view angle widens, the object takes up less of the
+field of view.  With a very narrow field of view (25 degrees),
+you can see only part of the house.  A large field of view (100
+degrees), like a wide angle lens, causes the house to appear far
+away because it takes up such a small portion of the field of
+view.
+In the parallel projections
+(bottom row), as the window grows (from 15x15 to 40x40 to 65x65),
+the object appears smaller.
+Fragments of the code for the cameras and lights for this
+figure are shown below.
+.(m
+C code:
+
+.\"#	ident "@(#)ch09.ex01	1.4" 5/15/91
+.\"
+DtObject camera1, camera2, camera3, 
+	 camera4, camera5, camera6,
+         light;
+
+static DtPoint3 origin = {0.0, 0.0, 0.0};
+static DtPoint3 camera_from = {25.0, 15.0, -30.0};
+static DtPoint3 light_from = {0.0, 0.0, -10.0};
+static DtVector3 up = (0.0, 1.0, 0.0};
+
+/* use degrees for all angles */
+DsSetAngleUnits(DcAngleDegrees);
+
+/* perspective cameras: */
+/* top left camera */
+camera1 = DoGroup(DcTrue);    
+     DgAddObj(DoPerspective(25.0, -0.1, -100.0));
+     DgAddObj(DoLookAtFrom(origin, camera_from, up));
+     DgAddObj(DoCamera());
+DgClose();
+
+/* top middle camera */
+camera2 = DoGroup(DcTrue);    
+     DgAddObj(DoPerspective(50.0, -0.1, -100.0));
+     DgAddObj(DoLookAtFrom(origin, camera_from, up));
+     DgAddObj(DoCamera());
+DgClose();
+
+/* top right camera */
+camera3 = DoGroup(DcTrue);   
+     DgAddObj(DoPerspective(100.0, -0.1, -100.0));
+     DgAddObj(DoLookAtFrom(origin, camera_from, up));
+     DgAddObj(DoCamera());
+DgClose();
+
+/* parallel cameras: */
+/* bottom left camera  (smallest window) */
+camera4 = DoGroup(DcTrue);    
+     DgAddObj(DoParallel(15.0, -0.1, -100.0));   
+     DgAddObj(DoLookAtFrom(origin, camera_from, up));
+     DgAddObj(DoCamera());
+DgClose();
+
+/* bottom middle camera (larger window) */
+camera5 = DoGroup(DcTrue);    
+     DgAddObj(DoParallel(40.0, -0.1, -100.0));   
+     DgAddObj(DoLookAtFrom(origin, camera_from, up));
+     DgAddObj(DoCamera());
+DgClose();
+
+/* bottom right camera (largest window) */
+camera6 = DoGroup(DcTrue);    
+     DgAddObj(DoParallel(65.0, -0.1, -100.0));   
+     DgAddObj(DoLookAtFrom(origin, camera_from, up));
+     DgAddObj(DoCamera());
+DgClose();
+
+light = DoGroup(DcTrue);
+     DgAddObj(DoLightIntens(1.0));
+     DgAddObj(DoLookAtFrom(origin, light_from, up));
+     DgAddObj(DoLight());
+DgClose();
+.)m
+.(m
+\*(Fo code:
+
+.\"#	ident "@(#)ch09.ex01.f	1.4" 5/15/91
+.\"
+     REAL*8 ORIGIN(3), CAMERA_FROM(3)
+     REAL*8 LIGHT_FROM(3), UP(3)
+     INTEGER*4 CAMERA1, CAMERA2, CAMERA3, 
+    1          CAMERA4, CAMERA5, CAMERA6, 
+     INTEGER*4 LIGHT
+C   
+     ORIGIN(1)=0.0D0
+     ORIGIN(2)=0.0D0
+     ORIGIN(3)=0.0D0
+     CAMERA_FROM(1)=25.0D0
+     CAMERA_FROM(2)=15.0D0
+     CAMERA_FROM(3)=-30.0D0
+     LIGHT_FROM(1)=0.0D0
+     LIGHT_FROM(2)=0.0D0
+     LIGHT_FROM(3)=-10.0D0
+     UP(1)=0.0D0
+     UP(2)=1.0D0
+     UP(3)=0.0D0
+
+     CALL DSSAU(DCAD)
+C
+     ! perspective cameras:
+     ! top left camera
+     CAMERA1=DOG(DCTRUE) 
+          CALL DGAO(DOPER(25.0D0, -0.1D0, -100.0D0))
+          CALL DGAO(DOLAF(ORIGIN, CAMERA_FROM, UP))
+          CALL DGAO(DOCM())
+     CALL DGCS()
+C
+     ! top middle camera
+     CAMERA2=DOG(DCTRUE) 
+          CALL DGAO(DOPER(50.0D0, -0.1D0, -100.0D0))
+          CALL DGAO(DOLAF(ORIGIN, CAMERA_FROM, UP))
+          CALL DGAO(DOCM())
+     CALL DGCS()
+C
+     ! top right camera
+     CAMERA3=DOG(DCTRUE) 
+          CALL DGAO(DOPER(100.0D0, -0.1D0, -100.0D0))
+          CALL DGAO(DOLAF(ORIGIN, CAMERA_FROM, UP))
+          CALL DGAO(DOCM())
+     CALL DGCS()
+C
+     ! parallel cameras:
+C
+     ! bottom left camera (smallest window)
+     CAMERA4=DOG(DCTRUE) 
+          CALL DGAO(DOPAR(15.0D0, -0.1D0, -100.0D0))
+          CALL DGAO(DOLAF(ORIGIN, CAMERA_FROM, UP))
+          CALL DGAO(DOCM())
+     CALL DGCS()
+C
+     ! bottom middle camera (larger window)
+     CAMERA5=DOG(DCTRUE) 
+          CALL DGAO(DOPAR(40.0D0, -0.1D0, -100.0D0))
+          CALL DGAO(DOLAF(ORIGIN, CAMERA_FROM, UP))
+          CALL DGAO(DOCM())
+     CALL DGCS()
+C
+     ! bottom right camera (largest window)
+     CAMERA6=DOG(DCTRUE) 
+          CALL DGAO(DOPAR(65.0D0, -0.1D0, -100.0D0))
+          CALL DGAO(DOLAF(ORIGIN, CAMERA_FROM, UP))
+          CALL DGAO(DOCM())
+     CALL DGCS()
+C
+     LIGHT=DOG(DCTRUE)
+          CALL DGAO(DOLI(1.0D0))
+          CALL DGAO(DOLAF(ORIGIN, LIGHT_FROM, UP))
+          CALL DGAO(DOLT())
+     CALL DGCS()
+.)m
+.lp
+See also the example in Chapter 9, \f2Views, Frames, and
+Devices\f1,
+which shows four different cameras added to four different views
+of the same object.
+.H2 "DoPushMatrix and DoPopMatrix"
+The example above uses groups to push and pop attributes for each
+camera.  If it is more convenient to put all cameras for a
+particular view into one group, you can use \f2DoPushMatrix <DOPUMX>\f1
+and \f2DoPopMatrix <DOPPMX>\f1 to explicitly push and pop the attributes
+for each camera and light.  For example:
+.(m
+C code:
+
+.\"#	ident "@(#)ch09.ex02	1.4" 5/15/91
+.\"
+DtObject camera_group, camera1, camera2, camera3;
+DtPoint3 at1, at2, at3; 
+DtPoint3 from1, from2, from3;
+DtVector3 up1, up2, up3;
+
+/* use degrees for angles */
+DsSetAngleUnits(DcAngleDegrees);
+
+camera_group = DoGroup(DcTrue);
+     DgAddObj(DoPushMatrix());
+          DgAddObj(DoPerspective(100.0, -0.1, -100.0));
+          DgAddObj(DoLookAtFrom(at1, from1, up1));
+          DgAddObj(camera1=DoCamera());
+     DgAddObj(DoPopMatrix());
+
+     DgAddObj(DoPushMatrix());
+          DgAddObj(DoPerspective(70.0, -0.1, -80.0));
+          DgAddObj(DoLookAtFrom(at2, from2, up2));
+          DgAddObj(camera2=DoCamera());
+     DgAddObj(DoPopMatrix());
+
+     DgAddObj(DoPushMatrix());
+          DgAddObj(DoParallel(10.0, -0.1, -100.0));
+          DgAddObj(DoLookAtFrom(at3, from3, up3));
+          DgAddObj(camera3=DoCamera());
+     DgAddObj(DoPopMatrix());
+DgClose();
+.)m
+.(m
+\*(Fo code:
+
+.\"#	ident "@(#)ch09.ex02.f	1.4" 5/15/91
+.\"
+    INTEGER*4 CAMGRP, CAM1, CAM2, CAM3
+    REAL*8 AT1(3), AT2(3), AT3(3) 
+    REAL*8 FROM1(3), FROM2(3), FROM3(3)
+    REAL*8 UP1(3), UP2(3), UP3(3)
+C
+    CALL DSSAU(DCAD)
+C
+    CAMGRP = DOG(DCTRUE)
+          CALL DGAO(DOPUMX())
+               CALL DGAO(DOPER(100.0DO, -0.1D0, -100.0D0))
+               CALL DGAO(DOLAF(AT1, FROM1, UP1))
+               CALL DGAO(CAM1=DOCM())
+          CALL DGAO(DOPPMX())
+C
+          CALL DGAO(DOPUMX())
+               CALL DGAO(DOPER(70.0DO, -0.1D0, -80.0D0))
+               CALL DGAO(DOLAF(AT2, FROM2, UP2))
+               CALL DGAO(CAM2=DOCM())
+          CALL DGAO(DOPPMX())
+C
+          CALL DGAO(DOPUMX())
+               CALL DGAO(DOPAR(10.0DO, -0.1D0, -100.0D0))
+               CALL DGAO(DOLAF(AT3, FROM3, UP3))
+               CALL DGAO(CAM3=DOCM())
+          CALL DGAO(DOPPMX())
+    CALL DGCS()   
+.)m
+.rs
+.sp -1v
+.H1 "The Active Camera"
+.rs
+.sp -.25v
+As mentioned earlier, many cameras can be defined for a
+particular view, but only one camera can be used to generate
+a specific image for that view.
+To select a specific camera for the view, use \f2DvSetActiveCamera <DVSAC>\f1.
+.sp -.25v
+.lp
+In the previous example, we might have
+used \f2DvSetActiveCamera(view, camera2)\f1 \f2<DVSAC(VIEW, CAM2)>\f1 to
+set the active camera to be the second of the group.
+\f2DvInqActiveCamera <DVQAC>\f1 returns the
+active camera for a view. When multiple cameras are defined and
+\f2DvSetActiveCamera <DVSAC>\f1
+is not used, a renderer will generally select the
+last camera that was defined. In such a case \f2DvInqActiveCamera <DVQAC>\f1
+will return \f2DcNullObject\f1.
+.H1 "Coordinate Systems"
+.rs
+.sp -.25v
+To this point, several coordinate systems have been
+discussed.
+.sp -.25v
+.np
+Cameras and lights are defined and positioned in \f2world coordinates.\f1 
+.sp -.25v
+.np
+Displayable objects are first
+described in their own \f2local coordinates\f1, and are then
+positioned relative to each other in world coordinates.
+.sp -.25v
+.np
+Camera projection attributes are specified in
+\f2camera projection coordinates\f1.
+Eventually, the scene is projected onto the camera lens, and the
+world coordinates are transformed to camera projection
+coordinates.
+.sp -.25v
+.lp
+This entire projected scene is then placed in a view, which is
+defined by \f2view coordinates.\f1  The view coordinate system is
+identical to the \f2frame coordinate system\f1. Default view
+coordinates are (0.0, 0.0, 0.0) for the back lower left corner to
+(1.0, 1.0, 1.0) for the front upper right corner.  
+.sp -.25v
+.lp
+Chapter 9, \f2Views, Frames, and Devices\f1, will trace this
+path to
+the final destination, the device, and explain the relationship
+between views and frames in more detail.
+.sp -.5v
+.H1 "DoStereo and DoStereoSwitch"
+.rs
+.sp -.25v
+The 
+\f2DoStereo <DOSTER>\f1 camera attribute creates two viewpoints for a camera,
+one for the left eye and one for the right eye,
+which gives a more realistic 3D effect to a scene.
+First,
+you specify the \f2eye separation\f1 distance, which is the
+distance from the normal camera position to each of the two
+stereo camera positions.
+This corresponds to the distance from the bridge of the viewer's nose
+to each eye.
+The total distance between the left and
+right camera viewpoints is 2 times the camera separation
+distance specified.  Second, you specify the \f2focal\f1
+distance, which is the distance from the original camera position
+to the point along the camera direction vector at which both
+stereo camera directions are centered.  This controls the
+\f2focus\f1 point, which becomes important when objects are
+close.
+The ratio between the eye separation distance and the
+focal distance is generally about 1 to 10.
+.sp -.25v
+.lp
+\f2DoStereoSwitch <DOSTES>\f1 specifies whether or not a camera is a
+stereo camera. If on, the camera is translated to two different
+viewpoints, one for each eye.
+.sp -.25v
+.lp
+A stereo device is required to make
+use of \f2DoStereo <DOSTER>\f1 and \f2DoStereoSwitch <DOSTES>\f1.
+See your \f2\*(Dd System Guide\fP for more detail.
+.sp -.5v
+.H1 "Global Rendering Attributes"
+.rs
+.sp -.25v
+Three global rendering attributes can be used by ray
+tracers. These attributes are bound to a particular camera:
+.sp -.25v
+.ip "\f3DoGlbRendMaxSub <DOGRMS>\f1"
+specifies the maximum level of spatial subdivisions for ray
+tracing. The default is 10.
+.sp -.25v
+.ip "\f3DoGlbRendMaxObjs <DOGRMO>\f1"
+specifies the maximum number of objects per spatial subdivision
+for ray tracing. The default is 1.
+.sp -.25v
+.ip "\f3DoGlbRendRayLevel <DOGRRL>\f1"
+specifies the maximum number of ray bounces. The default is 3.
+.sp -.25v
+.lp
+See your \f2\*(Dd System Guide\f1 for a description of the
+renderers available. 
+.sp -.5v
+.H1 "Sampling and Antialiasing"
+.rs
+.sp -.25v
+Normally, when an image is rendered, the center of each pixel
+is used to determine its color.
+If more than one object or only portions of certain objects fall
+into a pixel, taking a single sample in the center may result in
+a color that is not truly representative of the pixel.
+The jagged appearance of certain lines or edges are the result
+of such \f2aliasing\f1 problems.
+.lp
+.sp -.25v
+Sampling camera attribute objects provide \f2antialiasing\f1 by
+modifying the sampling process used to render an image.
+\*(FT
+illustrates the different sampling methods on
+a set of 3 x 3 pixels.
+.(F
+.\"	"./PS/8.4ps" 3.0i 0
+.sp 3.0i
+.)F "Sampling Methods" sampMethods
+.rs
+.sp .5v
+The sampling attributes that can be specified for a camera are:
+.ip "\f3DoSampleSuper <DOSSPR>\f1"
+With supersampling, each pixel of an image is subdivided into 
+a regular grid of \f2xsamples\f1 x \f2ysamples\f1 subpixels,
+and a shade is computed for each of the subpixels. The final shade for 
+the pixel is computed as a weighted average of the subpixel shades.
+See Figure 8-4\f2(b)\f1 where this is illustrated for \f2xsamples=ysamples=2\f1.
+.ip "\f3DoSampleSuperSwitch <DOSSSW>\f1"
+Specifies whether subsequent cameras should do supersampling.
+.ip "\f3DoSampleFilter <DOSFLT>\f1"
+Used in conjunction with supersampling, the filter camera attribute
+specifies which \f2filter\f1 or weighting function
+should be used to reconstruct the pixel shade from the various
+samples. 
+For example, with a box filter, equal weights are given to
+all samples under the area covered by the filter.
+The values \f2xwidth\f1 and \f2ywidth\f1 specify the size covered
+by the filter in pixels. Therefore, if \f2xwidth\f1 and \f2ywidth\f1
+are larger than 1.0, subpixels of neighboring pixels will also
+be taken into account.
+See Figure 8-4\f2(c)\f1 where this is illustrated for the center pixel
+with \f2xsamples=ysamples=2\f1 and \f2xwidth=ywidth=2\f1.
+Increasing the size of a filter 
+typically trades off aliasing for blur. 
+.ip "\f3DoSampleAdaptive <DOSADP>\f1"
+With adaptive sampling, pixels are
+sampled more frequently in regions
+where abrupt shade changes occur, such as the region where
+an edge intersects a pixel. 
+Subdivision of the pixels continues
+as long as the variance of the resulting shades
+is above a specified threshold.
+The final shade for a pixel is computed as a weighted average
+of all the subpixel shades.
+Figure 8-4\f2(d)\f1 shows an example of adaptive sampling. In this case,
+pixels (or subpixels) are regularly subdivided into four subsamples.
+.ip "\f3DoSampleAdaptiveSwitch <DOSASW>\f1"
+Specifies whether subsequent cameras should do adaptive sampling.
+.ip "\f3DoSampleJitter <DOSJIT>\f1"
+With jitter sampling, pixels are not sampled at the center, but at
+a random location within the pixel (see
+Figure 8-4\f2(e)\f1).
+If jitter sampling is used in
+conjunction with supersampling, sampling locations are also
+perturbed at subpixel level. In
+Figure 8-4\f2(f)\f1, this is illustrated with
+\f2xsamples=ysamples=2\f1.
+The parameter \f2factor\f1 specifies
+the maximum random deviation allowed, in percent of a pixel.
+Increasing the value of \f2factor\f1 trades off aliasing for
+noise.
+.ip "\f3DoSampleJitterSwitch <DOSJSW>\f1"
+Specifies whether subsequent cameras should do jitter sampling.
+.lp
+The default value for all sampling switch objects is \f2DcOff <DCOFF>.\f1
+Some of these sampling methods are not supported by all renderers.
+For more detail, refer to your \f2\*(Dd System Guide\f1.
+.lp
+The sampling techniques described are \f2global\f1 antialiasing
+techniques.  As camera attributes, they affect a whole image.
+\*(Dd also includes some primitive attributes for controlling 
+\f2local\f1 antialiasing. For example, only some of the lines in a scene
+could be drawn antialiased using the
+\f2DoLocalAntiAliasStyle <DOLAST> \f1 primitive attribute.
+See Chapter 5 for more information on local antialiasing.
+.H1 "Lights and Their Attributes"
+Light objects, like camera objects, are part of a scene but are
+not visible themselves.  In contrast to cameras, more than one
+light can be used in a scene at one time.  A light created with
+\f2DoLight <DOLT>\f1 is, by default, a white light source at
+infinity, oriented in the negative
+\f2z\f1 direction in world space, with an intensity of 1.0.
+.lp
+Use the various \f2light attribute\f1 object functions to create
+lights with other properties.  Important light attributes
+are
+.ip "\f3Type\f1"
+\f2DoLightType <DOLTT>\f1 specifies the primary type of
+subsequent light
+objects:  ambient light, light source at infinity, spot light,
+attenuated spot light, point light, and attenuated point light.
+(See the
+sections below for further details of these light types.)  Not
+all renderers can make use of all the available light types.
+.br
+.ne 5
+.ip "\f3Intensity\f1"
+\f2DoLightIntens <DOLI>\f1 specifies the overall intensity of
+subsequent
+light objects.  Intensities are normally between 0.0 and 1.0.
+.ip "\f3Color\f1" 
+\f2DoLightColor <DOLC>\f1 specifies the color of subsequent light
+objects.
+.H2 "Ambient Light"
+An ambient light source distributes light equally throughout the
+scene.
+It produces the
+inherent \f2glow\f1 of an object. 
+Since ambient light is nondirectional, its exact position
+in the scene is not important (see \*(FT).
+.lp
+An ambient light source is specified by \f2DcLightAmbient <DCLTAM>\f1.
+The illumination from each ambient light is determined
+by multiplying the light color times the light intensity:
+.EQ L 
+delim $$
+     DoLightColor~times~DoLightIntens
+.EN
+As for any other type of light source,
+it is possible to have more than one ambient light source in a scene.
+The ambient light component is the sum of all the ambient lights sources.
+.(F 
+.\" ./PS/8.5ps 2.0i 0
+.sp 2.0i
+.)F "Ambient Light Source"
+.H2 "Light Source at Infinity"
+Like sunlight, light rays produced by a light source at infinity
+can be represented by a series of parallel vectors, as shown in
+\*(FT.
+Light sources at infinity are specified 
+by \f2DcLightInfinite <DCLTIN>\f1. 
+The distance between an object and a light source at infinity is not
+important, but the direction is.  For these lights sources, as for
+ambient lights, the light color is multiplied by the light
+intensity to determine the illumination from each light:
+.EQ L
+     DoLightColor~times~DoLightIntens
+.EN
+.bp
+\ 
+.(F 
+.\"./PS/8.6ps" 1.25i -1
+.sp 1.25i
+.)F "Light Source at Infinity"
+.H2 "Point Lights"
+A standard point light source radiates light outward uniformly in all
+directions (see \*(FT).  This light source is analogous to a
+light bulb or a match, although it is not actually visible.
+.(F 
+.\"./PS/8.7ps" 2.25i -1
+.sp 2.25i
+.)F "Point Light Source" ptsource
+Point light sources can be either standard point lights,
+specified by \f2DcLightPoint <DCLTPT>\f1 or attenuated point
+lights, specified by \f2DcLightPointAttn <DCLTPA>\f1.  Attenuated
+point lights have an additional attribute that describes how the
+light intensity falls off as the distance from the light
+increases (see the following section). Whether a point light source is attenuated 
+or not, its position is important.
+For instance, as a
+point light source gets closer to an object,
+it may be the case that
+a smaller portion of
+the object be illuminated (see
+.FR ptsource
+).
+.lp
+For standard point lights, the
+illumination from each light is again the product of the light
+color and the light intensity:
+.EQ L
+     DoLightColor~times~DoLightIntens
+.EN
+.H3 "Attenuated Point Lights"
+Attenuated point lights (and also attenuated spot lights,
+described below), are affected by the studio attribute
+\f2DoLightAttenuation <DOLTA>\f1, which specifies the falloff of
+light as the distance from the light source increases.
+\f2DoLightAttenuation (c1, c2)\f1
+defines the following falloff:
+.EQ L
+     {lightattenuation~=~1.0 over {c1~+~(c2~times~distance)}}
+.EN
+.br
+In this equation,
+\f2distance\f1 is the distance between the
+point of interest and the light source.
+The term \f21.0/c1\f1 defines the value of light
+attenuation at the light source (\f2distance=0\f1).
+\f2c2\f1 defines how fast the intensity falls off with distance.
+The larger \f2c2\f1 is, the faster the light intensity drops off
+from its initial value to 0.0.
+.lp
+The illumination from an attenuated point light at a particular
+point in space can be represented as:
+.EQ L
+     DoLightColor~times~DoLightIntens~times~lightattenuation
+.EN
+.H2 "Spot Lights"
+A spot light is a directed light source that radiates a cone of light
+outward from the light position in the light direction. 
+The light intensity of a spot light decreases as
+a function of the distance from the center of the cone of light.
+Anything outside the cone of light is not lit
+(see \*(FT).  This drop in light intensity can be
+anywhere from an abrupt drop, which produces sharp edges between
+full light and darkness, to a gradual drop in light intensity,
+which produces soft edges to the cone of light (see next
+section).  Like point lights, spot lights can be either standard
+(\f2DcLightSpot <DCLTSP>\f1) or attenuated
+(\f2DcLightSpotAttn <DCLTSA>\f1).
+Two spot light attributes are used to
+define the variation of intensity about the light direction.
+A \f2spread angle\f1 and a \f2spread exponent\f1 can be specified
+for either standard or attenuated spot lights.
+In the following equation, the
+effect of the spread angle is represented by \f2lightspread1\f1,
+and the effect of the spread exponent is represented by
+\f2lightspread2\f1.  For standard spot lights, the illumination
+from each light is represented as:
+.EQ L
+     DoLightColor~times~DoLightIntens~times~lightspread1~times~lightspread2
+.EN
+The components
+\f2lightspread1\f1 and \f2lightspread2\f1 are described in the
+following sections on \*(lqSpread Angles\*(rq and \*(lqSpread
+Exponents\*(rq.
+.(F 
+.\"./PS/8.8ps" 1.75i 0
+.sp 2.25i
+.)F "Spot Light Source"
+.sp -.5v
+.H3 "Spread Angle"
+.rs
+.sp -.5v
+The \f2DoLightSpreadAngles <DOLTSA>\f1 function defines the size
+of the light cone for both standard spot lights and attenuated
+spot lights.  
+In C, the syntax for the function is  \f2DoLightSpreadAngles (total, delta)\f1,
+where \f2total\f1 and \f2delta\f1 are angle values.
+As shown in \*(FT, this defines two cones of light.
+Anywhere within \f2(total-delta)\f1 (the center cone),
+\f2lightspread1\f1
+takes the full intensity value (1.0).
+On the outside of this cone is
+a second cone, defined as \f2total\f1.
+Between these two
+cones, \f2lightspread1\f1 falls off from full intensity (1.0) to no
+intensity (0.0).  The larger the value of \f2delta\f1, the
+softer and more gradual the decline in \f2lightspread1\f1.
+The units to express \f2total\f1 and \f2delta\f1 are specified with
+\f2DsSetAngleUnits <DSSAU>\f1 (degrees or radians).
+.sp -.25v
+.lp
+To calculate the deviation from the light direction for a point \f2p\f1,
+a line can be drawn from \f2p\f1 to the light position.
+We will call \f2alpha\f1 the angle formed  by this line 
+and the light direction vector (refer to Figure 8-9).
+This angle is then used in the computation of \f2lightspread1\f1 :
+.sp .5v
+.EQ L
+     lightspread1 ~=~left { matrix {
+ccol      {{1.0} above {0.0} above { {"total - alpha"} over "delta"} }
+lcol      {{~~if~(alpha~<~(total~-~delta))} above {~~if~(alpha~>~total)} above
+{~~roman "otherwise"} } }
+.EN
+.lp
+.(F 
+.\"./PS/8.9PS" 3i 0
+.sp 3i
+.)F "Parameters for Light Spread Angles" lightSpread
+.H3 "Spread Exponents"
+The \f2DoLightSpreadExp <DOLTSE>\f1 function defines another
+factor affect:
+\f2lightspread2\f1 is calculated by raising the cosine of angle \f2alpha\f1
+to the power \f2exponent\f1 specified with \f2DoLightSpreadExp (exponent)\f1
+(see previous section for a definition of \f2alpha\f1).
+This can be expressed as:
+.EQ L
+     lightspread2~=~cos(alpha) sup exponent
+.EN
+With this function, full intensity (1.0) is obtained when a point
+is located directly on the path of the light vector (\f2alpha = 0\f1).
+As the value of \f2exponent\f1 increases, the beam of light emitted by
+the spot light becomes more concentrated about the light direction.
+\*(FT shows how four different light spread exponents affect the
+intensity when the angle away from the light direction varies
+from -90 to 90 degrees $(- pi /2 ~roman "to"~pi /2~roman "radians")$.
+.sp .5v
+.H3 "Attenuated Spot Lights"
+Like attenuated point lights,
+attenuated spot lights are affected by the studio attribute
+.I "DoLightAttenuation <DOLTA>" .
+The falloff of light as the distance from the light source
+increases is the same as described in the section on attenuated point lights.
+The illumination from each attenuated spot light can be
+represented as:
+.(m
+.EQ
+DoLightColor~times~ DoLightIntens~times~lightspread1~times~lightspread2~times~lightattenuation
+.EN
+.)m
+.(F ./PS/cosx.ps 5.25i 0
+.)F "Effect of Different Light Spread Exponents"
+.rs
+.sp -1.5v
+.H1 "Light Switch"
+The function \f2DoLightSwitch <DOLTS>\f1 creates a \f3primitive
+attribute\f1 that specifies whether subsequent primitive
+objects will be illuminated by a particular light object.  If the
+switch value is \f2DcOff <DCOFF>\f1, subsequent primitive objects will
+not be lit by that light source. If it is the only light source,
+those objects will not be illuminated. If the switch value for a
+particular light is \f2DcOn <DCON>\f1 (the default), subsequent objects
+will reflect light from that light source.
+.H1 "Shadows"
+Shadows are created by objects keeping the light from reaching other
+objects in a scene. The
+\f2DoShadowSwitch <DOSHAS>\f1 
+\f3primitive attribute\f1 is used to enable shadow computation for
+subsequent primitive objects.
+
+Shadow computation may be handled differently depending on the
+hardware being used. In some cases, turning the shadow switch
+on for a primitive object will mean that the primitive
+will be rendered with appropriate shadows on its surface.
+In other cases, it will mean that the shadows cast \f2by\f1
+the primitive object will be considered.
+The shadow attribute is also renderer-dependent.
+See your \f2\*(Dd System Guide\f1 for more detail.
+.H1 "Chapter Summary"
+Chapter 8 describes cameras and lights, which form a class of
+objects called \f2studio objects\f1.
+Studio objects are modified by \f2studio attribute objects\f1.
+Light attributes include the type, intensity and color of a light source.
+Camera attributes include the type of projection, the sampling method,
+and some global rendering attributes for ray tracing.
+.lp
+Studio attributes are bound to cameras and lights just as
+primitive
+attributes are bound to primitive objects.  The same principles
+of attribute stacking apply to both studio and primitive
+attributes.
+Geometric transformations are bound to studio objects in the same
+manner
+that they are bound to primitive objects.
+.lp
+You can position any number of cameras in a scene, but only one
+camera is
+active at a time.  Simple camera projections are the
+\f2parallel\f1 and
+\f2perspective\f1 projections.  The \f2DoProjection <DOPRJ>\f1
+function can be
+used to obtain other types of projections.  For the most complex
+projections,
+an arbitrary camera projection matrix can be specified with
+\f2DoCameraMatrix <DOCMX>\f1.
+.lp
+Primitive objects are \f2clipped\f1 to the view boundaries as
+defined by
+the camera
+projection attribute.  In addition, primitive objects are clipped
+in the viewing direction at the \f2hither\f1 and \f2yon\f1
+clipping planes.
+.lp
+Sampling camera attributes provide \f2antialiasing\f1 by
+taking more than one sample per pixel or by using jittered
+sampling.
+.lp
+Light sources are created with \f2DoLight <DOLT>\f1 and have
+a particular type, color and intensity. Light source types include
+ambient light, light source at infinity,
+point lights and spot lights.
+.lp
+Shadows can be computed individually for selected primitive objects using the
+\f2DoShadowSwitch <DOSHAS>\f1 primitive attribute.

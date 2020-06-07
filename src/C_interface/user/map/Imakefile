@@ -1,0 +1,17 @@
+#include <Dore.tmpl>
+
+    SRCS = cmapbmp.c cmapbmpswi.c cmapdifclr.c cmapdifswi.c cmapenv.c \
+           cmapenvswi.c cmaptrnint.c cmaptrnswi.c ctexaa.c ctexextuv.c \
+	   ctexextw.c ctexintsrf.c ctexmatuv.c ctexmatuvw.c ctexop.c \
+	   ctexscluv.c ctexsclw.c ctextrnuv.c ctextrnw.c ctexuvidx.c \
+	   ctexwidx.c
+    OBJS = cmapbmp.o cmapbmpswi.o cmapdifclr.o cmapdifswi.o cmapenv.o \
+           cmapenvswi.o cmaptrnint.o cmaptrnswi.o ctexaa.o ctexextuv.o \
+	   ctexextw.o ctexintsrf.o ctexmatuv.o ctexmatuvw.o ctexop.o \
+	   ctexscluv.o ctexsclw.o ctextrnuv.o ctextrnw.o ctexuvidx.o \
+	   ctexwidx.o
+
+LibraryObjectRule()
+SubdirLibraryRule($(OBJS))
+
+DependTarget()

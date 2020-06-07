@@ -1,0 +1,9 @@
+#include <Dore.tmpl>
+
+    SRCS = cxp_dcm.c cxp_inq.c cxp_output.c cxp_set.c gp_support.c
+    OBJS = cxp_dcm.o cxp_inq.o cxp_output.o cxp_set.o gp_support.o
+
+LibraryObjectRule()
+SubdirLibraryRule($(OBJS))
+
+DependTarget()

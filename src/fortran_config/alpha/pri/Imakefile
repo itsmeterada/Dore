@@ -1,0 +1,17 @@
+#include <Dore.tmpl>
+
+    SRCS = fanntxt.c flinlst.c fmat.c fnrbsrf.c fpch.c fply.c fplylin.c \
+           fplymkr.c fplymsh.c fpntlst.c fprisrf.c fquadgrid.c fquadlst.c \
+	   fquadmsh.c fsimply.c fsimplymsh.c fsphlst.c ftor.c ftrilst.c \
+	   ftrimsh.c ftristrip.c ftxt.c fvarlinlst.c fvarpntlst.c \
+	   fvarquadgr.c fvarqudmsh.c fvarsplmsh.c fvartrimsh.c fvartristr.c
+    OBJS = fanntxt.o flinlst.o fmat.o fnrbsrf.o fpch.o fply.o fplylin.o \
+           fplymkr.o fplymsh.o fpntlst.o fprisrf.o fquadgrid.o fquadlst.o \
+	   fquadmsh.o fsimply.o fsimplymsh.o fsphlst.o ftor.o ftrilst.o \
+	   ftrimsh.o ftristrip.o ftxt.o fvarlinlst.o fvarpntlst.o \
+	   fvarquadgr.o fvarqudmsh.o fvarsplmsh.o fvartrimsh.o fvartristr.o
+
+LibraryObjectRule()
+SubdirLibraryRule($(OBJS))
+
+DependTarget()

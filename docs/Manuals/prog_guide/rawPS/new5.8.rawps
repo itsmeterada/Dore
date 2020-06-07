@@ -1,0 +1,41 @@
+%!PS-Adobe-2.0
+%%Title: 5-8.pict
+%%Creator: MacDraw
+%%CreationDate: Friday, August 11, 1989
+%%Pages: (atend)
+%%BoundingBox: ? ? ? ?
+%%PageBoundingBox: 30 31 582 761
+%%For: aaron                         
+%%IncludeProcSet: "(AppleDict md)" 66
+%%EndComments
+%%EndProlog
+%%BeginDocumentSetup
+md begin
+
+T T -31 -30 761 582 100 72 72 1 F F F F T T psu
+(aaron                         ; document: 5-8.pict)jn
+0 mf
+od
+%%EndDocumentSetup
+%%Page: ? 1
+op
+0 0 xl
+1 1 pen
+0 0 gm
+(nc 0 0 720 540 6 rc)kp
+144.5 72.5 360.5 288.5 0 rc
+72.5 144.5 288.5 360.5 0 rc
+72 144 gm
+144 72 lin
+288 360 gm
+360 288 lin
+72 360 gm
+144 288 lin
+288 144 gm
+360 72 lin
+F T cp
+%%Trailer
+cd
+end
+%%Pages: 1 0
+%%EOF

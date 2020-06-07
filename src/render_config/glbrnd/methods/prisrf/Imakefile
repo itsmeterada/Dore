@@ -1,0 +1,9 @@
+#include <Dore.tmpl>
+
+    SRCS = prisrf_box.c prisrf_cone.c prisrf_cyl.c prisrf_gen.c prisrf_sph.c
+    OBJS = prisrf_box.o prisrf_cone.o prisrf_cyl.o prisrf_gen.o prisrf_sph.o
+
+LibraryObjectRule()
+SubdirLibraryRule($(OBJS))
+
+DependTarget()

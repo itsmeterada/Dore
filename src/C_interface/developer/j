@@ -1,0 +1,4 @@
+#include <Imake.rules>
+#include <DoreLib.tmpl>
+
+LibCleanDir(j)

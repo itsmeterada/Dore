@@ -1,0 +1,172 @@
+.\"#ident "%W%" %G%
+.\"
+.\" Copyright (C) 1988, 1989, 1990, 1991 by Kubota Pacific Computer Inc.
+.\"         All Rights Reserved
+.\" This program is a trade secret of Kubota Pacific Computer Inc. and
+.\" it is not to be reproduced, published, disclosed to others, copied,
+.\" adapted, distributed, or displayed without the prior authorization
+.\" of Kubota Pacific Computer Inc.  Licensee agrees to attach or embed
+.\" this Notice on all copies of the program, including partial copies
+.\" or modified versions thereof.
+.\"
+.so ../macros/local.me
+.ds CT Preface
+.ds BT \\*(Dd Programmer's Guide
+.L1 P REFACE
+.PN 15 i
+.CH 
+.rs
+.sp -1.5v
+This manual is a guide to programming with version 5.0 of \*(Dd, a
+three-dimensional computer graphics subroutine library.
+The manual explains the key terms and concepts of
+everyday programming with the \*(Do.  Each chapter includes
+sample code fragments, written in C and Fortran, to illustrate the topics
+under discussion.  
+.lp
+If you're new to graphics programming, you should
+read this manual thoroughly so that you have a complete picture
+of how to use the \*(Dd graphics subroutine library.
+Each chapter begins with a brief overview of the material presented
+and a list of the terms and concepts introduced in the chapter.  
+.lp
+If you're an experienced graphics programmer but are new to
+\*(Dd, you should turn to the code examples and
+illustrations and then move on to the \f2\*(Dd Reference
+Manual\f1.  Be sure to skim at least the following chapters of
+this manual:
+.BU hs
+Chapters 1 and 2 of introductory material
+.BU hs
+Chapter 3, \f2Objects and Groups\f1
+.BU hs
+Chapter 9, \f2Views, Frames, and Devices\f1
+.BU hs
+Chapter 10, \f2Methods\f1
+.BU hs
+Chapter 13, \f2User-Defined Primitives\f1
+.BU hs
+Chapter 15, \f2Texture Mapping\f1
+.sp -.5v
+.H1 "Chapter Summaries"
+This section briefly summarizes the chapters in this manual.
+.lp
+Chapter 1, \f2Overview\f1, 
+outlines the key features and benefits of the \*(Do.
+.lp
+Chapter 2, \f2Writing a \*(Dd Program\f1, serves as an
+introduction to the structure and components of a \*(Dd program. 
+Although the \*(Do contains several hundred functions, you need
+only a small subset to produce both simple 3D models,
+such as those created in the chapter example,
+and elaborate ray-traced images.
+This chapter also contains information on single- and double-precision
+versions of the \*(Dd application program interface.
+.lp
+Chapter 3, \f2Objects and Groups\f1, describes how to create
+objects and add them to groups, and how to reference groups
+within other groups.  
+.lp
+Chapter 4, \f2Primitive Objects\f1, explains concepts and offers
+examples related to the major primitive objects in the \*(Do.
+.lp
+Chapter 5, \f2Primitive Attributes\f1, describes some of the
+important attribute objects used to modify primitive objects.  A
+detailed discussion of how attribute objects affect the attribute
+stack is presented.  
+.lp
+Chapter 6, \f2Geometric Transformations\f1, describes how
+geometric transformation attribute objects can be used to modify
+primitive and studio objects.  A detailed discussion of the
+Current Transformation Matrix and how it is modified by
+geometric transformations is offered.
+.lp
+Chapter 7, \f2Text\f1, describes the text primitives and the
+attributes that affect them.
+.lp
+Chapter 8, \f2Cameras and Lights\f1, describes studio objects and
+explains how to use them when defining a scene.  Important studio
+attributes are also covered in this chapter.
+.lp
+Chapter 9, \f2Views, Frames, and Devices\f1, describes these
+organizational objects and how a scene is transformed from
+modeling coordinates to frame coordinates to device coordinates.
+.lp
+Chapter 10, \f2Methods\f1, describes the key functions that
+involve traversal of the \*(Dd database:  rendering, picking, and
+computing bounding volumes.
+.lp
+Chapter 11, \f2Conditionals\f1, discusses the use of conditional
+elements, such as callbacks, name sets and filters, and the
+executability set, to conditionally affect execution of the \*(Dd
+display tree.
+.lp
+Chapter 12, \f2System Functions\f1, describes key system
+functions, including the object naming facility, error handling,
+and the use of valuators and input slots to
+provide asynchronous input to \*(Dd.    
+.lp
+Chapter 13, \f2User-Defined Primitives\f1, describes how to create
+new \*(Dd primitives.  It also recommends conventions for naming
+user-defined primitives and the routines that implement them.
+.lp
+Chapter 14, \f2Raster Objects\fP, describes raster objects, and
+the system functions for reading, writing and maintaining
+raster data.
+.lp
+Chapter 15, \f2Texture Mapping\fP, describes the texture mapping
+attributes, and how to assign texture coordinates to primitive
+objects.
+.lp
+Appendix A, \f2Functional Groups\f1, lists all 
+the \*(Do functions, grouping them by
+function type.
+.H1 "Related Manuals and Texts"
+A comprehensive set of documentation is available with \*(Dd.
+The following list provides a brief description of all
+additional \*(Dd documentation 
+.BU
+The \f2\*(Dd Reference Manual\fP provides a complete description
+of all \*(Dd functions, as well as information on raster data
+formats, transformation matrices used by \*(Dd, and a discussion
+on renderer-dependent features of \*(Dd.
+.BU
+The \f2\*(Dd System Guides\fP 
+provide details that apply
+to \*(Dd on particular platforms, such as how to install
+\*(Dd, and which devices and renderers are included in
+the installation.
+.BU
+The \f2\*(Dd Developer's Guide\fP describes how to add new
+device drivers and renderers to \*(Dd on a given platform.
+It also provides
+information for system programmers to help them port
+\*(Dd to new computer platforms.  
+.lp
+If you are new to graphics programming, one of the following
+texts can provide useful background information:
+.BU
+\f2Principles of Interactive Computer Graphics\f1 by William M.
+Newman and Robert F. Sproull, published by McGraw-Hill.
+.BU
+\f2Computer Graphics, Principles and Practice, 2nd edition\f1 
+by James D. Foley, Andries van Dam, Steven K. Feiner, and John F. Hughes,
+published by Addison-Wesley.
+.BU
+\f2Procedural Elements for Computer Graphics\fP by
+David F. Rogers, published by McGraw-Hill.
+.H1 "Conventions Used in This Manual"
+The C name for the \*(Dd functions, constants, and types appears 
+first in the text, followed by the Fortran name in angled brackets <>;  
+typically these are shown in \f2italics\fP, for example
+\f2DoLineList <DOLINL>\fP.
+Italics are also used for emphasizing key words and/or phrases.
+A different font, as shown
+below, is used for code examples:
+.(m
+This is a sample of the font used for code examples.
+.)m
+For all code examples, the C code appears first, followed by the corresponding Fortran code.
+The Fortran examples use double precision for floating point numbers,
+for use with the double-precision
+version of the \*(Dd application interface.

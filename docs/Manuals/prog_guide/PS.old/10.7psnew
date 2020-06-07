@@ -1,0 +1,121 @@
+!md begin
+!/note {} def
+!/legal {} def
+!md /lnop known not { /lnop [ {} ] cvx def } if
+!/bigs [lnop lnop lnop lnop lnop lnop lnop lnop] def
+!/smalls [lnop lnop lnop lnop lnop lnop lnop lnop] def
+!/cp {pm restore pop pop} def
+!
+!T T -31 -30 761 582 100 72 72 1 F F F F T T psu
+!(Aaron Black; document: Unspecified)jn
+!0 mf
+!od
+!op
+!0 0 xl
+!-0.25 72 mul -0.5 72 mul translate
+!0.6 0.6 scale
+!1 1 pen
+!0 0 gm
+!(nc 0 0 720 540 6 rc)kp
+!64 gr
+!44 152 99 207 4 rc
+!0 gr
+!44.5 152.5 98.5 206.5 0 rc
+!64 gr
+!44 206 99 261 4 rc
+!0 gr
+!44.5 206.5 98.5 260.5 0 rc
+!64 gr
+!44 260 99 315 4 rc
+!0 gr
+!44.5 260.5 98.5 314.5 0 rc
+!28 197 gm
+!bu fc
+!{}mark T /Helvetica /Helvetica 0 rf
+!bn
+!1 setTxMode
+!0 fs
+!12 fz
+!bu fc
+!2 F /Helvetica fnt
+!bn
+!0.23213 0.(DcComponent)ashow
+!75 216 gm
+!0 gr
+!0.16508 0.(Green)ashow
+!75 275 gm
+!0.33044 0.(Blue)ashow
+!75 171 gm
+!(Red)show
+!208 8 gm
+!(3)show
+!208 168 gm
+!(3)show
+!208 325 gm
+!(2)show
+!113 281 gm
+!(2)show
+!126 275 gm
+!0.11071 0.(bits)ashow
+!113 180 gm
+!(3)show
+!126 174 gm
+!0.11071 0.(bits)ashow
+!113 233 gm
+!(3)show
+!126 227 gm
+!0.11071 0.(bits)ashow
+!236 485 gm
+!0.55757 0.(Full)ashow
+!249 485 gm
+!0.33467 0.(Color)ashow
+!147 349 gm
+!0.33082 0.(0-255)ashow
+!160 349 gm
+!0.61309 0. 32 0.06130 0.(Color Table Entries)awidthshow
+!0 0 gm
+!64 gr
+!215 0 261 46 4 rc
+!0 gr
+!215.5 0.5 260.5 45.5 0 rc
+!64 gr
+!215 323 261 369 4 rc
+!0 gr
+!215.5 323.5 260.5 368.5 0 rc
+!64 gr
+!215 164 261 210 4 rc
+!0 gr
+!215.5 164.5 260.5 209.5 0 rc
+!64 gr
+!215 45 261 145 4 rc
+!0 gr
+!215.5 45.5 260.5 144.5 0 rc
+!64 gr
+!215 368 261 468 4 rc
+!0 gr
+!215.5 368.5 260.5 467.5 0 rc
+!64 gr
+!215 209 261 309 4 rc
+!0 gr
+!215.5 209.5 260.5 308.5 0 rc
+!278 217 gm
+!0.16508 0.(Green)ashow
+!278 381 gm
+!0.33044 0.(Blue)ashow
+!279 55 gm
+!(Red)show
+!0 0 gm
+!118 156 138 176 125 173 1 ar
+!215 22 gm
+!132 158 lin
+!0 0 gm
+!121 219 141 239 95 143 1 ar
+!214 183 gm
+!138 224 lin
+!0 0 gm
+!120 282 140 302 34 82 1 ar
+!214 343 gm
+!137 295 lin
+!F T cp
+!cd
+!end

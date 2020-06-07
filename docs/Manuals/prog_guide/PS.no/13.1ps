@@ -1,0 +1,100 @@
+!md begin
+!/note {} def
+!/legal {} def
+!md /lnop known not { /lnop [ {} ] cvx def } if
+!/bigs [lnop lnop lnop lnop lnop lnop lnop lnop] def
+!/smalls [lnop lnop lnop lnop lnop lnop lnop lnop] def
+!/cp {pm restore pop pop} def
+!
+!T T -31 -30 761 582 100 72 72 1 F F F F T T psu
+!(Paul Ausick; document: 14-1.d)jn
+!0 mf
+!od
+!op
+!0 0 xl
+!-0.25 72 mul -0.65 72 mul translate
+!.5 .5 scale
+!1 1 pen
+!108 44 gm
+!(nc 0 0 709 539 6 rc)kp
+!221 44 lin
+!221 261 lin
+!250 7 gm
+!250 261 lin
+!108 7 gm
+!250 7 lin
+!108 7 gm
+!108 44 lin
+!221 261 gm
+!250 261 lin
+!108 44 gm
+!79 115 lin
+!108 7 gm
+!79 80 lin
+!221 44 gm
+!193 115 lin
+!221 261 gm
+!193 333 lin
+!221 333 gm
+!250 261 lin
+!79 80 gm
+!79 115 lin
+!193 115 gm
+!79 115 lin
+!193 115 gm
+!193 333 lin
+!221 333 lin
+!0 0 gm
+!171 122 191 142 246 294 1 ar
+!69 122 89 142 66 114 1 ar
+!87 131 gm
+!173 131 lin
+!0 0 gm
+!166 324 186 344 156 204 1 ar
+!166 129 186 149 336 384 1 ar
+!176 146 gm
+!176 325 lin
+!0 0 gm
+!58 106 78 126 156 204 1 ar
+!58 71 78 91 336 384 1 ar
+!68 88 gm
+!68 107 lin
+!0 0 gm
+!211 338 231 358 246 294 1 ar
+!183 338 203 358 66 114 1 ar
+!201 347 gm
+!213 347 lin
+!0 0 gm
+!217 338 237 358 133 181 1 ar
+!251 258 271 278 313 361 1 ar
+!258 274 gm
+!230 340 lin
+!136 139 gm
+!bu fc
+!{}mark T /Helvetica /Helvetica 0 rf
+!bn
+!1 setTxMode
+!0 fs
+!18 fz
+!bu fc
+!2 F /Helvetica fnt
+!bn
+!0.65689 0. 32 0.06568 0.( side1)awidthshow
+!169 197 gm
+!0 gr
+!0.65689 0. 32 0.06568 0.(side 2)awidthshow
+!215 363 gm
+!0.24809 0.(thickness)ashow
+!62 52 gm
+!0.24809 0.(thickness)ashow
+!260 312 gm
+!0.74923 0.(width)ashow
+!F T cp
+!op
+!F F cp
+!op
+!F F cp
+!op
+!F F cp
+!cd
+!end

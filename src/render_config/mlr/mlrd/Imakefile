@@ -1,0 +1,12 @@
+#include <Dore.tmpl>
+
+INCLUDES = -I../h
+    SRCS = MLRD_dirct.c MLRD_error.c MLRD_glbl.c MLRD_init.c MLRD_nstll.c \
+           MLRD_rnd.c mlrd_image.c
+    OBJS = MLRD_dirct.o MLRD_error.o MLRD_glbl.o MLRD_init.o MLRD_nstll.o \
+           MLRD_rnd.o mlrd_image.o
+
+LibraryObjectRule()
+SubdirLibraryRule($(OBJS))
+
+DependTarget()

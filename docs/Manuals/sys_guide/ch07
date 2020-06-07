@@ -1,0 +1,104 @@
+.\"#ident "%W%" %G%
+.\"
+.\" #
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  
+.\" # 
+.\" # KUBOTA GRAPHICS Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\" #
+.\"
+.so ../macros/local.me
+.ds BT "\\*(Dd System Guide
+.ds CT "PostScript Driver
+.ds h1 7
+.L1 P OST S CRIPT
+.L2 D RIVER
+.CH SEVEN
+.lp
+The PostScript device driver writes PostScript to a file using the
+PS-Adobe-1.0 structuring convention.  Each device update produces 
+a page of PostScript output that is appended to the specified 
+output file.  The generated output file can be sent directly 
+to a PostScript printer for printing.
+.lp
+The PostScript device driver generates the PostScript drawing commands
+to display the geometry.  It does not perform hidden line or 
+hidden surface removal except through backface culling.
+The output file does not contain raster data, only drawing commands.
+The output can be either color or greyscale.
+.H1 "Using the Driver
+A \*(Dd PostScript device object can be created using:
+.(m
+	DoDevice("ps", optionstring);
+.)m
+where "\f2ps\f1" is the device type and \f2optionstring\f1 is a list
+of initialization options for the PostScript driver.
+The \f2DoDevice <DOD>\f1 and \f2DdSetOptions <DDSO>\f1
+manpages with PostScript driver-specific
+information are provided in Section IV, \f2Manpages\f1, of this document.
+.H3 "Initialization Options
+The initialization options for the PostScript device driver are:
+.ip "-noborder
+specifies that no border be drawn around each view.
+The default is to draw a border.
+.ip "-filename \f2name\fP
+specifies that the output PostScript file be named \f2name\fP.
+The default name is \f2dore.ps\fP.
+.ip "-visualtype \f2vtype\fP"
+specifies the given visual type for the output.
+The possible values for \f2vtype\fP are \f2DcTrueColor\fP for a
+color image or \f2DcStaticGrey\fP for a greyscale image.
+The default visual type is \f2DcTrueColor\fP.
+.ip "-width \f2size\fP"
+specifies the image width of the PostScript file in inches be \f2size\fP.
+The default width is 8.5 inches.
+.ip "-height \f2size\fP"
+specifies the image height of the PostScript file in inches be \f2size\fP.
+The default height is 8.5 inches.
+.H3 "Modifying the Optional Values
+The PostScript device driver allows modification of driver specific
+values through the \f2DdSetOptions\fP call.
+The following options can be changed via this call:
+.ip "-border
+specifies that a border be drawn around each view.
+.ip "-noborder
+specifies that no border be drawn around each view.
+.rs
+.sp -.5v
+.H1 "Output Modules
+The PostScript device driver supports only the 
+dynamic renderer output module (DROM) interface; it does \f2not\fP support
+the production renderer output module (PROM) interface.
+.rs
+.sp -.5v
+.H1 "DROM Dependent Functions
+When using the dynamic renderer, a function is supported only if
+the DROM of the device driver being used also supports it.
+Refer to Appendix A, \f2Supported Functions\fP, for a list of the
+\*(Dd functions supported by the DROM used by the \*(CT.
+.H1 "Limitations
+The PostScript DROM has the following limitations:
+.BU
+It does not support the \f2DdInqPixelData\fP function.
+.BU
+It does not perform hidden surface removal.
+All objects are drawn based on their order in the \*(Dd graphical
+database.
+.BU
+It supports only ambient and infinite light types.
+All other types will be approximated by one of these two types.
+.BU
+It does not support the interpolation type \f2DcSurfaceShade\fP for
+\f2DoInterpType\fP.
+.BU
+It is best to use a white background and dark colored objects when
+working in greyscale.

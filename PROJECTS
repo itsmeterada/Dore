@@ -1,0 +1,23 @@
+This a list of projects either under way, or up for grabs. Please contact
+me (Brian - bdealwis@Newbridge.COM) before you start on one of these!
+I may be able to give you a view of how the project could fit into the
+general scheme. And I may be able to refer you to others involved in the
+same or similar projects. Also feel free to add new projects.
+
+Projects:
+- Re-doing the build process with Imake. (Brian de Alwis, 
+  <bdealwis@Newbridge.COM>)
+- Bug fixing (Brian de Alwis, <bdealwis@Newbridge.COM>, others)
+- WindowsNT testing and bug-fixing (tentative: James Drage,
+  <t-jdrage@microsoft.com>)
+- Fixing palette management - this may be only specific to the
+  X11 and OpenGL drivers
+- Adding Dore' as a rendering extension for Tcl/Tk (Roger Critchlow,
+  <rec@elf.org>)
+- Making C++ class wrappers around Dore' (tentative: Brian de Alwis,
+  <bdealwis@Newbridge.COM>)
+- Re-organising the code, to allow inlining of functions. (tentative:
+  Brian de Alwis, <bdealwis@Newbridge.COM>)
+- Finishing the `kopengl' port (there are unimplemented functions)
+- Updating and verifying the documentation.
+- Provide more example code.

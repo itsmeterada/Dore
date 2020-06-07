@@ -1,0 +1,14 @@
+/public/ftp/pub/packages/development/graphics/Dore
+
+
+RELEASE.TXT             KGC's announcement of making Dore' freely available
+mailing-list            Information on subscribing to the Dore' mailing-list
+
+INTERIM                 Interim 6.01 release information
+dore601.tar.gz          Dore' 6.01 interim release
+dore601.docs.tar.gz     Dore' 6.01 documentation
+split/                  The Dore' distribution split into 500k chunks
+
+incoming/               Place any submissions in here
+
+old/                    Older distributions of Dore'

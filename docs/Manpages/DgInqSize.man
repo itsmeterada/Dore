@@ -1,0 +1,46 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DgInqSize 3D  "Dore"
+.SH NAME
+DgInqSize \- Return the number of elements in the specified group
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+DtInt DgInqSize(group)
+DtObject group;
+.sp
+.in -.5i
+FORTRAN:
+.in +.5i
+INTEGER*4 DGQS(GROUP)
+INTEGER*4 GROUP
+.in -.5i
+.fi
+.SH DESCRIPTION
+.IX DGQS
+.IX DgInqSize
+.I DgInqSize
+returns the total number of elements in the group, \f2group\fP.
+.SH ERRORS
+.I DgInqSize
+will fail if the group is invalid; the value -1 will be returned.
+.TP 15
+[WARNING - invalid group handle]
+.SH "SEE ALSO"
+DoGroup(3D), DoInLineGroup(3D)

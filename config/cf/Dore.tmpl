@@ -1,0 +1,12 @@
+XCOMM ------------------------------------------------------------
+XCOMM Dore.tmpl - Dore imakefile info  - this contains any special
+XCOMM    redefinitions, etc. that Imakefiles in the source subtree
+XCOMM    may need.
+
+#define PassCDebugFlags CDEBUGFLAGS="$(CDEBUGFLAGS)" LDSTRIPFLAGS="$(LDSTRIPFLAGS)"
+
+#define DoNormalLib NormalLibDore
+#define DoSharedLib SharedLibDore
+#define DoProfileLib ProfileLibDore
+#define DoDebugLib DebugLibDore
+#include <DoreLib.tmpl>

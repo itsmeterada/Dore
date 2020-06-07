@@ -1,0 +1,13 @@
+#include <Dore.tmpl>
+
+    SRCS = xtg2_appatt.c xtg2_camera.c xtg2_data.c xtg2_drom.c xtg2_geoatt.c \
+           xtg2_light.c xtg2_map.c xtg2_modclip.c xtg2_print.c xtg2_update.c \
+	   xtg2dr_output.c
+    OBJS = xtg2_appatt.o xtg2_camera.o xtg2_data.o xtg2_drom.o xtg2_geoatt.o \
+           xtg2_light.o xtg2_map.o xtg2_modclip.o xtg2_print.o xtg2_update.o \
+	   xtg2dr_output.o
+
+LibraryObjectRule()
+SubdirLibraryRule($(OBJS))
+
+DependTarget()

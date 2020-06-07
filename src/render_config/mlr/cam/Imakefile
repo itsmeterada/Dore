@@ -1,0 +1,10 @@
+#include <Dore.tmpl>
+
+INCLUDES = -I../h
+    SRCS = CAM_global.c CAM_init.c CAM_make.c
+    OBJS = CAM_global.o CAM_init.o CAM_make.o
+
+LibraryObjectRule()
+SubdirLibraryRule($(OBJS))
+
+DependTarget()

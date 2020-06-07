@@ -1,0 +1,266 @@
+!/Dore 20 dict def
+!Dore begin
+!/Vrgb { moveto -1 -1 rmoveto 2 0 rlineto
+!        0 2 rlineto -2 0 rlineto
+!        closepath setrgbcolor fill } def
+!/Lrgb { moveto lineto setrgbcolor stroke } def
+!/Trgb { moveto lineto lineto closepath
+!        setrgbcolor fill } def
+!/BGrgb { dup 3 -1 roll dup 5 -1 roll dup
+!         7 -1 roll dup 3 -1 roll moveto
+!         6 -1 roll lineto exch 4 -1 roll
+!         lineto lineto closepath setrgbcolor
+!         fill } def
+!/Vgray { moveto -1 -1 rmoveto 2 0 rlineto
+!         0 2 rlineto -2 0 rlineto
+!         closepath setgray fill } def
+!/Lgray { moveto lineto setgray stroke } def
+!/Tgray { moveto lineto lineto closepath
+!         setgray fill } def
+!/BGgray { dup 3 -1 roll dup 5 -1 roll dup
+!          7 -1 roll dup 3 -1 roll moveto
+!          6 -1 roll lineto exch 4 -1 roll
+!          lineto lineto closepath setgray
+!          fill } def
+!gsave
+!-2 72 mul 3.5 72 mul translate
+!0 792 translate
+!1 -1 scale
+!0 167 288 163 290 Lgray
+!0 163 290 160 293 Lgray
+!0 160 293 159 296 Lgray
+!0 159 296 157 301 Lgray
+!0 157 301 157 306 Lgray
+!0 157 306 159 309 Lgray
+!0 159 309 162 311 Lgray
+!0 160 295 159 300 Lgray
+!0 159 300 159 306 Lgray
+!0 159 306 160 309 Lgray
+!0 167 288 163 291 Lgray
+!0 163 291 162 295 Lgray
+!0 162 295 160 300 Lgray
+!0 160 300 160 305 Lgray
+!0 160 305 162 311 Lgray
+!0 162 311 162 314 Lgray
+!0 162 314 160 318 Lgray
+!0 160 318 157 319 Lgray
+!0 180 288 183 288 Lgray
+!0 183 288 183 316 Lgray
+!0 183 316 180 316 Lgray
+!0 185 288 185 316 Lgray
+!0 186 287 186 318 Lgray
+!0 157 285 162 287 Lgray
+!0 162 287 172 288 Lgray
+!0 172 288 180 288 Lgray
+!0 180 288 186 287 Lgray
+!0 186 287 190 285 Lgray
+!0 160 301 183 301 Lgray
+!0 157 319 162 318 Lgray
+!0 162 318 172 316 Lgray
+!0 172 316 180 316 Lgray
+!0 180 316 186 318 Lgray
+!0 186 318 190 319 Lgray
+!0 269 285 279 287 Lgray
+!0 279 287 282 285 Lgray
+!0 282 285 280 288 Lgray
+!0 280 288 280 291 Lgray
+!0 280 291 277 288 Lgray
+!0 277 288 274 287 Lgray
+!0 274 287 269 285 Lgray
+!0 269 285 262 285 Lgray
+!0 262 285 257 287 Lgray
+!0 257 287 253 291 Lgray
+!0 253 291 251 296 Lgray
+!0 251 296 251 300 Lgray
+!0 251 300 253 305 Lgray
+!0 253 305 256 308 Lgray
+!0 256 308 261 309 Lgray
+!0 261 309 266 309 Lgray
+!0 266 309 269 308 Lgray
+!0 269 308 271 306 Lgray
+!0 271 306 272 303 Lgray
+!0 272 303 272 301 Lgray
+!0 280 287 279 288 Lgray
+!0 279 288 280 291 Lgray
+!0 253 301 254 305 Lgray
+!0 254 305 256 306 Lgray
+!0 256 306 261 308 Lgray
+!0 261 308 266 308 Lgray
+!0 266 308 269 306 Lgray
+!0 254 290 253 293 Lgray
+!0 253 293 253 298 Lgray
+!0 253 298 254 301 Lgray
+!0 254 301 257 305 Lgray
+!0 257 305 262 306 Lgray
+!0 262 306 266 306 Lgray
+!0 266 306 269 305 Lgray
+!0 269 305 272 301 Lgray
+!0 272 301 274 300 Lgray
+!0 274 300 275 300 Lgray
+!0 256 303 257 303 Lgray
+!0 257 303 259 301 Lgray
+!0 259 301 262 298 Lgray
+!0 262 298 266 296 Lgray
+!0 266 296 271 296 Lgray
+!0 271 296 274 298 Lgray
+!0 274 298 277 301 Lgray
+!0 277 301 279 305 Lgray
+!0 279 305 279 309 Lgray
+!0 279 309 277 314 Lgray
+!0 277 314 274 318 Lgray
+!0 262 296 266 295 Lgray
+!0 266 295 271 295 Lgray
+!0 271 295 275 296 Lgray
+!0 275 296 279 300 Lgray
+!0 279 300 280 305 Lgray
+!0 280 305 280 309 Lgray
+!0 280 309 279 313 Lgray
+!0 251 313 253 316 Lgray
+!0 253 316 251 318 Lgray
+!0 259 301 259 300 Lgray
+!0 259 300 261 296 Lgray
+!0 261 296 262 295 Lgray
+!0 262 295 266 293 Lgray
+!0 266 293 271 293 Lgray
+!0 271 293 275 295 Lgray
+!0 275 295 280 300 Lgray
+!0 280 300 282 305 Lgray
+!0 282 305 282 308 Lgray
+!0 282 308 280 313 Lgray
+!0 280 313 277 316 Lgray
+!0 277 316 274 318 Lgray
+!0 274 318 269 319 Lgray
+!0 269 319 262 319 Lgray
+!0 262 319 257 318 Lgray
+!0 257 318 254 316 Lgray
+!0 254 316 251 313 Lgray
+!0 251 313 251 316 Lgray
+!0 251 316 249 319 Lgray
+!0 249 319 253 318 Lgray
+!0 253 318 262 319 Lgray
+!0 307 288 304 285 Lgray
+!0 304 285 305 291 Lgray
+!0 305 291 305 314 Lgray
+!0 305 314 304 316 Lgray
+!0 304 316 307 319 Lgray
+!0 307 288 307 314 Lgray
+!0 307 314 305 316 Lgray
+!0 305 316 307 318 Lgray
+!0 307 318 309 316 Lgray
+!0 309 316 307 314 Lgray
+!0 307 288 310 285 Lgray
+!0 310 285 309 291 Lgray
+!0 309 291 309 314 Lgray
+!0 309 314 310 316 Lgray
+!0 310 316 307 319 Lgray
+!0 300 296 305 296 Lgray
+!0 309 296 313 296 Lgray
+!0 330 300 332 300 Lgray
+!0 332 300 333 301 Lgray
+!0 333 301 333 314 Lgray
+!0 333 314 332 316 Lgray
+!0 332 316 335 319 Lgray
+!0 333 298 335 300 Lgray
+!0 335 300 335 314 Lgray
+!0 335 314 333 316 Lgray
+!0 333 316 335 318 Lgray
+!0 335 318 337 316 Lgray
+!0 337 316 335 314 Lgray
+!0 330 300 333 296 Lgray
+!0 333 296 337 300 Lgray
+!0 337 300 337 314 Lgray
+!0 337 314 338 316 Lgray
+!0 338 316 335 319 Lgray
+!0 337 300 343 296 Lgray
+!0 343 296 347 300 Lgray
+!0 347 300 343 301 Lgray
+!0 343 301 340 298 Lgray
+!0 342 298 345 300 Lgray
+!0 368 285 365 288 Lgray
+!0 365 288 368 291 Lgray
+!0 368 291 371 288 Lgray
+!0 371 288 368 285 Lgray
+!0 368 287 367 288 Lgray
+!0 367 288 368 290 Lgray
+!0 368 290 370 288 Lgray
+!0 370 288 368 287 Lgray
+!0 368 296 365 300 Lgray
+!0 365 300 367 301 Lgray
+!0 367 301 367 314 Lgray
+!0 367 314 365 316 Lgray
+!0 365 316 368 319 Lgray
+!0 368 301 370 300 Lgray
+!0 370 300 368 298 Lgray
+!0 368 298 367 300 Lgray
+!0 367 300 368 301 Lgray
+!0 368 301 368 314 Lgray
+!0 368 314 367 316 Lgray
+!0 367 316 368 318 Lgray
+!0 368 318 370 316 Lgray
+!0 370 316 368 314 Lgray
+!0 368 296 371 300 Lgray
+!0 371 300 370 301 Lgray
+!0 370 301 370 314 Lgray
+!0 370 314 371 316 Lgray
+!0 371 316 368 319 Lgray
+!0 392 300 393 300 Lgray
+!0 393 300 395 301 Lgray
+!0 395 301 395 314 Lgray
+!0 395 314 393 316 Lgray
+!0 393 316 396 319 Lgray
+!0 395 298 396 300 Lgray
+!0 396 300 396 314 Lgray
+!0 396 314 395 316 Lgray
+!0 395 316 396 318 Lgray
+!0 396 318 398 316 Lgray
+!0 398 316 396 314 Lgray
+!0 392 300 395 296 Lgray
+!0 395 296 398 300 Lgray
+!0 398 300 398 314 Lgray
+!0 398 314 400 316 Lgray
+!0 400 316 396 319 Lgray
+!0 398 300 403 298 Lgray
+!0 403 298 406 296 Lgray
+!0 406 296 411 300 Lgray
+!0 411 300 411 314 Lgray
+!0 411 314 413 316 Lgray
+!0 413 316 410 319 Lgray
+!0 406 298 410 300 Lgray
+!0 410 300 410 314 Lgray
+!0 410 314 408 316 Lgray
+!0 408 316 410 318 Lgray
+!0 410 318 411 316 Lgray
+!0 411 316 410 314 Lgray
+!0 403 298 408 301 Lgray
+!0 408 301 408 314 Lgray
+!0 408 314 406 316 Lgray
+!0 406 316 410 319 Lgray
+!0 434 301 434 314 Lgray
+!0 434 314 439 319 Lgray
+!0 439 319 448 316 Lgray
+!0 436 301 436 314 Lgray
+!0 436 314 439 318 Lgray
+!0 438 300 438 313 Lgray
+!0 438 313 443 318 Lgray
+!0 434 301 438 300 Lgray
+!0 438 300 446 296 Lgray
+!0 446 296 451 301 Lgray
+!0 451 301 451 322 Lgray
+!0 451 322 449 326 Lgray
+!0 449 326 448 327 Lgray
+!0 448 327 444 329 Lgray
+!0 444 329 441 329 Lgray
+!0 441 329 438 327 Lgray
+!0 438 327 434 329 Lgray
+!0 434 329 438 331 Lgray
+!0 438 331 441 329 Lgray
+!0 446 298 449 301 Lgray
+!0 449 301 449 322 Lgray
+!0 449 322 448 326 Lgray
+!0 439 329 436 329 Lgray
+!0 443 298 448 303 Lgray
+!0 448 303 448 324 Lgray
+!0 448 324 446 327 Lgray
+!0 446 327 444 329 Lgray
+!grestore
+!end

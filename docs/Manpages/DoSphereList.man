@@ -1,0 +1,70 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DoSphereList 3D  "Dore"
+.SH NAME
+DoSphereList  \- Create a sphere list primitive object
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+DtObject DoSphereList(colormodel, spherecount, 
+	locations, radii, colors)
+DtColorModel colormodel;
+DtInt spherecount;
+DtReal locations[ ];
+DtReal radii[ ];
+DtReal colors[ ];
+.sp
+.in -.5i
+FORTRAN:
+.in +.5i
+INTEGER*4 DOSPHL(COLMOD, SPHCNT, LOCS, 
+	RADII, COLORS)
+INTEGER*4 COLMOD
+INTEGER*4 SPHCNT
+REAL*8 LOCS(*)
+REAL*8 RADII(*)
+REAL*8 COLORS(*)
+.in -.5i
+.fi
+.SH DESCRIPTION
+.I DoSphereList
+creates a sphere list primitive object containing any number of spheres.  
+.PP
+The parameter \f2colormodel\fP specifies the color model to use if sphere colors
+are provided.  The number of spheres in the sphere list is specified by 
+\f2spherecount\fP.  
+.PP
+Each sphere in the sphere list has a location, radius and color associated with it.
+\f2Locations\fP is an array of x,y,z triples that specify the location of the 
+center of each sphere in the list.  
+\f2Radii\fP is an array of real numbers
+with each entry representing the radius of a sphere.  
+If NULL is passed for 
+\f2radii\fP, each sphere will have a radius of 1.0.  
+The parameter \f2colors\fP 
+is an array of RGB triples that specify a sphere's color.  
+If NULL is passed for 
+\f2colors\fP, the created sphere list will use 
+whatever the current diffuse color setting is.
+.SH ERRORS
+.I DoSphereList 
+will fail if it cannot allocate enough memory to hold the vertex list for all 
+the spheres.
+.PP
+[SEVERE - unable to allocate memory]

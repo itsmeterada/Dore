@@ -1,0 +1,113 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DoFilter 3D  "Dore"
+.SH NAME
+DoFilter \- Create a filter modifying object
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+DtObject DoFilter(filter, n, members, setop)
+DtFilter filter;
+DtInt n;
+DtInt members[\|];
+DtSetOperation setop;
+.sp
+.in -.5i
+FORTRAN:
+.in +.5i
+INTEGER*4 DOFL(FILTER, N, MEMBER, SETOP)
+INTEGER*4 FILTER
+INTEGER*4 N
+INTEGER*4 MEMBER(N)
+INTEGER*4 SETOP
+.in -.5i
+.fi
+.SH DESCRIPTION
+.IX DOFL
+.IX DoFilter
+.I DoFilter
+creates an organizational object for modifying filter attributes.
+Filter attributes, in conjunction with name set
+attributes, provide a high-level control over the invisibility and
+pickability.
+.PP
+Name sets and filters are specified as enumerated sets of members.
+Currently Dor\o.\(aae.  supports up to 256 members referred to by the numbers 0
+through 255.  The meaning of a member is defined by the user.
+For example, the user could reserve member number 0 to indicate red
+objects and member number 9 to indicate spheres. Then an object whose name
+set includes members 0 and 9 indicates that that object is a red
+sphere while a name set including only member number 9 indicates a
+non-red sphere.
+.PP
+There exists an inclusion and an exclusion filter for
+invisibility and pickability.  Each quality
+is enabled if the intersection of the current name set with the
+current inclusion filter for that quality is not empty and if the
+intersection of the current name set with the corresponding exclusion
+filter is empty.  These qualities are enabled and disabled with the
+corresponding switch primitive attributes.
+.PP
+Like name sets, filter attribute values are calculated during execution.
+.PP
+Invisibility means that primitive objects will not be displayed.
+This applies to picking as well as rendering; i.e., 
+invisible objects cannot be picked.  Pickability means that
+objects are eligible to be picked during picking (see \f2DdPickObjs\fP).
+.PP
+The parameter \f2filter\fP specifies the current filter to be
+affected.  Possible choices are:
+.nf
+
+	DcInvisibilityInclusion <\f2DCINVI\fP>
+	DcInvisibilityExclusion <\f2DCINVE\fP>
+	DcPickabilityInclusion <\f2DCPCKI\fP>
+	DcPickabilityExclusion <\f2DCPCKE\fP>
+
+.fi
+.PP
+The parameter \f2members\fP is a list of members of the specified
+filter to be affected.  \f2n\fP is the number of elements in the list.
+The parameter \f2setop\fP specifies how the status of the members referred 
+to in \f2members\fP is to be affected. The valid choices for \f2setop\fP
+are:
+.IP "DcSetAdd <\f2DCSADD\fP>"
+Adds members listed in \f2members\fP to the current specified filter.
+.IP "DcSetDelete <\f2DCSDEL\fP>"
+Removes members listed in \f2members\fP from the current specified filter.
+.IP "DcSetInvert <\f2DCSINV\fP>"
+Causes all members of a filter listed in
+\f2members\fP to take on the opposite of their current values.  In
+other words, if the given members are not in the the current filter, they
+will be added; if they are included, they will be
+removed.
+.IP "DcSetReplace <\f2DCSREP\fP>"
+Replaces the current value
+of the specified filter with one that includes only the members listed
+in \f2members\fP.
+.SH ERRORS
+.I DoFilter
+will fail if the \f2setop\fP value is invalid.
+.TP 15
+[FATAL - invalid set operation]
+.SH DEFAULTS
+All filters default to empty, implying that all primitive objects
+are not invisible and not pickable.
+.SH "SEE ALSO"
+DoInvisSwitch(3D), DoNameSet(3D), DoPickSwitch(3D)

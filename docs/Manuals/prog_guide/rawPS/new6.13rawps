@@ -1,0 +1,92 @@
+%!PS-Adobe-2.0
+%%Title: 6.13.pict-Layer#1
+%%Creator: MacDraw II 1.1
+%%CreationDate: Thursday, September 7, 1989
+%%Pages: (atend)
+%%BoundingBox: ? ? ? ?
+%%PageBoundingBox: 125 130 2425 3170
+%%For: Aaron Black
+%%IncludeProcSet: "(AppleDict md)" 66
+%%EndComments
+%%EndProlog
+%%BeginDocumentSetup
+md begin
+
+T T -130 -125 3170 2425 100 300 300 1 F F F F T T psu
+(Aaron Black; document: 6.13.pict-Layer#1)jn
+0 mf
+od
+%%EndDocumentSetup
+%%Page: ? 1
+op
+0 0 xl
+1 1 pen
+0 0 gm
+(nc 0 0 3040 2300 6 rc)kp
+0 setlinecap
+currentscreen
+3 1 roll pop pop 60 45 3 -1 roll setscreen
+4 4 pen
+150 -400 2850 2304 227 312 0 ar
+448 106 gm
+448 1794 lin
+181 952 gm
+32<FFFFFFFF00000000>pat
+415 952 lin
+588 143 gm
+bu fc
+{}mark T /Helvetica /|______Helvetica 0 rf
+bn
+1 setTxMode
+0 fs
+38 fz
+bu fc
+2 F /|______Helvetica fnt
+bn
+(DtReal parms[1];)show
+642 143 gm
+0 gr
+-0.17155 0.(parms[0] = 0.03;)ashow
+696 143 gm
+(DoSubDivSpec \( DcSubDivRelative, parms \);)show
+88 159 gm
+50 fz
+bu fc
+2 F /|______Helvetica fnt
+bn
+(Curved Surface)show
+142 159 gm
+(\(ideal\))show
+111 352 gm
+190 456 lin
+64 gr
+717 700 771 1213 1 rc
+759 701 gm
+0 gr
+(Planar Representation)show
+619 1194 gm
+473 1277 lin
+64 gr
+288 979 342 1013 1 rc
+330 980 gm
+0 gr
+(a)show
+506 140 gm
+32<F0F0F0F0F0F0F0F0>pat
+506 1761 lin
+64 gr
+479 1058 533 1092 1 rc
+521 1059 gm
+0 gr
+(b)show
+64 gr
+542 1504 596 1738 1 rc
+584 1505 gm
+0 gr
+-0.41575 0.(a/b = 0.03)ashow
+F T cp
+%%Trailer
+cd
+end
+%%Pages: 1 0
+%%EOF

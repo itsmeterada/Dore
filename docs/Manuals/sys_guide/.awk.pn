@@ -1,0 +1,10 @@
+/^---- Last Page/ {
+    nextpage = $4 + 1
+    if (nextpage % 2 == 0) { 
+	nextpage ++;
+    }
+    print nextpage >".pn";
+    continue
+}
+
+{ print }

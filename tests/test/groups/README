@@ -1,0 +1,11 @@
+#ident "%W%" %G%
+ 
+This is a test of the Dore "groups" functionality. All group commands
+are used and tested.  In this test, typical uses of each function are
+and verified, but most of the functions are used in a straightforward way.
+
+No image is generated. The program is validated completely from
+the diognostics printed on the terminal. Some minor errors are purposely
+generated to verify that they are trapped and that the proper Dore error
+message printed. These error messages are bracketed by diognostic lines.
+True test failures are reported with lines beginning "*** test failed ...".

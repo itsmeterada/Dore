@@ -1,0 +1,74 @@
+Welcome to Dore'!
+
+This is Dore' 6.01, an interim release intended to fix bugs
+in the build process, and to perform some cosmetic changes.
+Please test and excercise it, and report any bugs or problems
+you may find to me (my address is below).
+
+There is a list of known outstanding bugs in the file `BUGS'.
+
+
+INTRODUCTION:
+=============
+
+On January 18th, 1995, Kubota Graphics Corp released Dore' 6.0, a
+commercial 3D graphics API, to the public for free, as they were soon
+to cease operation.
+
+About that time, I was looking for an available 3D API to experiment
+with. One requirement was that it be free, and support zbuffering,
+and backface culling. Anything else was an extra :)  Dore' satisfies
+all this, and much more. Dore' is a great gift to the public.
+
+Dore' still needs much work. And I can't do it all myself,
+primarily due to lack of time, and lack of hardware.
+This has to be a collective effort. So please, if you can, choose
+an aspect of Dore' that you think needs improvement, let me know
+about it, and then go to work! I'll try to coordinate things as best
+I can. The file PROJECTS has some things that need to be worked on.
+
+
+Brian de Alwis
+bdealwis@Newbridge.COM
+95/02/20
+
+------------------------------------------------------------
+Building Instructions:
+
+Dore' now builds using Imake. Imake is a complex beast, but there
+are relatively few options that need to be set for Dore'. For more
+information specifically on Imake, refer to the release notes from
+the X Window System (this particular Imake set was taken from
+X11R6/XFree86 3.1). One of the advantages of this Imake setup is
+that it is possible to build both normal and shared libraries at
+the same time!
+
+Edit config/cf/site.def to suit. The relevant options are in
+the AfterVendorCF section. You should be able to simply follow
+the comments. The build is set up for a `generic' Unix system running
+X11. If you have more esoteric hardware, you may want to change the setups.
+
+Look in config/cf for a .cf file describing your setup, such as
+sun.cf for a SunOS or Solaris system. Read over any comments, and
+also check in the file, for a line of the form
+
+    #define BootstrapCFlags  <bootstrap-options>
+    
+Make note of the <bootstrap-options>, as you'll be using it soon.
+Don't worry if your .cf file doesn't have a BootstrapCFlags line.
+
+Once you have completed this, run the following:
+
+    make -f Makefile.ini BOOTSTRAPCFLAGS="<bootstrap-options>" \
+	World 2>&1 | tee world.log
+
+where <bootstrap-options> is the value you recorded from above.
+This process will build the Dore' library, the demo programs
+(surprisingly found in demo/), and some test programs.
+
+If the build is successful, then you can install the various components
+with
+
+    make install
+
+If you want the man pages, then also specify the `install.man' target.

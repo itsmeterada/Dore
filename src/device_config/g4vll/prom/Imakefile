@@ -1,0 +1,9 @@
+#include <Dore.tmpl>
+
+    SRCS = g4vll_prom.c
+    OBJS = g4vll_proc.o
+
+LibraryObjectRule()
+SubdirLibraryRule($(OBJS))
+
+DependTarget()

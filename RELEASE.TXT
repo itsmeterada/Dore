@@ -1,0 +1,157 @@
+From: vijay@kpc.com (Vijay Sarathy)
+Newsgroups: comp.graphics,comp.graphics.opengl
+Subject: Kubota Graphics releases Dore 6.0 to Public Domain
+Date: 18 Jan 1995 22:19:16 GMT
+Organization: Kubota Graphics Corporation; Santa Clara, CA, USA
+Lines: 99
+Distribution: world
+Message-ID: <VIJAY.95Jan18141916@crusher.kpc.com>
+NNTP-Posting-Host: 144.52.28.51
+
+
+As many of you might have heard Kubota Graphics Corporation will, for all
+practical purposes, cease engineering operations on February 1, 1995. For the
+lack of much to do here at Kubota for the past 6 months, except for putting out
+maintenance releases (ho-hum), we thought that it might be fun to put Dore' out
+on to the public domain. So we have cleaned it up a little bit, ported and made
+sure that it works on Linux, FreeBSD and NT. Today, we at Kubota Graphics are
+proud to announce Public Domain Dore' (Dore 6.0). We certainly hope that it
+will be the next big graphics API ;-) Enjoy!
+
+Vijay Sarathy
+
+--
+
+ Vijay Sarathy
+ Kubota Graphics Corporation
+
+ e-mail: vijay@kgc.com
+ voice: (408) 987-3309
+
+
+==============================================================================
+
+Copyright Notice
+================
+
+/**************************************************************************
+# Copyright (C) 1994 Kubota Graphics Corp.
+#
+# Permission to use, copy, modify, and distribute this material for
+# any purpose and without fee is hereby granted, provided that the
+# above copyright notice and this permission notice appear in all
+# copies, and that the name of Kubota Graphics not be used in
+# advertising or publicity pertaining to this material.  Kubota
+# Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+# OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+# "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+# PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+# EXPRESS OR IMPLIED.
+**************************************************************************/
+
+
+Abstract of Package (submitted to sunsite)
+===================
+
+Title:             Dore' API (Dynamic Object Rendering Environment)
+Version:           6.0
+Description:       Dore' is a powerful 3D graphics subroutine library.
+                   It provides a comprehensive set of tools for creating
+                   graphics applications. It is also easy to use, portable,
+                   and extendable. This version has interfaces/drivers to
+                   X11, PEX, IrisGL, OpenGL, Postscript and more. It has
+                   been ported onto most unix systems, including Linux and
+                   FreeBSD. It has also been ported to Windows NT 3.5.
+Author(s):         The key authors and contributors from a long list of
+                   illustrious but evanescent computer companies are listed
+                   below:
+
+                     - Companies -
+                    Dana Computer
+                    Ardent Computer
+                    Stardent Computer
+                    Kubota Pacific Computer Inc.
+                    Kubota Graphics Corporation
+
+                     - Key Authors/Contributors -
+                    Michael Kaplan
+                    Mark Patrick
+                    Bruce Borden
+                    Kevin Weiler
+                    Dan McLachlan
+                    Helga Thorvaldsdottir
+                    Carolyn Houle
+                    Lori Whippler
+                    Steve Hollasch
+                    & many more
+
+                     - Public Domain Effort -
+                    Doug Ambrisko
+                    Larry Church
+                    Rita Ozanne
+                    Vijay Sarathy
+
+Maintained-by:
+Maintained-at:     sunsite.unc.edu, ftp.cdrom.com
+Platforms:         SunOS, OSF/1, Irix, Linux, FreeBSD, Windows NT
+Copying-Policy:    Public Domain
+Keywords:          Dore', 2D & 3D Graphics API, 3D Graphics subroutine library
+
+--
+
+ Vijay Sarathy                   "Used-car salesman to customer: `Not only 
+ Kubota Graphics Corporation       does it have low mileage, but most of 
+                                    that was while it was being towed.'"
+ e-mail: vijay@kgc.com    
+ voice: (408) 987-3309                          - Bob Thaves -  
+
+
+
+
+From: vijay@kpc.com (Vijay Sarathy)
+Newsgroups: comp.graphics
+Subject: Kubota - Dore 6.0. release (followup/clarifications)
+Date: 19 Jan 1995 18:41:30 GMT
+Organization: Kubota Graphics Corporation; Santa Clara, CA, USA
+Lines: 38
+Distribution: world
+Message-ID: <VIJAY.95Jan19104130@crusher.kpc.com>
+NNTP-Posting-Host: 144.52.28.51
+
+
+Hi Dore' fans!
+          I am really heartened by the response I got to the message I posted
+yesterday announcing the release of Dore' 6.0 from Kubota. Some clarifications
+that I thought I should make in response to the e-mail and phone calls:
+
+ 1) Kubota has released the copyright to the public. So you are free to make
+    modifications but cannot claim authorship. You are free to make changes
+    and modifications as long as the copyright message is included.
+
+ 2) Many people asked where exactly on susiste and cdrom were the files
+    located. I apologize for not mentioning this earlier. Anyway, I just
+    uploaded the files yesterday. The file is called:
+
+     pdore-6.0.tar.Z (about 7.25 Mb)
+                     (about 25 Mb uncompressed)
+
+    On sunsite I uploaded it to /uploads &
+    on ftp.cdrom.com I uploaded it to /incoming
+   
+    The tar file does not have the Dore' libraries built for any system.
+    It has complete sources and excellent documentation (man pages, ps
+    files, troff and tools)
+
+
+Alright folks! Looks like there is a lot of interest in Dore' especially
+in Europe. I'm glad Kubota allowed us to do this. Hope all of you find it
+useful.
+
+--
+
+ Vijay Sarathy                   "Used-car salesman to customer: `Not only 
+ Kubota Graphics Corporation       does it have low mileage, but most of 
+                                    that was while it was being towed.'"
+ e-mail: vijay@kgc.com    
+ voice: (408) 987-3309                          - Bob Thaves -  

@@ -1,0 +1,424 @@
+.\"#ident "%W%" %G%
+.\"
+.\" #
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  
+.\" # 
+.\" # KUBOTA GRAPHICS Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\" #
+.\"
+.sc
+.ds BT "\\*(Dd Developer's Guide
+.ds CT "Porting Section Introduction
+.ds h1 12
+.so ../macros/local.me
+.PN 185
+.L1 P ORTING
+.L2 S ECTION
+.L3 I NTRODUCTION
+.CH TWELVE
+.rs
+.sp -1v
+This section describes the source code structure of \*(Dd and
+how to port it to other platforms.
+This section is of interest to Portable \*(Dd users
+and others who have the \*(Dd source code.
+.lp
+Chapter 13, \f2\*(Dd Implementation Conventions\fP,
+describes the source code structure and the coding
+conventions used internally.
+Chapter 14, \f2Building the Sample Configurations\fP,
+explains how you build and install the \*(Dd library.
+Chapter 15, \f2Porting \*(Dd\fP, describes the steps involved in porting \*(Dd.
+Sections of this chapter will also refer you to Section III 
+on \f2Device Drivers\fP for information necessary to complete
+a port that includes new device drivers.
+.lp
+Before you attempt a port,
+several factors should be considered, including:
+.BU
+what capabilities the target platform must have
+in order to support a useful \*(Dd port,
+.BU hs
+what kind of effort is required to 
+port \*(Dd to a different platform, and
+.BU hs
+what general porting strategies 
+can be adopted.
+.lp
+The following sections
+discuss these and other issues.
+.H1 "Platform Requirements
+There are several broad classes of requirements to consider
+before deciding to port \*(Dd to a given platform,
+including the processor hardware characteristics,
+the graphics hardware characteristics,
+the availability of file system space,
+and the availability of operating system support tools.
+The following subsections address each of these areas.
+.H2 "Processor Hardware Characteristics
+\*(Dd will run on almost any
+computer system that has a good C compiler and 
+enough memory for both an application and \*(Dd to fit, although
+though some graphics hardware certainly helps.  
+.lp
+The critical issues as far as processor characteristics are concerned
+include
+the availability of sufficient address space and real memory
+on the target system.
+.lp
+The processor address space must be large enough to accommodate the
+application code,
+the \*(Dd library,
+the application data space,
+and the \*(Dd data space.
+The lower bound  
+for processor address
+space is 16 MB, and more is definitely desirable.
+.lp
+Minimum useful physical memory is 2 to 3 MB for \*(Dd 
+(in addition to application program memory) 
+and many interesting applications 
+will require 8 to 16 MB of real (i.e., not paged or virtual) memory 
+for efficient use by the \*(Dd code and database.  
+That is, the working set of some \*(Dd based applications 
+will be 8 to 16 MB, or more, just for the \*(Dd portion.
+.lp
+The processing speed of the platform must also be a consideration.
+Just how much is necessary as a minimum
+depends a lot on 
+how much graphics hardware is available
+and what applications are to be supported.
+The more use that is made of the production rendering mode in \*(Dd,
+the higher the processing power required.
+Similarly,
+the less graphics hardware that is available,
+the more general purpose processing power is required to 
+provide acceptable dynamic mode response.
+.lp
+\*(Dd can be used on a nongraphics system for production rendering.  
+Specifically, a very fast compute server (such as one manufactured by Cray) 
+makes a very good \*(Dd production rendering server.  
+The output can be a file of pixels 
+which is then moved to a display device over a network or on tape.
+.H2 "Graphics Hardware Characteristics
+.ig AAAAAA
+.nf
+double buffered frame buffer
+display pipeline
+transform
+clip
+shade
+z-buffer
+.fi
+.AAAAAA
+\*(Dd is designed to take advantage of as much of the underlying graphics
+display hardware as possible in its dynamic rendering mode.
+However, to provide good interactive response,
+some
+graphics hardware support is necessary
+for dynamic shaded graphics.
+.lp
+The graphics display hardware available 
+may be as little as one bit per pixel (monochrome) 
+or up to 24 bits per pixel (true-color).  
+However, without color or Z-buffer hardware, 
+the CPU has to do much more work 
+to emulate a Z-buffer 
+and to dither colors into black and white patterns, 
+further slowing down the rendering process.  
+.lp
+\*(Dd in dynamic mode will run best in an environment where 
+the graphics hardware 
+is tightly coupled to the main processor.  
+Specifically, \*(Dd maintains a graphical database from which it renders
+the objects.  
+Management of the database is easiest and fastest 
+if it is directly controlled by the main CPU.  
+Thus, a thin-wire terminal graphics model 
+(that is, low-bandwidth host-to-graphics interface, 
+such as RS-232 or even Ethernet) 
+is less efficient for \*(Dd.  
+In an environment where the output device maintains its own display list 
+(e.g., a Tektronix terminal), 
+\*(Dd must maintain two representations for each object,
+one for itself and another for the output device display list.  
+Two databases are necessary in this case
+because the output driver display list 
+is only usable by the dynamic renderer \(em 
+\*(Dd's own copy is still needed by other renderers and devices.
+.lp
+The output hardware should also have a very fast 
+immediate mode
+to handle user callbacks efficiently.
+.lp
+For \f2good\fP performance using the dynamic renderer,
+the underlying graphics hardware should have the following
+capabilities.
+However, acceptable performance could be achieved with less hardware
+support.
+.BU
+Hardware should support at least 8 bits of color per pixel, preferably
+double buffered
+(total of 16 bits for each pixel);
+better: 12 bits double buffered; best: 24 bits double buffered.
+.BU
+A Z-buffer must be supported at the rated speeds noted below, 
+or some alternative real-time hidden surface elimination hardware must exist.
+.BU
+Hardware should draw at least 50,000 vectors per second, preferably many more.
+.BU
+Hardware should support constant (single) color and, 
+preferably, shaded (color varies linearly from end to end) vectors.  
+Shaded vectors are used for shaded wireframe representations of surfaces 
+and for depth cueing.
+.BU
+Hardware should fill at least 5000 polygons (triangles, quads or general) 
+per second, preferably many more.
+.BU
+Hardware should support both constant (single) color and 
+Gouraud shaded (color varies linearly from vertex to vertex) polygons.
+.BU
+Hardware must also support pixel writes for the advanced renderers.  
+Performance of one million pixels per second or more is recommended.
+.BU
+For transformation, shading, and clipping, 
+floating point hardware is required.  
+This may be main processor floating point or a dedicated graphics pipeline.  
+Graphics floating point should be 64 bit, 
+but 32 bit will function for most applications.
+.BU
+Vectors require approximately 100 Flops per vertex.  
+Thus, 100,000 connected vectors per second requires 10 MFlops 
+of sustained floating point performance
+and 100,000 independent vectors (nonconnected) 
+require twice as much, 20 MFlops.
+.BU
+Triangles require approximately 100 Flops per vertex 
+plus 200 Flops per triangle.  
+Thus, 25,000 triangles per second in a triangle strip 
+(each new triangle requires one new vertex) 
+requires 7.5 MFlops of sustained floating point performance.  
+25,000 independent triangles per second requires 
+12.5 MFlops of sustained floating point performance.
+.BU
+These numbers do not include hardware setup, 
+which may in the best case require no processing, or, 
+in the worst case, 
+may require as much floating point and integer processing 
+as the transformation, shading, and clipping.
+.BU
+If the graphics hardware supports advanced features like transparency, 
+Phong shading, antialiasing, and texture mapping,
+\*(Dd can take advantage of them 
+(at the discretion of the porter of \*(Dd to the platform).
+On some sophisticated 3D graphics hardware platforms, the difference in
+image quality produced by the standard production renderer and the
+dynamic renderer may be insignificant.
+.BU
+Rather than implement transparency entirely in software, 
+if the hardware supports an area pattern, 
+the port can use this hardware to implement 
+transparency by a screen-door technique.
+.BU
+If the hardware implements an ``add with max'' pixel operation, 
+the port can use it for better transparency than screen-door.
+For fast production rendering (raytracing), 
+the hardware and system should have very good vector 
+or scalar main CPU performance 
+and very good library trigonometric and basic mathematics routines.  
+This processing also requires lots of MIPS.
+.H2 "File System Space Availability
+Sufficient file system space must be available to build \*(Dd.
+The space required to hold the 
+source distribution is about 10 MB.
+The space required to hold the object code during the build process
+and the finished library
+is less than an additional 10 MB.
+.H2 "Operating System Support Tool Availability
+The Portable \*(Dd distribution comes with automatic build tools,
+making it easy to build the \*(Dd library on a variety of different
+platforms.
+These tools are based on the availability
+of several standard UNIX system utilities,
+including \f2cc\fP, \f2make\fP, and
+execution of \f2sh\fP
+shell scripts.
+The shell scripts are embedded in many of the makefiles.
+If these tools are not available on the target platform,
+additional effort will be required to support the build activities.
+.fi
+.H1 "Porting Strategies for Less Powerful Platforms
+Interactive shaded-color 3D
+computer graphics,
+as is potentially available
+in the \*(Dd dynamic rendering mode,
+requires significant resources
+in terms of processing power,
+graphics support hardware,
+and memory.
+Not all platforms have sufficient power to support
+this level of interactivity in full-shaded color.
+.lp
+The \*(Dd dynamic mode renderer
+specifies a \f2feel\fP
+rather than a \f2look\fP.
+That is,
+the first priority in the dynamic rendering process 
+is interactivity rather than faithfulness to 
+specific color or shading models.
+It is possible
+for less powerful platforms
+to compromise image quality
+as long as
+acceptable interactive rates can be accomplished.
+This means that \*(Dd will operate 
+better on platforms with better graphics support,
+but in any case a good port to an appropriate
+platform should provide interactive response.
+For example,
+on platforms without fast polygon draw rates
+or depth buffer support,
+it might still be possible to achieve 
+interactive rates if polygon primitives
+are always drawn in wireframe mode only.
+While this may
+not ultimately be as desirable as operation
+on a graphics supercomputer,
+it may still provide useful results.
+.H1 "Effort to Perform a Port
+\*(Dd was designed and implemented to be portable.
+Nevertheless, porting \*(Dd to a new platform 
+should not be regarded as a trivial exercise,
+particularly regarding output from the dynamic renderer.
+Even if there is almost a one-to-one correspondence
+between the \*(Dd interfaces and the interface to the
+facilities on the
+target system, there are many C 
+routine templates to be filled in.
+.lp
+Your experience level, 
+the amount of graphics display hardware in the target machine,
+and the similarity
+of the target machine to a machine for which there is an existing port
+are all key factors affecting the effort required when you perform a port.
+.lp
+Your experience in 3D computer graphics
+will directly affect the amount
+of time it takes to do a successful port.
+Previous experience with 4x4 matrix transformation stacks,
+clipping, shading,
+and Z-buffers will be helpful, in particular
+for the implementation of the device driver output module that
+supports the dynamic renderer. 
+Refer to the \f2Preface\fP for recommended texts on computer graphics. 
+.lp
+The amount of graphics display hardware provided by the
+target system and the interface software provided 
+with it are also important.
+Since the dynamic renderer output module interface is designed
+to allow as much use of any supplied graphics display hardware
+as possible,
+a great deal of graphics display functionality must occur
+in the dynamic renderer output module,
+either by utilization of existing hardware facilities
+or by simulation of the functions in software. 
+The implementation
+of the dynamic renderer output module
+requires transformation, clipping, shading, hidden surface removal,
+and point, vector, and polygon drawing capabilities.
+The more hardware functionality provided 
+and the cleaner the system interface provided
+to it, 
+the easier the port will be.
+.H1 "Relationship with Window Systems
+Each \*(Dd configuration determines what output devices are available 
+to the application, although a set of generic devices are recommended.  
+These generic devices include files 
+and windows.
+In the case of a window interface, 
+\*(Dd is set up to handle window resizing in a reasonable fashion.  
+When told that the window has been resized, 
+\*(Dd will ask the device level what the new size is, 
+and automatically clip or scale and realign output under application control.
+Note that the actual interaction with the window system is handled
+by the device driver implementation and not by the \*(Dd kernel.
+.lp
+.rs
+.sp -.25v
+A key feature of \*(Dd is that it is designed 
+to allow as efficient dynamic graphics as possible.
+\*(Dd attains the highest frame display rates
+when it operates as a \f2peer\fP
+with the window system under which it runs.
+In particular, coordinating
+clipping and double buffering
+with the native window system
+will allow the most efficient performance.
+.H2 "Window Clipping
+.rs
+.sp -.25v
+\*(Dd runs fastest if draw operations called by \*(Dd 
+are allowed to write straight to the graphics display hardware
+without incurring any overhead from the window system.
+.rs
+.sp -.25v
+.lp
+With slower graphics applications,
+graphics draw operations are performed
+through the window system
+that clips the draw operation in two dimensions, so that 
+the draw only occurs
+in those sections of the window that are currently visible.
+However, in 3D graphics programs,
+the display process performs a 3D clip
+that often satisfies this requirement.
+Passing the draw operations through a window system,
+drastically increases the overhead, because additional clipping
+is performed unnecessarily.
+So 3D graphics display programs
+will run faster if they avoid this overhead.
+On the other hand,
+allowing a program to write straight to the hardware 
+also means the program now has the
+responsibility to know how 
+to avoid drawing on other windows when the windows overlap.
+.rs
+.sp -.25v
+.lp
+To do this well,
+the program must cooperate with the window system and obtain
+a list of clipping boundaries from the window system
+so that it can perform the entire clipping task.
+\*(Dd is set up to take advantage of window systems
+that provide this kind of information.
+.H2 "Double Buffering
+.rs
+.sp -.25v
+Double buffering is used in interactive graphics to achieve
+smooth dynamic animation of a succession of generated images.
+While displaying the results of the previous frame display computation,
+the image currently being computed is drawn into
+a buffer that is not currently being shown.
+When this new frame is complete, the buffers are switched
+and the new frame is shown while the buffer from the 
+previous frame is then drawn into.
+.ig xT
+when that frame's screen location is not actually being scanned,
+and the process continues.
+.xT
+In this way, partially drawn images are not seen
+and the animation appears smoother.
+In most cases,
+double buffering control needs to be coordinated with
+the native window system controlling the display.
+\*(Dd is designed to do this.

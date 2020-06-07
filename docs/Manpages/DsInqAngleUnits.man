@@ -1,0 +1,58 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DsInqAngleUnits 3D  "Dore"
+.SH NAME
+DsInqAngleUnits \- Return the current angle units 
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+DtAngleUnits DsInqAngleUnits()
+.sp
+.in -.5i
+FORTRAN:
+.in +.5i
+INTEGER*4 DSQAU()
+.in -.5i
+.fi
+.SH DESCRIPTION
+.IX DSQAU
+.IX DsInqAngleUnits
+.I DsInqAngleUnits
+returns the current angle units in use. The current angle units apply
+when a parameter used in a Dore function is an angle value.
+Possible return values are:
+.PP
+.IP "\f2DcAngleDegrees\fP <\f2DCAD\fP>"
+The current angle units are in degrees.
+.IP "\f2DcAngleRadians\fP <\f2DCAR\fP>"
+The current angle units are in radians.
+.IP "\f2DcAngleOldStyle\fP <\f2DCAOS\fP>" 
+The \f2default\f1 angle units of each Dore function making use of angles
+apply.
+The default units for the angle parameter in
+\f2DoRotate\f1 and \f2DoLightSpreadAngles\f1 are 
+in radians. The default units for the angle parameter
+in \f2DoPerspective\f1 are in degrees.
+.SH "SEE ALSO"
+.na
+.nh
+DsSetAngleUnits(3D), DoRotate(3D), DoPerspective(3D),
+DoLightSpreadAngles(3D)
+.ad
+.hy

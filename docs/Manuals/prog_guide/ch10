@@ -1,0 +1,936 @@
+.\"#ident "%W%" %G%
+.\"
+.\" Copyright (C) 1988, 1989, 1990, 1991 by Kubota Pacific Computer Inc.
+.\"         All Rights Reserved
+.\" This program is a trade secret of Kubota Pacific Computer Inc. and
+.\" it is not to be reproduced, published, disclosed to others, copied,
+.\" adapted, distributed, or displayed without the prior authorization
+.\" of Kubota Pacific Computer Inc.  Licensee agrees to attach or embed
+.\" this Notice on all copies of the program, including partial copies
+.\" or modified versions thereof.
+.\"
+.so ../macros/local.me
+.ds CT Methods
+.ds BT \*(Dd Programmer's Guide
+.ds h1 10
+.PN 205
+.L1 M ETHODS
+.CH TEN
+.rs
+.sp -1.5v
+This chapter describes the key execution methods to be used on a
+\*(Dd database:  rendering, picking, and computing bounding
+volumes.
+Concepts and terms introduced in this chapter include
+hidden surface removal,
+computing bounding volumes,
+picking, pick aperture,
+pick path, hits, and pick callbacks.
+.sp -.5v
+.H1 "Methods"
+.rs
+.sp -.25v
+A \f2method\f1 is a function that causes a \f2traversal\f1 or
+\f2execution\f1 of the
+\*(Dd database.
+A method defines a treatment to be applied to
+all objects in the database during traversal. Methods include:
+.(l I
+rendering initialization
+rendering
+computing bounding volumes
+picking
+printing
+.)l
+.sp -.25v
+.lp
+When you execute a method on a group hierarchy, it propagates
+through the hierarchy.  Groups execute the current method on
+their elements.  For most methods,
+when a method is executed on a regular group the
+following sequence occurs:
+.sp -.25v
+.np
+Attributes are pushed when the group is entered.
+.sp -.25v
+.np
+Elements of the group are executed, in order.
+.sp -.25v
+.np
+Attributes are popped when the group is exited.
+.lp
+All methods are defined for all
+objects, but in many cases, the method has no effect\(emfor
+example, when a camera is placed in a display group, its
+rendering method has no effect.  Similarly, the only method for
+label objects that has an effect is the print method.
+.lp
+\f2Rendering initialization\f1 is a method applied prior to
+rendering that traverses the
+studio objects
+and their attributes in order to set the viewing parameters.
+More detail about rendering, picking and bounding volumes is
+given later in this chapter.
+.H1 "Rendering"
+Much of the material in this section has
+already been covered in earlier chapters.
+The following paragraphs on
+rendering serve mainly as a summary of what you have already learned about
+rendering.
+.lp
+Rendering, the most common method,
+traverses the \*(Dd database and causes every displayable object 
+to be drawn.
+During rendering, primitive objects
+are executed using their respective attribute values. 
+.H2 "Update Functions"
+Rendering is triggered by one of the update functions:
+\f2DdUpdate <DDU>, DfUpdate <DFU>, \f1or \f2DvUpdate <DVU>\f1.
+When \f2DdUpdate <DDU>\f1 is called, if the device has a frame
+attached to it, all views attached to that frame are updated.
+\f2DfUpdate <DFU>\f1 causes the specified frame to be updated on
+all devices to which it is attached.  \f2DvUpdate <DVU>\f1 causes
+the specified view to be updated.  Each view has an update type,
+set with \f2DvSetUpdateType <DVSUT>\f1.  The type is either
+.ip "\f3DcUpdateAll <DCUALL>\f1"
+which causes all objects, including both definition objects and
+display objects, to be updated, or
+.ip "\f3DcUpdateDisplay <DCUDIS>\f1"
+which updates only the display objects.  Specify this type if
+camera and light information is the same as on previous updates.
+Use of this mode results in increased efficiency, since only the
+display groups are traversed at update time.
+.H2 "Choosing a Renderer"
+\*(Dd provides several renderers with different capabilities
+and speeds.
+Some provide interactive performance while others trade speed for
+image quality.
+There are typically at least two renderers available to \*(Dd
+applications: 
+.ip "\f3DcRealTime <DCRLTM>\f1"
+for fast, interactive display and rendering.
+.ip "\f3DcProductionTime <DCPRTM>\f1"
+for more photorealistic image generation.
+This renderer is typically slower than the \f2DcRealTime\f1 renderer.
+.lp
+A renderer is set for each view with \f2DvSetRendStyle <DVSRS>\fP.
+You are not locked in to using only one renderer; during program
+execution the renderer can be changed dynamically.
+You might use the dynamic renderer (\f2DcRealTime <DCRLTM>\fP) to
+manipulate the objects and change the camera, and then pop up a menu
+and select the \f2DcProductionTime <DCPRTM>\fP renderer to generate a
+photo-realistic image of the scene.
+.lp
+The number of renderers installed in a \*(Dd program is not limited to
+just these two renderers.
+The functions \f2DsInqNumRenderers <DSQNR>\fP, \f2DsInqRendererNames
+<DSQRNS>\fP and \f2DsInqRendererId <DSQRI>\fP can be used to
+interactively determine the installed renderers and the renderer ids
+(which are integers used to invoke them).
+The following code fragment prints out a list of the installed
+renderers and their ids.
+.(m
+C code:
+
+    DtInt num_rend;
+    DtPtr *renderer_name;
+    DtInt *renderer_id;
+    DtInt i;
+
+    num_rend = DsInqNumRenderers();
+    renderer_name = (DtPtr *)malloc (num_rend*sizeof(DtPtr));
+    renderer_id   = (DtInt *)malloc (num_rend*sizeof(DtInt));
+
+    DsInqRendererNames(renderer_name);
+
+    printf ("Installed Renderers:\\\\n");
+    for (i=0; i<num_rend; i++) {
+	renderer_id[i] = DsInqRendererId(renderer_name[i]);
+	printf ("\\\\t%d: '%s'\\\\n", renderer_id[i],
+		renderer_name[i]);
+    }
+
+\*(Fo Code:
+
+      INTEGER*4 NRNDS
+      CHARACTER*80 RNDNAM(50)
+      INTEGER*4 RNDID(50)
+      INTEGER*4 I
+
+      NRNDS = DSQNR()
+
+      IF (NRNDS .GT. 50) THEN
+          WRITE(6,*) 'More than 50 renderers'
+          RETURN
+      ENDIF
+
+      CALL DSQRNS(RNDNAM, 80)
+
+      WRITE(6, *) 'Installed Renderers'
+      DO 10 I=1, NRNDS
+          RNDID(I) = DSQRI(RNDNAM(I), 80)
+          WRITE(6, 20) RNDID(I), RNDNAM(I)
+ 10   CONTINUE
+
+ 20   FORMAT(' ', I, ': ', A)
+.)m
+Once the list of renderers is known then the application user could
+select which renderer to use.
+The following code would set \f2view\fP to use the first renderer in
+the list.
+.(m
+C code:
+
+    DvSetRendStyle (view, renderer_id[0]);
+
+\*(Fo code:
+
+      CALL DVSRS(VIEW, RNDID(1))
+.)m
+.lp
+See your \f2\*(Dd System Guide\fP for a list and description of
+the available renderers.
+.H2 "Rendering Efficiency Measures"
+You can employ various efficiency measures to speed up the
+rendering process.  Some of these efficiency measures include:
+.BU 
+using \f2DcUpdateDisplay <DCUDIS>\f1
+whenever possible (see \f2Update Functions\f1 above)
+.BU 
+using backface culling
+.BU 
+turning hidden surface removal off
+.BU 
+using bounding volumes (see \f2Computing Bounding Volumes\f1 below)
+.H3 "Backface Culling"
+Backface culling, discussed in Chapter 5, is an efficiency
+measure in which surfaces whose normals point away from
+the viewer are not included in the shading and rendering.
+An object is made backface cullable with \f2DoBackfaceCullable <DOBFC>\f1
+and backface culling is enabled with the
+\f2DoBackfaceCullSwitch <DOBFCS>\f1 switch.
+.H3 "Hidden Surfaces"
+If \f2DoHiddenSurfSwitch <DOHSS>\f1 is on, primitive objects will
+not render any of their parts that are hidden from the
+viewer by other objects in the scene.  If this switch is off,
+each object is displayed in group order, and the groups are
+displayed according to their priority, without regard to which
+parts are obscured from the viewer by other objects.
+Not having to compute which surfaces are hidden from the viewer
+speeds up rendering.
+.H1 "Computing Bounding Volumes"
+A \f2bounding volume\f1 is a rectangular
+volume assumed to tightly enclose 
+a primitive object or a group of primitive objects.
+Bounding volumes are not displayable objects.
+They are used to provide \*(Dd with a sense of
+spatial coherence.
+.lp
+Computing a bounding volume is another execution method.
+\f2DsCompBoundingVol <DSCBV>\f1 executes a method that computes
+and returns a bounding volume for a specified object or group of objects.
+In the simple example that follows, \f2DsCompBoundingVol <DSCBV>\f1
+is used to locate the center of a possibly
+complex object \f2obj <OBJ>\f1, and to move that object to the origin so it
+can be rotated about its center.
+For simplicity, 
+the object is scaled so that its maximum dimension is equal to 1.
+.(m
+C code:
+
+.\"#	ident "@(#)ch12.ex01	1.3" 5/15/91
+.\"
+#define MAX(x,y) (((x)>(y))?(x):(y))
+
+DtVolume vol;
+DtReal depth, width, height; 
+DtReal max_dim, scale_fac;
+DtObject our_group, obj;
+
+DsCompBoundingVol(&vol, obj);
+
+/* vol.bll is the back lower left corner 
+ *	of the bounding cube. 
+ * vol.fur is the front upper right corner 
+ *	of the bounding cube 
+ */
+depth = vol.fur[2] - vol.bll[2];
+width = vol.fur[0] - vol.bll[0];
+height = vol.fur[1] - vol.bll[1];
+max_dim = MAX(depth, MAX(width, height));
+scale_fac = 1.0/max_dim;
+
+our_group = DoGroup(DcTrue);
+    DgAddObj(DoScale(scale_fac, scale_fac, scale_fac));
+    DgAddObj(DoTranslate(-width/2.0, -height/2.0, 
+				-depth/2.0));
+    DgAddObj(obj);
+DgClose();
+
+\*(Fo code:
+
+.\"#	ident "@(#)ch12.ex01.f	1.3" 5/15/91
+.\"
+      INTEGER*4 OBJ, OURGP
+      REAL*8 VOL(3,2)
+      REAL*8 DEPTH, WIDTH, HEIGHT, MAXDIM, SCFAC
+C
+      CALL DSCBV(VOL, OBJ)
+C
+     ! VOL(*,1) is back lower left corner 
+     !			of bounding cube
+     ! VOL(*,2) is front upper right corner 
+     !			of bounding cube
+C
+      DEPTH=VOL(3,2)-VOL(3,1)
+      WIDTH=VOL(1,2)-VOL(1,1)
+      HEIGHT=VOL(2,2)-VOL(2,1)
+C
+      MAXDIM=DMAX(DEPTH, WIDTH, HEIGHT)
+      SCFAC=1.0/MAXDIM
+C
+      OURGP=DOG(DCTRUE)
+	    CALL DGAO(DOSC(SCFAC, SCFAC, SCFAC))
+            CALL DGAO(DOXLT(-WIDTH/2.0D0, -HEIGHT/2.0D0,
+     1                -DEPTH/2.0D0))
+	    CALL DGAO(OBJ)
+      CALL DGCS
+.)m
+.lp
+During rendering traversal, to speed up rendering,
+the size of a bounding volume can be used 
+to decide whether the object it encloses or its simpler alternate representation
+should be drawn. See Chapter 11, \f2Conditionals\f1, for more detail
+on bounding volumes used as conditionals.
+.lp
+If the bounding volume switch \f2DoBoundingVolSwitch <DOBVS>\f1
+is off, bounding volume
+calculations will be skipped and bounding volumes will be
+ignored. The default bounding volume switch is \f2DcOn <DCON>\f1.
+.H1 "Picking"
+.rs -.25v
+\f2Picking\f1 is a method that identifies the drawable primitive
+objects that are contained in a specified volume
+of a \*(Dd device.
+This volume is called the \f2pick volume\f1 and is defined by
+the size of the \f2pick aperture\f1.
+The width, height and depth of the pick aperture can be specified with
+\f2DdSetPickAperture <DDSPA>\f1.
+.sp -.25v
+.lp
+In applications, a common
+sequence is to select (or \f2pick\f1) an object at a particular point using
+an input device such as a mouse, to highlight that object, and
+then to reposition it in the scene.
+The picking method is triggered by the \f2DdPickObjs <DDPO>\f1
+function,
+which returns information about what it finds in the pick
+volume. During picking, geometric transformation objects are
+executed just as they are during rendering.  Other attribute
+objects, such as those relating to color, highlights, and
+shadows, have no effect during picking.
+.sp -.25v
+.lp
+Only points, lines and triangles can be picked.
+For primitive objects other than these, the primitive is decomposed
+into points, lines and triangles according to its alternate
+representation (see Chapter 13 for a discussion on base primitives
+and alternate representations).
+If any part of the object is contained within the pick aperture,
+.CL
+and if the current \f2pickability switch\f1 attribute is
+on, the primitive is considered to be \f2hit\f1.  This
+process continues for all objects in the scene.
+.sp -.25v
+.H2 "Pick ID Attribute"
+.rs
+.sp -.25v
+The pick ID primitive attribute is an integer \f2name\f1 that can be used
+to tag all objects below it in the display hierarchy.  In large
+databases, it is often useful to use this to identify
+different parts of the database\(emfor example, parts belonging to
+one object, parts that need to change color, and so on. An
+application might want to look at this ID only, not at the hit
+objects themselves. Pick ID attributes are specified with
+\f2DoPickID <DOPID>\f1.
+.sp -.25v
+.H2 "Pick Path"
+.rs
+.sp -.25v
+A \f2pick path\f1 consists of the hit object, plus information
+about the lineage of the hit object so that the application can
+uniquely identify it in the display hierarchy.  For example, a
+complex molecule might be made up of many atoms that are all made
+from the same sphere primitive.  If any one atom in the
+molecule\(eman iron atom, for example\(emwere \f2hit\f1, the
+pick path for
+the iron atom would list all the groups along the path to the
+iron atom, as well as information on where in each group to
+branch to the next lower object in the display tree.
+.H3 "Pick Path Elements"
+A pick path is made of one or more \f2pick path elements\f1.
+Each pick path element corresponds to a \f2node\f1 in the display tree along
+the path to the hit object.  \*(FT shows the hierarchy of objects
+leading to a sphere that was picked.
+Note that the sphere object
+is instanced twice in Group G3, but the sphere that was picked
+is the one that was translated.
+.(F 
+.\"./PS/10.1ps" 2.7i -1
+.sp 2.7i
+.)F "Display Tree for a Sphere Object"
+.lp
+Each pick path element 
+is an integer triple containing
+the following information, as shown in \*(FT:
+.np
+object handle
+.np
+pick ID
+.np
+number of the group element pointing to the next object in the
+pick path
+.bp
+\ 
+.(F 
+.\"./PS/10.2ps" 2.10i -1
+.sp 2.10i
+.)F "Pick Path for the Sphere Object"
+.lp
+In Figure 10-2, the first pick path element is comprised of the
+following information:
+.sp -.35v
+.np
+The root of the display tree for the hit sphere object is in
+Group \f3G1\f1.
+.sp -.35v
+.np
+The pick ID is \f30\f1 (the default).
+.sp -.35v
+.np
+Group element \f33\f1 (actually the fourth element in the group
+since group numbering is zero-based) references the next group,
+G2.
+.H3 "Hit List and Index"
+\f2DdPickObjs <DDPO>\f1 initiates the picking method on a device.
+In C, the calling sequence of the function is:
+.(m
+   DdPickObjs(device, pick_point, hit_count, index_size,
+       index, list_size, hit_list, z_values, wcs_values,
+       lcs_values, views, error_word)
+.)m
+The \*(Fo calling sequence is similar.
+\f2DdPickObjs <DDPO>\f1 searches hits around point \f2pick_point\f1
+of device \f2device\f1.
+It writes the pick path for each of 
+the hit objects into the array \f2hit_list\f1, and the indices to 
+access each of these pick paths into the array \f2index\f1 (see \*(FT).
+You specify the size of the \f2hit_list\f1 array with the 
+\f2list_size\f1 parameter, and the size of the \f2index\f1 array 
+with the \f2index_size\f1 parameter.  You are also responsible
+for providing the required space for the \f2hit_list\f1 and \f2index\f1 arrays
+before passing them to the \f2DdPickObjs <DDPO>\f1 function.
+.bp
+\ 
+.(F
+.\ "./PS/10.3ps" 3.75i -1
+.sp 3.75i
+.)F "Example of a Successful Pick Using \f2DdPickObjs\f1"
+.lp
+In our example (see Figure 10-3), we passed to \f2DdPickObjs\f1
+a \f2list_size\f1 of 22, a \f2hit_list\f1 array whose size 
+matches that of \f2list_size\f1, an \f2index_size\f1 of 6,
+and an \f2index\f1 array whose size matches that of \f2index_size\f1.
+\f2DdPickObjs\f1 returned to us a \f2hit_count\f1 of 3, which means 
+there are 3 pick paths returned in \f2hit_list\f1.  The indices to
+these pick paths are returned in \f2index\f1.  The pick path for 
+the first hit object begins with element \f2index[0]\f1=0 
+of the \f2hit_list\f1 array.  The pick path for the second hit object 
+begins with element \f2index[1]\f1=9.  The third hit object begins with element 
+\f2index[2]\f1=15.  From this we can see there are three pick path 
+elements in the first pick path and two in the second. To find out how many
+pick path elements are in the third pick path, we need to look at 
+\f2index[3]\f1. Since this last index points to 18, we know that there 
+is only one element in the third pick path.
+.lp
+An error status of zero was returned in \f2error_word\f1 indicating that
+nothing went wrong when the pick was done.
+If \f2index_size\f1 or \f2list_size\f1 is not large enough to
+hold information on all hit objects, this fact would be recorded in the
+space pointed to by \f2error_word\f1.
+In such a case, you can
+allocate more memory or make the pick aperture smaller so that
+less information is returned.  In one of these overflow cases,
+you can also choose to use the hits recorded before the overflow
+occurred.  Partial paths are not included, but \f2hit_count\f1
+always counts the good hits returned.
+.H3 "Optional Pick Information"
+In addition to setting the hit list and the index arrays,
+\f2DdPickObjs <DDPO>\f1 can provide additional information
+about the picked objects. For each category of information
+the user is interested in, a pointer to a user-supplied array must
+be passed. Otherwise, a \f2DcNullPtr <DCNULL>\f1 pointer indicates that
+the information is not required. Arrays can be passed and filled
+for the following pick information categories:
+.ip "\f3Depth values\f1"
+This consists of an array \f2z_values\f1 listing
+the \f2z\f1 value closest to \f2pick_point\f1 for
+each of the hit objects referred to in \f2index\f1.
+The depth values are expressed in device coordinates.
+This option is useful for sorting the hits relative to the viewer.
+.ip "\f3World coordinates\f1"
+The array \f2wcs_values\f1 will return
+the \f2x, y, z\f1 world coordinates of
+the closest point to \f2pick_point\f1,
+for each of the hit objects referred to in \f2index\f1.
+This array of floating point values should be three times
+the size of \f2index\f1.
+.ip "\f3Local coordinates\f1"
+In this case, 
+the array \f2lcs_values\f1 will return
+the \f2x, y, z\f1 local coordinates of
+the closest point to \f2pick_point\f1,
+for each of the hit objects referred to in \f2index\f1.
+This array of floating point values should be three times
+the size of \f2index\f1.
+.ip "\f3Views\f1"
+This consists of
+an array \f2views\f1 of view objects corresponding to the view in which
+each hit object was found.
+.H2 "Picking Example"
+.IX picking example
+The following example creates three objects, a sphere, a box, and
+a cylinder, as well as a parallel camera and a light.  A pick is
+initiated with \f2DdPickObjs <DDPO>\f1, and the pick point is determined by
+three numbers typed at the keyboard.  Information is printed on
+the screen regarding how many objects were hit.  In addition,
+for each hit, the screen shows the \f2z\f1 value,
+world coordinate position, local coordinate position, 
+which primitive objects were hit, and their pick IDs.
+
+.(m
+C code:
+
+.\"#	ident "@(#)ch12.ex03	1.3" 5/15/91
+.\"
+#include <dore.h>
+
+main()
+{
+    DtObject device, frame, view;
+    DtObject  camera_group, object_group, obj, stu;
+    DtObject sphere_obj, box_obj, cylinder_obj;
+    DtVolume volume;
+    static DtPoint3
+        origin = {0.0, 0.0, 0.0},
+        camera_from = {0.0, 0.0, 8.0}, /* positive z */
+        light_from = {-8.0, 8.0, 8.0}; /* upper left */
+    static DtVector3 up = {0.0, 1.0, 0.0};
+    DtPoint3 pick_point;
+    DtInt hit_count, index[4], hit_list[100], error, i;
+
+    DtReal z_values[4];
+    DtReal wc_values[4*3];
+    DtReal lc_values[4*3];
+    DtInt j;
+    DtInt *Path;
+    DtInt Size;
+    double dval;
+
+    DsInitialize(0);
+
+    /* make the studio objects */
+    stu = DoGroup(DcTrue);
+        DgAddObj(DoParallel(6.0, -0.1, -400.0));
+        DgAddObj(DoPushMatrix());
+            DgAddObj(DoLookAtFrom(origin, camera_from,up));
+            DgAddObj(DoCamera());
+        DgAddObj(DoPopMatrix());
+        DgAddObj(DoPushMatrix());
+            DgAddObj(DoLookAtFrom(origin, light_from, up));
+            DgAddObj(DoLightIntens(1.0));
+            DgAddObj(DoLight());
+        DgAddObj(DoPopMatrix());
+    DgClose());
+
+    /* make the display objects */
+    obj = DoGroup(DcTrue);
+        DgAddObj(DoPickSwitch(DcOn));
+	DgAddObj(DoPickID(1));
+        DgAddObj(sphere_obj = DoPrimSurf(DcSphere));
+        DgAddObj(DoTranslate(2.0, 0.0, 0.0));
+	DgAddObj(DoPickID(2));
+        DgAddObj(box_obj = DoPrimSurf(DcBox));
+        DgAddObj(DoTranslate(2.0, 0.0, 0.0));
+	DgAddObj(DoPickID(3));
+        DgAddObj(cylinder_obj = DoPrimSurf(DcCylinder));
+    DgClose();
+
+    /* set up display environment */
+    device = DoDevice("stdx11", "-geometry =640x512+0+0");
+    DdInqExtent(device, &volume);
+    frame = DoFrame();
+    DdSetFrame(device, frame);
+    DfSetBoundary(frame, &volume);
+    view = DoView();
+    DvSetRendStyle(view, DcRealTime);
+    DgAddObjToGroup(DfInqViewGroup(frame), view);
+    DvSetBoundary(view, &volume);
+    DgAddObjToGroup(DvInqDisplayGroup(view), obj);
+    DgAddObjToGroup(DvInqDefinitionGroup(view), stu);
+    DdUpdate(device, DcFalse);
+
+    /* vol.bll is the back lower left corner 
+     *			of the bounding cube.
+     * vol.fur is the front upper right corner 
+     *			of the bounding cube 
+     */
+    DdSetPickPathOrder(device, DcBottomFirst);
+    DdSetPickCallback(device, DcPickAll);
+
+    while (1) {
+        printf ("enter pick point (x = -1 to quit)\en");
+        scanf("%lf", &dval);  pick_point[0] = dval;
+        scanf("%lf", &dval);  pick_point[1] = dval;
+        scanf("%lf", &dval);  pick_point[2] = dval;
+        if (pick_point[0] == -1) break;
+
+        printf("\en\en******** PICK REPORT ********\en");
+        printf("   pick point  (%g,%g,%g)\en",
+	     pick_point[0],pick_point[1],pick_point[2]);
+
+        DdPickObjs(device,pick_point,&hit_count,4,index,
+		100,hit_list,z_values,wc_values,lc_values,
+		DcNullPtr,&error);
+
+        printf("   accepted    %d hit%c\en",
+	     hit_count, hit_count != 1 ? 's' : ' ');
+
+        for(i=0; i<hit_count; i++) {
+	    printf ("hit %d\tz_value: %g\en", 
+		i+1, z_values[i]);
+	    printf ("\tworld_point: (%g %g %g)\en",
+		wc_values[3*i], wc_values[3*i+1],
+		wc_values[3*i+2]);
+	    printf ("\tlocal_point: (%g %g %g)\en",
+		lc_values[3*i], lc_values[3*i+1],
+		lc_values[3*i+2]);
+
+	    Size = (index[i+1]-index[i]) / 3;
+	    Path = hit_list+index[i];
+	    for (j=0; j<Size; j++) {
+	        if ((DtObject)Path[j*3] == sphere_obj) 
+		    printf ("\t-> sphere (Pick Id: %d)\en",
+ 			Path[j*3+1]);
+	        else if ((DtObject)Path[j*3] == box_obj) 
+		    printf ("\t-> box (Pick Id: %d)\en", 
+			Path[j*3+1]);
+	        else if ((DtObject)Path[j*3]==cylinder_obj)
+		    printf ("\t-> cylinder (Pick Id: %d)\en", 
+			Path[j*3+1]);
+	    }
+        }
+    }
+    DsReleaseObj(device);
+    DsTerminate();
+}
+
+\*(Fo code:
+
+.\"#	ident "@(#)ch12.ex03.f	1.3" 5/15/91
+      PROGRAM MAIN
+C
+      IMPLICIT NONE
+      INCLUDE '/usr/include/fortran/DORE'
+C
+      INTEGER*4 DEVICE, FRAME, VIEW
+      INTEGER*4 CAMGRP, OBJGRP, OBJ, STU, 
+      INTEGER*4 SPHOBJ, BOXOBJ, CYLOBJ,SIZE
+      REAL*8 VOLUME (3,2)
+      REAL*8 ORIGIN(3), CAMFRM(3), LTFRM(3), UP(3), 
+      REAL*8 PICKPT(3)
+      REAL*8 ZVALS(4), WCVALS(12), LCVALS(12)
+      CHARACTER*8 CTYPE
+      INTEGER*4 HITCT, INDX(4), HITLST(100), ERROR, I
+C
+      DATA ORIGIN / 0.0D0, 0.0D0, 0.0D0 /
+      DATA CAMFRM / 0.0D0, 0.0D0, 8.0D0 /
+      DATA LTFRM  / -8.0D0, 8.0D0, 8.0D0 /
+      DATA UP     / 0.0D0, 1.0D0, 0.0D0 /
+C
+      CALL DSINIT(0)
+C
+      ! make the studio objects
+      STU=DOG(DCTRUE)
+          CALL DGAO(DOPAR(6.0D0, -0.1D0, -400.0D0))
+          CALL DGAO(DOPUMX())
+              CALL DGAO(DOLAF(ORIGIN, CAMFRM, UP))
+              CALL DGAO(DOCM())
+          CALL DGAO(DOPPMX())
+          CALL DGAO(DOPUMX())
+              CALL DGAO(DOLAF(ORIGIN, LTFRM, UP))
+              CALL DGAO(DOLI(1.0D0))
+              CALL DGAO(DOLT())
+          CALL DGAO(DOPPMX())
+      CALL DGCS
+C     
+      ! make the display objects
+      OBJ=DOG(DCTRUE)
+          CALL DGAO(DOPS(DCON))
+          SPHOBJ=DOPMS(DCSPHR)
+          CALL DGAO(SPHOBJ)
+          CALL DGAO(DOXLT(2.0D0, 0.0D0, 0.0D0))
+          BOXOBJ=DOPMS(DCBOX)
+          CALL DGAO(BOXOBJ)
+          CALL DGAO(DOXLT(2.0D0, 0.0D0, 0.0D0))
+          CYLOBJ=DOPMS(DCCYL)
+          CALL DGAO(CYLOBJ)
+      CALL DGCS
+C     
+      ! set up display environment
+      DEVICE=DOD('stdx11', 9, '-geometry =640x512+0+0', 22)
+C
+      ! VOLUME(*,1) is back lower left corner 
+      !				of bounding cube
+      ! VOLUME(*,2) is front upper right corner 
+      !				of bounding cube
+      CALL DDQE(DEVICE, VOLUME)
+      FRAME=DOFR()
+      CALL DDSF(DEVICE, FRAME)
+      CALL DFSB(FRAME, VOLUME)
+      VIEW=DOVW()
+      CALL DVSRS(VIEW, DCRLTM)
+      CALL DGAOG(DFQVG(FRAME), VIEW)
+      CALL DVSB(VIEW, VOLUME)
+      CALL DGAOG(DVQIG(VIEW), OBJ)
+      CALL DGAOG(DVQDG(VIEW), STU)
+      CALL DDU(DEVICE, DCFALS)
+C     
+      
+     ! do the picking
+      WRITE(6,*)'DEVICE VOLUME IS (',VOLUME(1,1),',',
+     1 VOLUME(2,1),',', VOLUME(3,1),') TO (',VOLUME(1,2),
+     2 ',',VOLUME(2,2),',',VOLUME(3,2), ')'
+      CALL DDSPPO(DEVICE, DCBOTF)
+      CALL DDSPCB(DEVICE, DCPKAL)
+C
+10    CONTINUE ! do forever loop starts here
+      WRITE(6,*) 'ENTER PICKPOINT (x=-1.0 TO QUIT)'
+      READ(5,*) PICKPT
+      IF (PICKPT(1).EQ.-1.0D0) GO TO 20
+      WRITE(6,*) '******PICK REPORT******'
+      WRITE(6,9901)PICKPT
+9901  FORMAT('PICK POINT X,Y,Z=',3D20.13)
+C
+      CALL DDPO (DEVICE,PICKPT, HITCT, 4, INDX, 100,
+     1 HITLST, ZVALS, WCVALS, LCVALS, DCNULL, ERROR)
+C
+      WRITE(6,*)'NUMBER OF HITS ACCEPTED=',HITCT
+      DO 15 I=1, HITCT
+      WRITE(6,*) I, ZVALS(I),'=ZVALUE'
+      WRITE(6,*)'WORLD POINT:', WCVALS(3*I-2), 
+     1  WCVALS (3*I-1), WCVALS(3*I)
+      WRITE(6,*)'LOCAL POINT:', LCVALS(3*I-2), 
+     1  LCVALS(3*I-1), LCVALS(3*I)
+      DO 14 J=INDX(I), INDX(I+1), 3
+      IOBJ=HITLST(J)
+      CTYPE='        	'
+      IF(IOBJ.EQ.SPHOBJ)CTYPE='SPHERE'
+      IF(IOBJ.EQ.BOXOBJ)CTYPE='BOX'
+      IF(IOBJ.EQ.CYLOBJ)CTYPE='CYLINDER"
+      WRITE(6,*)'->'CTYPE,'PICKID=',HITLST(J+1)
+14    CONTINUE
+15    CONTINUE
+      GO TO 10
+C
+20    CALL DSRO(DEVICE)
+      CALL DSTERM
+      END
+.)m
+.H2 "Pick Path Order"
+Each device has a pick path order associated with it, which can
+be set to either \f2DcTopFirst <DCTOPF>\f1 or \f2DcBottomFirst
+<DCBOTF>\f1 with
+\f2DdSetPickPathOrder <DDSPPO>\f1.  The default,
+\f2DcTopFirst <DCTOPF>\f1, is
+shown in Figure 10-2, where the pick path starts at the top of the display tree
+and ends with the hit primitive object.  \f2DcBottomFirst <DCBOTF>\f1
+specifies to order the pick path elements beginning with the hit
+primitive object and ending with the root.
+This is the order used in the picking code example earlier in this chapter.
+Note that the order
+of the triples \f2within\f1 each pick path element is not
+affected by \f2DdSetPickPathOrder <DDSPPO>\f1.
+.H2 "Pick Callbacks"
+This section discusses callbacks used for picking.
+A \f2callback\f1 is a \*(Dd object that consists of a pointer
+to a function and some data. Executing a callback
+means calling the function and passing it the data.
+Callbacks are explained with more detail in Chapter 11, \f2Conditionals\f1.
+.lp
+The function \f2DdSetPickCallback <DDSPCB>\f1 associates a
+picking callback object with a particular device.
+Each time a hit is detected, but before it is written into the
+hit list, the current pick callback function on the device is
+passed all information regarding the hit (pick path, depth value for
+the hit, view in which the hit is, number of hits accepted so far).
+The callback object takes a peek at
+the information on each hit and decides what to do with the
+information.  \*(Dd provides standard pick callbacks, but you can 
+also provide your own.  The standard \*(Dd pick callback objects
+that can be specified with \f2DdSetPickCallback <DDSPCB>\f1 are:
+.ip "\f3DcPickFirst <DCPKFR>\f1" 
+which keeps the first hit (the default)
+.ip "\f3DcPickClosest <DCPKCL>\f1"
+which keeps only the hit closest to the viewer
+.ip "\f3DcPickAll <DCPKAL>\f1"
+which adds all hits to the hit list
+.lp
+The \f2return\f1 value of the pick callback object is important
+because it tells \*(Dd what to do.  The three valid return values
+are:
+.(l
+\f2DcHitAccept <DCHACC>
+DcHitReject <DCHREJ>
+DcHitOverwrite <DCHOVW>\f1
+.)l
+\f2DcPickFirst <DCPKFR>\f1,
+for example, always
+makes a call to \f2DsExecutionAbort <DSEA>\f1, then
+returns \f2DcHitAccept <DCHACC>\f1.
+\f2DcPickClosest <DCPKCL>\f1
+returns \f2DcHitOverwrite <DCHOVW>\f1 if the object is closer,
+otherwise it returns \f2DcHitReject <DCHREJ>\f1.
+\f2DcPickAll <DCPKAL>\f1 always returns
+\f2DcHitAccept <DCHACC>\f1.
+.rs
+.sp -1v
+.H2 "User-Written Pick Callbacks"
+You can also write your own pick callback function to select
+hit objects under conditions other than those provided
+by the standard pick callbacks.
+The information passed to user-written callback functions
+consists of some user data, plus 
+the same information passed to standard pick callbacks
+(pick path, depth value for
+the hit, view in which the hit is, number of hits accepted so far).
+The following example shows a user-written callback,
+\f2my_pick_callback <MYPKCB>\f1, which accepts
+a maximum of three hit objects. In addition, for a hit object
+to be accepted, its depth value or (\f2z\f1 value) must be less than some
+threshold value.
+.(m
+C code:
+
+.\"#	ident "@(#)ch12.ex04	1.3" 5/15/91
+.\"
+#define MAX_DEPTH   100.0
+
+DtHitStatus
+my_pick_callback(data, num_elem, path, depth, 
+		view, num_hits)
+DtPtr data;
+DtObject view;
+DtInt num_elem, path[], num_hits;
+DtReal depth;
+{
+     if (depth < MAX_DEPTH && num_hits < 3)
+          return(DcHitAccept);
+     else
+          return(DcHitReject);
+}
+
+/* This call appears in the "main" program, or wherever 
+   the pick callback is set */
+
+DdSetPickCallback(device, 
+		  DoCallback(my_pick_callback, DcNullPtr));
+
+
+\*(Fo code:
+
+.\"#	ident "@(#)ch12.ex04.f	1.3" 5/15/91
+.\"
+       INTEGER*4 FUNCTION MYPKCB(DATA, ELMTS, PATH, 
+      1 			DEPTH, VIEW, HITS)
+C
+       INCLUDE '/usr/include/fortran/DORE'
+C
+       INTEGER*4 DATA,VIEW,ELMTS,PATH(1),HITS
+       REAL*8 DEPTH, MAXDEP
+       PARAMETER (MAXDEP=100.0)
+C
+       IF ((DEPTH.LT.MAXDEP).AND.(HITS.LT.3)) THEN
+           MYPKCB=DCHACC
+       ELSE
+           MYPKCB=DCHREJ
+       ENDIF
+       RETURN
+       END
+
+C Declarations required and 
+C establishment of callback object:
+       INTEGER*4 MYPKCB
+       EXTERNAL MYPKCB
+C
+       CALL DDSPCB(DEVICE, DOCB(MYPKCB,DCNULL) )
+.)m
+In some cases, the pick callback function could do all the work
+for the application, and the information returned by \f2DdPickObjs <DDPO>\f1
+itself would not be used.  For example, if the user callback were
+to find the three closest hits, the callback could maintain an
+array of the three closest hits and their \f2z\f1 values.  The
+user callback would handle the management of this array as it
+evaluates the hits and would write values into the array.  At the
+end, the application would read the values stored in the array by
+the callback.
+.lp
+Pick paths passed to pick callback functions are always organized
+\f2top first\f1, regardless of the order specified by
+\f2DdSetPickPathOrder <DDSPPO>\f1.
+.H1 "Chapter Summary"
+Chapter 10 describes the main execution methods that involve traversal of
+the \*(Dd database:  rendering, picking, and computing bounding volumes.
+When
+a method is executed on a group hierarchy, it propagates through the
+hierarchy.
+.lp
+Rendering actually consists of two methods:  rendering initialization and
+rendering itself.  During \f2rendering initialization\f1, the studio
+objects
+and their attributes in the view definition group are executed to set up
+the scene viewing parameters.  During \f2rendering\f1, primitive objects
+in the view
+display group are executed using the current value for each primitive
+attribute.
+Rendering is triggered by one of the update functions (\f2DdUpdate <DDU>,
+DfUpdate <DFU>, \f1or
+\f2DvUpdate <DVU>)\f1.
+.lp
+\*(Dd provides several renderers with different capabilities
+and speeds.
+Some provide interactive performance while others trade speed for
+image quality.
+Efficiency measures that can be
+used to
+speed up rendering include setting the view update type and using
+backface culling,
+the hidden surface switch, and bounding
+volumes.
+.lp
+\f2Computing a bounding volume\f1 is another \*(Dd method that involves 
+executing
+the \*(Dd database.  \f2DsCompBoundingVol <DSCBV>\f1 computes a tight
+rectangular volume that encloses
+a primitive object or group. 
+Computing a bounding volume provides \*(Dd with a sense of spatial coherence.
+.lp
+\f2Picking\f1, triggered by the \f2DdPickObjs <DDPO>\f1 function, identifies the
+drawable
+primitive objects contained in a specified volume of a \*(Dd device.  Each
+time
+a hit is detected, but before it is written into the hit list, the current
+pick callback function is passed the information and decides what to do
+with it.
+You can use \*(Dd's standard pick callback functions, or you can write your
+own.

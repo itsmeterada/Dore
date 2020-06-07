@@ -1,0 +1,17 @@
+#include <Dore.tmpl>
+#define IHaveSubdirs
+
+ DEFINES = -DDORE_ERRMSGFILE=\"$(ERRMSGDIR)/$(ERRMSGFILE)\" \
+           -DDORE_FONTDIR=\"$(FONTDIR)\"
+
+ SUBDIRS = objs pick render system
+    SRCS = condex.c dictionary.c error.c font.c
+    OBJS = condex.o dictionary.o error.o font.o
+
+LibraryObjectRule()
+SubdirLibraryRule($(OBJS))
+
+MakeSubdirs($(SUBDIRS))
+DependSubdirs($(SUBDIRS))
+
+DependTarget()

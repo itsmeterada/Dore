@@ -1,0 +1,1625 @@
+.\"#ident "%W%" %G%
+.\"
+.\" #
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  
+.\" # 
+.\" # KUBOTA GRAPHICS Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\" #
+.\"
+.sc
+.ds BT "\\*(Dd Developer's Guide
+.ds CT Device Driver Modules and Interfaces
+.ds h1 9
+.so ../macros/local.me
+.PN 81
+.L1 D EVICE " D" RIVER
+.L2 M "ODULES  AND"
+.L3 I NTERFACES
+.CH NINE
+.\" .ds hH
+.\"
+.EQ
+delim $$
+.EN
+.\"
+.lp
+This chapter describes the device driver modules and the interfaces
+that provide access to them.
+The routine required to install the device driver is also described.
+.H1 "The Components of a Device Driver
+A \f2device driver\fP links the \*(Dd renderers with an output device.
+Each device driver consists of several modules; 
+a \f2device control module\fP (\f2DCM\fP), and one
+or more \f2output modules\fP, each supporting a different style of
+renderer output.
+Two types of output modules are currently defined: the \f2production
+renderer output module\fP (\f2PROM\fP),
+and the \f2dynamic renderer output module\fP (\f2DROM\fP).
+The two types of output modules are used by, and named for, \*(Dd's
+dynamic renderer and standard production renderer, respectively.
+However, they can also be used by other renderers.
+.lp
+\*(Dd accesses these modules through the device driver interfaces
+which are defined as sets of subroutine calling sequences.
+The interface for each module includes a structure that contains
+pointers to functions in the device driver module implementation.
+The \*(Dd kernel and the renderers only access a device driver through
+these function pointers. 
+This type of interface allows multiple device drivers to coexist.
+.H1 "Device Driver Interfaces"
+There are currently four device driver interface types; one for the
+device control module, one for each of the output modules, and one
+that adds to the DROM the ability to provide method routines for
+particular object classes.
+The four interface types are designated by the constants:
+.rs
+.sp -.25v
+.(m
+DDc_DCM
+DDc_PROM
+DDc_DROM
+DDc_DROMMethods
+.)m
+.rs
+.sp -.25v
+Each interface type has a corresponding data structure that contains
+pointers to functions in the device driver implementation. 
+The names of the four structure types are:
+.rs
+.sp -.25v
+.(m
+DDt_DCM
+DDt_PROM
+DDt_DROM
+DDt_DROMMethod
+.)m
+.rs
+.sp -.25v
+The specifics of each structure will be discussed in 
+this chapter.
+The actual definitions of these interface types and structures are
+contained in the include file \f2dore_develop/develop.h\fP. 
+.sp -.25v
+.lp
+Each device driver is required to support the \f2DDc_DCM\fP interface
+for the device control module.
+The DCM interface is the interface used by the \*(Dd kernel to
+communicate with the device.
+Additionally, for the device driver to actually be of any use it must
+support at least one of the output module interfaces.
+A simple device driver may only support \f2DDc_DCM\fP and
+\f2DDc_PROM\fP for production renderer output.
+Other device drivers may support all four interfaces.
+.sp -.25v
+.lp
+For each supported interface, the driver must fill in the data 
+for the corresponding data structure.
+The \*(Dd kernel provides three routines that return pointers to the
+structures. 
+These are:
+.rs
+.sp -.25v
+.(m
+DDt_DCM  *DDdevice_CreateDCMStruct()
+DDt_PROM *DDdevice_CreatePROMStruct()
+DDt_DROM *DDdevice_CreateDROMStruct()
+.)m
+.rs
+.sp -.25v
+The returned structures will have been initialized to contain pointers
+to null routines.
+The device driver must replace these pointers with pointers
+to the routines that implement the interface functions for that driver.
+.sp -.25v
+.lp
+Each of the returned structures also contains a version number.
+This allows \*(Dd to expand these interfaces and still know which
+functions are provided by a particular device driver by examining the
+version number.
+Additions to the structures are commented with the corresponding version
+number.
+.lp
+The following paragraphs describe in detail the device driver 
+interfaces and the corresponding routines in the device driver modules.
+.H1 "Device Control Module Interface"
+The device control module (DCM) is required by all device drivers.
+It includes functions that support the \*(Dd kernel.
+These functions handle several kinds of device control at a level
+which is independent of the specific renderer being used, such as
+initializing the device, and querying it for it attributes.
+.lp
+The interface structure of type \f2DDt_DCM\fP contains pointers
+to the functions of the DCM.
+The structure is as follows:  
+.(m
+typedef struct {
+    DtInt version_number;
+
+    DtPFI create_local_data;	   /* required */
+    DtPFI initialize_device;	   /* required */
+    DtPFI become_current_driver;	
+    DtPFI close_device;			
+    DtPFI flush;			
+    DtPFI swap_buffers;		
+    DtPFI update_geometry;	
+    DtPFI inquire_device_extent;   /* required */
+    DtPFI inquire_stereo;	   /* required */
+    DtPFI inquire_ncolors;	   /* required */
+    DtPFI inquire_resolution;	   /* required */
+    DtPFI inquire_visual_type;	   /* required */
+    DtPFI inquire_auto_size;	   /* required */
+    DtPFI inquire_color_entries;	
+    DtPFI set_color_entries;		
+    DtPFI set_foreground_color;		
+    DtPFI set_background_color;		
+    DtPFI set_shade_index;		
+    DtPFI inquire_clip_list;	   /* required */
+    DtPFI clear_rectangle_depth;   /* DROM only */
+    DtPFI clear_rectangle_depth_and_color; /* DROM only */
+    DtPFI set_depth_buffer_enable; /* DROM only */
+    DtPFI set_depth_buffer_write;  /* DROM only */
+    DtPFI write_scanline_byte; 	   /* PROM only */
+    DtPFI set_current_view;		
+    DtPFI inquire_pixel_data;	   /* required */
+
+    /* following fields only in version 2 and up */
+
+    DtPFI set_options;	
+
+} DDt_DCM;
+.)m
+\f2DDdevice_CreateDCMStruct()\fP returns a pointer to a
+structure of this type containing pointers to null routines.
+The device driver must replace the pointers to null routines
+with pointers to actual routines in the DCM implementation.
+The version number is set by the \f2DDdevice_CreateDCMStruct\fP 
+routine to indicate the highest version number supported by your \*(Dd system.
+If the device driver does not support this version, it should change
+\f2version_number\fP to reflect the highest version that it supports.
+Some of the functions are only used if the driver supports
+a certain style of output.  
+These are labeled \f2DROM only\fP or \f2PROM only\fP in the
+above structure.
+Other functions are generic in nature.
+Sometimes when implementing a new device driver you don't want
+to implement all the functions before trying out a minimal driver.
+The entries labeled \f2required\fP must always point to
+actual routines, otherwise a severe error will occur.
+.rs
+.sp -.25v
+.lp
+The calling sequence and semantics of each of the functions is
+briefly described below.
+The \f2Device Driver Interface Functions\f1 manpages contain more details
+on each function.
+When these functions are discussed, they are referred to as
+\f2dcm.name\fP, where \f2name\fP is
+the name of the corresponding pointer in the interface structure.
+.rs
+.sp -.25v
+.H2 "Generic Functions
+.rs
+.sp -.25v
+The following DCM functions are generic in nature, and do not
+depend on the type of output supported by the device driver.
+.rs
+.sp -.25v
+.ip \f3dcm.create_local_data\fP
+is a required function for all device control modules.
+It is called by the user routine \f2DoDevice\fP to allocate any 
+memory required by the device driver to maintain its local data.
+The routine returns a pointer to this allocated memory.
+The \*(Dd kernel never accesses this data; it just
+associates the data pointer with the device object and hands it back
+to the device driver through the \f2dcm.become_current_driver\fP call.
+The calling sequence is: 
+.rs
+.sp -.25v
+.(m
+DtPtr dcm.create_local_data(DtObject device)
+.)m
+.rs
+.sp -1v
+.ip \f3dcm.initialize_device\fP
+is a required function for all device control modules.
+It is called by the \*(Dd kernel 
+to create a new instance of the driver when the application
+calls \f2DoDevice\fP.
+The calling sequence is:
+.rs
+.sp -.25v
+.(m
+DtFlag dcm.initialize_device (DtObject device, 
+				DtPtr device_data,
+				DtPtr argstring,
+				DtPtr name)
+.)m
+.ip
+The argument \f2device_data\fP is a pointer to the data allocated by
+\f2dcm.create_local_data\fP.
+The argument \f2argstring\fP is a pointer to a string that contains
+options specific to the device driver.
+It is the same string that is passed to \f2DoDevice\fP.
+The function returns \f2DcTrue\fP when the initialization was successful;
+otherwise, it returns \f2DcFalse\fP.
+.ip \f3dcm.set_options\fP 
+changes the device specific options that are initially set
+with the \f2argstring\fP argument to \f2dcm.initialize_device\fP.
+The calling sequence is:
+.rs
+.sp -.25v
+.(m
+void dcm.set_options (DtPtr argstring)
+.)m
+.ip \f3dcm.become_current_driver\fP
+is called each time
+that this specific device becomes the current device (as a result of
+an update being performed on the device).
+The calling sequence is:
+.rs
+.sp -.25v
+.(m
+void dcm.become_current_driver (DtPtr device_data)
+.)m
+.ip
+The device driver should maintain this pointer and use it to
+access its local data during other device driver functions.
+.ip \f3dcm.inquire_device_extent\fP
+is a required function for all device control modules.
+It returns the 3D extent of the device volume.
+The extent must be in the \*(Dd device coordinate system, which has
+the origin at the  lower left hand corner with y up, x to the right
+and z coming out of the screen.
+The calling sequence is:
+.rs
+.sp -.25v
+.(m
+void dcm.inquire_device_extent (DtVolume *extent)
+.)m
+.ip \f3dcm.inquire_ncolors\fP
+is a required function for all device control modules.
+It returns in \f2ncolors\fP the number of color 
+table entries that the device supports.
+The calling sequence is:
+.rs
+.sp -.25v
+.(m
+void dcm.inquire_ncolors (DtInt *ncolors)
+.)m
+.ip \f3dcm.inquire_resolution\fP
+is a required function for all device control modules.
+It returns the physical size of a pixel on the screen in millimeters.
+The calling sequence is:
+.rs
+.sp -.25v
+.(m
+void dcm.inquire_resolution(DtReal *x, DtReal *y)
+.)m
+.ip
+These values will be used when the user calls the routine
+\f2DdInqResolution\fP. 
+.ip \f3dcm.inquire_visual_type\fP
+is a required function for all device control modules.
+It returns the visual type of the device.
+The calling sequence is:
+.(m
+void dcm.inquire_visual_type
+         (DtVisualType *visualtype)
+.)m
+.ip
+The device visual type
+is specified by the user in the \f2DoDevice\fP call in
+\f2argstring\fP with the argument \f2-visualtype\fP.
+.ip \f3dcm.inquire_stereo\fP
+is a required function for all device control modules.
+It returns information on whether the device is a stereo device.
+The calling sequence is:
+.(m
+void dcm.inquire_stereo (DtFlag *stereo)
+.)m
+.ip \f3dcm.inquire_auto_size\fP
+is a required function for all device control modules.
+It returns \f2DcTrue\fP in the parameter \f2auto_size\fP if the user
+has specified that \*(Dd should  adjust aspect ratios when the device
+window changes; otherwise, \f2auto_size\fP is set to \f2DcFalse\fP.
+The calling sequence is:
+.(m
+void dcm.inquire_auto_size (DtFlag auto_size)
+.)m
+.ip
+Typically autosizing is on by default and is disabled with the
+argument \f2-noautosize\fP in the \f2argstring\fP argument to
+\f2DoDevice\fP.
+.ip \f3dcm.inquire_pixel_data\fP
+is a required function for all device control modules.
+It returns in \f2data\fP the raster data currently being displayed on the
+device.
+The calling sequence is:
+.(m
+DtFlag dcm.inquire_pixel_data
+           (DtRasterType requesttype,
+            DtInt *width, DtInt *height, 
+            DtRasterType *type,
+            DtPtr *data, 
+            DtFlag *userdelete)
+.)m
+.ip 
+If the device driver cannot provide this information, the function
+will return \f2DcFalse\fP.
+.ip \f3dcm.inquire_clip_list\fP
+is a required function for all device control modules.
+It returns the current clipping rectangle list.
+The calling sequence is:
+.(m
+void dcm.inquire_clip_list
+	 (DtUInt *nrect,
+	  DtReal **clip_list, 
+	  DtReal extent[4], 
+	  DtFlag *partiallyobscured)
+.)m
+.ip
+This function returns in the parameter \f2clip_list\fP a pointer to
+an array of 4*\f2nrects\fP \f2DtReal\fPs that specifies the visible
+rectangles on the device.
+If the device is fully visible then \f2clip_list\fP will contain one
+rectangle that is the same as \f2extent\fP.
+The elements of \f2clip_list\fP for the $i sup th$ rectangle 
+are \f2clip_list[i*4+0]\fP, \f2clip_list[i*4+1]\fP, \f2clip_list[i*4+2]\fP, 
+and \f2clip_list[i*4+3]\fP and define xmin, ymin, xmax, and ymax
+respectively.
+The parameter \f2extent\fP is the full unobscured extent of the device.
+The parameter \f2partiallyobscured\fP is set to \f2DcTrue\fP if the
+full device extent is not currently visible; otherwise, it is set 
+to \f2DcFalse\fP.
+.ip \f3dcm.flush\fP
+flushes the device driver.
+The calling sequence is:
+.(m
+void dcm.flush ()
+.)m
+.ip
+All commands currently queued for execution will be sent to the physical device.
+.ip \f3dcm.close_device\fP
+closes the device, frees any space that the driver has allocated
+with \f2dcm.create_local_data\fP, and releases any other resources.
+The calling sequence is:
+.(m
+void dcm.close_device ()
+.)m
+.ip \f3dcm.inquire_color_entries\fP
+is a required function for all device control modules.
+It returns \f2count\fP  color entries from the device color map beginning
+at entry \f2start\fP.
+The calling sequence is:
+.(m
+void dcm.inquire_color_entries 
+         (DtColorModel colormodel,
+          DtInt start, 
+          DtInt count, 
+          DtReal colors[])
+.)m
+.ip 
+The parameter \f2colormodel\f1 indicates which color model to use.
+If the color model is \f2DcRGB\f1,
+the length of \f2colors\fP is 3*\f2count\fP and
+the values returned in \f2colors\fP should be in the range 0 \- 1.
+In this case, the entries \f2colors[i*3+0]\fP, \f2colors[i*3+1]\fP 
+and \f2colors[i*3+2]\fP are the red, green, and blue values of 
+the $i sup th$ color starting from \f2start\fP. 
+.ip \f3dcm.set_color_entries\fP
+sets \f2count\fP color entries in the device color table beginning
+with entry \f2start\fP.
+The calling sequence is:
+.(m
+void dcm.set_color_entries
+         (DtColorModel colormodel,
+          DtInt start, 
+          DtInt count, 
+          DtReal colors[])
+.)m
+.ip 
+The parameter \f2colormodel\f1 indicates which color model to use.
+If the color model is \f2DcRGB\f1,
+the length of \f2colors\fP is 3*\f2count\fP and
+the values returned in \f2colors\fP should be in the range 0 \- 1.
+In this case, the entries \f2colors[i*3+0]\fP, \f2colors[i*3+1]\fP 
+and \f2colors[i*3+2]\fP are
+the red, green, and blue values of the $i sup th$ color 
+starting from \f2start\fP. 
+.ip \f3dcm.set_background_color\fP
+sets the background color of the device.
+The calling sequence is:
+.(m
+void dcm.set_background_color
+         (DtColorModel colormodel,
+          DtReal color[])
+.)m
+.ip 
+If \f2colormodel\f1 is \f2DcRGB\f1, \f2color[0]\fP 
+is the red component of the background color, \f2color[1]\fP
+is green and \f2color[2]\fP is blue. 
+The values are between 0 \- 1.
+.ip \f3dcm.set_foreground_color\fP
+sets the foreground color of the device.
+The calling sequence is:
+.(m
+void dcm.set_foreground_color
+         (DtColorModel colormodel,
+          DtReal color[])
+.)m
+.ip 
+If \f2colormodel\f1 is \f2DcRGB\f1, \f2color[0]\fP is  
+The red component of the foreground color, \f2color[1]\fP 
+Is green and \f2color[2]\fP is blue.
+The values are between 0 \- 1.
+.ip \f3dcm.set_shade_index\fP
+sets the shade index to be used for displaying colors
+when the device has a visual type of \f2DcPseudoColor\fP and a shade
+mode of \f2DcRange\fP.
+The calling sequence is:
+.(m
+void dcm.set_shade_index(DtInt index)
+.)m
+.ip \f3dcm.swap_buffers\fP
+swaps buffers if the device supports double buffering.
+The calling sequence is:
+.(m
+void dcm.swap_buffers ()
+.)m
+.ip \f3dcm.update_geometry\fP
+causes the device driver to take appropriate action 
+to update the clipping list maintained by the device driver.
+The calling sequence is:
+.(m
+void dcm.update_geometry ()
+.)m
+.ip \f3dcm.set_current_view\fP
+notifies the device driver when an update is to 
+occur that affects one view.
+The calling sequence is:
+.(m
+void dcm.set_current_view (DtObject view)
+.)m
+.H2 "Functions Supporting Production Renderer Output"
+Only one function is included in the DCM of device
+drivers to support production renderer output.
+.ip \f3dcm.write_scanline_byte\fP
+writes a sequence of pixels. 
+The calling sequence is:
+.(m
+void dcm.write_scanline_byte (DtInt x, DtInt y, 
+			      DtInt length, 
+			      DtUChar *values)
+.)m
+.ip 
+The sequence of pixels starts at the device coordinate 
+(\f2x\fP, \f2y\fP) for \f2length\fP pixels in the positive x
+direction.
+The RGB pixel values are \f2values[i*3+0]\fP, \f2values[i*3+1]\fP, 
+And \f2values[i*3+2]\fP for the red, green, and
+blue pixel values for the $i sup th$ pixel from the start.
+The RGB pixel values are between 0 \- 255.  \f2x\fP and \f2y\fP 
+Will be in the \*(Dd device coordinate system.
+This is the same coordinate system
+used by \f2dcm.inquire_device_extent\fP.
+.H2 "Functions Supporting Dynamic Renderer Output"
+The following functions are included only in the DCM of device
+drivers that support dynamic renderer output.
+.ip \f3dcm.clear_rectangle_depth_and_color\fP
+clears the depth buffer in the specified rectangle and fills the
+specified rectangle with the current background color as set 
+By \f2dcm.set_background_color\fP.
+The calling sequence is:
+.(m
+void dcm.clear_rectangle_depth_and_color
+         (DtShort xmin, 
+          DtShort ymin,
+          DtShort xmax, 
+          DtShort ymax)
+.)m
+.ip 
+The rectangle is specified in \*(Dd device coordinates.
+.ip \f3dcm.clear_rectangle_depth\fP
+clears the depth buffer in a specified rectangle.
+The calling sequence is:
+.(m
+void dcm.clear_rectangle_depth
+         (DtShort xmin,
+          DtShort ymin,
+          DtShort xmax,
+          DtShort ymax)
+.)m
+.ip
+The rectangle is specified in \*(Dd device coordinates.
+.ip \f3dcm.set_depth_buffer_enable\fP
+enables the use of the depth buffer.
+The calling sequence is:
+.(m
+void dcm.set_depth_buffer_enable (DtFlag flag)
+.)m
+.ip
+.ip \f3dcm.set_depth_buffer_write\fP
+enables writing to the depth buffer.
+The calling sequence is:
+.(m
+void dcm.set_depth_buffer_write (DtFlag flag)
+.)m
+.ip
+Note the depth buffer must also be enabled for writing to actually
+occur.
+.H1 "Production Renderer Output Module Interface
+The production renderer output module (PROM) interface assumes that the
+renderer performs all rendering functions up to
+and including scan conversion.
+As a result, this interface is a relatively
+concise, low-level interface requiring little or no processing of
+display information by the PROM before
+being sent directly to the display output device.
+It is therefore easier, when implementing a device driver, to get
+the production renderer operating before the dynamic renderer.
+.lp
+The structure of type \f2DDt_PROM\fP contains pointers to the
+functions of the PROM implementation.
+Currently, the PROM contains only one function, and the 
+interface structure looks like:
+.rs
+.sp -.25v
+.(m
+typedef struct {
+    DtInt version_number;
+    DtPFI write_rectangle_byte_rgb;	/* required */
+} DDt_PROM;
+.)m
+.rs
+.sp -.25v
+\f2DDdevice_CreatePROMStruct()\fP returns a pointer to a
+structure of this type containing a pointer to a null routine.
+Device drivers that support output from the standard production renderer
+or other renderers that use this interface must replace the null
+pointer in that structure with a pointer to the actual routine in the
+PROM implementation.
+The version number is set by the \f2DDdevice_CreatePROMStruct\fP
+routine to indicate the highest version number supported by your \*(Dd system.
+If the device driver does not support this version, it should change
+\f2version_number\fP to reflect the highest version that it supports.
+.rs
+.sp -.25v
+.lp
+The one function currently required to support production renderer
+output writes a set of pixels to the output device.
+The calling sequence is:
+.rs
+.sp -.25v
+.(m
+void prom.write_rectangle_byte_rgb
+	(DtInt xmin, DtInt ymin, 
+	 DtInt length, DtInt height, 
+	 DtUChar *pixarr).
+.)m
+.rs
+.sp -.25v
+The array \f2pixarr\fP contains the pixel data to be written
+into a rectangle on the device.
+The rectangle starts at \f2x\fP, \f2y\fP,
+and it is \f2length\fP wide and \f2height\fP high.
+The array \f2pixarr\fP is 3*\f2length\fP*\f2height\fP elements long,
+and stores pixels in scanline order.
+\f2pixarr[i*3]\fP, \f2pixarr[i*3+1]\fP and \f2pixarr[i*3+2]\fP are
+the red, green, and blue components of the $i sup th$ pixel.
+Each pixel value in \f2pixarr\fP is in the range 0 \- 255.
+In most device drivers, this routine will simply make calls
+to \f2dcm.write_scanline_byte\fP.
+.H1 "Dynamic Renderer Output Module Interface
+The dynamic renderer output module (DROM) handles all output from the
+dynamic renderer.
+The dynamic renderer is designed for interactive
+graphics performance by taking advantage of the
+host system's graphics display hardware whenever possible.
+The interface to the DROM is therefore fairly high level.
+The underlying graphics hardware (or failing that, the
+software in the DROM)
+must provide facilities for transformation, 
+clipping, shading, and hidden surface removal.
+.lp
+Note that the \*(Dd dynamic renderer does
+not guarantee a specific \f2look\fP or shading style.
+However, it is intended to provide a dynamic interactive response or
+\f2feel\fP.
+Therefore some implementations on some systems may choose to provide
+a lower level of shading sophistication to achieve sufficient
+rendering speed.
+While not encouraged, these tradeoffs may be required on certain
+comparatively low performance systems.
+For example, on hardware platforms incapable of fast shading, it may
+be necessary to allow only wireframe displays to achieve interactive
+rates.
+In any case, the documentation for each \*(Dd device driver 
+clearly identifies which appearance attributes and 
+representation types are used by each supported renderer. 
+The \*(Dd device drivers are documented
+in your \f2\*(Dd System Guide\f1.
+.lp
+The interface structure of type \f2DDt_DROM\fP contains pointers to the
+functions of the DROM:
+.(m
+typedef struct {
+   DtInt version_number;
+
+   DtPFI pre_initialization;
+   DtPFI post_initialization;
+
+   DtPFI create_local_device_data;	/* required */
+   DtPFI create_local_view_data;	/* required */
+   DtPFI create_local_window_data;	/* required */
+
+   DtPFI start_update;
+   DtPFI update_local_data;
+   DtPFI update_studio;
+   DtPFI update_display;
+
+   DtPFI camera;
+   DtPFI light;
+
+   
+   DtPFI set_camera_matrix;
+   DtPFI set_parallel_matrix;
+   DtPFI set_perspective_matrix;
+   DtPFI set_projection_matrix;
+
+   DtPFI push_att_clpvol;
+   DtPFI pop_att_clpvol;
+   DtPFI set_att_clpvol;
+   DtPFI apply_att_clpvol;
+
+   DtPFI get_wcstofcsmat;		/* required */
+   DtPFI pop_lcstofcsmat;
+   DtPFI push_lcstofcsmat;
+   DtPFI transform_clip_z_point;	/* required */
+
+   DtPFI render_point_list;
+   DtPFI render_line_list;
+   DtPFI render_connected_line_list;
+   DtPFI render_triangle_list;
+   DtPFI render_triangle_mesh;
+
+   DtPFI set_att_ambint;
+   DtPFI set_att_ambswi;
+   DtPFI set_att_bacfacculble;
+   DtPFI set_att_bacfacculswi;
+   DtPFI set_att_clpswi;
+   DtPFI set_att_depcue;
+   DtPFI set_att_depcueswi;
+   DtPFI set_att_difclr;
+   DtPFI set_att_difint;
+   DtPFI set_att_difswi;
+   DtPFI set_att_hidsrfswi;
+   DtPFI set_att_inttyp;
+   DtPFI set_att_lgtclr;
+   DtPFI set_att_lgtint;
+   DtPFI set_att_lgttyp;
+   DtPFI set_att_lintyp;
+   DtPFI set_att_linwid;
+   DtPFI set_att_refswi;
+   DtPFI set_att_reptyp;
+   DtPFI set_att_shaswi;
+   DtPFI set_att_shdidx;
+   DtPFI set_att_spcclr;
+   DtPFI set_att_spcfct;
+   DtPFI set_att_spcint;
+   DtPFI set_att_spcswi;
+   DtPFI set_att_srfshd;
+   DtPFI set_att_stereo;
+   DtPFI set_att_stereoswi;
+   DtPFI set_att_transpclr;
+   DtPFI set_att_transpint;
+   DtPFI set_att_transpswi;
+
+   DtPFI update_lcstowcsmat_lokatfrm;
+   DtPFI update_lcstowcsmat_pop;
+   DtPFI update_lcstowcsmat_push;
+   DtPFI update_lcstowcsmat_rotate;
+   DtPFI update_lcstowcsmat_scale;
+   DtPFI update_lcstowcsmat_shear;
+   DtPFI update_lcstowcsmat_tfmmat;
+   DtPFI update_lcstowcsmat_transl;
+
+   DtPFI set_att_lgtswi;
+   DtPFI set_att_lgtspdexp;
+   DtPFI set_att_lgtspdang;
+   DtPFI set_att_lgtatn;
+
+   DtPFI set_att_mapbmpswi;
+   DtPFI set_att_mapbmp;
+   DtPFI set_att_mapdifclrswi;
+   DtPFI set_att_mapdifclr;
+   DtPFI set_att_mapenvswi;
+   DtPFI set_att_mapenv;
+   DtPFI set_att_maptrnintswi;
+   DtPFI set_att_maptrnint;
+   DtPFI get_lcstowcsmat;		/* required */
+
+   DtPFI delete_local_device_data;
+   DtPFI delete_local_view_data;
+   DtPFI delete_local_window_data;
+
+   DtFlag use_separate_wireframe;	/* returned false */
+
+   /* following fields only in version 2 and up */
+
+   DtPFI set_att_srfedgclr;
+   DtPFI set_att_localaaswi;
+   DtPFI set_att_localaasty;
+
+} DDt_DROM;
+.)m
+\f2DDdevice_CreateDROMStruct()\fP returns a pointer to a
+structure of this type containing pointers to null routines.
+Device drivers that support output from the dynamic renderer
+must replace the pointers in that structure with 
+pointers to routines that implement the DROM.
+If you want to test a driver containing a minimal DROM, you
+must always include at least the functions labeled \f2required\fP
+in the above structure.
+Otherwise, a severe error will occur. The flag \f2use_separate_wireframe\fP
+is initialized to \f2DcFalse\fP by \f2DDdevice_CreateDROMStruct()\fP. 
+The device driver should set the flag to \f2DcTrue\fP if it cannot draw
+wireframes directly. In this case, alternate line representations
+will be created for objects when the representation type is
+\f2DcWireframe\fP or \f2DcOutlines\fP.
+.lp 
+The DROM is probably the most
+difficult device driver module to implement.
+The following paragraphs provide a brief overview of the dynamic
+rendering process and describe how the functions
+of the DROM are used.
+The functions are represented as \f2drom.name\fP, where
+\f2name\fP is the name of the pointer in the \f2DDt_DROM\fP
+structure.
+The \f2Device Driver Interface Functions\f1 manpages
+provide a more detailed description of each function.
+.H2 "Dynamic Rendering Overview
+There are two main parts to the dynamic rendering process: 
+an initial setup, and the actual rendering which occurs
+every update.
+This section lays out the general sequence of events, the data flow,
+and the utilization of that data.
+.lp
+During initialization, default values for all attributes
+are passed to the DROM from the dynamic renderer.
+The flow of data and control for this initialization is
+strictly from the dynamic renderer to the DROM.
+.lp
+The rendering process for each update is logically 
+divided into two different sequences.
+In each sequence, the communication flow is in both directions
+between the dynamic renderer and the DROM.
+.\" , as illustrated in Figure 9-1. 
+.\" The entire sequence is shown left to right in this figure.
+.lp
+The first sequence initializes the studio environment.
+The sequence is only initiated if the studio has changed
+since the last update.
+The dynamic renderer notifies the DROM (through one of the function 
+pointers) that this sequence should be initiated.  
+The DROM calls the dynamic renderer back to execute a traversal of the
+studio group for the view being updated.
+During this traversal the dynamic renderer calls the DROM
+with camera and light attributes as they change, and 
+to indicate when a camera or light should be created 
+with the current state of the attributes. 
+.lp
+The second sequence updates the display.
+The dynamic renderer notifies the DROM
+(through one of the function pointers) that this
+sequence should be initiated.
+The DROM calls the dynamic renderer back to execute at 
+least one traversal of the display group for
+the view being updated.
+During this traversal the dynamic renderer
+calls the DROM with new attribute values and 
+with geometry to be processed and displayed.
+The DROM generates the output directly,
+but may use functions of the DCM to handle
+double buffering and inquire the current state of the device,
+like the current window clipping list.
+.lp
+The following paragraphs describe how the functions of the
+DROM are used in the dynamic rendering process.
+.\" .sp 2.75i
+.\"./PS/DROMflow.ps" 2.75i -1.0
+.\" \f3Figure 9-1. Dynamic Renderer Output Control Flow\fP
+.H2 "Dynamic Renderer Output Module Initialization"
+During system initialization, several calls are made by the
+dynamic renderer to initialize the DROM.
+This initialization occurs in a sequence of three stages.
+First the dynamic renderer calls:
+.rs
+.sp -.25v
+.(m
+void drom.pre_initialization ()
+.)m
+.rs
+.sp -.25v
+Next, the dynamic renderer calls every attribute routine of the form
+\f2drom.set_att_*\fP to set the initial values of each attribute.
+These values are the default values of the attributes.
+Because of the attribute stacking mechanism,
+the values of all attributes after a traversal has completed
+are the same as before the traversal started, so default values need to
+be set only once.
+The last stage of the initialization is a call to:
+.rs
+.sp -.25v
+.(m
+void drom.post_initialization ()
+.)m
+.rs
+.sp -.25v
+This indicates the end of the initialization phase.
+.H2 "Studio and Display Group Rendering
+.rs
+.sp -.25v
+Different graphics hardware devices create their 
+output in many different ways.
+Even the number of traversals over the graphical database
+required to render a given view may vary from device to device.
+Because of this, it is necessary to share control of the rendering
+process between the dynamic renderer and the DROM of the device.
+.rs
+.sp -.25v
+.lp
+The dynamic renderer notifies the DROM
+of the general stages that need to be performed, and provides the
+functions to traverse the graphical database for the studio and display
+groups of the view.
+This allows the DROM the flexibility to
+use multiple passes when necessary and to 
+establish state before each pass. 
+.rs
+.sp -.25v
+.lp
+The dynamic renderer associates device driver specific data pointers
+with each device object, each view object, and each view as mapped to
+a specific device (also called a \f2window\fP). The data is
+only visible to the DROM. The dynamic renderer
+just keeps track of the pointers and passes the pointers to the
+DROM at the beginning of each update cycle.
+These pointers are pointers to the DROM's private data that the DROM uses
+to cache data associated with a device, view, or window.
+Each time a new device, view, or window is created,
+the dynamic renderer calls functions in the DROM and 
+requests that it allocate space for
+its own local data and return a pointer to this data space.
+The size of the data area and its contents is strictly
+the domain of the DROM.
+The calling sequence for these functions is:
+.rs
+.sp -.25v
+.(m
+DtPtr drom.create_local_device_data(DtObject device)
+DtPtr drom.create_local_view_data(DtObject view)
+DtPtr drom.create_local_window_data(DtObject device,
+				    DtObject view)
+.)m
+.rs
+.sp -.25v
+When a device or view is deleted, the DROM will be asked to
+delete the local data through the functions:
+.rs
+.sp -.25v
+.(m
+void drom.delete_local_device_data(DtPtr data)
+void drom.delete_local_view_data(DtPtr data)
+void drom.delete_local_window_data(DtPtr data)
+.)m
+.rs
+.sp -.25v
+Each time a view is updated, the dynamic renderer goes through
+the following four step sequence:
+.ip (1)
+Notifies the DROM of the device and view to be
+updated and passes the handles to the local data for the device,
+view, and view/device pair (window) through the routine:
+.in -5
+.(m
+     void drom.start_update (DtDevice device, 
+			DtView view, 
+			DtPtr device_data, 
+			DtPtr view_data,
+			DtPtr window_data)
+.)m
+.ip (2)
+Determines if the local data for the device, view, and window are
+out of date, and if so notifies the DROM that it needs
+to update its local data.
+This is done through the function:
+.in -5
+.(m
+     void drom.update_local_data ()
+.)m
+.ip (3)
+Determines whether the studio group needs to be updated based on
+the type of update requested and the current state of the dynamic
+renderer.
+If the studio group needs updating, it calls the DROM routine
+responsible for setting up the state of the cameras and
+lights for the view:
+.in -5
+.(m
+     void drom.update_studio (DtPFI traverse_studio)
+.)m
+.ip
+The parameter \f2traverse_studio\fP is a pointer to a routine provided 
+by the dynamic renderer to traverse the studio group for 
+the view specified in \f2drom.start_update\fP.
+This routine is executed through:
+.in -5
+.(m
+     (*traverse_studio)()
+.)m
+.ip
+As the objects of the studio group are executed they provide information
+about the environment to the DROM with the calls
+described in the following paragraphs.
+.ip (4)
+Finally the dynamic renderer tells the DROM
+that the display group needs to be rendered.
+This is done by a call to the function responsible for the actual
+generation of the image:
+.in -5
+.(m
+     void drom.update_display (DtPFI traverse_display)
+.)m
+.ip
+The parameter \f2traverse_display\fP is a pointer to a routine provided
+by the dynamic renderer to traverse the display group of a 
+view specified in \f2drom.start_update\fP. 
+This way the DROM can execute multiple passes through the display
+database, if necessary, to produce the final image.
+As the display group objects are executed during the traversal,
+the DROM is notified (through function calls) of attribute changes 
+and geometry to be rendered.
+These functions are described in the following paragraphs.
+.H2 "Studio Attributes"
+The studio attributes affect the
+environment in which the rendering takes place.
+They tell the position and attributes of the camera,
+and the number of lights and their attributes.
+.lp
+During the traversal of the studio group the DROM is notified 
+by one of the following routines of the 
+type of camera projection matrix 
+to use for image generation. 
+The last projection specified before a call to
+\f2drom.camera\fP is the one used by that camera.
+.(m
+void drom.set_camera_matrix (DtMatrix4x4 matrix)
+void drom.set_parallel_matrix (DtReal size,
+			DtReal hither, 
+	       		DtReal yon)
+void drom.set_perspective_matrix (DtReal fov,
+			DtReal hither,
+			DtReal yon)
+void drom.set_projection_matrix (DtArea *window,
+			DtProjectionType ptype,
+			DtPoint3 prp,
+			DtReal view_plane,
+			DtReal hither,
+			DtReal yon)
+.)m
+In addition to the type of camera projection, there are attributes
+that specify if the view will be a stereo view,
+and if it is, what
+the eye separation and convergence distance are.
+Calls to change the light
+attributes will also be made during the studio traversal.
+.(m
+void drom.set_att_stereoswi (DtFlag switchvalue)
+void drom.set_att_stereo (DtReal eyeseparation,
+        		  DtReal distance)
+void drom.set_att_lgtclr (DtColorModel colormodel,
+      			  DtReal color[])
+void drom.set_att_lgtint (DtReal intensity)
+void drom.set_att_lgttyp (DtObject type)
+void drom.set_att_lgtspdexp (DtReal exponent)
+void drom.set_att_lgtspdang (DtReal total, DtReal delta)
+void drom.set_att_lgtatn (DtReal c1, DtReal c2)
+.)m
+Each time a camera or light is executed during studio group 
+traversal the DROM is notified through the calls:
+.(m
+void drom.camera ()
+void drom.light (DtObject light)
+.)m
+.lp
+These routines are responsible for storing the current light and camera
+attributes for use during the rendering phase.
+Only one camera needs to be maintained, but
+multiple lights will typically be defined in a scene.
+It is important to store the handle to all the light objects, 
+because lights can be enabled and disabled at any time through
+\f2drom.set_att_lgtswi\fP.
+.H2 "Appearance Attributes"
+The appearance attributes affect how primitive objects look.
+As attribute values change during traversal of the display group,
+the DROM is notified of the new values through function calls.
+The attributes are used to control what
+happens when geometric data is passed to the DROM.
+It is strictly up to the implementation of the DROM
+to define what happens in these routines, but typically the 
+attribute values are stored in an internal data
+structure, and other values may be derived from them.
+Eventually, this information will be used for rendering 
+when the geometric data is passed to the DROM.
+The following routines may be called during the
+display group traversal as the attribute values change:
+.(m
+void drom.set_att_ambint (DtReal intensity)
+void drom.set_att_ambswi (DtSwitch switchvalue)
+void drom.set_att_bacfacculble (DtSwitch switchvalue)
+void drom.set_att_bacfacculswi (DtSwitch switchvalue)
+void drom.set_att_depcue (DtReal zfront, 
+			  DtReal zback, 
+			  DtReal sfront, 
+			  DtReal sback, 
+			  DtColorModel colormodel, 
+			  DtReal *color)
+void drom.set_att_depcueswi (DtSwitch switchvalue)
+void drom.set_att_difclr (DtColorModel colormodel,
+			  DtReal color[])
+void drom.set_att_difint (DtReal intensity)
+void drom.set_att_difswi (DtSwitch switchvalue)
+void drom.set_att_hidsrfswi (DtSwitch switchvalue)
+void drom.set_att_inttyp (DtInterpType interptype)
+void drom.set_att_lgtswi (DtInt count, DtObject *lights)
+void drom.set_att_lintyp (DtLineType type)
+void drom.set_att_linwid (DtReal width)
+void drom.set_att_localaaswi (DtSwitch switchvalue)
+void drom.set_att_localaasty (DtLocalAntiAliasStyle style)
+void drom.set_att_mapbmpswi (DtSwitch switchvalue)
+
+
+void drom.set_att_mapbmp (DtInt count, 
+			  DtObject mapping[],
+			  DtObject raster[], 
+			  dot_stdtexatt attributes[])
+void drom.set_att_mapdifclrswi (DtSwitch switchvalue)
+void drom.set_att_mapdifclr (DtInt count, 
+			  DtObject mapping[],
+			  DtObject raster[], 
+			  dot_stdtexatt attributes[])
+void drom.set_att_mapenvswi (DtSwitch switchvalue)
+void drom.set_att_mapenv (DtInt count, 
+		          DtObject mapping[],
+			  DtObject raster[], 
+			  dot_stdtexatt attributes[])
+void drom.set_att_maptrnintswi (DtSwitch switchvalue)
+void drom.set_att_maptrnint (DtInt count, 
+			  DtObject mapping[],
+			  DtObject raster[], 
+			  dot_stdtexatt attributes[])
+void drom.set_att_refswi (DtSwitch switchvalue)
+void drom.set_att_reptyp (DtRepType reptype)
+void drom.set_att_shaswi (DtSwitch switchvalue)
+void drom.set_att_shdidx (DtInt shadeindex)
+void drom.set_att_spcclr (DtColorModel colormodel,
+                          DtReal color[])
+void drom.set_att_spcfct (DtReal factor)
+void drom.set_att_spcint (DtReal intensity)
+void drom.set_att_spcswi (DtSwitch switchvalue)
+void drom.set_att_srfedgclr (DtColorModel colormodel,
+                          DtReal color[])
+void drom.set_att_srfshd (DtObject callbackobj)
+void drom.set_att_transpclr ((DtColorModel colormodel,
+                          DtReal color[])
+void drom.set_att_transpint (DtReal intensity)
+void drom.set_att_transpswi (DtSwitch switchvalue)
+.)m
+.H2 "Transformation Attributes"
+Geometric transformation attributes affect the shape and positioning
+of primitive and studio objects in 3D space.
+When the transformation objects are executed during traversal
+of the studio and display groups the current transformation
+matrix (CTM) is modified.
+This current transformation matrix represents the 
+transformation from local modeling space to world space.
+The DROM is called with the parameters that cause the geometric
+transform matrices to be applied to the CTM.
+The CTM is later preconcatenated to the composite viewing 
+transformation matrix, which then represents the transformation from
+local modeling space to frustum space.
+When the CTM itself is modified it does not affect
+the viewing transformation.
+Chapter 7 of the \f2\*(Dd Reference Manual\fP 
+discusses the matrix formulations used by \*(Dd.
+.lp
+The following routines modify the CTM.
+.(m
+void drom.update_lcstowcsmat_lokatfrm (DtPoint3 at,
+			DtPoint3 from, 
+			DtVector3 up
+			DtCompType concat)
+void drom.update_lcstowcsmat_transl (DtReal tx, 
+			DtReal ty, 
+			DtReal tz,
+			DtCompType concat)
+void drom.update_lcstowcsmat_rotate (DtAxis axis,
+			DtReal angle,
+			DtCompType concat)
+void drom.update_lcstowcsmat_scale (DtReal sx, 
+			DtReal sy, 
+			DtReal sz,
+			DtCompType concat)
+void drom.update_lcstowcsmat_shear (DtMajorPlane plane,
+			DtReal first_direction_value,
+			DtReal second_direction_value,
+			DtCompType concat)
+void drom.update_lcstowcsmat_tfmmat (DtMatrix4x4 matrix,
+			DtCompType comptype)
+.)m
+In addition to these CTM modification routines, there are two
+functions that save and restore the state of the CTM by pushing and
+popping the stack.
+.(m
+void drom.update_lcstowcsmat_push ()
+void drom.update_lcstowcsmat_pop ()
+.)m
+.lp
+This interface allows a \*(Dd device driver to use a 
+hardware matrix stack if it is available.
+For machines that do not have a hardware
+matrix stack, the matrix manipulation and stack must be implemented 
+in software.
+.H2 "Modeling Clip Volumes"
+Modeling clip volumes allow part of the geometry of a scene to be clipped
+away to show internal structures of the geometry.
+A modeling clip volume is composed of a set of sectioning planes or
+half spaces.
+Each half space is defined by a point in modeling coordinates
+and by a vector normal to the plane defining the
+boundary of the half space, pointing in the direction of the
+acceptance region.
+During both the studio and display group traversals, the current
+modeling clip volume is modified as new half spaces are applied to it.
+The routine
+.(m
+void drom.set_att_clpvol (DtClipOperator operator,
+			  DtInt halfspacecount,
+			  DtHalfSpace *halfspaces)
+.)m
+is called during system initialization to establish the default
+value of the modeling clip volume.
+During traversals, the state of
+the modeling clip volume is saved and restored with the functions:
+.(m
+void drom.push_att_clpvol()
+void drom.pop_att_clpvol()
+.)m
+The routine 
+.(m
+void drom.apply_att_clpvol(DtClipOperator operator,
+			   DtInt halfspacecount,
+			   DtHalfSpace *halfspaces)
+.)m
+modifies the modeling clip volume by applying the new half spaces,
+based on the operator, to the existing model clip volume.
+It is important to note that the half spaces passed to the DROM
+are designated in local modeling coordinates.
+So it is necessary to record in some manner the value of the 
+CTM (see above) at the time the new half spaces are added to the
+clipping volume.
+.lp
+The routine
+.(m
+void drom.set_att_clpswi(DtSwitch switchvalue)
+.)m
+controls whether the modeling clip volume is applied to the
+geometric primitives.
+Only when \f2switchvalue\fP is \f2DcTrue\fP is model clipping enabled.
+.H2 "Geometry"
+The geometric primitive objects are executed during display group
+traversal.
+The DROM is required to support five types of geometry:
+.(l
+point lists 
+line lists 
+connected line lists 
+triangle lists 
+triangle meshes
+.lp
+The dynamic rendering methods for all other types of primitives
+will decompose the object into one of these five types.
+This geometry is then passed to the DROM through a
+set of functions, one for each type of geometry.
+.(m
+void drom.render_point_list (DtColorModel colormodel,
+			DtRealTriple bndboxpts[8],
+			DtInt pointcount, 
+			DtRealTriple *vtxlocs, 
+			DtRealTriple *vtxnrms,
+			DtRealTriple *vtxclrs,
+			DtInt uv_count,
+			DtRealCouple **uv_list,
+			DtInt uvw_count,
+			DtRealTriple **uvw_list)
+void drom.render_line_list (DtColorModel colormodel,
+			DtRealTriple bndboxpts[8],
+		        DtInt linecount, 
+		        DtRealTriple *elenrms, 
+		        DtRealTriple *vtxlocs, 
+		        DtRealTriple *vtxnrms,
+		        DtRealTriple *vtxclrs,
+			DtInt uv_count,
+			DtRealCouple **uv_list,
+			DtInt uvw_count,
+			DtRealTriple **uvw_list)
+void drom.render_connected_line_list (
+			DtColorModel colormodel,
+			DtRealTriple bndboxpts[8],
+			DtInt vertexcount, 
+			DtRealTriple *elenrms, 
+			DtRealTriple *vtxlocs,
+			DtRealTriple *vtxnrms,
+			DtRealTriple *vtxclrs,
+			DtInt uv_count,
+			DtRealCouple **uv_list,
+			DtInt uvw_count,
+			DtRealTriple **uvw_list)
+void drom.render_triangle_list (DtColorModel colormodel,
+			DtRealTriple bndboxpts[8],
+			DtInt trianglecount, 
+			DtRealTriple *elenrms, 
+			DtRealTriple *vtxlocs, 
+			DtRealTriple *vtxnrms,
+			DtRealTriple *vtxclrs,
+			DtInt uv_count,
+			DtRealCouple **uv_list,
+			DtInt uvw_count,
+			DtRealTriple **uvw_list)
+void drom.render_triangle_mesh (DtColorModel colormodel,
+			DtRealTriple bndboxpts[8],
+			DtInt trianglecount, 
+			DtRealTriple *elenrms, 
+			DtInt vertexcount, 
+			DtRealTriple *vtxlocs, 
+			DtRealTriple *vtxnrms,
+			DtRealTriple *vtxclrs,
+			DtInt vertexlist[][3],
+			DtInt compiledvertexlist[][3],
+			DtInt uv_count,
+			DtRealCouple **uv_list,
+			DtInt uvw_count,
+			DtRealTriple **uvw_list)
+.)m
+These routines are responsible for drawing the objects.
+They take the geometric data of an object (in the local coordinate 
+system of the object) and transform it, through
+the control of the attributes, into a set of commands to draw the
+object on the output device.
+This typically involves transforming the vertex locations to 
+screen space, clipping to the view frustum, 
+clipping to a modeling volume, shading the elements, performing
+hidden surface/hidden line removal (usually through depth buffering),
+and generating output commands.
+Depending on the particular device, many of these
+steps may be performed by hardware.
+.H2 "Miscellaneous Dynamic Renderer Support Routines"
+The following routines must be provided by the DROM
+to support the dynamic renderer in dealing with several
+different types of objects. 
+.lp
+The following three routines are used by objects that require screen
+coordinate scaling, such as annotation text and polymarkers.
+.(m
+DtFlag drom.transform_clip_z_point (DtRealTriple point, 
+			            DtMatrix4x4 tfmmatrix)
+.)m
+clips the point in \f2z\f1 based on the current local-to-frustum space
+transformation  matrix and then returns \f2DcTrue\fP if it was clipped.
+It also returns a transformation matrix, which 
+represents a translation for the transformed point, followed
+by a scale for the device.
+.(m
+void drom.push_lcstofcsmat(DtMatrix4x4 newmatrix)
+.)m
+.lp
+saves the current local-to-frustum space transformation
+matrix and replaces it with the supplied one.
+.(m
+void drom.pop_lcstofcsmat ()
+.)m
+.lp
+restores the previous local-to-frustum space transformation matrix.
+.lp
+The following routines are used in computing bounding volumes and for
+model clipping:
+.(m
+void drom.get_wcstofcsmat (DtMatrix4x4 wcstofcsmat)
+void drom.get_lcstowcsmat (DtMatrix4x4 lcstowcsmat)
+.)m
+.rs
+.sp -1v
+.H1 "Adding Methods to the Dynamic Renderer
+The fourth device driver interface is quite different from the three
+you have seen so far.
+This last device interface allows the DROM to function more like a
+renderer, and in fact the output module can replace some of the renderer's
+method routines.
+With this interface, the DROM provides a method routine for each class
+of interest.
+When the dynamic renderer is using this device driver, it will use
+the method routine provided by the DROM
+for a class rather than the renderer's own
+method routine.
+.lp
+You saw in the discussion of geometry for the DROM that five primitive
+types comprise the complete set of geometries that the dynamic renderer uses.
+All other geometries are converted by the dynamic renderer into one of
+these five primitive types.
+.lp
+Some advanced hardware devices can draw other types of primitives
+than just these five. 
+For example, a device may be able to draw spheres directly, eliminating
+any tessellation artifacts.
+There may also be significant performance implications if advanced
+primitive types are decomposed into triangles rather than being
+rendered directly by the hardware.
+The DROM methods interface allows you to access the
+data of these higher level primitives, but there is a cost.
+When the device driver chooses to use this interface, it takes
+on additional complexity and responsibility usually taken care of by
+the renderer.
+In fact, the DROM methods interface provides the same flexibility to
+the device driver that \*(Dd provides to a renderer.
+.lp
+Through the DROM methods interface, the device driver specifies a list
+of object classes and corresponding method routines.
+Those routines will be used, instead of the standard method routines,
+when executing objects of the specified classes. 
+The list is a null-terminated array of type \f2DDt_DROMMethod\fP.
+The \f2DDt_DROMMethod\fP structure is defined as:
+.(m
+typedef struct {
+   DtPtr name;
+   DtPFI routine;
+} DDt_DROMMethod;
+.)m
+where \f2name\fP is the string name of an object class and
+\f2routine\fP is a pointer to a function that implements the dynamic
+rendering method for the class for this device driver.
+The dynamic renderer will execute this method routine rather than its
+standard rendering method routine for each of the specified classes.
+The burden is now completely on these routines to take the data stored
+in the object and render it.
+.lp
+The declaration of the function \f2routine\fP is:
+.(m
+void routine (DtObjectStructure *object)
+.)m
+The object structure is defined in \f2dore.h\fP as:
+.(m
+typedef struct object {
+        DtShort info ;
+        DtShort ref_count ;
+        DtPtr   data ;         
+        DtPtr  *additional_data ;
+} DtObjectStructure;      
+.)m
+The private data of an object is contained in the \f2data\fP field of
+the object structure.
+The data structures defining the private data of the primitive objects
+are found in \f2dore_develop/private\fP.
+.lp
+As an example, suppose you wanted to replace the dynamic rendering
+method for \f2DoPatch\fP with the function \f2my_patch_render\fP.
+First, you would write the function \f2my_patch_render\fP.
+A method routine should always check the renderability of the
+object class with \f2DDcondex_QueryRender\fP before drawing an object.
+Typically, the beginning of this routine would look like this:
+.(m
+#include "dore.h"
+#include "dore_develop/develop.h"
+#include "dore_develop/private/patch.h"
+
+void
+my_patch_render (object)
+DtObjectStructure *object;
+{
+
+
+
+    static DtInt class_id = -1;
+    struct patch *patch;
+    DtObject alt_obj;
+    static DtPFI altobj_query = (DtPFI)0;
+
+    if (class_id == -1) {
+	class_id = DsInqClassId("DoPatch");
+    }
+
+    if (!DDcondex_QueryRender(class_id)) return;
+
+    patch = (struct patch *)object->data;
+
+    /* render patch directly */
+	.
+	.
+}
+.)m
+This routine will be referenced in the array of \f2DDt_DROMMethod\fP.
+This array is initialized like this:
+.(m
+DDt_DROMMethod my_DROM_methods[] = {
+    "DoPatch",	(DtPFI) my_patch_render,
+    0,			0
+};
+.)m
+It is very important that the array of methods be terminated by a
+\f2name\fP and \f2routine\fP that are zero.
+This is how the renderer knows where the end of the list is.
+.lp
+The device driver is free to replace any primitive class rendering
+method using this interface.
+Within the routine, the device driver is free to use any of the \*(Dd
+facilities available through the application and developer's interfaces.
+For example, the device driver may want to render the primitive
+directly in some cases and use the alternate representation in others.
+.lp
+Let's continue with the previous example, and suppose that the patch
+will be rendered directly only if the representation type is
+\f2DcSurface\fP; otherwise, the alternate representation will be rendered.
+The routine \f2my_patch_render\f1 might continue like this:
+.(m
+    if (reptype != DcSurface) {
+        if (altobj_query == (DtPFI)0) {
+            altobj_query = DDobject_InqMethod(object,
+    			DsInqMethodId("UpdStdAlternateObj"));
+        }
+
+        if (altobj_query != (DtPFI)0) {
+            alt_obj = (DtObject) (*altobj_query)(object);
+
+            if (alt_obj != (DtObject)0) {
+    		DDobject_InqCurrentMethod(alt_obj) (alt_obj);
+            }
+        }
+        return;
+    }
+
+    /* render patch directly */
+	    .
+	    .
+.)m
+As you can see, this interface is extremely flexible, giving
+the device driver direct access to the primitives during traversal.
+.lp
+In conjunction with this interface, you may also find it desirable to
+associate object-specific data with every object of a class.
+For example, you may choose to use patches to approximate the torus
+rather than use the standard alternate object.
+In this case, you add data to the torus
+to maintain the list of patches used to approximate it.
+The developer's interface routine \f2DDclass_AddNotify\f1 allows
+you to install a routine that is called whenever a class is initialized.
+For our example, this routine would be responsible for requesting
+additional data to be added to the \f2DoTorus\f1 class.
+See Chapter 6, \f2Interfacing a Renderer\f1, for more information on how
+to request additional data for a class.
+.lp
+The DROM methods interface is used by the dynamic renderer to augment
+the DROM interface provided by a particular device driver.
+At the beginning of an update the dynamic renderer queries the device
+driver for the DROM structure and then queries the device driver for
+any DROM methods.
+If the device driver returns an array of \f2DDt_DROMMethod\fPs, the
+dynamic renderer saves its method routines for the listed classes and
+then installs in its display traversal method the method routines
+provided.
+These method routines will remain installed until the dynamic renderer
+starts an update using a different device driver.
+When a different device driver is used, the dynamic renderer will
+install the method routines that it had previously saved.
+.H1 "Device Driver Installation Routine
+Each \*(Dd device driver must provide one function that is known
+to its users.
+That is, the name and calling sequence of the function 
+are known, so the function can be called to install the device driver.
+All other functions provided by the device driver are accessed 
+through pointers to functions.
+.lp
+Typically, \*(Dd will call the function to install the device driver.
+(If you have access to \*(Dd source code see the function
+\f2dor_doresys_initialize_drivers\fP in the system configuration module.)
+It is also possible for an application user of the \*(Dd library 
+to install the device driver directly, after \f2DsInitialize\fP has been called.
+.lp
+Typically the installation function has the form:
+.rs
+.sp -.25v
+.(m
+void ddr_*_install_driver(DtPtr name)
+.)m
+.rs
+.sp -.25v
+where the \f2*\fP is the name of the device driver and \f2name\fP is
+the name that is specified by application programmers in the
+\f2DoDevice\fP call to create this type of device. 
+.lp
+The \*(Dd kernel provides a function that \f2ddr_*_install_driver\fP
+invokes to inform \*(Dd of the new device driver.
+This function is:
+.rs
+.sp -.25v
+.(m
+void DDdevice_InstallDriver(DtPtr name, 
+		       DtPtr description,
+		       DtPFI return_interf_functions)
+.)m
+.rs
+.sp -.25v
+This routine installs a new device driver and gives it the
+name \f2name\fP, which is a string.
+\f2description\fP is a string containing a short description of the
+device driver.
+The function \f2return_interf_functions\fP is a routine provided by the 
+device driver and has the form:
+.rs
+.sp -.25v
+.(m
+void return_interf_functions (DtInt type, DtPtr *functions)
+.)m
+.rs
+.sp -.25v
+\*(Dd uses this routine to get the structures containing
+the function pointers for the various device driver modules.
+The input parameter \f2type\fP specifies a particular type of device
+driver module interface.
+The return parameter \f2functions\fP is a pointer
+to an interface structure that contains pointers 
+to the functions that implement that type of device driver module.
+It is the responsibility of the \f2return_interf_functions\fP
+function to fill in the requested type of data
+structure and return a pointer to it.
+.lp
+The function \f2return_interf_functions\fP is called more than once, with
+different \f2type\fP parameter values. It is first called by
+\f2DDdevice_InstallDriver\fP with the \f2type\fP parameter set to
+\f2DDc_DCM\fP to query the DCM structure. If the
+standard production renderer is used to update a view, it calls
+\f2return_interf_functions\fP with the \f2type\fP
+parameter set to \f2DDc_PROM\fP to query the PROM structure. If
+the dynamic renderer is used to update a view, it calls the function
+twice: one time with \f2type\fP set to \f2DDc_DROM\fP to query
+the DROM structure, and one time with
+\f2type\fP set to \f2DDc_DROMMethods\fP to allow
+the driver to replace some of the method routines of the renderer.
+.lp
+As previously described in this chapter, the
+\*(Dd kernel provides template interface structures containing pointers
+to null routines for the DCM, PROM, and DROM.
+The device driver gets a copy of these templates by calling:
+.rs
+.sp -.25v
+.(m
+DDt_DCM_fcns  *DDdevice_CreateDCMStruct()
+DDt_PROM_fcns *DDdevice_CreatePROMStruct()
+DDt_DROM_fcns *DDdevice_CreateDROMStruct()
+.)m
+.rs
+.sp -.25v
+The driver then fills in the structure with actual routine pointers.
+In addition to the fields for the function pointers, each of these 
+structures contains a version number.
+This allows \*(Dd to expand these modules and still know which
+functions are provided by a particular device driver by examining the
+version number.

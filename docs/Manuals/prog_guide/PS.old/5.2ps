@@ -1,0 +1,614 @@
+!md begin
+!/note {} def
+!/legal {} def
+!md /lnop known not { /lnop [ {} ] cvx def } if
+!/bigs [lnop lnop lnop lnop lnop lnop lnop lnop] def
+!/smalls [lnop lnop lnop lnop lnop lnop lnop lnop] def
+!/cp {pm restore pop pop} def
+!
+!T T -52 -50 1268 970 60 72 72 1 F F F F T T psu
+!(TechPubs#1; document: 5-2AltRtHandRule)jn
+!0 mf
+!od
+!op
+!0 0 xl
+!0 72 mul -1.0 72 mul translate
+!1 1 scale
+!1 1 pen
+!0 0 gm
+!(nc 0 0 1216 920 6 rc)kp
+!0 0 pen
+!0 0 lin
+!nc ct 39 0 put
+!6 6 pen
+!240 168 gm
+!pt
+!156 168 pl
+!rh
+!ef
+!eu
+!(nc 0 0 1216 920 6 rc)kp
+!0 0 pen
+!156 168 lin
+!156 168 lin
+!nc ct 39 0 put
+!1 1 pen
+!219 74 gm
+!qf
+!pt
+!75 128 pl
+!75 272 pl
+!219 218 pl
+!219 74 pl
+!ef
+!eu
+!(nc 0 0 1216 920 6 rc)kp
+!0 0 pen
+!219 74 lin
+!219 74 lin
+!nc ct 39 0 put
+!1 1 pen
+!216 72 gm
+!64 gr
+!qf
+!pt
+!72 126 pl
+!72 270 pl
+!216 216 pl
+!216 72 pl
+!ef
+!0 gr
+!eu
+!(nc 0 0 1216 920 6 rc)kp
+!0 0 pen
+!0 gr
+!216 72 lin
+!216 72 lin
+!nc ct 39 0 put
+!6 6 pen
+!91 171 gm
+!pr
+!91 171 pl
+!118 180 pl
+!118 162 pl
+!91 171 pl
+!1 ep
+!1 1 pen
+!pr
+!91 171 pl
+!118 180 pl
+!118 162 pl
+!91 171 pl
+!0 ep
+!6 6 pen
+!141 168 gm
+!pt
+!109 168 pl
+!rh
+!ef
+!eu
+!(nc 0 0 1216 920 6 rc)kp
+!0 0 pen
+!109 168 lin
+!109 168 lin
+!nc ct 39 0 put
+!1 1 pen
+!152 214 gm
+!pr
+!152 214 pl
+!159 208 pl
+!153 205 pl
+!152 214 pl
+!1 ep
+!pr
+!152 214 pl
+!159 208 pl
+!153 205 pl
+!152 214 pl
+!0 ep
+!177 170 gm
+!pt
+!156 207 pl
+!ef
+!eu
+!(nc 0 0 1216 920 6 rc)kp
+!0 0 pen
+!156 207 lin
+!156 207 lin
+!nc ct 39 0 put
+!1 1 pen
+!116 194 gm
+!pr
+!116 194 pl
+!122 201 pl
+!125 195 pl
+!116 194 pl
+!1 ep
+!pr
+!116 194 pl
+!122 201 pl
+!125 195 pl
+!116 194 pl
+!0 ep
+!151 214 gm
+!pt
+!123 198 pl
+!ef
+!eu
+!(nc 0 0 1216 920 6 rc)kp
+!0 0 pen
+!123 198 lin
+!123 198 lin
+!nc ct 39 0 put
+!1 1 pen
+!107 150 gm
+!pr
+!107 150 pl
+!106 159 pl
+!111 158 pl
+!107 150 pl
+!1 ep
+!pr
+!107 150 pl
+!106 159 pl
+!111 158 pl
+!107 150 pl
+!0 ep
+!116 194 gm
+!pt
+!108 158 pl
+!ef
+!eu
+!(nc 0 0 1216 920 6 rc)kp
+!0 0 pen
+!108 158 lin
+!108 158 lin
+!nc ct 39 0 put
+!1 1 pen
+!149 132 gm
+!pr
+!149 132 pl
+!140 132 pl
+!142 138 pl
+!149 132 pl
+!1 ep
+!pr
+!149 132 pl
+!140 132 pl
+!142 138 pl
+!149 132 pl
+!0 ep
+!107 149 gm
+!pt
+!142 135 pl
+!ef
+!eu
+!(nc 0 0 1216 920 6 rc)kp
+!0 0 pen
+!142 135 lin
+!142 135 lin
+!nc ct 39 0 put
+!1 1 pen
+!177 169 gm
+!pr
+!177 169 pl
+!174 160 pl
+!170 164 pl
+!177 169 pl
+!1 ep
+!pr
+!177 169 pl
+!174 160 pl
+!170 164 pl
+!177 169 pl
+!0 ep
+!149 132 gm
+!pt
+!173 163 pl
+!ef
+!eu
+!(nc 0 0 1216 920 6 rc)kp
+!0 0 pen
+!173 163 lin
+!1 1 pen
+!156 218 gm
+!(nc 145 217 161 228 6 rc)kp
+!bu fc
+!{}mark T /Helvetica /Helvetica 0 rf
+!bn
+!1 setTxMode
+!0 fs
+!14 fz
+!bu fc
+!2 F /Helvetica fnt
+!bn
+!(0)show
+!114 194 gm
+!(nc 103 193 119 203 6 rc)kp
+!0 gr
+!(1)show
+!105 143 gm
+!(nc 94 142 110 152 6 rc)kp
+!(2)show
+!154 123 gm
+!(nc 143 122 159 133 6 rc)kp
+!(3)show
+!190 164 gm
+!(nc 179 163 195 173 6 rc)kp
+!(4)show
+!208 164 gm
+!(nc 0 0 1216 920 6 rc)kp
+!146 168 151 174 4 ov
+!146.5 168.5 150.5 173.5 0 ov
+!0 0 pen
+!208 164 lin
+!nc ct 39 0 put
+!1 1 pen
+!72 270 gm
+!qf
+!pt
+!75 272 pl
+!76 269 pl
+!73 270 pl
+!72 270 pl
+!ef
+!eu
+!(nc 0 0 1216 920 6 rc)kp
+!0 0 pen
+!72 270 lin
+!72 270 lin
+!nc ct 39 0 put
+!1 1 pen
+!216 72 gm
+!qf
+!pt
+!219 72 pl
+!219 73 pl
+!216 76 pl
+!216 72 pl
+!ef
+!eu
+!(nc 0 0 1216 920 6 rc)kp
+!0 0 pen
+!216 72 lin
+!216 72 lin
+!nc ct 39 0 put
+!1 1 pen
+!250 462 gm
+!64 gr
+!qf
+!pt
+!284 498 pl
+!260 508 pl
+!264 528 pl
+!238 526 pl
+!232 558 pl
+!218 544 pl
+!216 568 pl
+!188 530 pl
+!250 464 pl
+!250 462 pl
+!ef
+!0 gr
+!eu
+!(nc 0 0 1216 920 6 rc)kp
+!0 0 pen
+!0 gr
+!250 462 lin
+!250 462 lin
+!nc ct 39 0 put
+!1 1 pen
+!122 330 gm
+!bp
+!111 341 T qi
+!102 357 qc
+!99 368 qc
+!102 387 qc
+!108 401 qc
+!125 417 qc
+!144 425 qc
+!162 423 qc
+!170 414 qc
+!170 396 qc
+!162 382 qc
+!156 368 qc
+!153 365 qc
+!156 358 qc
+!162 353 qc
+!169 350 qc
+!172 352 qc
+!176 354 qc
+!178 357 qc
+!183 362 qc
+!189 367 qc
+!197 380 qc
+!202 394 qc
+!209 415 qc
+!212 431 qc
+!222 450 qc
+!231 459 qc
+!223 482 qc
+!203 504 qc
+!168 504 qc
+!141 482 qc
+!113 458 qc
+!102 447 qc
+!89 428 qc
+!81 414 qc
+!76 394 qc
+!76 380 qc
+!77 362 qc
+!79 349 qc
+!85 335 qc
+!93 327 qc
+!105 318 qc
+!114 312 qc
+!125 309 qc
+!130 312 qc
+!133 316 qc
+!131 319 qc
+!122 330 T qq
+!116 335 gm
+!64 gr
+!qf
+!ef
+!0 gr
+!1 ec
+!0 gr
+!(nc 0 0 1216 920 6 rc)kp
+!0 0 pen
+!100 100 gm
+!0 gr
+!100 100 lin
+!100 100 lin
+!nc ct 39 0 put
+!1 1 pen
+!117 325 gm
+!bp
+!106 336 T qi
+!97 352 qc
+!95 363 qc
+!98 382 qc
+!103 396 qc
+!120 412 qc
+!139 420 qc
+!157 419 qc
+!165 409 qc
+!165 392 qc
+!157 378 qc
+!151 364 qc
+!149 361 qc
+!152 354 qc
+!157 348 qc
+!164 345 qc
+!167 348 qc
+!171 350 qc
+!174 352 qc
+!179 357 qc
+!184 363 qc
+!192 376 qc
+!198 389 qc
+!205 410 qc
+!208 427 qc
+!217 445 qc
+!227 455 qc
+!219 477 qc
+!198 499 qc
+!164 499 qc
+!136 477 qc
+!108 453 qc
+!97 442 qc
+!84 423 qc
+!76 409 qc
+!71 389 qc
+!71 376 qc
+!72 358 qc
+!75 344 qc
+!81 330 qc
+!89 322 qc
+!100 313 qc
+!110 308 qc
+!120 305 qc
+!126 307 qc
+!129 311 qc
+!126 314 qc
+!117 325 T qq
+!111 330 gm
+!64 gr
+!qf
+!ef
+!0 gr
+!1 ec
+!0 gr
+!(nc 0 0 1216 920 6 rc)kp
+!0 0 pen
+!100 100 gm
+!0 gr
+!100 100 lin
+!100 100 lin
+!nc ct 39 0 put
+!1 1 pen
+!112 319 gm
+!bp
+!101 330 T qi
+!92 346 qc
+!89 357 qc
+!92 376 qc
+!98 390 qc
+!115 406 qc
+!134 414 qc
+!152 413 qc
+!160 403 qc
+!160 386 qc
+!152 372 qc
+!146 358 qc
+!143 355 qc
+!146 348 qc
+!152 342 qc
+!159 339 qc
+!162 342 qc
+!166 344 qc
+!168 346 qc
+!173 351 qc
+!179 357 qc
+!187 370 qc
+!192 383 qc
+!199 404 qc
+!202 421 qc
+!212 439 qc
+!221 449 qc
+!213 471 qc
+!193 493 qc
+!158 493 qc
+!131 471 qc
+!103 447 qc
+!92 436 qc
+!79 417 qc
+!71 403 qc
+!66 383 qc
+!66 370 qc
+!67 352 qc
+!69 338 qc
+!75 324 qc
+!83 316 qc
+!95 307 qc
+!104 302 qc
+!115 299 qc
+!120 301 qc
+!123 305 qc
+!121 308 qc
+!112 319 T qq
+!106 324 gm
+!64 gr
+!qf
+!ef
+!0 gr
+!1 ec
+!0 gr
+!(nc 0 0 1216 920 6 rc)kp
+!0 0 pen
+!100 100 gm
+!0 gr
+!100 100 lin
+!100 100 lin
+!nc ct 39 0 put
+!1 1 pen
+!108 312 gm
+!bp
+!97 323 T qi
+!88 339 qc
+!86 350 qc
+!89 369 qc
+!94 383 qc
+!111 399 qc
+!130 407 qc
+!148 405 qc
+!156 396 qc
+!155 380 qc
+!148 366 qc
+!141 353 qc
+!140 348 qc
+!143 340 qc
+!148 335 qc
+!155 332 qc
+!158 334 qc
+!162 336 qc
+!165 339 qc
+!170 344 qc
+!175 349 qc
+!184 361 qc
+!192 372 qc
+!202 391 qc
+!210 405 qc
+!223 431 qc
+!234 451 qc
+!226 483 qc
+!204 507 qc
+!164 503 qc
+!131 473 qc
+!99 444 qc
+!88 433 qc
+!75 413 qc
+!67 397 qc
+!62 376 qc
+!62 362 qc
+!63 344 qc
+!66 331 qc
+!72 317 qc
+!80 309 qc
+!91 300 qc
+!101 294 qc
+!111 291 qc
+!117 294 qc
+!120 298 qc
+!117 301 qc
+!108 312 T qq
+!102 317 gm
+!64 gr
+!qf
+!ef
+!0 gr
+!1 ec
+!0 gr
+!(nc 0 0 1216 920 6 rc)kp
+!0 0 pen
+!100 100 gm
+!0 gr
+!100 100 lin
+!100 100 lin
+!nc ct 39 0 put
+!1 1 pen
+!161 342 gm
+!bp
+!164 345 T qi
+!163 352 qc
+!156 358 qc
+!149 357 qc
+!146 351 qc
+!144 345 qc
+!145 343 qc
+!147 341 qc
+!148 339 qc
+!150 337 qc
+!152 337 qc
+!154 337 qc
+!156 337 qc
+!157 338 qc
+!158 339 qc
+!161 342 T qq
+!162 343 gm
+!64 gr
+!qf
+!ef
+!0 gr
+!1 ec
+!0 gr
+!(nc 0 0 1216 920 6 rc)kp
+!0 0 pen
+!100 100 gm
+!0 gr
+!100 100 lin
+!100 100 lin
+!nc ct 39 0 put
+!1 1 pen
+!234 426 gm
+!64 gr
+!qf
+!pt
+!152 506 pl
+!188 534 pl
+!262 457 pl
+!234 426 pl
+!ef
+!0 gr
+!eu
+!(nc 0 0 1216 920 6 rc)kp
+!0 0 pen
+!0 gr
+!234 426 lin
+!1 1 pen
+!232 446 247 461 4 ov
+!232.5 446.5 246.5 460.5 0 ov
+!F T cp
+!cd
+!end

@@ -1,0 +1,63 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DvInqDefinitionGroup 3D  "Dore"
+.SH NAME
+DvInqDefinitionGroup \- Return the definition group for a view
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+DtObject DvInqDefinitionGroup(view)
+DtObject view;
+.sp
+.in -.5i
+FORTRAN:
+.in +.5i
+INTEGER*4 DVQDG(VIEW)
+INTEGER*4 VIEW
+.fi
+.SH DESCRIPTION
+.IX DVQDG
+.IX DvInqDefinitionGroup
+.I DvInqDefinitionGroup
+returns the handle for a definition group of the view specified by the
+parameter \f2view\fP.
+The definition group is the part of every view that contains the objects that
+define the studio objects.
+During the definition group traversal of a view update,
+all objects in the definition group are executed
+sequentially.
+Users may edit the definition group to
+arrange objects in the desired order of execution.
+The objects in a view's definition group may be any of the studio objects,
+studio attribute objects, or other groups of the same.
+Objects that are not studio object types are ignored during
+definition traversal.
+.SH ERRORS
+.I DvInqDefinitionGroup
+will fail if the view handle is invalid; the returned value is
+\f2DcNullObject\fP <\f2DCNULL\fP>.
+.TP 15
+[WARNING - invalid view handle]
+.SH "SEE ALSO"
+.na
+.nh
+DfInqViewGroup(3D), DoView(3D), DvInqDisplayGroup(3D),
+DvSetActiveCamera(3D), DvUpdate(3D)
+.ad
+.hy

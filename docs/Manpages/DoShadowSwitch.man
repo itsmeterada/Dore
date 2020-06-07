@@ -1,0 +1,50 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DoShadowSwitch 3D  "Dore"
+.SH NAME
+DoShadowSwitch \- Create a primitive attribute object for enabling or disabling shadows
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+DtObject DoShadowSwitch(switchvalue)
+DtSwitch switchvalue;
+.sp
+.in -.5i
+FORTRAN:
+.in +.5i
+INTEGER*4 DOSHAS(SWVAL)
+INTEGER*4 SWVAL
+.in -.5i
+.fi
+.SH DESCRIPTION
+.IX DOSHAS
+.IX DoShadowSwitch
+.I DoShadowSwitch
+creates a shadow primitive attribute object.  The \f2switchvalue\fP
+parameter specifies whether subsequent primitive objects will
+render themselves with shadows.  Possible values are:
+.IP "\f2DcOff\fP <\f2DCOFF\fP>"
+A primitive object will render itself without shadows regardless of the
+settings of the lights.
+.IP "\f2DcOn\fP <\f2DCON\fP>"
+A primitive object will render itself with any shadows 
+cast on it whenever possible.
+.SH DEFAULTS
+The default value for \f2DoShadowSwitch\fP is \f2DcOff\fP <\f2DCOFF\fP>.
+

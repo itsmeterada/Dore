@@ -1,0 +1,387 @@
+.\"#ident "%W%" %G%
+.\"
+.\" #
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  
+.\" # 
+.\" # KUBOTA GRAPHICS Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\" #
+.\"
+.sc
+.ds BT "\\*(Dd Developer's Guide
+.ds CT "Classes and Methods
+.ds h1 3
+.so ../macros/local.me
+.PN 15
+.L1 C LASSES
+.L2 " " "AND"
+.L3 M ETHODS
+.CH \\*(h1
+.rs
+.sp -1v
+This chapter provides information about \*(Dd classes and methods,
+including information on the stacking mechanism used for
+keeping track of current attribute values.
+You should be familiar
+with the terms and concepts presented in this chapter
+before reading more about renderers and device drivers.
+.rs
+.sp -.5v
+.H1 "Classes and Objects"
+Objects are the basic building blocks of the \*(Dd library.
+Everything in a \*(Dd scene is an object, including
+cameras, lights, primitives, and all attributes.
+An \f2object\fP is a collection of data, along with a set of functions
+that operate on the data.
+A \f2class\fP is an object type; 
+an object is an instance of a class.
+Two objects created by calling the same function 
+are two instances of the same class.
+Different classes have different data structures for
+private object data and different
+initialization sequences. 
+The action to be taken when a method is executed on an object
+is specified by its class. 
+.rs
+.sp -.5v
+.H1 "Global Attribute Classes
+\*(Dd includes several classes that are not visible to the application
+programmer.
+These classes are the \f2global attribute classes\fP.
+They implement the stacking mechanism used by the \*(Dd system
+to keep track of the current values of attributes.
+.lp
+For each \*(Dd attribute class there is a corresponding
+global attribute class.
+At initialization time \*(Dd creates a single instance of
+every global attribute class. 
+These objects are often referred to as the global
+attribute stacks.
+Only one stack is created for each type of attribute because,
+although the application may create many attribute objects of
+a particular class, only one stack is used to keep track of the 
+current value of that type of attribute.
+In some cases, several \*(Dd attributes share a single global attribute.
+For example, the geometric transformation attributes all affect
+the global attribute that keeps track of the current transformation
+matrix.
+Similarly the camera projection attributes affect a single
+global attribute.
+.rs
+.sp -.25v
+.lp
+Conceptually the stacking mechanism works as follows. 
+When a group is entered, a copy of the current value
+of all attributes are pushed onto the top of their global attribute stacks.
+When an attribute object is executed within the group, the top
+of the corresponding stack is modified to reflect the new value.
+At the end of the group, the value will be popped off their
+stacks, leaving the top of the stacks the same as they were before the
+group was entered. 
+The top of a stack always reflects the current value of the
+attribute.
+The global attribute stacks are in fact more efficient than this 
+conceptual model indicates:
+attributes are not pushed and popped at group boundaries
+unless they are actually used within the group.
+.rs
+.sp -.25v
+.lp
+\*(Dd provides a method for querying the global attribute stacks
+for the current attribute values during a 
+traversal (see the section below on \*(Dd standard methods).
+For example, to know what color to draw an object, a renderer
+would query the global attribute stack that corresponds
+to the diffuse color attribute.
+.rs
+.sp -.25v
+.H1 "Class Names and Identifiers"
+Every class is uniquely identified by an integer number
+and a string name.
+.rs
+.sp -.25v
+.lp
+By convention, the \f2string name\fP of a \*(Dd class is the name
+of the C application function used to create an object of that class.
+For instance, "DoRepType" is the name of the primitive
+attribute class
+corresponding to objects created with a function call of the form
+\f2DoRepType(type)\f1 or \f2DOREPT(TYPE)\fP.
+The same convention is recommended for naming user-defined primitive 
+classes.
+.rs
+.sp -.25v
+.lp
+Modules within the \*(Dd system must know the names of the global
+attribute classes to be able to access the current attribute values.
+Since the global attribute classes don't have corresponding
+application functions, they use a different naming convention.
+The string name of a global attribute class
+can be found by substituting the substring "Att" 
+for the substring 
+"Do" in the name of the corresponding attribute class.
+For instance, the name of the global attribute class for 
+representation type is "AttRepType".
+In some cases several attributes share a global attribute,
+and the following names are used:
+.lp
+\f3"AttLcstowcsmat"\fP
+.rs
+.sp -1v
+.ip
+is the composite transformation matrix from
+local to world coordinates. 
+There are no individual
+global attributes corresponding to the geometric transformation attributes
+\f2DoRotate, DoScale, DoTranslate, DoShear, DoLookAtFrom,\fP
+\f2DoTransformMatrix\f1, \f2DoPushMatrix\fP, and \f2DoPopMatrix\fP.
+.lp
+\f3"AttCameraMatrix"\fP
+.rs
+.sp -1v
+.ip
+maintains the value of the camera projection matrix.
+There are no individual global attributes corresponding to
+the camera projection attributes 
+\f2DoParallel, DoPerspective, DoProjection\fP
+and \f2DoCameraMatrix\f1.
+.lp
+\f3"AttTextureMatrixUV"\fP
+.rs
+.sp -1v
+.ip
+is shared by all attributes that transform
+\f2uv\fP texture coordinates, i.e. \f2DoTextureMatrixUV\fP,
+\f2DoTextureScaleUV\fP, and \f2DoTextureTranslateUV\fP.
+.lp
+\f3"AttTextureMatrixUVW"\fP
+.rs
+.sp -1v
+.ip
+is shared by all attributes that transform
+\f2uvw\fP texture coordinates, i.e. \f2DoTextureMatrixUVW\fP,
+\f2DoTextureScaleUVW\fP, and \f2DoTextureTranslateUVW\fP.
+.lp
+The \f2integer identifier\fP of a class is 
+assigned by \*(Dd when the class
+is initialized in the \*(Dd system.
+Classes that are needed by every \*(Dd application, such as 
+devices, frames, views and groups, are initialized when the \*(Dd
+system is initialized with \f2DsInitialize\fP.
+Other classes are initialized the first time they are used.
+This means that if a class is not used at all by an application
+then \*(Dd does not waste the time or space required to
+initialize the class.
+Consequently, a class does not always have the same integer 
+identifier.
+The function \f2DsInqClassId\f1
+returns the identifier of a class, given its string name.
+Integer class identifiers are required by several routines of the 
+developer's interface.
+.H1 "Methods and Method Routines
+A \f2method\fP is an operation that is defined across all classes.
+Some methods are used to traverse the \*(Dd database, in
+which case objects of a group are executed sequentially.
+Methods for rendering,
+picking, computing bounding volumes and printing are examples of 
+\*(Dd traversal methods. 
+Other methods, such as querying global attribute values,
+are for executing a single object at a time.
+.lp
+Although a method is defined across all object classes, the actual 
+implementation of the method is different for the different 
+classes. 
+A \f2method routine\fP is the implementation of a method for
+a particular class of objects.
+Each class has several method routines, one for every 
+defined method.
+However, some method routines for a class may be null routines.
+For example, the picking method routine for the
+"DoCamera" class is a null routine;
+the picking method has no effect when executed on
+a camera object. 
+The developer's interface routine \f2DDclass_InqMethod\fP
+returns the method routine for a class/method combination.
+.sp -.25v
+.lp
+Attribute method routines and primitive method
+routines are usually very different.
+For example, in a rendering method, the
+attribute method routines generally notify their global attribute 
+stack of their value, while primitive method routines often decompose and
+render the geometry according to the value of
+the inherited attributes.
+Global attribute classes also have method routines associated 
+with them that provide access to 
+the values of the global attribute stacks. 
+.sp -.25v
+.lp
+Frequently, one method makes use of a second method.
+Chapter 10, \f2Methods\fP,
+of the \f2\*(Dd Programmer's Guide\f1, 
+refers to \f2rendering\fP as a method in itself.
+In fact, the rendering process usually consists of the execution of
+several methods. 
+For instance, the display traversal method
+routines for the primitive objects may require the generation of
+alternate representations, which is done by executing another
+method. 
+The renderer may also query the current value of an attribute
+through the global attribute inquiry method.
+.rs
+.sp -.5v
+.H1 "\*(Dd Standard Methods vs. New Methods
+.sp -.25v
+The \*(Dd \f2standard methods\fP are the methods that
+are always installed and available with \*(Dd.
+Some of them, such as picking, computing bounding volumes and printing,
+are executed when requested by an application
+(\f2DdPickObjs,
+DsCompBoundingVol, DsPrintObj\f1 and related functions).
+Other standard methods are intended to be used by the \*(Dd renderers,
+including user-defined renderers.
+They include:
+.lp
+\f3"StdRenderStudio"\fP
+.rs
+.sp -1v
+.ip
+A method that provides a 
+generic studio traversal method with
+method routines implemented for all studio 
+attributes.
+The method routine for an attribute object notifies its
+global attribute stack of the attribute value, and the global attribute
+then executes its own method routine.
+The method routines for all other classes are null routines.
+This standard method provides a base for renderers to create their
+own studio traversal methods.
+A renderer creates a new studio traversal method by first
+copying this method 
+and then updating the method routines for specific classes.
+Section II, \f2Renderers\fP, has more information on how this is done.
+.lp
+\f3"StdRenderDisplay"\fP
+.rs
+.sp -1v
+.ip
+A method that provides a 
+generic display traversal method with
+method routines implemented for primitive classes and attributes.
+The method routine for a primitive object updates the alternate
+representation of the object and then executes the current
+method on the alternate object.
+Primitive attribute method routines notify their global 
+attribute stack of their value, and the global attribute
+then executes its own method routine.
+Other classes have null method routines for this method.
+This standard method provides a base for renderers to create their
+own display traversal methods.
+A renderer creates
+a new display traversal method by copying this
+method 
+and then updating the method routines for specific classes.
+Section II, \f2Renderers\fP, has more information on how this is done.
+.lp
+\f3"UpdStdAlternateObj"\fP
+.rs
+.sp -1v
+.ip
+A method that generates and/or updates the alternate objects for 
+all primitives with alternate representations.
+An alternate object is updated when the 
+attributes that affect the shape of the object, such as
+subdivision specification, have changed since the alternate
+object was created.
+This method is used by the standard display traversal method 
+to create and update alternate objects for rendering.
+.lp
+\f3"UpdStdAlternateLineObj"\fP
+.rs
+.sp -1v
+.ip
+A method that generates and/or updates alternate objects 
+that represent the outlines of the corresponding primitive objects.
+These alternate objects are created as line lists or connected line lists.
+This method is used by some devices and renderers to draw the primitives
+when the representation type is \f2DcWireframe\fP or \f2DcOutlines\fP.
+Other devices and renderers can draw the outlines of primitive objects
+directly from the description of the object and do not use this
+method.
+.lp
+\f3"InqGlobalValue"\fP
+.rs
+.sp -1v
+.ip
+A method that returns the current values of attributes.
+It is implemented for all global
+attributes, and is generally used by the rendering methods
+during studio and display traversal.
+.lp
+The calling sequence for most methods is:
+.(m
+(*method_rtn) (DtObject object)
+.)m
+The calling sequences of the method routines for the global attribute 
+query routines vary from one attribute to another. 
+For a complete list of the
+calling sequences, see Appendix B, \f2Global Attribute Access\f1.
+.lp
+Renderers and add-on packages can define \f2new methods\fP and add
+them to the \*(Dd system. 
+A renderer can create a new method by copying a similar 
+existing method, and setting the method routines for 
+specific classes. 
+A renderer can also create a new method from scratch,
+and set the method routines for all classes.
+In that case, if a method routine is not explicitly provided
+for a class, the default routine of the class will be used.
+.H1 "Method Names and Identifiers
+Every method in \*(Dd is uniquely identified by an integer
+number and a string name.
+.lp
+\*(Dd assigns the \f2integer identifier\fP to a method when the method
+is installed in the \*(Dd system.
+The standard \*(Dd methods are all installed at system initialization
+time, but new methods can be created and installed at any time.
+The identifier of a new method is not always the same,
+depending on the order in which the methods are installed.
+For backward compatibility with previous \*(Dd releases
+the standard methods also have 
+symbolic names for the integer identifiers as defined
+in the \f2dore.h\fP include file.
+.lp
+The \f2string name\fP of a method is assigned by the implementor
+of the method and does not change.
+The function \f2DsInqMethodId\fP returns the integer identifier
+of a method, given its string name.
+.lp
+The string names and the corresponding symbolic names for the
+standard methods described above are:
+.BU
+"StdRenderStudio" and \f2DcMethodStdRenderStudio\fP for the
+standard studio traversal method.
+.BU hs
+"StdRenderDisplay" and \f2DcMethodStdRenderDisplay\fP for the
+standard display traversal method.
+.BU hs
+"UpdStdAlternateObj" and \f2DcMethodUpdStdAltObj\fP for the
+standard method that creates and updates the standard alternate 
+object for a primitive.
+.BU hs
+"UpdStdAlternateLineObj" and \f2DcMethodUpdStdAltLineObj\fP for 
+the standard method
+that creates and updates the standard alternate line object for
+a primitive.
+.BU hs
+"InqGlobalValue" and \f2DcMethodInqGlbAttVal\fP for the
+standard method for querying current attribute values.

@@ -1,0 +1,48 @@
+.\"#ident "%W%" %G%
+.\"
+.\" #
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  
+.\" # 
+.\" # KUBOTA GRAPHICS Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\" #
+.\"
+.so ../macros/local.me
+.ds BT "\\*(Dd System Guide
+.ds CT "Renderers Section Introduction
+.ds h1 2
+.L1 R ENDERERS
+.L2 S ECTION
+.L3 I NTRODUCTION
+.CH TWO
+.rs
+.sp -1.5v
+A \*(Dd \f2renderer\f1 is responsible for converting the 
+graphical object database into an image.  Renderers vary in 
+the techniques they use to draw the geometry of the objects 
+and in the attributes they consider.  As a result, the way an image 
+looks not only depends on the specific objects in the database, but 
+also on which renderer is selected.
+.lp
+A renderer displays output through a \f2device driver\f1 using the 
+device control module (DCM) functions and one of the output module interfaces.
+A renderer can therefore work with any device driver that supports its 
+required output module interface.  \*(Dd device drivers and the 
+output modules that they support are described in Section III, 
+\f2Device Drivers\f1.
+.lp
+If a renderer or device does not support a particular feature, it ignores it
+or does the best that it can.  For example, if smooth shading is not supported, 
+you may see only flat-shaded objects.  For this reason, you are encouraged 
+to include all desired functionality in your \*(Dd application code,
+especially when this code is being written for multiple configurations.

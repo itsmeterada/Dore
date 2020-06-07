@@ -1,0 +1,175 @@
+#ident	"%W%"	%G%
+
+==========================================================================
+
+		     Dore' Device Driver Summary
+		     ====  ====== ====== =======
+==========================================================================
+
+Device Driver Default Name:	sample
+Hardware supported:		none
+Library Dependencies:		none
+
+Supported Module Interfaces
+	DCM:			yes
+	PROM:			yes
+	DROM:			yes
+	DROMMethods:		no
+
+Originator
+	Company/Institution:	Kubota Pacific Computer Inc.
+	Name:			Advanced Graphics Software Group
+	Phone:			(408) 727-8100
+	Email:			
+	Address:		2630 Walsh Avenue
+				Santa Clara, CA 95051-0905
+	Date Completed:		??
+
+Maintainer (most recent first)
+	Company/Institution:	Kubota Pacific Computer Inc.
+	Name:			Advanced Graphics Software Group
+	Phone:			(408) 727-8100
+	Email:			
+	Address:		2630 Walsh Avenue
+				Santa Clara, CA 95051-0905
+	Date Completed:		??
+
+==========================================================================
+
+			 DCM Characteristics
+
+==========================================================================
+
+	Version Number:			1
+	Stereo:				
+	Double Buffered:		
+	VisualTypes:			
+	ColorMaps:			
+	Return Pixel Data:		
+	Clipping list handling:		
+	Operation while obscured:	
+	geometry update handling
+	    size:			
+	    overlap change:		
+
+
+==========================================================================
+
+			 PROM Characteristics
+
+==========================================================================
+
+	Version Number:			1
+
+==========================================================================
+
+			 DROM Characteristics
+
+==========================================================================
+
+	Version Number:			2
+
+	Cameras
+	    DoCameraMatrix:		
+	    DoParallel:			
+	    DoPerspective:		
+	    DoProjection:		
+	    DoStereo:			
+	    DoStereoSwitch:		
+
+	Lights
+	    DoLightColor:		
+	    DoLightIntens:		
+	    DoLightSpreadAngles:	
+	    DoLightSpreadExp:		
+	    DoLightType:		
+
+	Geometry
+	    DoPointList:		
+	    DoLineList:			
+	    DoPolyline:			
+	    DoTriangleList:		
+	    DoTriangleMesh:		
+	    Frame coordinates:		
+
+	Shading Attributes
+	    DoAmbientIntens:		
+	    DoAmbientSwitch:		
+	    DoDepthCue:			
+	    DoDepthCueSwitch:		
+	    DoDiffuseColor:		
+	    DoDiffuseIntens:		
+	    DoDiffuseSwitch:		
+	    DoInterpType:		
+	    DoLightSwitch:		
+	    DoReflectionSwitch:		
+	    DoShadowSwitch:		
+	    DoShadeIndex:		
+	    DoSpecularColor:		
+	    DoSpecularFactor:		
+	    DoSpecularIntens:		
+	    DoSpecularSwitch:		
+	    DoSurfaceEdgeColor:		
+	    DoSurfaceShade:		
+	    DoTranspColor:		
+	    DoTranspIntens:		
+	    DoTranspSwitch:		
+
+	Miscellaneous
+	    DoBackfaceCullSwitch:	
+	    DoBackfaceCullable:		
+	    DoClipVol:			
+	    DoHiddenSurfSwitch:		
+	    DoInvisSwitch:		
+	    DoLineType:			
+	    DoLineWidth:		
+	    DoRepType:			
+	    DoLocalAntiAliasSwitch:	
+	    DoLocalAntiAliasStyle:	
+
+	Texture Maps
+	    DoTextureMapBump:			
+	    DoTextureMapBumpSwitch:		
+	    DoTextureMapDiffuseColor:		
+	    DoTextureMapDiffuseColorSwitch:	
+	    DoTextureMapEnviron:		
+	    DoTextureMapEnvironSwitch:		
+	    DoTextureMapTranspIntens:		
+	    DoTextureMapTranspIntensSwitch:	
+
+
+	Geometric Transformations
+	    DoLookAtFrom:		
+	    DoPushMatrix:		
+	    DoPopMatrix:		
+	    DoRotate:			
+	    DoScale:			
+	    DoTranslate:		
+	    DoTransformMatrix:		
+
+
+	Texture Attributes
+	    DoTextureAntiAlias:		
+	    DoTextureExtendUV:		
+	    DoTextureExtendUVW:		
+	    DoTextureMatrixUV:		
+	    DoTextureMatrixUVW:		
+	    DoTextureOp:		
+	    DoTextureScaleUV:		
+	    DoTextureScaleUVW:		
+	    DoTextureTranslateUV:	
+	    DoTextureTranslateUVW:	
+	    DoTextureUVIndex:		
+	    DoTextureUVWIndex:		
+
+	View Attributes
+	    DvSetBackgroundColor:	
+	    DvSetBackgroundJust:	
+	    DvSetBackgroundRaster:	
+
+==========================================================================
+
+			     Limitations
+
+==========================================================================
+

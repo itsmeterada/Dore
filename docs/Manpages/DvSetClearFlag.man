@@ -1,0 +1,56 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DvSetClearFlag 3D  "Dore"
+.SH NAME
+DvSetClearFlag \- Set the clear flag of a view
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+void DvSetClearFlag(view, clearflag)
+DtObject view ;
+DtFlag clearflag ;
+.sp
+.in -.5i
+FORTRAN:
+.in +.5i
+CALL DVSCF(VIEW, CLRFLG)
+INTEGER*4 VIEW 
+INTEGER*4 CLRFLG
+.in -.5i
+.fi
+.SH DESCRIPTION
+.IX DVSCF
+.IX DvSetClearFlag
+.I DvSetClearFlag
+sets the clear flag of a view specified by the parameter \f2view\fP.
+If the parameter \f2clearflag\fP is \f2DcTrue\fP <\f2DCTRUE\fP>,
+the view is first cleared to its background color 
+or raster every time the view is
+updated.  If the \f2clearflag\fP is \f2DcFalse\fP <\f2DCFALS\fP>,
+the view is not cleared.
+.SH ERRORS
+.I DvSetClearFlag
+will fail if the view handle is invalid.
+.TP 15
+[WARNING - invalid view handle]
+.SH DEFAULTS
+The default clear flag is \f2DcTrue\fP.
+.SH "SEE ALSO"
+DvInqClearFlag(3D),
+DvSetBackgroundColor(3D)

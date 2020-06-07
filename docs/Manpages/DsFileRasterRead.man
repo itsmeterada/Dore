@@ -1,0 +1,122 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DsFileRasterRead 3D "Dore"
+.SH NAME
+DsFileRasterRead \- Read raster information from a file
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+DtInt DsFileRasterRead(filename, width, height, depth, 
+		type, data)
+DtPtr filename;
+DtInt *width;
+DtInt *height;
+DtInt *depth;
+DtRasterType *type;
+DtPtr *data;
+.sp
+.in  -.5i
+FORTRAN:
+.in  +.5i
+INTEGER*4 DSFRSR(FILENM, FLEN, WIDTH, HEIGHT, 
+	DEPTH, TYPE, DATA)
+INTEGER*4 FLEN
+CHARACTER*FLEN FILENM
+INTEGER*4 WIDTH
+INTEGER*4 HEIGHT
+INTEGER*4 DEPTH
+INTEGER*4 TYPE
+INTEGER*4 DATA
+.in  -.5i
+.fi 
+.IX "DsFileRasterRead"
+.IX "DSFRSR"
+.SH DESCRIPTION
+.LP
+\f2DsFileRasterRead\fP reads raster information from a file.
+This information can be used to create a raster object with \f2DoRaster\fP
+<\f2DORS\fP>.
+.LP
+The parameter \f2filename\fP is the name of the file containing the raster data.
+The file can contain information for a one-, two- or three-dimensional
+raster.
+The return parameters \f2width\fP, \f2height\fP, and \fPdepth\fP are the
+dimensions of the raster.
+.LP
+The return parameter \f2type\fP indicates the type and format of the
+information being extracted.
+Possible values for \f2type\fP are:
+.IX DcRasterRGB
+.IX DCRRGB
+.IP "\f2DcRasterRGB\fP <\f2DCRRGB\fP>"
+Each point in the raster has red, green and blue information.
+.IX DcRasterRGBA
+.IX DCRRA
+.IP "\f2DcRasterRGBA\fP <\f2DCRRA\fP>"
+Each point in the raster has red, green, blue and alpha information.
+.IX DcRasterRGBAZ
+.IX DCRRAZ
+.IP "\f2DcRasterRGBAZ\fP <\f2DCRRAZ\fP>"
+Each point in the raster has red, green, blue, alpha and z information.
+.IX DcRasterRGBZ
+.IX DCRRZ
+.IP "\f2DcRasterRGBZ\fP <\f2DCRRZ\fP>"
+Each point in the raster has red, green, blue and z information.
+.IX DcRasterA
+.IX DCRA
+.IP "\f2DcRasterA\fP <\f2DCRA\fP>"
+Each point in the raster has alpha information.
+.IX DcRasterABGR
+.IX DCRAR
+.IP "\f2DcRasterABGR <DCRAR>\fP
+Each point in the raster has alpha, blue, green, and red information.
+.IX DcRasterZ
+.IX DCRZ
+.IP "\f2DcRasterZ\fP <\f2DCRZ\fP>"
+Each point in the raster has z information.
+.LP
+The return parameter \f2data\fP is a pointer to the extracted raster data.
+\f2DsFileRasterRead\fP will allocate the space for the data, but it is up
+to the application to deallocate the space when the data is no longer needed, 
+for example
+through the delete callback mechanism of \f2DoRaster\fP <\f2DORS\fP>.
+.LP
+\f2DsFileRasterRead\fP returns -1 if an error occurs (see below),
+otherwise \f2DsFileRasterRead\fP returns 0.
+.SH FORTRAN SPECIFIC
+The parameter \f2FILENM\fP is a filename \f2FLEN\fP characters long.
+.SH ERRORS
+\f2DsFileRasterRead\fP will fail if the file is not a standard Dore 
+raster file.
+.PP 15
+[WARNING - value out of range. 'rastertype' required as first attribute ]
+.PP
+\f2DsFileRasterRead\fP will fail if the file cannot be opened.
+.PP 15
+[WARNING - io error.  Could not open file \f2filename\fP ]
+.PP
+.SH SEE ALSO
+.na
+.nh
+DoRaster(3D),
+DoFileRaster(3D),
+DsInqRaster(3D)
+.ad
+.hy
+\&

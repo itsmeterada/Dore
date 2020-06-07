@@ -1,0 +1,62 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DdInqViewport 3D  "Dore"
+.SH NAME
+DdInqViewport \- Return the size of the device viewport
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+void DdInqViewport(device, viewport)
+DtObject device;
+DtVolume *viewport;
+.sp
+.in -.5i
+FORTRAN:
+.in +.5i
+CALL DDQV(DEVICE, VWPORT)
+INTEGER*4 DEVICE
+REAL*8 VWPORT(6)
+.in -.5i
+.fi
+.SH DESCRIPTION
+.IX DDQV
+.IX DdInqViewport
+.I DdInqViewport
+returns in the supplied parameter \f2viewport\fP the extent of the
+device viewport for the device, \f2device\fP.
+.PP
+The device viewport is the subportion of the device's extent 
+upon which the application displays the device's frame.
+You can query the device's display volume by using
+\f2DdInqExtent <DDQE>\f1; refer to the \f2DdInqExtent\f1 
+manual page for more information.
+.PP
+The default viewport uses all of the current device volume.
+If the device extent changes (for example, if an X-window is resized),
+then by default, the viewport automatically changes to fit the new device
+extent.
+The auto-resize feature can be disabled for a device when it is
+created.
+.SH ERRORS
+.I DdInqViewport
+will fail if the device handle is invalid.
+.TP 15
+[WARNING - invalid device handle]
+.SH "SEE ALSO"
+DdSetViewport(3D), DdInqExtent(3D), DoDevice(3D)

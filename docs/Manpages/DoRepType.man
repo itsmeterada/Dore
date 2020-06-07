@@ -1,0 +1,76 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DoRepType 3D  "Dore"
+.SH NAME
+DoRepType \- Create a representation type primitive attribute object
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+DtObject DoRepType(type)
+DtRepType type;
+.sp
+.in -.5i
+FORTRAN:
+.in +.5i
+INTEGER*4 DOREPT(TYPE)
+INTEGER*4 TYPE
+.in -.5i
+.fi
+.SH DESCRIPTION
+.IX DOREPT
+.IX DoRepType
+\f2DoRepType\fP creates a representation type primitive attribute object.
+The \f2type\fP parameter specifies the primary geometric
+representation with which subsequent primitive objects will render
+themselves.  Possible values are:
+.IP "\f2DcPoints\fP <\f2DCPNTS\fP>"
+Points
+.IP "\f2DcWireframe\fP <\f2DCWIRE\fP>"
+Outlines of decomposed elements
+.IP "\f2DcSurface\fP <\f2DCSURF\fP>"
+Surfaces
+.IP "\f2DcOutlines\fP <\f2DCOUTL\fP>"
+Polygon outlines
+.IP "\f2DcSurfaceWireframeEdges\fP <\f2DCSWEG\fP>"
+Surfaces with colored edges on decomposed elements
+.IP "\f2DcSurfaceOutlineEdges\fP <\f2DCSOEG\fP>"
+Surfaces with colored edges on polygon outlines 
+.PP
+The difference between \f2DcWireframe\fP and \f2DcOutlines\fP is that
+with \f2DcWireframe\fP the outlines of all elements in the object will
+be drawn, including any triangles or other elements to which a primitive 
+has been decomposed.
+With \f2DcOutlines\fP you will only see the outlines of the object
+as defined by the application.
+.PP
+With \f2DcSurfaceWireframeEdges\fP and \f2DcSurfaceOutlineEdges\fP you get
+surfaces along with visible outlines.
+The color of the outlines is determined by the \f2DoSurfaceEdgeColor\fP
+<\f2DOSEGC\fP> attribute.
+\f2DcSurfaceWireframeEdges\fP will draw the edges of all the 
+elements of the 
+object after polygon decomposition.
+\f2DcSurfaceOutlineEdges\fP will draw the edges of the object as
+defined by the application.
+.SH DEFAULTS
+The default value for \f2DoRepType\fP is \f2DcWireframe\fP <\f2DCWIRE\fP>.
+.SH "SEE ALSO"
+DoInterpType(3D),
+DoSurfaceEdgeColor(3D)
+

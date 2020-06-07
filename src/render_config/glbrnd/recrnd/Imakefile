@@ -1,0 +1,9 @@
+#include <Dore.tmpl>
+
+    SRCS = glbrec_render.c grec_ini.c
+    OBJS = glbrec_render.o grec_ini.o
+
+LibraryObjectRule()
+SubdirLibraryRule($(OBJS))
+
+DependTarget()

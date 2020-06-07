@@ -1,0 +1,550 @@
+.\"#ident "%W%" %G%
+.\"
+.\"
+C **********************************************************************
+C
+C**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~**
+C**                                                        **
+C**  This file contains all the Dore FORTRAN type          **
+C**  constant declarations.                                **
+C**                                                        **
+C**************************** WARNING *********************************
+C**                                                        **
+C**  Dore 2.2 and older use constants for identifying      **
+C**  classes. The following constants of the form          **
+C**  'DCT...' have been retained for backward              **
+C**  compatibility. As new classes are added they will     **
+C**  NOT have assigned constants. Instead the class        **
+C**  identifier should be obtained from the class  name    **
+C**  through the system routine DSQCI (DsInqClassId).      **
+C**  The class name for all classes (both new and old)     **
+C**  is the same as the name of the C routine used to      **
+C**  create an instance of the class. For example the      **
+C**  class name for a View is "DoView", corresponding      **
+C**  to the routine DoView().                              **
+C***********************************************************************
+
+C object types
+C	DcTypeAny
+      INTEGER*4 DCTANY
+      PARAMETER (DCTANY =-1)	
+C	DcTypeClass
+      INTEGER*4 DCTCLS
+      PARAMETER (DCTCLS =0)	
+
+
+C	DcTypeDeleted
+      INTEGER*4 DCTDEL
+      PARAMETER (DCTDEL =1)	
+C	DcTypeGroup
+      INTEGER*4 DCTGRP
+      PARAMETER (DCTGRP =2)	
+C	DcTypeInlineGroup
+      INTEGER*4 DCTING
+      PARAMETER (DCTING =3)
+C	DcTypeDevice
+      INTEGER*4 DCTDEV
+      PARAMETER (DCTDEV =4)	
+C	DcTypeFrame
+      INTEGER*4 DCTFRM
+      PARAMETER (DCTFRM =5)	
+C	DcTypeView
+      INTEGER*4 DCTVW
+      PARAMETER (DCTVW =6)	
+C	DcTypeLabel
+      INTEGER*4 DCTLBL
+      PARAMETER (DCTLBL =7)	
+C	DcTypeTransformMatrix
+      INTEGER*4 DCTTMX
+      PARAMETER (DCTTMX =8)	
+C	DcTypeLookAtFrom
+      INTEGER*4 DCTLAF
+      PARAMETER (DCTLAF =9)	
+C	DcTypePopMatrix
+      INTEGER*4 DCTPPM
+      PARAMETER (DCTPPM =10)	
+C	DcTypePushMatrix
+      INTEGER*4 DCTPSM
+      PARAMETER (DCTPSM =11)	
+C	DcTypeRotate
+      INTEGER*4 DCTROT
+      PARAMETER (DCTROT =12)	
+C	DcTypeScale
+      INTEGER*4 DCTSCL
+      PARAMETER (DCTSCL =13)	
+C	DcTypeShear
+      INTEGER*4 DCTSHR
+      PARAMETER (DCTSHR =14)	
+C	DcTypeTranslate
+      INTEGER*4 DCTXLT
+      PARAMETER (DCTXLT =15)	
+C	DcTypeAmbientSwitch
+      INTEGER*4 DCTAS
+      PARAMETER (DCTAS =16)	
+
+
+C	DcTypeAnnotationText
+      INTEGER*4 DCTANT
+      PARAMETER (DCTANT =17)	
+C	DcTypeBackfaceCullSwitch
+      INTEGER*4 DCTBCS
+      PARAMETER (DCTBCS =20)	
+C	DcTypeBoundingVolume
+      INTEGER*4 DCTBV
+      PARAMETER (DCTBV =21)	
+C	DcTypeCallback
+      INTEGER*4 DCTCB
+      PARAMETER (DCTCB =22)	
+C	DcTypeCamera
+      INTEGER*4 DCTCM
+      PARAMETER (DCTCM =23)	
+C	DcTypeCameraMatrix
+      INTEGER*4 DCTCMX
+      PARAMETER (DCTCMX =25)	
+C	DcTypeClipSwitch
+      INTEGER*4 DCTCS
+      PARAMETER (DCTCS =26)	
+C	DcTypeClipVolume
+      INTEGER*4 DCTCV
+      PARAMETER (DCTCV =27)	
+C	DcTypeDataPtr
+      INTEGER*4 DCTDPT
+      PARAMETER (DCTDPT =29)	
+C	DcTypeDataVal
+      INTEGER*4 DCTDVL
+      PARAMETER (DCTDVL =30)	
+C	DcTypeDepthCue
+      INTEGER*4 DCTDCU
+      PARAMETER (DCTDCU =31)	
+C	DcTypeDepthCueSwitch
+      INTEGER*4 DCTDCS
+      PARAMETER (DCTDCS =32)	
+C	DcTypeDiffuseColor
+      INTEGER*4 DCTDFC
+      PARAMETER (DCTDFC =33)	
+C	DcTypeDiffuseIntens
+      INTEGER*4 DCTDFI
+      PARAMETER (DCTDFI =34)	
+C	DcTypeDiffuseSwitch
+      INTEGER*4 DCTDFS
+      PARAMETER (DCTDFS =35)	
+C	DcTypeExecSet
+      INTEGER*4 DCTEXS
+      PARAMETER (DCTEXS =37)	
+
+
+C	DcTypeFilter
+      INTEGER*4 DCTFLT
+      PARAMETER (DCTFLT =38)	
+C	DcTypeGlbRndMaxObjs
+      INTEGER*4 DCTGMO
+      PARAMETER (DCTGMO =39)	
+C	DcTypeGlbRndMaxSub
+      INTEGER*4 DCTGMS
+      PARAMETER (DCTGMS =40)	
+C	DcTypeGlbRndRayLevel
+      INTEGER*4 DCTGRL
+      PARAMETER (DCTGRL =41)	
+C	DcTypeHiddenSurfaceSwitch
+      INTEGER*4 DCTHSS
+      PARAMETER (DCTHSS =42)	
+C	DcTypeInputSlot
+      INTEGER*4 DCTINS
+      PARAMETER (DCTINS =45)	
+C	DcTypeInterpType
+      INTEGER*4 DCTINT
+      PARAMETER (DCTINT =46)	
+C	DcTypeInvisibilitySwitch
+      INTEGER*4 DCTIVS
+      PARAMETER (DCTIVS =47)	
+C	DcTypeLight
+      INTEGER*4 DCTL
+      PARAMETER (DCTL =48)	
+C	DcTypeLightColor
+      INTEGER*4 DCTLC
+      PARAMETER (DCTLC =49)	
+C	DcTypeLightIntens	
+      INTEGER*4 DCTLI
+      PARAMETER (DCTLI =52)	
+C	DcTypeLightType
+      INTEGER*4 DCTLT
+      PARAMETER (DCTLT =55)	
+C	DcTypeLineType
+      INTEGER*4 DCTLNT
+      PARAMETER (DCTLNT =57)	
+C	DcTypeLineWidth
+      INTEGER*4 DCTLNW
+      PARAMETER (DCTLNW =58)	
+C	DcTypeMatrix
+      INTEGER*4 DCTMX
+      PARAMETER (DCTMX =59)	
+C	DcTypeMinBoundingExtension
+      INTEGER*4 DCTMBE
+      PARAMETER (DCTMBE =60)	
+
+
+C	DcTypeMarkerFont	
+      INTEGER*4 DCTMKF
+      PARAMETER (DCTMKF =61)	
+C	DcTypeMarkerGlyph
+      INTEGER*4 DCTMKG
+      PARAMETER (DCTMKG =62)	
+C	DcTypeMarkerScale
+      INTEGER*4 DCTMKS
+      PARAMETER (DCTMKS =63)	
+C	DcTypeNameSet
+      INTEGER*4 DCTNMS
+      PARAMETER (DCTNMS =64)	
+C	DcTypeNURBSurface
+      INTEGER*4 DCTNSF
+      PARAMETER (DCTNSF =66)	
+C	DcTypeParallel
+      INTEGER*4 DCTPAR
+      PARAMETER (DCTPAR =69)	
+C	DcTypePatch
+      INTEGER*4 DCTPAT
+      PARAMETER (DCTPAT =70)	
+C	DcTypePickID
+      INTEGER*4 DCTPKI
+      PARAMETER (DCTPKI =71)	
+C	DcTypePickabilitySwitch
+      INTEGER*4 DCTPKS
+      PARAMETER (DCTPKS =72)	
+C	DcTypePerspective
+      INTEGER*4 DCTPSP
+      PARAMETER (DCTPSP =73)	
+C	DcTypePolygon
+      INTEGER*4 DCTPGN
+      PARAMETER (DCTPGN =74)	
+C	DcTypePolyline
+      INTEGER*4 DCTPLN
+      PARAMETER (DCTPLN =75)	
+C	DcTypePolymarker
+      INTEGER*4 DCTPMK
+      PARAMETER (DCTPMK =76)	
+C	DcTypePolygonMesh
+      INTEGER*4 DCTPMH
+      PARAMETER (DCTPMH =77)	
+C	DcTypePopAttributes
+      INTEGER*4 DCTPPA
+      PARAMETER (DCTPPA =78)	
+C	DcTypePrimitiveSurface
+      INTEGER*4 DCTPMS
+      PARAMETER (DCTPMS =79)	
+
+
+C	DcTypeProjection
+      INTEGER*4 DCTPRJ
+      PARAMETER (DCTPRJ =80)	
+C	DcTypePushAttributes
+      INTEGER*4 DCTPHA
+      PARAMETER (DCTPHA =81)	
+C	DcTypeReflectionSwitch
+      INTEGER*4 DCTRFS
+      PARAMETER (DCTRFS =82)	
+C	DcTypeRepType
+      INTEGER*4 DCTRT
+      PARAMETER (DCTRT =83)	
+C	DcTypeShadowSwitch
+      INTEGER*4 DCTSHS
+      PARAMETER (DCTSHS =84)	
+C	DcTypeShadeIndex
+      INTEGER*4 DCTSHI
+      PARAMETER (DCTSHI =85)	
+C	DcTypeSimplePolygon
+      INTEGER*4 DCTSPN
+      PARAMETER (DCTSPN =86)	
+C	DcTypeSimplePolygonMesh
+      INTEGER*4 DCTSPM
+      PARAMETER (DCTSPM =87)	
+C	DcTypeSpecularColor
+      INTEGER*4 DCTSPC
+      PARAMETER (DCTSPC =91)	
+C	DcTypeSpecularFactor
+      INTEGER*4 DCTSPF
+      PARAMETER (DCTSPF =92)	
+C	DcTypeSpecularIntens
+      INTEGER*4 DCTSPI
+      PARAMETER (DCTSPI =93)	
+C	DcTypeSpecularSwitch
+      INTEGER*4 DCTSPS
+      PARAMETER (DCTSPS =94)	
+C	DcTypeTorus
+      INTEGER*4 DCTTOR
+      PARAMETER (DCTTOR =98)	
+C	DcTypeTriangleMesh
+      INTEGER*4 DCTTRM
+      PARAMETER (DCTTRM =100)	
+C	DcTypeTranspColor
+      INTEGER*4 DCTTPC
+      PARAMETER (DCTTPC =101)	
+C	DcTypeTranspIntens
+      INTEGER*4 DCTTPI
+      PARAMETER (DCTTPI =102)	
+
+
+C	DcTypeTranspSwitch
+      INTEGER*4 DCTTPS
+      PARAMETER (DCTTPS =103)	
+C	DcTypeText	
+      INTEGER*4 DCTTXT
+      PARAMETER (DCTTXT =104)	
+C	DcTypeTextAlign
+      INTEGER*4 DCTTAL
+      PARAMETER (DCTTAL =105)	
+C	DcTypeTextExpansionFactor
+      INTEGER*4 DCTTEF
+      PARAMETER (DCTTEF =106)	
+C	DcTypeTextFont
+      INTEGER*4 DCTTFT
+      PARAMETER (DCTTFT =107)	
+C	DcTypeTextHeight
+      INTEGER*4 DCTTHT
+      PARAMETER (DCTTHT =108)	
+C	DcTypeTextPath
+      INTEGER*4 DCTTPH
+      PARAMETER (DCTTPH =109)	
+C	DcTypeTextPrecision
+      INTEGER*4 DCTTPN
+      PARAMETER (DCTTPN =110)	
+C	DcTypeTextSpace
+      INTEGER*4 DCTTSP
+      PARAMETER (DCTTSP =111)	
+C	DcTypeTextUpVector
+      INTEGER*4 DCTTUV
+      PARAMETER (DCTTUV =112)	
+C	DcTypeAttAmbientSwitch
+      INTEGER*4 DCTAAW
+      PARAMETER (DCTAAW =115)	
+C	DcTypeAttDiffuseSwitch
+      INTEGER*4 DCTADS
+      PARAMETER (DCTADS =116)	
+C	DcTypeAttSpecularSwitch
+      INTEGER*4 DCTASW
+      PARAMETER (DCTASW =117)	
+C	DcTypeAttDiffuseColor
+      INTEGER*4 DCTADC
+      PARAMETER (DCTADC =118)	
+C	DcTypeAttSpecularColor
+      INTEGER*4 DCTASC
+      PARAMETER (DCTASC =119)	
+C	DcTypeAttDiffuseIntens
+      INTEGER*4 DCTADI
+      PARAMETER (DCTADI =120)	
+
+
+C	DcTypeAttSpecularIntens
+      INTEGER*4 DCTASI
+      PARAMETER (DCTASI =121)	
+C	DcTypeAttSpecularFactor
+      INTEGER*4 DCTASF
+      PARAMETER (DCTASF =122)	
+C	DcTypeAttRepType
+      INTEGER*4 DCTART
+      PARAMETER (DCTART =123)	
+C	DcTypeAttInterpType
+      INTEGER*4 DCTAIT
+      PARAMETER (DCTAIT =124)	
+C	DcTypeAttLcstowcsmat
+      INTEGER*4 DCTALM
+      PARAMETER (DCTALM =125)	
+C	DcTypeAttBackfaceCullSwitch
+      INTEGER*4 DCTABS
+      PARAMETER (DCTABS =126)	
+C	DcTypeBackfaceCullable
+      INTEGER*4 DCTBFC
+      PARAMETER (DCTBFC =127)	
+C	DcTypeAttBackfaceCullable
+      INTEGER*4 DCTABC
+      PARAMETER (DCTABC =128)	
+C	DcTypeAttLightIntens
+      INTEGER*4 DCTALI
+      PARAMETER (DCTALI =129)	
+C	DcTypeAttLightColor
+      INTEGER*4 DCTALC
+      PARAMETER (DCTALC =131)	
+C	DcTypeAttShadowSwitch
+      INTEGER*4 DCTASH
+      PARAMETER (DCTASH =132)	
+C	DcTypeAttReflectionSwitch
+      INTEGER*4 DCTARW
+      PARAMETER (DCTARW =133)	
+C	DcTypeAttGlbRndMaxObjs
+      INTEGER*4 DCTAMO
+      PARAMETER (DCTAMO =134)	
+C	DcTypeAttGlbRndMaxSub
+      INTEGER*4 DCTARS
+      PARAMETER (DCTARS =135)	
+C	DcTypeAttGlbRndRayLevel
+      INTEGER*4 DCTARL
+      PARAMETER (DCTARL =136)	
+C	DcTypeAttTranspColor
+      INTEGER*4 DCTATC
+      PARAMETER (DCTATC =137)	
+
+
+C	DcTypeAttTranspIntens
+      INTEGER*4 DCTATI
+      PARAMETER (DCTATI =138)	
+C	DcTypeAttTranspSwitch
+      INTEGER*4 DCTATS
+      PARAMETER (DCTATS =139)	
+C	DcTypeAttTextAlignment
+      INTEGER*4 DCTATA
+      PARAMETER (DCTATA =145)	
+C	DcTypeAttTextExpansion
+      INTEGER*4 DCTATE
+      PARAMETER (DCTATE =146)	
+C	DcTypeAttTextFont
+      INTEGER*4 DCTATF
+      PARAMETER (DCTATF =147)	
+C	DcTypeAttTextHeight
+      INTEGER*4 DCTATH
+      PARAMETER (DCTATH =148)	
+C	DcTypeAttTextPath
+      INTEGER*4 DCTATP
+      PARAMETER (DCTATP =149)	
+C	DcTypeAttTextSpace
+      INTEGER*4 DCTAXS
+      PARAMETER (DCTAXS =150)	
+C	DcTypeAttTextUpVector
+      INTEGER*4 DCTATU
+      PARAMETER (DCTATU =151)	
+C	DcTypeAttTextPrecision
+      INTEGER*4 DCTATR
+      PARAMETER (DCTATR =152)	
+C	DcTypeRayinttri
+      INTEGER*4 DCTRIT
+      PARAMETER (DCTRIT =153)	
+C	DcTypeRayintmshtri
+      INTEGER*4 DCTRMT
+      PARAMETER (DCTRMT =154)	
+C	DcTypeNull
+      INTEGER*4 DCTNUL
+      PARAMETER (DCTNUL =155)	
+C	DcTypeAttLineType
+      INTEGER*4 DCTALT
+      PARAMETER (DCTALT =156)	
+C	DcTypeAttLineWidth
+      INTEGER*4 DCTALW
+      PARAMETER (DCTALW =157)	
+C	DcTypeAttMarkerScale
+      INTEGER*4 DCTAMS
+      PARAMETER (DCTAMS =158)	
+
+
+C	DcTypeAttMarkerGlyph
+      INTEGER*4 DCTAMG
+      PARAMETER (DCTAMG =159)	
+C	DcTypeAttMarkerFont
+      INTEGER*4 DCTAMF
+      PARAMETER (DCTAMF =160)	
+C	DcTypeAttExecSet
+      INTEGER*4 DCTAES
+      PARAMETER (DCTAES =161)	
+C	DcTypeAttNameSet
+      INTEGER*4 DCTANS
+      PARAMETER (DCTANS =162)	
+C	DcTypeAttFilter
+      INTEGER*4 DCTAFT
+      PARAMETER (DCTAFT =163)	
+C	DcTypeAttInvisibilitySwitch
+      INTEGER*4 DCTAIS
+      PARAMETER (DCTAIS =164)	
+C	DcTypeAttPickabilitySwitch
+      INTEGER*4 DCTAPS
+      PARAMETER (DCTAPS =165)	
+C	DcTypeAttClipSwitch
+      INTEGER*4 DCTACS
+      PARAMETER (DCTACS =168)	
+C	DcTypeAttClipVolume
+      INTEGER*4 DCTACV
+      PARAMETER (DCTACV =169)	
+C	DcTypeBoundingVolumeSwitch
+      INTEGER*4 DCTBVS
+      PARAMETER (DCTBVS =170)	
+C	DcTypeAttBoundingVolumeSwitch
+      INTEGER*4 DCTABV
+      PARAMETER (DCTABV =171)	
+C	DcTypeAttMinBoundingExtension
+      INTEGER*4 DCTAME
+      PARAMETER (DCTAME =172)	
+C	DcTypeAttPickID
+      INTEGER*4 DCTAPI
+      PARAMETER (DCTAPI =173)	
+C	DcTypeTriangleList
+      INTEGER*4 DCTTRL
+      PARAMETER (DCTTRL =175)	
+C	DcTypeAttDepthCue
+      INTEGER*4 DCTADU
+      PARAMETER (DCTADU =176)	
+C	DcTypeAttDepthCueSwitch
+      INTEGER*4 DCTADW
+      PARAMETER (DCTADW =177)	
+
+
+C	DcTypeAttHiddenSurfaceSwitch
+      INTEGER*4 DCTAHW
+      PARAMETER (DCTAHW =178)	
+C	DcTypeSubDivSpec
+      INTEGER*4 DCTSDS
+      PARAMETER (DCTSDS =179)	
+C	DcTypeAttSubDivSpec
+      INTEGER*4 DCTASD
+      PARAMETER (DCTASD =180)	
+C	DcTypeAttLightType
+      INTEGER*4 DCTALY
+      PARAMETER (DCTALY =182)	
+C	DcTypeSurfaceShader
+      INTEGER*4 DCTSSH
+      PARAMETER (DCTSSH =183)	
+C	DcTypeAttSurfaceShader
+      INTEGER*4 DCTASS
+      PARAMETER (DCTASS =184)	
+C	DcTypeLineList
+      INTEGER*4 DCTLNL
+      PARAMETER (DCTLNL =185)	
+C	DcTypePointList
+      INTEGER*4 DCTPTL
+      PARAMETER (DCTPTL =186)	
+C	DcTypeAttShadeIndex
+      INTEGER*4 DCTASN
+      PARAMETER (DCTASN =187)	
+C	DcTypeSphereList
+      INTEGER*4 DCTSPH
+      PARAMETER (DCTSPH =189)	
+C	DcTypeCylinderList
+      INTEGER*4 DCTCYL
+      PARAMETER (DCTCYL =190)	
+C	DcTypeStereoSwitch  
+      INTEGER*4 DCTSTS
+      PARAMETER (DCTSTS =193)
+C	DcTypeAttStereoSwitch                   
+      INTEGER*4 DCTAOS
+      PARAMETER (DCTAOS =194)
+C	DcTypeStereo                            
+      INTEGER*4 DCTSTR
+      PARAMETER (DCTSTR =195)
+C	DcTypeAttStereo      
+      INTEGER*4 DCTASR
+      PARAMETER (DCTASR = 196)
+C	DcTypeAmbientIntens
+      INTEGER*4 DCTAMI
+      PARAMETER (DCTAMI =199)	
+
+
+C	DcTypeAttAmbientIntens
+      INTEGER*4 DCTAAI
+      PARAMETER (DCTAAI =200)	
+C	DcTypeVarTriangleMesh
+      INTEGER*4 DCTVTM
+      PARAMETER (DCTVTM =201)	
+C	DcTypeVarLineList
+      INTEGER*4 DCTVLL
+      PARAMETER (DCTVLL =202)	
+C	DcTypeVarPointList
+      INTEGER*4 DCTVPL
+      PARAMETER (DCTVPL =203)	
+C	DcTypeVarSimplePolygonMesh
+      INTEGER*4 DCTVSM
+      PARAMETER (DCTVSM =204)	

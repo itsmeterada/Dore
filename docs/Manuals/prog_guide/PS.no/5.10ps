@@ -1,0 +1,325 @@
+!md begin
+!/note {} def
+!/legal {} def
+!md /lnop known not { /lnop [ {} ] cvx def } if
+!/bigs [lnop lnop lnop lnop lnop lnop lnop lnop] def
+!/smalls [lnop lnop lnop lnop lnop lnop lnop lnop] def
+!/cp {pm restore pop pop} def
+!
+!T T -41 -40 1015 776 75 72 72 1 F F F F T T psu
+!(TechPubs#1; document: 6-12SubDivAbsolute)jn
+!0 mf
+!od
+!op
+!0 0 xl
+!0 72 mul -1.4 72 mul translate
+!1 1 scale
+!1 1 pen
+!0 0 gm
+!(nc 0 0 974 736 6 rc)kp
+!99.5 -49.5 747.5 599.5 227 312 0 ar
+!0 0 pen
+!0 0 lin
+!nc ct 39 0 put
+!0 0 1 4 1 dh
+!1 1 pen
+!171 72 gm
+!pt
+!171 75 pl
+!171 76 pl
+!171 80 gm
+!171 83 pl
+!171 84 pl
+!171 88 gm
+!171 91 pl
+!171 92 pl
+!171 96 gm
+!171 99 pl
+!171 100 pl
+!171 104 gm
+!171 107 pl
+!171 108 pl
+!171 112 gm
+!171 115 pl
+!171 116 pl
+!171 120 gm
+!171 123 pl
+!171 124 pl
+!171 128 gm
+!171 131 pl
+!171 132 pl
+!171 136 gm
+!171 139 pl
+!171 140 pl
+!171 144 gm
+!171 147 pl
+!171 148 pl
+!171 152 gm
+!171 155 pl
+!171 156 pl
+!171 160 gm
+!171 163 pl
+!171 164 pl
+!171 168 gm
+!171 171 pl
+!171 172 pl
+!171 176 gm
+!171 179 pl
+!171 180 pl
+!171 184 gm
+!171 187 pl
+!171 188 pl
+!171 192 gm
+!171 195 pl
+!171 196 pl
+!171 200 gm
+!171 203 pl
+!171 204 pl
+!171 208 gm
+!171 211 pl
+!171 212 pl
+!171 216 gm
+!171 219 pl
+!171 220 pl
+!171 224 gm
+!171 227 pl
+!171 228 pl
+!171 232 gm
+!171 235 pl
+!171 236 pl
+!171 240 gm
+!171 243 pl
+!171 244 pl
+!171 248 gm
+!171 251 pl
+!171 252 pl
+!171 256 gm
+!171 259 pl
+!171 260 pl
+!171 264 gm
+!171 267 pl
+!171 268 pl
+!171 272 gm
+!171 275 pl
+!171 276 pl
+!171 280 gm
+!171 283 pl
+!171 284 pl
+!171 288 gm
+!171 291 pl
+!171 292 pl
+!171 296 gm
+!171 299 pl
+!171 300 pl
+!171 304 gm
+!171 307 pl
+!171 308 pl
+!171 312 gm
+!171 315 pl
+!171 316 pl
+!171 320 gm
+!171 323 pl
+!171 324 pl
+!171 328 gm
+!171 331 pl
+!171 332 pl
+!171 336 gm
+!171 339 pl
+!171 340 pl
+!171 344 gm
+!171 347 pl
+!171 348 pl
+!171 352 gm
+!171 355 pl
+!171 356 pl
+!171 360 gm
+!171 363 pl
+!171 364 pl
+!171 368 gm
+!171 371 pl
+!171 372 pl
+!171 376 gm
+!171 379 pl
+!171 380 pl
+!171 384 gm
+!171 387 pl
+!171 388 pl
+!171 392 gm
+!171 395 pl
+!171 396 pl
+!171 400 gm
+!171 403 pl
+!171 404 pl
+!171 408 gm
+!171 411 pl
+!171 412 pl
+!171 416 gm
+!171 419 pl
+!171 420 pl
+!171 424 gm
+!171 427 pl
+!171 428 pl
+!171 432 gm
+!171 435 pl
+!171 436 pl
+!171 440 gm
+!171 443 pl
+!171 444 pl
+!171 448 gm
+!171 451 pl
+!171 452 pl
+!171 456 gm
+!171 459 pl
+!171 460 pl
+!171 464 gm
+!171 467 pl
+!171 468 pl
+!171 472 gm
+!171 475 pl
+!171 476 pl
+!rh
+!ef
+!eu
+!(nc 0 0 974 736 6 rc)kp
+!0 0 pen
+!171 476 lin
+!171 476 lin
+!nc ct 39 0 put
+!1 1 pen
+!99 275 gm
+!pr
+!99 275 pl
+!108 278 pl
+!108 272 pl
+!99 275 pl
+!1 ep
+!pr
+!99 275 pl
+!108 278 pl
+!108 272 pl
+!99 275 pl
+!0 ep
+!171 275 gm
+!pr
+!171 275 pl
+!162 272 pl
+!162 278 pl
+!171 275 pl
+!1 ep
+!pr
+!171 275 pl
+!162 272 pl
+!162 278 pl
+!171 275 pl
+!0 ep
+!107 275 gm
+!pt
+!163 275 pl
+!rh
+!ef
+!eu
+!(nc 0 0 974 736 6 rc)kp
+!0 0 pen
+!163 275 lin
+!1 1 pen
+!188 80 gm
+!(nc 180 79 215 263 6 rc)kp
+!bu fc
+!{}mark T /Helvetica /Helvetica 0 rf
+!bn
+!1 setTxMode
+!0 fs
+!9 fz
+!bu fc
+!2 F /Helvetica fnt
+!bn
+!0.19989 0. 32 0.01998 0.(DtReal parms[1];)awidthshow
+!199 80 gm
+!0 gr
+!0.21636 0. 32 0.02163 0.(parms[0] = 0.1;)awidthshow
+!210 80 gm
+!(DoSubDivSpec \( DcSubDivAbsolute, parms \);)show
+!84 84 gm
+!(nc 74 83 105 172 6 rc)kp
+!12 fz
+!bu fc
+!2 F /Helvetica fnt
+!bn
+!1.15341 0. 32 0.11534 0.(Curved Surface)awidthshow
+!98 84 gm
+!0.27917 0.(\(ideal\))ashow
+!0 0 pen
+!115 84 gm
+!(nc 0 0 974 736 6 rc)kp
+!115 84 lin
+!nc ct 39 0 put
+!1 1 pen
+!113 162 gm
+!pr
+!113 162 pl
+!111 153 pl
+!106 157 pl
+!113 162 pl
+!1 ep
+!pr
+!113 162 pl
+!111 153 pl
+!106 157 pl
+!113 162 pl
+!0 ep
+!90 131 gm
+!pt
+!109 156 pl
+!ef
+!eu
+!(nc 0 0 974 736 6 rc)kp
+!0 0 pen
+!109 156 lin
+!1 1 pen
+!64 gr
+!217 285 234 410 2 rc
+!227 286 gm
+!(nc 217 285 234 410 6 rc)kp
+!0 gr
+!0.87966 0. 32 0.08796 0.(Planar Representation)awidthshow
+!0 0 pen
+!244 286 gm
+!(nc 0 0 974 736 6 rc)kp
+!244 286 lin
+!nc ct 39 0 put
+!1 1 pen
+!171 356 gm
+!pr
+!171 356 pl
+!180 355 pl
+!177 349 pl
+!171 356 pl
+!1 ep
+!pr
+!171 356 pl
+!180 355 pl
+!177 349 pl
+!171 356 pl
+!0 ep
+!212 333 gm
+!pt
+!177 353 pl
+!ef
+!eu
+!(nc 0 0 974 736 6 rc)kp
+!0 0 pen
+!177 353 lin
+!1 1 pen
+!64 gr
+!132 280 151 302 2 rc
+!144 281 gm
+!(nc 132 280 151 302 6 rc)kp
+!0 gr
+!12.47991 fz
+!bu fc
+!2 F /Helvetica fnt
+!bn
+!0.82868 0.(0.1)ashow
+!F T cp
+!cd
+!end

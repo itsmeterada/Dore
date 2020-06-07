@@ -1,0 +1,174 @@
+.so ../macros/local.me
+.ds BT "\\*(Dd System Guide
+.ds CT Contents
+.L1 C ONTENTS
+.PN 3 i
+.CH
+.rs
+.C0 "Preface" 
+.SC I "Release Notes"
+.C1 "Chapter Summaries" \}iii
+.C0 "Contents of Release" 1
+.C1 "Contents of Portable Dor\o.e\(aa. Release 5.0" 1-1
+.C2 "Sample Configurations" 1-1
+.C2 "Renderers" 1-2
+.C2 "Device Drivers" 1-2
+.C2 "Documentation" 1-4
+.SC II "Renderers"
+.C0 "Renderers Section Introduction" 2
+.C0 "Standard Production Renderer " 3
+.C1 "Device Driver Support" 3-1
+.C1 "Limitations" 3-1
+.C0 "Dynamic Renderer" 4
+.C1 "Device Driver Support" 4-1
+.C1 "Renderer Dependent Functions" 4-1
+.SC III "Device Drivers"
+.C0 "Device Drivers Section Introduction" 5
+.C0 "GL Driver" 6
+.C1 "Using the Driver" 6-1
+.C1 "Output Modules" 6-1
+.C1 "PROM Dependent Functions" 6-2
+.C1 "DROM Dependent Functions" 6-2
+.C2 "Studio Attributes" 6-2
+.C3 "\&Camera Attributes" 6-2
+.C3 "\&Lighting Attributes" 6-2
+.C2 "Primitives" 6-3
+.C2 "Primitive Attributes" 6-3
+.C3 "\&Shading Attributes" 6-3
+.C3 "\&Texture Maps" 6-3
+.C3 "\&Miscellaneous" 6-4
+.C2 "Texture Attributes" 6-4
+.C2 "View Functions" 6-4
+.C1 "Limitations" 6-4
+.C1 "Requirements" 6-5
+.C0 "PostScript Driver" 7
+.C1 "Using the Driver" 7-1
+.C3 "\&Initialization Options" 7-1
+.C3 "\&Modifying the Optional Values" 7-2
+.C1 "Output Modules" 7-2
+.C1 "DROM Dependent Functions" 7-2
+.C1 "Limitations" 7-2
+.C0 "Dor\o.e\(aa. Rasterfile Driver" 8
+.C1 "Using the Driver" 8-1
+.C3 "\&Initialization Options" 8-1
+.C1 "Output Modules" 8-2
+.C1 "PROM Dependent Functions" 8-2
+.C1 "Limitations" 8-2
+.C0 "Standard X11 Driver" 9
+.C1 "Using the Driver" 9-1
+.C3 "\&Initialization Options" 9-1
+.C3 "\&Modifying the Optional Values" 9-3
+.C1 "Output Modules" 9-3
+.C1 "PROM Dependent Functions" 9-3
+.C1 "DROM Dependent Functions" 9-4
+.C1 "Limitations" 9-4
+.C1 "Requirements" 9-4
+.C0 "SunView CXP Driver" 10
+.C1 "Using the Driver" 10-1
+.C1 "Output Modules" 10-1
+.C1 "PROM Dependent Functions" 10-2
+.C1 "DROM Dependent Functions" 10-2
+.C2 "Studio Attributes" 10-2
+.C3 "\&Camera Attributes" 10-2
+.C3 "\&Lighting Attributes" 10-2
+.C2 "Primitives" 10-3
+.C2 "Primitive Attributes" 10-3
+.C3 "\&Shading Attributes" 10-3
+.C3 "\&Miscellaneous" 10-4
+.C2 "View Functions" 10-4
+.C1 "Limitations" 10-4
+.C1 "Requirements" 10-4
+.C0 "Generic SunView Driver" 11
+.C1 "Using the Driver" 11-1
+.C3 "\&Initialization Options" 11-1
+.C3 "\&Modifying the Optional Values" 11-2
+.C1 "Output Modules" 11-2
+.C1 "PROM Dependent Functions" 11-3
+.C1 "DROM Dependent Functions" 11-3
+.C3 "\&Notes" 11-10
+.C1 "Limitations" 11-10
+.C1 "Requirements" 11-10
+.C0 "\s-1TITAN\s+1 G2 Driver" 12
+.C1 "Overview" 12-1
+.C1 "Using the Driver" 12-1
+.C1 "Output Modules" 12-2
+.C1 "DROM Dependent Functions" 12-2
+.C2 "Studio Attributes" 12-2
+.C3 "\&Camera Attributes" 12-2
+.C3 "\&Lighting Attributes" 12-3
+.C2 "Primitives" 12-3
+.C2 "Primitive Attributes" 12-3
+.C3 "\&Shading Attributes" 12-3
+.C3 "\&Miscellaneous" 12-3
+.C2 "View Functions" 12-4
+.C1 "Limitations" 12-4
+.C0 "XFDI Driver" 13
+.C1 "Overview" 13-1
+.C1 "Using the Driver" 13-1
+.C1 "Output Modules" 13-2
+.C2 "Studio Attributes" 13-2
+.C3 "\&Camera Attributes" 13-2
+.C3 "\&Lighting Attributes" 13-3
+.C2 "Primitives" 13-3
+.C2 "Primitive Attributes" 13-3
+.C3 "\&Shading Attributes" 13-3
+.C3 "\&Texture Maps" 13-4
+.C3 "\&Miscellaneous" 13-4
+.C2 "Texture Attributes" 13-4
+.C2 "View Functions" 13-4
+.C1 "Limitations" 13-5
+.C0 "Titan 3000 Driver" 14
+.C1 "Using the Driver" 14-1
+.C3 "\&Initialization Options" 14-1
+.C1 "Output Modules" 14-2
+.C1 "PROM Dependent Functions" 14-2
+.C1 "DROM Dependent Functions" 14-3
+.C1 "Notes" 14-3
+.C3 "\&Device Extents" 14-3
+.C1 "Limitations" 14-3
+.C0 "Titan 3000V Driver" 15
+.C1 "Using the Driver" 15-1
+.C3 "\&Initialization Options" 15-1
+.C3 "\&Modifying the Optional Values" 15-3
+.C1 "Output Modules" 15-3
+.C1 "PROM Dependent Functions" 15-3
+.C1 "DROM Dependent Functions" 15-3
+.C1 "Notes" 15-4
+.C3 "\&Use Local Antialiasing With DcWireframe <DCWIRE>" 15-4
+.C3 "\&Device Extents" 15-4
+.C1 "Limitations" 15-4
+.C2 "Limitations on Texture Mapping" 15-5
+.C2 "Limitations on Attribute Combinations" 15-7
+.C1 "Data Formats for Texture Maps" 15-7
+.C3 "\&Diffuse Color Maps" 15-7
+.C3 "\&Environment Maps" 15-8
+.SC IV "Appendices"
+.C0 "Supported Functions" A
+.C3 "\&Notes" A-71
+.C0 "Template Renderer" B
+.C1 "Overview" B-1
+.C1 "Device Driver Support" B-1
+.C1 "Renderer Dependent Functions" B-1
+.C2 "Studio Attributes" B-1
+.C3 "\&Camera Attributes" B-1
+.C3 "\&Lighting Attributes" B-2
+.C3 "\&Rendering Control" B-2
+.C2 "Primitives" B-2
+.C2 "Primitive Attributes" B-3
+.C3 "\&Shading Attributes" B-3
+.C3 "\&Texture Maps" B-4
+.C3 "\&Miscellaneous" B-4
+.C2 "Texture Attributes" B-4
+.C2 "View Functions" B-5
+.LT "Table 15-1. Orientations of Views for Environment Maps" 15-8
+.LT "Table A-1. Dor\o.e\(aa. Functions" A-61
+.LT "Table A-1. Dor\o.e\(aa. Functions (continued)" A-62
+.LT "Table A-1. Dor\o.e\(aa. Functions (continued)" A-63
+.LT "Table A-1. Dor\o.e\(aa. Functions (continued)" A-64
+.LT "Table A-1. Dor\o.e\(aa. Functions (continued)" A-65
+.LT "Table A-1. Dor\o.e\(aa. Functions (continued)" A-66
+.LT "Table A-1. Dor\o.e\(aa. Functions (continued)" A-67
+.LT "Table A-1. Dor\o.e\(aa. Functions (continued)" A-68
+.LT "Table A-1. Dor\o.e\(aa. Functions (continued)" A-69
+.LT "Table A-1. Dor\o.e\(aa. Functions (continued)" A-70
+.LT "Table A-1. Dor\o.e\(aa. Functions (continued)" A-71

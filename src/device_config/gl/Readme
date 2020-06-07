@@ -1,0 +1,224 @@
+#ident "%W% %G%"
+
+==========================================================================
+
+		     Dore' Device Driver Summary
+		     ====  ====== ====== =======
+==========================================================================
+
+Device Driver Default Name:	gl
+Hardware supported:		Silicon Graphics Inc. Personal Iris
+				Silicon Graphics Inc. VGX
+Library Dependencies:		-lgl or -lgl_s
+				-lsphere (with -spheretype "gl" or "glhemi")
+
+Supported Module Interfaces:
+	DCM:			yes
+	PROM:			yes
+	DROM:			yes
+	DROMMethods:		yes
+
+Originator
+	Company/Institution:	Kubota Pacific Computer Inc.
+	Name:			Advanced Graphics Software Group
+	Phone:			(408) 727-8100
+	Email:			
+	Address:		2630 Walsh Avenue
+				Santa Clara, CA 95051-0905
+	Date Completed:		??
+
+Maintainer (most recent first)
+	Company/Institution:	Kubota Pacific Computer Inc.
+	Name:			Advanced Graphics Software Group
+	Phone:			(408) 727-8100
+	Email:			
+	Address:		2630 Walsh Avenue
+				Santa Clara, CA 95051-0905
+	Date Completed:		??
+
+==========================================================================
+
+			 DCM Characteristics
+
+==========================================================================
+
+	Version Number:			1
+	Stereo:				no
+	Double Buffered:		yes
+			in 4 bit pseudo mode on an 8 bit machine
+			in 12 bit pseudo or RGB mode on 24 bit machine
+			in 24 bit RGB mode on a 48 bit machine
+	VisualTypes:			DcPseudoColor, DcTrueColor
+	ColorMaps:			4 bit, 8 bit, and 12 bit
+	Return Pixel Data:		yes
+	Clipping list handling:		internal to gl
+	Operation while obscured:	yes
+	geometry update handling:
+	    size:			yes
+	    overlap change:		yes
+
+==========================================================================
+
+			 PROM Characteristics
+
+==========================================================================
+
+	Version Number:			1
+
+==========================================================================
+
+			 DROM Characteristics
+
+==========================================================================
+
+	Version Number:			3
+
+	Cameras:
+	    DoCameraMatrix:		yes
+	    DoParallel:			yes
+	    DoPerspective:		yes
+	    DoProjection:		yes
+	    DoStereo:			no
+	    DoStereoSwitch:		no
+
+	Lights:
+	    DoLightColor:		yes
+	    DoLightIntens:		yes
+	    DoLightSpreadAngles:	yes
+	    DoLightSpreadExp:	    	yes
+	    DoLightType:		yes
+
+	Geometry:			yes
+	    DoPointList:		yes
+	    DoLineList:			yes
+	    DoPolyline:			yes
+	    DoTriangleList:		yes
+	    DoTriangleMesh:		yes
+	    Frame coordinates:		yes
+
+	Shading Attributes:		Pseudo	True Color
+	    DoAmbientIntens:		no	yes
+	    DoAmbientSwitch:		no	yes
+	    DoDepthCue:			yes	yes
+	    DoDepthCueSwitch:		yes	yes
+	    DoDiffuseColor:		yes	yes
+	    DoDiffuseIntens:		yes	yes
+	    DoDiffuseSwitch:	    	yes	yes
+	    DoInterpType:		yes	yes
+	    DoLightSwitch:		yes	yes
+	    DoReflectionSwitch:		no	no
+	    DoShadowSwitch:		no	no
+	    DoShadeIndex:		yes	n.a.
+	    DoSpecularColor:		no	yes
+	    DoSpecularFactor:		no	yes
+	    DoSpecularIntens:		no	yes
+	    DoSpecularSwitch:		no	yes
+	    DoSurfaceEdgeColor:		no	no
+	    DoSurfaceShade:		yes	yes
+	    DoTranspColor:		no	no
+	    DoTranspIntens:		yes	yes
+	    DoTranspSwitch:		yes	yes
+
+	Miscellaneous:
+	    DoBackfaceCullSwitch:	yes
+	    DoBackfaceCullable:		yes
+	    DoClipVol:			no
+	    DoHiddenSurfSwitch:		yes
+	    DoInvisSwitch:		yes
+	    DoLineType:			yes
+	    DoLineWidth:		yes
+	    DoRepType:	    		yes
+	    DoLocalAntiAliasSwitch:	no
+	    DoLocalAntiAliasStyle:	no
+
+	Texture Maps:
+	    DoTextureMapBump:			no
+	    DoTextureMapBumpSwitch:		no
+	    DoTextureMapDiffuseColor:		yes
+	    DoTextureMapDiffuseColorSwitch:	yes
+	    DoTextureMapEnviron:		no
+	    DoTextureMapEnvironSwitch:		no
+	    DoTextureMapTranspIntens:		no
+	    DoTextureMapTranspIntensSwitch:	no
+
+
+	Geometric Transformations:
+	    DoLookAtFrom:		yes
+	    DoPushMatrix:		yes
+	    DoPopMatrix:		yes
+	    DoRotate:			yes
+	    DoScale:			yes
+	    DoTranslate:		yes
+	    DoTransformMatrix:		yes
+
+
+	Texture Attributes:
+	    DoTextureAntiAlias:		yes
+	    DoTextureExtendUV:		yes
+	    DoTextureExtendUVW:		no
+	    DoTextureMatrixUV:		yes
+	    DoTextureMatrixUVW:		no
+	    DoTextureOp:		yes
+	    DoTextureScaleUV:		yes
+	    DoTextureScaleUVW:		no
+	    DoTextureTranslateUV:	yes
+	    DoTextureTranslateUVW:	no
+	    DoTextureUVIndex:		yes
+	    DoTextureUVWIndex:		no
+
+	View Attributes:
+	    DvSetBackgroundColor:	yes
+	    DvSetBackgroundJust:	yes
+	    DvSetBackgroundRaster:	yes
+
+
+==========================================================================
+
+			     Limitations
+
+==========================================================================
+Supports ambient, infinite, point and spot light types as available on 
+the particular hardware.  The attenuated light source types are 
+approximated with unattenuated versions.
+
+Supports a maximum of 8 lights.
+
+Color and Intensity of lights are ignored in PseudoColor mode.
+
+Does not support the interpolation type DcSurfaceShade for DoInterpType.
+
+DoAmbientIntens is only supported in TrueColor mode.
+
+Depth cueing effectively turns off all lighting attributes.  Vertex colors
+do work with depth cueing.
+
+DoTranspIntens uses a patterned write masking facility to emulate
+transparency.  A 4x4 dither allows for 17 levels of transparency, which
+have uniformly distributed over the 0 to 1 range.
+
+Texture mapping is only provided on VGX systems.
+
+DoTextureAntiAlias supports DcTextureAntiAliasNone, DcTextureAntiAliasMIP
+and DcTextureAntiAliasBilinear.  All other types will be interperted as
+DcTextureAntiAliasNone.
+
+DoTextureExtendUV supports only DcExtendRepeat and DcTextureClamp.  All
+other types will be interperted as DcExtendClamp.
+
+The raster format DcRasterABGR is the native internal format for texture maps.
+If this format of raster is used, the raster data will not need to be
+reformated.
+
+DoTextureOp supports only DcTextureReplace and DcTextureMultiply.  All other
+types will be interperted as DcTextureReplace.
+
+Back face culling does not work in wireframe or point mode.
+
+The iris hardware considers a polygon facing away from a light source to be
+in it's own shadow.  This has the advantage that the dark side of a moon
+will in fact be dark.  However, surfaces that are not oriented for backface
+cullability will not be shaded correctly.  This would include all open 
+surfaces, such as a flag or open box, as well as self intersecting surfaces
+such as a Kline bottle.
+
+Cylinder subdivision is limited to 256 facets.

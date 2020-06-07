@@ -1,0 +1,165 @@
+.\"#ident "%W%" %G%
+.\"
+.\" Copyright (C) 1988, 1989, 1990, 1991 by Kubota Pacific Computer Inc.
+.\"         All Rights Reserved
+.\" This program is a trade secret of Kubota Pacific Computer Inc. and
+.\" it is not to be reproduced, published, disclosed to others, copied,
+.\" adapted, distributed, or displayed without the prior authorization
+.\" of Kubota Pacific Computer Inc.  Licensee agrees to attach or embed
+.\" this Notice on all copies of the program, including partial copies
+.\" or modified versions thereof.
+.\"
+.ds CT Overview
+.so ../macros/local.me
+.ds BT \*(Dd Programmer's Guide
+.ds h1 1
+.L1 O VERVIEW
+.CH ONE
+.sp -1.5v
+\*(Dd is a powerful graphics library that enables you to produce
+both dynamic image sequences and near-photographic
+quality images.  With the \*(Do, you can combine full-color,
+high-resolution, three-dimensional images with computationally
+intensive applications.  
+\*(Dd is device
+independent and is designed to interface easily with existing
+software applications.
+.lp
+\*(Dd, which stands for \f3D\f1ynamic
+\f3O\f1bject \f3R\f1endering \f3E\f1nvironment, is uniquely
+suited to advance the needs of a variety of users. 
+Because of its ease of use, its portability and extendability,
+and its powerful graphics features, \*(Dd offers users a
+complete solution for their needs.
+\*(Dd handles a wide range of applications\|\(em\|from the very 
+simple to the more complex and compute intensive applications,
+such as molecular modeling,
+fluid dynamics, and mechanical stress loadings.
+.sp -.5v
+.H1 "Graphics Tools"
+\*(Dd provides a comprehensive set of tools for creating 
+graphics applications, including:
+.BU hs
+geometric primitives, such as polygons and patches, for representing
+objects.  Advanced primitives include polygonal meshes, closed
+cubic
+surfaces, and nonuniform rational B-spline surfaces.
+.BU hs
+surface properties, such as ambient, diffuse, and specular light
+reflectance.  Other surface properties available in \*(Dd include
+transparency, shadows, and environmental reflection.
+.BU hs
+features that enable you to describe a graphics \f2scene\fP
+that
+includes the objects, as well as the lights that illuminate them
+and the cameras used to \f2view\fP them.
+.BU hs
+rendering representations, including points, wireframe, faceted,
+and smooth-shaded surface types, and combinations of styles in
+the same scene.
+.BU hs
+a wide array of functions that enable you to edit your graphics
+database.
+.sp -.5v
+.H1 "Ease of Use"
+The \*(Do was designed for ease of use.  Although some
+familiarity with basic graphics programming concepts is assumed,
+you don't have to be a graphics expert to use the \*(Do.
+The \*(Dd programmer needs to supply only one basic description
+of an object's geometry and its attributes (how it is colored,
+lit, and modified).  Then \*(Dd, not the programmer, takes care
+of displaying the object in a variety of styles.  Decomposition,
+shading, and hidden surface algorithms are handled by \*(Dd as
+well.
+On the other hand, experienced graphics users will find
+\*(Dd flexible and unrestrictive.
+.sp -.5v
+.H1 "Interactivity"
+\*(Dd was designed and built with interactivity in mind.
+For example, \*(Dd includes picking functionality, which 
+is essential for many interactive graphics applications.
+The \*(Dd database is traversed every time
+an image is generated.
+To achieve the high image update rate required
+for real-time graphics, an efficient scheme was implemented
+for the traversal. 
+.sp -.5v
+.H1 "Multiple Output Devices and Renderers"
+\*(Dd supports both multiple output devices and multiple renderers.
+The devices range from simple
+file output to sophisticated graphics hardware devices.
+The renderers range from dynamic
+renderers for interactive graphics, to photo-realistic
+renderers for high-quality static images.
+\*(Dd fully supports the more advanced renderers
+by including advanced graphics features such as
+shadows, refraction, and texture mapping.
+.lp
+A unique \*(Dd feature is that it uses the same
+graphical database for generating images with the different
+renderers.
+You don't need additional coding to create a variety
+of image representations of the same scene.
+Renderers are selected at image-generation time,
+allowing you to move back and forth between
+rendering styles.
+.sp -.5v
+.H1 "Device Independence"
+\*(Dd is easily portable and is available on several
+different platforms.
+From a user's point of view \*(Dd is 
+device independent. 
+You do not need to 
+modify \*(Dd code every time a piece of graphics
+hardware changes.
+You have the flexibility of being able to
+run your software on a wide range of platforms,
+including conventional supercomputers and 
+workstations. 
+That way a large number of users can easily
+share a common graphics interface.
+.sp -.5v
+.H1 "Use of Underlying Hardware and Software"
+Whenever possible \*(Dd takes full advantage of advanced
+features provided by underlying renderers and
+graphics hardware devices.
+Therefore, \*(Dd does not dictate how particular features
+in the interface are implemented at the lowest level. 
+The different renderers may use
+shading models of varying complexity.
+One graphics device may support
+true transparency, while another may
+simply approximate a transparent effect.
+If a renderer or device does not support 
+a particular feature it will do the best that it can. 
+For example, if smooth shading is not supported
+you may see only flat-shaded objects.
+If vertex colors are not supported they will be ignored.
+.lp
+In general, it will never hurt to include attributes
+that are not supported by the selected renderer.
+You can, for example, use a simple, real-time
+renderer to preview a scene that includes 
+advanced graphics attributes
+before generating an
+image with a high-quality renderer. 
+.lp
+Keep this in mind as you read this book.
+Implementation details are omitted from 
+general \*(Dd documentation.
+See your \f2\*(Dd System Guide\fP for 
+details on the renderers and devices provided
+with \*(Dd on your system.
+.H1 "Extendability"
+The \*(Dd graphics application interface is 
+continually being re-evaluated.
+As new graphics features from the research community
+become more widely accepted, they are incorporated 
+into \*(Dd.
+.lp
+The \*(Dd graphics application interface is also
+user extendable.
+Users can add their own primitives to the set provided by \*(Dd.
+The \*(Do includes documented tools for doing this.
+Once a user-defined primitive has been implemented, it
+is used exactly the same way as the standard \*(Dd primitives.

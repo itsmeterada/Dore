@@ -1,0 +1,111 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DoTextureIntermediateSurf 3D "Dore"
+.SH NAME
+DoTextureIntermediateSurf \- Create an intermediate surface texture attribute object for two-part texture mapping
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+DtObject DoTextureIntermediateSurf(surface_object, 
+	projection_type)
+DtObject surface_object;
+Dt2PartProjType projection_type;
+.sp
+.in  -.5i
+FORTRAN:
+.in  +.5i
+INTEGER*4 DOTIMS(SRFOBJ, PRJTYP)
+INTERNAL SRFOBJ
+INTEGER*4 PRJTYP
+.in  -.5i
+.fi 
+.IX "DoTextureIntermediateSurf"
+.IX "DOTIMS"
+.SH DESCRIPTION
+\f2DoTextureIntermediateSurf\fP creates an intermediate surface
+texture attribute object for two-part texture mapping.
+.PP
+Two-part mapping occurs when 
+you use \f2DoTextureMapDiffuseColor\fP <\f2DOTMDC\fP> to
+set the parameter \f2mapping\fP to
+\f2Dc2PartMap\fP <\f2DC2PM\fP>.
+A two-dimensional tabular texture 
+is then mapped onto a target object in two steps.  
+The two-dimensional 
+texture is first mapped onto a relatively simple three-dimensional 
+surface.  This intermediate 
+surface is sized and positioned relative to the target object and 
+the texture is projected from there onto the target object.  
+.PP
+The parameter \f2surface_object\f1 specifies which intermediate 
+surface object to map the texture onto.  \f2Surface_object\f1 
+can be a \f2DoPrimSurf <DOPMS>\f1 object or a \f2DoSimplePolygon 
+<DOSPGN>\f1 object.
+.PP
+The parameter \f2projection_type\f1 specifies the type of projection 
+to use between the intermediate surface and the target object.  
+Possible values for \f2projection_type\f1 are:
+.BP
+.PP
+.IP "\f2DcObjCentroid <DCOCTR>\f1"
+the point on the intermediate surface which is projected onto 
+a particular target point is determined by following a line 
+from the 
+target object's centroid through the point being rendered, until 
+it reaches the intermediate surface.  
+Do not use this mapping when 
+the intermediate surface is a simple polygon.
+.IP "\f2DcISN <DCISN>\f1"
+a point on the intermediate surface is projected onto all points
+on the target object that fall on a line from that intermediate
+surface point in the direction of its surface normal.
+In the case where multiple intermediate surface points 
+project onto the same target point, only one is used.
+Usually, depending on the renderer, it is the intermediate surface
+point closest to the target point, in the direction of the
+target point's normal.
+.PP
+While texture coordinates are not used for the target object, they are 
+used for mapping the two-dimensional texture onto the intermediate
+surface, as are the texture attributes for specifying the (\f2u,v\fP)
+index, the texture coordinate transformations, and the extend modes.
+The \f2DoCompTextureUVCallback <DOCTVC>\f1 attribute is used to determine
+the parameterization of the intermediate surface if it is a \f2DoPrimSurf
+<DOPMS>\f1 object.
+.PP
+The intermediate surface is sized and positioned relative to the target
+object using the geometric transformation attributes (\f2DoTranslate
+<DOXLT>\f1, etc.).
+.SH DEFAULTS
+.na
+.nh
+The defaults for \f2DoTextureIntermediateSurf\fP are 
+\f2(DoPrimSurf(DcSphere), DcObjCentroid)\f1.
+.ad
+.hy
+.SH SEE ALSO
+.na
+.nh
+DoCompTextureUVCallback(3D), DoPrimSurf(3D), DoTextureExtendUV(3D),
+DoTextureMapBump(3D), DoTextureMapDiffuseColor(3D), 
+DoTextureMapEnviron(3D), DoTextureMapTranspIntens(3D)
+DoTextureMatrixUV(3D), DoTextureScaleUV(3D), DoTextureTranslateUV(3D)
+.ad
+.hy
+\&

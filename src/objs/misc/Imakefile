@@ -1,0 +1,11 @@
+#include <Dore.tmpl>
+
+    SRCS = calbak.c datptr.c datval.c label.c null.c omisc_exeset.c \
+           omisc_namset.c omisc_pckid.c omisc_rstr.c popatt.c pshatt.c slot.c
+    OBJS = calbak.o datptr.o datval.o label.o null.o omisc_exeset.o \
+           omisc_namset.o omisc_pckid.o omisc_rstr.o popatt.o pshatt.o slot.o
+
+LibraryObjectRule()
+SubdirLibraryRule($(OBJS))
+
+DependTarget()

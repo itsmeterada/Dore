@@ -1,0 +1,13 @@
+#include <Dore.tmpl>
+
+    SRCS = bitfield.c bytord.c execsets.c filters.c gpolyd.c list.c \
+           modclpvol.c util_clip3d.c util_math.c \
+	   util_matrix.c util_stack.c
+    OBJS = bitfield.o bytord.o execsets.o filters.o gpolyd.o list.o \
+           modclpvol.o util_clip3d.o util_math.o \
+	   util_matrix.o util_stack.o
+
+LibraryObjectRule()
+SubdirLibraryRule($(OBJS))
+
+DependTarget()

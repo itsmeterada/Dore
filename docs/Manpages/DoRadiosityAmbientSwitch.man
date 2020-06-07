@@ -1,0 +1,69 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DoRadiosityAmbientSwitch 3D  "Dore"
+.SH NAME
+DoRadiosityAmbientSwitch \- Create radiosity ambient switch primitive attribute object 
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+DtObject DoRadiosityAmbientSwitch(switchvalue)
+DtSwitch switchvalue;
+.sp
+.in -.5i
+FORTRAN:
+.in +.5i
+INTEGER*4 DORDAS(SWVAL)
+INTEGER*4 SWVAL
+.in -.5i
+.fi
+.SH DESCRIPTION
+.IX DORDAS
+.IX DoRadiosityAmbientSwitch
+\f2DoRadiosityAmbientSwitch\fP creates a radiosity switch primitive attribute
+object. The parameter \f2switchvalue\fP specifies whether
+an estimated ambient component should be added to the radiosity
+of an object at the time it is displayed.
+.PP
+When radiosity is used, a global ambient component is computed using the
+total unshot energy in the scene and an average overall interreflection factor.
+If the \f2DoRadiositySwitch <DORADS> \fP switch is
+\f2DcOn\fP <\f2DCON\fP> for an object,
+the global ambient component is weighted by the object's reflectance
+(its diffuse color) and the result is added to the current radiosity 
+value of the object.
+The ambient term is added for display purposes only and is not taken
+into account by the radiosity solution itself.
+.PP
+With progressive radiosity, energy is distributed in an iterative
+manner. Dark images may result when displaying the results of the first few
+iterations.
+The addition of the ambient component overestimates the actual objects' intensities.
+This provides a way to get brighter images early in the process.
+The contribution of the ambient term decreases as more iterations
+are computed, and becomes null when no more unshot energy
+remains in the scene.
+.PP
+.SH DEFAULTS
+The default value for \f2DoRadiosityAmbientSwitch\fP is \f2DcOff\fP <\f2DCOFF\fP>.
+.SH "SEE ALSO"
+.nh
+.na
+DoRadiositySwitch(3D)
+.ad
+.hy

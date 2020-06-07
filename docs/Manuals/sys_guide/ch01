@@ -1,0 +1,235 @@
+.\"#ident "%W%" %G%
+.\"
+.\"
+.so ../macros/local.me
+.ds BT "\\*(Dd System Guide
+.ds CT "Contents of Release
+.ds h1 1
+.L1 C "ONTENTS OF"
+.L2 R "ELEASE 5.0"
+.CH ONE
+.rs
+.sp -.15v
+This chapter describes the contents of Portable \*(Dd release 5.0.
+.rs
+.sp -.5v
+.H1 "Contents of Portable \*(Dd Release 5.0"
+.rs
+.sp -.25v
+Portable \*(Dd release 5.0 contains the \*(Dd source code and is 
+structured to be easy to port to new platforms.
+It is also operates without change for the sample configurations
+provided.
+Automatic procedures assist in building the \*(Dd library
+for the sample configurations, as well as for new ports.
+Documentation is provided to assist in writing \*(Dd application
+programs, adding new renderers and device drivers to \*(Dd,
+building the \*(Dd library, and porting \*(Dd to new platforms.
+Several test programs are also provided to test the installation
+of \*(Dd, the incorporation of any new renderers or device drivers,
+and the porting to new platforms.
+.H2 "Sample Configurations
+Portable \*(Dd release 5.0 includes source code and makefiles
+for building four different sample \*(Dd configurations:
+.BU hs
+The \f2iris\fP configuration 
+runs on the Personal IRIS 4D series of workstations with color frame
+buffer and Z-buffer, manufactured by Silicon Graphics Inc.
+The SGI compatible cartridge tape distribution of Portable \*(Dd
+also includes this configuration already built
+into a library ready for use with \*(Dd applications.
+.BU hs
+The \f2suncxp\fP configuration
+runs on a Sun/3- or Sun/4-CXP
+8-bit color workstation with a CG frame buffer and a GP graphics
+accelerator, manufactured by Sun Microsystems, running the SunView
+windowing system. 
+.BU hs
+The \f2sungen\fP configuration
+runs on a Sun/3 or Sun/4 black and white or 8-bit color workstation, 
+manufactured by Sun Microsystems, running the SunView windowing system.
+.BU hs
+The \f2stdx\fP configuration
+runs on systems that support the X11 Window System.
+.rs
+.sp -.5v
+.H2 "Renderers"
+.rs
+.sp -.25v
+The Portable \*(Dd release 5.0 includes three renderers.
+The code for the renderers is contained in subdirectories under
+\f2dore/src/render_config\fP.
+The renderers are:
+.BU hs
+The standard production renderer 
+is a spatial subdivision ray tracer, which performs
+all rendering calculations in machine independent
+software.
+.BU hs
+The dynamic renderer is 
+designed for interactive graphics performance by taking advantage
+of the host system's graphics display hardware
+whenever possible.
+.BU hs
+The sample renderer in Appendix B is a toy renderer which
+provides an
+example of how renderers are interfaced to the \*(Dd system.
+It is not intended to be used for useful rendering.
+.rs
+.sp -.25v
+.lp
+Every \*(Dd system configuration includes both the dynamic renderer
+and the production renderer. In addition to the source code for these
+two renderers, your distribution tape also includes the source code
+of the sample renderer. 
+However, since the sample renderer does not produce useful
+graphical output, it is not installed in the \*(Dd system for any of the
+configurations.
+.rs
+.sp -.25v
+.lp
+The dynamic renderer is used when the rendering style
+(\f2DvSetRendStyle <DVSRS>\fP) is \f2DcRealTime <DCRLTM>\fP.  
+The standard production renderer is used when the rendering style is
+\f2DcProductionTime <DCPRTM>\fP. 
+.rs
+.sp -.5v
+.H2 "Device Drivers
+.rs
+.sp -.25v
+There are seven device drivers included in Portable \*(Dd release
+5.0.
+The device driver implementations are contained in directories under
+\f2dore/src/device_config\fP.
+.BU hs
+The \f2gl\fP device driver provides access to the Silicon Graphics
+Inc. Personal IRIS line of workstations.
+The driver also includes code to access the advanced features of the 
+Power Series VGX graphics subsystem.
+.BU hs
+The \f2ps\fP device driver writes PostScript drawing
+commands to a file that can then be printed on any color or black and white
+PostScript printer.
+.BU hs
+The \f2rasterfile\fP device driver writes an image to a file,
+using the \*(Dd raster format.
+.BU hs
+The \f2stdx11\fP device driver provides access to devices that
+support the X11 Protocol.
+.BU hs
+The \f2sunview_cxp\fP device driver provides access to the 3D
+graphics accelerators on Sun Microsystems Sun/3-CXP and Sun/4-CXP 
+workstations through the Sun GPSI interface.
+.BU hs
+The \f2sunview_gen\fP device driver provides access to black and
+white or color Sun Microsystems workstations running the SunView windowing system.
+Since no 3D graphics hardware support is provided, the device driver
+uses a software implementation of the graphics pipeline for 
+dynamic rendering.
+.BU hs
+The \f2sampledev\fP device driver is a sample driver that can be
+used as a starting point for new device driver implementations.
+.lp
+The device drivers included in each sample \*(Dd configuration
+are listed in the following table:
+.lp
+.TS
+tab (:) ;
+c | c
+c | c
+lp9 | lp9.
+Configuration:Device Drivers
+ : 
+_
+iris:T{
+.nf
+.nh
+gl
+rasterfile
+ps
+.fi
+.ny
+T}
+_
+suncxp:T{
+.nf
+.nh
+sunview_cxp
+sunview_gen
+rasterfile
+ps
+.fi
+.ny
+T}
+_
+sungen:T{
+.nf
+.nh
+sunview_gen
+rasterfile
+ps
+.fi
+.ny
+T}
+_
+stdx:T{
+.nf
+.nh
+stdx11
+rasterfile
+ps
+.fi
+.ny
+T}
+.TE
+.lp
+Your distribution tape includes the source code for the device
+drivers corresponding to your \*(Dd system configuration.
+In addition, the source code for the sample device driver is also
+provided. However, since the sample device driver does not produce useful
+graphical output, it is not installed in the \*(Dd system for any of the
+configurations.
+All of the device drivers, except the sample driver, are described
+in more detail in  \f2Device Drivers\f1.
+.lp
+A device driver is accessed from \*(Dd applications by creating a
+device object with a call to \f2DoDevice <DOD>\fP.
+For example, in C:
+.rs
+.sp -.25v
+.(m
+     device = DoDevice ("type", "");
+.)m
+.rs
+.sp -.25v
+or, in \*(Fo:
+.rs
+.sp -.25v
+.(m
+     DEV = DOD('type', 4, '', 0)
+.)m
+.rs
+.sp -.25v
+The second parameter (or third, for \*(Fo) specifies optional 
+initialization values for the device.
+.rs
+.sp -.25v
+.H2 "Documentation
+The following manuals are provided with Portable \*(Dd release 5.0:
+.BU hs
+The \f2\*(Dd Programmer's Guide\fP explains the key terms and concepts
+of programming with the \*(Dd library, with sample code fragments
+in C and \*(Fo.
+.BU hs
+The \f2\*(Dd Reference Manual\fP provides a complete description
+of all \*(Dd functions in \f2manpage\f1 format, as well as information 
+on raster data formats, transformation matrices used by \*(Dd, and a 
+discussion on renderer-dependent features of \*(Dd.
+.BU hs
+The \f2\*(Dd Developer's Guide\fP describes how to add new 
+renderers and device drivers to \*(Dd.
+It also provides information for system programmers to help them
+port \*(Dd to new platforms.
+.BU hs
+This document, the \f2\*(Dd System Guide\fP, describes Portable \*(Dd release 5.0 drivers.
+.rs

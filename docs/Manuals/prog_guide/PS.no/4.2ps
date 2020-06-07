@@ -1,0 +1,76 @@
+!md begin
+!/note {} def
+!/legal {} def
+!md /lnop known not { /lnop [ {} ] cvx def } if
+!/bigs [lnop lnop lnop lnop lnop lnop lnop lnop] def
+!/smalls [lnop lnop lnop lnop lnop lnop lnop lnop] def
+!/cp {pm restore pop pop} def
+!
+!T T -97 -93 2378 1819 32 72 72 1 F F F F T T psu
+!(TechPubs#1; document: Pentagon)jn
+!0 mf
+!od
+!op
+!0 0 xl
+!-1 72 mul -1.5 72 mul translate
+!0.5 0.5 scale
+!1 1 pen
+!0 0 gm
+!(nc 0 0 2281 1726 6 rc)kp
+!0 0 pen
+!0 0 lin
+!nc ct 39 0 put
+!1 1 pen
+!589 328 gm
+!pt
+!393 73 pl
+!ef
+!eu
+!(nc 0 0 2281 1726 6 rc)kp
+!0 0 pen
+!393 73 lin
+!393 73 lin
+!nc ct 39 0 put
+!1 1 pen
+!393 74 gm
+!pt
+!73 166 pl
+!ef
+!eu
+!(nc 0 0 2281 1726 6 rc)kp
+!0 0 pen
+!73 166 lin
+!73 166 lin
+!nc ct 39 0 put
+!1 1 pen
+!pt
+!73 495 pl
+!ef
+!eu
+!(nc 0 0 2281 1726 6 rc)kp
+!0 0 pen
+!73 495 lin
+!73 495 lin
+!nc ct 39 0 put
+!1 1 pen
+!72 495 gm
+!pt
+!387 584 pl
+!ef
+!eu
+!(nc 0 0 2281 1726 6 rc)kp
+!0 0 pen
+!387 584 lin
+!387 584 lin
+!nc ct 39 0 put
+!1 1 pen
+!pt
+!589 328 pl
+!ef
+!eu
+!(nc 0 0 2281 1726 6 rc)kp
+!0 0 pen
+!589 328 lin
+!F T cp
+!cd
+!end

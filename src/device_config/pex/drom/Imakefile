@@ -1,0 +1,13 @@
+#include <Dore.tmpl>
+
+    SRCS = annotext.c line.c pex_appatt.c pex_camera.c pex_data.c pex_drom.c \
+           pex_geoatt.c pex_light.c pex_method.c pex_modclip.c pex_print.c \
+	   pex_update.c point.c triangle.c
+    OBJS = annotext.o line.o pex_appatt.o pex_camera.o pex_data.o pex_drom.o \
+           pex_geoatt.o pex_light.o pex_method.o pex_modclip.o pex_print.o \
+	   pex_update.o point.o triangle.o
+
+LibraryObjectRule()
+SubdirLibraryRule($(OBJS))
+
+DependTarget()

@@ -1,0 +1,62 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DoCamera 3D  "Dore"
+.SH NAME
+DoCamera \- Create a camera studio object
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+DtObject DoCamera()
+.sp
+.in -.5i
+FORTRAN:
+.in +.5i
+INTEGER*4 DOCM()
+.in -.5i
+.fi
+.SH DESCRIPTION
+.IX DOCM
+.IX DoCamera
+\f2DoCamera\fP creates a camera object.
+A camera is a studio object.  It obtains properties only
+through attribute inheritance and then only during execution
+of definition objects.
+.PP
+Cameras obtain their position and orientation through inheritance of
+the current transformation matrix attribute values.
+\f2DoLookAtFrom\fP <\f2DOLAF\fP> is a common mechanism for 
+setting the transformation matrix prior to creating a camera.
+.PP
+The camera object itself is not visible; only its effects are.
+One may have an arbitrary number of cameras per view, but only one camera may
+be active at a given time (see \f2DvSetActiveCamera\fP).
+The active camera is the camera used to render the image in the view.
+.SH DEFAULTS
+The default camera model is a perspective camera with a field of view
+of 90 degrees, and the \f2hither\fP and \f2yon\fP planes at -.01 and -1.0,
+respectively.  The camera is positioned at the origin, pointing down
+the Z-axis in the negative direction.  Up is in the direction of the
+positive Y-axis.
+.SH "SEE ALSO"
+.na
+.nh
+DoCameraMatrix(3D), DoLookAtFrom(3D), DoPerspective(3D), DoParallel(3D),
+DvInqActiveCamera(3D), DvSetActiveCamera(3D)
+.ad
+.hy

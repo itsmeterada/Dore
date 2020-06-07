@@ -1,0 +1,75 @@
+/**************************************************************************
+# Copyright (C) 1994 Kubota Graphics Corp.
+# 
+# Permission to use, copy, modify, and distribute this material for
+# any purpose and without fee is hereby granted, provided that the
+# above copyright notice and this permission notice appear in all
+# copies, and that the name of Kubota Graphics not be used in
+# advertising or publicity pertaining to this material.  Kubota
+# Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+# OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+# "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+# PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+# EXPRESS OR IMPLIED.
+**************************************************************************/
+ 
+/*
+  ======================================================================
+  Functions:
+	ddr_x11_XFDI_return_functions ddr_x11_XFDI_return_functions (type, fcns)
+	ddr_x11_XFDI_install_driver ddr_x11_XFDI_install_driver (name)
+
+  ======================================================================
+ */
+#include "dore/internal/dogen.h"
+#include "dore/dore_develop/develop.h"
+/*
+ ======================================================================
+ */
+ddr_x11_XFDI_return_functions (type, fcns)
+     DtInt type;
+     DtPtr *fcns;
+{
+    extern DtPtr ddr_x11_XFDI_return_DCM_fcns();
+    extern DtPtr ddr_x11_XFDI_return_PROM_fcns();
+    extern DtPtr ddr_x11_XFDI_return_DROM_fcns();
+    extern DtPtr ddr_x11_XFDI_return_DROM_methods();
+
+    switch (type) {
+    case DDc_DCM:
+	*fcns = ddr_x11_XFDI_return_DCM_fcns();
+	break;
+
+    case DDc_PROM:
+	*fcns = ddr_x11_XFDI_return_PROM_fcns();
+	break;
+
+    case DDc_DROM:
+	*fcns = ddr_x11_XFDI_return_DROM_fcns();
+	break;
+
+    case DDc_DROMMethods:
+	*fcns = ddr_x11_XFDI_return_DROM_methods();
+	break;
+    default:
+	*fcns = (DtPtr)0;
+	break;
+    }
+}
+/*
+ ======================================================================
+ */
+
+ddr_x11_XFDI_install_driver (name)
+     DtPtr name;
+{
+    extern void ddr_x11_XFDI_drom_new_class();
+
+    DDdevice_InstallDriver
+	    ((name == DcNullPtr) ? (DtPtr)"stardentx11" : name,
+	     (DtPtr)"Stardent 1000/2000 Driver",
+	     ddr_x11_XFDI_return_functions);
+
+    DDclass_AddNotify((DtPFI)ddr_x11_XFDI_drom_new_class);
+}

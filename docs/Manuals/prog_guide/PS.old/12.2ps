@@ -1,0 +1,230 @@
+!md begin
+!/note {} def
+!/legal {} def
+!md /lnop known not { /lnop [ {} ] cvx def } if
+!/bigs [lnop lnop lnop lnop lnop lnop lnop lnop] def
+!/smalls [lnop lnop lnop lnop lnop lnop lnop lnop] def
+!/cp {pm restore pop pop} def
+!
+!T T -39 -37 951 728 80 72 72 1 F F F F T T psu
+!(TechPubs#1; document: 12-2PickPathSphere)jn
+!0 mf
+!od
+!op
+!0 0 xl
+!0 72 mul -1.25 72 mul translate
+!1 1 scale
+!1 1 pen
+!0 0 gm
+!(nc 0 0 912 691 6 rc)kp
+!72.5 102.5 91.5 151.5 0 rc
+!91.5 102.5 110.5 151.5 0 rc
+!110.5 102.5 129.5 151.5 0 rc
+!69.5 74.5 130.5 136.5 126 233 0 ar
+!0 0 pen
+!0 0 lin
+!nc ct 39 0 put
+!3 3 pen
+!128 102 gm
+!pt
+!128 150 pl
+!rh
+!ef
+!eu
+!(nc 0 0 912 691 6 rc)kp
+!0 0 pen
+!128 150 lin
+!1 1 pen
+!128.5 102.5 147.5 151.5 0 rc
+!147.5 102.5 166.5 151.5 0 rc
+!166.5 102.5 185.5 151.5 0 rc
+!125.5 74.5 187.5 136.5 126 233 0 ar
+!0 0 pen
+!128 150 lin
+!nc ct 39 0 put
+!3 3 pen
+!184 102 gm
+!pt
+!184 150 pl
+!rh
+!ef
+!eu
+!(nc 0 0 912 691 6 rc)kp
+!0 0 pen
+!184 150 lin
+!1 1 pen
+!184.5 102.5 203.5 151.5 0 rc
+!203.5 102.5 223.5 151.5 0 rc
+!223.5 102.5 241.5 151.5 0 rc
+!181.5 74.5 243.5 136.5 126 233 0 ar
+!0 0 pen
+!184 150 lin
+!nc ct 39 0 put
+!3 3 pen
+!240 102 gm
+!pt
+!240 150 pl
+!rh
+!ef
+!eu
+!(nc 0 0 912 691 6 rc)kp
+!0 0 pen
+!240 150 lin
+!1 1 pen
+!240.5 102.5 259.5 151.5 0 rc
+!259.5 102.5 279.5 151.5 0 rc
+!279.5 102.5 297.5 151.5 0 rc
+!237.5 74.5 299.5 136.5 126 233 0 ar
+!0 0 pen
+!240 150 lin
+!nc ct 39 0 put
+!3 3 pen
+!296 102 gm
+!pt
+!296 150 pl
+!rh
+!ef
+!eu
+!(nc 0 0 912 691 6 rc)kp
+!0 0 pen
+!296 150 lin
+!1 1 pen
+!86 179 gm
+!(nc 74 178 93 261 6 rc)kp
+!bu fc
+!{}mark T /Helvetica /Helvetica 0 rf
+!bn
+!1 setTxMode
+!0 fs
+!12.47991 fz
+!bu fc
+!2 F /Helvetica fnt
+!bn
+!1.10946 0. 32 0.11094 0.(Group Handle)awidthshow
+!107 181 gm
+!(nc 95 180 114 227 6 rc)kp
+!0 gr
+!2.80120 0. 32 0.28012 0.(Pick ID)awidthshow
+!124 181 gm
+!(nc 112 180 147 397 6 rc)kp
+!2.84072 0. 32 0.28407 0.(Number of the Element Pointing to)awidthshow
+!140 181 gm
+!3.01788 0. 32 0.30178 0.(the next object in the pick path)awidthshow
+!0 0 pen
+!159 181 gm
+!(nc 0 0 912 691 6 rc)kp
+!159 181 lin
+!nc ct 39 0 put
+!1 1 pen
+!120 153 gm
+!pr
+!120 153 pl
+!117 162 pl
+!123 162 pl
+!120 153 pl
+!1 ep
+!pr
+!120 153 pl
+!117 162 pl
+!123 162 pl
+!120 153 pl
+!0 ep
+!120 176 gm
+!pt
+!120 161 pl
+!rh
+!ef
+!eu
+!(nc 0 0 912 691 6 rc)kp
+!0 0 pen
+!120 161 lin
+!120 161 lin
+!nc ct 39 0 put
+!1 1 pen
+!102 152 gm
+!pr
+!102 152 pl
+!99 161 pl
+!105 161 pl
+!102 152 pl
+!1 ep
+!pr
+!102 152 pl
+!99 161 pl
+!105 161 pl
+!102 152 pl
+!0 ep
+!102 177 gm
+!pt
+!102 160 pl
+!rh
+!ef
+!eu
+!(nc 0 0 912 691 6 rc)kp
+!0 0 pen
+!102 160 lin
+!102 160 lin
+!nc ct 39 0 put
+!1 1 pen
+!81 153 gm
+!pr
+!81 153 pl
+!78 162 pl
+!84 162 pl
+!81 153 pl
+!1 ep
+!pr
+!81 153 pl
+!78 162 pl
+!84 162 pl
+!81 153 pl
+!0 ep
+!81 177 gm
+!pt
+!81 161 pl
+!rh
+!ef
+!eu
+!(nc 0 0 912 691 6 rc)kp
+!0 0 pen
+!81 161 lin
+!1 1 pen
+!87 118 gm
+!(nc 75 117 94 136 6 rc)kp
+!-0.64486 0.(G1)ashow
+!107 122 gm
+!(nc 95 121 114 132 6 rc)kp
+!(0)show
+!126 122 gm
+!(nc 114 121 133 132 6 rc)kp
+!(3)show
+!144 118 gm
+!(nc 132 117 151 136 6 rc)kp
+!-0.64486 0.(G2)ashow
+!163 122 gm
+!(nc 151 121 170 132 6 rc)kp
+!(0)show
+!182 122 gm
+!(nc 170 121 189 132 6 rc)kp
+!(1)show
+!200 118 gm
+!(nc 188 117 207 136 6 rc)kp
+!-0.64486 0.(G3)ashow
+!219 122 gm
+!(nc 207 121 226 132 6 rc)kp
+!(5)show
+!238 122 gm
+!(nc 226 121 245 132 6 rc)kp
+!(2)show
+!256 118 gm
+!(nc 244 117 263 136 6 rc)kp
+!-0.64802 0.(SP)ashow
+!276 122 gm
+!(nc 264 121 283 132 6 rc)kp
+!(5)show
+!294 122 gm
+!(nc 282 121 301 132 6 rc)kp
+!(?)show
+!F T cp
+!cd
+!end

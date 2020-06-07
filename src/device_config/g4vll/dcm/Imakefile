@@ -1,0 +1,9 @@
+#include <Dore.tmpl>
+
+    SRCS = g4vll_dcm.c g4vll_inq.c g4vll_output.c g4vll_set.c
+    OBJS = g4vll_dcm.o g4vll_inq.o g4vll_output.o g4vll_set.o
+
+LibraryObjectRule()
+SubdirLibraryRule($(OBJS))
+
+DependTarget()

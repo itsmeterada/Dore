@@ -1,0 +1,354 @@
+!md begin
+!/note {} def
+!/legal {} def
+!md /lnop known not { /lnop [ {} ] cvx def } if
+!/bigs [lnop lnop lnop lnop lnop lnop lnop lnop] def
+!/smalls [lnop lnop lnop lnop lnop lnop lnop lnop] def
+!/cp {pm restore pop pop} def
+!
+!T T -46 -44 1136 869 67 72 72 1 F F F F T T psu
+!(TechPubs#1; document: 7-13BoltOriginCenter)jn
+!0 mf
+!od
+!op
+!0 0 xl
+!0 72 mul -1.25 72 mul translate
+!1 1 scale
+!1 1 pen
+!0 0 gm
+!(nc 0 0 1090 825 6 rc)kp
+!64 gr
+!185 153 222 208 4 ov
+!0 gr
+!185.5 153.5 221.5 207.5 0 ov
+!64 gr
+!329 153 366 208 4 ov
+!0 gr
+!329.5 153.5 365.5 207.5 0 ov
+!0 0 pen
+!0 0 lin
+!nc ct 39 0 put
+!1 1 pen
+!203 153 gm
+!pt
+!342 153 pl
+!rh
+!ef
+!eu
+!(nc 0 0 1090 825 6 rc)kp
+!0 0 pen
+!342 153 lin
+!342 153 lin
+!nc ct 39 0 put
+!1 1 pen
+!203 207 gm
+!pt
+!342 207 pl
+!rh
+!ef
+!eu
+!(nc 0 0 1090 825 6 rc)kp
+!0 0 pen
+!342 207 lin
+!342 207 lin
+!nc ct 39 0 put
+!1 1 pen
+!81 180 gm
+!pr
+!81 180 pl
+!90 183 pl
+!90 177 pl
+!81 180 pl
+!1 ep
+!pr
+!81 180 pl
+!90 183 pl
+!90 177 pl
+!81 180 pl
+!0 ep
+!0 0 1 4 1 dh
+!203 180 gm
+!pt
+!200 180 pl
+!199 180 pl
+!195 180 gm
+!192 180 pl
+!191 180 pl
+!187 180 gm
+!184 180 pl
+!183 180 pl
+!179 180 gm
+!176 180 pl
+!175 180 pl
+!171 180 gm
+!168 180 pl
+!167 180 pl
+!163 180 gm
+!160 180 pl
+!159 180 pl
+!155 180 gm
+!152 180 pl
+!151 180 pl
+!147 180 gm
+!144 180 pl
+!143 180 pl
+!139 180 gm
+!136 180 pl
+!135 180 pl
+!131 180 gm
+!128 180 pl
+!127 180 pl
+!123 180 gm
+!120 180 pl
+!119 180 pl
+!115 180 gm
+!112 180 pl
+!111 180 pl
+!107 180 gm
+!104 180 pl
+!103 180 pl
+!99 180 gm
+!96 180 pl
+!95 180 pl
+!rh
+!ef
+!eu
+!(nc 0 0 1090 825 6 rc)kp
+!0 0 pen
+!91 180 gm
+!91 180 lin
+!91 180 lin
+!nc ct 39 0 put
+!1 1 pen
+!203 306 gm
+!pr
+!203 306 pl
+!206 297 pl
+!200 297 pl
+!203 306 pl
+!1 ep
+!pr
+!203 306 pl
+!206 297 pl
+!200 297 pl
+!203 306 pl
+!0 ep
+!0 0 1 4 1 dh
+!203 180 gm
+!pt
+!203 183 pl
+!203 184 pl
+!203 188 gm
+!203 191 pl
+!203 192 pl
+!203 196 gm
+!203 199 pl
+!203 200 pl
+!203 204 gm
+!203 207 pl
+!203 208 pl
+!203 212 gm
+!203 215 pl
+!203 216 pl
+!203 220 gm
+!203 223 pl
+!203 224 pl
+!203 228 gm
+!203 231 pl
+!203 232 pl
+!203 236 gm
+!203 239 pl
+!203 240 pl
+!203 244 gm
+!203 247 pl
+!203 248 pl
+!203 252 gm
+!203 255 pl
+!203 256 pl
+!203 260 gm
+!203 263 pl
+!203 264 pl
+!203 268 gm
+!203 271 pl
+!203 272 pl
+!203 276 gm
+!203 279 pl
+!203 280 pl
+!203 284 gm
+!203 287 pl
+!203 288 pl
+!203 292 gm
+!203 295 pl
+!203 296 pl
+!rh
+!ef
+!eu
+!(nc 0 0 1090 825 6 rc)kp
+!0 0 pen
+!203 296 lin
+!203 296 lin
+!nc ct 39 0 put
+!1 1 pen
+!288 95 gm
+!pr
+!288 95 pl
+!280 99 pl
+!284 103 pl
+!288 95 pl
+!1 ep
+!pr
+!288 95 pl
+!280 99 pl
+!284 103 pl
+!288 95 pl
+!0 ep
+!203 180 gm
+!pt
+!206 177 pl
+!207 176 pl
+!211 172 gm
+!214 169 pl
+!215 168 pl
+!219 164 gm
+!222 161 pl
+!223 160 pl
+!227 156 gm
+!230 153 pl
+!231 152 pl
+!235 148 gm
+!238 145 pl
+!239 144 pl
+!243 140 gm
+!246 137 pl
+!247 136 pl
+!251 132 gm
+!254 129 pl
+!255 128 pl
+!259 124 gm
+!262 121 pl
+!263 120 pl
+!267 116 gm
+!270 113 pl
+!271 112 pl
+!275 108 gm
+!278 105 pl
+!279 104 pl
+!ef
+!eu
+!(nc 0 0 1090 825 6 rc)kp
+!0 0 pen
+!282 101 gm
+!282 101 lin
+!1 1 pen
+!64 gr
+!75 192 96 236 2 rc
+!89 193 gm
+!(nc 75 192 96 236 6 rc)kp
+!bu fc
+!{}mark T /Helvetica /Helvetica 0 rf
+!bn
+!1 setTxMode
+!0 fs
+!14.55990 fz
+!bu fc
+!2 F /Helvetica fnt
+!bn
+!1.57684 0. 32 0.15768 0.(Y \(up\))awidthshow
+!112 193 gm
+!(nc 0 0 1090 825 6 rc)kp
+!64 gr
+!179 284 200 348 2 rc
+!193 285 gm
+!(nc 179 284 200 348 6 rc)kp
+!0 gr
+!5.13549 0. 32 0.51354 0.(X \(right\))awidthshow
+!216 285 gm
+!(nc 0 0 1090 825 6 rc)kp
+!64 gr
+!296 71 317 122 2 rc
+!310 72 gm
+!(nc 296 71 317 122 6 rc)kp
+!0 gr
+!3.83621 0. 32 0.38362 0.(Z \(out\))awidthshow
+!333 72 gm
+!(nc 0 0 1090 825 6 rc)kp
+!126.5 135.5 171.5 221.5 0 rc
+!194.5 135.5 239.5 221.5 0 rc
+!0 0 pen
+!333 72 lin
+!nc ct 39 0 put
+!1 1 pen
+!207 90 gm
+!64 gr
+!qf
+!pt
+!162 90 pl
+!126 135 pl
+!171 135 pl
+!207 90 pl
+!ef
+!0 gr
+!eu
+!(nc 0 0 1090 825 6 rc)kp
+!0 0 pen
+!0 gr
+!207 90 lin
+!207 90 lin
+!nc ct 39 0 put
+!1 1 pen
+!162 90 gm
+!pt
+!194 135 pl
+!239 135 pl
+!207 90 pl
+!ef
+!eu
+!(nc 0 0 1090 825 6 rc)kp
+!0 0 pen
+!207 90 lin
+!207 90 lin
+!nc ct 39 0 put
+!1 1 pen
+!162 90 gm
+!pt
+!207 90 pl
+!rh
+!ef
+!eu
+!(nc 0 0 1090 825 6 rc)kp
+!0 0 pen
+!207 90 lin
+!207 90 lin
+!nc ct 39 0 put
+!1 1 pen
+!207 266 gm
+!64 gr
+!qf
+!pt
+!162 266 pl
+!126 221 pl
+!171 221 pl
+!207 266 pl
+!ef
+!0 gr
+!eu
+!(nc 0 0 1090 825 6 rc)kp
+!0 0 pen
+!0 gr
+!207 266 lin
+!207 266 lin
+!nc ct 39 0 put
+!1 1 pen
+!162 266 gm
+!pt
+!194 221 pl
+!239 221 pl
+!207 266 pl
+!ef
+!eu
+!(nc 0 0 1090 825 6 rc)kp
+!0 0 pen
+!207 266 lin
+!F T cp
+!cd
+!end

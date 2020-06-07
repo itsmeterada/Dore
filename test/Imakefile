@@ -1,0 +1,32 @@
+XCOMM Be sure to check the README!
+
+#define UseInstalled
+#include <Dore.tmpl>
+
+           SRCS = geom_spec.c user_parse.c
+           OBJS = geom_spec.o user_parse.o
+        DEPLIBS = $(DEPDORELIB)
+         DUILIB = ../dui/LibraryTargetName(dui)
+        DEFINES = -Dstdx
+       PROGRAMS = dor2X11
+      TESTPROGS = sample dyn_prims dyn_temple dyn_test dyn_texture dyn_tree \
+                  pro_prims pro_temple pro_tree
+        DR_OBJS = dynamic.o prsarg.o callback.o
+       	PR_OBJS = production.o prsarg.o callback.o
+
+AllTarget($(PROGRAMS) $(TESTPROGS))
+
+NormalProgramTarget(sample,sample.o,$(DEPLIBS),$(DORELIB) $(DORE_DEV_LIBS),)
+NormalProgramTarget(dyn_test,$(DR_OBJS) test.o,$(DEPLIBS),$(DORELIB) $(DORE_DEV_LIBS),)
+NormalProgramTarget(dyn_prims,$(DR_OBJS) prims.o,$(DEPLIBS),$(DORELIB) $(DORE_DEV_LIBS),)
+NormalProgramTarget(dyn_tree,$(DR_OBJS) tree.o,$(DEPLIBS),$(DORELIB) $(DORE_DEV_LIBS),)
+NormalProgramTarget(dyn_temple,$(DR_OBJS) temple.o,$(DEPLIBS),$(DORELIB) $(DORE_DEV_LIBS),)
+NormalProgramTarget(dyn_texture,$(DR_OBJS) texture.o,$(DEPLIBS),$(DORELIB) $(DORE_DEV_LIBS),)
+NormalProgramTarget(pro_prims,$(PR_OBJS) prims.o,$(DEPLIBS),$(DORELIB) $(DORE_DEV_LIBS),)
+NormalProgramTarget(pro_tree,$(PR_OBJS) tree.o,$(DEPLIBS),$(DORELIB) $(DORE_DEV_LIBS),)
+NormalProgramTarget(pro_temple,$(PR_OBJS) temple.o,$(DEPLIBS),$(DORELIB) $(DORE_DEV_LIBS),)
+
+NormalProgramTarget(dor2X11,dor2X11.o prsarg.o rstrlib.o,,$(DORE_DEV_LIBS),)
+InstallProgram($(PROGRAM),$(BINDIR))
+
+DependTarget()

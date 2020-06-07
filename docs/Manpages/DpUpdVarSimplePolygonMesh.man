@@ -1,0 +1,130 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DpUpdVarSimplePolygonMesh 3D  "Dore"
+.SH NAME
+DpUpdVarSimplePolygonMesh \- Update a variable simple polygon mesh primitive object
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+void DpUpdVarSimplePolygonMesh(object, 
+		vertlocs, vertnorms, vertcolors, 
+		shape, decompose, recompute_norms)
+DtObject object;
+DtReal vertlocs[\|];
+DtReal vertnorms[\|];
+DtReal vertcolors[\|];
+DtShapeType shape;
+DtFlag decompose;
+DtFlag recompute_norms;
+.sp
+.in -.5i
+
+
+FORTRAN:
+.in +.5i
+CALL DPUVSM(OBJECT, VTXLOC, VTXNRM, 
+		VTXCLR, SHAPE, DECOMP, 
+		CMPNRM)
+INTEGER*4 OBJECT
+REAL*8 VTXLOC(*)
+REAL*8 VTXNRM(*)
+REAL*8 VTXCLR(*)
+INTEGER*4 SHAPE
+INTEGER*4 DECOMP
+INTEGER*4 CMPNRM
+.fi
+.SH DESCRIPTION 
+.IX DpUpdVarSimplePolygonMesh
+.IX DPUVSM
+.I DpUpdVarSimplePolygonMesh 
+updates a variable 
+simple polygon mesh primitive object.
+.PP
+The parameter \f2object\fP is the handle to the object. 
+.PP
+The parameter \f2vertlocs\fP is an array of vertex locations.
+If the vertex locations have not been modified use
+\f2DcNullPtr\fP <\f2DCNULL\fP>.
+The number of vertices, the number of polygons and the mesh
+connectivity cannot be modified.
+.PP
+The parameter \f2vertnorms\fP is an array of vertex normals.
+If the vertex normals have not been modified use
+\f2DcNullPtr\fP <\f2DCNULL\fP>.
+\f2vertnorms\fP must be a null pointer if vertex normals were
+not provided when the object was created with \f2DoVarSimplePolygonMesh\fP
+<\f2DOVSPM\fP>.
+.PP
+The parameter \f2vertcolors\fP is an array of vertex colors.
+If the vertex colors have not been modified use
+\f2DcNullPtr\fP <\f2DCNULL\fP>.
+\f2vertcolors\fP must be a null pointer if vertex colors were 
+not provided when the object was created with \f2DoVarSimplePolygonMesh\fP
+<\f2DOVSPM\fP>.
+.PP
+The parameter \f2shape\fP hints at the geometry of the polygons in
+the mesh.  The possible values for \f2shape\fP are:
+.IP "\f2DcConvex\fP <\f2DCCNVX\fP>"
+Path is wholly convex.
+.IP "\f2DcConcave\fP <\f2DCCNCV\fP>"
+Path may be concave but not self-intersecting.
+.PP
+Note that the shape must \f2not\fP be \f2DcComplex\fP <\f2DCCPLX\fP>.
+If the vertex locations have been modified then the 
+shape may not be the same as when the object was created.
+The parameter \f2decompose\fP specifies whether the polygons need
+to be redecomposed for rendering if the vertex 
+locations have been modified.
+.PP
+The parameter \f2recompute_norms\fP specifies whether normals 
+should be recomputed if \f2vertlocs\fP is not \f2DcNullPtr\fP
+<\f2DCNULL\fP>. 
+The vertex normals will only be recomputed if
+\f2smoothflag\fP was set when the object was created with 
+\f2DoVarSimplePolygonMesh\fP <\f2DOVSPM\fP>,
+and if the shading needs them.
+.SH ERRORS
+.I DpUpdVarSimplePolygonMesh
+will fail if the polygon shape is specified as \f2DcComplex\fP.
+.PP 15
+[WARNING - value out of range]
+.PP
+.I DpUpdVarSimplePolygonMesh
+will issue a warning if a zero vertex normal is calculated by Dore.
+.PP 15
+[WARNING - triangle normals sum to 0 at vertex, check for back to back triangles]
+.PP
+.I DpUpdVarSimplePolygonMesh
+will fail if an invalid object is specified.
+.PP 15
+[WARNING - invalid or deleted object]
+.PP
+.I DpUpdVarSimplePolygonMesh
+will fail if vertex normals are specified for an object that did not
+possess them originally.
+.PP 15
+[WARNING - value out of range]
+.PP
+.I DpUpdVarSimplePolygonMesh
+will fail if vertex colors are specified for an object that did not
+possess them originally.
+.PP 15
+[WARNING - value out of range]
+.SH "SEE ALSO"
+DoVarSimplePolygonMesh(3D)

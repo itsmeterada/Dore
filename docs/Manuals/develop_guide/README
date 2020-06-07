@@ -1,0 +1,39 @@
+This directory contains the troff files necessary to print
+out the 5.0 Dore Developer's Guide.  To print them, use
+the dpx utility.  The instructions and options are given in
+the manpage /usr/local/lib/dpx/doc/dpx.txt
+
+We recommend that you put the macros in /usr/local/lib/dpx.
+If you want to put them in another directory, you must change
+the .so line in each file.  Also, there are references to
+other macros in the local.me file.  There may be other cross
+references to macros which will have to be searched out.
+
+If you are going to print out double-sided copy, remember to insert blank pages
+so that each chapter has an even number of pages.
+~
+======================
+
+To display the files on the screen, use:
+
+nroff -me <filename> | more
+
+They will be readable, but some of the formatting characters will show.
+
+=======================
+Undocumented help for dpx:
+
+To run "mkindx", you must set the following:
+"setenv INDEXFILE index_file"
+
+To run ANYTHING, you must set the following in your PATH:
+"usr/local/lib/dpx/bin" 
+
+Check for the use of "delim" in in the files.
+The "delim" statement must come after the
+".so ../macros/<macro file>".
+
+Running Chapter 11 with the -debug option causes dpx to complain mightily
+about missing fonts.  This is because of the subscripts.
+The chapter prints out correctly, however.
+

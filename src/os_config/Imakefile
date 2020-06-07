@@ -1,0 +1,7 @@
+#include <Dore.tmpl>
+#define	IHaveSubdirs
+
+SUBDIRS = $(DORE_OS)
+
+MakeSubdirs($(SUBDIRS))
+DependSubdirs($(SUBDIRS))

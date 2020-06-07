@@ -1,0 +1,9 @@
+#include <Dore.tmpl>
+
+    SRCS = xtg2_dcm.c xtg2_inq.c xtg2_output.c xtg2_set.c
+    OBJS = xtg2_dcm.o xtg2_inq.o xtg2_output.o xtg2_set.o
+
+LibraryObjectRule()
+SubdirLibraryRule($(OBJS))
+
+DependTarget()

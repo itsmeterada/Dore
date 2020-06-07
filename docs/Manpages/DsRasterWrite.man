@@ -1,0 +1,73 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DsRasterWrite 3D "Dore"
+.SH NAME
+DsRasterWrite \- Write a raster object to a file
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+DtInt DsRasterWrite(raster, filename)
+DtObject raster;
+DtPtr filename;
+.sp
+.in  -.5i
+FORTRAN:
+.in  +.5i
+INTEGER*4 DSRSW(RASTER, FNAME, FLEN)
+INTEGER*4 RASTER
+INTEGER*4 FLEN
+CHARACTER*FLEN FNAME
+.in  -.5i
+.fi 
+.IX "DsRasterWrite"
+.IX "DSRSW"
+.SH DESCRIPTION
+.PP
+\f2DsRasterWrite\fP takes a raster object and writes it out to a file. 
+.PP
+The parameter \f2raster\fP is a handle to the raster object.
+The parameter \f2filename\fP is the name of the file. 
+.PP
+\f2DsRasterWrite\fP returns -1 if an error occurs (see below),
+otherwise \f2DsRasterWrite\fP returns 0.
+.SH FORTRAN SPECIFIC
+The parameter \f2FNAME\fP is a filename that is \f2FLEN\fP characters long.
+.SH ERRORS
+\f2DsRasterWrite\fP will fail if \f2raster\fP is not a valid raster object.
+.PP
+[WARNING - invalid or deleted object]
+.PP
+\f2DsRasterWrite\fP will fail if the raster object data is not one of
+the standard Dore types.
+.PP
+.na
+.nh
+[WARNING - unimplemented function. Cannot write DcRasterSpecial.]
+.ad
+.hy
+\f2DsRasterWrite\fP will fail if the file cannot be opened.
+.PP
+[WARNING - io error.  Could not open file \f2filename\fP for writing.]
+.SH SEE ALSO
+.nh
+.na
+DoRaster(3D), DsInqRaster(3D)
+.ad
+.hy
+\&

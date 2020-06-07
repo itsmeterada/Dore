@@ -1,0 +1,39 @@
+#include <Dore.tmpl>
+
+    SRCS = bakculswi.c bckcul.c opri_ambint.c opri_ambswi.c opri_bndvol.c \
+           opri_bndvolswi.c opri_clpswi.c opri_clpvol.c opri_cmptuvcbk.c \
+	   opri_cmptuvswi.c opri_cmptuvwcbk.c opri_cmptuvwswi.c opri_depcue.c \
+	   opri_depcueswi.c opri_difclr.c opri_difint.c opri_difswi.c \
+	   opri_emisclr.c opri_emisfct.c opri_emisswi.c opri_hidsrfswi.c \
+	   opri_inttyp.c opri_invswi.c opri_lgtswi.c opri_lintyp.c \
+	   opri_linwid.c opri_localaasty.c opri_localaaswi.c opri_minbndext.c \
+	   opri_mkrfnt.c opri_mkrgly.c opri_mkrscl.c opri_pckswi.c \
+	   opri_radambswi.c opri_radswi.c opri_reflecswi.c opri_refractidx.c \
+	   opri_refractswi.c opri_reptyp.c opri_shadowswi.c opri_shdidx.c \
+	   opri_spcclr.c opri_spcfct.c opri_spcint.c opri_spcswi.c \
+	   opri_srfedgclr.c opri_srfshd.c opri_subdivspc.c opri_transpclr.c \
+	   opri_transpint.c opri_transpswi.c opri_txtaln.c opri_txtexp.c \
+	   opri_txtfnt.c opri_txthgt.c opri_txtpat.c opri_txtprc.c \
+	   opri_txtspc.c opri_txtupvec.c trnorclr.c trnorexp.c trnorint.c \
+	   trnorswi.c
+    OBJS = bakculswi.o bckcul.o opri_ambint.o opri_ambswi.o opri_bndvol.o \
+           opri_bndvolswi.o opri_clpswi.o opri_clpvol.o opri_cmptuvcbk.o \
+	   opri_cmptuvswi.o opri_cmptuvwcbk.o opri_cmptuvwswi.o opri_depcue.o \
+	   opri_depcueswi.o opri_difclr.o opri_difint.o opri_difswi.o \
+	   opri_emisclr.o opri_emisfct.o opri_emisswi.o opri_hidsrfswi.o \
+	   opri_inttyp.o opri_invswi.o opri_lgtswi.o opri_lintyp.o \
+	   opri_linwid.o opri_localaasty.o opri_localaaswi.o opri_minbndext.o \
+	   opri_mkrfnt.o opri_mkrgly.o opri_mkrscl.o opri_pckswi.o \
+	   opri_radambswi.o opri_radswi.o opri_reflecswi.o opri_refractidx.o \
+	   opri_refractswi.o opri_reptyp.o opri_shadowswi.o opri_shdidx.o \
+	   opri_spcclr.o opri_spcfct.o opri_spcint.o opri_spcswi.o \
+	   opri_srfedgclr.o opri_srfshd.o opri_subdivspc.o opri_transpclr.o \
+	   opri_transpint.o opri_transpswi.o opri_txtaln.o opri_txtexp.o \
+	   opri_txtfnt.o opri_txthgt.o opri_txtpat.o opri_txtprc.o \
+	   opri_txtspc.o opri_txtupvec.o trnorclr.o trnorexp.o trnorint.o \
+	   trnorswi.o
+
+LibraryObjectRule()
+SubdirLibraryRule($(OBJS))
+
+DependTarget()

@@ -1,0 +1,57 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DoHiddenSurfSwitch 3D  "Dore"
+.SH NAME
+DoHiddenSurfSwitch \- Create a hidden surface switch primitive attribute object
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+DtObject DoHiddenSurfSwitch(switchvalue)
+DtSwitch switchvalue;
+.sp
+.in -.5i
+FORTRAN:
+.in +.5i
+INTEGER*4 DOHSS(SWVAL)
+INTEGER*4 SWVAL
+.in -.5i
+.fi
+.SH DESCRIPTION
+.IX DOHSS
+.IX DoHiddenSurfSwitch
+.I DoHiddenSurfSwitch
+creates a hidden surface primitive attribute object.
+The parameter \f2switchvalue\fP specifies whether 
+all portions of subsequent primitive objects will be rendered, including
+those that are obscured by other primitive objects or by other portions
+of the same object.
+.PP
+If \f2switchvalue\fP is \f2DcOff\fP <\f2DCOFF\fP>, primitive objects 
+render themselves completely even if they are partially
+or completely hidden with respect to the viewer
+by other primitive objects in the scene.  Hence,
+the order in which
+primitive objects are displayed is critical to the scene organization.
+If \f2switchvalue\fP is \f2DcOn\fP <\f2DCON\fP>, primitive objects do not
+render the portions of themselves that are hidden with respect to the viewer
+by other objects in the scene. 
+.SH DEFAULTS
+The default value for \f2DoHiddenSurfSwitch\fP is \f2DcOn\fP <\f2DCON\fP>.
+.SH "SEE ALSO"
+DoBackfaceCullSwitch(3D)

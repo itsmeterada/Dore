@@ -1,0 +1,1820 @@
+%!PS-Adobe-3.0
+%%Creator: groff version 1.06
+%%DocumentNeededResources: font Palatino-Roman
+%%+ font Palatino-Bold
+%%+ font Helvetica
+%%+ font Helvetica-Bold
+%%DocumentSuppliedResources: procset grops 1.06 0
+%%Pages: 21
+%%PageOrder: Ascend
+%%Orientation: Portrait
+%%EndComments
+%%BeginProlog
+%%BeginResource: procset grops 1.06 0
+%!PS-Adobe-3.0 Resource-ProcSet
+
+/setpacking where {
+	pop
+	currentpacking
+	true setpacking
+} if
+
+/grops 120 dict dup begin 
+
+% The ASCII code of the space character.
+/SC 32 def
+
+/A /show load def
+/B { 0 SC 3 -1 roll widthshow } bind def
+/C { 0 exch ashow } bind def
+/D { 0 exch 0 SC 5 2 roll awidthshow } bind def
+/E { 0 rmoveto show } bind def
+/F { 0 rmoveto 0 SC 3 -1 roll widthshow } bind def
+/G { 0 rmoveto 0 exch ashow } bind def
+/H { 0 rmoveto 0 exch 0 SC 5 2 roll awidthshow } bind def
+/I { 0 exch rmoveto show } bind def
+/J { 0 exch rmoveto 0 SC 3 -1 roll widthshow } bind def
+/K { 0 exch rmoveto 0 exch ashow } bind def
+/L { 0 exch rmoveto 0 exch 0 SC 5 2 roll awidthshow } bind def
+/M { rmoveto show } bind def
+/N { rmoveto 0 SC 3 -1 roll widthshow } bind def
+/O { rmoveto 0 exch ashow } bind def
+/P { rmoveto 0 exch 0 SC 5 2 roll awidthshow } bind def
+/Q { moveto show } bind def 
+/R { moveto 0 SC 3 -1 roll widthshow } bind def
+/S { moveto 0 exch ashow } bind def
+/T { moveto 0 exch 0 SC 5 2 roll awidthshow } bind def
+
+% name size font SF -
+
+/SF {
+	findfont exch
+	[ exch dup 0 exch 0 exch neg 0 0 ] makefont
+	dup setfont
+	[ exch /setfont cvx ] cvx bind def
+} bind def
+
+% name a c d font MF -
+
+/MF {
+	findfont
+	[ 5 2 roll
+	0 3 1 roll % b
+	neg 0 0 ] makefont
+	dup setfont
+	[ exch /setfont cvx ] cvx bind def
+} bind def
+
+/level0 0 def
+/RES 0 def
+/PL 0 def
+/LS 0 def
+
+% Guess the page length.
+% This assumes that the imageable area is vertically centered on the page.
+% PLG - length
+
+/PLG {
+	gsave newpath clippath pathbbox grestore
+	exch pop add exch pop
+} bind def
+
+% BP -
+
+/BP {
+	/level0 save def
+	1 setlinecap
+	1 setlinejoin
+	72 RES div dup scale
+	LS {
+		90 rotate
+	} {
+		0 PL translate
+	} ifelse
+	1 -1 scale
+} bind def
+
+/EP {
+	level0 restore
+	showpage
+} bind def
+
+
+% centerx centery radius startangle endangle DA -
+
+/DA {
+	newpath arcn stroke
+} bind def
+
+% x y SN - x' y'
+% round a position to nearest (pixel + (.25,.25))
+
+/SN {
+	transform 
+	.25 sub exch .25 sub exch
+	round .25 add exch round .25 add exch
+	itransform
+} bind def
+	
+% endx endy startx starty DL -
+% we round the endpoints of the line, so that parallel horizontal
+% and vertical lines will appear even
+
+/DL {
+	SN
+	moveto
+	SN
+	lineto stroke
+} bind def
+
+% centerx centery radius DC -
+
+/DC {
+	newpath 0 360 arc closepath
+} bind def
+
+
+/TM matrix def
+
+%  width height centerx centery DE -
+
+/DE {
+	TM currentmatrix pop
+	translate scale newpath 0 0 .5 0 360 arc closepath
+	TM setmatrix
+} bind def
+
+% these are for splines
+
+/RC /rcurveto load def
+/RL /rlineto load def
+/ST /stroke load def
+/MT /moveto load def
+/CL /closepath load def
+
+% fill the last path
+
+% amount FL -
+
+/FL {
+	currentgray exch setgray fill setgray
+} bind def
+
+% fill with the ``current color''
+
+/BL /fill load def
+
+/LW /setlinewidth load def
+% new_font_name encoding_vector old_font_name RE -
+
+/RE {
+	findfont
+	dup maxlength dict begin
+	{
+		1 index /FID ne { def } { pop pop } ifelse
+	} forall
+	/Encoding exch def
+	dup /FontName exch def
+	currentdict end definefont pop
+} bind def
+
+/DEFS 0 def
+
+% hpos vpos EBEGIN -
+
+/EBEGIN {
+	moveto
+	DEFS begin
+} bind def
+
+/EEND /end load def
+
+/CNT 0 def
+/level1 0 def
+
+% llx lly newwid wid newht ht newllx newlly PBEGIN -
+
+/PBEGIN {
+	/level1 save def
+	translate
+	div 3 1 roll div exch scale
+	neg exch neg exch translate
+	% set the graphics state to default values
+	0 setgray
+	0 setlinecap
+	1 setlinewidth
+	0 setlinejoin
+	10 setmiterlimit
+	[] 0 setdash
+	/setstrokeadjust where {
+		pop
+		false setstrokeadjust
+	} if
+	/setoverprint where {
+		pop
+		false setoverprint
+	} if
+	newpath
+	/CNT countdictstack def
+	userdict begin
+	/showpage {} def
+} bind def
+
+/PEND {
+	clear
+	countdictstack CNT sub { end } repeat
+	level1 restore
+} bind def
+
+end def
+
+/setpacking where {
+	pop
+	setpacking
+} if
+%%EndResource
+%%EndProlog
+%%BeginSetup
+%%IncludeResource: font Palatino-Roman
+%%IncludeResource: font Palatino-Bold
+%%IncludeResource: font Helvetica
+%%IncludeResource: font Helvetica-Bold
+grops begin/DEFS 1 dict def DEFS begin/u{.001 mul}bind def end/RES 72 def/PL
+792 def/LS false def/ENC0[/asciicircum/asciitilde/Scaron/Zcaron/scaron/zcaron
+/Ydieresis/trademark/quotesingle/.notdef/.notdef/.notdef/.notdef/.notdef
+/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef
+/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/space
+/exclam/quotedbl/numbersign/dollar/percent/ampersand/quoteright/parenleft
+/parenright/asterisk/plus/comma/hyphen/period/slash/zero/one/two/three/four
+/five/six/seven/eight/nine/colon/semicolon/less/equal/greater/question/at/A/B/C
+/D/E/F/G/H/I/J/K/L/M/N/O/P/Q/R/S/T/U/V/W/X/Y/Z/bracketleft/backslash
+/bracketright/circumflex/underscore/quoteleft/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q
+/r/s/t/u/v/w/x/y/z/braceleft/bar/braceright/tilde/.notdef/quotesinglbase
+/guillemotleft/guillemotright/bullet/florin/fraction/perthousand/dagger
+/daggerdbl/endash/emdash/ff/fi/fl/ffi/ffl/dotlessi/dotlessj/grave/hungarumlaut
+/dotaccent/breve/caron/ring/ogonek/quotedblleft/quotedblright/oe/lslash
+/quotedblbase/OE/Lslash/.notdef/exclamdown/cent/sterling/currency/yen/brokenbar
+/section/dieresis/copyright/ordfeminine/guilsinglleft/logicalnot/minus
+/registered/macron/degree/plusminus/twosuperior/threesuperior/acute/mu
+/paragraph/periodcentered/cedilla/onesuperior/ordmasculine/guilsinglright
+/onequarter/onehalf/threequarters/questiondown/Agrave/Aacute/Acircumflex/Atilde
+/Adieresis/Aring/AE/Ccedilla/Egrave/Eacute/Ecircumflex/Edieresis/Igrave/Iacute
+/Icircumflex/Idieresis/Eth/Ntilde/Ograve/Oacute/Ocircumflex/Otilde/Odieresis
+/multiply/Oslash/Ugrave/Uacute/Ucircumflex/Udieresis/Yacute/Thorn/germandbls
+/agrave/aacute/acircumflex/atilde/adieresis/aring/ae/ccedilla/egrave/eacute
+/ecircumflex/edieresis/igrave/iacute/icircumflex/idieresis/eth/ntilde/ograve
+/oacute/ocircumflex/otilde/odieresis/divide/oslash/ugrave/uacute/ucircumflex
+/udieresis/yacute/thorn/ydieresis]def/Helvetica-Bold@0 ENC0/Helvetica-Bold RE
+/Helvetica@0 ENC0/Helvetica RE/Palatino-Bold@0 ENC0/Palatino-Bold RE
+/Palatino-Roman@0 ENC0/Palatino-Roman RE
+%%EndSetup
+%%Page: 399 1
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 99 46.8 63 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 243 46.8 207 46.8 DL 279 46.8 243 46.8 DL 315 46.8 279 46.8 DL 351
+46.8 315 46.8 DL 387 46.8 351 46.8 DL 437.4 46.8 401.4 46.8 DL 464.4 46.8 428.4
+46.8 DL 500.4 46.8 464.4 46.8 DL 536.4 46.8 500.4 46.8 DL/F0 42
+/Palatino-Roman@0 SF(I)269.058 91 Q/F1 36/Palatino-Roman@0 SF(NDEX)A 99 186 63
+186 DL 135 186 99 186 DL 171 186 135 186 DL 207 186 171 186 DL 243 186 207 186
+DL 279 186 243 186 DL 315 186 279 186 DL 351 186 315 186 DL 387 186 351 186 DL
+437.4 186 401.4 186 DL 464.4 186 428.4 186 DL 500.4 186 464.4 186 DL 536.4 186
+500.4 186 DL/F2 17/Palatino-Bold@0 SF(A)63 259.2 Q/F3 11/Palatino-Roman@0 SF
+(active camera)63 284.4 Q/F4 11/Palatino-Bold@0 SF(5:)143.366 284.4 Q F3
+(24, 26;)A F4(7:)2.75 E F3(61-62;)A F4(A:)2.75 E F3(360)A
+(additional data space)63 297.6 Q F4(6:)180.524 297.6 Q F3(29, 32, 34, 41;)A F4
+(7:)2.75 E F3(52, 54, 58, 62, 75;)A F4(A:)2.75 E F3(355)A
+(additional object data)63 310.8 Q F4(6:)181.998 310.8 Q F3(29;)A F4(17:)2.75 E
+F3(238)A 1.284(alternate object)63 324 R F4(3:)153.128 324 Q F3(19-20;)A F4(6:)
+4.034 E F3 1.284(30, 35;)B F4(7:)4.034 E F3 1.284(57, 61;)B F4(9:)4.034 E F3
+(109;)A F4(A:)4.034 E F3 1.284(355-356, 359,)B(363)85 337.2 Q
+(ambient intensity)63 350.4 Q F4 -.407(11)161.681 350.4 S(:).407 E F3(172;)A F4
+(18:)2.75 E F3(309)A(ambient light)63 363.6 Q F4(7:)141.76 363.6 Q F3(70)A
+(ambient r)63 376.8 Q(e\215ectance)-.198 E F4(18:)171.152 376.8 Q F3(309, 314)A
+(antialiasing)63 390 Q F4(5:)133.224 390 Q F3(26;)A F4(12:)2.75 E F3(188)A
+(local)74 403.2 Q F4(18:)110.542 403.2 Q F3(322-323)A(attribute)63 416.4 Q
+(appearance)74 429.6 Q F4(9:)143.641 429.6 Q F3(92, 100;)A F4(10:)2.75 E F3
+(120;)A F4 -.407(11)2.75 G(:).407 E F3(133, 157, 166-167, 171)A(camera)74 442.8
+Q F4(5:)122.961 442.8 Q F3(26;)A F4(9:)2.75 E F3(100;)A F4 -.407(11)2.75 G(:)
+.407 E F3(133, 144-145, 160;)A F4(18:)2.75 E F3(291)A(class)74 456 Q F4(3:)
+110.663 456 Q F3(15-17;)A F4(6:)2.75 E F3(31-32;)A F4(A:)2.75 E F3(356, 360;)A
+F4(B:)2.75 E F3(365)A(global)74 469.2 Q F4(3:)119.244 469.2 Q F3(15-19;)A F4
+(5:)4.138 E F3(26-28;)A F4(6:)4.138 E F3 1.388(31-32, 38, 41;)B F4(7:)4.138 E
+F3 1.388(44-45, 66, 73;)B F4(13:)4.138 E F3(201;)A F4(A:)85 482.4 Q F3
+(356, 364;)A F4(B:)2.75 E F3(365-366, 378)A(light)74 495.6 Q F4(5:)110.256
+495.6 Q F3(26;)A F4(7:)2.75 E F3(63;)A F4(9:)2.75 E F3(95, 99;)A F4 -.407(11)
+2.75 G(:).407 E F3(133, 162-163;)A F4(18:)2.75 E F3(296, 317-321)A(objects)74
+508.8 Q F4(3:)120.816 508.8 Q F3(15;)A F4(5:)2.75 E F3(27;)A F4(A:)2.75 E F3
+(355)A(transformation)74 522 Q F4(3:)160.669 522 Q F3(16-17;)A F4(7:)2.75 E F3
+(44;)A F4(9:)2.75 E F3(101;)A F4(A:)2.75 E F3(358;)A F4(B:)2.75 E F3(365)A
+(see global attribute classes)74 535.2 Q F2(B)63 567.6 Q F3(backface culling)63
+592.8 Q F4(18:)155.037 592.8 Q F3(310-31)A(1)-.605 E(backgr)63 606 Q 3.243
+(ound color)-.198 F F4(5:)169.036 606 Q F3(24;)A F4(9:)5.993 E F3 3.243
+(88, 90;)B F4 -.407(11)5.993 G(:).407 E F3 3.243(151, 154;)B F4(17:)5.993 E F3
+3.243(244-245, 254;)B F4(18:)85 619.2 Q F3(272, 280-281, 351)A(base primitives)
+63 632.4 Q F4(6:)151.022 632.4 Q F3(30-31, 38;)A F4(7:)2.75 E F3(44, 77;)A F4
+(A:)2.75 E F3(355-356, 359)A(building the test pr)63 645.6 Q(ograms)-.198 E F4
+(14:)206.022 645.6 Q F3(209)A 1.44 LW 81 756 63 756 DL 99 756 81 756 DL 117 756
+99 756 DL 135 756 117 756 DL 153 756 135 756 DL 171 756 153 756 DL 189 756 171
+756 DL 207 756 189 756 DL 225 756 207 756 DL 243 756 225 756 DL 261 756 243 756
+DL 279 756 261 756 DL 297 756 279 756 DL 315 756 297 756 DL 333 756 315 756 DL
+351 756 333 756 DL 369 756 351 756 DL 387 756 369 756 DL 419.4 756 401.4 756 DL
+428.4 756 410.4 756 DL 446.4 756 428.4 756 DL 464.4 756 446.4 756 DL 482.4 756
+464.4 756 DL 500.4 756 482.4 756 DL 518.4 756 500.4 756 DL 536.4 756 518.4 756
+DL/F5 9/Helvetica@0 SF(Inde)365.256 768.96 Q(x)-.27 E(Dore)416.802 768.96 Q
+3.506<b444>432.304 768.96 S -2.187 -.27(ev e)445.305 768.96 T(loper').27 E
+2.502(sG)-.45 G(uide)494.877 768.96 Q/F6 9/Helvetica-Bold@0 SF(I-399)4.002 E EP
+%%Page: 400 2
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 108 46.8 72 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 257.4 46.8 221.4 46.8 DL 293.4 46.8 257.4 46.8 DL 329.4 46.8 293.4
+46.8 DL 365.4 46.8 329.4 46.8 DL 401.4 46.8 365.4 46.8 DL 437.4 46.8 401.4 46.8
+DL 473.4 46.8 437.4 46.8 DL 509.4 46.8 473.4 46.8 DL 545.4 46.8 509.4 46.8 DL
+/F0 17/Palatino-Bold@0 SF(C)221.5 116.4 Q/F1 11/Palatino-Roman@0 SF 2.75(Cc)
+221.5 141.6 S(onstants)236.933 141.6 Q(DcMethodAddRefer)232.5 154.8 Q(ence)
+-.198 E/F2 11/Palatino-Bold@0 SF(17:)367.558 154.8 Q F1(257)A(DcMethodDestr)
+232.5 168 Q(oy)-.198 E F2(17:)336.34 168 Q F1(258)A(DcMethodInqGlbAttV)232.5
+181.2 Q(al)-1.012 E F2(3:)363.345 181.2 Q F1(20;)A F2(17:)2.75 E F1(241, 260)A
+(DcMethodRemoveRefer)232.5 194.4 Q(ence)-.198 E F2(17:)385.378 194.4 Q F1(258)A
+(DcMethodStdRenderDisplay)232.5 207.6 Q F2(3:)387.281 207.6 Q F1(20)A
+(DcMethodStdRenderStudio)232.5 220.8 Q F2(3:)381.396 220.8 Q F1(20)A
+(DcMethodUpdStdAltObj)232.5 234 Q F2(3:)368.658 234 Q F1(20)A 2.75(Cd)221.5
+247.2 S(evice functions)238.77 247.2 Q(DdInqColorT)232.5 260.4 Q(ableSize)
+-1.012 E F2(18:)350.64 260.4 Q F1(278)A(DdInqExtent)232.5 273.6 Q F2(18:)
+308.994 273.6 Q F1(277)A(DdInqPixelData)232.5 286.8 Q F2(18:)324.845 286.8 Q F1
+(279)A(DdInqResolution)232.5 300 Q F2(7:)330.07 300 Q F1(70;)A F2(9:)2.75 E F1
+(86;)A F2 -.407(11)2.75 G(:).407 E F1(148;)A F2(18:)2.75 E F1(279)A
+(DdInqShadeMode)232.5 313.2 Q F2(7:)335.823 313.2 Q F1(70;)A F2 -.407(11)2.75 G
+(:).407 E F1(153;)A F2(18:)2.75 E F1(285, 331)A(DdInqShadeRanges)232.5 326.4 Q
+F2(17:)342.72 326.4 Q F1(252)A(DdInqV)232.5 339.6 Q(isualT)-.605 E(ype)-.99 E
+F2(7:)332.039 339.6 Q F1(70;)A F2 -.407(11)2.75 G(:).407 E F1(153;)A F2(17:)
+2.75 E F1(252, 257;)A F2(18:)2.75 E F1(280, 285, 331)A(DdPickObjs)232.5 352.8 Q
+F2(3:)304.297 352.8 Q F1(18;)A F2(A:)2.75 E F1(363)A(DdSetColorEntries)232.5
+366 Q F2(18:)337.66 366 Q F1(281)A(DdSetFrame)232.5 379.2 Q F2(7:)307.058 379.2
+Q F1(78)A(DdSetOptions)232.5 392.4 Q F2(18:)315.231 392.4 Q F1(284)A(DdUpdate)
+232.5 405.6 Q F2(7:)297.73 405.6 Q F1(78)A 2.75(Ce)221.5 418.8 S
+(xtension functions)237.318 418.8 Q(DeAddClass)232.5 432 Q F2(17:)307.861 432 Q
+F1(241)A(DeDeleteObject)232.5 445.2 Q F2(7:)322.183 445.2 Q F1(58)A 2.75(Cf)
+221.5 458.4 S(rame functions)235.712 458.4 Q(DfInqBoundary)232.5 471.6 Q F2
+(17:)323.14 471.6 Q F1(249)A(DfInqV)232.5 484.8 Q(iewGr)-.605 E(oup)-.198 E F2
+(7:)331.467 484.8 Q F1(78)A 2.75(Cg)221.5 498 S -.198(ro)238.165 498 S
+(up functions).198 E(DgAddObj)232.5 511.2 Q F2(7:)300.183 511.2 Q F1(78)A
+(DgAddObjT)232.5 524.4 Q(oGr)-1.012 E(oup)-.198 E F2(7:)343.71 524.4 Q F1(78)A
+(DgClose)232.5 537.6 Q F2(7:)287.819 537.6 Q F1(78)A 2.75(Co)221.5 550.8 S
+(bject cr)238.055 550.8 Q(eation functions)-.198 E(DoAmbientIntens)232.5 564 Q
+F2(18:)333.612 564 Q F1(309)A(DoAmbientSwitch)232.5 577.2 Q F2(18:)336.604
+577.2 Q F1(310)A(DoAnnoT)232.5 590.4 Q(ext)-1.012 E F2(10:)308.4 590.4 Q F1
+-.605(11)C(9;).605 E F2 -.407(11)2.75 G(:).407 E F1(157;)A F2(C:)2.75 E F1(382)
+A(DoBackfaceCullable)232.5 603.6 Q F2(18:)344.194 603.6 Q F1(310)A
+(DoBackfaceCullSwitch)232.5 616.8 Q F2(18:)357.163 616.8 Q F1(31)A(1)-.605 E
+(DoCamera)232.5 630 Q F2(3:)298.896 630 Q F1(18;)A F2(7:)2.75 E F1(48, 61, 78;)
+A F2(18:)2.75 E F1(291)A(DoCameraMatrix)232.5 643.2 Q F2(3:)331.61 643.2 Q F1
+(17;)A F2(18:)2.75 E F1(339;)A F2(B:)2.75 E F1(365;)A F2(C:)2.75 E F1(393)A
+(DoClipSwitch)232.5 656.4 Q F2(18:)314.604 656.4 Q F1(31)A(1)-.605 E(DoClipV)
+232.5 669.6 Q(ol)-1.221 E F2(18:)297.51 669.6 Q F1(290, 297, 299, 312;)A F2(C:)
+2.75 E F1(396)A(DoDataPtr)232.5 682.8 Q F2(C:)298.445 682.8 Q F1(396)A(DoDataV)
+232.5 696 Q(al)-1.012 E F2(C:)299.501 696 Q F1(396)A 1.44 LW 90 756 72 756 DL
+99 756 81 756 DL 117 756 99 756 DL 135 756 117 756 DL 153 756 135 756 DL 171
+756 153 756 DL 189 756 171 756 DL 207 756 189 756 DL 239.4 756 221.4 756 DL
+257.4 756 239.4 756 DL 275.4 756 257.4 756 DL 293.4 756 275.4 756 DL 311.4 756
+293.4 756 DL 329.4 756 311.4 756 DL 347.4 756 329.4 756 DL 365.4 756 347.4 756
+DL 383.4 756 365.4 756 DL 401.4 756 383.4 756 DL 419.4 756 401.4 756 DL 437.4
+756 419.4 756 DL 455.4 756 437.4 756 DL 473.4 756 455.4 756 DL 491.4 756 473.4
+756 DL 509.4 756 491.4 756 DL 527.4 756 509.4 756 DL 545.4 756 527.4 756 DL/F3
+9/Helvetica-Bold@0 SF(I-400)72 768.96 Q/F4 9/Helvetica@0 SF(Dore)6.504 E 3.506
+<b444>114.517 768.96 S -2.187 -.27(ev e)127.518 768.96 T(loper').27 E 2.502(sG)
+-.45 G(uide)177.09 768.96 Q(Inde)221.4 768.96 Q(x)-.27 E EP
+%%Page: 401 3
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 99 46.8 63 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 243 46.8 207 46.8 DL 279 46.8 243 46.8 DL 315 46.8 279 46.8 DL 351
+46.8 315 46.8 DL 387 46.8 351 46.8 DL 437.4 46.8 401.4 46.8 DL 464.4 46.8 428.4
+46.8 DL 500.4 46.8 464.4 46.8 DL 536.4 46.8 500.4 46.8 DL/F0 11
+/Palatino-Roman@0 SF(DoDepthCue)74 109.2 Q/F1 11/Palatino-Bold@0 SF(18:)152.353
+109.2 Q F0(313)A(DoDepthCueSwitch)74 122.4 Q F1(18:)185.375 122.4 Q F0(313)A
+(DoDevice)74 135.6 Q F1(2:)143.465 135.6 Q F0(13;)A F1(7:)176.059 135.6 Q F0
+7.844(49, 52, 78;)B F1(9:)257.341 135.6 Q F0 7.844(84-86, 1)B(10;)-.605 E F1
+(17:)333.837 135.6 Q F0(252-253;)A F1(18:)85 148.8 Q F0(273-275;)A F1(A:)2.75 E
+F0(357-358)A(DoDif)74 162 Q(fuseColor)-.198 E F1(7:)165.036 162 Q F0(78;)A F1
+(18:)2.75 E F0(309, 314)A(DoDif)74 175.2 Q(fuseIntens)-.198 E F1(18:)167.709
+175.2 Q F0(315)A(DoDif)74 188.4 Q(fuseSwitch)-.198 E F1(18:)170.701 188.4 Q F0
+(315)A(DoExecSet)74 201.6 Q F1(17:)139.45 201.6 Q F0(242-243)A(DoFileRaster)74
+214.8 Q F1(C:)150.769 214.8 Q F0(397)A(DoFrame)74 228 Q F1(7:)133.213 228 Q F0
+(78)A(DoGr)74 241.2 Q(oup)-.198 E F1(7:)134.06 241.2 Q F0(78)A
+(DoHiddenSurfSwitch)74 254.4 Q F1(18:)193.174 254.4 Q F0(316)A(DoInterpT)74
+267.6 Q(ype)-.99 E F1(18:)155.939 267.6 Q F0(317)A(DoInvisSwitch)74 280.8 Q F1
+(17:)159.481 280.8 Q F0(243)A(DoLight)74 294 Q F1(7:)128.296 294 Q F0(48, 78;)A
+F1(18:)2.75 E F0(296)A(DoLightAttenuation)74 307.2 Q F1(18:)187.025 307.2 Q F0
+(317)A(DoLightColor)74 320.4 Q F1(18:)155.653 320.4 Q F0(318)A(DoLightIntens)74
+333.6 Q F1(18:)158.326 333.6 Q F0(318)A(DoLightSpr)74 346.8 Q(eadAngles)-.198 E
+F1(18:)196.529 346.8 Q F0(319)A(DoLightSpr)74 360 Q(eadExp)-.198 E F1(18:)
+181.327 360 Q F0(320)A(DoLightSwitch)74 373.2 Q F1 -.407(11)161.318 373.2 S(:)
+.407 E F0(165-166;)A F1(18:)2.75 E F0(320)A(DoLightT)74 386.4 Q(ype)-.99 E F1
+(18:)152.045 386.4 Q F0(321)A(DoLineList)74 399.6 Q F1(6:)142.035 399.6 Q F0
+(30;)A F1(7:)2.75 E F0(48;)A F1(18:)2.75 E F0(303;)A F1(C:)2.75 E F0(383)A
+(DoLineT)74 412.8 Q(ype)-.99 E F1(18:)147.612 412.8 Q F0(321)A(DoLineW)74 426 Q
+(idth)-.605 E F1(18:)154.168 426 Q F0(322)A(DoLocalAntiAliasStyle)74 439.2 Q F1
+(18:)199.4 439.2 Q F0(322)A(DoLocalAntiAliasSwitch)74 452.4 Q F1(18:)208.475
+452.4 Q F0(323)A(DoLookAtFr)74 465.6 Q(om)-.198 E F1(3:)165.245 465.6 Q F0(17;)
+A F1(7:)2.75 E F0(78;)A F1(18:)2.75 E F0(344;)A F1(B:)2.75 E F0(365;)A F1(C:)
+2.75 E F0(394)A(DoMatrix)74 478.8 Q F1(C:)134.984 478.8 Q F0(384)A(DoNURBSurf)
+74 492 Q F1(6:)154.454 492 Q F0(30, 38;)A F1(A:)2.75 E F0(359;)A F1(C:)2.75 E
+F0(383)A(DoParallel)74 505.2 Q F1(3:)139.131 505.2 Q F0(17;)A F1(7:)2.75 E F0
+(78;)A F1(18:)2.75 E F0(339;)A F1(B:)2.75 E F0(365;)A F1(C:)2.75 E F0(393)A
+(DoPatch)74 518.4 Q F1(9:)129.286 518.4 Q F0(107-108;)A F1(C:)2.75 E F0(384)A
+(DoPerspective)74 531.6 Q F1(3:)158.227 531.6 Q F0(17;)A F1(18:)2.75 E F0(340;)
+A F1(B:)2.75 E F0(365;)A F1(C:)2.75 E F0(393)A(DoPointList)74 544.8 Q F1(6:)
+146.281 544.8 Q F0(30;)A F1(7:)2.75 E F0(48, 52, 60, 75-76, 78;)A F1(18:)2.75 E
+F0(305;)A F1(C:)2.75 E F0(385)A(DoPolygon)74 558 Q F1(C:)142.761 558 Q F0(385)A
+(DoPolygonMesh)74 571.2 Q F1(C:)169.502 571.2 Q F0(385)A(DoPolyline)74 584.4 Q
+F1(6:)142.31 584.4 Q F0(30;)A F1(7:)2.75 E F0(48;)A F1(18:)2.75 E F0(301;)A F1
+(C:)2.75 E F0(386)A(DoPolymarker)74 597.6 Q F1(10:)159.525 597.6 Q F0 -.605(11)
+C(9;).605 E F1 -.407(11)2.75 G(:).407 E F0(157;)A F1(C:)2.75 E F0(386)A
+(DoPopMatrix)74 610.8 Q F1(3:)154.245 610.8 Q F0(17;)A F1(7:)2.75 E F0(78;)A F1
+(18:)2.75 E F0(345;)A F1(B:)2.75 E F0(365)A(DoPrimSurf)74 624 Q F1(6:)146.589
+624 Q F0(30, 38;)A F1(7:)2.75 E F0(78;)A F1 -.407(11)2.75 G(:).407 E F0(136;)A
+F1(A:)2.75 E F0(360;)A F1(C:)2.75 E F0(387)A(DoPr)74 637.2 Q(ojection)-.198 E
+F1(3:)150.989 637.2 Q F0(17;)A F1(18:)2.75 E F0(341;)A F1(B:)2.75 E F0(365;)A
+F1(C:)2.75 E F0(394)A(DoPushMatrix)74 650.4 Q F1(3:)159.327 650.4 Q F0(17;)A F1
+(7:)2.75 E F0(78;)A F1(18:)2.75 E F0(346;)A F1(B:)2.75 E F0(365)A(DoRaster)74
+663.6 Q F1 -.407(11)132.982 663.6 S(:).407 E F0(154;)A F1(C:)2.75 E F0(397)A
+(DoRe\215ectionSwitch)74 676.8 Q F1(18:)183.945 676.8 Q F0(329)A(DoRepT)74 690
+Q(ype)-.99 E F1(3:)145.247 690 Q F0(16;)A F1(7:)2.75 E F0(78;)A F1(18:)2.75 E
+F0(330, 334)A 1.44 LW 81 756 63 756 DL 99 756 81 756 DL 117 756 99 756 DL 135
+756 117 756 DL 153 756 135 756 DL 171 756 153 756 DL 189 756 171 756 DL 207 756
+189 756 DL 225 756 207 756 DL 243 756 225 756 DL 261 756 243 756 DL 279 756 261
+756 DL 297 756 279 756 DL 315 756 297 756 DL 333 756 315 756 DL 351 756 333 756
+DL 369 756 351 756 DL 387 756 369 756 DL 419.4 756 401.4 756 DL 428.4 756 410.4
+756 DL 446.4 756 428.4 756 DL 464.4 756 446.4 756 DL 482.4 756 464.4 756 DL
+500.4 756 482.4 756 DL 518.4 756 500.4 756 DL 536.4 756 518.4 756 DL/F2 9
+/Helvetica@0 SF(Inde)365.256 768.96 Q(x)-.27 E(Dore)416.802 768.96 Q 3.506
+<b444>432.304 768.96 S -2.187 -.27(ev e)445.305 768.96 T(loper').27 E 2.502(sG)
+-.45 G(uide)494.877 768.96 Q/F3 9/Helvetica-Bold@0 SF(I-401)4.002 E EP
+%%Page: 402 4
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 108 46.8 72 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 257.4 46.8 221.4 46.8 DL 293.4 46.8 257.4 46.8 DL 329.4 46.8 293.4
+46.8 DL 365.4 46.8 329.4 46.8 DL 401.4 46.8 365.4 46.8 DL 437.4 46.8 401.4 46.8
+DL 473.4 46.8 437.4 46.8 DL 509.4 46.8 473.4 46.8 DL 545.4 46.8 509.4 46.8 DL
+/F0 11/Palatino-Roman@0 SF(DoRotate)232.5 109.2 Q/F1 11/Palatino-Bold@0 SF(3:)
+292.065 109.2 Q F0(17;)A F1(18:)2.75 E F0(347;)A F1(B:)2.75 E F0(365;)A F1(C:)
+2.75 E F0(394)A(DoScale)232.5 122.4 Q F1(3:)285.399 122.4 Q F0(17;)A F1(7:)2.75
+E F0(78;)A F1(18:)2.75 E F0(347;)A F1(B:)2.75 E F0(365;)A F1(C:)2.75 E F0(394)A
+(DoShadeIndex)232.5 135.6 Q F1(18:)318.212 135.6 Q F0(285, 331)A
+(DoShadowSwitch)232.5 148.8 Q F1(18:)333.37 148.8 Q F0(330)A(DoShear)232.5 162
+Q F1(3:)288.061 162 Q F0(17;)A F1(18:)2.75 E F0(348;)A F1(B:)2.75 E F0(365;)A
+F1(C:)2.75 E F0(395)A(DoSimplePolygon)232.5 175.2 Q F1(C:)335.031 175.2 Q F0
+(387)A(DoSimplePolygonMesh)232.5 188.4 Q F1(C:)361.772 188.4 Q F0(387)A
+(DoSpecularColor)232.5 201.6 Q F1(18:)330.345 201.6 Q F0(332)A
+(DoSpecularFactor)232.5 214.8 Q F1(18:)333.425 214.8 Q F0(332)A
+(DoSpecularIntens)232.5 228 Q F1(18:)333.018 228 Q F0(333)A(DoSpecularSwitch)
+232.5 241.2 Q F1(18:)336.01 241.2 Q F0(333)A(DoSpher)232.5 254.4 Q(eList)-.198
+E F1(7:)312.415 254.4 Q F0(57;)A F1(C:)2.75 E F0(388)A(DoSter)232.5 267.6 Q(eo)
+-.198 E F1(18:)290.822 267.6 Q F0(335)A(DoSter)232.5 280.8 Q(eoSwitch)-.198 E
+F1(18:)323.844 280.8 Q F0(336)A(DoSubDivSpec)232.5 294 Q F1(7:)319.73 294 Q F0
+(77)A(DoSurfaceEdgeColor)232.5 307.2 Q F1(18:)349.023 307.2 Q F0(334)A
+(DoSurfaceShade)232.5 320.4 Q F1(18:)326.506 320.4 Q F0(335)A(DoT)232.5 333.6 Q
+(ext)-1.012 E F1(C:)281.032 333.6 Q F0(388)A(DoT)232.5 346.8 Q(extur)-1.012 E
+(eAntiAlias)-.198 E F1(B:)343.952 346.8 Q F0(377)A(DoT)232.5 360 Q(extur)-1.012
+E(eExtendUV)-.198 E F1(B:)347.956 360 Q F0(377)A(DoT)232.5 373.2 Q(extur)-1.012
+E(eMapBump)-.198 E F1(18:)349.276 373.2 Q F0(324;)A F1(B:)2.75 E F0(377;)A F1
+(C:)2.75 E F0(395)A(DoT)232.5 386.4 Q(extur)-1.012 E(eMapBumpSwitch)-.198 E F1
+(18:)382.298 386.4 Q F0(324)A(DoT)232.5 399.6 Q(extur)-1.012 E(eMapDif)-.198 E
+(fuseColor)-.198 E F1(18:)382.364 399.6 Q F0(325;)A F1(B:)2.75 E F0(377;)A F1
+(C:)2.75 E F0(395)A(DoT)232.5 412.8 Q(extur)-1.012 E(eMapDif)-.198 E
+(fuseColorSwitch)-.198 E F1(18:)415.386 412.8 Q F0(326)A(DoT)232.5 426 Q(extur)
+-1.012 E(eMapEnvir)-.198 E(on)-.198 E F1(18:)358.692 426 Q F0(327;)A F1(B:)2.75
+E F0(377;)A F1(C:)2.75 E F0(396)A(DoT)232.5 439.2 Q(extur)-1.012 E(eMapEnvir)
+-.198 E(onSwitch)-.198 E F1(18:)391.714 439.2 Q F0(327)A(DoT)232.5 452.4 Q
+(extur)-1.012 E(eMapT)-.198 E(ranspIntens)-.99 E F1(18:)382.903 452.4 Q F0
+(328;)A F1(B:)2.75 E F0(377;)A F1(C:)2.75 E F0(396)A(DoT)232.5 465.6 Q(extur)
+-1.012 E(eMapT)-.198 E(ranspIntensSwitch)-.99 E F1(18:)415.925 465.6 Q F0(329)A
+(DoT)232.5 478.8 Q(extur)-1.012 E(eMatrixUV)-.198 E F1(3:)346.295 478.8 Q F0
+(17;)A F1(B:)2.75 E F0(365)A(DoT)232.5 492 Q(extur)-1.012 E(eMatrixUVW)-.198 E
+F1(3:)357.295 492 Q F0(17;)A F1(B:)2.75 E F0(365)A(DoT)232.5 505.2 Q(extur)
+-1.012 E(eScaleUV)-.198 E F1(3:)338.21 505.2 Q F0(17;)A F1(B:)2.75 E F0(365)A
+(DoT)232.5 518.4 Q(extur)-1.012 E(eScaleUVW)-.198 E F1(3:)349.21 518.4 Q F0
+(17;)A F1(B:)2.75 E F0(365)A(DoT)232.5 531.6 Q(extur)-1.012 E(eT)-.198 E
+(ranslateUV)-.99 E F1(3:)357.801 531.6 Q F0(17;)A F1(B:)2.75 E F0(365)A(DoT)
+232.5 544.8 Q(extur)-1.012 E(eT)-.198 E(ranslateUVW)-.99 E F1(3:)368.801 544.8
+Q F0(17;)A F1(B:)2.75 E F0(365)A(DoT)232.5 558 Q(or)-1.012 E(us)-.088 E F1(9:)
+288.061 558 Q F0(109;)A F1(C:)2.75 E F0(389)A(DoT)232.5 571.2 Q(ransformMatrix)
+-.99 E F1(3:)343.875 571.2 Q F0(17;)A F1(18:)2.75 E F0(349;)A F1(B:)2.75 E F0
+(365;)A F1(C:)2.75 E F0(395)A(DoT)232.5 584.4 Q(ranslate)-.99 E F1(3:)304.99
+584.4 Q F0(17;)A F1(7:)2.75 E F0(78;)A F1(18:)2.75 E F0(350;)A F1(B:)2.75 E F0
+(365;)A F1(C:)2.75 E F0(395)A(DoT)232.5 597.6 Q(ranspColor)-.99 E F1(18:)
+321.402 597.6 Q F0(337)A(DoT)232.5 610.8 Q(ranspIntens)-.99 E F1(18:)324.075
+610.8 Q F0(337)A(DoT)232.5 624 Q(ranspSwitch)-.99 E F1(18:)327.067 624 Q F0
+(338)A(DoT)232.5 637.2 Q(riangleList)-.99 E F1(6:)318.729 637.2 Q F0(30;)A F1
+(7:)2.75 E F0(48;)A F1(18:)2.75 E F0(306;)A F1(C:)2.75 E F0(389)A(DoT)232.5
+650.4 Q(riangleMesh)-.99 E F1(6:)327.298 650.4 Q F0(30, 36;)A F1(7:)2.75 E F0
+(48, 58-59;)A F1(18:)2.75 E F0(308;)A F1(A:)2.75 E F0(361;)A F1(C:)2.75 E F0
+(389)A(DoT)232.5 663.6 Q(riangleStrip)-.99 E F1(6:)324.075 663.6 Q F0(30;)A F1
+(7:)2.75 E F0(48;)A F1(C:)2.75 E F0(390)A(DoV)232.5 676.8 Q(arLineList)-1.012 E
+F1(6:)317.31 676.8 Q F0(30;)A F1(7:)2.75 E F0(48;)A F1(C:)2.75 E F0(390)A(DoV)
+232.5 690 Q(arPointList)-1.012 E F1(6:)321.556 690 Q F0(30;)A F1(7:)2.75 E F0
+(48;)A F1(C:)2.75 E F0(391)A 1.44 LW 90 756 72 756 DL 99 756 81 756 DL 117 756
+99 756 DL 135 756 117 756 DL 153 756 135 756 DL 171 756 153 756 DL 189 756 171
+756 DL 207 756 189 756 DL 239.4 756 221.4 756 DL 257.4 756 239.4 756 DL 275.4
+756 257.4 756 DL 293.4 756 275.4 756 DL 311.4 756 293.4 756 DL 329.4 756 311.4
+756 DL 347.4 756 329.4 756 DL 365.4 756 347.4 756 DL 383.4 756 365.4 756 DL
+401.4 756 383.4 756 DL 419.4 756 401.4 756 DL 437.4 756 419.4 756 DL 455.4 756
+437.4 756 DL 473.4 756 455.4 756 DL 491.4 756 473.4 756 DL 509.4 756 491.4 756
+DL 527.4 756 509.4 756 DL 545.4 756 527.4 756 DL/F2 9/Helvetica-Bold@0 SF
+(I-402)72 768.96 Q/F3 9/Helvetica@0 SF(Dore)6.504 E 3.506<b444>114.517 768.96 S
+-2.187 -.27(ev e)127.518 768.96 T(loper').27 E 2.502(sG)-.45 G(uide)177.09
+768.96 Q(Inde)221.4 768.96 Q(x)-.27 E EP
+%%Page: 403 5
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 99 46.8 63 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 243 46.8 207 46.8 DL 279 46.8 243 46.8 DL 315 46.8 279 46.8 DL 351
+46.8 315 46.8 DL 387 46.8 351 46.8 DL 437.4 46.8 401.4 46.8 DL 464.4 46.8 428.4
+46.8 DL 500.4 46.8 464.4 46.8 DL 536.4 46.8 500.4 46.8 DL/F0 11
+/Palatino-Roman@0 SF(DoV)74 109.2 Q(arSimplePolygonMesh)-1.012 E/F1 11
+/Palatino-Bold@0 SF(C:)220.047 109.2 Q F0(391)A(DoV)74 122.4 Q(arT)-1.012 E
+(riangleMesh)-.99 E F1(6:)185.573 122.4 Q F0(30;)A F1(7:)2.75 E F0(48;)A F1(C:)
+2.75 E F0(392)A(DoV)74 135.6 Q(iew)-.605 E F1(7:)127.251 135.6 Q F0
+(49, 52, 78;)A F1(A:)2.75 E F0(364)A 2.75(Cs)63 148.8 S(ystem functions)78.213
+148.8 Q(DsCompBoundingV)74 162 Q(ol)-1.221 E F1(3:)195.187 162 Q F0(18;)A F1
+(A:)2.75 E F0(363)A(DsHoldObj)74 175.2 Q F1(17:)143.311 175.2 Q F0(259;)A F1
+(C:)2.75 E F0(381)A(DsInitialize)74 188.4 Q F1(2:)143.696 188.4 Q F0(12-13;)A
+F1(3:)2.75 E F0(17;)A F1(7:)2.75 E F0(77;)A F1(9:)2.75 E F0 -.605(11)C(0;).605
+E F1(10:)2.75 E F0 -.605(11)C(7;).605 E F1 -.407(11)2.75 G(:).407 E F0(176;)A
+F1(17:)2.75 E F0(266)A(DsInqClassId)74 201.6 Q F1(3:)156.179 201.6 Q F0(17;)A
+F1(6:)5.476 E F0 2.726(32, 35-36;)B F1(7:)5.476 E F0 2.726
+(49, 59-63, 67, 73-74;)B F1(9:)5.476 E F0(108;)A F1 -.407(11)85 214.8 S(:).407
+E F0(154;)A F1(A:)2.75 E F0(356;)A F1(B:)2.75 E F0(366)A(DsInqMethodId)74 228 Q
+F1(3:)166.597 228 Q F0(20;)A F1(6:)3.332 E F0(32;)A F1(7:)3.332 E F0 .582
+(49, 61-63, 67, 73-74;)B F1(9:)3.333 E F0(109;)A F1(17:)3.333 E F0(240;)A F1
+(A:)85 241.2 Q F0(361;)A F1(B:)2.75 E F0(366)A(DsInqObjClassId)74 254.4 Q F1
+(17:)170.756 254.4 Q F0(242-243)A(DsInqRaster)74 267.6 Q F1 -.407(11)147.909
+267.6 S(:).407 E F0(154)A(DsInqRender)74 280.8 Q(erId)-.198 E F1(17:)172.395
+280.8 Q F0(264)A(DsInqV)74 294 Q(ersion)-1.221 E F1(A:)153.805 294 Q F0(358)A
+(DsPrintObj)74 307.2 Q F1(3:)142.409 307.2 Q F0(18;)A F1(6:)2.75 E F0(37;)A F1
+(7:)2.75 E F0(54, 57;)A F1(17:)2.75 E F0(239;)A F1(A:)2.75 E F0(363)A
+(DsRasterUpdate)74 320.4 Q F1(C:)167.885 320.4 Q F0(397)A(DsReleaseObj)74 333.6
+Q F1(17:)154.751 333.6 Q F0(239, 258-259)A(DsT)74 346.8 Q(erminate)-1.012 E F1
+(6:)149.944 346.8 Q F0(40;)A F1(7:)2.75 E F0(78;)A F1(17:)2.75 E F0(263)A 2.75
+(Cv)63 360 S(iew functions)79.764 360 Q(DvInqActiveCamera)74 373.2 Q F1(7:)
+188.587 373.2 Q F0(61, 63)A(DvInqBackgr)74 386.4 Q(oundJust)-.198 E F1 -.407
+(11)196.54 386.4 S(:).407 E F0(153)A(DvInqBoundary)74 399.6 Q F1(7:)167.192
+399.6 Q F0(70;)A F1 -.407(11)2.75 G(:).407 E F0(144, 148;)A F1(17:)2.75 E F0
+(249)A(DvInqClearFlag)74 412.8 Q F1(7:)165.795 412.8 Q F0(70;)A F1 -.407(11)
+2.75 G(:).407 E F0(151)A(DvInqDe\214nitionGr)74 426 Q(oup)-.198 E F1(7:)199.774
+426 Q F0(78)A(DvInqDisplayGr)74 439.2 Q(oup)-.198 E F1(7:)188.345 439.2 Q F0
+(78)A(DvInqShadeIndex)74 452.4 Q F1(7:)176.19 452.4 Q F0(70;)A F1 -.407(11)2.75
+G(:).407 E F0(153)A(DvSetActiveCamera)74 465.6 Q F1(7:)186.948 465.6 Q F0(63)A
+(DvSetBackgr)74 478.8 Q(oundRaster)-.198 E F1(17:)207.067 478.8 Q F0(267)A
+(DvSetRendStyle)74 492 Q F1(2:)166.796 492 Q F0(13;)A F1(5:)2.75 E F0(23-25;)A
+F1(6:)2.75 E F0(36;)A F1(7:)2.75 E F0(78;)A F1(17:)2.75 E F0(264;)A F1(A:)2.75
+E F0(362)A(camera)63 505.2 Q(active)74 518.4 Q F1(5:)116.405 518.4 Q F0
+(24, 26;)A F1(7:)2.75 E F0(61-62;)A F1(A:)2.75 E F0(360)A(attributes)74 531.6 Q
+F1(5:)134.203 531.6 Q F0(26;)A F1(9:)2.75 E F0(100;)A F1 -.407(11)2.75 G(:).407
+E F0(133, 144-145, 160;)A F1(18:)2.75 E F0(291)A(class)63 544.8 Q(attribute)74
+558 Q F1(3:)129.539 558 Q F0(15-17;)A F1(6:)2.75 E F0(31-32;)A F1(A:)2.75 E F0
+(356, 360;)A F1(B:)2.75 E F0(365)A(identi\214er)74 571.2 Q F1(A:)132.399 571.2
+Q F0(356;)A F1(C:)2.75 E F0(381)A(instance of identi\214er)74 584.4 Q F1(3:)
+187.476 584.4 Q F0(15;)A F1(6:)2.75 E F0(36)A(name)74 597.6 Q F1(A:)114.634
+597.6 Q F0(356;)A F1(B:)2.75 E F0(366-379;)A F1(C:)2.75 E F0(382-397)A
+(name primitive)74 610.8 Q F1(6:)162.726 610.8 Q F0(30, 33;)A F1(7:)2.75 E F0
+(58;)A F1(9:)2.75 E F0(108;)A F1(A:)2.75 E F0(355)A(clear \215ag)63 624 Q F1
+(7:)121.003 624 Q F0(73;)A F1 -.407(11)2.75 G(:).407 E F0(151, 153)A
+(clip volume)63 637.2 Q F1(9:)134.434 637.2 Q F0(102-103;)A F1(18:)2.75 E F0
+(290, 297, 299, 31)A(1-312)-.605 E(clipping)63 650.4 Q F1(5:)119.729 650.4 Q F0
+(25;)A F1(7:)5.502 E F0(70;)A F1(9:)5.502 E F0 2.752
+(87, 89, 92, 96, 103, 105-106;)B F1 -.407(11)5.501 G(:).407 E F0 2.751
+(148, 159;)B F1(12:)85 663.6 Q F0 3.858(188, 190-191;)B F1(17:)6.608 E F0
+(248-249;)A F1(18:)6.609 E F0 3.859(276, 285, 290, 339-340, 343;)B F1(A:)85
+676.8 Q F0(359)A(color)63 690 Q 1.44 LW 81 756 63 756 DL 99 756 81 756 DL 117
+756 99 756 DL 135 756 117 756 DL 153 756 135 756 DL 171 756 153 756 DL 189 756
+171 756 DL 207 756 189 756 DL 225 756 207 756 DL 243 756 225 756 DL 261 756 243
+756 DL 279 756 261 756 DL 297 756 279 756 DL 315 756 297 756 DL 333 756 315 756
+DL 351 756 333 756 DL 369 756 351 756 DL 387 756 369 756 DL 419.4 756 401.4 756
+DL 428.4 756 410.4 756 DL 446.4 756 428.4 756 DL 464.4 756 446.4 756 DL 482.4
+756 464.4 756 DL 500.4 756 482.4 756 DL 518.4 756 500.4 756 DL 536.4 756 518.4
+756 DL/F2 9/Helvetica@0 SF(Inde)365.256 768.96 Q(x)-.27 E(Dore)416.802 768.96 Q
+3.506<b444>432.304 768.96 S -2.187 -.27(ev e)445.305 768.96 T(loper').27 E
+2.502(sG)-.45 G(uide)494.877 768.96 Q/F3 9/Helvetica-Bold@0 SF(I-403)4.002 E EP
+%%Page: 404 6
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 108 46.8 72 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 257.4 46.8 221.4 46.8 DL 293.4 46.8 257.4 46.8 DL 329.4 46.8 293.4
+46.8 DL 365.4 46.8 329.4 46.8 DL 401.4 46.8 365.4 46.8 DL 437.4 46.8 401.4 46.8
+DL 473.4 46.8 437.4 46.8 DL 509.4 46.8 473.4 46.8 DL 545.4 46.8 509.4 46.8 DL
+/F0 11/Palatino-Roman@0 SF(backgr)232.5 109.2 Q(ound)-.198 E/F1 11
+/Palatino-Bold@0 SF(5:)305.657 109.2 Q F0(24;)A F1(9:)3.549 E F0 .798(88, 90;)B
+F1 -.407(11)3.548 G(:).407 E F0 .798(151, 154;)B F1(17:)3.548 E F0 .798
+(244-245, 254;)B F1(18:)3.548 E F0(272,)A(280-281, 351)243.5 122.4 Q(dif)232.5
+135.6 Q(fuse)-.198 E F1(3:)279.866 135.6 Q F0(16;)A F1(7:)2.75 E F0(66-67;)A F1
+-.407(11)2.75 G(:).407 E F0(167, 172, 174;)A F1(18:)2.75 E F0
+(309, 314-315, 325-326)A(model)232.5 148.8 Q F1(9:)277.439 148.8 Q F0(88;)A F1
+(17:)3.029 E F0 .279(254, 256;)B F1(18:)3.029 E F0 .28
+(277, 280-281, 284, 300, 302, 304-305,)B(307, 313-314, 331, 334)243.5 162 Q
+(specular)232.5 175.2 Q F1 -.407(11)287.357 175.2 S(:).407 E F0(173;)A F1(18:)
+2.75 E F0(331, 333)A(transpar)232.5 188.4 Q(ent)-.198 E F1(18:)302.262 188.4 Q
+F0(336-337)A(vertex)232.5 201.6 Q F1 -.407(11)276.61 201.6 S(:).407 E F0(173)A
+(connected line list)221.5 214.8 Q F1(6:)322.898 214.8 Q F0(30;)A F1(16:)2.75 E
+F0(229)A(constant shading)221.5 228 Q F1 -.407(11)318.036 228 S(:).407 E F0
+(172, 174)A(contr)221.5 241.2 Q(ol r)-.198 E(outines)-.198 E F1 -.407(11)312.14
+241.2 S(:).407 E F0(131, 150, 157)A(convention, naming)221.5 254.4 Q F1(3:)
+332.457 254.4 Q F0(16;)A F1(7:)2.75 E F0(43;)A F1 -.407(11)2.75 G(:).407 E F0
+(121;)A F1(13:)2.75 E F0(193)A(coor)221.5 267.6 Q(dinates)-.198 E(device)232.5
+280.8 Q F1(9:)284.42 280.8 Q F0(90;)A F1 -.407(11)9.361 G(:).407 E F0 6.61
+(127, 148, 157, 171;)B F1(17:)9.36 E F0 6.61(244-245, 249-250;)B F1(18:)243.5
+294 Q F0(271-272, 286, 353;)A F1(A:)2.75 E F0(357-358)A(frame)232.5 307.2 Q F1
+(7:)274.74 307.2 Q F0(70;)A F1 -.407(11)2.75 G(:).407 E F0(148, 157)A(local)
+232.5 320.4 Q F1 -.407(11)269.042 320.4 S(:).407 E F0(157, 171-172;)A F1(18:)
+2.75 E F0(290)A(textur)232.5 333.6 Q(e)-.198 E F1(3:)280.416 333.6 Q F0(17;)A
+F1(6:)2.75 E F0(39;)A F1(18:)2.75 E F0(301, 303-306, 308;)A F1(A:)2.75 E F0
+(361)A(world)232.5 346.8 Q F1(3:)275.697 346.8 Q F0(17;)A F1(6:)2.75 E F0(41;)A
+F1(7:)2.75 E F0(70;)A F1 -.407(11)2.75 G(:).407 E F0(146-148, 171-172, 174)A
+(culling, backface)221.5 360 Q F1(18:)316.287 360 Q F0(310-31)A(1)-.605 E(curr)
+221.5 373.2 Q(ent method)-.198 E F1(3:)310.963 373.2 Q F0(19;)A F1(6:)2.75 E F0
+(30;)A F1(7:)2.75 E F0(45, 61;)A F1(17:)2.75 E F0(259;)A F1(A:)2.75 E F0
+(356, 364)A(curr)221.5 386.4 Q(ent transformation matrix)-.198 E F1(3:)380.956
+386.4 Q F0(16;)A F1(9:)2.75 E F0(101;)A F1 -.407(11)2.75 G(:).407 E F0(160)A/F2
+17/Palatino-Bold@0 SF(D)221.5 418.8 Q F0(data)221.5 444 Q(additional object)
+232.5 457.2 Q F1(6:)327.441 457.2 Q F0(29;)A F1(17:)2.75 E F0(238)A
+(object private)232.5 470.4 Q F1(C:)312.129 470.4 Q F0(382)A(private)232.5
+483.6 Q F1(5:)283.941 483.6 Q F0(25;)A F1(6:)5.714 E F0 2.964(35, 39;)B F1(7:)
+5.714 E F0 2.965(45-46, 49, 58, 62, 69, 76;)B F1(9:)5.715 E F0 2.965(97, 107;)B
+F1(17:)243.5 496.8 Q F0(239, 248;)A F1(A:)2.75 E F0(356, 361;)A F1(C:)2.75 E F0
+(381-382)A(str)232.5 510 Q(uctur)-.088 E(e)-.198 E F1(6:)291.43 510 Q F0 1.521
+(33, 35;)B F1(7:)4.271 E F0 1.521(45, 56;)B F1(9:)4.271 E F0 1.521(82, 100, 1)B
+(10;)-.605 E F1(10:)4.271 E F0 -.605(11)C(5;).605 E F1 -.407(11)4.27 G(:).407 E
+F0 1.52(122, 136,)B(138, 162, 166, 168, 178;)243.5 523.2 Q F1(C:)2.75 E F0(381)
+A(DCM)221.5 536.4 Q F1(9:)265.146 536.4 Q F0 3.177(81-84, 89-90, 96, 1)B(10-1)
+-.605 E -.605(11)-.605 G(;).605 E F1(10:)5.927 E F0 -.605(11)C(3-1).605 E 3.177
+(14, 1)-.605 F(17;)-.605 E F1 -.407(11)5.927 G(:).407 E F0 3.177(122, 127,)B
+(129-131, 153, 156, 177-179;)243.5 549.6 Q F1(17:)2.75 E F0(245;)A F1(18:)2.75
+E F0(269, 271-286;)A F1(A:)2.75 E F0(356-357)A(DCM functions)221.5 562.8 Q
+(dcm.become_curr)232.5 576 Q(ent_driver)-.198 E F1(9:)395.332 576 Q F0(84-85;)A
+F1(10:)446.172 576 Q F0 -.605(11)C(5;).605 E F1 -.407(11)492.744 576 S(:).407 E
+F0(126-127;)A F1(18:)243.5 589.2 Q F0(270-271, 273)A(dcm.clear_r)232.5 602.4 Q
+(ectangle_depth)-.198 E F1(9:)377.48 602.4 Q F0(90;)A F1(18:)2.75 E F0(271-272)
+A(dcm.clear_r)232.5 615.6 Q(ectangle_depth_and_color)-.198 E F1(9:)431.545
+615.6 Q F0(90;)A F1(18:)2.75 E F0(271-272, 281)A(dcm.close_device)232.5 628.8 Q
+F1(9:)331.401 628.8 Q F0(87;)A F1(18:)2.75 E F0(272-273)A(dcm.cr)232.5 642 Q
+(eate_local_data)-.198 E F1(9:)360.477 642 Q F0 6.405(84-85, 87;)B F1(10:)9.155
+E F0 -.605(11)C(5;).605 E F1 -.407(11)9.156 G(:).407 E F0(123;)A F1(18:)9.156 E
+F0(271,)A(273-275)243.5 655.2 Q(dcm.\215ush)232.5 668.4 Q F1(9:)294.705 668.4 Q
+F0(87;)A F1(18:)2.75 E F0(274)A(dcm.initialize_device)232.5 681.6 Q F1(9:)
+356.235 681.6 Q F0(84-85;)A F1(10:)9.346 E F0 -.605(11)C(5;).605 E F1 -.407(11)
+9.346 G(:).407 E F0 6.596(123-124, 128-129;)B F1(18:)243.5 694.8 Q F0(273-274)A
+1.44 LW 90 756 72 756 DL 99 756 81 756 DL 117 756 99 756 DL 135 756 117 756 DL
+153 756 135 756 DL 171 756 153 756 DL 189 756 171 756 DL 207 756 189 756 DL
+239.4 756 221.4 756 DL 257.4 756 239.4 756 DL 275.4 756 257.4 756 DL 293.4 756
+275.4 756 DL 311.4 756 293.4 756 DL 329.4 756 311.4 756 DL 347.4 756 329.4 756
+DL 365.4 756 347.4 756 DL 383.4 756 365.4 756 DL 401.4 756 383.4 756 DL 419.4
+756 401.4 756 DL 437.4 756 419.4 756 DL 455.4 756 437.4 756 DL 473.4 756 455.4
+756 DL 491.4 756 473.4 756 DL 509.4 756 491.4 756 DL 527.4 756 509.4 756 DL
+545.4 756 527.4 756 DL/F3 9/Helvetica-Bold@0 SF(I-404)72 768.96 Q/F4 9
+/Helvetica@0 SF(Dore)6.504 E 3.506<b444>114.517 768.96 S -2.187 -.27(ev e)
+127.518 768.96 T(loper').27 E 2.502(sG)-.45 G(uide)177.09 768.96 Q(Inde)221.4
+768.96 Q(x)-.27 E EP
+%%Page: 405 7
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 99 46.8 63 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 243 46.8 207 46.8 DL 279 46.8 243 46.8 DL 315 46.8 279 46.8 DL 351
+46.8 315 46.8 DL 387 46.8 351 46.8 DL 437.4 46.8 401.4 46.8 DL 464.4 46.8 428.4
+46.8 DL 500.4 46.8 464.4 46.8 DL 536.4 46.8 500.4 46.8 DL/F0 11
+/Palatino-Roman@0 SF(dcm.inquir)74 109.2 Q(e_auto_size)-.198 E/F1 11
+/Palatino-Bold@0 SF(9:)198.19 109.2 Q F0(86;)A F1(10:)2.75 E F0 -.605(11)C(5;)
+.605 E F1 -.407(11)2.75 G(:).407 E F0(129;)A F1(18:)2.75 E F0(275)A(dcm.inquir)
+74 122.4 Q(e_clip_list)-.198 E F1(9:)190.38 122.4 Q F0(87;)A F1(10:)2.75 E F0
+-.605(11)C(5;).605 E F1 -.407(11)2.75 G(:).407 E F0(129;)A F1(18:)2.75 E F0
+(275-276, 286)A(dcm.inquir)74 135.6 Q(e_device_extent)-.198 E F1(9:)219.178
+135.6 Q F0(85, 90;)A F1(10:)2.75 E F0 -.605(11)C(5;).605 E F1 -.407(11)2.75 G
+(:).407 E F0(127;)A F1(18:)2.75 E F0(277)A(dcm.inquir)74 148.8 Q(e_ncolors)
+-.198 E F1(9:)187.839 148.8 Q F0(85;)A F1(10:)2.75 E F0 -.605(11)C(5;).605 E F1
+-.407(11)2.75 G(:).407 E F0(128;)A F1(18:)2.75 E F0(277)A(dcm.inquir)74 162 Q
+(e_pixel_data)-.198 E F1(9:)203.096 162 Q F0(86;)A F1(18:)2.75 E F0(278)A
+(dcm.inquir)74 175.2 Q(e_r)-.198 E(esolution)-.198 E F1(9:)201.446 175.2 Q F0
+(85-86;)A F1(10:)2.75 E F0 -.605(11)C(5;).605 E F1 -.407(11)2.75 G(:).407 E F0
+(128;)A F1(18:)2.75 E F0(279)A(dcm.inquir)74 188.4 Q(e_ster)-.198 E(eo)-.198 E
+F1(9:)181.272 188.4 Q F0(86;)A F1(10:)2.75 E F0 -.605(11)C(5;).605 E F1 -.407
+(11)2.75 G(:).407 E F0(127;)A F1(18:)2.75 E F0(279)A(dcm.inquir)74 201.6 Q
+(e_visual_type)-.198 E F1(9:)208.827 201.6 Q F0(86;)A F1(10:)2.75 E F0 -.605
+(11)C(5;).605 E F1 -.407(11)2.75 G(:).407 E F0(128;)A F1(18:)2.75 E F0(280)A
+(dcm.set_backgr)74 214.8 Q(ound_color)-.198 E F1(9:)219.387 214.8 Q F0(88, 90;)
+A F1(18:)2.75 E F0(272, 280)A(dcm.set_color_entries)74 228 Q F1(9:)193.515 228
+Q F0(88;)A F1(18:)2.75 E F0(281)A(dcm.set_curr)74 241.2 Q(ent_view)-.198 E F1
+(9:)195.462 241.2 Q F0(89;)A F1(18:)2.75 E F0(281-282)A(dcm.set_depth_buf)74
+254.4 Q(fer_enable)-.198 E F1(9:)231.608 254.4 Q F0(90;)A F1(18:)2.75 E F0
+(282-283)A(dcm.set_depth_buf)74 267.6 Q(fer_write)-.198 E F1(9:)225.459 267.6 Q
+F0(90;)A F1(18:)2.75 E F0(282-283)A(dcm.set_for)74 280.8 Q(egr)-.198 E
+(ound_color)-.198 E F1(9:)215.889 280.8 Q F0(88;)A F1(18:)2.75 E F0(283)A
+(dcm.set_options)74 294 Q F1(9:)167.313 294 Q F0(85;)A F1(18:)2.75 E F0(284)A
+(dcm.set_shade_index)74 307.2 Q F1(9:)192.162 307.2 Q F0(88-89;)A F1(18:)2.75 E
+F0(284)A(dcm.swap_buf)74 320.4 Q(fers)-.198 E F1(9:)177.389 320.4 Q F0(89;)A F1
+(18:)2.75 E F0(285)A(dcm.update_geometry)74 333.6 Q F1(9:)198.058 333.6 Q F0
+(89;)A F1(18:)2.75 E F0(285)A(dcm.write_scanline_byte)74 346.8 Q F1(9:)208.97
+346.8 Q F0(89, 92;)A F1(10:)2.75 E F0 -.605(11)C(5;).605 E F1 -.407(11)2.75 G
+(:).407 E F0(129-130;)A F1(18:)2.75 E F0(286)A(de\214nition gr)63 360 Q(oup)
+-.198 E F1(5:)156.456 360 Q F0(24;)A F1(17:)2.75 E F0(268)A -1.936
+(developer 's)63 373.2 R(interface)9.041 E F1(A:)191.643 373.2 Q F0 6.291
+(356-357, 362;)B F1(2:)9.041 E F0(9-1)A(1;)-.605 E F1(3:)9.041 E F0(17-18;)A F1
+(4:)9.042 E F0(21;)A F1(5:)85 386.4 Q F0(25-26;)A F1(9:)2.75 E F0(109;)A F1
+(13:)2.75 E F0(194, 198;)A F1(17:)2.75 E F0(237)A(device)63 399.6 Q(contr)74
+412.8 Q(ol module functions: see DCM functions)-.198 E(contr)74 426 Q
+(ol module interface)-.198 E F1(13:)207.144 426 Q F0(194;)A F1(17:)2.75 E F0
+(251, 253)A(coor)74 439.2 Q(dinates)-.198 E F1(9:)147.2 439.2 Q F0(90;)A F1
+-.407(11)5.814 G(:).407 E F0 3.064(127, 148, 157, 171;)B F1(17:)5.813 E F0
+3.063(244-245, 249-250;)B F1(18:)85 452.4 Q F0(271-272, 286, 353;)A F1(A:)2.75
+E F0(357-358)A(driver)74 465.6 Q F1(2:)119.3 465.6 Q F0 1.454(6, 8;)B F1(4:)
+4.204 E F0(21;)A F1(5:)4.204 E F0 1.454(23, 28;)B F1(6:)4.204 E F0 1.454
+(33, 38;)B F1(8:)4.204 E F0(79;)A F1(9:)4.204 E F0 1.454(81, 89, 91, 95, 97,)B
+.877(102, 106;)85 478.8 R F1(10:)3.627 E F0 -.605(11)C(3;).605 E F1 -.407(11)
+3.626 G(:).407 E F0 .876(121, 126, 144, 171, 176;)B F1(12:)3.626 E F0(190;)A F1
+(13:)3.626 E F0 .876(195, 197,)B(201;)85 492 Q F1(15:)3.525 E F0 .775
+(214, 217, 219, 223, 225;)B F1 .775(16:230; 17:)3.525 F F0 .775(245, 250;)B F1
+(18:)3.525 E F0 .775(269, 273,)B(282, 284, 287, 299, 351;)85 505.2 Q F1(A:)2.75
+E F0(3559, 362)A(driver implementation)74 518.4 Q F1(9:)198.256 518.4 Q F0(91)A
+(driver installation)74 531.6 Q F1 -.407(11)175.046 531.6 S(:).407 E F0(176)A
+(driver interface)74 544.8 Q F1(2:)162.715 544.8 Q F0(9-1)A(1;)-.605 E F1(9:)
+2.75 E F0(81, 106;)A F1(17:)2.75 E F0(250;)A F1(A:)2.75 E F0(357, 359)A
+(driver sample)74 558 Q F1(2:)155.554 558 Q F0(13;)A F1(10:)2.75 E F0 -.605(11)
+C(3-1).605 E(14;)-.605 E F1 -.407(11)2.75 G(:).407 E F0
+(121-124, 130, 144, 171, 177)A(output interface)74 571.2 Q F1(6:)165.674 571.2
+Q F0(29, 39;)A F1(7:)2.75 E F0(69)A(viewport)74 584.4 Q F1(5:)132.157 584.4 Q
+F0(25;)A F1 -.407(11)2.75 G(:).407 E F0(123)A(dif)63 597.6 Q 3.847(fuse color)
+-.198 F F1(3:)145.252 597.6 Q F0(16;)A F1(7:)6.597 E F0(66-67;)A F1 -.407(11)
+6.597 G(:).407 E F0 3.847(167, 172, 174;)B F1(18:)6.596 E F0 3.846
+(309, 314-315,)B(325-326)85 610.8 Q(dif)63 624 Q(fuse light)-.198 E F1(18:)
+135.622 624 Q F0(315)A(dif)63 637.2 Q(fuse r)-.198 E(e\215ectance)-.198 E F1
+(18:)165.014 637.2 Q F0(314-315)A(dir)63 650.4 Q
+(ect traversal image generation)-.198 E F1(5:)237.328 650.4 Q F0(27)A(dir)63
+663.6 Q(ectory str)-.198 E(uctur)-.088 E(e)-.198 E F1(13:)167.434 663.6 Q F0
+(195-196, 202;)A F1(14:)2.75 E F0(208, 21)A(1;)-.605 E F1(15:)2.75 E F0
+(220, 224)A .405(display gr)63 676.8 R(oup)-.198 E F1(5:)145.837 676.8 Q F0
+.405(24, 26-27;)B F1(6:)3.155 E F0 .405(34, 40;)B F1(7:)3.155 E F0(78;)A F1(9:)
+3.156 E F0 .406(95, 98-100, 103;)B F1 -.407(11)3.156 G(:).407 E F0(156;)A F1
+(17:)85 690 Q F0(267;)A F1(18:)2.75 E F0(343;)A F1(A:)2.75 E F0(358, 364)A 1.44
+LW 81 756 63 756 DL 99 756 81 756 DL 117 756 99 756 DL 135 756 117 756 DL 153
+756 135 756 DL 171 756 153 756 DL 189 756 171 756 DL 207 756 189 756 DL 225 756
+207 756 DL 243 756 225 756 DL 261 756 243 756 DL 279 756 261 756 DL 297 756 279
+756 DL 315 756 297 756 DL 333 756 315 756 DL 351 756 333 756 DL 369 756 351 756
+DL 387 756 369 756 DL 419.4 756 401.4 756 DL 428.4 756 410.4 756 DL 446.4 756
+428.4 756 DL 464.4 756 446.4 756 DL 482.4 756 464.4 756 DL 500.4 756 482.4 756
+DL 518.4 756 500.4 756 DL 536.4 756 518.4 756 DL/F2 9/Helvetica@0 SF(Inde)
+365.256 768.96 Q(x)-.27 E(Dore)416.802 768.96 Q 3.506<b444>432.304 768.96 S
+-2.187 -.27(ev e)445.305 768.96 T(loper').27 E 2.502(sG)-.45 G(uide)494.877
+768.96 Q/F3 9/Helvetica-Bold@0 SF(I-405)4.002 E EP
+%%Page: 406 8
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 108 46.8 72 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 257.4 46.8 221.4 46.8 DL 293.4 46.8 257.4 46.8 DL 329.4 46.8 293.4
+46.8 DL 365.4 46.8 329.4 46.8 DL 401.4 46.8 365.4 46.8 DL 437.4 46.8 401.4 46.8
+DL 473.4 46.8 437.4 46.8 DL 509.4 46.8 473.4 46.8 DL 545.4 46.8 509.4 46.8 DL
+/F0 11/Palatino-Roman@0 SF(display pipeline)221.5 109.2 Q/F1 11/Palatino-Bold@0
+SF(A:)313.779 109.2 Q F0(357)A 1.973(display traversal)221.5 122.4 R F1(3:)
+320.585 122.4 Q F0(18-20;)A F1(5:)4.723 E F0(26;)A F1(6:)4.723 E F0(38)A F1(7:)
+4.723 E F0 1.972(44, 48, 56, 63, 66, 70, 73;)B F1(9:)243.5 135.6 Q F0(109;)A F1
+-.407(11)2.75 G(:).407 E F0(153, 165;)A F1(A:)2.75 E F0(358, 360)A(Dore)221.5
+148.8 Q 3.553<b444>241.168 148.8 S(eveloper functions)256.898 148.8 Q
+(DDclass_AddMethod)232.5 162 Q F1(6:)352.081 162 Q F0(34, 40;)A F1(17:)2.75 E
+F0(237, 240, 267-268)A(DDclass_AddNotify)232.5 175.2 Q F1(9:)345.404 175.2 Q F0
+(109;)A F1 -.407(11)2.75 G(:).407 E F0(177;)A F1(17:)2.75 E F0(238-239, 242)A
+(DDclass_AddObjectData)232.5 188.4 Q F1(6:)367.833 188.4 Q F0(36-37;)A F1(7:)
+2.75 E F0(49, 76;)A F1(17:)2.75 E F0(238-239;)A F1(C:)2.75 E F0(382)A
+(DDclass_CopyMethod)232.5 201.6 Q F1(6:)356.613 201.6 Q F0(34, 40;)A F1(7:)2.75
+E F0(49;)A F1(17:)2.75 E F0(237, 240, 267-268)A(DDclass_InqDefaultMethod)232.5
+214.8 Q F1(17:)382.716 214.8 Q F0(237, 240-241, 260)A(DDclass_InqMethod)232.5
+228 Q F1(3:)347.918 228 Q F0(18;)A F1(6:)4.318 E F0(32;)A F1(7:)4.318 E F0
+1.569(61-63, 67, 73-74;)B F1(17:)4.319 E F0(241-242,)A(260;)243.5 241.2 Q F1
+(B:)2.75 E F0(366)A(DDclass_SetMethod)232.5 254.4 Q F1(6:)344.711 254.4 Q F0
+(35;)A F1(7:)2.75 E F0(49, 75;)A F1(17:)2.75 E F0(237-238, 240-242)A
+(DDcondex_QueryExecute)232.5 267.6 Q F1(17:)372.783 267.6 Q F0(242-243)A
+(DDcondex_QueryRender)232.5 280.8 Q F1(7:)370.099 280.8 Q F0(58-60;)A F1(9:)
+2.75 E F0(107-108;)A F1(17:)2.75 E F0(242-243)A
+(DDcondex_SetDisablePrimExecFlag)232.5 294 Q F1(17:)422.184 294 Q F0(243)A
+(DDdevice_ClearRectangleDepth)232.5 307.2 Q F1(17:)404.408 307.2 Q F0(244-245)A
+(DDdevice_ClearRectangleDepthColor)232.5 320.4 Q F1(7:)431.925 320.4 Q F0(73;)A
+F1 -.407(11)2.91 G(:).407 E F0(154;)A F1(17:)2.909 E F0(244-245,)A(254)243.5
+333.6 Q(DDdevice_Cr)232.5 346.8 Q(eateDCMStr)-.198 E(uct)-.088 E F1(9:)387.526
+346.8 Q F0(84;)A F1 -.407(11)2.929 G(:).407 E F0(179;)A F1(17:)2.929 E F0 .18
+(245-246, 251, 253;)B F1(18:)243.5 360 Q F0(269-270)A(DDdevice_Cr)232.5 373.2 Q
+(eateDROMStr)-.198 E(uct)-.088 E F1(9:)395.552 373.2 Q F0(94-95;)A F1 -.407(11)
+2.76 G(:).407 E F0(184;)A F1(17:)2.76 E F0 .009(245-246, 251,)B(253;)243.5
+386.4 Q F1(18:)2.75 E F0(287, 289)A(DDdevice_Cr)232.5 399.6 Q(eatePROMStr)-.198
+E(uct)-.088 E F1(9:)397.815 399.6 Q F0(91;)A F1 -.407(11)6.893 G(:).407 E F0
+(180;)A F1(17:)6.893 E F0 4.143(245-246, 251,)B(253;)243.5 412.8 Q F1(18:)2.75
+E F0(352)A(DDdevice_Flush)232.5 426 Q F1(7:)327.353 426 Q F0(74;)A F1(17:)2.75
+E F0(247)A(DDdevice_InqAbortedDraw)232.5 439.2 Q F1(17:)384.707 439.2 Q F0
+(247, 254)A(DDdevice_InqActualV)232.5 452.4 Q(iewport)-.605 E F1(5:)407.6 452.4
+Q F0(25;)A F1(7:)445.453 452.4 Q F0 13.102(70, 73;)B F1 -.407(11)512.907 452.4
+S(:).407 E F0(151;)A F1(17:)243.5 465.6 Q F0(247-248)A(DDdevice_InqClipList)
+232.5 478.8 Q F1(5:)355.59 478.8 Q F0(25;)A F1(17:)2.75 E F0(248)A
+(DDdevice_InqClippingV)232.5 492 Q(olume)-1.221 E F1(5:)397.291 492 Q F0(25;)A
+F1(7:)2.75 E F0(70;)A F1 -.407(11)2.75 G(:).407 E F0(148;)A F1(17:)2.75 E F0
+(249)A(DDdevice_InqFrameScaleT)232.5 505.2 Q(rans)-.99 E F1(17:)398.842 505.2 Q
+F0(249)A(DDdevice_InqFr)232.5 518.4 Q(ustumScaleT)-.088 E(rans)-.99 E F1(5:)
+417.477 518.4 Q F0(26;)A F1(7:)450.203 518.4 Q F0(70;)A F1 -.407(11)482.93
+518.4 S(:).407 E F0 7.977(148, 151;)B F1(17:)243.5 531.6 Q F0(249-250;)A F1
+(18:)2.75 E F0(343)A(DDdevice_InqInterfaceRoutines)232.5 544.8 Q F1(6:)402.34
+544.8 Q F0(40;)A F1(7:)2.75 E F0(67;)A F1(17:)2.75 E F0(250, 253)A
+(DDdevice_InqShadeRange)232.5 558 Q F1(5:)376.908 558 Q F0(26;)A F1(17:)2.75 E
+F0(251, 257)A(DDdevice_InqSter)232.5 571.2 Q(eo)-.198 E F1(5:)346.658 571.2 Q
+F0(26;)A F1 -.407(11)2.75 G(:).407 E F0(151;)A F1(17:)2.75 E F0(252)A
+(DDdevice_InstallDriver)232.5 584.4 Q F1(9:)362.487 584.4 Q F0 -.605(11)C(0;)
+.605 E F1 -.407(11)2.75 G(:).407 E F0(176-177;)A F1(17:)2.75 E F0
+(245-246, 251-252)A(DDdevice_SetAbortedDraw)232.5 597.6 Q F1(17:)383.068 597.6
+Q F0(247, 253-254)A(DDdevice_SetBackgr)232.5 610.8 Q(oundColor)-.198 E F1 -.407
+(11)401.57 610.8 S(:).407 E F0(154;)A F1(17:)2.75 E F0(245, 254)A
+(DDdevice_SetDepthBuf)232.5 624 Q(ferEnable)-.198 E F1(17:)408.621 624 Q F0
+(254-255)A(DDdevice_SetDepthBuf)232.5 637.2 Q(ferW)-.198 E(rite)-.814 E F1(17:)
+402.032 637.2 Q F0(255)A(DDdevice_SetFor)232.5 650.4 Q(egr)-.198 E(oundColor)
+-.198 E F1(17:)399.887 650.4 Q F0(256)A(DDdevice_SetShadeIndex)232.5 663.6 Q F1
+(17:)372.409 663.6 Q F0(252, 256)A(DDgetenv)232.5 676.8 Q F1(17:)296.135 676.8
+Q F0(257)A(DDobject_AddRefer)232.5 690 Q(ence)-.198 E F1(17:)366.7 690 Q F0
+(257-259;)A F1(C:)2.75 E F0(381)A 1.44 LW 90 756 72 756 DL 99 756 81 756 DL 117
+756 99 756 DL 135 756 117 756 DL 153 756 135 756 DL 171 756 153 756 DL 189 756
+171 756 DL 207 756 189 756 DL 239.4 756 221.4 756 DL 257.4 756 239.4 756 DL
+275.4 756 257.4 756 DL 293.4 756 275.4 756 DL 311.4 756 293.4 756 DL 329.4 756
+311.4 756 DL 347.4 756 329.4 756 DL 365.4 756 347.4 756 DL 383.4 756 365.4 756
+DL 401.4 756 383.4 756 DL 419.4 756 401.4 756 DL 437.4 756 419.4 756 DL 455.4
+756 437.4 756 DL 473.4 756 455.4 756 DL 491.4 756 473.4 756 DL 509.4 756 491.4
+756 DL 527.4 756 509.4 756 DL 545.4 756 527.4 756 DL/F2 9/Helvetica-Bold@0 SF
+(I-406)72 768.96 Q/F3 9/Helvetica@0 SF(Dore)6.504 E 3.506<b444>114.517 768.96 S
+-2.187 -.27(ev e)127.518 768.96 T(loper').27 E 2.502(sG)-.45 G(uide)177.09
+768.96 Q(Inde)221.4 768.96 Q(x)-.27 E EP
+%%Page: 407 9
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 99 46.8 63 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 243 46.8 207 46.8 DL 279 46.8 243 46.8 DL 315 46.8 279 46.8 DL 351
+46.8 315 46.8 DL 387 46.8 351 46.8 DL 437.4 46.8 401.4 46.8 DL 464.4 46.8 428.4
+46.8 DL 500.4 46.8 464.4 46.8 DL 536.4 46.8 500.4 46.8 DL/F0 11
+/Palatino-Roman@0 SF(DDobject_Delete)74 109.2 Q/F1 11/Palatino-Bold@0 SF(17:)
+169.788 109.2 Q F0(239, 258)A(DDobject_DeleteRefer)74 122.4 Q(ence)-.198 E F1
+(17:)217.308 122.4 Q F0(258;)A F1(C:)2.75 E F0(382)A(DDobject_InqCurr)74 135.6
+Q(entMethod)-.198 E F1(7:)231.52 135.6 Q F0(61;)A F1(9:)2.75 E F0(109;)A F1
+(17:)2.75 E F0(259)A(DDobject_InqDefaultMethod)74 148.8 Q F1(17:)229.705 148.8
+Q F0(241, 259-260)A(DDobject_InqMethod)74 162 Q F1(9:)193.339 162 Q F0(109;)A
+F1(17:)2.75 E F0(241, 260)A(DDprint)74 175.2 Q F1(7:)128.923 175.2 Q F0
+(54-55, 57;)A F1(17:)2.75 E F0(260-262)A(DDprint_GetLine)74 188.4 Q F1(7:)
+173.264 188.4 Q F0(54-55;)A F1(17:)2.75 E F0(261)A(DDprint_IndentDown)74 201.6
+Q F1(7:)196.606 201.6 Q F0(54-55, 57;)A F1(17:)2.75 E F0(260-262)A
+(DDprint_IndentUp)74 214.8 Q F1(7:)181.679 214.8 Q F0(54-55, 57;)A F1(17:)2.75
+E F0(260-262)A(DDr)74 228 Q(ender_AddRender)-.198 E(er)-.198 E F1(6:)214.391
+228 Q F0 5.19(36-37, 39;)B F1(7:)7.939 E F0 5.189(49, 52, 67;)B F1(13:)7.939 E
+F0(194;)A F1(17:)85 241.2 Q F0(262-263)A(DDspace_Allocate)74 254.4 Q F1(7:)
+177.411 254.4 Q F0(49, 53, 56;)A F1 -.407(11)2.75 G(:).407 E F0
+(123-124, 134-135;)A F1(17:)2.75 E F0(264-265)A(DDspace_Deallocate)74 267.6 Q
+F1(7:)188.136 267.6 Q F0(55, 57, 75;)A F1 -.407(11)2.75 G(:).407 E F0(124;)A F1
+(17:)2.75 E F0(264-265)A(DDspace_Reallocate)74 280.8 Q F1(7:)186.97 280.8 Q F0
+(63;)A F1 -.407(11)2.75 G(:).407 E F0(137, 163, 168;)A F1(17:)2.75 E F0
+(264-265)A(DDstrtok)74 294 Q F1 -.407(11)133.081 294 S(:).407 E F0(124;)A F1
+(17:)2.75 E F0(265-266)A(DDsystem_InqNumberPr)74 307.2 Q(ocessors)-.198 E F1
+(17:)253.036 307.2 Q F0(266)A(DDview_ResizeRaster)74 320.4 Q F1 -.407(11)196.1
+320.4 S(:).407 E F0(154;)A F1(17:)2.75 E F0(266-267)A(DDview_T)74 333.6 Q
+(raverseDisplay)-.99 E F1(6:)213.304 333.6 Q F0(40;)A F1(7:)2.75 E F0(69;)A F1
+(17:)2.75 E F0(259, 264, 267-268)A(DDview_T)74 346.8 Q(raverseStudio)-.99 E F1
+(6:)207.419 346.8 Q F0(40;)A F1(7:)2.75 E F0(67;)A F1(17:)2.75 E F0
+(259, 264, 267-268)A(Dore)63 360 Q 3.553<b46b>82.668 360 S(ernel: see kernel)96
+360 Q(driver)63 373.2 Q 2.75(,d)-.814 G(evice: see device)104.503 373.2 Q(DROM)
+63 386.4 Q F1(A:)112.046 386.4 Q F0(359;)A F1(5:)3.132 E F0(28;)A F1(6:)3.132 E
+F0 .383(33, 40;)B F1(9:)3.133 E F0 .383(81, 84, 92, 94, 103, 109, 1)B -.605(11)
+-.605 G(;).605 E F1(10:)3.133 E F0 -.605(11)C(3,).605 E -.605(11)85 399.6 S(8;)
+.605 E F1 -.407(11)3.251 G(:).407 E F0 .501
+(131, 136, 143, 150, 153, 157, 160, 163, 166, 169, 171, 174,)B(177, 180;)85
+412.8 Q F1(17:)2.75 E F0(246, 251, 253;)A F1(18:)2.75 E F0
+(270, 286, 289, 302, 304, 307, 309)A(DROM Methods Interface)63 426 Q F1(9:)
+202.843 426 Q F0(106, 109;)A F1(A:)2.75 E F0(359)A(DROM functions)63 439.2 Q
+(dr)74 452.4 Q(om.apply_att_clpvol)-.198 E F1(9:)198.916 452.4 Q F0(103;)A F1
+(18:)2.75 E F0(290, 297, 299, 312)A(dr)74 465.6 Q(om.camera)-.198 E F1(9:)
+152.728 465.6 Q F0(99-100;)A F1(10:)3.18 E F0 -.605(11)C(8-1).605 E(19;)-.605 E
+F1 -.407(11)3.18 G(:).407 E F0 .43(145, 161;)B F1(18:)3.18 E F0 .43
+(291, 335-336,)B(338-341, 351)85 478.8 Q(dr)74 492 Q(om.cr)-.198 E
+(eate_local_device_data)-.198 E F1(9:)243.116 492 Q F0(97;)A F1(10:)7.966 E F0
+-.605(11)C(8;).605 E F1 -.407(11)7.965 G(:).407 E F0(134;)A F1(18:)7.965 E F0
+(291,)A(294, 342)85 505.2 Q(dr)74 518.4 Q(om.cr)-.198 E(eate_local_view_data)
+-.198 E F1(9:)231.512 518.4 Q F0(97;)A F1(10:)4.062 E F0 -.605(11)C(8;).605 E
+F1 -.407(11)4.062 G(:).407 E F0(134;)A F1(18:)4.063 E F0 1.313(292, 294,)B(342)
+85 531.6 Q(dr)74 544.8 Q(om.cr)-.198 E(eate_local_window_data)-.198 E F1(9:)
+249.955 544.8 Q F0(97;)A F1(10:)5.686 E F0 -.605(11)C(8;).605 E F1 -.407(11)
+5.686 G(:).407 E F0(134;)A F1(18:)5.685 E F0(292,)A(295, 342)85 558 Q(dr)74
+571.2 Q(om.delete_local_device_data)-.198 E F1(9:)238.56 571.2 Q F0(97;)A F1
+(18:)2.75 E F0(293)A(dr)74 584.4 Q(om.delete_local_view_data)-.198 E F1(9:)
+230.86 584.4 Q F0(97;)A F1(18:)2.75 E F0(294)A(dr)74 597.6 Q
+(om.delete_local_window_data)-.198 E F1(9:)247.679 597.6 Q F0(97;)A F1(18:)2.75
+E F0(294)A(dr)74 610.8 Q(om.get_lcstowcsmat)-.198 E F1(9:)197.42 610.8 Q F0
+(106;)A F1(10:)2.75 E F0 -.605(11)C(8;).605 E F1 -.407(11)2.75 G(:).407 E F0
+(137;)A F1(18:)2.75 E F0(295)A(dr)74 624 Q(om.get_wcstofcsmat)-.198 E F1(9:)
+197.882 624 Q F0(106;)A F1 -.407(11)2.75 G(:).407 E F0(157, 160;)A F1(18:)2.75
+E F0(295)A(dr)74 637.2 Q(om.light)-.198 E F1(9:)139.593 637.2 Q F0(100;)A F1
+-.407(11)2.75 G(:).407 E F0(162, 173;)A F1(18:)2.75 E F0(296, 317-321, 351)A
+(dr)74 650.4 Q(om.pop_att_clpvol)-.198 E F1(9:)190.105 650.4 Q F0(103;)A F1
+(18:)2.75 E F0(290, 297, 299, 312)A(dr)74 663.6 Q(om.pop_lcstofcsmat)-.198 E F1
+(9:)196.166 663.6 Q F0(106;)A F1 -.407(11)2.75 G(:).407 E F0(157, 159;)A F1
+(18:)2.75 E F0(297, 300)A(dr)74 676.8 Q(om.post_initialization)-.198 E F1(9:)
+205.142 676.8 Q F0(96;)A F1 -.407(11)2.75 G(:).407 E F0(169;)A F1(18:)2.75 E F0
+(298-299)A(dr)74 690 Q(om.pr)-.198 E(e_initialization)-.198 E F1(9:)200.302 690
+Q F0(96;)A F1 -.407(11)2.75 G(:).407 E F0(169;)A F1(18:)2.75 E F0(298)A 1.44 LW
+81 756 63 756 DL 99 756 81 756 DL 117 756 99 756 DL 135 756 117 756 DL 153 756
+135 756 DL 171 756 153 756 DL 189 756 171 756 DL 207 756 189 756 DL 225 756 207
+756 DL 243 756 225 756 DL 261 756 243 756 DL 279 756 261 756 DL 297 756 279 756
+DL 315 756 297 756 DL 333 756 315 756 DL 351 756 333 756 DL 369 756 351 756 DL
+387 756 369 756 DL 419.4 756 401.4 756 DL 428.4 756 410.4 756 DL 446.4 756
+428.4 756 DL 464.4 756 446.4 756 DL 482.4 756 464.4 756 DL 500.4 756 482.4 756
+DL 518.4 756 500.4 756 DL 536.4 756 518.4 756 DL/F2 9/Helvetica@0 SF(Inde)
+365.256 768.96 Q(x)-.27 E(Dore)416.802 768.96 Q 3.506<b444>432.304 768.96 S
+-2.187 -.27(ev e)445.305 768.96 T(loper').27 E 2.502(sG)-.45 G(uide)494.877
+768.96 Q/F3 9/Helvetica-Bold@0 SF(I-407)4.002 E EP
+%%Page: 408 10
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 108 46.8 72 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 257.4 46.8 221.4 46.8 DL 293.4 46.8 257.4 46.8 DL 329.4 46.8 293.4
+46.8 DL 365.4 46.8 329.4 46.8 DL 401.4 46.8 365.4 46.8 DL 437.4 46.8 401.4 46.8
+DL 473.4 46.8 437.4 46.8 DL 509.4 46.8 473.4 46.8 DL 545.4 46.8 509.4 46.8 DL
+/F0 11/Palatino-Roman@0 SF(dr)232.5 109.2 Q(om.push_att_clpvol)-.198 E/F1 11
+/Palatino-Bold@0 SF(9:)353.687 109.2 Q F0(103;)A F1(18:)2.75 E F0
+(290, 297, 299, 312)A(dr)232.5 122.4 Q(om.push_lcstofcsmat)-.198 E F1(9:)
+359.748 122.4 Q F0(105;)A F1 -.407(11)2.75 G(:).407 E F0(157, 159;)A F1(18:)
+2.75 E F0(298-300)A(dr)232.5 135.6 Q(om.r)-.198 E(ender_connected_line_list)
+-.198 E F1(9:)406.388 135.6 Q F0(105;)A F1(10:)2.75 E F0 -.605(11)C(9;).605 E
+F1 -.407(11)2.75 G(:).407 E F0(157;)A F1(18:)2.75 E F0(300)A(dr)232.5 148.8 Q
+(om.r)-.198 E(ender_line_list)-.198 E F1(9:)351.465 148.8 Q F0(105;)A F1(10:)
+2.75 E F0 -.605(11)C(9;).605 E F1 -.407(11)2.75 G(:).407 E F0(157;)A F1(18:)
+2.75 E F0(302)A(dr)232.5 162 Q(om.r)-.198 E(ender_point_list)-.198 E F1(9:)
+359.198 162 Q F0(105;)A F1(10:)2.75 E F0 -.605(11)C(9;).605 E F1 -.407(11)2.75
+G(:).407 E F0(157;)A F1(18:)2.75 E F0(303-304)A(dr)232.5 175.2 Q(om.r)-.198 E
+(ender_triangle_list)-.198 E F1(9:)371.012 175.2 Q F0(105;)A F1(10:)2.75 E F0
+-.605(11)C(9;).605 E F1 -.407(11)2.75 G(:).407 E F0(157;)A F1(18:)2.75 E F0
+(305)A(dr)232.5 188.4 Q(om.r)-.198 E(ender_triangle_mesh)-.198 E F1(9:)382.408
+188.4 Q F0(105;)A F1(10:)2.75 E F0 -.605(11)C(9;).605 E F1 -.407(11)2.75 G(:)
+.407 E F0(157;)A F1(18:)2.75 E F0(306-307)A(dr)232.5 201.6 Q(om.set_att_ambint)
+-.198 E F1(9:)347.263 201.6 Q F0(101;)A F1 -.407(11)2.75 G(:).407 E F0
+(166, 172;)A F1(18:)2.75 E F0(309, 314)A(dr)232.5 214.8 Q(om.set_att_ambswi)
+-.198 E F1(9:)351.113 214.8 Q F0(101;)A F1 -.407(11)2.75 G(:).407 E F0
+(166, 175;)A F1(18:)2.75 E F0(309)A(dr)232.5 228 Q(om.set_att_bacfacculble)
+-.198 E F1(9:)372.563 228 Q F0(101;)A F1 -.407(11)2.75 G(:).407 E F0(166;)A F1
+(18:)2.75 E F0(310-31)A(1)-.605 E(dr)232.5 241.2 Q(om.set_att_bacfacculswi)
+-.198 E F1(9:)375.049 241.2 Q F0(101;)A F1 -.407(11)2.75 G(:).407 E F0(166;)A
+F1(18:)2.75 E F0(310-31)A(1)-.605 E(dr)232.5 254.4 Q(om.set_att_clpswi)-.198 E
+F1(9:)344.513 254.4 Q F0(103;)A F1(18:)2.75 E F0(31)A(1)-.605 E(dr)232.5 267.6
+Q(om.set_att_clpvol)-.198 E F1(9:)342.896 267.6 Q F0(103;)A F1(18:)2.75 E F0
+(290, 297, 299, 312)A(dr)232.5 280.8 Q(om.set_att_depcue)-.198 E F1(9:)348.165
+280.8 Q F0(101;)A F1 -.407(11)2.75 G(:).407 E F0(166;)A F1(18:)2.75 E F0
+(312-313)A(dr)232.5 294 Q(om.set_att_depcueswi)-.198 E F1(9:)365.204 294 Q F0
+(101;)A F1 -.407(11)2.75 G(:).407 E F0(166;)A F1(18:)2.75 E F0(313)A(dr)232.5
+307.2 Q(om.set_att_difclr)-.198 E F1(9:)338.793 307.2 Q F0(101;)A F1 -.407(11)
+2.75 G(:).407 E F0(166, 172;)A F1(18:)2.75 E F0(314-315)A(dr)232.5 320.4 Q
+(om.set_att_di\214nt)-.198 E F1(9:)339.343 320.4 Q F0(101;)A F1 -.407(11)2.75 G
+(:).407 E F0(166, 172;)A F1(18:)2.75 E F0(314)A(dr)232.5 333.6 Q
+(om.set_att_difswi)-.198 E F1(9:)343.402 333.6 Q F0(101;)A F1 -.407(11)2.75 G
+(:).407 E F0(166, 175;)A F1(18:)2.75 E F0(315)A(dr)232.5 346.8 Q
+(om.set_att_hidsrfswi)-.198 E F1(9:)358.813 346.8 Q F0(101;)A F1 -.407(11)2.75
+G(:).407 E F0(166;)A F1(18:)2.75 E F0(315-316)A(dr)232.5 360 Q
+(om.set_att_inttyp)-.198 E F1(9:)342.28 360 Q F0(101;)A F1 -.407(11)2.75 G(:)
+.407 E F0(166, 172;)A F1(18:)2.75 E F0(316)A(dr)232.5 373.2 Q
+(om.set_att_lgtatn)-.198 E F1(9:)341.169 373.2 Q F0(99;)A F1 -.407(11)2.75 G(:)
+.407 E F0(162, 173;)A F1(18:)2.75 E F0(296, 317)A(dr)232.5 386.4 Q
+(om.set_att_lgtclr)-.198 E F1(9:)338.111 386.4 Q F0(99;)A F1 -.407(11)2.75 G(:)
+.407 E F0(162, 173;)A F1(18:)2.75 E F0(296, 317-318)A(dr)232.5 399.6 Q
+(om.set_att_lgtint)-.198 E F1(9:)338.87 399.6 Q F0(99;)A F1 -.407(11)2.75 G(:)
+.407 E F0(162, 173;)A F1(18:)2.75 E F0(296, 318)A(dr)232.5 412.8 Q
+(om.set_att_lgtspdang)-.198 E F1(9:)361.695 412.8 Q F0(99;)A F1 -.407(11)2.75 G
+(:).407 E F0(162, 173;)A F1(18:)2.75 E F0(296, 319)A(dr)232.5 426 Q
+(om.set_att_lgtspdexp)-.198 E F1(9:)361.233 426 Q F0(99;)A F1 -.407(11)2.75 G
+(:).407 E F0(162, 173;)A F1(18:)2.75 E F0(296, 319)A(dr)232.5 439.2 Q
+(om.set_att_lgtswi)-.198 E F1(9:)342.72 439.2 Q F0(100-101;)A F1 -.407(11)2.75
+G(:).407 E F0(162, 165;)A F1(18:)2.75 E F0(296, 320)A(dr)232.5 452.4 Q
+(om.set_att_lgttyp)-.198 E F1(9:)341.994 452.4 Q F0(99;)A F1 -.407(11)2.75 G(:)
+.407 E F0(162, 173;)A F1(18:)2.75 E F0(296, 320-321)A(dr)232.5 465.6 Q
+(om.set_att_lintyp)-.198 E F1(9:)341.895 465.6 Q F0(101;)A F1 -.407(11)2.75 G
+(:).407 E F0(166;)A F1(18:)2.75 E F0(321)A(dr)232.5 478.8 Q(om.set_att_linwid)
+-.198 E F1(9:)344.678 478.8 Q F0(101;)A F1 -.407(11)2.75 G(:).407 E F0(166;)A
+F1(18:)2.75 E F0(321-322)A(dr)232.5 492 Q(om.set_att_localaasty)-.198 E F1(9:)
+360.936 492 Q F0(101;)A F1 -.407(11)2.75 G(:).407 E F0(166;)A F1(18:)2.75 E F0
+(322)A(dr)232.5 505.2 Q(om.set_att_localaaswi)-.198 E F1(9:)363.609 505.2 Q F0
+(101;)A F1 -.407(11)2.75 G(:).407 E F0(166;)A F1(18:)2.75 E F0(323)A(dr)232.5
+518.4 Q(om.set_att_mapbmp)-.198 E F1(9:)357.009 518.4 Q F0(101;)A F1 -.407(11)
+2.75 G(:).407 E F0(167;)A F1(18:)2.75 E F0(323-324)A(dr)232.5 531.6 Q
+(om.set_att_mapbmpswi)-.198 E F1(9:)374.048 531.6 Q F0(101;)A F1 -.407(11)2.75
+G(:).407 E F0(167;)A F1(18:)2.75 E F0(324)A(dr)232.5 544.8 Q
+(om.set_att_mapdifclr)-.198 E F1(9:)360.617 544.8 Q F0(101;)A F1 -.407(11)2.75
+G(:).407 E F0(167;)A F1(18:)2.75 E F0(325)A(dr)232.5 558 Q
+(om.set_att_mapdifclrswi)-.198 E F1(9:)377.656 558 Q F0(101;)A F1 -.407(11)2.75
+G(:).407 E F0(167;)A F1(18:)2.75 E F0(325-326)A(dr)232.5 571.2 Q
+(om.set_att_mapenv)-.198 E F1(9:)352.488 571.2 Q F0(101;)A F1 -.407(11)2.75 G
+(:).407 E F0(167;)A F1(18:)2.75 E F0(326)A(dr)232.5 584.4 Q
+(om.set_att_mapenvswi)-.198 E F1(9:)369.527 584.4 Q F0(101;)A F1 -.407(11)2.75
+G(:).407 E F0(167;)A F1(18:)2.75 E F0(327)A(dr)232.5 597.6 Q
+(om.set_att_maptrnint)-.198 E F1(9:)362.124 597.6 Q F0(101;)A F1 -.407(11)2.75
+G(:).407 E F0(167;)A F1(18:)2.75 E F0(327-328)A(dr)232.5 610.8 Q
+(om.set_att_maptrnintswi)-.198 E F1(9:)379.163 610.8 Q F0(101;)A F1 -.407(11)
+2.75 G(:).407 E F0(167;)A F1(18:)2.75 E F0(328)A(dr)232.5 624 Q(om.set_att_r)
+-.198 E(efswi)-.198 E F1(9:)342.896 624 Q F0(101;)A F1 -.407(11)2.75 G(:).407 E
+F0(166;)A F1(18:)2.75 E F0(329)A(dr)232.5 637.2 Q(om.set_att_r)-.198 E(eptyp)
+-.198 E F1(9:)345.118 637.2 Q F0(101;)A F1 -.407(11)2.75 G(:).407 E F0(166;)A
+F1(18:)2.75 E F0(329-330)A(dr)232.5 650.4 Q(om.set_att_shaswi)-.198 E F1(9:)
+346.383 650.4 Q F0(101;)A F1 -.407(11)2.75 G(:).407 E F0(166;)A F1(18:)2.75 E
+F0(330)A(dr)232.5 663.6 Q(om.set_att_shdidx)-.198 E F1(9:)346.163 663.6 Q F0
+(101;)A F1 -.407(11)2.75 G(:).407 E F0(166;)A F1(18:)2.75 E F0(331)A(dr)232.5
+676.8 Q(om.set_att_spcclr)-.198 E F1(9:)341.367 676.8 Q F0(101;)A F1 -.407(11)
+2.75 G(:).407 E F0(166, 173;)A F1(18:)2.75 E F0(331)A(dr)232.5 690 Q
+(om.set_att_spcfct)-.198 E F1(9:)341.07 690 Q F0(101;)A F1 -.407(11)2.75 G(:)
+.407 E F0(166, 173;)A F1(18:)2.75 E F0(332)A 1.44 LW 90 756 72 756 DL 99 756 81
+756 DL 117 756 99 756 DL 135 756 117 756 DL 153 756 135 756 DL 171 756 153 756
+DL 189 756 171 756 DL 207 756 189 756 DL 239.4 756 221.4 756 DL 257.4 756 239.4
+756 DL 275.4 756 257.4 756 DL 293.4 756 275.4 756 DL 311.4 756 293.4 756 DL
+329.4 756 311.4 756 DL 347.4 756 329.4 756 DL 365.4 756 347.4 756 DL 383.4 756
+365.4 756 DL 401.4 756 383.4 756 DL 419.4 756 401.4 756 DL 437.4 756 419.4 756
+DL 455.4 756 437.4 756 DL 473.4 756 455.4 756 DL 491.4 756 473.4 756 DL 509.4
+756 491.4 756 DL 527.4 756 509.4 756 DL 545.4 756 527.4 756 DL/F2 9
+/Helvetica-Bold@0 SF(I-408)72 768.96 Q/F3 9/Helvetica@0 SF(Dore)6.504 E 3.506
+<b444>114.517 768.96 S -2.187 -.27(ev e)127.518 768.96 T(loper').27 E 2.502(sG)
+-.45 G(uide)177.09 768.96 Q(Inde)221.4 768.96 Q(x)-.27 E EP
+%%Page: 409 11
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 99 46.8 63 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 243 46.8 207 46.8 DL 279 46.8 243 46.8 DL 315 46.8 279 46.8 DL 351
+46.8 315 46.8 DL 387 46.8 351 46.8 DL 437.4 46.8 401.4 46.8 DL 464.4 46.8 428.4
+46.8 DL 500.4 46.8 464.4 46.8 DL 536.4 46.8 500.4 46.8 DL/F0 11
+/Palatino-Roman@0 SF(dr)74 109.2 Q(om.set_att_spcint)-.198 E/F1 11
+/Palatino-Bold@0 SF(9:)183.626 109.2 Q F0(101;)A F1 -.407(11)2.75 G(:).407 E F0
+(166, 173;)A F1(18:)2.75 E F0(332)A(dr)74 122.4 Q(om.set_att_spcswi)-.198 E F1
+(9:)187.476 122.4 Q F0(101;)A F1 -.407(11)2.75 G(:).407 E F0(166, 175;)A F1
+(18:)2.75 E F0(333)A(dr)74 135.6 Q(om.set_att_srfedgclr)-.198 E F1(9:)197.486
+135.6 Q F0(101;)A F1 -.407(11)2.75 G(:).407 E F0(166;)A F1(18:)2.75 E F0
+(333-334)A(dr)74 148.8 Q(om.set_att_srfshd)-.198 E F1(9:)184.737 148.8 Q F0
+(101;)A F1 -.407(11)2.75 G(:).407 E F0(166, 172;)A F1(18:)2.75 E F0(334)A(dr)74
+162 Q(om.set_att_ster)-.198 E(eo)-.198 E F1(9:)183.219 162 Q F0(99;)A F1 -.407
+(11)2.75 G(:).407 E F0(160;)A F1(18:)2.75 E F0(291, 335)A(dr)74 175.2 Q
+(om.set_att_ster)-.198 E(eoswi)-.198 E F1(9:)200.258 175.2 Q F0(99;)A F1 -.407
+(11)2.75 G(:).407 E F0(160;)A F1(18:)2.75 E F0(291, 335-336)A(dr)74 188.4 Q
+(om.set_att_transpclr)-.198 E F1(9:)197.816 188.4 Q F0(101;)A F1 -.407(11)2.75
+G(:).407 E F0(166;)A F1(18:)2.75 E F0(336-337)A(dr)74 201.6 Q
+(om.set_att_transpint)-.198 E F1(9:)198.575 201.6 Q F0(101;)A F1 -.407(11)2.75
+G(:).407 E F0(166;)A F1(18:)2.75 E F0(336-337)A(dr)74 214.8 Q
+(om.set_att_transpswi)-.198 E F1(9:)202.425 214.8 Q F0(101;)A F1 -.407(11)2.75
+G(:).407 E F0(166;)A F1(18:)2.75 E F0(337-338)A(dr)74 228 Q
+(om.set_camera_matrix)-.198 E F1(9:)208.838 228 Q F0(99;)A F1(10:)2.75 E F0
+-.605(11)C(9;).605 E F1 -.407(11)2.75 G(:).407 E F0(144;)A F1(18:)2.75 E F0
+(291, 338-341)A(dr)74 241.2 Q(om.set_parallel_matrix)-.198 E F1(9:)210.455
+241.2 Q F0(99;)A F1(10:)2.75 E F0 -.605(11)C(9;).605 E F1 -.407(11)2.75 G(:)
+.407 E F0(144;)A F1(18:)2.75 E F0(291, 339-341)A(dr)74 254.4 Q
+(om.set_perspective_matrix)-.198 E F1(9:)236.853 254.4 Q F0(99;)A F1(10:)
+268.906 254.4 Q F0 -.605(11)C(9;).605 E F1 -.407(11)311.354 254.4 S(:).407 E F0
+(144;)A F1(18:)354 254.4 Q F0(291,)A(339-341)85 267.6 Q(dr)74 280.8 Q
+(om.set_pr)-.198 E(ojection_matrix)-.198 E F1(9:)231.426 280.8 Q F0(99;)A F1
+(10:)265.288 280.8 Q F0 -.605(11)C(9;).605 E F1 -.407(11)309.545 280.8 S(:).407
+E F0(144;)A F1(18:)354 280.8 Q F0(291,)A(339-341)85 294 Q(dr)74 307.2 Q
+(om.start_update)-.198 E F1(9:)182.157 307.2 Q F0(98;)A F1(10:)6.319 E F0 -.605
+(11)C(8;).605 E F1 -.407(11)6.32 G(:).407 E F0(150-151;)A F1(18:)6.32 E F0 3.57
+(292-293, 342,)B(351)85 320.4 Q(dr)74 333.6 Q(om.transform_clip_z_point)-.198 E
+F1(9:)239.863 333.6 Q F0(105;)A F1 -.407(11)278.961 333.6 S(:).407 E F0(157;)A
+F1(18:)323.152 333.6 Q F0 8.848(298, 300,)B(342-343)85 346.8 Q(dr)74 360 Q
+(om.update_display)-.198 E F1(9:)192.921 360 Q F0(98;)A F1(10:)2.75 E F0 -.605
+(11)C(8;).605 E F1 -.407(11)2.75 G(:).407 E F0(150, 153;)A F1(18:)2.75 E F0
+(343)A(dr)74 373.2 Q(om.update_lcstowcsmat_lokatfrm)-.198 E F1(9:)265.052 373.2
+Q F0(102;)A F1(10:)3.403 E F0 -.605(11)C(8;).605 E F1 -.407(11)3.403 G(:).407 E
+F0 .654(139, 141,)B(143;)85 386.4 Q F1(18:)2.75 E F0(344)A(dr)74 399.6 Q
+(om.update_lcstowcsmat_pop)-.198 E F1(9:)257.336 399.6 Q F0(102;)A F1(10:)
+303.424 399.6 Q F0 -.605(11)C(8;).605 E F1 -.407(11)354.407 399.6 S(:).407 E F0
+(138;)A F1(18:)85 412.8 Q F0(345-346)A(dr)74 426 Q(om.update_lcstowcsmat_push)
+-.198 E F1(9:)260.723 426 Q F0(102;)A F1(10:)305.117 426 Q F0 -.605(11)C(8;)
+.605 E F1 -.407(11)354.407 426 S(:).407 E F0(137;)A F1(18:)85 439.2 Q F0
+(345-346)A(dr)74 452.4 Q(om.update_lcstowcsmat_r)-.198 E(otate)-.198 E F1(9:)
+250.363 452.4 Q F0(102;)A F1(10:)2.75 E F0 -.605(11)C(8;).605 E F1 -.407(11)
+2.75 G(:).407 E F0(139;)A F1(18:)2.75 E F0(346)A(dr)74 465.6 Q
+(om.update_lcstowcsmat_scale)-.198 E F1(9:)251.094 465.6 Q F0(102;)A F1(10:)
+8.056 E F0 -.605(11)C(8;).605 E F1 -.407(11)8.056 G(:).407 E F0 5.306
+(139, 143;)B F1(18:)85 478.8 Q F0(347)A(dr)74 492 Q
+(om.update_lcstowcsmat_shear)-.198 E F1(9:)248.449 492 Q F0(102;)A F1(10:)2.75
+E F0 -.605(11)C(8;).605 E F1 -.407(11)2.75 G(:).407 E F0(139;)A F1(18:)2.75 E
+F0(348)A(dr)74 505.2 Q(om.update_lcstowcsmat_tfmmat)-.198 E F1(9:)268.357 505.2
+Q F0(102;)A F1(10:)308.934 505.2 Q F0 -.605(11)C(8;).605 E F1 -.407(11)354.407
+505.2 S(:).407 E F0(139;)A F1(18:)85 518.4 Q F0(349)A(dr)74 531.6 Q
+(om.update_lcstowcsmat_transl)-.198 E F1(9:)262.982 531.6 Q F0(102;)A F1(10:)
+306.247 531.6 Q F0 -.605(11)C(8;).605 E F1 -.407(11)354.407 531.6 S(:).407 E F0
+(139;)A F1(18:)85 544.8 Q F0(349-350)A(dr)74 558 Q(om.update_local_data)-.198 E
+F1(9:)206.506 558 Q F0(98;)A F1(10:)2.75 E F0 -.605(11)C(8;).605 E F1 -.407(11)
+2.75 G(:).407 E F0(150-151;)A F1(18:)2.75 E F0(350)A(dr)74 571.2 Q
+(om.update_studio)-.198 E F1(9:)187.718 571.2 Q F0(98;)A F1(10:)2.75 E F0 -.605
+(11)C(8;).605 E F1 -.407(11)2.75 G(:).407 E F0(146, 148, 150, 153;)A F1(18:)
+2.75 E F0(351)A .363(dynamic r)63 584.4 R(ender)-.198 E(er)-.198 E F1(2:)
+164.332 584.4 Q F0(8;)A F1(5:)3.113 E F0 .363(23, 27;)B F1(6:)3.113 E F0(33;)A
+F1(9:)3.114 E F0 .364(81, 90, 94, 105, 109;)B F1(10:)3.114 E F0 -.605(11)C(3,)
+.605 E -.605(11)85 597.6 S(9;).605 E F1 -.407(11)4.641 G(:).407 E F0 1.891
+(131, 157;)B F1(12:)4.64 E F0 1.89(187, 190;)B F1(13:)4.64 E F0 1.89(198, 201;)
+B F1(15:)4.64 E F0(220;)A F1(16:)4.64 E F0 1.89(228, 233;)B F1(17:)85 610.8 Q
+F0(246, 251, 253;)A F1(18:)2.75 E F0(286, 289;)A F1(A:)2.75 E F0(355, 359)A
+3.27(output module)74 624 R F1(5:)167.638 624 Q F0(28;)A F1(6:)6.02 E F0(33;)A
+F1(9:)6.02 E F0(81;)A F1(10:)6.021 E F0 -.605(11)C(3;).605 E F1 -.407(11)6.021
+G(:).407 E F0 3.271(131, 157;)B F1(12:)6.021 E F0(190;)A F1(13:)85 637.2 Q F0
+(201;)A F1(A:)2.75 E F0(355, 359)A 1.44 LW 81 756 63 756 DL 99 756 81 756 DL
+117 756 99 756 DL 135 756 117 756 DL 153 756 135 756 DL 171 756 153 756 DL 189
+756 171 756 DL 207 756 189 756 DL 225 756 207 756 DL 243 756 225 756 DL 261 756
+243 756 DL 279 756 261 756 DL 297 756 279 756 DL 315 756 297 756 DL 333 756 315
+756 DL 351 756 333 756 DL 369 756 351 756 DL 387 756 369 756 DL 419.4 756 401.4
+756 DL 428.4 756 410.4 756 DL 446.4 756 428.4 756 DL 464.4 756 446.4 756 DL
+482.4 756 464.4 756 DL 500.4 756 482.4 756 DL 518.4 756 500.4 756 DL 536.4 756
+518.4 756 DL/F2 9/Helvetica@0 SF(Inde)365.256 768.96 Q(x)-.27 E(Dore)416.802
+768.96 Q 3.506<b444>432.304 768.96 S -2.187 -.27(ev e)445.305 768.96 T(loper')
+.27 E 2.502(sG)-.45 G(uide)494.877 768.96 Q/F3 9/Helvetica-Bold@0 SF(I-409)
+4.002 E EP
+%%Page: 410 12
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 108 46.8 72 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 257.4 46.8 221.4 46.8 DL 293.4 46.8 257.4 46.8 DL 329.4 46.8 293.4
+46.8 DL 365.4 46.8 329.4 46.8 DL 401.4 46.8 365.4 46.8 DL 437.4 46.8 401.4 46.8
+DL 473.4 46.8 437.4 46.8 DL 509.4 46.8 473.4 46.8 DL 545.4 46.8 509.4 46.8 DL
+/F0 17/Palatino-Bold@0 SF(E)221.5 116.4 Q/F1 11/Palatino-Roman@0 SF(envir)221.5
+141.6 Q(onment variables)-.198 E(DORE_ERRDA)232.5 154.8 Q -.814(TA)-.814 G/F2
+11/Palatino-Bold@0 SF(14:)335.141 154.8 Q F1(210)A(DORE_FONTDA)232.5 168 Q
+-.814(TA)-.814 G F2(14:)344.37 168 Q F1(210)A(DORE_FOR)232.5 181.2 Q(TRAN)-.407
+E F2(15:)336.472 181.2 Q F1(217, 222-223)A(DORE_LIB_NAME)232.5 194.4 Q F2(10:)
+343.154 194.4 Q F1 -.605(11)C(6-1).605 E 2.7(17, 1)-.605 F(19;)-.605 E F2(14:)
+5.45 E F1(209;)A F2(15:)5.45 E F1 2.699(216, 218, 221,)B(225; 316:230, 234)
+243.5 207.6 Q(DORE_LIBT)232.5 220.8 Q(OC)-.198 E F2(15:)323.118 220.8 Q F1(217)
+A(DORE_LOC)232.5 234 Q F2(10:)306.958 234 Q F1 -.605(11)C(6-1).605 E .813
+(17, 1)-.605 F(19;)-.605 E F2(14:)3.563 E F1 .813(207, 209;)B F2(15:)3.563 E F1
+.814(216, 218, 221, 225;)B F2(16:)243.5 247.2 Q F1(230, 234-235)A(DORE_OBJTYPE)
+232.5 260.4 Q F2(10:)335.382 260.4 Q F1 -.605(11)C(6-1).605 E 5.928(17, 1)-.605
+F(19;)-.605 E F2(14:)8.678 E F1 5.928(207-209, 21)B(1;)-.605 E F2(15:)8.678 E
+F1(216,)A(218-219, 221-222, 224-226;)243.5 273.6 Q F2(16:)2.75 E F1
+(230-232, 234-235)A(DORE_SYSTEM)232.5 286.8 Q F2(15:)325.736 286.8 Q F1(217)A
+(executability set)221.5 300 Q F2(7:)313.724 300 Q F1(58)A(executable)221.5
+313.2 Q F2(10:)286.62 313.2 Q F1 -.605(11)C(7, 1).605 E(19;)-.605 E F2(15:)2.75
+E F1(29, 222;)A F2(16:)2.75 E F1(229-232, 234-235)A F0(F)221.5 345.6 Q F1
+(factor)221.5 370.8 Q 2.75(,s)-.814 G(pecular)258.834 370.8 Q F2 -.407(11)
+309.027 370.8 S(:).407 E F1(173;)A F2(18:)2.75 E F1(332)A(\214eld of view)221.5
+384 Q F2(18:)296.124 384 Q F1(339-340)A(fonts)221.5 397.2 Q F2(14:)259.571
+397.2 Q F1(208-210)A(format, raster\214le)221.5 410.4 Q F2(16:)316.397 410.4 Q
+F1(231)A(frame)221.5 423.6 Q F2(6:)264.363 423.6 Q F1 .623(35, 41;)B F2(7:)
+3.373 E F1 .623(70, 77-78;)B F2(10:)3.373 E F1 -.605(11)C(9;).605 E F2 -.407
+(11)3.374 G(:).407 E F1 .624(136, 143, 148, 151, 157, 159;)B F2(12:)243.5 436.8
+Q F1(191;)A F2(13:)2.75 E F1(198;)A F2(17:)2.75 E F1(249;)A F2(18:)2.75 E F1
+(298, 300, 313, 343;)A F2(A:)2.75 E F1(356-360)A(coor)232.5 450 Q(dinates)-.198
+E F2(7:)302.636 450 Q F1(70;)A F2 -.407(11)2.75 G(:).407 E F1(148, 157)A(fr)
+221.5 463.2 Q(ustum space)-.088 E F2(7:)304.077 463.2 Q F1(70;)A F2(9:)2.75 E
+F1(102;)A F2 -.407(11)2.75 G(:).407 E F1(147-148, 158;)A F2(17:)2.75 E F1
+(250, 264)A F0(G)221.5 495.6 Q F1(generation, dir)221.5 520.8 Q
+(ect traversal image)-.198 E F2(5:)398.578 520.8 Q F1(27)A(secondary database)
+232.5 534 Q F2(5:)341.73 534 Q F1(27)A(global attribute classes)221.5 547.2 Q
+(AttAmbientIntens)232.5 560.4 Q F2(B:)334.822 560.4 Q F1(369)A
+(AttAmbientSwitch)232.5 573.6 Q F2(B:)337.814 573.6 Q F1(369)A
+(AttBackfaceCullable)232.5 586.8 Q F2(B:)345.404 586.8 Q F1(369)A
+(AttBackfaceCullSwitch)232.5 600 Q F2(B:)358.373 600 Q F1(369)A(AttBoundingV)
+232.5 613.2 Q(olSwitch)-1.221 E F2(B:)359.132 613.2 Q F1(369)A(AttCameraMatrix)
+232.5 626.4 Q F2(3:)332.82 626.4 Q F1(17;)A F2(7:)2.75 E F1(44, 61;)A F2(B:)
+2.75 E F1(365-366)A(AttClipSwitch)232.5 639.6 Q F2(B:)315.814 639.6 Q F1(369)A
+(AttClipV)232.5 652.8 Q(ol)-1.221 E F2(B:)298.72 652.8 Q F1(370)A(AttCompT)
+232.5 666 Q(extur)-1.012 E(eUVCallback)-.198 E F2(B:)387.204 666 Q F1(370)A
+(AttCompT)232.5 679.2 Q(extur)-1.012 E(eUVSwitch)-.198 E F2(B:)377.942 679.2 Q
+F1(370)A(AttDepthCue)232.5 692.4 Q F2(B:)312.063 692.4 Q F1(370)A 1.44 LW 90
+756 72 756 DL 99 756 81 756 DL 117 756 99 756 DL 135 756 117 756 DL 153 756 135
+756 DL 171 756 153 756 DL 189 756 171 756 DL 207 756 189 756 DL 239.4 756 221.4
+756 DL 257.4 756 239.4 756 DL 275.4 756 257.4 756 DL 293.4 756 275.4 756 DL
+311.4 756 293.4 756 DL 329.4 756 311.4 756 DL 347.4 756 329.4 756 DL 365.4 756
+347.4 756 DL 383.4 756 365.4 756 DL 401.4 756 383.4 756 DL 419.4 756 401.4 756
+DL 437.4 756 419.4 756 DL 455.4 756 437.4 756 DL 473.4 756 455.4 756 DL 491.4
+756 473.4 756 DL 509.4 756 491.4 756 DL 527.4 756 509.4 756 DL 545.4 756 527.4
+756 DL/F3 9/Helvetica-Bold@0 SF(I-410)72 768.96 Q/F4 9/Helvetica@0 SF(Dore)
+6.504 E 3.506<b444>114.517 768.96 S -2.187 -.27(ev e)127.518 768.96 T(loper')
+.27 E 2.502(sG)-.45 G(uide)177.09 768.96 Q(Inde)221.4 768.96 Q(x)-.27 E EP
+%%Page: 411 13
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 99 46.8 63 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 243 46.8 207 46.8 DL 279 46.8 243 46.8 DL 315 46.8 279 46.8 DL 351
+46.8 315 46.8 DL 387 46.8 351 46.8 DL 437.4 46.8 401.4 46.8 DL 464.4 46.8 428.4
+46.8 DL 500.4 46.8 464.4 46.8 DL 536.4 46.8 500.4 46.8 DL/F0 11
+/Palatino-Roman@0 SF(AttDepthCueSwitch)74 109.2 Q/F1 11/Palatino-Bold@0 SF(B:)
+186.585 109.2 Q F0(370)A(AttDif)74 122.4 Q(fuseColor)-.198 E F1(7:)166.246
+122.4 Q F0(44, 48, 66-67, 73;)A F1(B:)2.75 E F0(370)A(AttDif)74 135.6 Q
+(fuseIntens)-.198 E F1(7:)168.919 135.6 Q F0(44, 48, 73;)A F1(B:)2.75 E F0(370)
+A(AttDif)74 148.8 Q(fuseSwitch)-.198 E F1(7:)171.911 148.8 Q F0(44, 48, 73;)A
+F1(B:)2.75 E F0(371)A(AttGlbRendMaxObjs)74 162 Q F1(B:)190.446 162 Q F0(366)A
+(AttGlbRendMaxSub)74 175.2 Q F1(B:)186.97 175.2 Q F0(366)A(AttGlbRendRayLevel)
+74 188.4 Q F1(B:)192.536 188.4 Q F0(366)A(AttHiddenSurfSwitch)74 201.6 Q F1(B:)
+194.384 201.6 Q F0(371)A(AttInterpT)74 214.8 Q(ype)-.99 E F1(B:)157.149 214.8 Q
+F0(371)A(AttInvisSwitch)74 228 Q F1(B:)160.691 228 Q F0(371)A(AttLcstowcsmat)74
+241.2 Q F1(3:)166.862 241.2 Q F0(17;)A F1(7:)2.75 E F0(44, 48, 62-63, 74;)A F1
+(B:)2.75 E F0(365, 369)A(AttLightAttenuation)74 254.4 Q F1(B:)188.235 254.4 Q
+F0(367)A(AttLightColor)74 267.6 Q F1(B:)156.863 267.6 Q F0(367;)A F1(7:)2.75 E
+F0(44, 63)A(AttLightIntens)74 280.8 Q F1(B:)159.536 280.8 Q F0(367;)A F1(7:)
+2.75 E F0(44, 63)A(AttLightSpr)74 294 Q(eadAngles)-.198 E F1(B:)197.739 294 Q
+F0(367)A(AttLightSpr)74 307.2 Q(eadExp)-.198 E F1(B:)182.537 307.2 Q F0(367)A
+(AttLightSwitch)74 320.4 Q F1(B:)162.528 320.4 Q F0(371)A(AttLightT)74 333.6 Q
+(ype)-.99 E F1(B:)153.255 333.6 Q F0(367;)A F1(7:)2.75 E F0(44, 63)A(AttLineT)
+74 346.8 Q(ype)-.99 E F1(B:)148.822 346.8 Q F0(371)A(AttLineW)74 360 Q(idth)
+-.605 E F1(B:)155.378 360 Q F0(371)A(AttLocalAntiAliasStyle)74 373.2 Q F1(B:)
+200.61 373.2 Q F0(371)A(AttLocalAntiAliasSwitch)74 386.4 Q F1(B:)209.685 386.4
+Q F0(372)A(AttMarkerFont)74 399.6 Q F1(B:)161.571 399.6 Q F0(372)A
+(AttMarkerGlyph)74 412.8 Q F1(B:)170.184 412.8 Q F0(372)A(AttMarkerScale)74 426
+Q F1(B:)164.09 426 Q F0(372)A(AttMinBoundingV)74 439.2 Q(olExt)-1.221 E F1(B:)
+203.602 439.2 Q F0(372)A(AttPickID)74 452.4 Q F1(B:)136.546 452.4 Q F0(372)A
+(AttPickSwitch)74 465.6 Q F1(B:)157.347 465.6 Q F0(372)A(AttRe\215ectionSwitch)
+74 478.8 Q F1(B:)185.155 478.8 Q F0(372)A(AttRefractionIndex)74 492 Q F1(B:)
+181.459 492 Q F0(372)A(AttRefractionSwitch)74 505.2 Q F1(B:)186.706 505.2 Q F0
+(373)A(AttRepT)74 518.4 Q(ype)-.99 E F1(3:)146.457 518.4 Q F0(17;)A F1(6:)2.75
+E F0(32;)A F1(7:)2.75 E F0(44, 48, 73;)A F1(B:)2.75 E F0(373)A
+(AttSampleAdaptive)74 531.6 Q F1(B:)185.21 531.6 Q F0(367)A
+(AttSampleAdaptiveSwitch)74 544.8 Q F1(B:)218.232 544.8 Q F0(367)A
+(AttSampleJitter)74 558 Q F1(B:)163.199 558 Q F0(368)A(AttSampleJitterSwitch)74
+571.2 Q F1(B:)196.221 571.2 Q F0(368)A(AttSampleSuper)74 584.4 Q F1(B:)168.182
+584.4 Q F0(368)A(AttSampleSuperSwitch)74 597.6 Q F1(B:)201.204 597.6 Q F0(368)A
+(AttShadeIndex)74 610.8 Q F1(B:)160.922 610.8 Q F0(373)A(AttShadowSwitch)74 624
+Q F1(B:)176.08 624 Q F0(373)A(AttSpecularColor)74 637.2 Q F1(B:)173.055 637.2 Q
+F0(373)A(AttSpecularFactor)74 650.4 Q F1(B:)176.135 650.4 Q F0(373)A
+(AttSpecularIntens)74 663.6 Q F1(B:)175.728 663.6 Q F0(373)A(AttSpecularSwitch)
+74 676.8 Q F1(B:)178.72 676.8 Q F0(373)A(AttSter)74 690 Q(eo)-.198 E F1(B:)
+133.532 690 Q F0(368)A 1.44 LW 81 756 63 756 DL 99 756 81 756 DL 117 756 99 756
+DL 135 756 117 756 DL 153 756 135 756 DL 171 756 153 756 DL 189 756 171 756 DL
+207 756 189 756 DL 225 756 207 756 DL 243 756 225 756 DL 261 756 243 756 DL 279
+756 261 756 DL 297 756 279 756 DL 315 756 297 756 DL 333 756 315 756 DL 351 756
+333 756 DL 369 756 351 756 DL 387 756 369 756 DL 419.4 756 401.4 756 DL 428.4
+756 410.4 756 DL 446.4 756 428.4 756 DL 464.4 756 446.4 756 DL 482.4 756 464.4
+756 DL 500.4 756 482.4 756 DL 518.4 756 500.4 756 DL 536.4 756 518.4 756 DL/F2
+9/Helvetica@0 SF(Inde)365.256 768.96 Q(x)-.27 E(Dore)416.802 768.96 Q 3.506
+<b444>432.304 768.96 S -2.187 -.27(ev e)445.305 768.96 T(loper').27 E 2.502(sG)
+-.45 G(uide)494.877 768.96 Q/F3 9/Helvetica-Bold@0 SF(I-411)4.002 E EP
+%%Page: 412 14
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 108 46.8 72 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 257.4 46.8 221.4 46.8 DL 293.4 46.8 257.4 46.8 DL 329.4 46.8 293.4
+46.8 DL 365.4 46.8 329.4 46.8 DL 401.4 46.8 365.4 46.8 DL 437.4 46.8 401.4 46.8
+DL 473.4 46.8 437.4 46.8 DL 509.4 46.8 473.4 46.8 DL 545.4 46.8 509.4 46.8 DL
+/F0 11/Palatino-Roman@0 SF(AttSter)232.5 109.2 Q(eoSwitch)-.198 E/F1 11
+/Palatino-Bold@0 SF(B:)325.054 109.2 Q F0(368)A(AttSubDivSpec)232.5 122.4 Q F1
+(B:)320.94 122.4 Q F0(374)A(AttSurfaceEdgeColor)232.5 135.6 Q F1(B:)350.233
+135.6 Q F0(374)A(AttSurfaceShade)232.5 148.8 Q F1(B:)327.716 148.8 Q F0(374)A
+(AttT)232.5 162 Q(extAlign)-1.012 E F1(B:)309.72 162 Q F0(374)A(AttT)232.5
+175.2 Q(extExpFactor)-1.012 E F1(B:)331.687 175.2 Q F0(374)A(AttT)232.5 188.4 Q
+(extFont)-1.012 E F1(B:)304.352 188.4 Q F0(374)A(AttT)232.5 201.6 Q(extHeight)
+-1.012 E F1(B:)315.968 201.6 Q F0(374)A(AttT)232.5 214.8 Q(extPath)-1.012 E F1
+(B:)304.374 214.8 Q F0(374)A(AttT)232.5 228 Q(extPr)-1.012 E(ecision)-.198 E F1
+(B:)326.66 228 Q F0(375)A(AttT)232.5 241.2 Q(extSpace)-1.012 E F1(B:)310.281
+241.2 Q F0(375)A(AttT)232.5 254.4 Q(extUpV)-1.012 E(ector)-1.221 E F1(B:)
+328.222 254.4 Q F0(375)A(AttT)232.5 267.6 Q(extur)-1.012 E(eAntiAlias)-.198 E
+F1(B:)345.162 267.6 Q F0(378)A(AttT)232.5 280.8 Q(extur)-1.012 E(eExtendUV)
+-.198 E F1(B:)349.166 280.8 Q F0(378)A(AttT)232.5 294 Q(extur)-1.012 E
+(eExtendUVW)-.198 E F1(B:)360.166 294 Q F0(378)A(AttT)232.5 307.2 Q(extur)
+-1.012 E(eIntermediateSurf)-.198 E F1(B:)381.275 307.2 Q F0(379)A(AttT)232.5
+320.4 Q(extur)-1.012 E(eMapBump)-.198 E F1(B:)350.486 320.4 Q F0(375, 377)A
+(AttT)232.5 333.6 Q(extur)-1.012 E(eMapBumpSwitch)-.198 E F1(B:)383.508 333.6 Q
+F0(375)A(AttT)232.5 346.8 Q(extur)-1.012 E(eMapDif)-.198 E(fuseColor)-.198 E F1
+(B:)383.574 346.8 Q F0(375, 377)A(AttT)232.5 360 Q(extur)-1.012 E(eMapDif)-.198
+E(fuseColorSwitch)-.198 E F1(B:)416.596 360 Q F0(376)A(AttT)232.5 373.2 Q
+(extur)-1.012 E(eMapEnvir)-.198 E(on)-.198 E F1(B:)359.902 373.2 Q F0(376-377)A
+(AttT)232.5 386.4 Q(extur)-1.012 E(eMapEnvir)-.198 E(onSwitch)-.198 E F1(B:)
+392.924 386.4 Q F0(376)A(AttT)232.5 399.6 Q(extur)-1.012 E(eMapT)-.198 E
+(ranspIntens)-.99 E F1(B:)384.113 399.6 Q F0(376-377)A(AttT)232.5 412.8 Q
+(extur)-1.012 E(eMapT)-.198 E(ranspIntensSwitch)-.99 E F1(B:)417.135 412.8 Q F0
+(376)A(AttT)232.5 426 Q(extur)-1.012 E(eMatrixUV)-.198 E F1(3:)347.505 426 Q F0
+(17;)A F1(B:)2.75 E F0(365, 379)A(AttT)232.5 439.2 Q(extur)-1.012 E(eMatrixUVW)
+-.198 E F1(3:)358.505 439.2 Q F0(17;)A F1(B:)2.75 E F0(365, 379)A(AttT)232.5
+452.4 Q(extur)-1.012 E(eOp)-.198 E F1(B:)313.548 452.4 Q F0(379)A(AttT)232.5
+465.6 Q(extur)-1.012 E(eUVIndex)-.198 E F1(B:)342.566 465.6 Q F0(379)A(AttT)
+232.5 478.8 Q(extur)-1.012 E(eUVWIndex)-.198 E F1(B:)353.566 478.8 Q F0(379)A
+(AttT)232.5 492 Q(ranspColor)-.99 E F1(B:)322.612 492 Q F0(376)A(AttT)232.5
+505.2 Q(ranspIntens)-.99 E F1(B:)325.285 505.2 Q F0(377)A(AttT)232.5 518.4 Q
+(ranspOrientColor)-.99 E F1(B:)354.061 518.4 Q F0(377)A(AttT)232.5 531.6 Q
+(ranspOrientExp)-.99 E F1(B:)345.712 531.6 Q F0(377)A(AttT)232.5 544.8 Q
+(ranspOrientIntens)-.99 E F1(B:)356.734 544.8 Q F0(377)A(AttT)232.5 558 Q
+(ranspOrientSwitch)-.99 E F1(B:)359.726 558 Q F0(377)A(AttT)232.5 571.2 Q
+(ranspSwitch)-.99 E F1(B:)328.277 571.2 Q F0(377)A(global attribute stack)221.5
+584.4 Q F1(3:)337.396 584.4 Q F0(16, 18-19;)A F1(5:)2.75 E F0(28;)A F1(6:)2.75
+E F0(31;)A F1(7:)2.75 E F0(45;)A F1(13:)2.75 E F0(201)A(gr)221.5 597.6 Q(oup)
+-.198 E(de\214nition)232.5 610.8 Q F1(5:)293.693 610.8 Q F0(24;)A F1(17:)2.75 E
+F0(268)A(display)232.5 624 Q F1(5:)285.077 624 Q F0 2.813(24, 26-27;)B F1(6:)
+5.563 E F0 2.813(34, 40;)B F1(7:)5.563 E F0(78;)A F1(9:)5.563 E F0 2.813
+(95, 98-100, 103;)B F1 -.407(11)5.563 G(:).407 E F0(156;)A F1(17:)243.5 637.2 Q
+F0(267;)A F1(18:)2.75 E F0(343;)A F1(A:)2.75 E F0(358, 364)A(studio)232.5 650.4
+Q F1(4:)280.146 650.4 Q F0(21;)A F1(5:)5.835 E F0(24-26;)A F1(6:)5.835 E F0
+3.085(34, 40;)B F1(7:)5.836 E F0 3.086(62, 78;)B F1(9:)5.836 E F0 3.086
+(95, 98-100;)B F1 -.407(11)5.836 G(:).407 E F0(153;)A F1(17:)243.5 663.6 Q F0
+(263, 268;)A F1(18:)2.75 E F0(351;)A F1(A:)2.75 E F0(363-364)A 1.44 LW 90 756
+72 756 DL 99 756 81 756 DL 117 756 99 756 DL 135 756 117 756 DL 153 756 135 756
+DL 171 756 153 756 DL 189 756 171 756 DL 207 756 189 756 DL 239.4 756 221.4 756
+DL 257.4 756 239.4 756 DL 275.4 756 257.4 756 DL 293.4 756 275.4 756 DL 311.4
+756 293.4 756 DL 329.4 756 311.4 756 DL 347.4 756 329.4 756 DL 365.4 756 347.4
+756 DL 383.4 756 365.4 756 DL 401.4 756 383.4 756 DL 419.4 756 401.4 756 DL
+437.4 756 419.4 756 DL 455.4 756 437.4 756 DL 473.4 756 455.4 756 DL 491.4 756
+473.4 756 DL 509.4 756 491.4 756 DL 527.4 756 509.4 756 DL 545.4 756 527.4 756
+DL/F2 9/Helvetica-Bold@0 SF(I-412)72 768.96 Q/F3 9/Helvetica@0 SF(Dore)6.504 E
+3.506<b444>114.517 768.96 S -2.187 -.27(ev e)127.518 768.96 T(loper').27 E
+2.502(sG)-.45 G(uide)177.09 768.96 Q(Inde)221.4 768.96 Q(x)-.27 E EP
+%%Page: 413 15
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 99 46.8 63 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 243 46.8 207 46.8 DL 279 46.8 243 46.8 DL 315 46.8 279 46.8 DL 351
+46.8 315 46.8 DL 387 46.8 351 46.8 DL 437.4 46.8 401.4 46.8 DL 464.4 46.8 428.4
+46.8 DL 500.4 46.8 464.4 46.8 DL 536.4 46.8 500.4 46.8 DL/F0 17/Palatino-Bold@0
+SF(H)63 116.4 Q/F1 11/Palatino-Roman@0 SF(handle, object)63 141.6 Q/F2 11
+/Palatino-Bold@0 SF(A:)144.147 141.6 Q F1(361, 364)A(highlights)63 154.8 Q F2
+-.407(11)126.041 154.8 S(:).407 E F1(176)A(specular)74 168 Q F2(18:)128.857 168
+Q F1(332)A(hither)63 181.2 Q F2(9:)105.955 181.2 Q F1(99;)A F2 -.407(11)2.75 G
+(:).407 E F1(144-145;)A F2(18:)2.75 E F1(339-341;)A F2(C:)2.75 E F1(393-394)A
+F0(I)63 213.6 Q F1(identi\214er)63 238.8 Q(class)74 252 Q F2(A:)110.663 252 Q
+F1(356;)A F2(C:)2.75 E F1(381)A(method)74 265.2 Q F2(6:)125.447 265.2 Q F1
+(34, 40;)A F2(17:)2.75 E F1(237, 240;)A F2(A:)2.75 E F1(360)A -.198(re)74 278.4
+S(nder).198 E(er)-.198 E F2(6:)129.319 278.4 Q F1(36;)A F2(A:)2.75 E F1(362)A
+(include \214les)63 291.6 Q F2(7:)135.6 291.6 Q F1(45;)A F2(12:)2.75 E F1(191;)
+A F2(13:)2.75 E F1(196;)A F2(14:)2.75 E F1(210;)A F2(15:)2.75 E F1(224)A
+(inquiry r)63 304.8 Q(outines)-.198 E F2 -.407(11)155.466 304.8 S(:).407 E F1
+(127)A 3.832(installation r)63 318 R(outine)-.198 E F2(2:)176.857 318 Q F1(12;)
+A F2(6:)6.581 E F1 3.831(34, 36-37, 40;)B F2(7:)6.581 E F1 3.831
+(45, 48-49, 67, 77;)B F2(10:)85 331.2 Q F1 -.605(11)C(4;).605 E F2 -.407(11)
+2.75 G(:).407 E F1(121, 176-177;)A F2(A:)2.75 E F1(357, 362)A
+(instance of a class)63 344.4 Q F2(3:)162.99 344.4 Q F1(15;)A F2(6:)2.75 E F1
+(36)A(intensity)63 357.6 Q 2.75(,a)-1.221 G(mbient)115.206 357.6 Q F2 -.407(11)
+163.21 357.6 S(:).407 E F1(172;)A F2(18:)2.75 E F1(309)A(interface)63 370.8 Q
+-1.936(developer 's)74 384 R F2(2:)148.002 384 Q F1(9-1)A(1;)-.605 E F2(3:)5.56
+E F1(17-18;)A F2(4:)5.56 E F1(21;)A F2(5:)5.561 E F1(25-26;)A F2(9:)5.561 E F1
+(109;)A F2(13:)5.561 E F1 2.811(194, 198;)B F2(17:)85 397.2 Q F1(237;)A F2(A:)
+2.75 E F1(356-357, 362)A(device contr)74 410.4 Q(ol)-.198 E F2(13:)156.291
+410.4 Q F1(194;)A F2(17:)2.75 E F1(251, 253)A(device driver)74 423.6 Q F2(2:)
+152.155 423.6 Q F1(9-1)A(1;)-.605 E F2(9:)2.75 E F1(81, 106;)A F2(17:)2.75 E F1
+(250;)A F2(A:)2.75 E F1(357, 359)A(device output)74 436.8 Q F2(6:)155.114 436.8
+Q F1(29, 39;)A F2(7:)2.75 E F1(69)A(DROM Methods)74 450 Q F2(9:)168.468 450 Q
+F1(106, 109;)A F2(A:)2.75 E F1(359)A F0(K)63 482.4 Q F1(kernel)63 507.6 Q F2
+(2:)108.316 507.6 Q F1 .963(7, 9-12;)B F2(4:)3.713 E F1(21;)A F2(5:)3.713 E F1
+(24;)A F2(8:)3.713 E F1(79;)A F2(9:)3.713 E F1 .963(81-84, 1)B 3.713(10)-.605 G
+(-1)292.278 507.6 Q -.605(11)-.605 G(;).605 E F2 -.407(11)3.713 G(:).407 E F1
+(168;)A F2(12:)3.713 E F1(191;)A F2(A:)85 520.8 Q F1(356-357;)A F2(C:)2.75 E F1
+(382)A F0(L)63 553.2 Q F1(light)63 578.4 Q(ambient)74 591.6 Q F2(7:)127.504
+591.6 Q F1(70)A(attributes)74 604.8 Q F2(5:)134.203 604.8 Q F1(26;)A F2(7:)2.75
+E F1(63;)A F2(9:)2.75 E F1(95, 99;)A F2 -.407(11)2.75 G(:).407 E F1
+(133, 162-163;)A F2(18:)2.75 E F1(296, 317-321)A(dif)74 618 Q(fuse)-.198 E F2
+(18:)121.366 618 Q F1(315)A(list)74 631.2 Q F2(7:)102.402 631.2 Q F1
+(46, 53, 63, 70;)A F2 -.407(11)2.75 G(:).407 E F1(165)A(list point)74 644.4 Q
+F2(7:)130.958 644.4 Q F1(63)A(sour)74 657.6 Q(ce shading)-.198 E F2 -.407(11)
+161.109 657.6 S(:).407 E F1(131, 172)A(line list)63 670.8 Q F2(6:)112.225 670.8
+Q F1(30;)A F2(16:)2.75 E F1(229)A(list)63 684 Q(connected line)74 697.2 Q F2
+(6:)157.996 697.2 Q F1(30;)A F2(16:)2.75 E F1(229)A 1.44 LW 81 756 63 756 DL 99
+756 81 756 DL 117 756 99 756 DL 135 756 117 756 DL 153 756 135 756 DL 171 756
+153 756 DL 189 756 171 756 DL 207 756 189 756 DL 225 756 207 756 DL 243 756 225
+756 DL 261 756 243 756 DL 279 756 261 756 DL 297 756 279 756 DL 315 756 297 756
+DL 333 756 315 756 DL 351 756 333 756 DL 369 756 351 756 DL 387 756 369 756 DL
+419.4 756 401.4 756 DL 428.4 756 410.4 756 DL 446.4 756 428.4 756 DL 464.4 756
+446.4 756 DL 482.4 756 464.4 756 DL 500.4 756 482.4 756 DL 518.4 756 500.4 756
+DL 536.4 756 518.4 756 DL/F3 9/Helvetica@0 SF(Inde)365.256 768.96 Q(x)-.27 E
+(Dore)416.802 768.96 Q 3.506<b444>432.304 768.96 S -2.187 -.27(ev e)445.305
+768.96 T(loper').27 E 2.502(sG)-.45 G(uide)494.877 768.96 Q/F4 9
+/Helvetica-Bold@0 SF(I-413)4.002 E EP
+%%Page: 414 16
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 108 46.8 72 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 257.4 46.8 221.4 46.8 DL 293.4 46.8 257.4 46.8 DL 329.4 46.8 293.4
+46.8 DL 365.4 46.8 329.4 46.8 DL 401.4 46.8 365.4 46.8 DL 437.4 46.8 401.4 46.8
+DL 473.4 46.8 437.4 46.8 DL 509.4 46.8 473.4 46.8 DL 545.4 46.8 509.4 46.8 DL
+/F0 11/Palatino-Roman@0 SF(line)232.5 109.2 Q/F1 11/Palatino-Bold@0 SF(6:)
+264.323 109.2 Q F0(30;)A F1(16:)2.75 E F0(229)A(point)232.5 122.4 Q F1(6:)
+272.056 122.4 Q F0(30;)A F1(7:)2.75 E F0(52, 56-58, 60-61, 75, 77;)A F1(16:)
+2.75 E F0(229)A(triangle)232.5 135.6 Q F1(6:)283.87 135.6 Q F0(30;)A F1(7:)2.75
+E F0(77;)A F1 -.407(11)2.75 G(:).407 E F0(172;)A F1(16:)2.75 E F0(229)A
+(variable line)232.5 148.8 Q F1(6:)306.387 148.8 Q F0(30)A(variable point)232.5
+162 Q F1(6:)314.12 162 Q F0(30)A(local antialiasing)221.5 175.2 Q F1(18:)
+317.266 175.2 Q F0(322-323)A(local coor)221.5 188.4 Q(dinates)-.198 E F1 -.407
+(11)317.178 188.4 S(:).407 E F0(157, 171-172;)A F1(18:)2.75 E F0(290)A 3.653
+(local-to-world transformation)221.5 201.6 R F1(7:)387.382 201.6 Q F0(61;)A F1
+-.407(11)6.403 G(:).407 E F0 3.653(136-137, 145, 163, 173;)B F1(18:)243.5 214.8
+Q F0(290-291, 295-296, 344-350)A(locations, vertex)221.5 228 Q F1(6:)314.56 228
+Q F0(39;)A F1(9:)2.75 E F0(105;)A F1 -.407(11)2.75 G(:).407 E F0(172)A/F2 17
+/Palatino-Bold@0 SF(M)221.5 260.4 Q F0 1.752(mapping, textur)221.5 285.6 R(e)
+-.198 E F1(1:)322.574 285.6 Q F0(2;)A F1 -.407(11)4.502 G(:).407 E F0(167-168;)
+A F1(12:)4.502 E F0(188;)A F1(18:)4.502 E F0(325-326;)A F1(B:)4.501 E F0
+(377-378;)A F1(C:)243.5 298.8 Q F0(381)A(markers)221.5 312 Q F1 -.407(11)
+275.202 312 S(:).407 E F0(151)A(matrix, curr)221.5 325.2 Q(ent transformation)
+-.198 E F1(3:)383.706 325.2 Q F0(16;)A F1(9:)2.75 E F0(101;)A F1 -.407(11)2.75
+G(:).407 E F0(160)A 2.227(mesh, triangle)221.5 338.4 R F1(6:)308.872 338.4 Q F0
+2.227(30, 36;)B F1(7:)4.978 E F0(58-59;)A F1(13:)4.978 E F0(195;)A F1(16:)4.978
+E F0(228-229;)A F1(18:)4.978 E F0(307-308;)A F1(A:)243.5 351.6 Q F0(355)A
+(method)221.5 364.8 Q(curr)232.5 378 Q(ent)-.198 E F1(3:)281.516 378 Q F0(19;)A
+F1(6:)2.75 E F0(30;)A F1(7:)2.75 E F0(45, 61;)A F1(17:)2.75 E F0(259;)A F1(A:)
+2.75 E F0(356, 364)A(identi\214er)232.5 391.2 Q F1(6:)290.899 391.2 Q F0
+(34, 40;)A F1(17:)2.75 E F0(237, 240;)A F1(A:)2.75 E F0(360)A(interface)232.5
+404.4 Q F1(9:)288.369 404.4 Q F0(106, 109;)A F1(A:)2.75 E F0(359)A(name)232.5
+417.6 Q F1(A:)273.134 417.6 Q F0(361)A -.198(ro)232.5 430.8 S(utine).198 E F1
+(3:)283.971 430.8 Q F0(18-20;)A F1(5:)5.227 E F0(26-28;)A F1(6:)5.227 E F0
+2.477(32, 35, 38;)B F1(7:)5.227 E F0 2.476(45, 49, 58, 60-61, 63,)B 1.589
+(66-67, 75;)243.5 444 R F1(9:)4.339 E F0(106-107;)A F1(17:)4.339 E F0 1.59
+(237, 240-242, 259-260;)B F1(A:)4.34 E F0 1.59(360-361, 364;)B F1(B:)243.5
+457.2 Q F0(366, 378)A(standar)232.5 470.4 Q(d)-.198 E F1(3:)289.491 470.4 Q F0
+(16, 18, 20;)A F1(6:)2.75 E F0(30, 35;)A F1(A:)2.75 E F0(363;)A F1(B:)2.75 E F0
+(378;)A F1(C:)2.75 E F0(382)A(traversal)232.5 483.6 Q F1(3:)290.773 483.6 Q F0
+(18-20;)A F1(5:)4.648 E F0(27;)A F1(6:)4.648 E F0(38;)A F1(7:)4.648 E F0 1.897
+(44-46 , 48-49, 66;)B F1(9:)4.647 E F0(109;)A F1(A:)4.647 E F0(362,)A(364)243.5
+496.8 Q 2.859(model, color)221.5 510 R F1(9:)301.82 510 Q F0(88;)A F1(17:)5.609
+E F0 2.859(254, 256;)B F1(18:)5.609 E F0 2.86(277, 280-281, 284, 300, 302,)B
+(304-305, 307, 313-314, 331, 334)243.5 523.2 Q(modeling space)221.5 536.4 Q F1
+(A:)311.557 536.4 Q F0(360;)A F1(9:)2.75 E F0(101-102)A(module)221.5 549.6 Q
+1.142(dynamic r)232.5 562.8 R(ender)-.198 E 1.142(er output)-.198 F F1(5:)
+372.337 562.8 Q F0(28;)A F1(6:)3.892 E F0(33;)A F1(9:)3.892 E F0 1.142(81, 92;)
+B F1(10:)3.892 E F0 -.605(11)C 1.142(3; f31).605 F(1:131,)-.605 E(157;)243.5
+576 Q F1(12:)2.75 E F0(190;)A F1(13:)2.75 E F0(201;)A F1(A:)2.75 E F0(359)A
+(system)232.5 589.2 Q F1(2:)282.626 589.2 Q F0 2.364(5, 7, 12;)B F1(7:)5.114 E
+F0(77;)A F1 -.407(11)5.114 G(:).407 E F0(176;)A F1(13:)5.115 E F0(201;)A F1
+(15:)5.115 E F0 2.365(213, 215, 217, 220;)B F1(A:)243.5 602.4 Q F0
+(357, 362-363)A(output)232.5 615.6 Q F1(4:)279.305 615.6 Q F0(22;)A F1(5:)2.75
+E F0(28;)A F1(6:)2.75 E F0(33;)A F1(8:)2.75 E F0(79;)A F1(9:)2.75 E F0(81;)A F1
+(18:)2.75 E F0(270, 289, 352;)A F1(A:)2.75 E F0(357)A(utility)232.5 628.8 Q F1
+(2:)275.774 628.8 Q F0(5, 7, 12;)A F1(15:)2.75 E F0(213, 217)A 1.44 LW 90 756
+72 756 DL 99 756 81 756 DL 117 756 99 756 DL 135 756 117 756 DL 153 756 135 756
+DL 171 756 153 756 DL 189 756 171 756 DL 207 756 189 756 DL 239.4 756 221.4 756
+DL 257.4 756 239.4 756 DL 275.4 756 257.4 756 DL 293.4 756 275.4 756 DL 311.4
+756 293.4 756 DL 329.4 756 311.4 756 DL 347.4 756 329.4 756 DL 365.4 756 347.4
+756 DL 383.4 756 365.4 756 DL 401.4 756 383.4 756 DL 419.4 756 401.4 756 DL
+437.4 756 419.4 756 DL 455.4 756 437.4 756 DL 473.4 756 455.4 756 DL 491.4 756
+473.4 756 DL 509.4 756 491.4 756 DL 527.4 756 509.4 756 DL 545.4 756 527.4 756
+DL/F3 9/Helvetica-Bold@0 SF(I-414)72 768.96 Q/F4 9/Helvetica@0 SF(Dore)6.504 E
+3.506<b444>114.517 768.96 S -2.187 -.27(ev e)127.518 768.96 T(loper').27 E
+2.502(sG)-.45 G(uide)177.09 768.96 Q(Inde)221.4 768.96 Q(x)-.27 E EP
+%%Page: 415 17
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 99 46.8 63 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 243 46.8 207 46.8 DL 279 46.8 243 46.8 DL 315 46.8 279 46.8 DL 351
+46.8 315 46.8 DL 387 46.8 351 46.8 DL 437.4 46.8 401.4 46.8 DL 464.4 46.8 428.4
+46.8 DL 500.4 46.8 464.4 46.8 DL 536.4 46.8 500.4 46.8 DL/F0 17/Palatino-Bold@0
+SF(N)63 116.4 Q/F1 11/Palatino-Roman@0 SF(name)63 141.6 Q(class)74 154.8 Q/F2
+11/Palatino-Bold@0 SF(A:)110.663 154.8 Q F1(356;)A F2(B:)2.75 E F1(366-379;)A
+F2(C:)2.75 E F1(382-397)A(method)74 168 Q F2(A:)125.447 168 Q F1(361)A -.198
+(re)74 181.2 S(nder).198 E(er)-.198 E F2(A:)129.319 181.2 Q F1(362-363)A
+(naming convention)63 194.4 Q F2(3:)171.207 194.4 Q F1(16;)A F2(7:)2.75 E F1
+(43;)A F2 -.407(11)2.75 G(:).407 E F1(121;)A F2(13:)2.75 E F1(193)A
+(new class noti\214cation r)63 207.6 Q(outine)-.198 E F2(6:)219.431 207.6 Q F1
+(41;)A F2(7:)2.75 E F1(52, 67, 75)A(normal, vertex)63 220.8 Q F2(18:)147.777
+220.8 Q F1(301, 303-304, 306, 308)A F0(O)63 253.2 Q F1(object)63 278.4 Q
+(alternate)74 291.6 Q F2(3:)130.408 291.6 Q F1(19-20;)A F2(6:)2.75 E F1
+(30, 35;)A F2(7:)2.75 E F1(57, 61;)A F2(9:)2.75 E F1(109;)A F2(A:)2.75 E F1
+(355-356, 359, 363)A(handle)74 304.8 Q F2(A:)121.245 304.8 Q F1(361, 364)A
+(private data)74 318 Q F2(C:)146.534 318 Q F1(382)A(studio)74 331.2 Q F2(6:)
+118.561 331.2 Q F1(31, 40;)A F2(9:)2.75 E F1(101;)A F2(16:)2.75 E F1(229;)A F2
+(A:)2.75 E F1(355;)A F2(C:)2.75 E F1(381)A .093(output modules)63 344.4 R F2
+(4:)154.948 344.4 Q F1(22;)A F2(5:)2.843 E F1(28;)A F2(6:)2.843 E F1(33;)A F2
+(8:)2.843 E F1(79;)A F2(9:)2.843 E F1(81;)A F2(18:)2.843 E F1 .093
+(270, 289, 352;)B F2(A:)2.843 E F1(357)A F0(P)63 376.8 Q F1(parallel)63 402 Q
+F2(5:)114.692 402 Q F1(26;)A F2 -.407(11)3.864 G(:).407 E F1(143-144;)A F2(13:)
+3.864 E F1 1.114(196, 198;)B F2(14:)3.865 E F1(207;)A F2(15:)3.865 E F1(217;)A
+F2(18:)3.865 E F1 1.115(291, 313,)B(338-341;)85 415.2 Q F2(A:)2.75 E F1(359)A
+(perspective)63 428.4 Q F2(5:)132.674 428.4 Q F1(26;)A F2 -.407(11)2.75 G(:)
+.407 E F1(144, 148;)A F2(18:)2.75 E F1(291, 338-341)A(picking)63 441.6 Q F2(2:)
+113.281 441.6 Q F1(7;)A F2(3:)2.75 E F1(17-18;)A F2(13:)2.75 E F1
+(195, 197, 201;)A F2(A:)2.75 E F1(358, 363-364)A(pipeline, display)63 454.8 Q
+F2(A:)158.029 454.8 Q F1(357)A(point light)63 468 Q F2(7:)127.812 468 Q F1(63)A
+(portability)63 481.2 Q F2(1:)128.186 481.2 Q F1(1;)A F2(13:)2.75 E F1(193;)A
+F2(15:)2.75 E F1(218)A(primitive class)63 494.4 Q F2(6:)147.755 494.4 Q F1
+(30, 33;)A F2(7:)2.75 E F1(58;)A F2(9:)2.75 E F1(108;)A F2(A:)2.75 E F1(355)A
+(primitives, base)63 507.6 Q F2(6:)153.772 507.6 Q F1(30-31, 38;)A F2(7:)2.75 E
+F1(44, 77;)A F2(A:)2.75 E F1(355-356, 359)A(print r)63 520.8 Q(outine)-.198 E
+F2(6:)138.889 520.8 Q F1(37;)A F2(7:)2.75 E F1(53, 57)A 1.63(private data)63
+534 R F2(5:)138.794 534 Q F1(25;)A F2(6:)4.38 E F1 1.63(35, 39;)B F2(7:)4.38 E
+F1 1.629(45-46, 49, 58, 62, 69, 76;)B F2(9:)4.379 E F1 1.629(97, 107;)B F2(17:)
+85 547.2 Q F1(239, 248;)A F2(A:)2.75 E F1(356, 361;)A F2(C:)2.75 E F1(381-382)A
+(pr)63 560.4 Q 1.934(oduction r)-.198 F(ender)-.198 E(er)-.198 E F2(2:)179.134
+560.4 Q F1(8;)A F2(5:)4.684 E F1 1.934(23, 27-28;)B F2(6:)4.684 E F1(33;)A F2
+(7:)4.684 E F1(45;)A F2(9:)4.684 E F1 1.935(81-82, 89, 91,)B -.605(11)85 573.6
+S(0;).605 E F2(10:)4.683 E F1 -.605(11)C(3-1).605 E 1.933(14, 1)-.605 F(16-1)
+-.605 E 1.933(17, 1)-.605 F(19;)-.605 E F2 -.407(11)4.683 G(:).407 E F1 1.933
+(122, 129;)B F2(12:)4.682 E F1(188;)A F2(13:)4.682 E F1 1.932(198, 201;)B F2
+(15:)85 586.8 Q F1(215, 217-219, 221;)A F2(17:)2.75 E F1(246, 251, 253, 263;)A
+F2(18:)2.75 E F1(352;)A F2(A:)2.75 E F1(361, 363)A
+(output module functions: see PROM functions)74 600 Q(pr)63 613.2 Q 5.334
+(ograms, test)-.198 F F2(10:)157.125 613.2 Q F1 -.605(11)C 5.334(7, 1).605 F
+(19;)-.605 E F2(13:)8.084 E F1(196;)A F2(14:)8.084 E F1 5.335(206, 209-210;)B
+F2(15:)8.085 E F1(213,)A(218-219, 221-222;)85 626.4 Q F2(16:)2.75 E F1
+(227, 229-231, 233)A(PROM)63 639.6 Q F2(5:)109.901 639.6 Q F1(28;)A F2(6:)2.857
+E F1 .106(33, 40;)B F2(7:)2.856 E F1(45;)A F2(9:)2.856 E F1 .106(81, 84, 91, 1)
+B(10-1)-.605 E -.605(11)-.605 G(;).605 E F2(10:)2.856 E F1 -.605(11)C(3-1).605
+E(16;)-.605 E F2 -.407(11)2.856 G(:).407 E F1(130,)A(177, 179;)85 652.8 Q F2
+(17:)2.75 E F1(246;)A F2(18:)2.75 E F1(270, 351-353;)A F2(A:)2.75 E F1(361-362)
+A(PRPOM functions)63 666 Q(pr)74 679.2 Q(om.write_r)-.198 E(ectangle_byte_r)
+-.198 E(gb)-.198 E F2(9:)240.826 679.2 Q F1(91;)A F2 -.407(11)2.75 G(:).407 E
+F1(130;)A F2(18:)2.75 E F1(352-353)A 1.44 LW 81 756 63 756 DL 99 756 81 756 DL
+117 756 99 756 DL 135 756 117 756 DL 153 756 135 756 DL 171 756 153 756 DL 189
+756 171 756 DL 207 756 189 756 DL 225 756 207 756 DL 243 756 225 756 DL 261 756
+243 756 DL 279 756 261 756 DL 297 756 279 756 DL 315 756 297 756 DL 333 756 315
+756 DL 351 756 333 756 DL 369 756 351 756 DL 387 756 369 756 DL 419.4 756 401.4
+756 DL 428.4 756 410.4 756 DL 446.4 756 428.4 756 DL 464.4 756 446.4 756 DL
+482.4 756 464.4 756 DL 500.4 756 482.4 756 DL 518.4 756 500.4 756 DL 536.4 756
+518.4 756 DL/F3 9/Helvetica@0 SF(Inde)365.256 768.96 Q(x)-.27 E(Dore)416.802
+768.96 Q 3.506<b444>432.304 768.96 S -2.187 -.27(ev e)445.305 768.96 T(loper')
+.27 E 2.502(sG)-.45 G(uide)494.877 768.96 Q/F4 9/Helvetica-Bold@0 SF(I-415)
+4.002 E EP
+%%Page: 416 18
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 108 46.8 72 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 257.4 46.8 221.4 46.8 DL 293.4 46.8 257.4 46.8 DL 329.4 46.8 293.4
+46.8 DL 365.4 46.8 329.4 46.8 DL 401.4 46.8 365.4 46.8 DL 437.4 46.8 401.4 46.8
+DL 473.4 46.8 437.4 46.8 DL 509.4 46.8 473.4 46.8 DL 545.4 46.8 509.4 46.8 DL
+/F0 17/Palatino-Bold@0 SF(R)221.5 116.4 Q/F1 11/Palatino-Roman@0 SF(ray tracer)
+221.5 141.6 Q/F2 11/Palatino-Bold@0 SF(A:)281.89 141.6 Q F1(363)A -.198(re)
+221.5 154.8 S(\215ectance).198 E(ambient)232.5 168 Q F2(18:)286.004 168 Q F1
+(309, 314)A(dif)232.5 181.2 Q(fuse)-.198 E F2(18:)279.866 181.2 Q F1(314-315)A
+(specular)232.5 194.4 Q F2(18:)287.357 194.4 Q F1(332-333)A -.198(re)221.5
+207.6 S(\215ection).198 E F2(18:)280.702 207.6 Q F1(329)A -.198(re)221.5 220.8
+S(fraction).198 E F2(1:)282.253 220.8 Q F1(2)A -.198(re)221.5 234 S(nderable)
+.198 E F2(7:)287.456 234 Q F1(58, 60)A -.198(re)221.5 247.2 S(nder).198 E(er)
+-.198 E(dynamic)232.5 260.4 Q F2(2:)290.234 260.4 Q F1(8;)A F2(5:)4.197 E F1
+1.447(23, 27;)B F2(6:)4.197 E F1(33;)A F2(9:)4.197 E F1 1.448
+(81, 90, 94, 105, 109;)B F2(10:)4.198 E F1 -.605(11)C 1.448(3, 1).605 F(19;)
+-.605 E F2 -.407(11)243.5 273.6 S(:).407 E F1 .296(131, 157;)B F2(12:)3.046 E
+F1 .295(187, 190;)B F2(13:)3.045 E F1 .295(198, 201;)B F2(15:)3.045 E F1(220;)A
+F2(16:)3.045 E F1 .295(228, 233;)B F2(17:)3.045 E F1(246,)A(251, 253;)243.5
+286.8 Q F2(18:)2.75 E F1(286, 289;)A F2(A:)2.75 E F1(355, 359)A(identi\214er)
+232.5 300 Q F2(6:)290.899 300 Q F1(36;)A F2(A:)2.75 E F1(362)A(name)232.5 313.2
+Q F2(A:)273.134 313.2 Q F1(362-363)A .325(output module)232.5 326.4 R F2(5:)
+320.248 326.4 Q F1(28;)A F2(6:)3.075 E F1(33;)A F2(7:)3.075 E F1(45;)A F2(9:)
+3.075 E F1 .325(81, 91-9 2;)B F2(10:)3.075 E F1 -.605(11)C(3;).605 E F2 -.407
+(11)3.075 G(:).407 E F1 .326(131, 157;)B F2(12:)243.5 339.6 Q F1(190;)A F2(13:)
+2.75 E F1(201;)A F2(A:)2.75 E F1(359, 361)A(pr)232.5 352.8 Q(oduction)-.198 E
+F2(2:)300.64 352.8 Q F1(8;)A F2(5:)2.943 E F1 .193(23, 27;)B F2(6:)2.943 E F1
+(33;)A F2(7:)2.943 E F1(45;)A F2(9:)2.943 E F1 .192(81, 89, 91, 1)B(10;)-.605 E
+F2(10:)2.942 E F1 -.605(11)C .192(3, 1).605 F(16,)-.605 E -.605(11)243.5 366 S
+(9;).605 E F2 -.407(11)4.64 G(:).407 E F1 1.89(122, 129;)B F2(12:)4.64 E F1
+(188;)A F2(13:)4.64 E F1 1.89(198, 201;)B F2(15:)4.64 E F1 1.89(215, 217, 221;)
+B F2(16:)4.641 E F1(228,)A(233;)243.5 379.2 Q F2(17:)2.75 E F1
+(246, 251, 253, 263;)A F2(18:)2.75 E F1(352;)A F2(A:)2.75 E F1(361, 363)A
+(sample)232.5 392.4 Q F2(2:)281.208 392.4 Q F1(13;)A F2(7:)2.75 E F1
+(43-46, 49, 52, 56, 58, 66-67, 74-78;)A F2(13:)2.75 E F1(198)A(standar)232.5
+405.6 Q 5.209(dp)-.198 G -.198(ro)287.561 405.6 S(duction).198 E F2(2:)351.356
+405.6 Q F1(8;)A F2(5:)5.209 E F1 2.459(23, 27;)B F2(9:)5.209 E F1 2.458
+(81, 91, 1)B(10;)-.605 E F2(10:)5.208 E F1 -.605(11)C 2.458(7, 1).605 F(19;)
+-.605 E F2(12:)243.5 418.8 Q F1(188;)A F2(13:)2.75 E F1(198;)A F2(15:)2.75 E F1
+(215, 217, 221;)A F2(16:)2.75 E F1(228;)A F2(17:)2.75 E F1(263;)A F2(A:)2.75 E
+F1(363)A -.198(re)221.5 432 S(ndering).198 E(interface data str)232.5 445.2 Q
+(uctur)-.088 E(es)-.198 E F2(C:)363.499 445.2 Q F1(381)A -.198(ro)232.5 458.4 S
+(utine).198 E F2(7:)281.494 458.4 Q F1(67, 69)A(style)232.5 471.6 Q F2(1:)
+269.086 471.6 Q F1(2;)A F2(2:)2.75 E F1(13;)A F2(5:)2.75 E F1(23;)A F2(6:)2.75
+E F1(36-37;)A F2(A:)2.75 E F1(362)A -.198(re)221.5 484.8 S(pr).198 E 3.716
+(esentation type)-.198 F F2(3:)337.073 484.8 Q F1 3.716(17, 19;)B F2(6:)6.466 E
+F1(32;)A F2(7:)6.466 E F1 3.716(56, 60-61, 77;)B F2(9:)6.467 E F1 3.717
+(95, 108;)B F2(18:)243.5 498 Q F1(329-330, 334)A -.198(ro)221.5 511.2 S(tation)
+.198 E F2(18:)273.684 511.2 Q F1(346)A -.198(ro)221.5 524.4 S(utine).198 E
+(contr)232.5 537.6 Q(ol)-.198 E F2 -.407(11)280.482 537.6 S(:).407 E F1
+(131, 150, 157)A(inquiry)232.5 550.8 Q F2 -.407(11)282.308 550.8 S(:).407 E F1
+(127)A(installation)232.5 564 Q F2(2:)303.626 564 Q F1(12;)A F2(6:)5.676 E F1
+2.926(34, 36-37, 40;)B F2(7:)5.675 E F1 2.925(45, 48-49, 67, 77;)B F2(10:)5.675
+E F1 -.605(11)C(4;).605 E F2 -.407(11)243.5 577.2 S(:).407 E F1(121, 176-177;)A
+F2(A:)2.75 E F1(357, 362)A(method)232.5 590.4 Q F2(3:)286.178 590.4 Q F1
+(18-20;)A F2(5:)4.981 E F1(26-28;)A F2(6:)4.981 E F1 2.231(32, 35, 38;)B F2(7:)
+4.981 E F1 2.232(45, 49, 58, 60-61, 63,)B 1.59(66-67, 75;)243.5 603.6 R F2(9:)
+4.34 E F1(106-107;)A F2(17:)4.34 E F1 1.59(237, 240-242, 259-260;)B F2(A:)4.339
+E F1 1.589(360-361, 364;)B F2(B:)243.5 616.8 Q F1(366, 378)A(new class)232.5
+630 Q F2(6:)292.758 630 Q F1(41;)A F2(7:)2.75 E F1(52, 67, 75)A(print)232.5
+643.2 Q F2(6:)270.395 643.2 Q F1(37;)A F2(7:)2.75 E F1(53, 57)A -.198(re)232.5
+656.4 S(ndering).198 E F2(7:)294.122 656.4 Q F1(67, 69)A 1.44 LW 90 756 72 756
+DL 99 756 81 756 DL 117 756 99 756 DL 135 756 117 756 DL 153 756 135 756 DL 171
+756 153 756 DL 189 756 171 756 DL 207 756 189 756 DL 239.4 756 221.4 756 DL
+257.4 756 239.4 756 DL 275.4 756 257.4 756 DL 293.4 756 275.4 756 DL 311.4 756
+293.4 756 DL 329.4 756 311.4 756 DL 347.4 756 329.4 756 DL 365.4 756 347.4 756
+DL 383.4 756 365.4 756 DL 401.4 756 383.4 756 DL 419.4 756 401.4 756 DL 437.4
+756 419.4 756 DL 455.4 756 437.4 756 DL 473.4 756 455.4 756 DL 491.4 756 473.4
+756 DL 509.4 756 491.4 756 DL 527.4 756 509.4 756 DL 545.4 756 527.4 756 DL/F3
+9/Helvetica-Bold@0 SF(I-416)72 768.96 Q/F4 9/Helvetica@0 SF(Dore)6.504 E 3.506
+<b444>114.517 768.96 S -2.187 -.27(ev e)127.518 768.96 T(loper').27 E 2.502(sG)
+-.45 G(uide)177.09 768.96 Q(Inde)221.4 768.96 Q(x)-.27 E EP
+%%Page: 417 19
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 99 46.8 63 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 243 46.8 207 46.8 DL 279 46.8 243 46.8 DL 315 46.8 279 46.8 DL 351
+46.8 315 46.8 DL 387 46.8 351 46.8 DL 437.4 46.8 401.4 46.8 DL 464.4 46.8 428.4
+46.8 DL 500.4 46.8 464.4 46.8 DL 536.4 46.8 500.4 46.8 DL/F0 17/Palatino-Bold@0
+SF(S)63 116.4 Q/F1 11/Palatino-Roman@0 SF(sample)63 141.6 Q(device driver)74
+154.8 Q/F2 11/Palatino-Bold@0 SF(2:)152.155 154.8 Q F1(13;)A F2(10:)2.75 E F1
+-.605(11)C(3-1).605 E(14;)-.605 E F2 -.407(11)2.75 G(:).407 E F1
+(121-124, 130, 144, 171, 177)A -.198(re)74 168 S(nder).198 E(er)-.198 E F2(2:)
+129.319 168 Q F1(13;)A F2(7:)2.75 E F1(43-46, 49, 52, 56, 58, 66-67, 74-78;)A
+F2(13:)2.75 E F1(198)A(scaling)63 181.2 Q F2(7:)110.718 181.2 Q F1(70;)A F2(9:)
+2.75 E F1(105;)A F2 -.407(11)2.75 G(:).407 E F1(136, 148, 151;)A F2(17:)2.75 E
+F1(249-250;)A F2(18:)2.75 E F1(347)A(secondary database image generation)63
+194.4 Q F2(5:)259.625 194.4 Q F1(27)A(set, executability)63 207.6 Q F2(7:)
+157.974 207.6 Q F1(58)A(shading)63 220.8 Q F2(1:)116.49 220.8 Q F1(2;)A F2(9:)
+3.484 E F1 .734(92, 105;)B F2(10:)3.484 E F1 -.605(11)C .734(8, 120;).605 F F2
+-.407(11)3.484 G(:).407 E F1 .735(131, 146, 157, 159, 171-172,)B(174;)85 234 Q
+F2(12:)2.75 E F1(188-190;)A F2(18:)2.75 E F1(309, 314-316, 320, 332-335;)A F2
+(A:)2.75 E F1(359)A(constant)74 247.2 Q F2 -.407(11)128.78 247.2 S(:).407 E F1
+(172, 174)A(light sour)74 260.4 Q(ce)-.198 E F2 -.407(11)144.609 260.4 S(:).407
+E F1(131, 172)A(smooth)74 273.6 Q F2(1:)124.127 273.6 Q F1(2)A(shadow)63 286.8
+Q F2(18:)115.217 286.8 Q F1(330)A(shearing)63 300 Q F2(18:)118.649 300 Q F1
+(348)A(smooth shading)63 313.2 Q F2(1:)154.883 313.2 Q F1(2)A(sour)63 326.4 Q
+(ce code str)-.198 E(uctur)-.088 E(e)-.198 E F2(12:)180.392 326.4 Q F1(185)A
+(space)63 339.6 Q(additional data)74 352.8 Q F2(6:)161.846 352.8 Q F1
+(29, 32, 34, 41;)A F2(7:)2.75 E F1(52, 54, 58, 62, 75;)A F2(A:)2.75 E F1(355)A
+(fr)74 366 Q(ustum)-.088 E F2(7:)126.899 366 Q F1(70;)A F2(9:)2.75 E F1(102;)A
+F2 -.407(11)2.75 G(:).407 E F1(147-148, 158;)A F2(17:)2.75 E F1(250, 264)A
+(modeling)74 379.2 Q F2(9:)134.379 379.2 Q F1(101-102;)A F2(A:)2.75 E F1(360)A
+(world)74 392.4 Q F2(9:)117.197 392.4 Q F1(101;)A F2 -.407(11)2.75 G(:).407 E
+F1(136, 146, 172-173;)A F2(17:)2.75 E F1(264)A(specular color)63 405.6 Q F2
+-.407(11)145.049 405.6 S(:).407 E F1(173;)A F2(18:)2.75 E F1(331, 333)A
+(specular factor)63 418.8 Q F2 -.407(11)148.591 418.8 S(:).407 E F1(173;)A F2
+(18:)2.75 E F1(332)A(specular highlight)63 432 Q F2(18:)165.234 432 Q F1(332)A
+(specular r)63 445.2 Q(e\215ectance)-.198 E F2(18:)172.505 445.2 Q F1(332-333)A
+(stack, global attribute)63 458.4 Q F2(3:)181.646 458.4 Q F1(16, 18-19;)A F2
+(5:)2.75 E F1(28;)A F2(6:)2.75 E F1(31;)A F2(7:)2.75 E F1(45;)A F2(13:)2.75 E
+F1(201)A(standar)63 471.6 Q 2.75(dm)-.198 G(ethods)118.704 471.6 Q F2(3:)
+165.102 471.6 Q F1(16, 18, 20;)A F2(6:)2.75 E F1(30, 35;)A F2(A:)2.75 E F1
+(363;)A F2(B:)2.75 E F1(378;)A F2(C:)2.75 E F1(382)A(StdRenderDisplay)74 484.8
+Q F2(3:)176.993 484.8 Q F1(19-20;)A F2(5:)2.75 E F1(28;)A F2(6:)2.75 E F1
+(30, 35, 38;)A F2(7:)2.75 E F1(49)A(standar)63 498 Q 3.884(dp)-.198 G -.198(ro)
+116.736 498 S 1.134(duction r).198 F(ender)-.198 E(er)-.198 E F2(2:)224.659 498
+Q F1(8;)A F2(5:)3.884 E F1 1.134(23, 27;)B F2(9:)3.884 E F1 1.133(81, 91, 1)B
+(10;)-.605 E F2(10:)3.883 E F1 -.605(11)C(7,).605 E -.605(11)85 511.2 S(9;).605
+E F2(12:)2.75 E F1(188;)A F2(13:)2.75 E F1(198;)A F2(15:)2.75 E F1
+(215, 217-219, 221;)A F2(16:)2.75 E F1(228;)A F2(17:)2.75 E F1(263;)A F2(A:)
+2.75 E F1(363)A(StdRenderDisplay)63 524.4 Q F2(3:)165.993 524.4 Q F1(19-20;)A
+F2(5:)2.75 E F1(28;)A F2(6:)2.75 E F1(30, 35, 38;)A F2(7:)2.75 E F1(49)A
+(StdRenderStudio)63 537.6 Q F2(3:)160.108 537.6 Q F1(18, 20;)A F2(5:)2.75 E F1
+(28;)A F2(6:)2.75 E F1(35, 38;)A F2(7:)2.75 E F1(49)A(str)63 550.8 Q(uctur)
+-.088 E(e)-.198 E(data)74 564 Q F2(6:)110.471 564 Q F1 1.414(33, 35;)B F2(7:)
+4.164 E F1 1.414(45, 56;)B F2(9:)4.164 E F1 1.415(82, 100, 1)B(10;)-.605 E F2
+(10:)4.165 E F1 -.605(11)C(5;).605 E F2 -.407(11)4.165 G(:).407 E F1 1.415
+(122, 136, 138,)B(162, 166, 168, 178;)85 577.2 Q F2(C:)2.75 E F1(381)A(dir)74
+590.4 Q(ectory)-.198 E F2(13:)132.025 590.4 Q F1(195-196, 202;)A F2(14:)2.75 E
+F1(208, 21)A(1;)-.605 E F2(15:)2.75 E F1(220, 224)A(sour)74 603.6 Q(ce code)
+-.198 E F2(12:)144.983 603.6 Q F1(185)A .651(studio gr)63 616.8 R(oup)-.198 E
+F2(4:)141.126 616.8 Q F1(21;)A F2(5:)3.401 E F1(24-26;)A F2(6:)3.401 E F1 .651
+(34, 40;)B F2(7:)3.401 E F1 .651(62, 78;)B F2(9:)3.4 E F1 .65(95, 98-100;)B F2
+-.407(11)3.4 G(:).407 E F1(153;)A F2(17:)85 630 Q F1(263, 268;)A F2(18:)2.75 E
+F1(351;)A F2(A:)2.75 E F1(363-364)A(studio objects)63 643.2 Q F2(6:)143.377
+643.2 Q F1(31, 40;)A F2(9:)2.75 E F1(101;)A F2(16:)2.75 E F1(229;)A F2(A:)2.75
+E F1(355;)A F2(C:)2.75 E F1(381)A .377(studio traversal)63 656.4 R F2(3:)153.69
+656.4 Q F1 .377(18, 20;)B F2(5:)3.127 E F1(25;)A F2(6:)3.127 E F1 .377
+(35, 38, 41;)B F2 3.127(7:)3.127 G F1 .377(48-49, 52, 67, 70, 76;)291.079 656.4
+R F2(9:)85 669.6 Q F1(99;)A F2 -.407(11)2.75 G(:).407 E F1(145-146, 153, 161;)A
+F2(A:)2.75 E F1(358, 363)A(style, r)63 682.8 Q(endering)-.198 E F2(1:)152.958
+682.8 Q F1(2;)A F2(2:)2.75 E F1(13;)A F2(5:)2.75 E F1(23;)A F2(6:)2.75 E F1
+(36-37;)A F2(A:)2.75 E F1(362)A(system)63 696 Q 1.44 LW 81 756 63 756 DL 99 756
+81 756 DL 117 756 99 756 DL 135 756 117 756 DL 153 756 135 756 DL 171 756 153
+756 DL 189 756 171 756 DL 207 756 189 756 DL 225 756 207 756 DL 243 756 225 756
+DL 261 756 243 756 DL 279 756 261 756 DL 297 756 279 756 DL 315 756 297 756 DL
+333 756 315 756 DL 351 756 333 756 DL 369 756 351 756 DL 387 756 369 756 DL
+419.4 756 401.4 756 DL 428.4 756 410.4 756 DL 446.4 756 428.4 756 DL 464.4 756
+446.4 756 DL 482.4 756 464.4 756 DL 500.4 756 482.4 756 DL 518.4 756 500.4 756
+DL 536.4 756 518.4 756 DL/F3 9/Helvetica@0 SF(Inde)365.256 768.96 Q(x)-.27 E
+(Dore)416.802 768.96 Q 3.506<b444>432.304 768.96 S -2.187 -.27(ev e)445.305
+768.96 T(loper').27 E 2.502(sG)-.45 G(uide)494.877 768.96 Q/F4 9
+/Helvetica-Bold@0 SF(I-417)4.002 E EP
+%%Page: 418 20
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 108 46.8 72 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 257.4 46.8 221.4 46.8 DL 293.4 46.8 257.4 46.8 DL 329.4 46.8 293.4
+46.8 DL 365.4 46.8 329.4 46.8 DL 401.4 46.8 365.4 46.8 DL 437.4 46.8 401.4 46.8
+DL 473.4 46.8 437.4 46.8 DL 509.4 46.8 473.4 46.8 DL 545.4 46.8 509.4 46.8 DL
+/F0 11/Palatino-Roman@0 SF(module)232.5 109.2 Q/F1 11/Palatino-Bold@0 SF(2:)
+285.805 109.2 Q F0 2.012(5, 7, 12;)B F1(7:)4.762 E F0(77;)A F1 -.407(11)4.761 G
+(:).407 E F0(176;)A F1(13:)4.761 E F0(201;)A F1(15:)4.761 E F0 2.011
+(213, 215, 217, 220;)B F1(A:)243.5 122.4 Q F0(357, 362-363)A(window)232.5 135.6
+Q F1(12:)286.928 135.6 Q F0(191;)A F1(14:)2.75 E F0(205)A(world coor)232.5
+148.8 Q(dinate)-.198 E F1 -.407(11)330.169 148.8 S(:).407 E F0(136, 147, 160;)A
+F1(18:)2.75 E F0(296)A/F2 17/Palatino-Bold@0 SF(T)221.5 181.2 Q F0(template)
+221.5 206.4 Q F1(9:)277.985 206.4 Q F0 -.605(111)C(;).605 E F1(15:)2.75 E F0
+(213, 222;)A F1(17:)2.75 E F0(245-246)A 5.727(test pr)221.5 219.6 R(ograms)
+-.198 E F1(10:)313.661 219.6 Q F0 -.605(11)C 5.727(7, 1).605 F(19;)-.605 E F1
+(13:)8.477 E F0(196;)A F1(14:)8.477 E F0 5.727(206, 209-210;)B F1(15:)8.478 E
+F0(213,)A(218-219, 221-222;)243.5 232.8 Q F1(16:)2.75 E F0(227, 229, 233)A
+(testing)221.5 246 Q F1(8:)268.074 246 Q F0(79;)A F1(10:)2.75 E F0 -.605(11)C
+(9-120;).605 E F1 -.407(11)2.75 G(:).407 E F0(121;)A F1(14:)2.75 E F0(210;)A F1
+(15:)2.75 E F0(221;)A F1(16:)2.75 E F0(229-230)A(textur)221.5 259.2 Q 2.75(ec)
+-.198 G(oor)263.3 259.2 Q(dinates)-.198 E F1(A:)328.552 259.2 Q F0(361;)A F1
+(3:)2.75 E F0(17;)A F1(6:)2.75 E F0(39;)A F1(18:)2.75 E F0(301, 303-306, 308)A
+(textur)221.5 272.4 Q 8.831(em)-.198 G(apping)274.21 272.4 Q F1(B:)328.482
+272.4 Q F0(377-378;)A F1(C:)8.83 E F0(381;)A F1(1:)8.83 E F0(2;)A F1 -.407(11)
+8.83 G(:).407 E F0(167-168;)A F1(12:)8.83 E F0(188;)A F1(18:)243.5 285.6 Q F0
+(325-326)A(tracer)221.5 298.8 Q 2.75(,r)-.814 G(ay)258.46 298.8 Q F1(A:)283.826
+298.8 Q F0(363)A(transformation)221.5 312 Q(attributes)232.5 325.2 Q F1(3:)
+292.703 325.2 Q F0(16-17;)A F1(7:)2.75 E F0(44;)A F1(9:)2.75 E F0(101;)A F1(A:)
+2.75 E F0(358;)A F1(B:)2.75 E F0(365)A(local-to-world)232.5 338.4 Q F1(7:)
+320.519 338.4 Q F0(61;)A F1 -.407(11)7.862 G(:).407 E F0 5.112
+(136-137, 145, 163, 173;)B F1(18:)7.863 E F0(290-291,)A(295-296, 344-350)243.5
+351.6 Q(world-to-fr)232.5 364.8 Q(ustum)-.088 E F1(6:)331.764 364.8 Q F0
+(37, 41;)A F1(7:)2.75 E F0(67, 76;)A F1 -.407(11)2.75 G(:).407 E F0(146-148;)A
+F1(18:)2.75 E F0(295)A(translation)221.5 378 Q F1(5:)287.643 378 Q F0(26;)A F1
+(7:)2.75 E F0(70;)A F1(9:)2.75 E F0(105;)A F1 -.407(11)2.75 G(:).407 E F0
+(151, 158;)A F1(17:)2.75 E F0(249-250;)A F1(18:)2.75 E F0(343, 349)A(transpar)
+221.5 391.2 Q(ency)-.198 E F1(A:)298.676 391.2 Q F0(363;)A F1(1:)2.75 E F0(2;)A
+F1(6:)2.75 E F0(38;)A F1(12:)2.75 E F0(188-189;)A F1(18:)2.75 E F0
+(327-328, 338)A(transpar)221.5 404.4 Q(ent color)-.198 E F1(18:)318.454 404.4 Q
+F0(336-337)A(traversal)221.5 417.6 Q F1(2:)280.215 417.6 Q F0(7;)A F1(3:)5.09 E
+F0(16-20;)A F1(5:)5.09 E F0 2.34(23, 25-27;)B F1(6:)5.09 E F0 2.34
+(29, 31-32, 34-35, 38, 40-41;)B F1(7:)243.5 430.8 Q F0 1.327
+(44-46, 48-49, 52, 56, 63, 66-67, 70, 73-74, 76;)B F1(9:)4.078 E F0 1.328
+(95-96, 99-101,)B 2.639(103, 109;)243.5 444 R F1 -.407(11)5.389 G(:).407 E F0
+2.638(145-146, 153, 161, 165;)B F1(13:)5.388 E F0(201;)A F1(17:)5.388 E F0
+2.638(242, 259, 263;)B F1(18:)243.5 457.2 Q F0(343-344, 351;)A F1(A:)2.75 E F0
+(356, 358, 360, 362-364;)A F1(B:)2.75 E F0(365)A(display)232.5 470.4 Q F1(3:)
+282.862 470.4 Q F0(18-20;)A F1(5:)3.348 E F0(26;)A F1(6:)3.348 E F0(38;)A F1
+3.348(7:)3.348 G F0 .599(44-45, 48, 56, 63, 66-67, 70, 73-74;)385.167 470.4 R
+F1(9:)243.5 483.6 Q F0(109;)A F1 -.407(11)2.75 G(:).407 E F0(153, 165;)A F1(A:)
+2.75 E F0(358, 360, 362-363)A(method)232.5 496.8 Q F1(3:)283.947 496.8 Q F0
+(18-20;)A F1(5:)2.75 E F0(27;)A F1(6:)2.75 E F0(38;)A F1(7:)2.75 E F0
+(44-46 , 48-49, 66;)A F1(9:)2.75 E F0(109;)A F1(A:)2.75 E F0(362, 364)A(studio)
+232.5 510 Q F1(3:)278.179 510 Q F0 1.118(18, 20;)B F1(5:)3.868 E F0(25;)A F1
+(6:)3.868 E F0 1.118(35, 38, 41;)B F1 3.867(7:)3.867 G F0 1.117
+(48-49, 52, 67, 70, 76;)420.752 510 R F1(9:)3.867 E F0(99;)A F1 -.407(11)243.5
+523.2 S(:).407 E F0(145-146, 153, 161;)A F1(A:)2.75 E F0(358, 363)A(triangle)
+221.5 536.4 Q(list)232.5 549.6 Q F1(6:)260.902 549.6 Q F0(30;)A F1(7:)2.75 E F0
+(77;)A F1 -.407(11)2.75 G(:).407 E F0(172;)A F1(16:)2.75 E F0(229)A(mesh)232.5
+562.8 Q F1(6:)272.298 562.8 Q F0(30, 36;)A F1(7:)2.75 E F0(58-59;)A F1(13:)2.75
+E F0(195;)A F1(16:)2.75 E F0(228-229;)A F1(18:)2.75 E F0(307-308;)A F1(A:)2.75
+E F0(355)A(strip)232.5 576 Q F1(6:)268.657 576 Q F0(30;)A F1(12:)2.75 E F0
+(188;)A F1(16:)2.75 E F0(229)A 3.41(type, r)221.5 589.2 R(epr)-.198 E
+(esentation)-.198 E F1(3:)339.211 589.2 Q F0 3.41(17, 19;)B F1(6:)6.161 E F0
+(32;)A F1(7:)6.161 E F0 3.411(56, 60-61, 77;)B F1(9:)6.161 E F0 3.411(95, 108;)
+B F1(18:)243.5 602.4 Q F0(329-330, 334)A F2(U)221.5 634.8 Q F0(update function)
+221.5 660 Q F1(7:)313.097 660 Q F0(69)A(UpdStdAlternateObj)221.5 673.2 Q F1(3:)
+336.241 673.2 Q F0(19-20;)A F1(6:)2.75 E F0(30;)A F1(9:)2.75 E F0(109)A
+(utility module)221.5 686.4 Q F1(2:)305.067 686.4 Q F0(5, 7, 12;)A F1(15:)2.75
+E F0(213, 217)A 1.44 LW 90 756 72 756 DL 99 756 81 756 DL 117 756 99 756 DL 135
+756 117 756 DL 153 756 135 756 DL 171 756 153 756 DL 189 756 171 756 DL 207 756
+189 756 DL 239.4 756 221.4 756 DL 257.4 756 239.4 756 DL 275.4 756 257.4 756 DL
+293.4 756 275.4 756 DL 311.4 756 293.4 756 DL 329.4 756 311.4 756 DL 347.4 756
+329.4 756 DL 365.4 756 347.4 756 DL 383.4 756 365.4 756 DL 401.4 756 383.4 756
+DL 419.4 756 401.4 756 DL 437.4 756 419.4 756 DL 455.4 756 437.4 756 DL 473.4
+756 455.4 756 DL 491.4 756 473.4 756 DL 509.4 756 491.4 756 DL 527.4 756 509.4
+756 DL 545.4 756 527.4 756 DL/F3 9/Helvetica-Bold@0 SF(I-418)72 768.96 Q/F4 9
+/Helvetica@0 SF(Dore)6.504 E 3.506<b444>114.517 768.96 S -2.187 -.27(ev e)
+127.518 768.96 T(loper').27 E 2.502(sG)-.45 G(uide)177.09 768.96 Q(Inde)221.4
+768.96 Q(x)-.27 E EP
+%%Page: 419 21
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 99 46.8 63 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 243 46.8 207 46.8 DL 279 46.8 243 46.8 DL 315 46.8 279 46.8 DL 351
+46.8 315 46.8 DL 387 46.8 351 46.8 DL 437.4 46.8 401.4 46.8 DL 464.4 46.8 428.4
+46.8 DL 500.4 46.8 464.4 46.8 DL 536.4 46.8 500.4 46.8 DL/F0 17/Palatino-Bold@0
+SF(V)63 116.4 Q/F1 11/Palatino-Roman@0 SF(variable line list)63 141.6 Q/F2 11
+/Palatino-Bold@0 SF(6:)154.289 141.6 Q F1(30)A(variable point list)63 154.8 Q
+F2(6:)162.022 154.8 Q F1(30)A(variable triangle mesh)63 168 Q F2(6:)185.232 168
+Q F1(30)A(variable triangle strip)63 181.2 Q F2(6:)181.591 181.2 Q F1(30)A
+(vertex color)63 194.4 Q F2 -.407(11)134.302 194.4 S(:).407 E F1(173)A
+(vertex locations)63 207.6 Q F2(6:)153.31 207.6 Q F1(39;)A F2(9:)2.75 E F1
+(105;)A F2 -.407(11)2.75 G(:).407 E F1(172)A(vertex normal)63 220.8 Q F2(18:)
+145.027 220.8 Q F1(301, 303-304, 306, 308)A(view)63 234 Q F2(1:)100.819 234 Q
+F1(1;)A F2(2:)2.96 E F1 .21(5, 13;)B F2(4:)2.96 E F1(21;)A F2(5:)2.96 E F1(23;)
+A F2(6:)2.96 E F1 .209(32, 34, 39;)B F2(7:)2.959 E F1 .209
+(43, 45, 49, 52, 61, 67, 69,)B(76;)85 247.2 Q F2(9:)4.396 E F1 1.647
+(89, 95, 97, 105, 1)B(10;)-.605 E F2 -.407(11)4.397 G(:).407 E F1 1.647
+(133, 143, 147, 151, 153, 161, 165,)B(170;)85 260.4 Q F2(13:)4.9 E F1(198;)A F2
+(17:)4.9 E F1 2.15(248, 262, 267;)B F2(18:)4.9 E F1 2.15
+(281, 292, 300, 302, 304, 307,)B(338;)85 273.6 Q F2(A:)2.75 E F1(359, 362, 364)
+A(\214eld of)74 286.8 Q F2(18:)122.015 286.8 Q F1(339-340)A(viewport, device)63
+300 Q F2(5:)158.216 300 Q F1(25;)A F2 -.407(11)2.75 G(:).407 E F1(123)A
+(volume, clip)63 313.2 Q F2(9:)137.184 313.2 Q F1(102-103;)A F2(18:)2.75 E F1
+(290, 297, 299, 31)A(1-312)-.605 E F0(W)63 345.6 Q F1(window system)63 370.8 Q
+F2(12:)154.19 370.8 Q F1(191;)A F2(14:)2.75 E F1(205)A(world coor)63 384 Q
+(dinate system)-.198 E F2 -.407(11)197.431 384 S(:).407 E F1(136, 147, 160;)A
+F2(18:)2.75 E F1(296)A(world coor)63 397.2 Q(dinates)-.198 E F2(3:)165.333
+397.2 Q F1(17;)A F2(6:)2.75 E F1(41;)A F2(7:)2.75 E F1(70;)A F2 -.407(11)2.75 G
+(:).407 E F1(146-148, 171-172, 174)A(world space)63 410.4 Q F2(9:)135.875 410.4
+Q F1(101;)A F2 -.407(11)2.75 G(:).407 E F1(136, 146, 172-173;)A F2(17:)2.75 E
+F1(264)A(world-to-fr)63 423.6 Q 2.301(ustum transformation)-.088 F F2(6:)
+242.536 423.6 Q F1 2.302(37, 41;)B F2(7:)5.052 E F1 2.302(67, 76;)B F2 -.407
+(11)5.052 G(:).407 E F1(146-148;)A F2(18:)85 436.8 Q F1(295)A F0(Y)63 469.2 Q
+F1(yon)63 494.4 Q F2(9:)95.274 494.4 Q F1(99;)A F2 -.407(11)2.75 G(:).407 E F1
+(144-145;)A F2(18:)2.75 E F1(339;)A F2(C:)2.75 E F1(393-394)A 1.44 LW 81 756 63
+756 DL 99 756 81 756 DL 117 756 99 756 DL 135 756 117 756 DL 153 756 135 756 DL
+171 756 153 756 DL 189 756 171 756 DL 207 756 189 756 DL 225 756 207 756 DL 243
+756 225 756 DL 261 756 243 756 DL 279 756 261 756 DL 297 756 279 756 DL 315 756
+297 756 DL 333 756 315 756 DL 351 756 333 756 DL 369 756 351 756 DL 387 756 369
+756 DL 419.4 756 401.4 756 DL 428.4 756 410.4 756 DL 446.4 756 428.4 756 DL
+464.4 756 446.4 756 DL 482.4 756 464.4 756 DL 500.4 756 482.4 756 DL 518.4 756
+500.4 756 DL 536.4 756 518.4 756 DL/F3 9/Helvetica@0 SF(Inde)365.256 768.96 Q
+(x)-.27 E(Dore)416.802 768.96 Q 3.506<b444>432.304 768.96 S -2.187 -.27(ev e)
+445.305 768.96 T(loper').27 E 2.502(sG)-.45 G(uide)494.877 768.96 Q/F4 9
+/Helvetica-Bold@0 SF(I-419)4.002 E EP
+%%Trailer
+end
+%%EOF

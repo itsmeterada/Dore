@@ -1,0 +1,89 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DdSetShadeMode 3D  "Dore"
+.SH NAME
+DdSetShadeMode \- Set the shade mode of a device
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+void DdSetShadeMode(device, mode)
+DtObject device;
+DtShadeMode mode;
+.sp
+.in -.5i
+FORTRAN:
+.in +.5i
+CALL DDSSM(DEVICE, MODE)
+INTEGER*4 DEVICE
+INTEGER*4 MODE
+.in -.5i
+.fi
+.SH DESCRIPTION
+.IX DDSSM
+.IX DdSetShadeMode
+.I DdSetShadeMode
+specifies the shade mode of a device, \f2device\fP.  
+.PP
+Dore can produce output on devices that have limited color capability. 
+These devices are usually referred to as
+"pseudocolor" devices.
+Dore always computes shades in full color, and compresses these shades to
+pseudocolor at output.  
+.PP
+The shade mode specifies how this compression is
+performed. The values that can be returned are:
+.IP "\f2DcComponent\fP <\f2DCCOMP\fP>"
+Each primary computed color (red, green, or blue)
+is compressed into a limited bit range and the
+resulting bit fields are combined with a bitwise or  
+function to form a single \f2n\fP-bit value.
+For each value of \f2n\fP, the compression algorithm
+is fixed. 
+For example, when \f2n\fP = 8, 3 bits are red, 3
+bits are green, and 2 bits are blue.
+.IP "\f2DcRange\fP <\f2DCRNG\fP>"
+The user has loaded a particular color map 
+with known ranges of shading (such as gold or silver) into
+the pseudocolor device.
+The \f2DdInqShadeRanges\fP <\f2DDQSR\fP> and
+\f2DdSetShadeRanges\fP <\f2DDSSR\fP> functions
+inquire and set up the contents of specific shade
+ranges for the device.
+See the manual pages for those calls
+for more information about pseudocolor mode.
+.SH ERRORS
+.I DdSetShadeMode
+will fail if the device handle is invalid.
+.TP 15
+[WARNING - invalid device handle]
+.PP
+\f2DdSetShadeMode\fP will fail if the mode value is invalid.
+.TP 15
+[WARNING - bad mode value]
+.SH DEFAULTS
+The default mode is \f2DcComponent\fP <\f2DCCOMP\fP>.
+.SH "SEE ALSO"
+.na
+.nh
+DdInqColorEntries(3D), DdInqColorTableSize(3D),
+DdInqShadeMode(3D), DdInqShadeRanges(3D),
+DdInqVisualType(3D), DdSetColorEntries(3D),
+DdSetShadeRanges(3D), DoShadeIndex(3D), DoDevice(3D)
+.ad
+.hy

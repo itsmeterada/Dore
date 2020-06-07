@@ -1,0 +1,71 @@
+!md begin
+!/note {} def
+!/legal {} def
+!md /lnop known not { /lnop [ {} ] cvx def } if
+!/bigs [lnop lnop lnop lnop lnop lnop lnop lnop] def
+!/smalls [lnop lnop lnop lnop lnop lnop lnop lnop] def
+!/cp {pm restore pop pop} def
+!
+!T T -31 -30 761 582 100 72 72 1 F F F F T T psu
+!(aaron                         ; document: 4-3.pict)jn
+!0 mf
+!od
+!op
+!0 0 xl
+!0 72 mul -1.5 72 mul translate
+!.6 .6  scale
+!1 1 pen
+!0 0 gm
+!(nc 0 0 720 540 6 rc)kp
+!202.5 225.5 224.5 337.5 26.5 26.5 0 rr
+!228.5 225.5 250.5 337.5 26.5 26.5 0 rr
+!255.5 225.5 277.5 337.5 26.5 26.5 0 rr
+!180.5 144.5 297.5 216.5 26.5 26.5 0 rr
+!198.5 153.5 225.5 207.5 0 rc
+!225.5 153.5 252.5 207.5 0 rc
+!252.5 153.5 279.5 207.5 0 rc
+!263 176 270 184 4 ov
+!263.5 176.5 269.5 183.5 0 ov
+!235 176 242 184 4 ov
+!235.5 176.5 241.5 183.5 0 ov
+!209 176 216 184 4 ov
+!209.5 176.5 215.5 183.5 0 ov
+!202 215 222 235 156 204 1 ar
+!212 180 gm
+!212 216 lin
+!0 0 gm
+!228 214 248 234 156 204 1 ar
+!238 180 gm
+!238 215 lin
+!0 0 gm
+!256 216 276 236 156 204 1 ar
+!266 180 gm
+!266 217 lin
+!0 0 gm
+!145.5 148.5 163.5 211.5 0 rc
+!151 176 158 184 4 ov
+!151.5 176.5 157.5 183.5 0 ov
+!170 171 190 191 246 294 1 ar
+!154 180 gm
+!172 180 lin
+!138 148 gm
+!bu fc
+!{}mark T /Helvetica /Helvetica 0 rf
+!bn
+!1 setTxMode
+!0 fs
+!12.47991 fz
+!bu fc
+!2 F /Helvetica fnt
+!bn
+!1.03736 0.(obj_group)ashow
+!217 256 gm
+!0 gr
+!0.83377 0.(Surface)ashow
+!244 255 gm
+!0.24186 0.(Magenta)ashow
+!271 259 gm
+!0.35441 0.(Sphere)ashow
+!F T cp
+!cd
+!end

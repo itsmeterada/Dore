@@ -1,0 +1,6 @@
+Because of their size, the extensive Dore' documentation has been
+bundled separately from the main Dore' distribution. You should
+be able to `drop' it into the tree however, by extracting it, and then
+editting docs/Imakefile's SUBDIRS line.
+
+Remember to remake the Makefiles (with `make Makefiles').

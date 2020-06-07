@@ -1,0 +1,1475 @@
+.\"#ident "%W%" %G%
+.\"
+.\" #
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  
+.\" # 
+.\" # KUBOTA GRAPHICS Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\" #
+.\"
+.ds BT \\*(Dd Developer's Guide
+.ds CT "Index
+.so ../macros/local.me
+.PN 399
+.L1 I NDEX
+.CH
+.IH A
+.I1 active camera
+\%\f35:\f124, 26; \%\f37:\f161-62; \%\f3A:\f1360 
+.I1 additional data space
+\%\f36:\f129, 32, 34, 41; \%\f37:\f152, 54, 58, 62, 75; \%\f3A:\f1355 
+.I1 additional object data
+\%\f36:\f129; \%\f317:\f1238
+.I1 alternate object
+\%\f33:\f119-20; \%\f36:\f130, 35; \%\f37:\f157, 61; \%\f39:\f1109; \%\f3A:\f1355-356, 359, 363
+.I1 ambient intensity
+\%\f311:\f1172; \%\f318:\f1309
+.I1 ambient light
+\%\f37:\f170
+.I1 ambient reflectance
+\%\f318:\f1309, 314
+.I1 antialiasing
+\%\f35:\f126; \%\f312:\f1188
+.I2 local 
+\%\f318:\f1322-323
+.I1 attribute
+.I2 appearance
+\%\f39:\f192, 100; \%\f310:\f1120; \%\f311:\f1133, 157, 166-167, 171
+.I2 camera 
+\%\f35:\f126; \%\f39:\f1100; \%\f311:\f1133, 144-145, 160; \%\f318:\f1291
+.I2 class
+\%\f33:\f115-17; \%\f36:\f131-32; \%\f3A:\f1356, 360; \%\f3B:\f1365 
+.I2 global 
+\%\f33:\f115-19; \%\f35:\f126-28; \%\f36:\f131-32, 38, 41; \%\f37:\f144-45, 66, 73; \%\f313:\f1201; \%\f3A:\f1356, 364; \%\f3B:\f1365-366, 378 
+.I2 light 
+\%\f35:\f126; \%\f37:\f163; \%\f39:\f195, 99; \%\f311:\f1133, 162-163; \%\f318:\f1296, 317-321
+.I2 objects
+\%\f33:\f115; \%\f35:\f127; \%\f3A:\f1355
+.I2 transformation 
+\%\f33:\f116-17; \%\f37:\f144; \%\f39:\f1101; \%\f3A:\f1358; \%\f3B:\f1365 
+.I2 see global attribute classes
+.IH B
+.I1 backface culling
+\%\f318:\f1310-311
+.I1 background color
+\%\f35:\f124; \%\f39:\f188, 90; \%\f311:\f1151, 154; \%\f317:\f1244-245, 254; \%\f318:\f1272, 280-281, 351
+.I1 base primitives
+\%\f36:\f130-31, 38; \%\f37:\f144, 77; \%\f3A:\f1355-356, 359 
+.I1 building the test programs
+\%\f314:\f1209
+.IH C
+.I1 C constants
+.I2 DcMethodAddReference
+\%\f317:\f1257
+.I2 DcMethodDestroy
+\%\f317:\f1258
+.I2 DcMethodInqGlbAttVal
+\%\f33:\f120; \%\f317:\f1241, 260
+.I2 DcMethodRemoveReference
+\%\f317:\f1258
+.I2 DcMethodStdRenderDisplay
+\%\f33:\f120
+.I2 DcMethodStdRenderStudio
+\%\f33:\f120
+.I2 DcMethodUpdStdAltObj
+\%\f33:\f120
+.I1 C device functions
+.I2 DdInqColorTableSize
+\%\f318:\f1278
+.I2 DdInqExtent
+\%\f318:\f1277
+.I2 DdInqPixelData
+\%\f318:\f1279
+.I2 DdInqResolution
+\%\f37:\f170; \%\f39:\f186; \%\f311:\f1148; \%\f318:\f1279
+.I2 DdInqShadeMode
+\%\f37:\f170; \%\f311:\f1153; \%\f318:\f1285, 331
+.I2 DdInqShadeRanges
+\%\f317:\f1252
+.I2 DdInqVisualType
+\%\f37:\f170; \%\f311:\f1153; \%\f317:\f1252, 257; \%\f318:\f1280, 285, 331
+.I2 DdPickObjs
+\%\f33:\f118; \%\f3A:\f1363 
+.I2 DdSetColorEntries
+\%\f318:\f1281
+.I2 DdSetFrame
+\%\f37:\f178
+.I2 DdSetOptions
+\%\f318:\f1284
+.I2 DdUpdate
+\%\f37:\f178
+.I1 C extension functions
+.I2 DeAddClass
+\%\f317:\f1241
+.I2 DeDeleteObject
+\%\f37:\f158
+.I1 C frame functions
+.I2 DfInqBoundary
+\%\f317:\f1249
+.I2 DfInqViewGroup
+\%\f37:\f178
+.I1 C group functions
+.I2 DgAddObj
+\%\f37:\f178
+.I2 DgAddObjToGroup
+\%\f37:\f178
+.I2 DgClose
+\%\f37:\f178
+.I1 C object creation functions
+.I2 DoAmbientIntens
+\%\f318:\f1309
+.I2 DoAmbientSwitch
+\%\f318:\f1310
+.I2 DoAnnoText
+\%\f310:\f1119; \%\f311:\f1157; \%\f3C:\f1382 
+.I2 DoBackfaceCullable
+\%\f318:\f1310
+.I2 DoBackfaceCullSwitch
+\%\f318:\f1311
+.I2 DoCamera
+\%\f33:\f118; \%\f37:\f148, 61, 78; \%\f318:\f1291
+.I2 DoCameraMatrix
+\%\f33:\f117; \%\f318:\f1339; \%\f3B:\f1365; \%\f3C:\f1393 
+.I2 DoClipSwitch
+\%\f318:\f1311
+.I2 DoClipVol
+\%\f318:\f1290, 297, 299, 312; \%\f3C:\f1396 
+.I2 DoDataPtr
+\%\f3C:\f1396
+.I2 DoDataVal
+\%\f3C:\f1396
+.I2 DoDepthCue
+\%\f318:\f1313
+.I2 DoDepthCueSwitch
+\%\f318:\f1313
+.I2 DoDevice
+\%\f32:\f113; \%\f37:\f149, 52, 78; \%\f39:\f184-86, 110; \%\f317:\f1252-253; \%\f318:\f1273-275; \%\f3A:\f1357-358 
+.I2 DoDiffuseColor
+\%\f37:\f178; \%\f318:\f1309, 314
+.I2 DoDiffuseIntens
+\%\f318:\f1315
+.I2 DoDiffuseSwitch
+\%\f318:\f1315
+.I2 DoExecSet
+\%\f317:\f1242-243
+.I2 DoFileRaster
+\%\f3C:\f1397
+.I2 DoFrame
+\%\f37:\f178
+.I2 DoGroup
+\%\f37:\f178
+.I2 DoHiddenSurfSwitch
+\%\f318:\f1316
+.I2 DoInterpType
+\%\f318:\f1317
+.I2 DoInvisSwitch
+\%\f317:\f1243
+.I2 DoLight
+\%\f37:\f148, 78; \%\f318:\f1296
+.I2 DoLightAttenuation
+\%\f318:\f1317
+.I2 DoLightColor
+\%\f318:\f1318
+.I2 DoLightIntens
+\%\f318:\f1318
+.I2 DoLightSpreadAngles
+\%\f318:\f1319
+.I2 DoLightSpreadExp
+\%\f318:\f1320
+.I2 DoLightSwitch
+\%\f311:\f1165-166; \%\f318:\f1320
+.I2 DoLightType
+\%\f318:\f1321
+.I2 DoLineList
+\%\f36:\f130; \%\f37:\f148; \%\f318:\f1303; \%\f3C:\f1383 
+.I2 DoLineType
+\%\f318:\f1321
+.I2 DoLineWidth
+\%\f318:\f1322
+.I2 DoLocalAntiAliasStyle
+\%\f318:\f1322
+.I2 DoLocalAntiAliasSwitch
+\%\f318:\f1323
+.I2 DoLookAtFrom
+\%\f33:\f117; \%\f37:\f178; \%\f318:\f1344; \%\f3B:\f1365; \%\f3C:\f1394 
+.I2 DoMatrix
+\%\f3C:\f1384
+.I2 DoNURBSurf
+\%\f36:\f130, 38; \%\f3A:\f1359; \%\f3C:\f1383 
+.I2 DoParallel
+\%\f33:\f117; \%\f37:\f178; \%\f318:\f1339; \%\f3B:\f1365; \%\f3C:\f1393 
+.I2 DoPatch
+\%\f39:\f1107-108; \%\f3C:\f1384 
+.I2 DoPerspective
+\%\f33:\f117; \%\f318:\f1340; \%\f3B:\f1365; \%\f3C:\f1393 
+.I2 DoPointList
+\%\f36:\f130; \%\f37:\f148, 52, 60, 75-76, 78; \%\f318:\f1305; \%\f3C:\f1385 
+.I2 DoPolygon
+\%\f3C:\f1385
+.I2 DoPolygonMesh
+\%\f3C:\f1385
+.I2 DoPolyline
+\%\f36:\f130; \%\f37:\f148; \%\f318:\f1301; \%\f3C:\f1386 
+.I2 DoPolymarker
+\%\f310:\f1119; \%\f311:\f1157; \%\f3C:\f1386 
+.I2 DoPopMatrix
+\%\f33:\f117; \%\f37:\f178; \%\f318:\f1345; \%\f3B:\f1365 
+.I2 DoPrimSurf
+\%\f36:\f130, 38; \%\f37:\f178; \%\f311:\f1136; \%\f3A:\f1360; \%\f3C:\f1387 
+.I2 DoProjection
+\%\f33:\f117; \%\f318:\f1341; \%\f3B:\f1365; \%\f3C:\f1394 
+.I2 DoPushMatrix
+\%\f33:\f117; \%\f37:\f178; \%\f318:\f1346; \%\f3B:\f1365
+.I2 DoRaster
+\%\f311:\f1154; \%\f3C:\f1397 
+.I2 DoReflectionSwitch
+\%\f318:\f1329
+.I2 DoRepType
+\%\f33:\f116; \%\f37:\f178; \%\f318:\f1330, 334
+.I2 DoRotate
+\%\f33:\f117; \%\f318:\f1347; \%\f3B:\f1365; \%\f3C:\f1394 
+.I2 DoScale
+\%\f33:\f117; \%\f37:\f178; \%\f318:\f1347; \%\f3B:\f1365; \%\f3C:\f1394 
+.I2 DoShadeIndex
+\%\f318:\f1285, 331
+.I2 DoShadowSwitch
+\%\f318:\f1330
+.I2 DoShear
+\%\f33:\f117; \%\f318:\f1348; \%\f3B:\f1365; \%\f3C:\f1395 
+.I2 DoSimplePolygon
+\%\f3C:\f1387
+.I2 DoSimplePolygonMesh
+\%\f3C:\f1387
+.I2 DoSpecularColor
+\%\f318:\f1332
+.I2 DoSpecularFactor
+\%\f318:\f1332
+.I2 DoSpecularIntens
+\%\f318:\f1333
+.I2 DoSpecularSwitch
+\%\f318:\f1333
+.I2 DoSphereList
+\%\f37:\f157; \%\f3C:\f1388 
+.I2 DoStereo
+\%\f318:\f1335
+.I2 DoStereoSwitch
+\%\f318:\f1336
+.I2 DoSubDivSpec
+\%\f37:\f177
+.I2 DoSurfaceEdgeColor
+\%\f318:\f1334
+.I2 DoSurfaceShade
+\%\f318:\f1335
+.I2 DoText
+\%\f3C:\f1388
+.I2 DoTextureAntiAlias
+\%\f3B:\f1377
+.I2 DoTextureExtendUV
+\%\f3B:\f1377
+.I2 DoTextureMapBump
+\%\f318:\f1324; \%\f3B:\f1377; \%\f3C:\f1395 
+.I2 DoTextureMapBumpSwitch
+\%\f318:\f1324
+.I2 DoTextureMapDiffuseColor
+\%\f318:\f1325; \%\f3B:\f1377; \%\f3C:\f1395 
+.I2 DoTextureMapDiffuseColorSwitch
+\%\f318:\f1326
+.I2 DoTextureMapEnviron
+\%\f318:\f1327; \%\f3B:\f1377; \%\f3C:\f1396 
+.I2 DoTextureMapEnvironSwitch
+\%\f318:\f1327
+.I2 DoTextureMapTranspIntens
+\%\f318:\f1328; \%\f3B:\f1377; \%\f3C:\f1396
+.I2 DoTextureMapTranspIntensSwitch
+\%\f318:\f1329
+.I2 DoTextureMatrixUV
+\%\f33:\f117; \%\f3B:\f1365 
+.I2 DoTextureMatrixUVW
+\%\f33:\f117; \%\f3B:\f1365 
+.I2 DoTextureScaleUV
+\%\f33:\f117; \%\f3B:\f1365 
+.I2 DoTextureScaleUVW
+\%\f33:\f117; \%\f3B:\f1365 
+.I2 DoTextureTranslateUV
+\%\f33:\f117; \%\f3B:\f1365 
+.I2 DoTextureTranslateUVW
+\%\f33:\f117; \%\f3B:\f1365 
+.I2 DoTorus
+\%\f39:\f1109; \%\f3C:\f1389
+.I2 DoTransformMatrix
+\%\f33:\f117; \%\f318:\f1349; \%\f3B:\f1365; \%\f3C:\f1395 
+.I2 DoTranslate
+\%\f33:\f117; \%\f37:\f178; \%\f318:\f1350; \%\f3B:\f1365; \%\f3C:\f1395 
+.I2 DoTranspColor
+\%\f318:\f1337
+.I2 DoTranspIntens
+\%\f318:\f1337
+.I2 DoTranspSwitch
+\%\f318:\f1338
+.I2 DoTriangleList
+\%\f36:\f130; \%\f37:\f148; \%\f318:\f1306; \%\f3C:\f1389 
+.I2 DoTriangleMesh
+\%\f36:\f130, 36; \%\f37:\f148, 58-59; \%\f318:\f1308; \%\f3A:\f1361; \%\f3C:\f1389 
+.I2 DoTriangleStrip
+\%\f36:\f130; \%\f37:\f148; \%\f3C:\f1390 
+.I2 DoVarLineList
+\%\f36:\f130; \%\f37:\f148; \%\f3C:\f1390 
+.I2 DoVarPointList
+\%\f36:\f130; \%\f37:\f148; \%\f3C:\f1391 
+.I2 DoVarSimplePolygonMesh
+\%\f3C:\f1391
+.I2 DoVarTriangleMesh
+\%\f36:\f130; \%\f37:\f148; \%\f3C:\f1392 
+.I2 DoView
+\%\f37:\f149, 52, 78; \%\f3A:\f1364 
+.I1 C system functions
+.I2 DsCompBoundingVol
+\%\f33:\f118; \%\f3A:\f1363 
+.I2 DsHoldObj
+\%\f317:\f1259; \%\f3C:\f1381 
+.I2 DsInitialize
+\%\f32:\f112-13; \%\f33:\f117; \%\f37:\f177; \%\f39:\f1110; \%\f310:\f1117; \%\f311:\f1176; \%\f317:\f1266
+.I2 DsInqClassId
+\%\f33:\f117; \%\f36:\f132, 35-36; \%\f37:\f149, 59-63, 67, 73-74; \%\f39:\f1108; \%\f311:\f1154; \%\f3A:\f1356; \%\f3B:\f1366 
+.I2 DsInqMethodId
+\%\f33:\f120; \%\f36:\f132; \%\f37:\f149, 61-63, 67, 73-74; \%\f39:\f1109; \%\f317:\f1240; \%\f3A:\f1361; \%\f3B:\f1366 
+.I2 DsInqObjClassId
+\%\f317:\f1242-243
+.I2 DsInqRaster
+\%\f311:\f1154
+.I2 DsInqRendererId
+\%\f317:\f1264
+.I2 DsInqVersion
+\%\f3A:\f1358
+.I2 DsPrintObj
+\%\f33:\f118; \%\f36:\f137; \%\f37:\f154, 57; \%\f317:\f1239; \%\f3A:\f1363 
+.I2 DsRasterUpdate
+\%\f3C:\f1397
+.I2 DsReleaseObj
+\%\f317:\f1239, 258-259
+.I2 DsTerminate
+\%\f36:\f140; \%\f37:\f178; \%\f317:\f1263
+.I1 C view functions
+.I2 DvInqActiveCamera
+\%\f37:\f161, 63
+.I2 DvInqBackgroundJust
+\%\f311:\f1153
+.I2 DvInqBoundary
+\%\f37:\f170; \%\f311:\f1144, 148; \%\f317:\f1249
+.I2 DvInqClearFlag
+\%\f37:\f170; \%\f311:\f1151
+.I2 DvInqDefinitionGroup
+\%\f37:\f178
+.I2 DvInqDisplayGroup
+\%\f37:\f178
+.I2 DvInqShadeIndex
+\%\f37:\f170; \%\f311:\f1153
+.I2 DvSetActiveCamera
+\%\f37:\f163
+.I2 DvSetBackgroundRaster
+\%\f317:\f1267
+.I2 DvSetRendStyle
+\%\f32:\f113; \%\f35:\f123-25; \%\f36:\f136; \%\f37:\f178; \%\f317:\f1264; \%\f3A:\f1362 
+.I1 camera
+.I2 active
+\%\f35:\f124, 26; \%\f37:\f161-62; \%\f3A:\f1360 
+.I2 attributes
+\%\f35:\f126; \%\f39:\f1100; \%\f311:\f1133, 144-145, 160; \%\f318:\f1291
+.I1 class
+.I2 attribute
+\%\f33:\f115-17; \%\f36:\f131-32; \%\f3A:\f1356, 360; \%\f3B:\f1365 
+.I2 identifier
+\%\f3A:\f1356; \%\f3C:\f1381
+.I2 instance of identifier
+\%\f33:\f115; \%\f36:\f136
+.I2 name
+\%\f3A:\f1356; \%\f3B:\f1366-379; \%\f3C:\f1382-397
+.I2 name primitive 
+\%\f36:\f130, 33; \%\f37:\f158; \%\f39:\f1108; \%\f3A:\f1355 
+.I1 clear flag
+\%\f37:\f173; \%\f311:\f1151, 153
+.I1 clip volume
+\%\f39:\f1102-103; \%\f318:\f1290, 297, 299, 311-312
+.I1 clipping
+\%\f35:\f125; \%\f37:\f170; \%\f39:\f187, 89, 92, 96, 103, 105-106; \%\f311:\f1148, 159; \%\f312:\f1188, 190-191; \%\f317:\f1248-249; \%\f318:\f1276, 285, 290, 339-340, 343; \%\f3A:\f1359 
+.I1 color
+.I2 background
+\%\f35:\f124; \%\f39:\f188, 90; \%\f311:\f1151, 154; \%\f317:\f1244-245, 254; \%\f318:\f1272, 280-281, 351
+.I2 diffuse 
+\%\f33:\f116; \%\f37:\f166-67; \%\f311:\f1167, 172, 174; \%\f318:\f1309, 314-315, 325-326
+.I2 model
+\%\f39:\f188; \%\f317:\f1254, 256; \%\f318:\f1277, 280-281, 284, 300, 302, 304-305, 307, 313-314, 331, 334
+.I2 specular 
+\%\f311:\f1173; \%\f318:\f1331, 333
+.I2 transparent 
+\%\f318:\f1336-337
+.I2 vertex 
+\%\f311:\f1173
+.I1 connected line list
+\%\f36:\f130; \%\f316:\f1229
+.I1 constant shading
+\%\f311:\f1172, 174
+.I1 control routines
+\%\f311:\f1131, 150, 157
+.I1 convention, naming
+\%\f33:\f116; \%\f37:\f143; \%\f311:\f1121; \%\f313:\f1193
+.I1 coordinates
+.I2 device
+\%\f39:\f190; \%\f311:\f1127, 148, 157, 171; \%\f317:\f1244-245, 249-250; \%\f318:\f1271-272, 286, 353; \%\f3A:\f1357-358 
+.I2 frame
+\%\f37:\f170; \%\f311:\f1148, 157
+.I2 local 
+\%\f311:\f1157, 171-172; \%\f318:\f1290
+.I2 texture 
+\%\f33:\f117; \%\f36:\f139; \%\f318:\f1301, 303-306, 308; \%\f3A:\f1361 
+.I2 world 
+\%\f33:\f117; \%\f36:\f141; \%\f37:\f170; \%\f311:\f1146-148, 171-172, 174
+.I1 culling, backface
+\%\f318:\f1310-311
+.I1 current method
+\%\f33:\f119; \%\f36:\f130; \%\f37:\f145, 61; \%\f317:\f1259; \%\f3A:\f1356, 364 
+.I1 current transformation matrix
+\%\f33:\f116; \%\f39:\f1101; \%\f311:\f1160
+.IH D
+.I1 data
+.I2 additional object
+\%\f36:\f129; \%\f317:\f1238
+.I2 object private
+\%\f3C:\f1382
+.I2 private 
+\%\f35:\f125; \%\f36:\f135, 39; \%\f37:\f145-46, 49, 58, 62, 69, 76; \%\f39:\f197, 107; \%\f317:\f1239, 248; \%\f3A:\f1356, 361; \%\f3C:\f1381-382 
+.I2 structure
+\%\f36:\f133, 35; \%\f37:\f145, 56; \%\f39:\f182, 100, 110; \%\f310:\f1115; \%\f311:\f1122, 136, 138, 162, 166, 168, 178; \%\f3C:\f1381 
+.I1 DCM
+\%\f39:\f181-84, 89-90, 96, 110-111; \%\f310:\f1113-114, 117; \%\f311:\f1122, 127, 129-131, 153, 156, 177-179; \%\f317:\f1245; \%\f318:\f1269, 271-286; \%\f3A:\f1356-357 
+.I1 DCM functions
+.I2 dcm.become_current_driver
+\%\f39:\f184-85; \%\f310:\f1115; \%\f311:\f1126-127; \%\f318:\f1270-271, 273
+.I2 dcm.clear_rectangle_depth
+\%\f39:\f190; \%\f318:\f1271-272
+.I2 dcm.clear_rectangle_depth_and_color
+\%\f39:\f190; \%\f318:\f1271-272, 281
+.I2 dcm.close_device
+\%\f39:\f187; \%\f318:\f1272-273
+.I2 dcm.create_local_data
+\%\f39:\f184-85, 87; \%\f310:\f1115; \%\f311:\f1123; \%\f318:\f1271, 273-275
+.I2 dcm.flush
+\%\f39:\f187; \%\f318:\f1274
+.I2 dcm.initialize_device
+\%\f39:\f184-85; \%\f310:\f1115; \%\f311:\f1123-124, 128-129; \%\f318:\f1273-274
+.I2 dcm.inquire_auto_size
+\%\f39:\f186; \%\f310:\f1115; \%\f311:\f1129; \%\f318:\f1275
+.I2 dcm.inquire_clip_list
+\%\f39:\f187; \%\f310:\f1115; \%\f311:\f1129; \%\f318:\f1275-276, 286
+.I2 dcm.inquire_device_extent
+\%\f39:\f185, 90; \%\f310:\f1115; \%\f311:\f1127; \%\f318:\f1277
+.I2 dcm.inquire_ncolors
+\%\f39:\f185; \%\f310:\f1115; \%\f311:\f1128; \%\f318:\f1277
+.I2 dcm.inquire_pixel_data
+\%\f39:\f186; \%\f318:\f1278
+.I2 dcm.inquire_resolution
+\%\f39:\f185-86; \%\f310:\f1115; \%\f311:\f1128; \%\f318:\f1279
+.I2 dcm.inquire_stereo
+\%\f39:\f186; \%\f310:\f1115; \%\f311:\f1127; \%\f318:\f1279
+.I2 dcm.inquire_visual_type
+\%\f39:\f186; \%\f310:\f1115; \%\f311:\f1128; \%\f318:\f1280
+.I2 dcm.set_background_color
+\%\f39:\f188, 90; \%\f318:\f1272, 280
+.I2 dcm.set_color_entries
+\%\f39:\f188; \%\f318:\f1281
+.I2 dcm.set_current_view
+\%\f39:\f189; \%\f318:\f1281-282
+.I2 dcm.set_depth_buffer_enable
+\%\f39:\f190; \%\f318:\f1282-283
+.I2 dcm.set_depth_buffer_write
+\%\f39:\f190; \%\f318:\f1282-283
+.I2 dcm.set_foreground_color
+\%\f39:\f188; \%\f318:\f1283
+.I2 dcm.set_options
+\%\f39:\f185; \%\f318:\f1284
+.I2 dcm.set_shade_index
+\%\f39:\f188-89; \%\f318:\f1284
+.I2 dcm.swap_buffers
+\%\f39:\f189; \%\f318:\f1285
+.I2 dcm.update_geometry
+\%\f39:\f189; \%\f318:\f1285
+.I2 dcm.write_scanline_byte
+\%\f39:\f189, 92; \%\f310:\f1115; \%\f311:\f1129-130; \%\f318:\f1286
+.I1 definition group
+\%\f35:\f124; \%\f317:\f1268
+.I1 developer's interface
+\%\f3A:\f1356-357, 362; \%\f32:\f19-11; \%\f33:\f117-18; \%\f34:\f121; \%\f35:\f125-26; \%\f39:\f1109; \%\f313:\f1194, 198; \%\f317:\f1237
+.I1 device
+.I2 control module functions: see DCM functions
+.I2 control module interface
+\%\f313:\f1194; \%\f317:\f1251, 253
+.I2 coordinates
+\%\f39:\f190; \%\f311:\f1127, 148, 157, 171; \%\f317:\f1244-245, 249-250; \%\f318:\f1271-272, 286, 353; \%\f3A:\f1357-358 
+.I2 driver
+\%\f32:\f16, 8; \%\f34:\f121; \%\f35:\f123, 28; \%\f36:\f133, 38; \%\f38:\f179; \%\f39:\f181, 89, 91, 95, 97, 102, 106; \%\f310:\f1113; \%\f311:\f1121, 126, 144, 171, 176; \%\f312:\f1190; \%\f313:\f1195, 197, 201; \%\f315:\f1214, 217, 219, 223, 225; \%\f316:230; \%\f317:\f1245, 250; \%\f318:\f1269, 273, 282, 284, 287, 299, 351; \%\f3A:\f13559, 362 
+.I2 driver implementation
+\%\f39:\f191
+.I2 driver installation
+\%\f311:\f1176
+.I2 driver interface
+\%\f32:\f19-11; \%\f39:\f181, 106; \%\f317:\f1250; \%\f3A:\f1357, 359 
+.I2 driver sample
+\%\f32:\f113; \%\f310:\f1113-114; \%\f311:\f1121-124, 130, 144, 171, 177
+.I2 output interface
+\%\f36:\f129, 39; \%\f37:\f169
+.I2 viewport
+\%\f35:\f125; \%\f311:\f1123
+.I1 diffuse color
+\%\f33:\f116; \%\f37:\f166-67; \%\f311:\f1167, 172, 174; \%\f318:\f1309, 314-315, 325-326
+.I1 diffuse light
+\%\f318:\f1315
+.I1 diffuse reflectance
+\%\f318:\f1314-315
+.I1 direct traversal image generation
+\%\f35:\f127
+.I1 directory structure
+\%\f313:\f1195-196, 202; \%\f314:\f1208, 211; \%\f315:\f1220, 224
+.I1 display group
+\%\f35:\f124, 26-27; \%\f36:\f134, 40; \%\f37:\f178; \%\f39:\f195, 98-100, 103; \%\f311:\f1156; \%\f317:\f1267; \%\f318:\f1343; \%\f3A:\f1358, 364 
+.I1 display pipeline
+\%\f3A:\f1357
+.I1 display traversal
+\%\f33:\f118-20; \%\f35:\f126; \%\f36:\f138 \%\f37:\f144, 48, 56, 63, 66, 70, 73; \%\f39:\f1109; \%\f311:\f1153, 165; \%\f3A:\f1358, 360 
+.I1 \*(Dd Developer functions
+.I2 DDclass_AddMethod
+\%\f36:\f134, 40; \%\f317:\f1237, 240, 267-268
+.I2 DDclass_AddNotify
+\%\f39:\f1109; \%\f311:\f1177; \%\f317:\f1238-239, 242
+.I2 DDclass_AddObjectData
+\%\f36:\f136-37; \%\f37:\f149, 76; \%\f317:\f1238-239; \%\f3C:\f1382 
+.I2 DDclass_CopyMethod
+\%\f36:\f134, 40; \%\f37:\f149; \%\f317:\f1237, 240, 267-268
+.I2 DDclass_InqDefaultMethod
+\%\f317:\f1237, 240-241, 260
+.I2 DDclass_InqMethod
+\%\f33:\f118; \%\f36:\f132; \%\f37:\f161-63, 67, 73-74; \%\f317:\f1241-242, 260; \%\f3B:\f1366 
+.I2 DDclass_SetMethod
+\%\f36:\f135; \%\f37:\f149, 75; \%\f317:\f1237-238, 240-242
+.I2 DDcondex_QueryExecute
+\%\f317:\f1242-243
+.I2 DDcondex_QueryRender
+\%\f37:\f158-60; \%\f39:\f1107-108; \%\f317:\f1242-243
+.I2 DDcondex_SetDisablePrimExecFlag
+\%\f317:\f1243
+.I2 DDdevice_ClearRectangleDepth
+\%\f317:\f1244-245
+.I2 DDdevice_ClearRectangleDepthColor
+\%\f37:\f173; \%\f311:\f1154; \%\f317:\f1244-245, 254
+.I2 DDdevice_CreateDCMStruct
+\%\f39:\f184; \%\f311:\f1179; \%\f317:\f1245-246, 251, 253; \%\f318:\f1269-270
+.I2 DDdevice_CreateDROMStruct
+\%\f39:\f194-95; \%\f311:\f1184; \%\f317:\f1245-246, 251, 253; \%\f318:\f1287, 289
+.I2 DDdevice_CreatePROMStruct
+\%\f39:\f191; \%\f311:\f1180; \%\f317:\f1245-246, 251, 253; \%\f318:\f1352
+.I2 DDdevice_Flush
+\%\f37:\f174; \%\f317:\f1247
+.I2 DDdevice_InqAbortedDraw
+\%\f317:\f1247, 254
+.I2 DDdevice_InqActualViewport
+\%\f35:\f125; \%\f37:\f170, 73; \%\f311:\f1151; \%\f317:\f1247-248
+.I2 DDdevice_InqClipList
+\%\f35:\f125; \%\f317:\f1248
+.I2 DDdevice_InqClippingVolume
+\%\f35:\f125; \%\f37:\f170; \%\f311:\f1148; \%\f317:\f1249
+.I2 DDdevice_InqFrameScaleTrans
+\%\f317:\f1249
+.I2 DDdevice_InqFrustumScaleTrans
+\%\f35:\f126; \%\f37:\f170; \%\f311:\f1148, 151; \%\f317:\f1249-250; \%\f318:\f1343
+.I2 DDdevice_InqInterfaceRoutines
+\%\f36:\f140; \%\f37:\f167; \%\f317:\f1250, 253
+.I2 DDdevice_InqShadeRange
+\%\f35:\f126; \%\f317:\f1251, 257
+.I2 DDdevice_InqStereo
+\%\f35:\f126; \%\f311:\f1151; \%\f317:\f1252
+.I2 DDdevice_InstallDriver
+\%\f39:\f1110; \%\f311:\f1176-177; \%\f317:\f1245-246, 251-252
+.I2 DDdevice_SetAbortedDraw
+\%\f317:\f1247, 253-254
+.I2 DDdevice_SetBackgroundColor
+\%\f311:\f1154; \%\f317:\f1245, 254
+.I2 DDdevice_SetDepthBufferEnable
+\%\f317:\f1254-255
+.I2 DDdevice_SetDepthBufferWrite
+\%\f317:\f1255
+.I2 DDdevice_SetForegroundColor
+\%\f317:\f1256
+.I2 DDdevice_SetShadeIndex
+\%\f317:\f1252, 256
+.I2 DDgetenv
+\%\f317:\f1257
+.I2 DDobject_AddReference
+\%\f317:\f1257-259; \%\f3C:\f1381 
+.I2 DDobject_Delete
+\%\f317:\f1239, 258
+.I2 DDobject_DeleteReference
+\%\f317:\f1258; \%\f3C:\f1382 
+.I2 DDobject_InqCurrentMethod
+\%\f37:\f161; \%\f39:\f1109; \%\f317:\f1259
+.I2 DDobject_InqDefaultMethod
+\%\f317:\f1241, 259-260
+.I2 DDobject_InqMethod
+\%\f39:\f1109; \%\f317:\f1241, 260
+.I2 DDprint
+\%\f37:\f154-55, 57; \%\f317:\f1260-262
+.I2 DDprint_GetLine
+\%\f37:\f154-55; \%\f317:\f1261
+.I2 DDprint_IndentDown
+\%\f37:\f154-55, 57; \%\f317:\f1260-262
+.I2 DDprint_IndentUp
+\%\f37:\f154-55, 57; \%\f317:\f1260-262
+.I2 DDrender_AddRenderer
+\%\f36:\f136-37, 39; \%\f37:\f149, 52, 67; \%\f313:\f1194; \%\f317:\f1262-263
+.I2 DDspace_Allocate
+\%\f37:\f149, 53, 56; \%\f311:\f1123-124, 134-135; \%\f317:\f1264-265
+.I2 DDspace_Deallocate
+\%\f37:\f155, 57, 75; \%\f311:\f1124; \%\f317:\f1264-265
+.I2 DDspace_Reallocate
+\%\f37:\f163; \%\f311:\f1137, 163, 168; \%\f317:\f1264-265
+.I2 DDstrtok
+\%\f311:\f1124; \%\f317:\f1265-266
+.I2 DDsystem_InqNumberProcessors
+\%\f317:\f1266
+.I2 DDview_ResizeRaster
+\%\f311:\f1154; \%\f317:\f1266-267
+.I2 DDview_TraverseDisplay
+\%\f36:\f140; \%\f37:\f169; \%\f317:\f1259, 264, 267-268
+.I2 DDview_TraverseStudio
+\%\f36:\f140; \%\f37:\f167; \%\f317:\f1259, 264, 267-268
+.I1 \*(Dd kernel: see kernel
+.I1 driver, device: see device
+.I1 DROM
+\%\f3A:\f1359; \%\f35:\f128; \%\f36:\f133, 40; \%\f39:\f181, 84, 92, 94, 103, 109, 111; \%\f310:\f1113, 118; \%\f311:\f1131, 136, 143, 150, 153, 157, 160, 163, 166, 169, 171, 174, 177, 180; \%\f317:\f1246, 251, 253; \%\f318:\f1270, 286, 289, 302, 304, 307, 309
+.I1 DROM Methods Interface
+\%\f39:\f1106, 109; \%\f3A:\f1359
+.I1 DROM functions
+.I2 drom.apply_att_clpvol
+\%\f39:\f1103; \%\f318:\f1290, 297, 299, 312
+.I2 drom.camera
+\%\f39:\f199-100; \%\f310:\f1118-119; \%\f311:\f1145, 161; \%\f318:\f1291, 335-336, 338-341, 351
+.I2 drom.create_local_device_data
+\%\f39:\f197; \%\f310:\f1118; \%\f311:\f1134; \%\f318:\f1291, 294, 342
+.I2 drom.create_local_view_data
+\%\f39:\f197; \%\f310:\f1118; \%\f311:\f1134; \%\f318:\f1292, 294, 342
+.I2 drom.create_local_window_data
+\%\f39:\f197; \%\f310:\f1118; \%\f311:\f1134; \%\f318:\f1292, 295, 342
+.I2 drom.delete_local_device_data
+\%\f39:\f197; \%\f318:\f1293
+.I2 drom.delete_local_view_data
+\%\f39:\f197; \%\f318:\f1294
+.I2 drom.delete_local_window_data
+\%\f39:\f197; \%\f318:\f1294
+.I2 drom.get_lcstowcsmat
+\%\f39:\f1106; \%\f310:\f1118; \%\f311:\f1137; \%\f318:\f1295
+.I2 drom.get_wcstofcsmat
+\%\f39:\f1106; \%\f311:\f1157, 160; \%\f318:\f1295
+.I2 drom.light
+\%\f39:\f1100; \%\f311:\f1162, 173; \%\f318:\f1296, 317-321, 351
+.I2 drom.pop_att_clpvol
+\%\f39:\f1103; \%\f318:\f1290, 297, 299, 312
+.I2 drom.pop_lcstofcsmat
+\%\f39:\f1106; \%\f311:\f1157, 159; \%\f318:\f1297, 300
+.I2 drom.post_initialization
+\%\f39:\f196; \%\f311:\f1169; \%\f318:\f1298-299
+.I2 drom.pre_initialization
+\%\f39:\f196; \%\f311:\f1169; \%\f318:\f1298
+.I2 drom.push_att_clpvol
+\%\f39:\f1103; \%\f318:\f1290, 297, 299, 312
+.I2 drom.push_lcstofcsmat
+\%\f39:\f1105; \%\f311:\f1157, 159; \%\f318:\f1298-300
+.I2 drom.render_connected_line_list
+\%\f39:\f1105; \%\f310:\f1119; \%\f311:\f1157; \%\f318:\f1300
+.I2 drom.render_line_list
+\%\f39:\f1105; \%\f310:\f1119; \%\f311:\f1157; \%\f318:\f1302
+.I2 drom.render_point_list
+\%\f39:\f1105; \%\f310:\f1119; \%\f311:\f1157; \%\f318:\f1303-304
+.I2 drom.render_triangle_list
+\%\f39:\f1105; \%\f310:\f1119; \%\f311:\f1157; \%\f318:\f1305
+.I2 drom.render_triangle_mesh
+\%\f39:\f1105; \%\f310:\f1119; \%\f311:\f1157; \%\f318:\f1306-307
+.I2 drom.set_att_ambint
+\%\f39:\f1101; \%\f311:\f1166, 172; \%\f318:\f1309, 314
+.I2 drom.set_att_ambswi
+\%\f39:\f1101; \%\f311:\f1166, 175; \%\f318:\f1309
+.I2 drom.set_att_bacfacculble
+\%\f39:\f1101; \%\f311:\f1166; \%\f318:\f1310-311
+.I2 drom.set_att_bacfacculswi
+\%\f39:\f1101; \%\f311:\f1166; \%\f318:\f1310-311
+.I2 drom.set_att_clpswi
+\%\f39:\f1103; \%\f318:\f1311
+.I2 drom.set_att_clpvol
+\%\f39:\f1103; \%\f318:\f1290, 297, 299, 312
+.I2 drom.set_att_depcue
+\%\f39:\f1101; \%\f311:\f1166; \%\f318:\f1312-313
+.I2 drom.set_att_depcueswi
+\%\f39:\f1101; \%\f311:\f1166; \%\f318:\f1313
+.I2 drom.set_att_difclr
+\%\f39:\f1101; \%\f311:\f1166, 172; \%\f318:\f1314-315
+.I2 drom.set_att_difint
+\%\f39:\f1101; \%\f311:\f1166, 172; \%\f318:\f1314
+.I2 drom.set_att_difswi
+\%\f39:\f1101; \%\f311:\f1166, 175; \%\f318:\f1315
+.I2 drom.set_att_hidsrfswi
+\%\f39:\f1101; \%\f311:\f1166; \%\f318:\f1315-316
+.I2 drom.set_att_inttyp
+\%\f39:\f1101; \%\f311:\f1166, 172; \%\f318:\f1316
+.I2 drom.set_att_lgtatn
+\%\f39:\f199; \%\f311:\f1162, 173; \%\f318:\f1296, 317
+.I2 drom.set_att_lgtclr
+\%\f39:\f199; \%\f311:\f1162, 173; \%\f318:\f1296, 317-318
+.I2 drom.set_att_lgtint
+\%\f39:\f199; \%\f311:\f1162, 173; \%\f318:\f1296, 318
+.I2 drom.set_att_lgtspdang
+\%\f39:\f199; \%\f311:\f1162, 173; \%\f318:\f1296, 319
+.I2 drom.set_att_lgtspdexp
+\%\f39:\f199; \%\f311:\f1162, 173; \%\f318:\f1296, 319
+.I2 drom.set_att_lgtswi
+\%\f39:\f1100-101; \%\f311:\f1162, 165; \%\f318:\f1296, 320
+.I2 drom.set_att_lgttyp
+\%\f39:\f199; \%\f311:\f1162, 173; \%\f318:\f1296, 320-321
+.I2 drom.set_att_lintyp
+\%\f39:\f1101; \%\f311:\f1166; \%\f318:\f1321
+.I2 drom.set_att_linwid
+\%\f39:\f1101; \%\f311:\f1166; \%\f318:\f1321-322
+.I2 drom.set_att_localaasty
+\%\f39:\f1101; \%\f311:\f1166; \%\f318:\f1322
+.I2 drom.set_att_localaaswi
+\%\f39:\f1101; \%\f311:\f1166; \%\f318:\f1323
+.I2 drom.set_att_mapbmp
+\%\f39:\f1101; \%\f311:\f1167; \%\f318:\f1323-324
+.I2 drom.set_att_mapbmpswi
+\%\f39:\f1101; \%\f311:\f1167; \%\f318:\f1324
+.I2 drom.set_att_mapdifclr
+\%\f39:\f1101; \%\f311:\f1167; \%\f318:\f1325
+.I2 drom.set_att_mapdifclrswi
+\%\f39:\f1101; \%\f311:\f1167; \%\f318:\f1325-326
+.I2 drom.set_att_mapenv
+\%\f39:\f1101; \%\f311:\f1167; \%\f318:\f1326
+.I2 drom.set_att_mapenvswi
+\%\f39:\f1101; \%\f311:\f1167; \%\f318:\f1327
+.I2 drom.set_att_maptrnint
+\%\f39:\f1101; \%\f311:\f1167; \%\f318:\f1327-328
+.I2 drom.set_att_maptrnintswi
+\%\f39:\f1101; \%\f311:\f1167; \%\f318:\f1328
+.I2 drom.set_att_refswi
+\%\f39:\f1101; \%\f311:\f1166; \%\f318:\f1329
+.I2 drom.set_att_reptyp
+\%\f39:\f1101; \%\f311:\f1166; \%\f318:\f1329-330
+.I2 drom.set_att_shaswi
+\%\f39:\f1101; \%\f311:\f1166; \%\f318:\f1330
+.I2 drom.set_att_shdidx
+\%\f39:\f1101; \%\f311:\f1166; \%\f318:\f1331
+.I2 drom.set_att_spcclr
+\%\f39:\f1101; \%\f311:\f1166, 173; \%\f318:\f1331
+.I2 drom.set_att_spcfct
+\%\f39:\f1101; \%\f311:\f1166, 173; \%\f318:\f1332
+.I2 drom.set_att_spcint
+\%\f39:\f1101; \%\f311:\f1166, 173; \%\f318:\f1332
+.I2 drom.set_att_spcswi
+\%\f39:\f1101; \%\f311:\f1166, 175; \%\f318:\f1333
+.I2 drom.set_att_srfedgclr
+\%\f39:\f1101; \%\f311:\f1166; \%\f318:\f1333-334
+.I2 drom.set_att_srfshd
+\%\f39:\f1101; \%\f311:\f1166, 172; \%\f318:\f1334
+.I2 drom.set_att_stereo
+\%\f39:\f199; \%\f311:\f1160; \%\f318:\f1291, 335
+.I2 drom.set_att_stereoswi
+\%\f39:\f199; \%\f311:\f1160; \%\f318:\f1291, 335-336
+.I2 drom.set_att_transpclr
+\%\f39:\f1101; \%\f311:\f1166; \%\f318:\f1336-337
+.I2 drom.set_att_transpint
+\%\f39:\f1101; \%\f311:\f1166; \%\f318:\f1336-337
+.I2 drom.set_att_transpswi
+\%\f39:\f1101; \%\f311:\f1166; \%\f318:\f1337-338
+.I2 drom.set_camera_matrix
+\%\f39:\f199; \%\f310:\f1119; \%\f311:\f1144; \%\f318:\f1291, 338-341
+.I2 drom.set_parallel_matrix
+\%\f39:\f199; \%\f310:\f1119; \%\f311:\f1144; \%\f318:\f1291, 339-341
+.I2 drom.set_perspective_matrix
+\%\f39:\f199; \%\f310:\f1119; \%\f311:\f1144; \%\f318:\f1291, 339-341
+.I2 drom.set_projection_matrix
+\%\f39:\f199; \%\f310:\f1119; \%\f311:\f1144; \%\f318:\f1291, 339-341
+.I2 drom.start_update
+\%\f39:\f198; \%\f310:\f1118; \%\f311:\f1150-151; \%\f318:\f1292-293, 342, 351
+.I2 drom.transform_clip_z_point
+\%\f39:\f1105; \%\f311:\f1157; \%\f318:\f1298, 300, 342-343
+.I2 drom.update_display
+\%\f39:\f198; \%\f310:\f1118; \%\f311:\f1150, 153; \%\f318:\f1343
+.I2 drom.update_lcstowcsmat_lokatfrm
+\%\f39:\f1102; \%\f310:\f1118; \%\f311:\f1139, 141, 143; \%\f318:\f1344
+.I2 drom.update_lcstowcsmat_pop
+\%\f39:\f1102; \%\f310:\f1118; \%\f311:\f1138; \%\f318:\f1345-346
+.I2 drom.update_lcstowcsmat_push
+\%\f39:\f1102; \%\f310:\f1118; \%\f311:\f1137; \%\f318:\f1345-346
+.I2 drom.update_lcstowcsmat_rotate
+\%\f39:\f1102; \%\f310:\f1118; \%\f311:\f1139; \%\f318:\f1346
+.I2 drom.update_lcstowcsmat_scale
+\%\f39:\f1102; \%\f310:\f1118; \%\f311:\f1139, 143; \%\f318:\f1347
+.I2 drom.update_lcstowcsmat_shear
+\%\f39:\f1102; \%\f310:\f1118; \%\f311:\f1139; \%\f318:\f1348
+.I2 drom.update_lcstowcsmat_tfmmat
+\%\f39:\f1102; \%\f310:\f1118; \%\f311:\f1139; \%\f318:\f1349
+.I2 drom.update_lcstowcsmat_transl
+\%\f39:\f1102; \%\f310:\f1118; \%\f311:\f1139; \%\f318:\f1349-350
+.I2 drom.update_local_data
+\%\f39:\f198; \%\f310:\f1118; \%\f311:\f1150-151; \%\f318:\f1350
+.I2 drom.update_studio
+\%\f39:\f198; \%\f310:\f1118; \%\f311:\f1146, 148, 150, 153; \%\f318:\f1351
+.I1 dynamic renderer
+\%\f32:\f18; \%\f35:\f123, 27; \%\f36:\f133; \%\f39:\f181, 90, 94, 105, 109; \%\f310:\f1113, 119; \%\f311:\f1131, 157; \%\f312:\f1187, 190; \%\f313:\f1198, 201; \%\f315:\f1220; \%\f316:\f1228, 233; \%\f317:\f1246, 251, 253; \%\f318:\f1286, 289; \%\f3A:\f1355, 359 
+.I2 output module
+\%\f35:\f128; \%\f36:\f133; \%\f39:\f181; \%\f310:\f1113; \%\f311:\f1131, 157; \%\f312:\f1190; \%\f313:\f1201; \%\f3A:\f1355, 359 
+.IH E
+.I1 environment variables
+.I2 DORE_ERRDATA
+\%\f314:\f1210
+.I2 DORE_FONTDATA
+\%\f314:\f1210
+.I2 DORE_FORTRAN
+\%\f315:\f1217, 222-223
+.I2 DORE_LIB_NAME
+\%\f310:\f1116-117, 119; \%\f314:\f1209; \%\f315:\f1216, 218, 221, 225; \%\316:\f1230, 234
+.I2 DORE_LIBTOC
+\%\f315:\f1217
+.I2 DORE_LOC
+\%\f310:\f1116-117, 119; \%\f314:\f1207, 209; \%\f315:\f1216, 218, 221, 225; \%\f316:\f1230, 234-235
+.I2 DORE_OBJTYPE
+\%\f310:\f1116-117, 119; \%\f314:\f1207-209, 211; \%\f315:\f1216, 218-219, 221-222, 224-226; \%\f316:\f1230-232, 234-235
+.I2 DORE_SYSTEM
+\%\f315:\f1217
+.I1 executability set
+\%\f37:\f158
+.I1 executable
+\%\f310:\f1117, 119; \%\f315:\f129, 222; \%\f316:\f1229-232, 234-235
+.IH F
+.I1 factor, specular
+\%\f311:\f1173; \%\f318:\f1332
+.I1 field of view
+\%\f318:\f1339-340
+.I1 fonts
+\%\f314:\f1208-210
+.I1 format, rasterfile
+\%\f316:\f1231
+.I1 frame
+\%\f36:\f135, 41; \%\f37:\f170, 77-78; \%\f310:\f1119; \%\f311:\f1136, 143, 148, 151, 157, 159; \%\f312:\f1191; \%\f313:\f1198; \%\f317:\f1249; \%\f318:\f1298, 300, 313, 343; \%\f3A:\f1356-360 
+.I2 coordinates
+\%\f37:\f170; \%\f311:\f1148, 157
+.I1 frustum space
+\%\f37:\f170; \%\f39:\f1102; \%\f311:\f1147-148, 158; \%\f317:\f1250, 264
+.IH G
+.I1 generation, direct traversal image
+\%\f35:\f127
+.I2 secondary database
+\%\f35:\f127
+.I1 global attribute classes
+.I2 AttAmbientIntens
+\%\f3B:\f1369
+.I2 AttAmbientSwitch
+\%\f3B:\f1369
+.I2 AttBackfaceCullable
+\%\f3B:\f1369
+.I2 AttBackfaceCullSwitch
+\%\f3B:\f1369
+.I2 AttBoundingVolSwitch
+\%\f3B:\f1369
+.I2 AttCameraMatrix
+\%\f33:\f117; \%\f37:\f144, 61; \%\f3B:\f1365-366 
+.I2 AttClipSwitch
+\%\f3B:\f1369
+.I2 AttClipVol
+\%\f3B:\f1370
+.I2 AttCompTextureUVCallback
+\%\f3B:\f1370
+.I2 AttCompTextureUVSwitch
+\%\f3B:\f1370
+.I2 AttDepthCue
+\%\f3B:\f1370
+.I2 AttDepthCueSwitch
+\%\f3B:\f1370
+.I2 AttDiffuseColor
+\%\f37:\f144, 48, 66-67, 73; \%\f3B:\f1370 
+.I2 AttDiffuseIntens
+\%\f37:\f144, 48, 73; \%\f3B:\f1370 
+.I2 AttDiffuseSwitch
+\%\f37:\f144, 48, 73; \%\f3B:\f1371 
+.I2 AttGlbRendMaxObjs
+\%\f3B:\f1366
+.I2 AttGlbRendMaxSub
+\%\f3B:\f1366
+.I2 AttGlbRendRayLevel
+\%\f3B:\f1366
+.I2 AttHiddenSurfSwitch
+\%\f3B:\f1371
+.I2 AttInterpType
+\%\f3B:\f1371
+.I2 AttInvisSwitch
+\%\f3B:\f1371
+.I2 AttLcstowcsmat
+\%\f33:\f117; \%\f37:\f144, 48, 62-63, 74; \%\f3B:\f1365, 369 
+.I2 AttLightAttenuation
+\%\f3B:\f1367
+.I2 AttLightColor
+\%\f3B:\f1367; \%\f37:\f144, 63
+.I2 AttLightIntens
+\%\f3B:\f1367; \%\f37:\f144, 63
+.I2 AttLightSpreadAngles
+\%\f3B:\f1367
+.I2 AttLightSpreadExp
+\%\f3B:\f1367
+.I2 AttLightSwitch
+\%\f3B:\f1371
+.I2 AttLightType
+\%\f3B:\f1367; \%\f37:\f144, 63
+.I2 AttLineType
+\%\f3B:\f1371
+.I2 AttLineWidth
+\%\f3B:\f1371
+.I2 AttLocalAntiAliasStyle
+\%\f3B:\f1371
+.I2 AttLocalAntiAliasSwitch
+\%\f3B:\f1372
+.I2 AttMarkerFont
+\%\f3B:\f1372
+.I2 AttMarkerGlyph
+\%\f3B:\f1372
+.I2 AttMarkerScale
+\%\f3B:\f1372
+.I2 AttMinBoundingVolExt
+\%\f3B:\f1372
+.I2 AttPickID
+\%\f3B:\f1372
+.I2 AttPickSwitch
+\%\f3B:\f1372
+.I2 AttReflectionSwitch
+\%\f3B:\f1372
+.I2 AttRefractionIndex
+\%\f3B:\f1372
+.I2 AttRefractionSwitch
+\%\f3B:\f1373
+.I2 AttRepType
+\%\f33:\f117; \%\f36:\f132; \%\f37:\f144, 48, 73; \%\f3B:\f1373 
+.I2 AttSampleAdaptive
+\%\f3B:\f1367
+.I2 AttSampleAdaptiveSwitch
+\%\f3B:\f1367
+.I2 AttSampleJitter
+\%\f3B:\f1368
+.I2 AttSampleJitterSwitch
+\%\f3B:\f1368
+.I2 AttSampleSuper
+\%\f3B:\f1368
+.I2 AttSampleSuperSwitch
+\%\f3B:\f1368
+.I2 AttShadeIndex
+\%\f3B:\f1373
+.I2 AttShadowSwitch
+\%\f3B:\f1373
+.I2 AttSpecularColor
+\%\f3B:\f1373
+.I2 AttSpecularFactor
+\%\f3B:\f1373
+.I2 AttSpecularIntens
+\%\f3B:\f1373
+.I2 AttSpecularSwitch
+\%\f3B:\f1373
+.I2 AttStereo
+\%\f3B:\f1368
+.I2 AttStereoSwitch
+\%\f3B:\f1368
+.I2 AttSubDivSpec
+\%\f3B:\f1374
+.I2 AttSurfaceEdgeColor
+\%\f3B:\f1374
+.I2 AttSurfaceShade
+\%\f3B:\f1374
+.I2 AttTextAlign
+\%\f3B:\f1374
+.I2 AttTextExpFactor
+\%\f3B:\f1374
+.I2 AttTextFont
+\%\f3B:\f1374
+.I2 AttTextHeight
+\%\f3B:\f1374
+.I2 AttTextPath
+\%\f3B:\f1374
+.I2 AttTextPrecision
+\%\f3B:\f1375
+.I2 AttTextSpace
+\%\f3B:\f1375
+.I2 AttTextUpVector
+\%\f3B:\f1375
+.I2 AttTextureAntiAlias
+\%\f3B:\f1378
+.I2 AttTextureExtendUV
+\%\f3B:\f1378
+.I2 AttTextureExtendUVW
+\%\f3B:\f1378
+.I2 AttTextureIntermediateSurf
+\%\f3B:\f1379
+.I2 AttTextureMapBump
+\%\f3B:\f1375, 377
+.I2 AttTextureMapBumpSwitch
+\%\f3B:\f1375
+.I2 AttTextureMapDiffuseColor
+\%\f3B:\f1375, 377
+.I2 AttTextureMapDiffuseColorSwitch
+\%\f3B:\f1376
+.I2 AttTextureMapEnviron
+\%\f3B:\f1376-377
+.I2 AttTextureMapEnvironSwitch
+\%\f3B:\f1376
+.I2 AttTextureMapTranspIntens
+\%\f3B:\f1376-377
+.I2 AttTextureMapTranspIntensSwitch
+\%\f3B:\f1376
+.I2 AttTextureMatrixUV
+\%\f33:\f117; \%\f3B:\f1365, 379 
+.I2 AttTextureMatrixUVW
+\%\f33:\f117; \%\f3B:\f1365, 379 
+.I2 AttTextureOp
+\%\f3B:\f1379
+.I2 AttTextureUVIndex
+\%\f3B:\f1379
+.I2 AttTextureUVWIndex
+\%\f3B:\f1379
+.I2 AttTranspColor
+\%\f3B:\f1376
+.I2 AttTranspIntens
+\%\f3B:\f1377
+.I2 AttTranspOrientColor
+\%\f3B:\f1377
+.I2 AttTranspOrientExp
+\%\f3B:\f1377
+.I2 AttTranspOrientIntens
+\%\f3B:\f1377
+.I2 AttTranspOrientSwitch
+\%\f3B:\f1377
+.I2 AttTranspSwitch
+\%\f3B:\f1377
+.I1 global attribute stack
+\%\f33:\f116, 18-19; \%\f35:\f128; \%\f36:\f131; \%\f37:\f145; \%\f313:\f1201
+.I1 group
+.I2 definition
+\%\f35:\f124; \%\f317:\f1268
+.I2 display 
+\%\f35:\f124, 26-27; \%\f36:\f134, 40; \%\f37:\f178; \%\f39:\f195, 98-100, 103; \%\f311:\f1156; \%\f317:\f1267; \%\f318:\f1343; \%\f3A:\f1358, 364 
+.I2 studio 
+\%\f34:\f121; \%\f35:\f124-26; \%\f36:\f134, 40; \%\f37:\f162, 78; \%\f39:\f195, 98-100; \%\f311:\f1153; \%\f317:\f1263, 268; \%\f318:\f1351; \%\f3A:\f1363-364 
+.IH H
+.I1 handle, object
+\%\f3A:\f1361, 364
+.I1 highlights
+\%\f311:\f1176
+.I2 specular
+\%\f318:\f1332
+.I1 hither
+\%\f39:\f199; \%\f311:\f1144-145; \%\f318:\f1339-341; \%\f3C:\f1393-394 
+.IH I
+.I1 identifier
+.I2 class
+\%\f3A:\f1356; \%\f3C:\f1381
+.I2 method 
+\%\f36:\f134, 40; \%\f317:\f1237, 240; \%\f3A:\f1360 
+.I2 renderer 
+\%\f36:\f136; \%\f3A:\f1362 
+.I1 include files
+\%\f37:\f145; \%\f312:\f1191; \%\f313:\f1196; \%\f314:\f1210; \%\f315:\f1224
+.I1 inquiry routines
+\%\f311:\f1127
+.I1 installation routine
+\%\f32:\f112; \%\f36:\f134, 36-37, 40; \%\f37:\f145, 48-49, 67, 77; \%\f310:\f1114; \%\f311:\f1121, 176-177; \%\f3A:\f1357, 362 
+.I1 instance of a class
+\%\f33:\f115; \%\f36:\f136
+.I1 intensity, ambient
+\%\f311:\f1172; \%\f318:\f1309
+.I1 interface
+.I2 developer's 
+\%\f32:\f19-11; \%\f33:\f117-18; \%\f34:\f121; \%\f35:\f125-26; \%\f39:\f1109; \%\f313:\f1194, 198; \%\f317:\f1237; \%\f3A:\f1356-357, 362 
+.I2 device control
+\%\f313:\f1194; \%\f317:\f1251, 253
+.I2 device driver
+\%\f32:\f19-11; \%\f39:\f181, 106; \%\f317:\f1250; \%\f3A:\f1357, 359 
+.I2 device output
+\%\f36:\f129, 39; \%\f37:\f169
+.I2 DROM Methods
+\%\f39:\f1106, 109; \%\f3A:\f1359
+.IH K
+.I1 kernel
+\%\f32:\f17, 9-12; \%\f34:\f121; \%\f35:\f124; \%\f38:\f179; \%\f39:\f181-84, 11
+0-111; \%\f311:\f1168; \%\f312:\f1191; \%\f3A:\f1356-357; \%\f3C:\f1382
+.IH L
+.I1 light
+.I2 ambient
+\%\f37:\f170
+.I2 attributes
+\%\f35:\f126; \%\f37:\f163; \%\f39:\f195, 99; \%\f311:\f1133, 162-163; \%\f318:\f1296, 317-321
+.I2 diffuse 
+\%\f318:\f1315
+.I2 list
+\%\f37:\f146, 53, 63, 70; \%\f311:\f1165
+.I2 list point 
+\%\f37:\f163
+.I2 source shading
+\%\f311:\f1131, 172
+.I1 line list
+\%\f36:\f130; \%\f316:\f1229
+.I1 list
+.I2 connected line
+\%\f36:\f130; \%\f316:\f1229
+.I2 line
+\%\f36:\f130; \%\f316:\f1229
+.I2 point
+\%\f36:\f130; \%\f37:\f152, 56-58, 60-61, 75, 77; \%\f316:\f1229
+.I2 triangle
+\%\f36:\f130; \%\f37:\f177; \%\f311:\f1172; \%\f316:\f1229
+.I2 variable line
+\%\f36:\f130
+.I2 variable point
+\%\f36:\f130
+.I1 local antialiasing
+\%\f318:\f1322-323
+.I1 local coordinates
+\%\f311:\f1157, 171-172; \%\f318:\f1290
+.I1 local-to-world transformation
+\%\f37:\f161; \%\f311:\f1136-137, 145, 163, 173; \%\f318:\f1290-291, 295-296, 344-350
+.I1 locations, vertex
+\%\f36:\f139; \%\f39:\f1105; \%\f311:\f1172
+.IH M
+.I1 mapping, texture
+\%\f31:\f12; \%\f311:\f1167-168; \%\f312:\f1188; \%\f318:\f1325-326; \%\f3B:\f1377-378; \%\f3C:\f1381 
+.I1 markers
+\%\f311:\f1151
+.I1 matrix, current transformation
+\%\f33:\f116; \%\f39:\f1101; \%\f311:\f1160
+.I1 mesh, triangle
+\%\f36:\f130, 36; \%\f37:\f158-59; \%\f313:\f1195; \%\f316:\f1228-229; \%\f318:\f1307-308; \%\f3A:\f1355 
+.I1 method
+.I2 current 
+\%\f33:\f119; \%\f36:\f130; \%\f37:\f145, 61; \%\f317:\f1259; \%\f3A:\f1356, 364 
+.I2 identifier
+\%\f36:\f134, 40; \%\f317:\f1237, 240; \%\f3A:\f1360 
+.I2 interface
+\%\f39:\f1106, 109; \%\f3A:\f1359 
+.I2 name
+\%\f3A:\f1361
+.I2 routine
+\%\f33:\f118-20; \%\f35:\f126-28; \%\f36:\f132, 35, 38; \%\f37:\f145, 49, 58, 60-61, 63, 66-67, 75; \%\f39:\f1106-107; \%\f317:\f1237, 240-242, 259-260; \%\f3A:\f1360-361, 364; \%\f3B:\f1366, 378 
+.I2 standard
+\%\f33:\f116, 18, 20; \%\f36:\f130, 35; \%\f3A:\f1363; \%\f3B:\f1378; \%\f3C:\f1382 
+.I2 traversal
+\%\f33:\f118-20; \%\f35:\f127; \%\f36:\f138; \%\f37:\f144-46
+, 48-49, 66; \%\f39:\f1109; \%\f3A:\f1362, 364 
+.I1 model, color
+\%\f39:\f188; \%\f317:\f1254, 256; \%\f318:\f1277, 280-281, 284, 300, 302, 304-305, 307, 313-314, 331, 334
+.I1 modeling space
+\%\f3A:\f1360; \%\f39:\f1101-102
+.I1 module
+.I2 dynamic renderer output
+\%\f35:\f128; \%\f36:\f133; \%\f39:\f181, 92; \%\f310:\f1113; \%\
+f311:\f1131, 157; \%\f312:\f1190; \%\f313:\f1201; \%\f3A:\f1359 
+.I2 system 
+\%\f32:\f15, 7, 12; \%\f37:\f177; \%\f311:\f1176; \%\f313:\f1201; \%\f315:\f1213, 215, 217, 220; \%\f3A:\f1357, 362-363 
+.I2 output
+\%\f34:\f122; \%\f35:\f128; \%\f36:\f133; \%\f38:\f179; \%\f39:\f181; \%\f318:\f1270, 289, 352; \%\f3A:\f1357 
+.I2 utility 
+\%\f32:\f15, 7, 12; \%\f315:\f1213, 217
+.IH N
+.I1 name
+.I2 class
+\%\f3A:\f1356; \%\f3B:\f1366-379; \%\f3C:\f1382-397
+.I2 method 
+\%\f3A:\f1361
+.I2 renderer 
+\%\f3A:\f1362-363
+.I1 naming convention
+\%\f33:\f116; \%\f37:\f143; \%\f311:\f1121; \%\f313:\f1193
+.I1 new class notification routine
+\%\f36:\f141; \%\f37:\f152, 67, 75
+.I1 normal, vertex
+\%\f318:\f1301, 303-304, 306, 308
+.IH O
+.I1 object
+.I2 alternate
+\%\f33:\f119-20; \%\f36:\f130, 35; \%\f37:\f157, 61; \%\f39:\f1109; \%\f3A:\f1355-356, 359, 363 
+.I2 handle
+\%\f3A:\f1361, 364
+.I2 private data
+\%\f3C:\f1382
+.I2 studio
+\%\f36:\f131, 40; \%\f39:\f1101; \%\f316:\f1229; \%\f3A:\f1355; \%\f3C:\f1381 
+.I1 output modules
+\%\f34:\f122; \%\f35:\f128; \%\f36:\f133; \%\f38:\f179; \%\f39:\f181; \%\f318:\f1270, 289, 352; \%\f3A:\f1357 
+.IH P
+.I1 parallel
+\%\f35:\f126; \%\f311:\f1143-144; \%\f313:\f1196, 198; \%\f314:\f1207; \%\f315:\f1217; \%\f318:\f1291, 313, 338-341; \%\f3A:\f1359 
+.I1 perspective
+\%\f35:\f126; \%\f311:\f1144, 148; \%\f318:\f1291, 338-341
+.I1 picking
+\%\f32:\f17; \%\f33:\f117-18; \%\f313:\f1195, 197, 201; \%\f3A:\f1358, 363-364 
+.I1 pipeline, display
+\%\f3A:\f1357
+.I1 point light
+\%\f37:\f163
+.I1 portability
+\%\f31:\f11; \%\f313:\f1193; \%\f315:\f1218
+.I1 primitive class
+\%\f36:\f130, 33; \%\f37:\f158; \%\f39:\f1108; \%\f3A:\f1355 
+.I1 primitives, base
+\%\f36:\f130-31, 38; \%\f37:\f144, 77; \%\f3A:\f1355-356, 359 
+.I1 print routine
+\%\f36:\f137; \%\f37:\f153, 57
+.I1 private data
+\%\f35:\f125; \%\f36:\f135, 39; \%\f37:\f145-46, 49, 58, 62, 69, 76; \%\f39:\f197, 107; \%\f317:\f1239, 248; \%\f3A:\f1356, 361; \%\f3C:\f1381-382 
+.I1 production renderer
+\%\f32:\f18; \%\f35:\f123, 27-28; \%\f36:\f133; \%\f37:\f145; \%\f39:\f181-82, 89, 91, 110; \%\f310:\f1113-114, 116-117, 119; \%\f311:\f1122, 129; \%\f312:\f1188; \%\f313:\f1198, 201; \%\f315:\f1215, 217-219, 221; \%\f317:\f1246, 251, 253, 263; \%\f318:\f1352; \%\f3A:\f1361, 363 
+.I2 output module functions: see PROM functions
+.I1 programs, test 
+\%\f310:\f1117, 119; \%\f313:\f1196; \%\f314:\f1206, 209-210; \%\f315:\f1213, 218-219, 221-222; \%\f316:\f1227, 229-231, 233
+.I1 PROM
+\%\f35:\f128; \%\f36:\f133, 40; \%\f37:\f145; \%\f39:\f181, 84, 91, 110-111; \%\f310:\f1113-116; \%\f311:\f1130, 177, 179; \%\f317:\f1246; \%\f318:\f1270, 351-353; \%\f3A:\f1361-362 
+.I1 PRPOM functions
+.I2 prom.write_rectangle_byte_rgb
+\%\f39:\f191; \%\f311:\f1130; \%\f318:\f1352-353
+.IH R
+.I1 ray tracer
+\%\f3A:\f1363
+.I1 reflectance
+.I2 ambient
+\%\f318:\f1309, 314
+.I2 diffuse 
+\%\f318:\f1314-315
+.I2 specular 
+\%\f318:\f1332-333
+.I1 reflection
+\%\f318:\f1329
+.I1 refraction
+\%\f31:\f12
+.I1 renderable
+\%\f37:\f158, 60
+.I1 renderer
+.I2 dynamic
+\%\f32:\f18; \%\f35:\f123, 27; \%\f36:\f133; \%\f39:\f181, 90, 94, 105, 109; \%\f310:\f1113, 119; \%\f311:\f1131, 157; \%\f312:\f1187, 190; \%\f313:\f1198, 201; \%\f315:\f1220; \%\f316:\f1228, 233; \%\f317:\f1246, 251, 253; \%\f318:\f1286, 289; \%\f3A:\f1355, 359 
+.I2 identifier
+\%\f36:\f136; \%\f3A:\f1362 
+.I2 name
+\%\f3A:\f1362-363
+.I2 output module
+\%\f35:\f128; \%\f36:\f133; \%\f37:\f145; \%\f39:\f181, 91-9
+2; \%\f310:\f1113; \%\f311:\f1131, 157; \%\f312:\f1190; \%\f313:\f1201; \%\f3A:\f1359, 361 
+.I2 production 
+\%\f32:\f18; \%\f35:\f123, 27; \%\f36:\f133; \%\f37:\f145; \%\f39:\f181, 89, 91, 110; \%\f310:\f1113, 116, 119; \%\f311:\f1122, 129; \%\f312:\f1188; \%\f313:\f1198, 201; \%\f315:\f1215, 217, 221; \%\f316:\f1228, 233; \%\f317:\f1246, 251, 253, 263; \%\f318:\f1352; \%\f3A:\f1361, 363 
+.I2 sample 
+\%\f32:\f113; \%\f37:\f143-46, 49, 52, 56, 58, 66-67, 74-78; \%\f313:\f1198
+.I2 standard production
+\%\f32:\f18; \%\f35:\f123, 27; \%\f39:\f181, 91, 110; \%\f310:\f1117, 119; \%\f312:\f1188; \%\f313:\f1198; \%\f315:\f1215, 217, 221; \%\f316:\f1228; \%\f317:\f1263; \%\f3A:\f1363 
+.I1 rendering 
+.I2 interface data structures
+\%\f3C:\f1381
+.I2 routine
+\%\f37:\f167, 69
+.I2 style
+\%\f31:\f12; \%\f32:\f113; \%\f35:\f123; \%\f36:\f136-37; \%\f3A:\f1362 
+.I1 representation type
+\%\f33:\f117, 19; \%\f36:\f132; \%\f37:\f156, 60-61, 77; \%\f39:\f195, 108; \%\f318:\f1329-330, 334
+.I1 rotation
+\%\f318:\f1346
+.I1 routine
+.I2 control
+\%\f311:\f1131, 150, 157
+.I2 inquiry 
+\%\f311:\f1127
+.I2 installation
+\%\f32:\f112; \%\f36:\f134, 36-37, 40; \%\f37:\f145, 48-49, 67, 77; \%\f310:\f1114; \%\f311:\f1121, 176-177; \%\f3A:\f1357, 362 
+.I2 method 
+\%\f33:\f118-20; \%\f35:\f126-28; \%\f36:\f132, 35, 38; \%\f37:\f145, 49, 58, 60-61, 63, 66-67, 75; \%\f39:\f1106-107; \%\f317:\f1237, 240-242, 259-260; \%\f3A:\f1360-361, 364; \%\f3B:\f1366, 378 
+.I2 new class
+\%\f36:\f141; \%\f37:\f152, 67, 75
+.I2 print 
+\%\f36:\f137; \%\f37:\f153, 57
+.I2 rendering 
+\%\f37:\f167, 69
+.IH S
+.I1 sample
+.I2 device driver
+\%\f32:\f113; \%\f310:\f1113-114; \%\f311:\f1121-124, 130, 144, 171, 177
+.I2 renderer
+\%\f32:\f113; \%\f37:\f143-46, 49, 52, 56, 58, 66-67, 74-78; \%\f313:\f1198
+.I1 scaling
+\%\f37:\f170; \%\f39:\f1105; \%\f311:\f1136, 148, 151; \%\f317:\f1249-250; \%\f318:\f1347
+.I1 secondary database image generation
+\%\f35:\f127
+.I1 set, executability
+\%\f37:\f158
+.I1 shading
+\%\f31:\f12; \%\f39:\f192, 105; \%\f310:\f1118, 120; \%\f311:\f1131, 146, 157, 159, 171-172, 174; \%\f312:\f1188-190; \%\f318:\f1309, 314-316, 320, 332-335; \%\f3A:\f1359 
+.I2 constant 
+\%\f311:\f1172, 174
+.I2 light source
+\%\f311:\f1131, 172
+.I2 smooth 
+\%\f31:\f12
+.I1 shadow
+\%\f318:\f1330
+.I1 shearing
+\%\f318:\f1348
+.I1 smooth shading
+\%\f31:\f12
+.I1 source code structure
+\%\f312:\f1185
+.I1 space
+.I2 additional data
+\%\f36:\f129, 32, 34, 41; \%\f37:\f152, 54, 58, 62, 75; \%\f3A:\f1355 
+.I2 frustum 
+\%\f37:\f170; \%\f39:\f1102; \%\f311:\f1147-148, 158; \%\f317:\f1250, 264
+.I2 modeling 
+\%\f39:\f1101-102; \%\f3A:\f1360 
+.I2 world 
+\%\f39:\f1101; \%\f311:\f1136, 146, 172-173; \%\f317:\f1264
+.I1 specular color
+\%\f311:\f1173; \%\f318:\f1331, 333
+.I1 specular factor
+\%\f311:\f1173; \%\f318:\f1332
+.I1 specular highlight
+\%\f318:\f1332
+.I1 specular reflectance
+\%\f318:\f1332-333
+.I1 stack, global attribute
+\%\f33:\f116, 18-19; \%\f35:\f128; \%\f36:\f131; \%\f37:\f145; \%\f313:\f1201
+.I1 standard methods
+\%\f33:\f116, 18, 20; \%\f36:\f130, 35; \%\f3A:\f1363; \%\f3B:\f1378; \%\f3C:\f1382 
+.I2 StdRenderDisplay
+\%\f33:\f119-20; \%\f35:\f128; \%\f36:\f130, 35, 38; \%\f37:\f149
+.I1 standard production renderer
+\%\f32:\f18; \%\f35:\f123, 27; \%\f39:\f181, 91, 110; \%\f310:\f1117, 119; \%\f312:\f1188; \%\f313:\f1198; \%\f315:\f1215, 217-219, 221; \%\f316:\f1228; \%\f317:\f1263; \%\f3A:\f1363 
+.I1 StdRenderDisplay
+\%\f33:\f119-20; \%\f35:\f128; \%\f36:\f130, 35, 38; \%\f37:\f149
+.I1 StdRenderStudio
+\%\f33:\f118, 20; \%\f35:\f128; \%\f36:\f135, 38; \%\f37:\f149
+.I1 structure
+.I2 data
+\%\f36:\f133, 35; \%\f37:\f145, 56; \%\f39:\f182, 100, 110; \%\f310:\f1115; \%\f311:\f1122, 136, 138, 162, 166, 168, 178; \%\f3C:\f1381 
+.I2 directory 
+\%\f313:\f1195-196, 202; \%\f314:\f1208, 211; \%\f315:\f1220, 224
+.I2 source code
+\%\f312:\f1185
+.I1 studio group
+\%\f34:\f121; \%\f35:\f124-26; \%\f36:\f134, 40; \%\f37:\f162, 78; \%\f39:\f195, 98-100; \%\f311:\f1153; \%\f317:\f1263, 268; \%\f318:\f1351; \%\f3A:\f1363-364 
+.I1 studio objects
+\%\f36:\f131, 40; \%\f39:\f1101; \%\f316:\f1229; \%\f3A:\f1355; \%\f3C:\f1381 
+.I1 studio traversal
+\%\f33:\f118, 20; \%\f35:\f125; \%\f36:\f135, 38, 41; \%\f37
+:\f148-49, 52, 67, 70, 76; \%\f39:\f199; \%\f311:\f1145-146, 153, 161; \%\f3A:\f1358, 363 
+.I1 style, rendering
+\%\f31:\f12; \%\f32:\f113; \%\f35:\f123; \%\f36:\f136-37; \%\f3A:\f1362 
+.I1 system 
+.I2 module
+\%\f32:\f15, 7, 12; \%\f37:\f177; \%\f311:\f1176; \%\f313:\f1201; \%\f315:\f1213, 215, 217, 220; \%\f3A:\f1357, 362-363 
+.I2 window 
+\%\f312:\f1191; \%\f314:\f1205
+.I2 world coordinate
+\%\f311:\f1136, 147, 160; \%\f318:\f1296
+.IH T
+.I1 template
+\%\f39:\f1111; \%\f315:\f1213, 222; \%\f317:\f1245-246
+.I1 test programs
+\%\f310:\f1117, 119; \%\f313:\f1196; \%\f314:\f1206, 209-210; \%\f315:\f1213, 218-219, 221-222; \%\f316:\f1227, 229, 233
+.I1 testing
+\%\f38:\f179; \%\f310:\f1119-120; \%\f311:\f1121; \%\f314:\f1210; \%\f315:\f1221; \%\f316:\f1229-230
+.I1 texture coordinates
+\%\f3A:\f1361; \%\f33:\f117; \%\f36:\f139; \%\f318:\f1301, 303-306, 308
+.I1 texture mapping
+\%\f3B:\f1377-378; \%\f3C:\f1381; \%\f31:\f12; \%\f311:\f1167-168; \%\f312:\f1188; \%\f318:\f1325-326
+.I1 tracer, ray
+\%\f3A:\f1363
+.I1 transformation 
+.I2 attributes
+\%\f33:\f116-17; \%\f37:\f144; \%\f39:\f1101; \%\f3A:\f1358; \%\f3B:\f1365 
+.I2 local-to-world 
+\%\f37:\f161; \%\f311:\f1136-137, 145, 163, 173; \%\f318:\f1290-291, 295-296, 344-350
+.I2 world-to-frustum 
+\%\f36:\f137, 41; \%\f37:\f167, 76; \%\f311:\f1146-148; \%\f318:\f1295
+.I1 translation
+\%\f35:\f126; \%\f37:\f170; \%\f39:\f1105; \%\f311:\f1151, 158; \%\f317:\f1249-250; \%\f318:\f1343, 349
+.I1 transparency
+\%\f3A:\f1363; \%\f31:\f12; \%\f36:\f138; \%\f312:\f1188-189; \%\f318:\f1327-328, 338
+.I1 transparent color
+\%\f318:\f1336-337
+.I1 traversal
+\%\f32:\f17; \%\f33:\f116-20; \%\f35:\f123, 25-27; \%\f36:\f129, 31-32, 34-35, 38, 40-41; \%\f37:\f144-46, 48-49, 52, 56, 63, 66-67, 70, 73-74, 76; \%\f39:\f195-96, 99-101, 103, 109; \%\f311:\f1145-146, 153, 161, 165; \%\f313:\f1201; \%\f317:\f1242, 259, 263; \%\f318:\f1343-344, 351; \%\f3A:\f1356, 358, 360, 362-364; \%\f3B:\f1365 
+.I2 display
+\%\f33:\f118-20; \%\f35:\f126; \%\f36:\f138; \%\f37
+:\f144-45, 48, 56, 63, 66-67, 70, 73-74; \%\f39:\f1109; \%\f311:\f1153, 165; \%\f3A:\f1358, 360, 362-363 
+.I2 method
+\%\f33:\f118-20; \%\f35:\f127; \%\f36:\f138; \%\f37:\f144-46
+, 48-49, 66; \%\f39:\f1109; \%\f3A:\f1362, 364
+.I2 studio
+\%\f33:\f118, 20; \%\f35:\f125; \%\f36:\f135, 38, 41; \%\f37
+:\f148-49, 52, 67, 70, 76; \%\f39:\f199; \%\f311:\f1145-146, 153, 161; \%\f3A:\f1358, 363 
+.I1 triangle 
+.I2 list
+\%\f36:\f130; \%\f37:\f177; \%\f311:\f1172; \%\f316:\f1229
+.I2 mesh
+\%\f36:\f130, 36; \%\f37:\f158-59; \%\f313:\f1195; \%\f316:\f1228-229; \%\f318:\f1307-308; \%\f3A:\f1355 
+.I2 strip
+\%\f36:\f130; \%\f312:\f1188; \%\f316:\f1229
+.I1 type, representation
+\%\f33:\f117, 19; \%\f36:\f132; \%\f37:\f156, 60-61, 77; \%\f39:\f195, 108; \%\f318:\f1329-330, 334
+.IH U
+.I1 update function
+\%\f37:\f169
+.I1 UpdStdAlternateObj
+\%\f33:\f119-20; \%\f36:\f130; \%\f39:\f1109
+.I1 utility module
+\%\f32:\f15, 7, 12; \%\f315:\f1213, 217
+.IH V
+.I1 variable line list
+\%\f36:\f130
+.I1 variable point list
+\%\f36:\f130
+.I1 variable triangle mesh
+\%\f36:\f130
+.I1 variable triangle strip
+\%\f36:\f130
+.I1 vertex color
+\%\f311:\f1173
+.I1 vertex locations
+\%\f36:\f139; \%\f39:\f1105; \%\f311:\f1172
+.I1 vertex normal
+\%\f318:\f1301, 303-304, 306, 308
+.I1 view
+\%\f31:\f11; \%\f32:\f15, 13; \%\f34:\f121; \%\f35:\f123; \%\f36:\f132, 34, 39; \%\f37:\f143, 45, 49, 52, 61, 67, 69, 76; \%\f39:\f189, 95, 97, 105, 110; \%\f311:\f1133, 143, 147, 151, 153, 161, 165, 170; \%\f313:\f1198; \%\f317:\f1248, 262, 267; \%\f318:\f1281, 292, 300, 302, 304, 307, 338; \%\f3A:\f1359, 362, 364 
+.I2 field of
+\%\f318:\f1339-340
+.I1 viewport, device
+\%\f35:\f125; \%\f311:\f1123
+.I1 volume, clip
+\%\f39:\f1102-103; \%\f318:\f1290, 297, 299, 311-312
+.IH W
+.I1 window system
+\%\f312:\f1191; \%\f314:\f1205
+.I1 world coordinate system
+\%\f311:\f1136, 147, 160; \%\f318:\f1296
+.I1 world coordinates
+\%\f33:\f117; \%\f36:\f141; \%\f37:\f170; \%\f311:\f1146-148, 171-172, 174
+.I1 world space
+\%\f39:\f1101; \%\f311:\f1136, 146, 172-173; \%\f317:\f1264
+.I1 world-to-frustum transformation
+\%\f36:\f137, 41; \%\f37:\f167, 76; \%\f311:\f1146-148; \%\f318:\f1295
+.IH Y
+.I1 yon
+\%\f39:\f199; \%\f311:\f1144-145; \%\f318:\f1339; \%\f3C:\f1393-394 
+
+

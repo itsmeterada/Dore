@@ -1,0 +1,14 @@
+#include <Dore.tmpl>
+#define IHaveSubdirs
+
+ SUBDIRS = methods
+    SRCS = display.c rsmp_extern.c rsmp_math.c smp_data.c smp_render.c studio.c
+    OBJS = display.o rsmp_extern.o rsmp_math.o smp_data.o smp_render.o studio.o
+
+LibraryObjectRule()
+SubdirLibraryRule($(OBJS))
+
+MakeSubdirs($(SUBDIRS))
+DependSubdirs($(SUBDIRS))
+
+DependTarget()

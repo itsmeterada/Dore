@@ -1,0 +1,397 @@
+#ident "%W%" %G%
+ 
+/**************************************************************************
+# Copyright (C) 1994 Kubota Graphics Corp.
+# 
+# Permission to use, copy, modify, and distribute this material for
+# any purpose and without fee is hereby granted, provided that the
+# above copyright notice and this permission notice appear in all
+# copies, and that the name of Kubota Graphics not be used in
+# advertising or publicity pertaining to this material.  Kubota
+# Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+# OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+# "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+# PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+# EXPRESS OR IMPLIED.
+**************************************************************************/
+ 
+--------------------------------------------------------------------------
+CONTENTS OF THIS README:
+
+	Section 1	Dynamic Renderer Tests -- Description and Usage
+	Section 2	Production Renderer Tests -- Description and Usage
+	Section 3	Building the Test Programs
+	Section 4	Creating Your Own Test Objects
+	Section 5	Displaying Dore rasterfile Images
+
+See Chapter 16, Testing Dore, in the Dore Developer's Guide for more
+information.
+--------------------------------------------------------------------------
+
+
+-----------------------------------------------------------
+Section 1: Dynamic Renderer Tests -- Description and Usage
+-----------------------------------------------------------
+
+Several test programs can be built and run to test the dynamic renderer. 
+They are:
+
+sample,		Output from the C and FORTRAN code of the simple sample 
+fsample 	program provided in Chapter 2 of the Dore Programmer's 
+		Guide.  These programs provide you with a quick test of 
+		your Portable Dore installation. Note : since include
+		file paths have to be hard-coded into Fortran files,
+		Dore must be installed before "fsample" is compiled.
+
+dyn_prims 	A simple scene that contains a sphere, a cylinder, a box,
+		and a torus.
+
+dyn_temple 	A scene that includes a transparent cylinder with spheres 
+		inside.  Transparency is enabled on the command line with 
+		the "-transp" option.  See your Dore System Guide to 
+		determine whether transparency is supported on your system.
+
+dyn_test 	This test can be run with any one of 8 test cases.  The 
+		test case is specified on the command line with the 
+		"-testcase" option.  Possible test cases and their 
+		corresponding test case number are:
+
+		TEST CASE			TEST CASE NUMBER
+		- a triangle list			0
+		- a triangle mesh			1
+		- a triangle strip			2
+		- a line list				3
+		- a connected line list			4
+		- a point list				5
+		- text					6
+		- annotation text			7
+
+		In cases where lists of elements are created (i.e. all cases 
+		except for text and annotation text) the program will prompt 
+		for a gridcount and vertex type.  Each element list is 
+		created as a grid of elements, and the gridcount N determines 
+		the size of the grid:  NxN points, Nx(N-1) lines, or 
+		(N-1)x(N-1)x2 triangles will be created.
+
+dyn_texture 	The display object is a texture-mapped triangle mesh.  Several
+		callbacks are included that allow you to alter the texture's
+		position on the mesh, how it is combined with the current
+		properties of the mesh, and how it is antialiased.  See your 
+		Dore System Guide to determine whether texture mapping is 
+		supported on your system.
+
+dyn_tree 	A more complex scene of a tree, composed of cylinders and 
+		spheres, standing on a box.
+
+The last four test programs use the same main program and differ only in the 
+objects they display and their camera and light objects.  
+
+The dyn_* programs have the following command line options:
+
+OPTION			DEFAULT			EXPLANATION 
+------			-------			-----------
+-width n		512			-image width in pixels
+-height n		512			-image height in pixels
+-visualtype visualtype 	if run on Sun   	[DcPseudoColor,DcDirectColor,
+			   DcTrueColor 	 	DcTrueColor,DcStaticGrey]**
+			else 
+			   DcPseudoColor
+-shademode 		DcComponent		[DcRange, DcComponent]
+-singlebuffered [0,1]	0 	 		-buffering flag (0 means
+				   	 	 do not singlebuffer)
+-shaderanges n		1			-number of shade ranges when
+					 	 shade mode is DcRange
+-testcase n		0			-for dyn_test only [0-6]
+-transp	[0,1]		0 			-transparency flag (0 means
+				   	 	 no transparency)
+-transpintens n		0.7			-transparent intensity
+-rendstyle rendstyle    DcRealTime		[DcRealTime, DcProductionTime, or
+					 	 any other installed renderer]
+-dt devicetype		if run on Sun		[sunviewGP, sunview, gl, stdx11,
+			   sunviewGP             ps]
+			if run on SGI
+			   gl
+			else
+			   stdx11
+-procs n		0			-number of processors
+-ls n			1024 			-pick list size
+-is n			10			-pick index size 
+-xap n			20			-x pick aperture 
+-yap n			16			-y pick aperture 
+-rp n			0			-pick reverse 
+-df						-string to be passed as
+						the argstring to DoDevice
+						(useful when testing new 
+						device drivers)
+
+** possible values in []
+
+The dyn_* test programs respond to the following keyboard control characters
+when the cursor is in the graphics window:
+
+	CHARACTER	RESPONSE
+	---------	--------
+   	x  		exit the program
+   	1  		toggle backface cull switch
+   	2  		cycle through representation types
+   	3  		cycle through interpolation types
+   	4  		toggle specular highlights
+   	5  		cycle through shading type (Component, Ranges 1 and 8)
+	6/^		increase/decrease texture scale in U
+	7/&		increase/decrease texture scale in V
+	8/*		increase/decrease texture translate in U
+	9/(		increase/decrease texture translate in V
+	0		cycle texture extend mode in U
+	-		cycle texture extend mode in V
+	=		cycle texture antialias mode
+	\		cycle texture operator
+   	c  		toggle depth cue switch
+   	s/S  		reduce/increase subdivision level value
+   	d/D  		increase/reduce diffuse intensity
+   	a/A  		increase/reduce ambient intensity
+   	m/M     	scale up/down in X
+   	,/<  		scale up/down in Y
+   	./>  		scale up/down in Z
+   	j/J  		rotate positively/negatively in X
+   	k/K  		rotate positively/negatively in Y
+   	l/L  		rotate positively/negatively in Z
+   	u/U  		translate positively/negatively in X
+   	i/I  		translate positively/negatively in Y
+   	o/O  		translate positively/negatively in Z
+   	r  		read values from 'values.dat'
+   	w  		write values to 'values.dat'
+   	W  		unconditional update
+   	P  		write the device's pixel data to a file in
+			   Dore rasterfile format
+   	Z  		toggle clear flag switch
+
+
+-------------------------------------------------------------
+Section 2: Production Renderer Tests -- Description and Usage
+-------------------------------------------------------------
+
+Three test programs can be built and run to test the production renderer. 
+They are:
+
+pro_prims 	A simple scene that contains a sphere, a cylinder, a box,
+		and a torus.  The scene can be rendered with shadows if 
+		the "-shadows" shadows flag is set on the command line.
+
+pro_temple 	A scene that includes a transparent cylinder with spheres 
+		inside.  Transparency is enabled on the command line with 
+		the "-transp" option.  The scene can also be rendered with 
+		shadows if the "-shadows" shadows flag is set.  
+
+pro_tree 	A more complex scene of a tree, composed of cylinders and 
+		spheres, standing on a box.  The box will be rendered with 
+		reflections if the "-reflections" flag is set on the command 
+		line.  The scene can also be rendered with shadows if the 
+		"-shadows" shadows flag is set.
+
+All three test programs use the same main program and differ only in the 
+objects they display and their camera and light objects.  See your Dore 
+System Guide to determine whether the transparency, reflection, and
+shadow attributes are supported on your system.  
+
+By default, the resultant image is written to a Dore rasterfile called
+"test.img".
+
+The production test programs have the following command line options:
+
+OPTION			DEFAULT			EXPLANATION 
+------			-------			-----------
+-width n		128			-image width in pixels
+-height n		128			-image height in pixels
+-shadows [0,1]		0 (no shadows)  	-shadow flag
+-reflections [0,1]	0 (no reflections)	-reflection flag
+-transp [0,1]		0 (no transparency)	-transparency flag
+-transpintens n		0.7			-transparency intensity
+-dt devicetype		rasterfile 		-device type 
+			  (creates an image 	[gl, sunview, rasterfile]
+			  file called test.img)
+-procs n		0			-number of processors
+-read [0,1]		0 (do not read values 	-reads various attribute values
+			   file)		 (e.g. an object's representation
+						 type) from a file
+-file filename		values.dat		-filename is the name of the 
+						 file to be read if "-read 1"
+						 is specified
+-df						-string to be passed as
+						the argstring to DoDevice
+						(useful when testing new 
+						device drivers)
+
+
+
+-------------------------------------
+Section 3: Building the Test Programs
+-------------------------------------
+
+The makefiles mk.sun, mk.iris, and mk.stdx are provided with Portable
+Dore to build all of the test programs.  Copy and edit one of these
+makefiles if one does not exist for your platform.
+
+To build:
+
+1.  Ensure that the following variables are set correctly in the 
+    appropriate makefile:
+
+	VARIABLE	DESCRIPTION
+	--------	-----------
+	DORE_LOC 	the location of the dore directory
+	DORE_OBJTYPE 	the machine object type
+	DORE_LIB_NAME 	set to libdore.a or whatever your Dore library 
+			is called
+	LIBS 		libraries, other than the Dore library, that need 
+			to be linked to the test program, e.g. -lsuntools
+	CFLAGS 		compiler options
+
+    It is assumed that DORE_LIB_NAME is in DORE_LOC/dore/lib/DORE_OBJTYPE.
+    If this is not the case, the value of DORLIB in the makefile must also
+    be changed.
+
+    Note that dynamic.c should be compiled with -Dstdx if it is to be
+    used with the stdx configuration of the Dore library.
+
+
+2.  To make the quick sample tests, type:
+	make -f mk.DORE_OBJTYPE sample 
+	make -f mk.DORE_OBJTYPE fsample 
+
+    To make all of the dyn_* dynamic renderer tests, type:
+	make -f mk.DORE_OBJTYPE dyn_all 
+
+    To make all of the production renderer tests, type:
+	make -f mk.DORE_OBJTYPE pro_all 
+
+    To make all of the above, type:
+	make -f mk.DORE_OBJTYPE all
+
+The executables will be located in a subdirectory with the same name as 
+the value of DORE_OBJTYPE.  The directory will be created if it does not
+already exist.
+
+Before you run the test programs, you must ensure that Dore has access
+to the font and error message files. If these data files were not installed
+under /usr/dore/data, the shell environment variables DORE_FONTDATA and
+DORE_ERRDATA must be set to the name of the directories containing the fonts
+and the error message file, respectively. For example:
+
+    setenv DORE_ERRDATA $DORE_LOC/dore/data/errmsg
+    setenv DORE_FONTDATA $DORE_LOC/dore/data/fonts/fontbin/default_type
+
+
+------------------------------------------
+Section 4:  Creating Your Own Test Objects
+------------------------------------------
+
+The file dynamic.c contains the main program for the dynamic tests, and
+production.c contains the main program for the production tests.  Both 
+main programs call the routine makestudio() to create the camera and 
+lights, and the routine makeobject() to create the display object.
+
+You can display your own objects using the main test programs by 
+providing your own makestudio() and makeobject() routines in a file 
+called myobjects.c and making them with:
+
+	make -f mk.DORE_OBJTYPE my_dyn my_pro
+
+where DORE_OBJTYPE is your machine's object type.  See the makestudio() 
+and makeobject() routines used with the test programs to see how to use 
+the callbacks provided to change the values of attributes.
+
+
+---------------------------------------------
+Section 5:  Displaying Dore rasterfile Images
+---------------------------------------------
+
+The rasterfile device is the default output device for the Production 
+Renderer test programs.  Tools are provided to display the resulting file 
+on various platforms.  
+
+
+dor2iris
+--------
+dor2iris is a filter that converts a Dore rasterfile image to an SGI 
+rasterfile format.  Once you have SGI rasterfile image, it can be displayed 
+using the tools provided by SGI.
+
+To build the filter, first edit the appropriate makefile to set the 
+variables DORE_LOC and DORE_OBJTYPE.  Then type:
+
+	make -f mk.DORE_OBJTYPE dor2iris
+
+The executable will be located in a subdirectory with the same name as 
+the value of DORE_OBJTYPE.  The directory will be created if it does not 
+already exist.
+
+To create an image:
+	dor2iris -if test.img -of iris.img
+
+where test.img is the name of the file created by the rasterfile device
+driver when running one of the test programs.  If no file names are 
+provided on the command line, the defaults are "test.img" and "iris.img" 
+as the input and output file names, respectively.
+
+To display the image:
+	showimg iris.img
+
+
+dor2sunras
+----------
+dor2sunras is a filter that converts a Dore rasterfile image to the Sun 
+standard rasterfile format.  Once you have a Sun rasterfile image, it 
+can be displayed using the tools provided by Sun.
+
+To build the filter, first edit the appropriate makefile to set the 
+variables DORE_LOC and DORE_OBJTYPE.  Then type:
+
+	make -f mk.DORE_OBJTYPE dor2sunras
+
+The executable will be located in a subdirectory with the same name as 
+the value of DORE_OBJTYPE.  The directory will be created if it does not 
+already exist.
+
+To create a greyscale image:
+	dor2sunras -shademode DcRange -if test.img -of sun.img
+
+To create an 8-bit color image:
+	dor2sunras -shademode DcComponent -if test.img -of sun.img
+
+where test.img is the name of the file created by the rasterfile device
+driver when running one of the test programs.  If no file names are 
+provided on the command line, the defaults are "test.img" and "sun.img" 
+as the input and output file names, respectively.
+
+To display the image on a color Sun:
+	screenload sun.img
+
+To display the image on a monochrome Sun:
+	rasfilter8to1 -d < sun.img | screenload
+
+
+dor2X11
+-------
+dor2X11 is a filter that converts a Dore rasterfile image to the X11 xwud 
+format.  Once you have an xwud image, it can be displayed using X11 tools.
+
+To build the filter, first edit the appropriate makefile to set the 
+variables DORE_LOC and DORE_OBJTYPE. Then type:
+
+	make -f mk.DORE_OBJTYPE dor2X11
+
+The executable will be located in a subdirectory with the same name as 
+the value of DORE_OBJTYPE.  The directory will be created if it does not 
+already exist.
+
+To create an image:
+	dor2X11 -if test.img -of xwud.img
+
+where test.img is the name of the file created by the rasterfile device 
+driver when running one of the test programs.  (If no file names are 
+provided on the command line, the defaults are "test.img" and "xwud.img" 
+as the input and output file names, respectively.)
+
+To display the image:
+	xwud -in xfile

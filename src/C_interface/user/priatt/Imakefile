@@ -1,0 +1,33 @@
+#include <Dore.tmpl>
+
+SRCS = cambint.c cambswi.c cbakculswi.c cbckcul.c cbndvol.c \
+       cbndvolswi.c cclpswi.c cclpvol.c ccmptuvcbk.c ccmptuvswi.c \
+       ccmptwcbk.c ccmptwswi.c cdepcue.c cdepcueswi.c cdifclr.c \
+       cdifint.c cdifswi.c cemisclr.c cemisfct.c cemisswi.c \
+       cgentexuv.c chidsrfswi.c cinttyp.c cinvswi.c clclaasty.c \
+       clclaaswi.c clgtswi.c clintyp.c clinwid.c cminbndext.c \
+       cmkrfnt.c cmkrgly.c cmkrscl.c cpckswi.c cradambswi.c \
+       cradswi.c crefridx.c crefrswi.c crefswi.c creptyp.c \
+       cshaswi.c cshdidx.c cspcclr.c cspcfct.c cspcint.c cspcswi.c \
+       csrfedgclr.c csrfshd.c csubdivspc.c ctrnclr.c ctrnint.c \
+       ctrnorclr.c ctrnorexp.c ctrnorint.c ctrnorswi.c ctrnswi.c \
+       ctxtali.c ctxtexpfct.c ctxtfnt.c ctxthgt.c ctxtpat.c \
+       ctxtprc.c ctxtspc.c ctxtupvec.c
+OBJS = cambint.o cambswi.o cbakculswi.o cbckcul.o cbndvol.o \
+       cbndvolswi.o cclpswi.o cclpvol.o ccmptuvcbk.o ccmptuvswi.o \
+       ccmptwcbk.o ccmptwswi.o cdepcue.o cdepcueswi.o cdifclr.o \
+       cdifint.o cdifswi.o cemisclr.o cemisfct.o cemisswi.o \
+       cgentexuv.o chidsrfswi.o cinttyp.o cinvswi.o clclaasty.o \
+       clclaaswi.o clgtswi.o clintyp.o clinwid.o cminbndext.o \
+       cmkrfnt.o cmkrgly.o cmkrscl.o cpckswi.o cradambswi.o \
+       cradswi.o crefridx.o crefrswi.o crefswi.o creptyp.o \
+       cshaswi.o cshdidx.o cspcclr.o cspcfct.o cspcint.o cspcswi.o \
+       csrfedgclr.o csrfshd.o csubdivspc.o ctrnclr.o ctrnint.o \
+       ctrnorclr.o ctrnorexp.o ctrnorint.o ctrnorswi.o ctrnswi.o \
+       ctxtali.o ctxtexpfct.o ctxtfnt.o ctxthgt.o ctxtpat.o \
+       ctxtprc.o ctxtspc.o ctxtupvec.o
+
+LibraryObjectRule()
+SubdirLibraryRule($(OBJS))
+
+DependTarget()

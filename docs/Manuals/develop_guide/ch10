@@ -1,0 +1,474 @@
+.\"#ident "%W%" %G%
+.\"
+.\" #
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  
+.\" # 
+.\" # KUBOTA GRAPHICS Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\" #
+.\"
+.sc
+.ds BT "\\*(Dd Developer's Guide
+.ds CT Implementing a Device Driver
+.ds h1 10
+.so ../macros/local.me
+.PN 113
+.L1 I "MPLEMENTING A"
+.L2 D EVICE " D" RIVER
+.CH \\*(h1
+.rs
+.sp -1v
+This chapter describes the steps necessary to implement a new 
+\*(Dd device driver.
+For \*(Dd renderers to generate output on a hardware device 
+or virtual device,
+they access the device modules through the set of interfaces 
+described in Chapter 9, \f2 Device Driver Modules and Interfaces\fP.
+This chapter describes an incremental strategy for implementing 
+the modules of a new \*(Dd device driver.
+Using this strategy, you can see results quickly before you
+design and implement the whole device driver.
+It is assumed that you are already familiar with the software or
+hardware interface to the device that the new driver will be
+supporting.
+.H1 "Steps to Implement a Device Driver
+The major steps to incrementally create a new \*(Dd device driver are:
+.rs
+.sp -.25v
+.np
+Copy the sample device driver.
+.rs
+.sp -.25v
+.np
+Implement the minimal device control module (DCM)
+functions necessary to support the production renderer.
+.rs
+.sp -.25v
+.np
+Implement the production renderer output module (PROM). 
+.rs
+.sp -.25v
+.np
+Build and test the device driver with the production renderer.
+.rs
+.sp -.25v
+.np
+Complete the DCM module.
+.rs
+.sp -.25v
+.np
+Implement a minimal dynamic renderer output module (DROM).
+.rs
+.sp -.25v
+.np
+Build and test the minimal DROM.
+.rs
+.sp -.25v
+.np
+Complete the DROM module.
+.rs
+.sp -.25v
+.np
+Build and test completed device driver.
+.lp
+The following paragraphs will discuss each of these steps.
+.rs
+.sp -.5v
+.H1 "Step 1: Copy the Sample Device Driver
+.rs
+.sp -.25v
+A sample device driver implementation is provided in
+\f2dore/src/device_config/sampledev\fP.
+You should use it as a starting point for your implementation.
+If you are a Portable \*(Dd user and have been following the 
+instructions in Section IV on \f2Porting\fP, you probably already
+have copied a driver and should go on to the next step.
+.sp -.25v
+.lp
+You need to choose a name for the new device driver.
+This name will be used as the name of the directory that will
+contain the new device driver implementation.
+Make sure you do not use the name of a directory
+that already exists in \f2dore/src/device_config\fP.
+.sp -.25v
+.lp
+Copy the sample driver by going to the \f2dore\fP directory
+and typing:
+.rs
+.sp -.25v
+.(m
+% make copy_device TO_DEV=newdevice FROM_DEV=sampledev
+.)m
+.rs
+.sp -.25v
+where \f2newdevice\fP is the name you selected for your driver.
+The directory
+.rs
+.sp -.25v
+.(m
+        dore/src/device_config/newdevice
+.)m
+.rs
+.sp -.25v
+will be created, and it will
+contain a copy of everything in the \f2sampledev\fP directory.
+All routine names, external variable names, and type names
+are modified to use the name of the new device driver
+in places where \f2sampledev\fP occurs in the copied routines.
+The only modification you have to make at this point
+is to change the actual string name used to create device objects
+of this new type.
+The name is set in the driver installation routine.
+Edit the file \f2extern.c\fP in \f2dore/src/device_config/newdevice\fP
+and look for the routine \f2ddr_newdevice_install_driver\fP.
+Change the default name and the description of the driver
+from "sample" and "Sample Device Driver" to names that are
+more descriptive for your driver.
+.sp -.25v
+.lp
+You now have a buildable device driver, although it does
+nothing useful.
+The sample driver defines the set of routines that implement the
+DCM, the PROM, and the DROM.
+Most of these sample routines are null routines.
+It is up to you to fill in the details for your particular device.
+.rs
+.sp -.5v
+.H1 "Step 2: Implement a Minimal DCM
+A subset of the DCM routines are required
+to support production renderer output.
+These functions fall into three categories: control, inquiry, and
+output.
+.lp
+The control functions (found in \f2dcm/dcm.c\fP) are:
+.(l
+\f2dcm.initialize_device\fP
+\f2dcm.create_local_data\fP
+\f2dcm.become_current_driver\fP
+.)l
+.rs
+.sp -.25v
+.lp
+The inquiry functions (found in \f2dcm/inq.c\fP) are:
+.(l
+\f2dcm.inquire_device_extent\fP
+\f2dcm.inquire_stereo\fP
+\f2dcm.inquire_ncolors\fP
+\f2dcm.inquire_resolution\fP
+\f2dcm.inquire_visual_type\fP
+\f2dcm.inquire_auto_size\fP
+\f2dcm.inquire_clip_list\fP
+.)l
+.rs
+.sp -.25v
+.lp
+And the output function (found in \f2dcm/output.c\fP) is:
+.(l
+\f2dcm.write_scanline_byte\fP
+.)l
+.rs
+.sp -.25v
+.lp
+The sample driver has been set up to provide reasonable values for 
+each of the \f2inquire\fP functions.
+You may find that these functions do not require alteration.
+.sp -.25v
+.lp
+Only two functions really require your attention,
+\f2dcm.initialize_device\fP and \f2dcm.write_scanline_byte\fP.
+You will probably also need to modify the data structure in
+\f2dcm/dcm.h\fP to hold other data required by the device driver.
+.sp -.25v
+.lp
+The \f2dcm.initialize_device\fP routine should handle device dependent
+flags and attributes, and open and initialize the hardware device.
+The \f2dcm.write_scanline_byte\fP routine should take the input data
+array of RGB pixel data and write them to the device.
+Each of these functions is by nature device specific, and the sample
+makes no attempt to provide an implementation.
+.rs
+.sp -.5v
+.H1 "Step 3: Implement the PROM
+.rs
+.sp -.25v
+The PROM sample contains an implementation that uses 
+the \f2dcm.write_scanline_byte\fP function we discussed above.
+Unless you need to do something different, 
+this implementation should be sufficient.
+.rs
+.sp -.5v
+.H1 "Step 4: Build and Test #1
+.rs
+.sp -.25v
+You now have a device driver implementation that, when built, will
+display output from the production renderer through the PROM interface.
+.lp
+To build your device driver, you will invoke \f2make\fP in the top
+directory of the device driver.
+Go to that directory.
+.(m
+% cd /my_directory/dore/src/device_config/newdevice
+.)m
+The directory, \f2/my_directory\fP, is the location of the \*(Dd tree, and
+\f2newdevice\fP is the name of your new device driver.
+.lp
+The makefiles depend on several environment variables being set.
+They are:
+.ip DORE_LOC
+the location of the \*(Dd tree (e.g., \f2/my_directory\fP from above).
+.ip DORE_OBJTYPE
+the name of the machine object type.
+It controls where the object files and libraries will be placed.
+Object files will go in:
+.rs
+.sp -.25v
+.lp
+.(m
+     /my_directory/dore/obj/objtype/device_config/newdevice
+.)m
+.rs
+.sp -1.25v
+.ip
+and the libraries will go in:
+.rs
+.sp -.25v
+.lp
+.(m
+     /my_directory/dore/lib/objtype
+.)m
+.rs
+.sp -1.25v
+.ip
+where \f2objtype\fP is the value of \s-1\f2DORE_OBJTYPE\fP\s+1.
+.ip DORE_LIB_NAME
+the name of the library that will contain the device driver.
+.ip "CC and CFLAGS
+the compile command and options for compiling the device
+driver.
+The compile options should include either
+.nh
+.SM \f2-DDORE_REAL_SINGLE\fP
+or 
+.SM \f2-DDORE_REAL_DOUBLE\fP 
+to set \f2DtReal\fP to float or double precision.
+.hy
+.ip "LD and LDFLAGS
+the load command and options for combining several objects
+files into one.
+These are typically \f2ld\fP and \f2-r -s\fP.
+.ip "AR and ARFLAGS
+the archive command and options for archiving the device
+driver.
+Typically these are \f2ar\fP and \f2rv\fP to replace the object files
+in the library.
+.lp
+Once these environment variables are set, you can build the device
+driver with the command:
+.rs
+.sp -.25v
+.(m
+% make compile library
+.)m
+.rs
+.sp -.25v
+This will compile the device driver source files in the directory and
+below, and place the object files in the corresponding object
+directory.
+All the object code for your
+device driver will be archived into the library specified by
+\f2\s-1DORE_LIB_NAME\s+1\fP.
+.rs
+.sp -.25v
+.lp
+A few simple test programs are provided to test output from 
+the standard production renderer.
+You may want to try one of them at this point.
+They are located in the test directory, \f2dore/test\fP.
+.rs
+.sp -.25v
+.lp
+If you do not have \*(Dd source or you did not add a call to your
+device initialization routine in \f2dor_doresys_initialize_drivers\fP,
+you will need to modify the test programs to initialize your driver.
+Add this call to your driver initialization routine after the
+\f2DsInitialize\fP call in the test programs:
+.rs
+.sp -.25v
+.(m
+   DsInitialize(processors);
+   ddr_newdevice_install_driver(DcNullPtr);
+.)m
+.rs
+.sp -.25v
+where \f2newdevice\fP is the name you selected for your driver.
+.rs
+.sp -.25v
+.lp
+Edit the appropriate makefile (depending on your platform) to set the
+variables
+.SM \f2DORE_LOC\fP ,
+.SM \f2DORE_OBJTYPE\fP ,
+.SM \f2DORE_LIB_NAME\fP ,
+and
+.SM \f2LIBS\fP
+to the proper values.
+The first two are
+the location of the \f2dore\fP directory, the machine
+object type, and the \*(Dd library name, as described above.
+.SM \f2LIBS\fP
+specifies which libraries, other than the \*(Dd library, need
+to be linked with the test programs (e.g.,
+.I \-lm ,
+.I \-lgl ,
+etc.).
+If you did not archive your new device driver into the \*(Dd library,
+you should include the library containing your device driver in 
+.SM \f2LIBS\fP.
+Now build one of the test programs using this makefile.
+.rs
+.sp -.25v
+.lp
+The executable will be located in a subdirectory with the same name as
+the machine object type specified by the
+.SM \f2DORE_OBJTYPE\fP
+variable.
+When you run the program, use the \f2-dt devicetype\fP
+command line option to select your new device.
+The argument
+\f2devicetype\fP is the name of the driver as set in
+Step 1.
+.sp -.25v
+.lp
+For a more complete description of how to build and run the
+standard production renderer test programs, see the
+\f2Readme\fP file in the test directory and Section V on
+\f2Testing\fP.
+.rs
+.bp
+.H1 "Step 5: Complete the DCM"
+At this point go back and implement all the remaining functions
+in the device control module.
+.H1 "Step 6: Implement a Minimal DROM
+The DROM is a large module consisting of
+approximately 90 functions.
+This may seem like an overwhelming number at first, but you will see
+that many of these functions are just attribute setting routines.
+There are numerous ways of approaching the DROM implementation.
+To begin with, we will focus on setting up initial data
+structures, getting the
+control structures in place for the traversals of the
+studio and display groups, implementing the transformation pipeline,
+and drawing geometry without lighting or shading.
+.lp
+The important functions for initializing data structures
+(found in \f2drom/data.c\fP) are:
+.(l
+\f2drom.create_local_device_data\fP
+\f2drom.create_local_view_data\fP
+\f2drom.create_local_window_data\fP
+.)l
+.lp
+The important control functions (found in \f2drom/update.c\fP) are:
+.(l
+\f2drom.start_update\fP
+\f2drom.update_local_data\fP
+\f2drom.update_studio\fP
+\f2drom.update_display\fP
+.)l
+.lp
+The matrix transformation functions (found in \f2drom/geoatt.c\fP) are:
+.(l
+\f2drom.update_lcstowcsmat_lokatfrm\fP
+\f2drom.update_lcstowcsmat_pop\fP
+\f2drom.update_lcstowcsmat_push\fP
+\f2drom.update_lcstowcsmat_rotate\fP
+\f2drom.update_lcstowcsmat_scale\fP
+\f2drom.update_lcstowcsmat_shear\fP
+\f2drom.update_lcstowcsmat_tfmmat\fP
+\f2drom.update_lcstowcsmat_transl\fP
+\f2drom.get_lcstowcsmat\fP
+.)l
+.lp
+The camera functions (found in \f2drom/camera.c\fP) are:
+.(l
+\f2drom.camera\fP
+\f2drom.set_camera_matrix\fP
+\f2drom.set_parallel_matrix\fP
+\f2drom.set_perspective_matrix\fP
+\f2drom.set_projection_matrix\fP
+.)l
+.lp
+And finally the geometric primitive drawing routines (found in
+\f2drom/output.c\fP) are:
+.(l
+\f2drom.render_point_list\fP
+\f2drom.render_line_list\fP
+\f2drom.render_connected_line_list\fP
+\f2drom.render_triangle_list\fP
+\f2drom.render_triangle_mesh\fP
+.)l
+.lp
+See Chapter 9, \f2Device Driver Modules and Interfaces\fP, and the
+\f2Device Driver Interface Functions\fP manpageS, for
+details on what is required to implement these functions.
+Also, see Chapter 11, \f2Sample Device Driver\fP. 
+.H1 "Step 7: Build and Test #2
+You now have a minimal DROM module that you can build and test.
+Testing at this point using the dynamic renderer
+will ensure that the geometry is
+being transformed and displayed in the appropriate positions on 
+the device.
+Note that some routines that are required for transforming
+frame coordinate geometries have not yet been implemented.
+This means that annotation text and polymarkers will not
+yet work correctly with your new driver.
+Do not try to use \f2DoAnnoText\fP or \f2DoPolymarker\fP objects
+in your tests at this point.
+.lp
+Try running one of the dynamic renderer tests provided in the test
+directory, \f2dore/test\fP.
+If you have not already done so during testing with the
+standard production renderer,
+edit the appropriate makefile to set the variables
+.SM \f2DORE_LOC\fP ,
+.SM \f2DORE_OBJTYPE\fP ,
+.SM \f2DORE_LIB_NAME\fP ,
+and
+.SM \f2LIBS\fP
+to the proper values.
+Then build one of the test programs.
+The executable will be located in a subdirectory with 
+the same name as the machine object type specified by the
+.SM \f2DORE_OBJTYPE\fP
+variable.
+When you run the program, use the \f2-dt devicetype\fP
+command line option to select your new device.
+The argument
+\f2devicetype\fP would be the name of the driver as set in
+Step 1.
+.lp
+For more complete information on how to build and run the
+dynamic renderer test
+programs, see the \f2Readme\fP file in the test directory and
+Section V on \f2Testing\fP.
+.H1 "Step 8: Complete the DROM
+Now that you have a driver that transforms and displays geometry
+for the dynamic renderer, it is time to complete the 
+implementation of the DROM.
+In this step you will add code to collect and apply the appearance
+attributes and add lighting and shading to the geometry display.
+.H1 "Step 9: Build and Test #3
+It is now time to do full testing of the dynamic renderer on this new
+device.
+You can do more thorough testing with the programs provided in
+the \f2dore/test\fP directory.
+You should also try some of your own applications.

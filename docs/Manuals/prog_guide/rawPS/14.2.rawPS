@@ -1,0 +1,188 @@
+%!PS-Adobe-2.0
+%%Title: 14-2.d-Layer#1
+%%Creator: MacDraw II 1.1
+%%CreationDate: Thursday, August 10, 1989
+%%Pages: (atend)
+%%BoundingBox: ? ? ? ?
+%%PageBoundingBox: 125 130 2425 3170
+%%For: Paul Ausick
+%%IncludeProcSet: "(AppleDict md)" 66
+%%EndComments
+%%EndProlog
+%%BeginDocumentSetup
+md begin
+
+T T -130 -125 3170 2425 100 300 300 1 F F F F T T psu
+(Paul Ausick; document: 14-2.d-Layer#1)jn
+0 mf
+od
+%%EndDocumentSetup
+%%Page: ? 1
+op
+0 0 xl
+1 1 pen
+0 0 gm
+(nc 0 0 3040 2300 6 rc)kp
+0 setlinecap
+currentscreen
+3 1 roll pop pop 60 45 3 -1 roll setscreen
+4 4 pen
+38 258 638 1608 115 115 0 rr
+1000 38 1246 358 115 115 0 rr
+1000 529 1246 850 115 115 0 rr
+1000 1025 1246 1346 115 115 0 rr
+1000 1517 1246 1838 115 115 0 rr
+1134 155 gm
+bu fc
+{}mark T /Helvetica /|______Helvetica 0 rf
+bn
+1 setTxMode
+0 fs
+50 fz
+bu fc
+2 F /|______Helvetica fnt
+bn
+(doc)show
+1142 647 gm
+0 gr
+(src)show
+1138 1143 gm
+(obj)show
+1138 1630 gm
+(test)show
+292 716 gm
+bu fc
+{}mark T /Helvetica-Bold /|______Helvetica-Bold 0 rf
+bn
+1 fs
+58 fz
+bu fc
+2 F /|______Helvetica-Bold fnt
+bn
+(Primitive Name)show
+388 626 gm
+bu fc
+{}mark T /Helvetica-Oblique /|______Helvetica-Oblique 0 rf
+bn
+2 fs
+50 fz
+bu fc
+2 F /|______Helvetica-Oblique fnt
+bn
+(\(for example: DUoLbracket\))show
+588 1142 621 1175 1 ov
+588 1142 621 1175 0 ov
+588 692 621 725 1 ov
+588 692 621 725 0 ov
+583 1550 617 1583 1 ov
+583 1550 617 1583 0 ov
+583 288 617 321 1 ov
+583 288 617 321 0 ov
+0 0 pen
+938 196 gm
+938 196 lin
+pr
+1000 196 pl
+938 196 pl
+942 213 pl
+946 225 pl
+1000 196 pl
+1 ep
+pr
+1000 196 pl
+938 196 pl
+942 213 pl
+946 225 pl
+1000 196 pl
+0 ep
+4 4 pen
+598 302 gm
+940 211 lin
+0 0 pen
+942 692 gm
+942 692 lin
+pr
+1000 708 pl
+942 692 pl
+942 708 pl
+942 725 pl
+1000 708 pl
+1 ep
+pr
+1000 708 pl
+942 692 pl
+942 708 pl
+942 725 pl
+1000 708 pl
+0 ep
+4 4 pen
+602 706 gm
+940 706 lin
+0 0 pen
+942 1142 gm
+942 1142 lin
+pr
+1000 1158 pl
+942 1142 pl
+942 1158 pl
+942 1175 pl
+1000 1158 pl
+1 ep
+pr
+1000 1158 pl
+942 1142 pl
+942 1158 pl
+942 1175 pl
+1000 1158 pl
+0 ep
+4 4 pen
+602 1156 gm
+940 1156 lin
+0 0 pen
+950 1658 gm
+950 1658 lin
+pr
+1000 1688 pl
+950 1658 pl
+946 1671 pl
+938 1683 pl
+1000 1688 pl
+1 ep
+pr
+1000 1688 pl
+950 1658 pl
+946 1671 pl
+938 1683 pl
+1000 1688 pl
+0 ep
+4 4 pen
+602 1565 gm
+944 1669 lin
+1300 14 gm
+(\(description of)show
+1354 14 gm
+-0.08624 0.(how to use the)ashow
+1408 14 gm
+(primitive\))show
+1296 480 gm
+(\(makefile,)show
+1350 480 gm
+(readme file,)show
+1404 480 gm
+(src files for)show
+1458 480 gm
+(implementation\))show
+1300 993 gm
+-0.06257 0.(\(.o files -)ashow
+1354 993 gm
+(produced by the)show
+1408 993 gm
+(makefile\))show
+1305 1484 gm
+(\(test program\))show
+F T cp
+%%Trailer
+cd
+end
+%%Pages: 1 0
+%%EOF

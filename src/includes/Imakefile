@@ -1,0 +1,11 @@
+#include <Dore.tmpl>
+
+#define	IHaveSubdirs
+
+ SUBDIRS = dore_develop internal
+ HEADERS = dore.h dore_proto.h
+
+AllTarget()
+BuildIncludesTop($(HEADERS))
+InstallMultipleFlags($(HEADERS),$(INCDIR),$(INSTINCFLAGS))
+DependTarget()

@@ -1,0 +1,128 @@
+/*****************************************************************************
+ *                                                                           *
+ *			   SITE-SPECIFIC DEFINITIONS                         *
+ *                                                                           *
+ * This file contains two halves, one included before the vendor-specific    *
+ * configuration file (.cf file), and one included after the .cf file.       *
+ * The before-half should be protected by #ifdef BeforeVendorCF, and the     *
+ * after-half should be protected by #ifdef AfterVendorCF.                   *
+ *                                                                           *
+ * The before-half should only set things that the .cf file depends on.      *
+ * For the .cf files shipped in this release, the main variables in this     *
+ * category are HasGcc and HasGcc2.                                          *
+ *                                                                           *
+ * The after-half should contain all other definitions.  For example,        *
+ * place your ProjectRoot definition here.                                   *
+ *                                                                           *
+ * OS Major and Minor version numbers should be changed directly in the .cf  *
+ * file, not overridden in site.def.                                         *
+ *                                                                           *
+ *****************************************************************************/
+
+#ifdef BeforeVendorCF
+
+#define HasSunC	YES
+/*
+#ifndef HasGcc2
+#define HasGcc2 YES
+#endif
+*/
+
+#endif /* BeforeVendorCF */
+
+#ifdef AfterVendorCF
+
+/**********************************************************************\
+The following make variables will affect what devices and options are to
+be build into Dore'. 
+
+EXTRA_DEFINES
+   This is a set of C options that will be defined for all sources.
+   Some systems (apparently the Titans) may need -DXLIB_ILLEGAL_ACCESS.
+   You should put any -I directives for includes needed for device includes
+   You can force a Dore' library to use single or double precision
+     arithmetic by specifying -DDORE_REAL_SINGLE or -DDORE_REAL_DOUBLE
+     respectively.
+
+DORE_NAME
+   This is the base name of the library to be generated (on Unix
+     systems, something like `libDORE_NAME.a').
+
+DORE_SYSTEM
+   This is a single word describing which machine configuration Dore'
+     should be built for.
+   Choose from:
+    alpha dec-mips iris kopengl sample st1500 st2000 st3000
+    stdx suncxp sungen titang2
+
+DORE_RNDS
+   A list of all renderers to be included in the Dore' build.
+   Choose from:
+    dynrnd glbrnd mlr samplernd
+   Note: only the Titans use mlr, and samplernd is non-functional
+
+DORE_DEVS
+   This is a list of all device drivers that should be built into Dore'.
+   Choose from:
+    g4vll gl kopengl pex ps rasterfile sampledev soft_tools stdx11 
+    sunview_cxp sunview_gen template vll x11_DGL x11_XFDI x11_titang2
+
+DORE_DEV_LIBS
+   This is a set of linker flags necessary to include the required device
+     libraries for the devices specified in DORE_DEVS, for linking programs.
+
+DORE_FORTRAN
+   This specifies for which Fortran vendor to compile the Dore'
+     Fortran wrappers.
+   Choose one of:
+    alpha none sun titan
+
+DORE_OS
+    This specifies which OS Dore' will run on. This does very little,
+      at present.
+    Choose one of:
+     unix nt
+\**********************************************************************/
+
+EXTRA_DEFINES = -I$(OPENWINHOME)/include /* -DDORE_REAL_SINGLE */
+    DORE_NAME = dore
+  DORE_SYSTEM = stdx
+    DORE_RNDS = glbrnd dynrnd
+    DORE_DEVS = rasterfile stdx11 soft_tools ps 
+DORE_DEV_LIBS = -L$(OPENWINHOME)/lib -lX11 -lm
+ DORE_FORTRAN = none
+      DORE_OS = unix
+
+
+/**********************************************************************\
+Installation options:
+
+By default, Imake will cause the various files to be installed in the
+`standard' Unix places (ie. libs into /usr/lib, includes into
+/usr/include, etc). This section will allow you to over-ride these
+destination directories.
+\**********************************************************************/
+
+/* This will cause everything to be installed under the given hierarchy */
+#define ProjectRoot /home/bsdealwi/dore
+
+/* Or, alternatively, you could redefine some of the following: */
+/* #define BinDir /usr/local/bin */
+/* #define UsrLibDir /usr/lib */
+/* #define ShLibDir UsrLibDir */
+/* #define IncRoot /usr/include */
+/* #define FontDir /usr/lib/fonts */
+/* #define ErrMsgFile /usr/lib/errmsgfile */
+/* #define LintlibDir $(USRLIBDIR)/lint */
+/* #define ManDirectoryRoot SystemManDirectory */
+
+/**********************************************************************\
+You may set the following to inhibit building building the various
+types of libraries. Imake will figure these out by default.
+\**********************************************************************/
+/* #define SharedLibDore	NO */
+/* #define NormalLibDore	NO */
+/* #define ProfileLibDore	NO */
+/* #define DebugLibDore		NO */
+
+#endif /* AfterVendorCF */

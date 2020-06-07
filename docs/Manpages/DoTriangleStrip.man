@@ -1,0 +1,84 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DoTriangleStrip 3D  "Dore"
+.SH NAME
+DoTriangleStrip \- Create a triangle strip primitive object
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+DtObject DoTriangleStrip(colormodel, vertextype, 
+		vertexcount, vertices)
+DtColorModel colormodel;
+DtVertexType vertextype;
+DtInt vertexcount;
+DtReal vertices[\|];
+.sp
+.in -.5i
+FORTRAN:
+.in +.5i
+INTEGER*4 DOTRIS(COLMOD, VTXTYP, VTXCNT, 
+		VTXS)
+INTEGER*4 COLMOD
+INTEGER*4 VTXTYP
+INTEGER*4 VTXCNT
+REAL*8 VTXS(*)
+.in -.5i
+.fi
+.SH DESCRIPTION
+.IX DOTRIS
+.IX DoTriangleStrip
+.I DoTriangleStrip
+creates a primitive object that defines a strip of connected triangles.
+.PP
+The parameter \f2colormodel\fP specifies the color model used if the vertices
+contain color information for shading purposes.
+.PP
+The parameter \f2vertextype\fP specifies the exact nature of the vertices.
+for more information, refer to Chapter 6, \f2Dore Vertex Types\fP,
+in the \f2Dore Reference Manual\fP or 
+to the \f2VertexTypes\fP on-line manual page.)
+.PP
+The parameter \f2vertexcount\fP contains the number of vertices in the
+strip.
+The first three vertices make up the first triangle.
+Each additional vertex adds an additional triangle, using the new
+vertex along with the preceding two vertices.
+This means that the number of triangles drawn is two less than the
+number of vertices.
+.PP
+The parameter \f2vertices\fP is an array of vertex data.
+.PP
+The geometric normal to each triangle is calculated using the right-hand 
+rule (when the fingers of the right hand point in the order of the 
+vertices, the thumb points in the direction of the normal) for triangles
+1, 3, 5, etc.
+The left-hand rule is used for triangles 2, 4, 6, etc.
+These normals are sometimes used for backface culling and 
+facet shading.
+.SH ERRORS
+\f2DoTriangleStrip\fP must be called with at least three vertices.
+.TP 15
+[WARNING - invalid parameter]
+.SH "SEE ALSO"
+.na
+.nh
+DoTriangleMesh(3D), DoTriangleList(3D), DoVarTriangleStrip(3D),
+VertexTypes(3D)
+.ad
+.hy

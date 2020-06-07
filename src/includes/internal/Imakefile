@@ -1,0 +1,10 @@
+#include <Dore.tmpl>
+
+ HEADERS = bitfield.h bndvol.h clip3d.h dogen.h driver.h error.h \
+        exeset.h filters.h font.h geoatt.h glbatt.h gpolyd.h list.h \
+	matrix.h modclpvol.h obj.h priatt.h print.h studio.h system.h \
+	txtalnglb.h txtupvcglb.h util.h
+
+AllTarget()
+BuildIncludes($(HEADERS),internal,..)
+DependTarget()

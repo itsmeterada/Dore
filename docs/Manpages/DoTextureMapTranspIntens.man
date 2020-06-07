@@ -1,0 +1,144 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DoTextureMapTranspIntens 3D "Dore"
+.SH NAME
+DoTextureMapTranspIntens \- Create a transparent intensity texture map primitive attribute object
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+DtObject DoTextureMapTranspIntens(operator, 
+	mapping, raster)
+DtMapOperator operator;
+DtObject mapping;
+DtObject raster;
+.sp
+.in  -.5i
+FORTRAN:
+.in  +.5i
+INTEGER*4 DOTMTI(OPRATR, MAPPNG, RASTER)
+INTEGER*4 OPRATR
+INTEGER*4 MAPPNG
+INTEGER*4 RASTER
+.in  -.5i
+.fi 
+.IX "DoTextureMapTranspIntens"
+.IX "DOTMTI"
+.SH DESCRIPTION
+.LP
+\f2DoTextureMapTranspIntens\fP creates a primitive attribute object that
+specifies a texture map for transparent intensity.
+.LP
+Texture mapped primitive objects can be affected by more than one
+\f2DoTextureMapTranspIntens\fP attribute.
+The parameter \f2operator\fP specifies whether subsequent primitive
+objects will be affected by this transparent intensity texture only, or 
+also by other transparent intensity textures higher up in the scene hierarchy.
+The possible values for \f2operator\fP are:
+.IX "DcMapReplace"
+.IX "DCMR"
+.IP "\f2DcMapReplace\fP <\f2DCMR\fP>"
+Any transparent intensity textures already defined will be ignored by
+subsequent primitive objects.
+.IX "DcMapAdd"
+.IX "DCMADD"
+.IP "\f2DcMapAdd\fP <\f2DCMADD\fP>"
+Use this texture in addition to the transparent intensity textures higher
+up in the hierarchy.
+In case of overlapping textures, the one that is defined closest
+to the primitive object affected by the textures will be evaluated first.  
+Note that a primitive object can only be affected by textures above it
+in the hierarchy.
+.LP
+The parameter \f2mapping\fP specifies which mapping procedure to use.
+Possible values for \f2mapping\fP are:
+.IX "DcStdTableLookup"
+.IX "DCSTLU"
+.IP "\f2DcStdTableLookup\fP <\f2DCSTLU\fP>"
+Use the default 2-dimensional tabular 
+texture mapping method the renderer provides.
+.IX "DcStd3dTableLookup"
+.IX "DCS3TL"
+.IP "\f2DcStd3dTableLookup\fP <\f2DCS3TL\fP>"
+Use the default 3-dimensional tabular texture mapping method the 
+renderer provides.
+.IP "Renderer-specific mappings"
+Use any renderer-specific mappings documented in your
+\f2Dore System Guide\fP.
+.LP
+The parameter \f2raster\fP contains the actual texture map data to be 
+used by the texturing procedure.  \f2raster\fP is a handle to an object 
+created with \f2DoRaster\fP <\f2DORS\fP>,
+or \f2DoFileRaster\fP <\f2DOFRS\fP>.
+Only one channel of data is (usually) needed for mapping transparent
+intensity.
+If the raster data is in the standard Dore format, the following
+convention is used. 
+For rasters of type \f2DcRasterA\fP <\f2DCRA\fP> the alpha channel is
+used.  For rasters of type \f2DcRasterZ\fP <\f2DCRZ\fP> the Z channel is
+used.
+For rasters of type \f2DcRasterRGB\fP <\f2DCRRGB\fP>,
+\f2DcRasterRGBA\fP <\f2DCRRA\fP>, \f2DcRasterRGBZ\fP <\f2DCRRZ\fP>,
+and \f2DcRasterRGBAZ\fP <\f2DCRRAZ\fP> a single intensity value
+is calculated from RGB data for every pixel.  This value is then used
+as the map data.   Some texture maps also use the alpha channel
+(see \f2DoTextureOp\fP). 
+Note that some renderers may not adhere to this convention.
+.LP
+\f2DoTextureMapTranspIntens\fP is a primitive attribute and is
+inherited by subsequent primitive objects, as are all primitive 
+attributes. 
+Unlike most other primitive attributes though, \f2DoTextureMapTranspIntens\fP
+also inherits a set of attributes, i.e. the texture attributes.
+The texture attributes specify things such as which set of primitive
+\f2uv\fP coordinates to use, how to extend a texture when the primitive
+\f2uv\fP coordinates extend beyond the limits of the texture, 
+whether to apply a transformation to the primitive \f2uv\fP
+coordinates before applying the texture, etc.
+The current values of the texture attributes are bound to the 
+\f2DoTextureMapTranspIntens\fP 
+object when it is executed during traversal.
+Thus the texture attributes are only indirectly bound to the
+primitive objects.
+.SH ERRORS
+\f2DoTextureMapTranspIntens\fP will fail if \f2raster\fP is not a
+\f2DoRaster\fP object or a \f2DoFileRaster\fP object.
+.TP 15
+[WARNING - invalid or deleted object]
+.SH SEE ALSO
+.nh
+.na
+DoFileRaster(3D),
+DoRaster(3D),
+DoTranspIntens(3D), 
+DoTextureMapTranspIntensSwitch(3D),
+DoTextureUVIndex(3D), 
+DoTextureUVWIndex(3D), 
+DoTextureMatrixUV(3D), 
+DoTextureMatrixUVW(3D), 
+DoTextureScaleUV(3D), 
+DoTextureScaleUVW(3D), 
+DoTextureTranslateUV(3D),
+DoTextureTranslateUVW(3D),
+DoTextureExtendUV(3D), 
+DoTextureExtendUVW(3D), 
+DoTextureOp(3D), 
+DoTextureAntiAlias(3D)
+.ad
+.hy
+\&

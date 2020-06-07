@@ -1,0 +1,9 @@
+#include <Dore.tmpl>
+
+    SRCS = ofr_inqset.c ofr_obj.c ofr_update.c
+    OBJS = ofr_inqset.o ofr_obj.o ofr_update.o
+
+LibraryObjectRule()
+SubdirLibraryRule($(OBJS))
+
+DependTarget()

@@ -1,0 +1,11 @@
+#include <Dore.tmpl>
+
+    SRCS = dclass.c dcondex.c ddevice.c derror.c dmisc.c dobject.c \
+	   dprint.c drender.c dspace.c dsystem.c dview.c
+    OBJS = dclass.o dcondex.o ddevice.o derror.o dmisc.o dobject.o \
+	   dprint.o drender.o dspace.o dsystem.o dview.o
+
+LibraryObjectRule()
+SubdirLibraryRule($(OBJS))
+
+DependTarget()

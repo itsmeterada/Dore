@@ -1,0 +1,74 @@
+.\"#ident "%W%" %G%
+.\"
+.\" #
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  
+.\" # 
+.\" # KUBOTA GRAPHICS Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\" #
+.\"
+.so ../macros/local.me
+.ds BT "\\*(Dd System Guide
+.ds CT "\\*(Dd Rasterfile Driver
+.ds h1 8
+.L1 D OR\h'5p'\v'-8p'\(aa\v'8p'\h'-5p' "" "\h'-\w'\(aa'u'E
+.L2 R ASTERFILE " D" RIVER
+.CH EIGHT
+.lp
+The \*(Dd Rasterfile device driver writes a generated \*(Dd image to a file.
+The file is written in the format described in the section on \f2Raster
+File and Memory Formats\fP, in the \f2\*(Dd Reference Manual\fP, with 
+the \f2r8g8b8\fP pixel data format.
+The \*(Dd Rasterfile driver writes the image output from a renderer
+directly to a file.  The image file written by the raster file driver
+may later be used by the \*(Dd functions \f2DoFileRaster <DOFRS>\fP and 
+\f2DsFileRasterRead <DSFRSR>\fP.
+.H1 "Using the Driver
+A \*(Dd Rasterfile device object can be created using:
+.(m
+	DoDevice("rasterfile", optionstring);
+.)m
+where "\f2rasterfile\f1" is the device type and \f2optionstring\f1 is
+a list of initialization options for the \*(Dd Rasterfile driver.
+The \f2DoDevice <DOD>\f1 and \f2DdSetOptions <DDSO>\f1
+manpages with \*(Dd Rasterfile driver-specific
+information are provided in Section IV, \f2Manpages\f1, of this document.
+.H3 "Initialization Options"
+The initialization options for the \*(Dd Rasterfile device driver are:
+.ip "-width \f2size\fP"
+specifies a width of \f2size\fP for the raster file image.
+The default width is 512.
+.ip "-height \f2size\fP"
+specifies a height of \f2size\fP for the raster file image.
+The default height is 512.
+.ip "-filename \f2name\fP"
+specifies that the raster file be named \f2name\fP.
+The default name is \f2test.img\fP.
+.lp
+None of the \*(Dd Rasterfile options are modifiable after initialization.
+.H1 "Output Modules
+The \*(Dd Rasterfile device driver supports only the production
+renderer output module (PROM) interface; it does \f2not\f1 support
+the dynamic renderer output module (DROM) interface.
+.H1 "PROM Dependent Functions
+The interface to the PROM is a very simple one, intended for renderers
+that generate pixel data, such as the standard production renderer.
+The \*(Dd Rasterfile PROM implements all functions of the PROM interface.  
+As a result, any renderer that uses the PROM interface will be fully 
+supported by the \*(Dd Rasterfile device driver.
+.H1 "Limitations
+The \*(Dd Rasterfile device driver has the following limitations.
+.BU
+It does not support the \f2DdInqPixelData\fP function.
+.BU
+Each successive device update will overwrite the previous image in
+the file.

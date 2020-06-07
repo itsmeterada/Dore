@@ -1,0 +1,620 @@
+%!PS-Adobe-3.0
+%%Creator: groff version 1.06
+%%DocumentNeededResources: font Palatino-Roman
+%%+ font Helvetica
+%%+ font Palatino-Italic
+%%+ font Helvetica-BoldOblique
+%%+ font Courier
+%%+ font Helvetica-Bold
+%%DocumentSuppliedResources: procset grops 1.06 0
+%%Pages: 2
+%%PageOrder: Ascend
+%%Orientation: Portrait
+%%EndComments
+%%BeginProlog
+%%BeginResource: procset grops 1.06 0
+%!PS-Adobe-3.0 Resource-ProcSet
+
+/setpacking where {
+	pop
+	currentpacking
+	true setpacking
+} if
+
+/grops 120 dict dup begin 
+
+% The ASCII code of the space character.
+/SC 32 def
+
+/A /show load def
+/B { 0 SC 3 -1 roll widthshow } bind def
+/C { 0 exch ashow } bind def
+/D { 0 exch 0 SC 5 2 roll awidthshow } bind def
+/E { 0 rmoveto show } bind def
+/F { 0 rmoveto 0 SC 3 -1 roll widthshow } bind def
+/G { 0 rmoveto 0 exch ashow } bind def
+/H { 0 rmoveto 0 exch 0 SC 5 2 roll awidthshow } bind def
+/I { 0 exch rmoveto show } bind def
+/J { 0 exch rmoveto 0 SC 3 -1 roll widthshow } bind def
+/K { 0 exch rmoveto 0 exch ashow } bind def
+/L { 0 exch rmoveto 0 exch 0 SC 5 2 roll awidthshow } bind def
+/M { rmoveto show } bind def
+/N { rmoveto 0 SC 3 -1 roll widthshow } bind def
+/O { rmoveto 0 exch ashow } bind def
+/P { rmoveto 0 exch 0 SC 5 2 roll awidthshow } bind def
+/Q { moveto show } bind def 
+/R { moveto 0 SC 3 -1 roll widthshow } bind def
+/S { moveto 0 exch ashow } bind def
+/T { moveto 0 exch 0 SC 5 2 roll awidthshow } bind def
+
+% name size font SF -
+
+/SF {
+	findfont exch
+	[ exch dup 0 exch 0 exch neg 0 0 ] makefont
+	dup setfont
+	[ exch /setfont cvx ] cvx bind def
+} bind def
+
+% name a c d font MF -
+
+/MF {
+	findfont
+	[ 5 2 roll
+	0 3 1 roll % b
+	neg 0 0 ] makefont
+	dup setfont
+	[ exch /setfont cvx ] cvx bind def
+} bind def
+
+/level0 0 def
+/RES 0 def
+/PL 0 def
+/LS 0 def
+
+% Guess the page length.
+% This assumes that the imageable area is vertically centered on the page.
+% PLG - length
+
+/PLG {
+	gsave newpath clippath pathbbox grestore
+	exch pop add exch pop
+} bind def
+
+% BP -
+
+/BP {
+	/level0 save def
+	1 setlinecap
+	1 setlinejoin
+	72 RES div dup scale
+	LS {
+		90 rotate
+	} {
+		0 PL translate
+	} ifelse
+	1 -1 scale
+} bind def
+
+/EP {
+	level0 restore
+	showpage
+} bind def
+
+
+% centerx centery radius startangle endangle DA -
+
+/DA {
+	newpath arcn stroke
+} bind def
+
+% x y SN - x' y'
+% round a position to nearest (pixel + (.25,.25))
+
+/SN {
+	transform 
+	.25 sub exch .25 sub exch
+	round .25 add exch round .25 add exch
+	itransform
+} bind def
+	
+% endx endy startx starty DL -
+% we round the endpoints of the line, so that parallel horizontal
+% and vertical lines will appear even
+
+/DL {
+	SN
+	moveto
+	SN
+	lineto stroke
+} bind def
+
+% centerx centery radius DC -
+
+/DC {
+	newpath 0 360 arc closepath
+} bind def
+
+
+/TM matrix def
+
+%  width height centerx centery DE -
+
+/DE {
+	TM currentmatrix pop
+	translate scale newpath 0 0 .5 0 360 arc closepath
+	TM setmatrix
+} bind def
+
+% these are for splines
+
+/RC /rcurveto load def
+/RL /rlineto load def
+/ST /stroke load def
+/MT /moveto load def
+/CL /closepath load def
+
+% fill the last path
+
+% amount FL -
+
+/FL {
+	currentgray exch setgray fill setgray
+} bind def
+
+% fill with the ``current color''
+
+/BL /fill load def
+
+/LW /setlinewidth load def
+% new_font_name encoding_vector old_font_name RE -
+
+/RE {
+	findfont
+	dup maxlength dict begin
+	{
+		1 index /FID ne { def } { pop pop } ifelse
+	} forall
+	/Encoding exch def
+	dup /FontName exch def
+	currentdict end definefont pop
+} bind def
+
+/DEFS 0 def
+
+% hpos vpos EBEGIN -
+
+/EBEGIN {
+	moveto
+	DEFS begin
+} bind def
+
+/EEND /end load def
+
+/CNT 0 def
+/level1 0 def
+
+% llx lly newwid wid newht ht newllx newlly PBEGIN -
+
+/PBEGIN {
+	/level1 save def
+	translate
+	div 3 1 roll div exch scale
+	neg exch neg exch translate
+	% set the graphics state to default values
+	0 setgray
+	0 setlinecap
+	1 setlinewidth
+	0 setlinejoin
+	10 setmiterlimit
+	[] 0 setdash
+	/setstrokeadjust where {
+		pop
+		false setstrokeadjust
+	} if
+	/setoverprint where {
+		pop
+		false setoverprint
+	} if
+	newpath
+	/CNT countdictstack def
+	userdict begin
+	/showpage {} def
+} bind def
+
+/PEND {
+	clear
+	countdictstack CNT sub { end } repeat
+	level1 restore
+} bind def
+
+end def
+
+/setpacking where {
+	pop
+	setpacking
+} if
+%%EndResource
+%%EndProlog
+%%BeginSetup
+%%IncludeResource: font Palatino-Roman
+%%IncludeResource: font Helvetica
+%%IncludeResource: font Palatino-Italic
+%%IncludeResource: font Helvetica-BoldOblique
+%%IncludeResource: font Courier
+%%IncludeResource: font Helvetica-Bold
+grops begin/DEFS 1 dict def DEFS begin/u{.001 mul}bind def end/RES 72 def/PL
+792 def/LS false def/ENC0[/asciicircum/asciitilde/Scaron/Zcaron/scaron/zcaron
+/Ydieresis/trademark/quotesingle/.notdef/.notdef/.notdef/.notdef/.notdef
+/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef
+/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/space
+/exclam/quotedbl/numbersign/dollar/percent/ampersand/quoteright/parenleft
+/parenright/asterisk/plus/comma/hyphen/period/slash/zero/one/two/three/four
+/five/six/seven/eight/nine/colon/semicolon/less/equal/greater/question/at/A/B/C
+/D/E/F/G/H/I/J/K/L/M/N/O/P/Q/R/S/T/U/V/W/X/Y/Z/bracketleft/backslash
+/bracketright/circumflex/underscore/quoteleft/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q
+/r/s/t/u/v/w/x/y/z/braceleft/bar/braceright/tilde/.notdef/quotesinglbase
+/guillemotleft/guillemotright/bullet/florin/fraction/perthousand/dagger
+/daggerdbl/endash/emdash/ff/fi/fl/ffi/ffl/dotlessi/dotlessj/grave/hungarumlaut
+/dotaccent/breve/caron/ring/ogonek/quotedblleft/quotedblright/oe/lslash
+/quotedblbase/OE/Lslash/.notdef/exclamdown/cent/sterling/currency/yen/brokenbar
+/section/dieresis/copyright/ordfeminine/guilsinglleft/logicalnot/minus
+/registered/macron/degree/plusminus/twosuperior/threesuperior/acute/mu
+/paragraph/periodcentered/cedilla/onesuperior/ordmasculine/guilsinglright
+/onequarter/onehalf/threequarters/questiondown/Agrave/Aacute/Acircumflex/Atilde
+/Adieresis/Aring/AE/Ccedilla/Egrave/Eacute/Ecircumflex/Edieresis/Igrave/Iacute
+/Icircumflex/Idieresis/Eth/Ntilde/Ograve/Oacute/Ocircumflex/Otilde/Odieresis
+/multiply/Oslash/Ugrave/Uacute/Ucircumflex/Udieresis/Yacute/Thorn/germandbls
+/agrave/aacute/acircumflex/atilde/adieresis/aring/ae/ccedilla/egrave/eacute
+/ecircumflex/edieresis/igrave/iacute/icircumflex/idieresis/eth/ntilde/ograve
+/oacute/ocircumflex/otilde/odieresis/divide/oslash/ugrave/uacute/ucircumflex
+/udieresis/yacute/thorn/ydieresis]def/Helvetica-Bold@0 ENC0/Helvetica-Bold RE
+/Courier@0 ENC0/Courier RE/Helvetica-BoldOblique@0 ENC0/Helvetica-BoldOblique
+RE/Palatino-Italic@0 ENC0/Palatino-Italic RE/Helvetica@0 ENC0/Helvetica RE
+/Palatino-Roman@0 ENC0/Palatino-Roman RE
+%%EndSetup
+%%Page: 1 1
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 99 46.8 63 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 243 46.8 207 46.8 DL 279 46.8 243 46.8 DL 315 46.8 279 46.8 DL 351
+46.8 315 46.8 DL 387 46.8 351 46.8 DL 437.4 46.8 401.4 46.8 DL 464.4 46.8 428.4
+46.8 DL 500.4 46.8 464.4 46.8 DL 536.4 46.8 500.4 46.8 DL/F0 42
+/Palatino-Roman@0 SF(D)280.152 91 Q/F1 36/Palatino-Roman@0 SF(OR)A<b4>370.004
+83 Q(E)365.004 91 Q F0(R)167.784 133 Q F1(ASTERFILE)A F0(D)246.276 175 Q F1
+(RIVER)A/F2 12/Helvetica@0 SF(CHAPTER EIGHT)435.72 175 Q 99 186 63 186 DL 135
+186 99 186 DL 171 186 135 186 DL 207 186 171 186 DL 243 186 207 186 DL 279 186
+243 186 DL 315 186 279 186 DL 351 186 315 186 DL 387 186 351 186 DL 437.4 186
+401.4 186 DL 464.4 186 428.4 186 DL 500.4 186 464.4 186 DL 536.4 186 500.4 186
+DL/F3 11/Palatino-Roman@0 SF 1.229(The Dore)63 252 R 4.782<b452>105.061 252 S
+1.229(aster\214le device driver writes a generated Dore)120.854 252 R 4.782
+<b469>348.756 252 S(mage)360.402 252 Q .912(to a \214le.)63 265.2 R .913
+(The \214le is written in the format described in the section)6.412 F(on)63
+278.4 Q/F4 11/Palatino-Italic@0 SF 1.783(Raster File and Memory Formats)4.533 F
+F3 4.533(,i)C 4.532(nt)244.836 278.4 S(he)259.356 278.4 Q F4(Dore)4.532 E 4.84
+<b452>293.588 278.4 S(efer)309.428 278.4 Q 1.782(ence Manual)-.198 F F3(,)A
+3.133(with the)63 291.6 R F4(r8g8b8)5.883 E F3 3.133(pixel data format.)5.883 F
+3.133(The Dore)8.633 F 6.687<b452>294.833 291.6 S 3.134(aster\214le driver)
+312.531 291.6 R 2.141(writes the image output fr)63 304.8 R 2.141(om a r)-.198
+F(ender)-.198 E 2.14(er dir)-.198 F 2.14(ectly to a \214le.)-.198 F(The)7.64 E
+.158(image \214le written by the raster \214le driver may later be used by the)
+63 318 R(Dore)63 331.2 Q 10.212<b466>82.668 331.2 S(unctions)100.206 331.2 Q F4
+6.658(DoFileRaster <DOFRS>)9.409 F F3(and)9.408 E F4(DsFileRasterRead)9.408 E
+(<DSFRSR>)63 344.4 Q F3(.)A .16 LW 65 370.4 63 370.4 DL 67 370.4 65 370.4 DL 69
+370.4 67 370.4 DL 71 370.4 69 370.4 DL 73 370.4 71 370.4 DL 75 370.4 73 370.4
+DL 77 370.4 75 370.4 DL 79 370.4 77 370.4 DL 81 370.4 79 370.4 DL 83 370.4 81
+370.4 DL 85 370.4 83 370.4 DL 87 370.4 85 370.4 DL 89 370.4 87 370.4 DL 91
+370.4 89 370.4 DL 93 370.4 91 370.4 DL 95 370.4 93 370.4 DL 97 370.4 95 370.4
+DL 99 370.4 97 370.4 DL 101 370.4 99 370.4 DL 103 370.4 101 370.4 DL 105 370.4
+103 370.4 DL 107 370.4 105 370.4 DL 109 370.4 107 370.4 DL 111 370.4 109 370.4
+DL 113 370.4 111 370.4 DL 115 370.4 113 370.4 DL 117 370.4 115 370.4 DL 119
+370.4 117 370.4 DL 121 370.4 119 370.4 DL 123 370.4 121 370.4 DL 125 370.4 123
+370.4 DL 127 370.4 125 370.4 DL 129 370.4 127 370.4 DL 131 370.4 129 370.4 DL
+133 370.4 131 370.4 DL 135 370.4 133 370.4 DL 137 370.4 135 370.4 DL 139 370.4
+137 370.4 DL 141 370.4 139 370.4 DL 143 370.4 141 370.4 DL 145 370.4 143 370.4
+DL 147 370.4 145 370.4 DL 149 370.4 147 370.4 DL 151 370.4 149 370.4 DL 153
+370.4 151 370.4 DL 155 370.4 153 370.4 DL 157 370.4 155 370.4 DL 159 370.4 157
+370.4 DL 161 370.4 159 370.4 DL 163 370.4 161 370.4 DL 165 370.4 163 370.4 DL
+167 370.4 165 370.4 DL 169 370.4 167 370.4 DL 171 370.4 169 370.4 DL 173 370.4
+171 370.4 DL 175 370.4 173 370.4 DL 177 370.4 175 370.4 DL 179 370.4 177 370.4
+DL 181 370.4 179 370.4 DL 183 370.4 181 370.4 DL 185 370.4 183 370.4 DL 187
+370.4 185 370.4 DL 189 370.4 187 370.4 DL 191 370.4 189 370.4 DL 193 370.4 191
+370.4 DL 195 370.4 193 370.4 DL 197 370.4 195 370.4 DL 199 370.4 197 370.4 DL
+201 370.4 199 370.4 DL 203 370.4 201 370.4 DL 205 370.4 203 370.4 DL 207 370.4
+205 370.4 DL 209 370.4 207 370.4 DL 211 370.4 209 370.4 DL 213 370.4 211 370.4
+DL 215 370.4 213 370.4 DL 217 370.4 215 370.4 DL 219 370.4 217 370.4 DL 221
+370.4 219 370.4 DL 223 370.4 221 370.4 DL 225 370.4 223 370.4 DL 227 370.4 225
+370.4 DL 229 370.4 227 370.4 DL 231 370.4 229 370.4 DL 233 370.4 231 370.4 DL
+235 370.4 233 370.4 DL 237 370.4 235 370.4 DL 239 370.4 237 370.4 DL 241 370.4
+239 370.4 DL 243 370.4 241 370.4 DL 245 370.4 243 370.4 DL 247 370.4 245 370.4
+DL 249 370.4 247 370.4 DL 251 370.4 249 370.4 DL 253 370.4 251 370.4 DL 255
+370.4 253 370.4 DL 257 370.4 255 370.4 DL 259 370.4 257 370.4 DL 261 370.4 259
+370.4 DL 263 370.4 261 370.4 DL 265 370.4 263 370.4 DL 267 370.4 265 370.4 DL
+269 370.4 267 370.4 DL 271 370.4 269 370.4 DL 273 370.4 271 370.4 DL 275 370.4
+273 370.4 DL 277 370.4 275 370.4 DL 279 370.4 277 370.4 DL 281 370.4 279 370.4
+DL 283 370.4 281 370.4 DL 285 370.4 283 370.4 DL 287 370.4 285 370.4 DL 289
+370.4 287 370.4 DL 291 370.4 289 370.4 DL 293 370.4 291 370.4 DL 295 370.4 293
+370.4 DL 297 370.4 295 370.4 DL 299 370.4 297 370.4 DL 301 370.4 299 370.4 DL
+303 370.4 301 370.4 DL 305 370.4 303 370.4 DL 307 370.4 305 370.4 DL 309 370.4
+307 370.4 DL 311 370.4 309 370.4 DL 313 370.4 311 370.4 DL 315 370.4 313 370.4
+DL 317 370.4 315 370.4 DL 319 370.4 317 370.4 DL 321 370.4 319 370.4 DL 323
+370.4 321 370.4 DL 325 370.4 323 370.4 DL 327 370.4 325 370.4 DL 329 370.4 327
+370.4 DL 331 370.4 329 370.4 DL 333 370.4 331 370.4 DL 335 370.4 333 370.4 DL
+337 370.4 335 370.4 DL 339 370.4 337 370.4 DL 341 370.4 339 370.4 DL 343 370.4
+341 370.4 DL 345 370.4 343 370.4 DL 347 370.4 345 370.4 DL 349 370.4 347 370.4
+DL 351 370.4 349 370.4 DL 353 370.4 351 370.4 DL 355 370.4 353 370.4 DL 357
+370.4 355 370.4 DL 359 370.4 357 370.4 DL 361 370.4 359 370.4 DL 363 370.4 361
+370.4 DL 365 370.4 363 370.4 DL 367 370.4 365 370.4 DL 369 370.4 367 370.4 DL
+371 370.4 369 370.4 DL 373 370.4 371 370.4 DL 375 370.4 373 370.4 DL 377 370.4
+375 370.4 DL 379 370.4 377 370.4 DL 381 370.4 379 370.4 DL 383 370.4 381 370.4
+DL 385 370.4 383 370.4 DL 387 370.4 385 370.4 DL 1.44 LW 419.4 370.9 401.4
+370.9 DL 428.4 370.9 410.4 370.9 DL 446.4 370.9 428.4 370.9 DL 464.4 370.9
+446.4 370.9 DL 482.4 370.9 464.4 370.9 DL 500.4 370.9 482.4 370.9 DL 518.4
+370.9 500.4 370.9 DL 536.4 370.9 518.4 370.9 DL/F5 12/Helvetica-BoldOblique@0
+SF(Using)503.064 384.9 Q(the)518.4 398.9 Q(Driver)501.72 412.9 Q F3 2.75(AD)63
+399 S(ore)82.822 399 Q 3.553<b452>93.976 399 S
+(aster\214le device object can be cr)108.54 399 Q(eated using:)-.198 E/F6 9
+/Courier@0 SF(DoDevice\("rasterfile", optionstring\);)106.2 422 Q F3(wher)63
+447.2 Q 3.561(e")-.198 G F4(raster\214le)100.903 447.2 Q F3 3.561("i)C 3.561
+(st)150.554 447.2 S .811(he device type and)162.365 447.2 R F4(optionstring)
+3.561 E F3 .811(is a list of ini-)3.561 F 2.576
+(tialization options for the Dore)63 460.4 R 6.129<b452>218.603 460.4 S 2.576
+(aster\214le driver)235.743 460.4 R 8.076(.T)-.814 G(he)326.409 460.4 Q F4
+(DoDevice)5.327 E(<DOD>)63 473.6 Q F3(and)3.804 E F4 1.054(DdSetOptions <DDSO>)
+3.804 F F3 1.054(manpages with Dore)3.804 F 4.606<b452>344.554 473.6 S(aster)
+360.171 473.6 Q(-)-.198 E 2.07(\214le driver)63 486.8 R 2.07
+(-speci\214c information ar)-.198 F 4.82(ep)-.198 G -.198(ro)246.686 486.8 S
+2.07(vided in Section IV).198 F(,)-1.419 E F4(Man-)4.821 E(pages)63 500 Q F3
+2.75(,o)C 2.75(ft)98.948 500 S(his document.)108.947 500 Q/F7 11
+/Helvetica-BoldOblique@0 SF(Initialization Options)63 537.2 Q F3
+(The initialization options for the Dore)63 562.4 Q 3.553<b452>242.267 562.4 S
+(aster\214le device driver ar)256.831 562.4 Q(e:)-.198 E(-width)63 587.6 Q F4
+(size)2.75 E F3 .581(speci\214es a width of)88 600.8 R F4(size)3.331 E F3 .581
+(for the raster \214le image.)3.331 F .58(The default)6.08 F(width is 512.)88
+614 Q(-height)63 639.2 Q F4(size)2.75 E F3 .408(speci\214es a height of)88
+652.4 R F4(size)3.159 E F3 .409(for the raster \214le image.)3.159 F .409
+(The default)5.909 F(height is 512.)88 665.6 Q(-\214lename)63 690.8 Q F4(name)
+2.75 E F3 3.177(speci\214es that the raster \214le be named)88 704 R F4(name)
+5.926 E F3 8.676(.T)C 3.176(he default)334.83 704 R 81 756 63 756 DL 99 756 81
+756 DL 117 756 99 756 DL 135 756 117 756 DL 153 756 135 756 DL 171 756 153 756
+DL 189 756 171 756 DL 207 756 189 756 DL 225 756 207 756 DL 243 756 225 756 DL
+261 756 243 756 DL 279 756 261 756 DL 297 756 279 756 DL 315 756 297 756 DL 333
+756 315 756 DL 351 756 333 756 DL 369 756 351 756 DL 387 756 369 756 DL 419.4
+756 401.4 756 DL 428.4 756 410.4 756 DL 446.4 756 428.4 756 DL 464.4 756 446.4
+756 DL 482.4 756 464.4 756 DL 500.4 756 482.4 756 DL 518.4 756 500.4 756 DL
+536.4 756 518.4 756 DL/F8 9/Helvetica@0 SF(Dore)300.582 768.96 Q 3.506<b452>
+316.084 768.96 S(aster\214le Dr)329.085 768.96 Q(iv).135 E(er)-.225 E(Dore)
+440.868 768.96 Q 3.506<b453>456.37 768.96 S(ystem Guide)468.876 768.96 Q/F9 9
+/Helvetica-Bold@0 SF(8-1)4.002 E EP
+%%Page: 2 2
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 108 46.8 72 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 257.4 46.8 221.4 46.8 DL 293.4 46.8 257.4 46.8 DL 329.4 46.8 293.4
+46.8 DL 365.4 46.8 329.4 46.8 DL 401.4 46.8 365.4 46.8 DL 437.4 46.8 401.4 46.8
+DL 473.4 46.8 437.4 46.8 DL 509.4 46.8 473.4 46.8 DL 545.4 46.8 509.4 46.8 DL
+/F0 10/Helvetica-BoldOblique@0 SF(Using the Driver)72 57.6 Q/F1 10/Helvetica@0
+SF(\(contin)72 68.4 Q(ued\))-.1 E/F2 11/Palatino-Roman@0 SF(name is)246.5 109.2
+Q/F3 11/Palatino-Italic@0 SF(test.img)2.75 E F2(.)A .586(None of the Dore)221.5
+134.4 R 4.139<b452>302.92 134.4 S .586(aster\214le options ar)318.07 134.4 R
+3.336(em)-.198 G .586(odi\214able after initializa-)427.672 134.4 R(tion.)221.5
+147.6 Q .16 LW 223.4 173.6 221.4 173.6 DL 225.4 173.6 223.4 173.6 DL 227.4
+173.6 225.4 173.6 DL 229.4 173.6 227.4 173.6 DL 231.4 173.6 229.4 173.6 DL
+233.4 173.6 231.4 173.6 DL 235.4 173.6 233.4 173.6 DL 237.4 173.6 235.4 173.6
+DL 239.4 173.6 237.4 173.6 DL 241.4 173.6 239.4 173.6 DL 243.4 173.6 241.4
+173.6 DL 245.4 173.6 243.4 173.6 DL 247.4 173.6 245.4 173.6 DL 249.4 173.6
+247.4 173.6 DL 251.4 173.6 249.4 173.6 DL 253.4 173.6 251.4 173.6 DL 255.4
+173.6 253.4 173.6 DL 257.4 173.6 255.4 173.6 DL 259.4 173.6 257.4 173.6 DL
+261.4 173.6 259.4 173.6 DL 263.4 173.6 261.4 173.6 DL 265.4 173.6 263.4 173.6
+DL 267.4 173.6 265.4 173.6 DL 269.4 173.6 267.4 173.6 DL 271.4 173.6 269.4
+173.6 DL 273.4 173.6 271.4 173.6 DL 275.4 173.6 273.4 173.6 DL 277.4 173.6
+275.4 173.6 DL 279.4 173.6 277.4 173.6 DL 281.4 173.6 279.4 173.6 DL 283.4
+173.6 281.4 173.6 DL 285.4 173.6 283.4 173.6 DL 287.4 173.6 285.4 173.6 DL
+289.4 173.6 287.4 173.6 DL 291.4 173.6 289.4 173.6 DL 293.4 173.6 291.4 173.6
+DL 295.4 173.6 293.4 173.6 DL 297.4 173.6 295.4 173.6 DL 299.4 173.6 297.4
+173.6 DL 301.4 173.6 299.4 173.6 DL 303.4 173.6 301.4 173.6 DL 305.4 173.6
+303.4 173.6 DL 307.4 173.6 305.4 173.6 DL 309.4 173.6 307.4 173.6 DL 311.4
+173.6 309.4 173.6 DL 313.4 173.6 311.4 173.6 DL 315.4 173.6 313.4 173.6 DL
+317.4 173.6 315.4 173.6 DL 319.4 173.6 317.4 173.6 DL 321.4 173.6 319.4 173.6
+DL 323.4 173.6 321.4 173.6 DL 325.4 173.6 323.4 173.6 DL 327.4 173.6 325.4
+173.6 DL 329.4 173.6 327.4 173.6 DL 331.4 173.6 329.4 173.6 DL 333.4 173.6
+331.4 173.6 DL 335.4 173.6 333.4 173.6 DL 337.4 173.6 335.4 173.6 DL 339.4
+173.6 337.4 173.6 DL 341.4 173.6 339.4 173.6 DL 343.4 173.6 341.4 173.6 DL
+345.4 173.6 343.4 173.6 DL 347.4 173.6 345.4 173.6 DL 349.4 173.6 347.4 173.6
+DL 351.4 173.6 349.4 173.6 DL 353.4 173.6 351.4 173.6 DL 355.4 173.6 353.4
+173.6 DL 357.4 173.6 355.4 173.6 DL 359.4 173.6 357.4 173.6 DL 361.4 173.6
+359.4 173.6 DL 363.4 173.6 361.4 173.6 DL 365.4 173.6 363.4 173.6 DL 367.4
+173.6 365.4 173.6 DL 369.4 173.6 367.4 173.6 DL 371.4 173.6 369.4 173.6 DL
+373.4 173.6 371.4 173.6 DL 375.4 173.6 373.4 173.6 DL 377.4 173.6 375.4 173.6
+DL 379.4 173.6 377.4 173.6 DL 381.4 173.6 379.4 173.6 DL 383.4 173.6 381.4
+173.6 DL 385.4 173.6 383.4 173.6 DL 387.4 173.6 385.4 173.6 DL 389.4 173.6
+387.4 173.6 DL 391.4 173.6 389.4 173.6 DL 393.4 173.6 391.4 173.6 DL 395.4
+173.6 393.4 173.6 DL 397.4 173.6 395.4 173.6 DL 399.4 173.6 397.4 173.6 DL
+401.4 173.6 399.4 173.6 DL 403.4 173.6 401.4 173.6 DL 405.4 173.6 403.4 173.6
+DL 407.4 173.6 405.4 173.6 DL 409.4 173.6 407.4 173.6 DL 411.4 173.6 409.4
+173.6 DL 413.4 173.6 411.4 173.6 DL 415.4 173.6 413.4 173.6 DL 417.4 173.6
+415.4 173.6 DL 419.4 173.6 417.4 173.6 DL 421.4 173.6 419.4 173.6 DL 423.4
+173.6 421.4 173.6 DL 425.4 173.6 423.4 173.6 DL 427.4 173.6 425.4 173.6 DL
+429.4 173.6 427.4 173.6 DL 431.4 173.6 429.4 173.6 DL 433.4 173.6 431.4 173.6
+DL 435.4 173.6 433.4 173.6 DL 437.4 173.6 435.4 173.6 DL 439.4 173.6 437.4
+173.6 DL 441.4 173.6 439.4 173.6 DL 443.4 173.6 441.4 173.6 DL 445.4 173.6
+443.4 173.6 DL 447.4 173.6 445.4 173.6 DL 449.4 173.6 447.4 173.6 DL 451.4
+173.6 449.4 173.6 DL 453.4 173.6 451.4 173.6 DL 455.4 173.6 453.4 173.6 DL
+457.4 173.6 455.4 173.6 DL 459.4 173.6 457.4 173.6 DL 461.4 173.6 459.4 173.6
+DL 463.4 173.6 461.4 173.6 DL 465.4 173.6 463.4 173.6 DL 467.4 173.6 465.4
+173.6 DL 469.4 173.6 467.4 173.6 DL 471.4 173.6 469.4 173.6 DL 473.4 173.6
+471.4 173.6 DL 475.4 173.6 473.4 173.6 DL 477.4 173.6 475.4 173.6 DL 479.4
+173.6 477.4 173.6 DL 481.4 173.6 479.4 173.6 DL 483.4 173.6 481.4 173.6 DL
+485.4 173.6 483.4 173.6 DL 487.4 173.6 485.4 173.6 DL 489.4 173.6 487.4 173.6
+DL 491.4 173.6 489.4 173.6 DL 493.4 173.6 491.4 173.6 DL 495.4 173.6 493.4
+173.6 DL 497.4 173.6 495.4 173.6 DL 499.4 173.6 497.4 173.6 DL 501.4 173.6
+499.4 173.6 DL 503.4 173.6 501.4 173.6 DL 505.4 173.6 503.4 173.6 DL 507.4
+173.6 505.4 173.6 DL 509.4 173.6 507.4 173.6 DL 511.4 173.6 509.4 173.6 DL
+513.4 173.6 511.4 173.6 DL 515.4 173.6 513.4 173.6 DL 517.4 173.6 515.4 173.6
+DL 519.4 173.6 517.4 173.6 DL 521.4 173.6 519.4 173.6 DL 523.4 173.6 521.4
+173.6 DL 525.4 173.6 523.4 173.6 DL 527.4 173.6 525.4 173.6 DL 529.4 173.6
+527.4 173.6 DL 531.4 173.6 529.4 173.6 DL 533.4 173.6 531.4 173.6 DL 535.4
+173.6 533.4 173.6 DL 537.4 173.6 535.4 173.6 DL 539.4 173.6 537.4 173.6 DL
+541.4 173.6 539.4 173.6 DL 543.4 173.6 541.4 173.6 DL 545.4 173.6 543.4 173.6
+DL 1.44 LW 90 174.1 72 174.1 DL 99 174.1 81 174.1 DL 117 174.1 99 174.1 DL 135
+174.1 117 174.1 DL 153 174.1 135 174.1 DL 171 174.1 153 174.1 DL 189 174.1 171
+174.1 DL 207 174.1 189 174.1 DL/F4 12/Helvetica-BoldOblique@0 SF
+(Output Modules)72 188.1 Q F2 2.207(The Dore)221.5 202.2 R 5.76<b452>264.539
+202.2 S 2.208(aster\214le device driver supports only the pr)281.31 202.2 R
+(oduction)-.198 E -.198(re)221.5 215.4 S(nder).198 E .447
+(er output module \(PROM\) interface; it does)-.198 F F3(not)3.197 E F2 .446
+(support the)3.196 F(dynamic r)221.5 228.6 Q(ender)-.198 E
+(er output module \(DROM\) interface.)-.198 E .16 LW 223.4 254.6 221.4 254.6 DL
+225.4 254.6 223.4 254.6 DL 227.4 254.6 225.4 254.6 DL 229.4 254.6 227.4 254.6
+DL 231.4 254.6 229.4 254.6 DL 233.4 254.6 231.4 254.6 DL 235.4 254.6 233.4
+254.6 DL 237.4 254.6 235.4 254.6 DL 239.4 254.6 237.4 254.6 DL 241.4 254.6
+239.4 254.6 DL 243.4 254.6 241.4 254.6 DL 245.4 254.6 243.4 254.6 DL 247.4
+254.6 245.4 254.6 DL 249.4 254.6 247.4 254.6 DL 251.4 254.6 249.4 254.6 DL
+253.4 254.6 251.4 254.6 DL 255.4 254.6 253.4 254.6 DL 257.4 254.6 255.4 254.6
+DL 259.4 254.6 257.4 254.6 DL 261.4 254.6 259.4 254.6 DL 263.4 254.6 261.4
+254.6 DL 265.4 254.6 263.4 254.6 DL 267.4 254.6 265.4 254.6 DL 269.4 254.6
+267.4 254.6 DL 271.4 254.6 269.4 254.6 DL 273.4 254.6 271.4 254.6 DL 275.4
+254.6 273.4 254.6 DL 277.4 254.6 275.4 254.6 DL 279.4 254.6 277.4 254.6 DL
+281.4 254.6 279.4 254.6 DL 283.4 254.6 281.4 254.6 DL 285.4 254.6 283.4 254.6
+DL 287.4 254.6 285.4 254.6 DL 289.4 254.6 287.4 254.6 DL 291.4 254.6 289.4
+254.6 DL 293.4 254.6 291.4 254.6 DL 295.4 254.6 293.4 254.6 DL 297.4 254.6
+295.4 254.6 DL 299.4 254.6 297.4 254.6 DL 301.4 254.6 299.4 254.6 DL 303.4
+254.6 301.4 254.6 DL 305.4 254.6 303.4 254.6 DL 307.4 254.6 305.4 254.6 DL
+309.4 254.6 307.4 254.6 DL 311.4 254.6 309.4 254.6 DL 313.4 254.6 311.4 254.6
+DL 315.4 254.6 313.4 254.6 DL 317.4 254.6 315.4 254.6 DL 319.4 254.6 317.4
+254.6 DL 321.4 254.6 319.4 254.6 DL 323.4 254.6 321.4 254.6 DL 325.4 254.6
+323.4 254.6 DL 327.4 254.6 325.4 254.6 DL 329.4 254.6 327.4 254.6 DL 331.4
+254.6 329.4 254.6 DL 333.4 254.6 331.4 254.6 DL 335.4 254.6 333.4 254.6 DL
+337.4 254.6 335.4 254.6 DL 339.4 254.6 337.4 254.6 DL 341.4 254.6 339.4 254.6
+DL 343.4 254.6 341.4 254.6 DL 345.4 254.6 343.4 254.6 DL 347.4 254.6 345.4
+254.6 DL 349.4 254.6 347.4 254.6 DL 351.4 254.6 349.4 254.6 DL 353.4 254.6
+351.4 254.6 DL 355.4 254.6 353.4 254.6 DL 357.4 254.6 355.4 254.6 DL 359.4
+254.6 357.4 254.6 DL 361.4 254.6 359.4 254.6 DL 363.4 254.6 361.4 254.6 DL
+365.4 254.6 363.4 254.6 DL 367.4 254.6 365.4 254.6 DL 369.4 254.6 367.4 254.6
+DL 371.4 254.6 369.4 254.6 DL 373.4 254.6 371.4 254.6 DL 375.4 254.6 373.4
+254.6 DL 377.4 254.6 375.4 254.6 DL 379.4 254.6 377.4 254.6 DL 381.4 254.6
+379.4 254.6 DL 383.4 254.6 381.4 254.6 DL 385.4 254.6 383.4 254.6 DL 387.4
+254.6 385.4 254.6 DL 389.4 254.6 387.4 254.6 DL 391.4 254.6 389.4 254.6 DL
+393.4 254.6 391.4 254.6 DL 395.4 254.6 393.4 254.6 DL 397.4 254.6 395.4 254.6
+DL 399.4 254.6 397.4 254.6 DL 401.4 254.6 399.4 254.6 DL 403.4 254.6 401.4
+254.6 DL 405.4 254.6 403.4 254.6 DL 407.4 254.6 405.4 254.6 DL 409.4 254.6
+407.4 254.6 DL 411.4 254.6 409.4 254.6 DL 413.4 254.6 411.4 254.6 DL 415.4
+254.6 413.4 254.6 DL 417.4 254.6 415.4 254.6 DL 419.4 254.6 417.4 254.6 DL
+421.4 254.6 419.4 254.6 DL 423.4 254.6 421.4 254.6 DL 425.4 254.6 423.4 254.6
+DL 427.4 254.6 425.4 254.6 DL 429.4 254.6 427.4 254.6 DL 431.4 254.6 429.4
+254.6 DL 433.4 254.6 431.4 254.6 DL 435.4 254.6 433.4 254.6 DL 437.4 254.6
+435.4 254.6 DL 439.4 254.6 437.4 254.6 DL 441.4 254.6 439.4 254.6 DL 443.4
+254.6 441.4 254.6 DL 445.4 254.6 443.4 254.6 DL 447.4 254.6 445.4 254.6 DL
+449.4 254.6 447.4 254.6 DL 451.4 254.6 449.4 254.6 DL 453.4 254.6 451.4 254.6
+DL 455.4 254.6 453.4 254.6 DL 457.4 254.6 455.4 254.6 DL 459.4 254.6 457.4
+254.6 DL 461.4 254.6 459.4 254.6 DL 463.4 254.6 461.4 254.6 DL 465.4 254.6
+463.4 254.6 DL 467.4 254.6 465.4 254.6 DL 469.4 254.6 467.4 254.6 DL 471.4
+254.6 469.4 254.6 DL 473.4 254.6 471.4 254.6 DL 475.4 254.6 473.4 254.6 DL
+477.4 254.6 475.4 254.6 DL 479.4 254.6 477.4 254.6 DL 481.4 254.6 479.4 254.6
+DL 483.4 254.6 481.4 254.6 DL 485.4 254.6 483.4 254.6 DL 487.4 254.6 485.4
+254.6 DL 489.4 254.6 487.4 254.6 DL 491.4 254.6 489.4 254.6 DL 493.4 254.6
+491.4 254.6 DL 495.4 254.6 493.4 254.6 DL 497.4 254.6 495.4 254.6 DL 499.4
+254.6 497.4 254.6 DL 501.4 254.6 499.4 254.6 DL 503.4 254.6 501.4 254.6 DL
+505.4 254.6 503.4 254.6 DL 507.4 254.6 505.4 254.6 DL 509.4 254.6 507.4 254.6
+DL 511.4 254.6 509.4 254.6 DL 513.4 254.6 511.4 254.6 DL 515.4 254.6 513.4
+254.6 DL 517.4 254.6 515.4 254.6 DL 519.4 254.6 517.4 254.6 DL 521.4 254.6
+519.4 254.6 DL 523.4 254.6 521.4 254.6 DL 525.4 254.6 523.4 254.6 DL 527.4
+254.6 525.4 254.6 DL 529.4 254.6 527.4 254.6 DL 531.4 254.6 529.4 254.6 DL
+533.4 254.6 531.4 254.6 DL 535.4 254.6 533.4 254.6 DL 537.4 254.6 535.4 254.6
+DL 539.4 254.6 537.4 254.6 DL 541.4 254.6 539.4 254.6 DL 543.4 254.6 541.4
+254.6 DL 545.4 254.6 543.4 254.6 DL 1.44 LW 90 255.1 72 255.1 DL 99 255.1 81
+255.1 DL 117 255.1 99 255.1 DL 135 255.1 117 255.1 DL 153 255.1 135 255.1 DL
+171 255.1 153 255.1 DL 189 255.1 171 255.1 DL 207 255.1 189 255.1 DL F4(PR)72
+269.1 Q(OM Dependent)-.24 E(Functions)72 283.1 Q F2 .593
+(The interface to the PROM is a very simple one, intended for r)221.5 283.2 R
+(en-)-.198 E(der)221.5 296.4 Q 1.617
+(ers that generate pixel data, such as the standar)-.198 F 4.366(dp)-.198 G
+-.198(ro)497.914 296.4 S(duction).198 E -.198(re)221.5 309.6 S(nder).198 E(er)
+-.198 E 6.709(.T)-.814 G 1.209(he Dore)278.457 309.6 R 4.762<b452>313.755 309.6
+S 1.21(aster\214le PROM implements all functions of)329.528 309.6 R .061
+(the PROM interface.)221.5 322.8 R .061(As a r)5.561 F .061(esult, any r)-.198
+F(ender)-.198 E .06(er that uses the PROM)-.198 F 2.751
+(interface will be fully supported by the Dore)221.5 336 R 6.304<b452>452.636
+336 S 2.751(aster\214le device)469.951 336 R(driver)221.5 349.2 Q(.)-.814 E .16
+LW 223.4 375.2 221.4 375.2 DL 225.4 375.2 223.4 375.2 DL 227.4 375.2 225.4
+375.2 DL 229.4 375.2 227.4 375.2 DL 231.4 375.2 229.4 375.2 DL 233.4 375.2
+231.4 375.2 DL 235.4 375.2 233.4 375.2 DL 237.4 375.2 235.4 375.2 DL 239.4
+375.2 237.4 375.2 DL 241.4 375.2 239.4 375.2 DL 243.4 375.2 241.4 375.2 DL
+245.4 375.2 243.4 375.2 DL 247.4 375.2 245.4 375.2 DL 249.4 375.2 247.4 375.2
+DL 251.4 375.2 249.4 375.2 DL 253.4 375.2 251.4 375.2 DL 255.4 375.2 253.4
+375.2 DL 257.4 375.2 255.4 375.2 DL 259.4 375.2 257.4 375.2 DL 261.4 375.2
+259.4 375.2 DL 263.4 375.2 261.4 375.2 DL 265.4 375.2 263.4 375.2 DL 267.4
+375.2 265.4 375.2 DL 269.4 375.2 267.4 375.2 DL 271.4 375.2 269.4 375.2 DL
+273.4 375.2 271.4 375.2 DL 275.4 375.2 273.4 375.2 DL 277.4 375.2 275.4 375.2
+DL 279.4 375.2 277.4 375.2 DL 281.4 375.2 279.4 375.2 DL 283.4 375.2 281.4
+375.2 DL 285.4 375.2 283.4 375.2 DL 287.4 375.2 285.4 375.2 DL 289.4 375.2
+287.4 375.2 DL 291.4 375.2 289.4 375.2 DL 293.4 375.2 291.4 375.2 DL 295.4
+375.2 293.4 375.2 DL 297.4 375.2 295.4 375.2 DL 299.4 375.2 297.4 375.2 DL
+301.4 375.2 299.4 375.2 DL 303.4 375.2 301.4 375.2 DL 305.4 375.2 303.4 375.2
+DL 307.4 375.2 305.4 375.2 DL 309.4 375.2 307.4 375.2 DL 311.4 375.2 309.4
+375.2 DL 313.4 375.2 311.4 375.2 DL 315.4 375.2 313.4 375.2 DL 317.4 375.2
+315.4 375.2 DL 319.4 375.2 317.4 375.2 DL 321.4 375.2 319.4 375.2 DL 323.4
+375.2 321.4 375.2 DL 325.4 375.2 323.4 375.2 DL 327.4 375.2 325.4 375.2 DL
+329.4 375.2 327.4 375.2 DL 331.4 375.2 329.4 375.2 DL 333.4 375.2 331.4 375.2
+DL 335.4 375.2 333.4 375.2 DL 337.4 375.2 335.4 375.2 DL 339.4 375.2 337.4
+375.2 DL 341.4 375.2 339.4 375.2 DL 343.4 375.2 341.4 375.2 DL 345.4 375.2
+343.4 375.2 DL 347.4 375.2 345.4 375.2 DL 349.4 375.2 347.4 375.2 DL 351.4
+375.2 349.4 375.2 DL 353.4 375.2 351.4 375.2 DL 355.4 375.2 353.4 375.2 DL
+357.4 375.2 355.4 375.2 DL 359.4 375.2 357.4 375.2 DL 361.4 375.2 359.4 375.2
+DL 363.4 375.2 361.4 375.2 DL 365.4 375.2 363.4 375.2 DL 367.4 375.2 365.4
+375.2 DL 369.4 375.2 367.4 375.2 DL 371.4 375.2 369.4 375.2 DL 373.4 375.2
+371.4 375.2 DL 375.4 375.2 373.4 375.2 DL 377.4 375.2 375.4 375.2 DL 379.4
+375.2 377.4 375.2 DL 381.4 375.2 379.4 375.2 DL 383.4 375.2 381.4 375.2 DL
+385.4 375.2 383.4 375.2 DL 387.4 375.2 385.4 375.2 DL 389.4 375.2 387.4 375.2
+DL 391.4 375.2 389.4 375.2 DL 393.4 375.2 391.4 375.2 DL 395.4 375.2 393.4
+375.2 DL 397.4 375.2 395.4 375.2 DL 399.4 375.2 397.4 375.2 DL 401.4 375.2
+399.4 375.2 DL 403.4 375.2 401.4 375.2 DL 405.4 375.2 403.4 375.2 DL 407.4
+375.2 405.4 375.2 DL 409.4 375.2 407.4 375.2 DL 411.4 375.2 409.4 375.2 DL
+413.4 375.2 411.4 375.2 DL 415.4 375.2 413.4 375.2 DL 417.4 375.2 415.4 375.2
+DL 419.4 375.2 417.4 375.2 DL 421.4 375.2 419.4 375.2 DL 423.4 375.2 421.4
+375.2 DL 425.4 375.2 423.4 375.2 DL 427.4 375.2 425.4 375.2 DL 429.4 375.2
+427.4 375.2 DL 431.4 375.2 429.4 375.2 DL 433.4 375.2 431.4 375.2 DL 435.4
+375.2 433.4 375.2 DL 437.4 375.2 435.4 375.2 DL 439.4 375.2 437.4 375.2 DL
+441.4 375.2 439.4 375.2 DL 443.4 375.2 441.4 375.2 DL 445.4 375.2 443.4 375.2
+DL 447.4 375.2 445.4 375.2 DL 449.4 375.2 447.4 375.2 DL 451.4 375.2 449.4
+375.2 DL 453.4 375.2 451.4 375.2 DL 455.4 375.2 453.4 375.2 DL 457.4 375.2
+455.4 375.2 DL 459.4 375.2 457.4 375.2 DL 461.4 375.2 459.4 375.2 DL 463.4
+375.2 461.4 375.2 DL 465.4 375.2 463.4 375.2 DL 467.4 375.2 465.4 375.2 DL
+469.4 375.2 467.4 375.2 DL 471.4 375.2 469.4 375.2 DL 473.4 375.2 471.4 375.2
+DL 475.4 375.2 473.4 375.2 DL 477.4 375.2 475.4 375.2 DL 479.4 375.2 477.4
+375.2 DL 481.4 375.2 479.4 375.2 DL 483.4 375.2 481.4 375.2 DL 485.4 375.2
+483.4 375.2 DL 487.4 375.2 485.4 375.2 DL 489.4 375.2 487.4 375.2 DL 491.4
+375.2 489.4 375.2 DL 493.4 375.2 491.4 375.2 DL 495.4 375.2 493.4 375.2 DL
+497.4 375.2 495.4 375.2 DL 499.4 375.2 497.4 375.2 DL 501.4 375.2 499.4 375.2
+DL 503.4 375.2 501.4 375.2 DL 505.4 375.2 503.4 375.2 DL 507.4 375.2 505.4
+375.2 DL 509.4 375.2 507.4 375.2 DL 511.4 375.2 509.4 375.2 DL 513.4 375.2
+511.4 375.2 DL 515.4 375.2 513.4 375.2 DL 517.4 375.2 515.4 375.2 DL 519.4
+375.2 517.4 375.2 DL 521.4 375.2 519.4 375.2 DL 523.4 375.2 521.4 375.2 DL
+525.4 375.2 523.4 375.2 DL 527.4 375.2 525.4 375.2 DL 529.4 375.2 527.4 375.2
+DL 531.4 375.2 529.4 375.2 DL 533.4 375.2 531.4 375.2 DL 535.4 375.2 533.4
+375.2 DL 537.4 375.2 535.4 375.2 DL 539.4 375.2 537.4 375.2 DL 541.4 375.2
+539.4 375.2 DL 543.4 375.2 541.4 375.2 DL 545.4 375.2 543.4 375.2 DL 1.44 LW 90
+375.7 72 375.7 DL 99 375.7 81 375.7 DL 117 375.7 99 375.7 DL 135 375.7 117
+375.7 DL 153 375.7 135 375.7 DL 171 375.7 153 375.7 DL 189 375.7 171 375.7 DL
+207 375.7 189 375.7 DL F4(Limitations)72 389.7 Q F2(The Dore)221.5 403.8 Q
+3.553<b452>262.332 403.8 S
+(aster\214le device driver has the following limitations.)276.896 403.8 Q
+18.334<8349>221.5 429 S 2.75(td)250.207 429 S(oes not support the)263.264 429 Q
+F3(DdInqPixelData)2.75 E F2(function.)2.75 E 18.334<8345>221.5 454.2 S 2.261
+(ach successive device update will overwrite the pr)253.221 454.2 R(evious)
+-.198 E(image in the \214le.)246.5 467.4 Q 90 756 72 756 DL 99 756 81 756 DL
+117 756 99 756 DL 135 756 117 756 DL 153 756 135 756 DL 171 756 153 756 DL 189
+756 171 756 DL 207 756 189 756 DL 239.4 756 221.4 756 DL 257.4 756 239.4 756 DL
+275.4 756 257.4 756 DL 293.4 756 275.4 756 DL 311.4 756 293.4 756 DL 329.4 756
+311.4 756 DL 347.4 756 329.4 756 DL 365.4 756 347.4 756 DL 383.4 756 365.4 756
+DL 401.4 756 383.4 756 DL 419.4 756 401.4 756 DL 437.4 756 419.4 756 DL 455.4
+756 437.4 756 DL 473.4 756 455.4 756 DL 491.4 756 473.4 756 DL 509.4 756 491.4
+756 DL 527.4 756 509.4 756 DL 545.4 756 527.4 756 DL/F5 9/Helvetica-Bold@0 SF
+(8-2)72 768.96 Q/F6 9/Helvetica@0 SF(Dore)6.504 E 3.506<b453>107.011 768.96 S
+(ystem Guide)119.517 768.96 Q(Dore)221.4 768.96 Q 3.506<b452>236.902 768.96 S
+(aster\214le Dr)249.903 768.96 Q(iv).135 E(er)-.225 E EP
+%%Trailer
+end
+%%EOF

@@ -1,0 +1,55 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DoMarkerScale 3D  "Dore"
+.SH NAME
+DoMarkerScale \- Create a marker scale factor primitive attribute object
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+DtObject DoMarkerScale(scale)
+DtReal scale;
+.sp
+.in -.5i
+FORTRAN:
+.in +.5i
+INTEGER*4 DOMS(SCALE)
+REAL*8 SCALE
+.in -.5i
+.fi
+.SH DESCRIPTION
+.IX DOMS
+.IX DoMarkerScale
+.I DoMarkerScale
+creates a marker scale factor primitive attribute object.  The
+parameter \f2scale\fP specifies the relative size of the
+image of polymarker primitive objects.
+The actual size of the displayed marker is determined by multiplying the marker
+scale factor by a device-dependent nominal marker size;
+the result is in frame units.
+Polymarkers are represented by single points until rendering, and thus
+have no dimension (or scale) until the marker glyph is used.
+The parameter \f2scale\fP may be any floating point number;
+negative numbers will invert the marker representation in X and Y.
+If the parameter \f2scale\fP is 0, the marker will be a single point.  The same
+result can be achieved with less overhead using the marker glyph 
+\f2DcMarkerPoint\fP <\f2DCMKPT\fP>.
+.SH DEFAULTS
+The default \f2DoMarkerScale\fP is 1.0.
+.SH "SEE ALSO"
+DoMarkerFont(3D), DoMarkerGlyph(3D), DoPolymarker(3D)

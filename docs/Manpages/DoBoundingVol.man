@@ -1,0 +1,85 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DoBoundingVol 3D  "Dore"
+.SH NAME
+DoBoundingVol \- Create a bounding volume object
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+DtObject DoBoundingVol(volume, alternate_object)
+DtVolume *volume;
+DtObject alternate_object;
+.sp
+.in -.5i
+FORTRAN:
+.in +.5i
+INTEGER*4 DOBV(VOLUME, ALTOBJ)
+REAL*8 VOLUME(6)
+INTEGER*4 ALTOBJ
+.in -.5i
+.fi
+.SH DESCRIPTION
+.IX DOBV
+.IX DoBoundingVol
+.I DoBoundingVol
+returns a bounding volume object.
+\f2volume\fP defines a box in modeling coordinates that is
+assumed to completely enclose all objects below it in the scene data base,
+i.e., all child branches rooted below that point in the display 
+database.
+When a bounding volume object is executed, the given \f2volume\fP is
+projected onto the device.  If there is no intersection with the device
+or if the diagonal of the smallest right rectangle that can enclose
+this projection in X and Y is smaller than the
+\f2DoMinBoundingVolExt\fP <\f2DOMBVE\fP>, then the rest of the current group is
+not executed.  However, if the bounding volume is
+visible but under the minimum size, then the optional \f2alternate_object\fP
+is executed.
+.PP
+If the projection is larger than the \f2DoMinBoundingVolExt 
+<DOMBVE>\fP, the \f2alternate_object\fP is ignored and the
+rest of the current group is executed.
+.PP
+Alternate objects are simpler versions of the
+objects being skipped to avoid a lot of complex rendering 
+that would contribute little to the final image.
+One may want to have more than one alternate object;
+i.e., execute object2 if object1 is too small or 
+execute object3 if object2 is too small, and so on.
+In this case, the alternate object will be a group object that 
+contains a new shorter minimum bounding extension and a bounding volume
+containing the even simpler alternate object. If
+\f2alternate_object\fP is a null object pointer, \f2DcNullObject
+<DCNULL>\fP, then nothing will be drawn if the bounded
+objects do not cover the minimum area on the device.
+.PP
+The \f2volume\fP parameter is a user-supplied three-dimensional
+space specifying the bounding volume.  \f2DsCompBoundingVol\fP <\f2DSCBV\fP>
+can be  used to compute a volume that contains a user-supplied object.
+.PP
+If the current bounding volume switch \f2DoBoundingVolSwitch\fP <\f2DOBVS\fP> 
+is \f2DcOff\fP <\f2DCOFF\fP>, then bounding
+volume calculations will be skipped.
+.SH "SEE ALSO"
+.na
+.nh
+DoBoundingVolSwitch(3D), DoMinBoundingVolExt(3D),
+DsCompBoundingVol(3D)
+.ad
+.hy

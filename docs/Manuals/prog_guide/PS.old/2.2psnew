@@ -1,0 +1,109 @@
+!md begin
+!/note {} def
+!/legal {} def
+!md /lnop known not { /lnop [ {} ] cvx def } if
+!/bigs [lnop lnop lnop lnop lnop lnop lnop lnop] def
+!/smalls [lnop lnop lnop lnop lnop lnop lnop lnop] def
+!/cp {pm restore pop pop} def
+!
+!T T -31 -30 761 582 100 72 72 1 F F F F T T psu
+!(Aaron Black; document: Unspecified)jn
+!0 mf
+!od
+!op
+!0 0 xl
+!-1 72 mul 0 72 mul translate
+!0.5 0.5 scale
+!1 1 pen
+!0 0 gm
+!(nc 0 0 720 540 6 rc)kp
+!64 gr
+!66 121 94 172 4 rc
+!0 gr
+!66.5 121.5 93.5 171.5 0 rc
+!76 142 83 149 4 ov
+!76.5 142.5 82.5 148.5 0 ov
+!68.5 200.5 90.5 295.5 26.5 26.5 0 rr
+!64 gr
+!93 121 121 172 4 rc
+!0 gr
+!93.5 121.5 120.5 171.5 0 rc
+!103 142 110 149 4 ov
+!103.5 142.5 109.5 148.5 0 ov
+!64 gr
+!120 121 148 172 4 rc
+!0 gr
+!120.5 121.5 147.5 171.5 0 rc
+!130 142 137 149 4 ov
+!130.5 142.5 136.5 148.5 0 ov
+!64 gr
+!147 121 175 172 4 rc
+!0 gr
+!147.5 121.5 174.5 171.5 0 rc
+!157 142 164 149 4 ov
+!157.5 142.5 163.5 148.5 0 ov
+!53.5 108.5 188.5 183.5 44.5 44.5 0 rr
+!18.5 121.5 34.5 171.5 0 rc
+!23 142 30 149 4 ov
+!23.5 142.5 29.5 148.5 0 ov
+!44 136 64 156 246 294 1 ar
+!26 145 gm
+!46 145 lin
+!0 0 gm
+!96 191 116 211 156 204 1 ar
+!106 145 gm
+!106 192 lin
+!0 0 gm
+!123 189 143 209 156 204 1 ar
+!133 147 gm
+!133 190 lin
+!0 0 gm
+!150 187 170 207 156 204 1 ar
+!160 147 gm
+!160 188 lin
+!0 0 gm
+!69 190 89 210 156 204 1 ar
+!79 146 gm
+!79 191 lin
+!0 0 gm
+!95.5 200.5 117.5 295.5 26.5 26.5 0 rr
+!123.5 199.5 145.5 294.5 26.5 26.5 0 rr
+!151.5 198.5 173.5 293.5 26.5 26.5 0 rr
+!13 133 gm
+!bu fc
+!{}mark T /Helvetica /Helvetica 0 rf
+!bn
+!1 setTxMode
+!0 fs
+!12 fz
+!bu fc
+!2 F /Helvetica fnt
+!bn
+!0.32905 0.(base)ashow
+!83 213 gm
+!0 gr
+!0.62881 0. 32 0.06288 0.(Translate #1)awidthshow
+!138 212 gm
+!0.62881 0. 32 0.06288 0.(Translate #2)awidthshow
+!110 226 gm
+!0.49784 0.(Scale)ashow
+!166 232 gm
+!0.16262 0.(Box)ashow
+!2 2 pen
+!0 0 gm
+!71 79 132 123 180 270 0 ar
+!84 79 144 123 90 180 0 ar
+!95 69 108 79 0 90 0 ar
+!108 69 120 79 270 360 0 ar
+!144 87 171 115 180 270 0 ar
+!149 87 176 115 90 180 0 ar
+!155 79 160 87 0 90 0 ar
+!160 79 165 87 270 360 0 ar
+!1 1 pen
+!109 18 gm
+!0.14726 0.(Attributes)ashow
+!164 34 gm
+!0.12690 0.(Primitive)ashow
+!F T cp
+!cd
+!end

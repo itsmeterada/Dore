@@ -1,0 +1,9 @@
+#include <Dore.tmpl>
+
+    SRCS = vll_dcm.c vll_inq.c vll_output.c vll_set.c
+    OBJS = vll_dcm.o vll_inq.o vll_output.o vll_set.o
+
+LibraryObjectRule()
+SubdirLibraryRule($(OBJS))
+
+DependTarget()

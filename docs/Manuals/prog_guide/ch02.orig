@@ -1,0 +1,1024 @@
+.\"#ident "%W%" %G%
+.\"
+.\" Copyright (C) 1988, 1989, 1990, 1991 by Kubota Pacific Computer Inc.
+.\"         All Rights Reserved
+.\" This program is a trade secret of Kubota Pacific Computer Inc. and
+.\" it is not to be reproduced, published, disclosed to others, copied,
+.\" adapted, distributed, or displayed without the prior authorization
+.\" of Kubota Pacific Computer Inc.  Licensee agrees to attach or embed
+.\" this Notice on all copies of the program, including partial copies
+.\" or modified versions thereof.
+.\"
+.so ../macros/local.me
+.PN 5
+.ds CT Writing a \*(Dd Program
+.ds BT \*(Dd Programmer's Guide
+.ds h1 2
+.L1 W RITING " A"
+.L2 D OR\h'5p'\v'-8p'\(aa\v'8p'\h'-5p' "" "\h'-\w'\(aa'u'E
+.L3 P ROGRAM
+.CH TWO
+.rs
+.sp -1v
+This chapter provides an introduction to the structure of a \*(Dd
+program and to some of the commonly used functions in the \*(Do.
+\*(Dd programming is object-based, an approach which leads to
+programs that are both modular and easily extendable.
+.H1 "The \*(Dd Process"
+.IX sample program
+The process of defining a scene with the \*(Do, taking its
+picture, moving the camera, taking its picture again, modifying
+the scene, and taking another picture is analogous to actual
+photography.  Imagine an animation artist preparing
+a scene for a science fiction movie, using models and cameras to
+create the illusion of starfighters in a battle scene.  The
+artist
+.np
+Constructs the models of the starfighters from smaller parts.
+.np
+Positions the models in the scene, usually in front of a backdrop
+picture of stars and galaxies.
+.np
+Positions the camera and chooses a lens to obtain the proper
+image framing and depth of field.
+.np
+Adjusts the light level and positions spotlights to make
+everything in the scene visible, to highlight portions of the
+scene, and to cast shadows.
+.np
+Takes a picture.  To simulate motion, the artist attaches
+everything in the scene to moving arms or platforms.  Then, all
+the pieces in the scene can be moved a small amount and another
+picture taken, then moved again and another picture taken, and so
+on until the whole sequence is filmed.
+.lp
+A \*(Dd application modeling an internal combustion engine may
+not be as thrilling as a starfight, but the series of steps from
+basic parts construction through scene generation, camera
+positioning, and lighting is the same.  The application must
+define each part of the engine: from nuts, bolts, and washers, to
+piston rods, pistons, cylinder head, and engine block.  Some of
+these parts are used in the engine only once (the cylinder head
+and engine block), while other parts are used more than once
+(bolts, piston parts).  The application positions each part
+together to build an image of a realistic engine.
+This model building applies both to construction of new parts and to viewing of
+existing parts and data, such as the results of stress or thermal
+analysis.
+.sp -.5v
+.H1 "Objects and Methods"
+.rs
+.sp -.25v
+The \*(Do consists of \f2objects\f1 and \f2methods\f1.  All data
+is kept in the form of \f2objects\f1.  Each geometric primitive,
+attribute, group, camera, light, device, frame, and view is a
+separate object.  Each object has a set of \f2methods\f1, which
+are a set of internal functions that operate on the object.  When
+a method is invoked, the \*(Dd database is traversed, and the
+objects in the database are executed using that method.  The most
+commonly used method is \f2rendering\f1.  Other methods include
+picking and printing.
+.sp -.5v
+.H1 "Basic Steps in Programming with the \*(Do"
+.rs
+.sp -.25v
+The basic steps in programming with the \*(Do are very similar to
+those used by the artist in constructing the starfighter scene.
+The programmer
+.sp -.25v
+.np
+Creates the objects being modeled using primitives for points,
+lines, polygons, patches, and surfaces.
+.np
+Chooses attributes to describe the appearance of the
+objects\(emtheir
+color, shininess, whether they have shadows on their surfaces,
+and so on.
+.np
+Positions and sizes scene objects relative to one another.
+.np
+Positions various kinds of lights in the scene.
+.np
+Selects a camera lens and positions the camera in the scene.
+.np
+Asks for the scene to be rendered.
+.lp
+Now let's take a look at each of these steps in a bit more
+detail and
+examine some simple code fragments written in C and
+\*(Fo. 
+Finally we'll see how all the pieces work together 
+in a complete program. 
+The sample program given at the end of this chapter produces a
+simple scene with a blue cylinder, a magenta box, and a wireframe
+magenta sphere.
+You can refer to this to see 
+what a complete \*(Dd program looks like.
+.H1 "Step 1:  Primitives"
+The \*(Do offers a wide range of primitives for describing the
+shape of displayable objects.  Simple primitives create points,
+lines, polygons, and text, while more advanced primitives create
+meshes, patches, and closed cubic surfaces such as spheres and
+cones.
+.lp
+The sample program creates three shapes\(ema cylinder, 
+a box, and a sphere.
+In C, the function calls to create these shapes are:
+.(m
+.\"#	ident "@(#)ch02.ex01	1.2" 5/15/91
+.\"
+DoPrimSurf(DcCylinder)
+DoPrimSurf(DcBox)
+DoPrimSurf(DcSphere)
+.)m
+.lp
+In \*(Fo, the function calls are:
+.(m
+.\"#	ident "@(#)ch02.ex01.f	1.2" 5/15/91
+.\"
+      CALL DOPMS(DCCYL)
+      CALL DOPMS(DCBOX)
+      CALL DOPMS(DCSPHR)
+.)m
+.H1 "Step 2:  Attributes"
+Next, you select the attributes to describe the appearance of the
+primitive objects.  The sphere and the box are both magenta, and
+the cylinder is blue.  The sphere is displayed as a wireframe 
+structure, whereas the actual surfaces of the box and cylinder 
+can be seen.
+.lp
+Specifying an object's color brings up two important concepts in
+the \*(Do:  the concept of a \f2color model\f1 and the concept of
+\f2how an object responds to light\f1.  Later chapters go into
+detail on these concepts, so a brief introduction will suffice
+for now.
+.H2 "Color Model"
+Colors are specified by a color model and an array of color
+data.  Currently, the \*(Do supports the RGB color model.  The
+amounts of red, green, and blue are specified as  real numbers,
+where (0.0, 0.0, 0.0) is black, (1.0, 0.0, 0.0) is red, 
+and (1.0, 1.0, 1.0) is white.
+.lp
+The color for the sphere and box in the example is specified in
+an array, as follows:
+.(m
+C code:
+
+.\"#	ident "@(#)ch02.ex02	1.4" 5/16/91
+.\"
+static DtReal magenta[] = {1.0, 0.0, 1.0};  /* R,G,B */
+DoDiffuseColor(DcRGB, magenta);
+
+\*(Fo code:
+
+.\"#	ident "@(#)ch02.ex02.f	1.4" 5/16/91
+.\"
+      REAL*8 MAGENTA(3)
+      DATA MAGENTA / 1.0D0, 0.0D0, 1.0D0 /
+      CALL DODIFC(DCRGB,MAGENTA)
+.)m
+The cylinder is a deep sky blue, which is specified as:
+.(m
+C code:
+
+.\"#	ident "@(#)ch02.ex03	1.3" 5/16/91
+.\"
+DtReal sky_blue []= {0.3, 0.3, 1.0};
+DoDiffuseColor(DcRGB, sky_blue);
+
+\*(Fo code:
+
+.\"#	ident "@(#)ch02.ex03.f	1.4" 5/16/91
+.\"
+      REAL*8 SKYBLU(3)
+      DATA SKYBLU / 0.3D0, 0.3D0, 1.0D0 /
+      CALL DODIFC(DCRGB,SKYBLU)
+.)m
+.H2 "How an Object Responds to Light"
+.IX object's response to light
+An object's response to light has five basic components:
+ambient, diffuse, specular, transparent, and reflection.  Each of these
+components in turn has a color, an intensity, and a switch that
+specifies whether the component is applied or not.  The
+\f2diffuse color\f1 is usually thought of as the object's base
+color.  For example, the diffuse color of the cylinder in the
+example is sky blue.  The diffuse color of the box and sphere is
+magenta.  
+The \f2ambient color\f1 is essentially
+the same as the diffuse color.
+The \f2specular color\f1 is the color of
+the object's highlights.  
+The \f2transparent color\f1 is the color of
+light transmitted through the object.
+The \f2reflection color\f1 of the object will appear the same as
+its specular color except that the object responds only to light
+reflected from other primitive objects and not from light sources.
+.H2 "Default Values for Attributes"
+.IX default values for attributes
+If you do not specify a value for a particular attribute, the
+default value for that attribute is used.  In the example, no
+diffuse intensity is specified so the default intensity (1.0) is
+used.  Don't be afraid to trust the default values for attributes
+in the \*(Do; they have been carefully designed to fit the most
+common usage.
+.H2 "Colored Vertices"
+.IX colored vertices
+The primitives in this chapter are created using the
+\f2DoPrimSurf <DOPMS>\f1 function, which defines a primitive
+surface in a standard location and with a standard size.  Other
+primitives, such as lines, triangles, polygons, and meshes, 
+use vertices explicitly to compose the object.  With those
+primitives, you can optionally include color information in the
+definition of each vertex, to be used for shading computation.
+If you do not specify colors for the vertices, global color
+attributes will be used for the whole surface.
+.H1 "Step 3:  Positioning and Sizing Scene Objects"
+Another important category of attributes for primitive objects
+is the \f2geometric transformations,\f1 which affect the shape
+and positioning of objects in three-dimensional space.  Important
+geometric transformations include
+.ip "\f3DoScale <DOSC>\f1"
+which scales the object in \f2x, y, \f1and \f2z\f1
+.ip "\f3DoTranslate <DOXLT>\f1"
+which moves the object a specified amount in the \f2x, y, \f1and
+\f2z\f1 directions
+.ip "\f3DoRotate <DOROT>\f1"
+which rotates the object a specified amount around one of the
+axes
+.lp
+In the example, the cylinder (which is created at the origin,
+extending in the positive \f2z\fP direction) is
+scaled in all three directions:
+.(m
+C code:
+
+.\"#	ident "@(#)ch02.ex04	1.2" 5/15/91
+.\"
+DoScale (1.2, 1.2, 2.4)
+
+\*(Fo code:
+
+.\"#	ident "@(#)ch02.ex04.f	1.2" 5/15/91
+.\"
+      CALL DOSC(1.2D0, 1.2D0, 2.4D0)
+.)m
+This scaling stretches the cylinder in the
+\f2x\f1 and \f2y\f1 directions, thus making it fatter, and
+stretches it in the \f2z\f1 direction, which lengthens it.
+.lp
+Angles in \*(Dd can be specified
+as degrees or radians, depending on the value set 
+by \f2DsSetAngleUnits <DSSAU>\fP.
+By default, rotation angles are assumed to be in radians.
+In the example, the angle units are set to \f2DcAngleDegrees
+<DCAD>\fP and the cylinder is rotated 90 degrees around the 
+\f2x\fP axis:
+.(m
+C code:
+
+DsSetAngleUnits(DcAngleDegrees);
+DoRotate (DcXAxis, 90.0);
+
+\*(Fo code:
+
+     CALL DSSAU(DCAD)
+     CALL DOROT(DCXAX, 90.0D0)
+.)m
+.H2 "Objects and Groups:  DgAddObj()"
+We now have several primitive objects\(ema box, a cylinder, and a
+sphere\(emand
+some attributes\(emdiffuse color, scaling, and other attributes
+you'll learn about soon such as representation type.  
+How
+do we begin putting them together into an ordered program?  The
+main vehicle for organizing objects and their associated
+attributes into a hierarchical database is the \f2group\f1.  A
+group is an ordered list of object pointers.  Each of the
+\f2Do-\f1
+functions described above returns an object handle that can
+be added to a group with the function \f2DgAddObj <DGAO>\f1.
+.lp
+\*(FT shows a simplified diagram of 
+the objects included in the group \f2post\fP from the sample program.
+Note that the attribute objects \f2precede\f1
+their associated primitive objects, as shown.
+The ordering of
+objects within a group is important because the objects within a
+group are executed in order\(emfirst the diffuse color object,
+then the translate object, 
+followed by the other attributes, and finally the 
+cylinder primitive object.
+.(F ./PS/2.1ps" 2.25i 1
+.\".sp 2.25i
+.)F "post Group"
+.lp
+The code for this sample group looks like this:
+.sp .5v
+.(m
+C code:
+
+.\"#	ident "@(#)ch02.ex05	1.2" 5/15/91
+.\"
+     DsSetAngleUnits(DcAngleDegrees);
+
+     post = DoGroup(DcTrue);
+          DgAddObj(DoDiffuseColor(DcRGB, sky_blue));
+          DgAddObj(DoTranslate(0.0, 1.5, 0.0));
+          DgAddObj(DoRotate(DcXAxis, 90));
+          DgAddObj(DoScale(1.2, 1.2, 2.4));
+          DgAddObj(DoPrimSurf(DcCylinder));
+     DgClose();
+.)m
+
+.(m
+
+\*(Fo code:
+
+.\"#	ident "@(#)ch02.ex05.f	1.2" 5/15/91
+.\"
+      CALL DSSAU(DCAD)
+C
+      POST = DOG(DCTRUE)
+          CALL DGAO(DODIFC(DCRGB, SKYBLU))
+          CALL DGAO(DOXLT(0.0D0, 1.5D0, 0.0D0))
+          CALL DGAO(DOROT(DCXAX, 90.0D0))
+          CALL DGAO(DOSC(1.2D0, 1.2D0, 2.4D0))
+          CALL DGAO(DOPMS(DCCYL))
+      CALL DGCS()
+.)m
+.bp
+\*(FT shows a diagram for another group, called \f2base\fP,
+from the sample program.
+.(F ./PS/2.2ps" 1.75i 1
+.\" .sp 1.75i
+.)F "base Group"
+Code for that group looks like this:
+.(m
+C code:
+
+.\"#	ident "@(#)ch02.ex06	1.2" 5/15/91
+.\"
+     base = DoGroup(DcTrue);
+          DgAddObj(DoTranslate(0.0, -2.2, 0.0));
+          DgAddObj(DoScale(2.5, 2.5, 2.5));
+          DgAddObj(DoTranslate(-0.5, -0.5, -0.5));
+          DgAddObj(DoPrimSurf(DcBox));
+     DgClose();
+
+\*(Fo code:
+
+.\"#	ident "@(#)ch02.ex06.f	1.2" 5/15/91
+.\"
+      BASE = DOG(DCTRUE)
+          CALL DGAO(DOXLT(0.0D0, -2.2D0, 0.0D0))
+          CALL DGAO(DOSC(2.5D0, 2.5D0, 2.5D0))
+          CALL DGAO(DOXLT(-0.5D0, -0.5D0, -0.5D0))
+          CALL DGAO(DOPMS(DCBOX))
+      CALL DGCS()
+.)m
+.sp -.5v
+.H1 "Step 4:  Choosing Lights"
+Once the primitive objects and their attributes have been
+defined, the programmer sets up the \f2studio objects\f1 for the
+scene:  the \f2cameras\f1 and \f2lights\f1.  Like primitive
+objects, cameras and lights have attributes that affect them.
+In a \*(Dd program, the attributes for the studio objects precede
+the objects they modify, just as primitive attributes precede the
+primitives they modify (see \*(FT).
+.bp
+.(F ./PS/2.3ps" 2i 0
+.\".sp 2i
+.)F "Light and Camera Attributes"
+This example creates a light, using the default light type 
+(\f2DcLightInfinite <DCLTIN>)\fP.
+The geometric transformation attribute \f2DoLookAtFrom <DOLAF>\fP
+positions the light at (1.0, 1.0, 0.5), pointing towards the origin.  
+The light has an intensity of 1.0.  
+Code for the lights is
+.(m
+C code:
+
+.\"#	ident "@(#)ch02.ex07	1.2" 5/15/91
+.\"
+static DtPoint3
+    origin = {0.,0.,0.},
+    light = {1.0, 1.0, 0.5};
+
+static DtVector3 up = {0.,1.,0.};
+
+def_group = DoGroup(DcTrue);
+          .
+          .
+    DgAddObj(DoPushMatrix());
+        DgAddObj(DoLookAtFrom(origin, light, up));
+        DgAddObj(DoLightIntens(1.0));            
+        DgAddObj(DoLight());                    
+    DgAddObj(DoPopMatrix());
+DgClose();
+
+\*(Fo code:
+
+.\"#	ident "@(#)ch02.ex07.f	1.2" 5/15/91
+.\"
+      REAL*8 ORIGIN(3)
+      REAL*8 LIGHT(3)
+      REAL*8 UP(3)
+C
+      DATA ORIGIN / 0.0D0, 0.0D0, 0.0D0 /
+      DATA LIGHT  / 1.0D0, 1.0D0, 0.5D0 /
+      DATA UP     / 0.0D0, 1.0D0, 0.0D0 /
+C
+      DEF_GROUP = DOG(DCTRUE)
+          .
+          .
+          .
+      CALL DGAO(DOPUMX())
+      CALL DGAO(DOLAF(ORIGIN, LIGHT, UP))  
+      CALL DGAO(DOLI(1.0D0))              
+      CALL DGAO(DOLT())                  
+      CALL DGAO(DOPPMX())
+      CALL DGCS()
+.)m
+The functions \f2DoPushMatrix <DOPUMX>\f1 and \f2DoPopMatrix
+<DOPPMX>\f1
+will be
+discussed in more detail in Chapter 6. This functional pair is
+used to localize the effects of geometric transformation
+attributes.  In this case, we want only the light to be affected
+by the \f2DoLookAtFrom <DOLAF>\f1 function; we will include a separate
+\f2DoLookAtFrom\f1 to position the camera object.
+.H1 "Step 5:  Selecting a Lens and Camera Position"
+The next step is choosing a camera type and positioning the
+camera in the scene.  
+Selecting the camera projection (parallel or perspective) 
+is analogous to a photographer selecting a camera lens.  
+Like the light discussed in the previous section, the
+camera can be positioned in the scene with the
+\f2DoLookAtFrom <DOLAF>\f1 function:
+.(m
+C code:
+
+.\"#	ident "@(#)ch02.ex08	1.2" 5/15/91
+.\"
+static DtPoint3
+    origin    = {  0.0,  0.0,  0.0},
+    eye_point = { 10.0, 10.0, 10.0};
+static DtVector3
+    up        = {  0.0,  1.0,  0.0};
+
+def_group = DoGroup(DcTrue);
+    DgAddObj(DoParallel(10.0, -0.1, -20.0));
+    DgAddObj(DoPushMatrix());
+        DgAddObj(DoLookAtFrom(origin, eye_point, up));
+        DgAddObj(DoCamera());
+    DgAddObj(DoPopMatrix());
+       .
+       .
+DgClose();
+
+
+
+
+\*(Fo code:
+
+.\"#	ident "@(#)ch02.ex08.f	1.2" 5/15/91
+.\"
+      REAL*8 ORIGIN(3)
+      REAL*8 EYEPT(3)
+      REAL*8 UP(3)
+C
+      DATA ORIGIN /  0.0D0,  0.0D0,  0.0D0 /
+      DATA EYEPT  / 10.0D0, 10.0D0, 10.0D0 /
+      DATA UP     /  0.0D0,  1.0D0,  0.0D0 /
+C
+      DEFGRP = DOG(DCTRUE)
+           CALL DGAO(DOPAR(10.0D0, -0.1D0, -20.0D0)) 
+           CALL DGAO(DOPUMX())
+               CALL DGAO (DOLAF(ORIGIN, EYEPT, UP)) 
+               CALL DGAO (DOCM())                  
+           CALL DGAO(DOPPMX())
+          .
+          .
+      CALL DGCS()
+.)m
+.H2 "Views, Frames, and Devices"
+We have now completed the major steps in describing the
+objects in the scene and their attributes.
+But we need to give more organization to this
+collection of objects before the \*(Do knows exactly what we want
+it to do with them.
+With views, frames and devices, \*(Dd
+provides a very flexible way of collecting groups of 
+objects and displaying them.
+.H3 "Views"
+A \f2view\f1 is used to collect \f2primitive
+objects\f1 and their attributes, as well as the
+\f2viewing parameters\f1 for those objects (cameras and lights,
+along with their attributes).
+Usually, the displayable objects of a view are updated far more
+frequently than the studio objects.
+A view therefore has one group for the displayable objects and 
+their attributes, and another group for the studio objects and
+their attributes.
+.lp
+Primitive objects and their attributes are added to
+the display group of a view by:
+.(m
+C code:
+
+.\"#	ident "@(#)ch02.ex09	1.2" 5/15/91
+.\"
+view = DoView();
+DgAddObjToGroup(DvInqDisplayGroup(view), obj_group);
+
+
+\*(Fo code:
+
+.\"#	ident "@(#)ch02.ex09.f	1.2" 5/15/91
+.\"
+      VIEW=DOVW()
+      CALL DGAOG(DVQIG(VIEW), OBJGRP)
+.)m
+.rs
+.sp -.25v
+Studio objects and their attributes are added to
+the definition group of a view by:
+.(m
+C code:
+
+.\"#	ident "@(#)ch02.ex10	1.2" 5/15/91
+.\"
+view = DoView();
+DgAddObjToGroup(DvInqDefinitionGroup(view), def_group);
+
+\*(Fo code:
+
+.\"#	ident "@(#)ch02.ex10.f	1.3" 5/15/91
+.\"
+      VIEW=DOVW()
+      CALL DGAOG(DVQDG(VIEW),DEFGRP)
+.)m
+.rs
+.sp -.25v
+.H3 "Frames"
+.rs
+.sp -.25v
+A \f2frame\fP is used to collect views into a virtual image.
+A frame can contain multiple views, much as a bulletin board 
+could have a number of notices pinned to it.  
+In our example, we have only one view and it fills the entire frame.
+.(m
+C code:
+
+.\"#	ident "@(#)ch02.ex11	1.2" 5/15/91
+.\"
+frame=DoFrame();
+DgAddObjToGroup(DfInqViewGroup(frame), view);
+
+\*(Fo code:
+
+.\"#	ident "@(#)ch02.ex11.f	1.2" 5/15/91
+.\"
+      FRAME=DOFR()
+      CALL DGAOG(DFQVG(FRAME),VIEW)
+.)m
+.rs
+.sp -.25v
+.H3 "Devices"
+.rs
+.sp -.25v
+To display an image the frame must be assigned to a \f2device\fP.
+\*(Dd supports several different output devices, ranging from
+simple file output to sophisticated graphics workstations.
+You can think of the frame as a device independent image, which can
+easily be assigned to one or more of these devices.
+.(m
+C code:
+
+.\"#	ident "@(#)ch02.ex12	1.3" 5/15/91
+.\"
+device = DoDevice("stdx11",
+                    "-zbuffer -visualtype DcTrueColor");
+DdSetFrame(device, frame);
+
+
+\*(Fo code:
+
+.\"#	ident "@(#)ch02.ex12.f	1.3" 5/15/91
+.\"
+      DEVICE=DOD('stdx11',6,
+     1            '-zbuffer -visualtype DcTrueColor',32)
+      CALL DDSF(DEVICE, FRAME)
+.)m
+.H1 "Step 6:  Rendering the Scene"
+\*(Dd supports multiple renderers and the final step in displaying
+a scene includes selecting a renderer using 
+the \f2DvSetRendStyle <DVSRS>\f1 function.
+Two renderers are commonly provided with \*(Dd: 
+.IX constants
+.ip "\f3DcRealTime <DCRLTM>\f1"
+for fast, dynamic display rendering
+.ip "\f3DcProductionTime <DCPRTM>\f1"
+for the most realistic rendering, which requires the most time
+.lp
+The view in our example will be rendered with the 
+real-time renderer, which is the default renderer.
+The exact same \*(Dd scene can be used with any of the provided
+renderers.
+A renderer will simply ignore any attributes in the scene that
+it cannot handle.
+See your \f2\*(Dd System Guide\fP for the list of
+renderers available on your system and the attributes they support.
+.lp
+To invoke the renderer you use one of the update commands.
+Our example uses \f2DdUpdate <DDU>\f1 to invoke the renderer.
+.H1 "Immediate Mode Execution"
+.IX immediate mode execution
+In this example, we first created the objects that made up the
+database hierarchy.  Then we invoked the rendering method, which
+traversed the objects making up the database.
+.lp
+The \*(Do can also be used in \f2immediate mode\f1, which is
+ideal for simple databases that can be traversed very quickly.
+In immediate mode, objects are created and then immediately
+executed.  The objects exist only during database traversal. See
+Chapter 11, \f2Conditionals\fP, for more information on immediate
+mode.
+.rs
+.sp -1v
+.H1 "Naming Conventions"
+.IX naming conventions
+All \*(Dd functions, types, and constants begin with the letter
+\f2D\f1.  The second letter identifies whether the name is a
+\*(Dd type, a constant, or a particular kind of function.
+The rest of a \*(Dd C name is a mnemonic, using concatenated
+words or abbreviations with the first character of each word
+in upper case.
+\*(Dd \*(Fo names are restricted to 6 characters and
+are all upper case.
+.sp -.25v
+.ip "\f3Dc\f1XxxYyy <\f3DC\f1XXXX>"
+a \f2constant\f1 value, used as a parameter.
+.sp -.25v
+.ip "\f3Dt\f1XxxYyy <\f3DT\f1XXXX>"
+a \f2type\f1 declaration, used for parameters.
+.sp -.25v
+.ip "\f3Dd\f1XxxYyy <\f3DD\f1XXXX>"
+a \f2device\f1 function.
+.sp -.25v
+.ip "\f3De\f1XxxYyy <\f3DE\f1XXXX>"
+a function called when user \f2extensions\f1 are added to
+standard \*(Dd.  These functions are not typically used by
+application programs.
+.sp -.25v
+.ip "\f3Df\f1XxxYyy <\f3DF\f1XXXX>"
+a \f2frame\f1 function.
+.sp -.25v
+.ip "\f3Dg\f1XxxYyy <\f3DG\f1XXXX>"
+a \f2group\f1 function.
+.sp -.25v
+.ip "\f3Do\f1XxxYyy <\f3DO\f1XXXX>"
+an \f2object creation\f1 function.  All \f2Doxxx\f1 functions
+return object handles.
+.sp -.25v
+.ip "\f3Dp\f1XxxYyy <\f3DP\f1XXXX>"
+a function used to modify \*(Dd \f2primitives\f1.
+.sp -.25v
+.ip "\f3Ds\f1XxxYyy <\f3DS\f1XXXX>"
+a \f2system\f1 command.
+.sp -.25v
+.ip "\f3Dv\f1XxxYyy <\f3DV\f1XXXX>"
+a \f2view\f1 function.
+.sp -.25v
+.ip "\f3DUo\f1XxxYyy <\f3DUO\f1XXX>"
+a user-defined primitive object creation function.
+.rs
+.sp -1v
+.H1 "Include Files"
+All \*(Dd programs must include the standard \*(Dd include files,
+which are installed in \f2/usr/include\fP and
+\f2/usr/include/fortran\fP on most systems.
+.sp -.25v
+.ip \f3dore.h\fP
+must be included by all C code.
+.sp -.25v
+.ip \f3DORE\fP
+must be included by all \*(Fo code.
+.sp -.25v
+.ip \f3DORETEXT\fP
+must be included by \*(Fo code that uses text attributes.
+(See Chapter 7.)
+.sp -.25v
+.ip \f3DOREMETHODS\fP
+must be included by \*(Fo code that implements user-defined
+primitives.
+(See Chapter 13.)
+.H1 "Single\(hy and Double\(hyPrecision Application Interfaces"
+Different implementations of \*(Dd on different platforms may
+provide support
+for either single- or double-precision real numbers in the
+application
+program interface.
+That is, the floating point values and arrays 
+passed into \*(Dd subroutine calls may be either single or double
+precision.  For C programs, the type \f2DtReal\f1 corresponds
+to a float or a double depending on the precision.
+Be sure to check your \f2\*(Dd System Guide\fP
+for whether your version of \*(Dd provides a single- or
+double-precision interface.
+.lp
+Some platforms provide support for both single-
+and double-precision reals.
+In these cases,  you will need to consider
+tradeoffs among different factors:  amount of space required for
+each
+precision,
+the difference in precision between single- and double-precision
+reals, and the effect on speed of choosing one type of precision
+over the
+other.
+.H2 "Portability"
+Portability of \*(Dd applications between 
+\*(Dd implementations supporting different precisions
+is an issue that you must be aware of.
+The following paragraphs describe some of the factors that should
+be taken into consideration to achieve portability.
+.H3 "C Code"
+If certain standard coding practices are followed, C code should
+be portable
+between single- and double-precision \*(Dd implementations.  
+.lp
+For arrays of type
+\f2DtReal\f1, the precision should be explicitly declared rather
+than
+assumed (for example, through type casting).
+In general, variables passed in to \*(Dd should be
+explicitly declared as \f2DtReals\f1.  
+.lp
+Avoid performing I/O with \f2DtReals\f1, since the
+precision will differ with different machines.
+For example, to read in a value for diffuse intensity
+do something like:
+.(m
+double tmpval;
+DtReal intens;
+DtObject difint;
+
+printf("enter diffuse intensity: ");
+scanf(" %lf ", &tmpval);
+intens = tmpval;
+difint = DoDiffuseIntens(intens);
+
+.)m
+.H3 "\*(Fo Code"
+At present, \*(Fo code may not be portable between hardware
+that supports
+only single-precision reals and hardware that supports only
+double-precision
+reals.  The \*(Fo examples in this manual all use
+double-precision reals.
+.lp
+For double precision, all real numbers and arrays are 
+declared as REAL*8.
+For single precision, all real numbers and arrays are 
+declared as REAL*4.
+In double-precision the constants include \f2D0\f1 after their
+values. 
+In single-precision implementations, the \f2D0\f1 is omitted.  
+(Real constants in \f2data\f1 statements
+can be written as double precision for both single- and
+double-precision implementations because
+they will be converted to single precision if necessary by most
+\*(Fo compilers.)  
+.H2 "Compiling and Linking"
+When compiling C code on systems that provide both
+single- and double-precision versions of the \*(Dd interface, 
+use the compile options -DDORE_REAL_SINGLE and -DDORE_REAL_DOUBLE
+to configure your code to the precision you want.
+Your \f2\*(Dd System Guide\fP has information on which configuration
+will be used by default.
+.lp
+Systems that provide both single- and double-precision \*(Dd
+will have two installed \*(Dd libraries\(emone for each
+type of interface.
+Make sure you link with the library that corresponds to 
+the precision used by your code.
+.H1 "Complete Sample Program"
+The complete sample program used in this chapter's examples is
+shown below.  The program creates and displays three objects\(ema
+cylinder, a box, and a sphere.  It also creates a definition
+group with a camera and one light.
+Check your \f2\*(Dd System Guide\fP for whether the sample
+program is available to you online.
+.(m
+C Code
+
+.\"#	ident "%W%" %G%
+.\"
+#include <dore.h> /* standard \*(Dd include */
+
+main()
+{
+    DtObject device, frame, view;
+    DtObject post, base, def_group, obj_group;
+    static DtPoint3
+    	origin     = {  0.0,  0.0,  0.0 },
+    	eye_point  = { 10.0, 10.0, 10.0 },
+    	light      = {  1.0,  1.0,  0.5 };
+    static DtVector3
+    	up         = {  0.0,  1.0,  0.0 };
+    static DtReal
+    	magenta[]  = {  1.0,  0.0,  1.0 },   /* R,G,B */
+    	grey[]     = {  0.4,  0.4,  0.4 },
+    	sky_blue[] = {  0.3,  0.3,  1.0 },
+    	sds[]      = { 28.0 };  /* for DoSubDivSpec */
+
+    /* initialize \*(Dd */
+    DsInitialize(0);                
+
+    /* create device */
+    device = DoDevice("stdx11", 
+                      "-zbuffer -visualtype DcTrueColor");
+
+    /* create frame and add to the device */
+    frame = DoFrame();
+    DdSetFrame(device, frame);
+
+    /* create view and add to frame */
+    view = DoView();
+    DvSetBackgroundColor(view, DcRGB, grey);
+    DgAddObjToGroup(DfInqViewGroup(frame), view);
+
+    /* use degrees for all angles */
+    DsSetAngleUnits(DcAngleDegrees);
+
+    /* create group with a parallel camera and a light */
+    def_group = DoGroup(DcTrue);
+    	DgAddObj(DoParallel(10.0, -0.1, -20.0));
+    	DgAddObj(DoPushMatrix());
+    	    DgAddObj(DoLookAtFrom(origin, eye_point, up));
+    	    DgAddObj(DoCamera());
+    	DgAddObj(DoPopMatrix());
+    	DgAddObj(DoPushMatrix());
+    	    DgAddObj(DoLookAtFrom(origin, light, up));
+    	    DgAddObj(DoLightIntens(1.0));
+    	    DgAddObj(DoLight());
+    	DgAddObj(DoPopMatrix());
+    DgClose();
+
+    /* define post group */
+    post = DoGroup(DcTrue);
+    	DgAddObj(DoDiffuseColor(DcRGB, sky_blue));
+    	DgAddObj(DoTranslate(0.0, 1.5, 0.0));
+    	DgAddObj(DoRotate(DcXAxis, 90));
+    	DgAddObj(DoScale(1.2, 1.2, 2.4));
+    	DgAddObj(DoPrimSurf(DcCylinder));
+    DgClose();
+
+    /* define base group */
+    base = DoGroup(DcTrue);
+    	DgAddObj(DoTranslate(0.0, -2.2, 0.0));
+    	DgAddObj(DoScale(2.5, 2.5, 2.5));
+    	DgAddObj(DoTranslate(-0.5, -0.5, -0.5));
+    	DgAddObj(DoPrimSurf(DcBox));
+    DgClose();
+
+    /* obj_group includes post & base groups, and sphere */
+    obj_group = DoGroup(DcTrue);
+    	DgAddObj(DoRepType(DcSurface));
+    	DgAddObj(DoSubDivSpec(DcSubDivSegments, sds));
+    	DgAddObj(DoDiffuseColor(DcRGB, magenta));
+    	DgAddObj(post);
+    	DgAddObj(base);
+    	DgAddObj(DoTranslate(0.0, 3.2, 0.0));
+    	DgAddObj(DoScale(1.5, 1.5, 1.5));
+    	DgAddObj(DoRepType(DcWireframe));
+    	DgAddObj(DoPrimSurf(DcSphere));
+    DgClose();
+
+    /* add objects to view */
+    DgAddObjToGroup(DvInqDefinitionGroup(view), def_group);
+    DgAddObjToGroup(DvInqDisplayGroup(view), obj_group);
+
+    /* render the image */
+    DdUpdate(device);
+
+    printf("Hit return to continue.");
+    getchar();
+
+    /* clean up */
+    DsReleaseObj(device);
+
+    /* shut down */
+    DsTerminate();
+}
+
+\*(Fo Code
+
+.\"#	ident "%W%" %G%
+.\"
+      PROGRAM MAIN
+C
+      IMPLICIT NONE
+      INCLUDE '/usr/include/fortran/DORE'
+C
+      INTEGER*4 DEVICE, FRAME, VIEW
+      INTEGER*4 POST, BASE, DEFGRP, OBJGRP
+      REAL*8 ORIGIN(3)
+      REAL*8 EYEPT(3)
+      REAL*8 LIGHT(3)
+      REAL*8 UP(3)
+      REAL*8 MAGENT(3)
+      REAL*8 GREY(3)
+      REAL*8 SKYBLU(3)
+      REAL*8 SDS(1)
+      CHARACTER DUMMY
+C
+      DATA ORIGIN /  0.0D0,  0.0D0,  0.0D0 /
+      DATA EYEPT  / 10.0D0, 10.0D0, 10.0D0 /
+      DATA LIGHT  /  1.0D0,  1.0D0,  0.5D0 /
+      DATA UP     /  0.0D0,  1.0D0,  0.0D0 /
+      DATA MAGENT /  1.0D0,  0.0D0,  1.0D0 /
+      DATA GREY   /  0.4D0,  0.4D0,  0.4D0 /
+      DATA SKYBLU /  0.3D0,  0.3D0,  1.0D0 /
+      DATA SDS    / 28.0D0 /
+C
+      CALL DSINIT (0)  ! initialize \*(Dd !
+C
+      ! create device
+      DEVICE = DOD('stdx11',6,
+     1             '-zbuffer -visualtype DcTrueColor',32)
+C
+      ! create frame and add to device
+      FRAME = DOFR()                 
+      CALL DDSF (DEVICE,FRAME)      
+C
+      ! create view and add to frame
+      VIEW = DOVW()                      
+      CALL DVSBC (VIEW, DCRGB, GREY)  
+      CALL DGAOG(DFQVG(FRAME), VIEW)   
+C	
+      ! use degrees for all angles
+      CALL DSSAU(DCAD)		
+C
+      ! create a group for parallel camera and light
+      DEFGRP = DOG(DCTRUE)  	
+           CALL DGAO(DOPAR(10.0D0, -0.1D0, -20.0D0))  
+           CALL DGAO(DOPUMX())
+                CALL DGAO (DOLAF(ORIGIN, EYEPT, UP)) 
+                CALL DGAO (DOCM())       
+           CALL DGAO(DOPPMX())
+           CALL DGAO(DOPUMX())
+                CALL DGAO(DOLAF(ORIGIN, LIGHT, UP))  
+                CALL DGAO(DOLI(1.0D0))   
+                CALL DGAO(DOLT())       
+           CALL DGAO(DOPPMX())
+      CALL DGCS()
+C
+      ! define POST group
+      POST = DOG(DCTRUE)
+           CALL DGAO(DODIFC(DCRGB, SKYBLU))  
+           CALL DGAO(DOXLT(0.0D0, 1.5D0, 0.0D0)) 
+           CALL DGAO(DOROT(DCXAX, 90.0D0))  
+           CALL DGAO(DOSC(1.2D0, 1.2D0, 2.4D0))  
+           CALL DGAO(DOPMS(DCCYL))       
+      CALL DGCS()
+C
+      ! define BASE group
+      BASE = DOG(DCTRUE)
+           CALL DGAO(DOXLT(0.0D0, -2.2D0, 0.0D0))  
+           CALL DGAO(DOSC(2.5D0, 2.5D0, 2.5D0))  
+           CALL DGAO(DOXLT(-0.5D0, -0.5D0, -0.5D0)) 
+           CALL DGAO(DOPMS(DCBOX))       
+      CALL DGCS()
+C
+      ! OBJGRP includes POST, BASE, and sphere object
+      OBJGRP = DOG(DCTRUE)
+           CALL DGAO(DOREPT(DCSURF))
+           CALL DGAO(DOSDS(DCSDSG, SDS))
+           CALL DGAO(DODIFC(DCRGB, MAGENT)) 
+           CALL DGAO(POST)               
+           CALL DGAO(BASE)              
+           CALL DGAO(DOXLT(0.0D0, 3.2D0, 0.0D0)) 
+           CALL DGAO(DOSC(1.5D0, 1.5D0, 1.5D0))  
+           CALL DGAO(DOREPT(DCWIRE))    
+           CALL DGAO(DOPMS(DCSPHR))     
+      CALL DGCS()
+C
+      ! add objects to view
+      CALL DGAOG(DVQDG(VIEW), DEFGRP)    
+      CALL DGAOG(DVQIG(VIEW),OBJGRP)    
+C
+      ! render the image
+      CALL DDU(DEVICE)                   
+      WRITE(6,'(''Hit return to continue.'')')
+      READ(5, '(A)') DUMMY
+C
+      ! clean up
+      CALL DSRO(DEVICE)                  
+C
+      ! shut down
+      CALL DSTERM                       
+C
+      END
+.)m

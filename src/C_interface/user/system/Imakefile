@@ -1,0 +1,31 @@
+#include <Dore.tmpl>
+
+SRCS = ccmpbndvol.c cexeabt.c cexeobj.c cexertn.c cfilrstrrd.c \
+       chldobj.c cini.c cinirad.c cinpval.c cinqangunt.c \
+       cinqclsid.c cinqcurmet.c cinqdrvinf.c cinqerrmsg.c \
+       cinqerrvar.c cinqexedep.c cinqhldobj.c cinqmthid.c \
+       cinqnumdrv.c cinqnumrnd.c cinqobj.c cinqobjcid.c \
+       cinqobjint.c cinqobjnam.c cinqobjstr.c cinqobjtyp.c \
+       cinqonami.c cinqonams.c cinqonamt.c cinqrndid.c cinqrndnms.c \
+       cinqrstr.c cinqsafflg.c cinqvalgrp.c cinqver.c cprtobj.c \
+       crelobj.c crstrupd.c crstrwrt.c csetangunt.c cseterrvar.c \
+       csetexedep.c csetobjnam.c csetonami.c csetonams.c \
+       csetsafflg.c ctexuvcnt.c ctexuvwcnt.c ctrm.c ctrmsys.c \
+       cupdallviw.c cvalobj.c cvalswi.c
+OBJS = ccmpbndvol.o cexeabt.o cexeobj.o cexertn.o cfilrstrrd.o \
+       chldobj.o cini.o cinirad.o cinpval.o cinqangunt.o \
+       cinqclsid.o cinqcurmet.o cinqdrvinf.o cinqerrmsg.o \
+       cinqerrvar.o cinqexedep.o cinqhldobj.o cinqmthid.o \
+       cinqnumdrv.o cinqnumrnd.o cinqobj.o cinqobjcid.o \
+       cinqobjint.o cinqobjnam.o cinqobjstr.o cinqobjtyp.o \
+       cinqonami.o cinqonams.o cinqonamt.o cinqrndid.o cinqrndnms.o \
+       cinqrstr.o cinqsafflg.o cinqvalgrp.o cinqver.o cprtobj.o \
+       crelobj.o crstrupd.o crstrwrt.o csetangunt.o cseterrvar.o \
+       csetexedep.o csetobjnam.o csetonami.o csetonams.o \
+       csetsafflg.o ctexuvcnt.o ctexuvwcnt.o ctrm.o ctrmsys.o \
+       cupdallviw.o cvalobj.o cvalswi.o
+
+LibraryObjectRule()
+SubdirLibraryRule($(OBJS))
+
+DependTarget()

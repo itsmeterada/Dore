@@ -1,0 +1,328 @@
+!md begin
+!/note {} def
+!/legal {} def
+!md /lnop known not { /lnop [ {} ] cvx def } if
+!/bigs [lnop lnop lnop lnop lnop lnop lnop lnop] def
+!/smalls [lnop lnop lnop lnop lnop lnop lnop lnop] def
+!/cp {pm restore pop pop} def
+!
+!T T -100 -96 2454 1878 31 72 72 1 F F F F T T psu
+!(David B; document: ardent3)jn
+!0 mf
+!od
+!op
+!0 0 xl
+!0 72 mul -2 72 mul translate
+!1 1 scale
+!1 1 pen
+!0 0 gm
+!(nc 0 0 2354 1782 6 rc)kp
+!0 0 pen
+!0 0 lin
+!nc ct 39 0 put
+!1 1 pen
+!143 70 gm
+!pt
+!71 106 pl
+!ef
+!eu
+!(nc 0 0 2354 1782 6 rc)kp
+!0 0 pen
+!71 106 lin
+!71 106 lin
+!nc ct 39 0 put
+!1 1 pen
+!pt
+!143 142 pl
+!ef
+!eu
+!(nc 0 0 2354 1782 6 rc)kp
+!0 0 pen
+!143 142 lin
+!143 142 lin
+!nc ct 39 0 put
+!1 1 pen
+!112 88 gm
+!pt
+!112 124 pl
+!ef
+!eu
+!(nc 0 0 2354 1782 6 rc)kp
+!0 0 pen
+!112 124 lin
+!112 124 lin
+!nc ct 39 0 put
+!1 1 pen
+!226 86 gm
+!pt
+!298 86 pl
+!ef
+!eu
+!(nc 0 0 2354 1782 6 rc)kp
+!0 0 pen
+!298 86 lin
+!298 86 lin
+!nc ct 39 0 put
+!1 1 pen
+!226 86 gm
+!pt
+!226 113 pl
+!ef
+!eu
+!(nc 0 0 2354 1782 6 rc)kp
+!0 0 pen
+!226 113 lin
+!226 113 lin
+!nc ct 39 0 put
+!1 1 pen
+!pt
+!235 127 pl
+!ef
+!eu
+!(nc 0 0 2354 1782 6 rc)kp
+!0 0 pen
+!235 127 lin
+!235 127 lin
+!nc ct 39 0 put
+!1 1 pen
+!pt
+!252 127 pl
+!ef
+!eu
+!(nc 0 0 2354 1782 6 rc)kp
+!0 0 pen
+!252 127 lin
+!252 127 lin
+!nc ct 39 0 put
+!1 1 pen
+!261 113 gm
+!pt
+!261 86 pl
+!ef
+!eu
+!(nc 0 0 2354 1782 6 rc)kp
+!0 0 pen
+!261 86 lin
+!261 86 lin
+!nc ct 39 0 put
+!1 1 pen
+!261 103 gm
+!pt
+!298 127 pl
+!ef
+!eu
+!(nc 0 0 2354 1782 6 rc)kp
+!0 0 pen
+!298 127 lin
+!298 127 lin
+!nc ct 39 0 put
+!1 1 pen
+!261 113 gm
+!pt
+!252 127 pl
+!ef
+!eu
+!(nc 0 0 2354 1782 6 rc)kp
+!0 0 pen
+!252 127 lin
+!252 127 lin
+!nc ct 39 0 put
+!1 1 pen
+!378 82 gm
+!pt
+!450 82 pl
+!ef
+!eu
+!(nc 0 0 2354 1782 6 rc)kp
+!0 0 pen
+!450 82 lin
+!450 82 lin
+!nc ct 39 0 put
+!1 1 pen
+!378 82 gm
+!pt
+!378 104 pl
+!ef
+!eu
+!(nc 0 0 2354 1782 6 rc)kp
+!0 0 pen
+!378 104 lin
+!378 104 lin
+!nc ct 39 0 put
+!1 1 pen
+!399 130 gm
+!pt
+!431 130 pl
+!ef
+!eu
+!(nc 0 0 2354 1782 6 rc)kp
+!0 0 pen
+!431 130 lin
+!431 130 lin
+!nc ct 39 0 put
+!1 1 pen
+!450 82 gm
+!pt
+!450 104 pl
+!ef
+!eu
+!(nc 0 0 2354 1782 6 rc)kp
+!0 0 pen
+!450 104 lin
+!450 104 lin
+!nc ct 39 0 put
+!1 1 pen
+!378 104 gm
+!pt
+!385 121 pl
+!ef
+!eu
+!(nc 0 0 2354 1782 6 rc)kp
+!0 0 pen
+!385 121 lin
+!385 121 lin
+!nc ct 39 0 put
+!1 1 pen
+!pt
+!398 130 pl
+!ef
+!eu
+!(nc 0 0 2354 1782 6 rc)kp
+!0 0 pen
+!398 130 lin
+!398 130 lin
+!nc ct 39 0 put
+!1 1 pen
+!450 104 gm
+!pt
+!443 121 pl
+!ef
+!eu
+!(nc 0 0 2354 1782 6 rc)kp
+!0 0 pen
+!443 121 lin
+!443 121 lin
+!nc ct 39 0 put
+!1 1 pen
+!444 121 gm
+!pt
+!430 130 pl
+!ef
+!eu
+!(nc 0 0 2354 1782 6 rc)kp
+!0 0 pen
+!430 130 lin
+!430 130 lin
+!nc ct 39 0 put
+!1 1 pen
+!682 86 gm
+!pt
+!753 86 pl
+!ef
+!eu
+!(nc 0 0 2354 1782 6 rc)kp
+!0 0 pen
+!753 86 lin
+!753 86 lin
+!nc ct 39 0 put
+!1 1 pen
+!682 86 gm
+!pt
+!755 129 pl
+!ef
+!eu
+!(nc 0 0 2354 1782 6 rc)kp
+!0 0 pen
+!755 129 lin
+!755 129 lin
+!nc ct 39 0 put
+!1 1 pen
+!755 130 gm
+!pt
+!682 130 pl
+!ef
+!eu
+!(nc 0 0 2354 1782 6 rc)kp
+!0 0 pen
+!682 130 lin
+!682 130 lin
+!nc ct 39 0 put
+!1 1 pen
+!836 85 gm
+!pt
+!836 127 pl
+!ef
+!eu
+!(nc 0 0 2354 1782 6 rc)kp
+!0 0 pen
+!836 127 lin
+!836 127 lin
+!nc ct 39 0 put
+!1 1 pen
+!836 106 gm
+!pt
+!908 106 pl
+!ef
+!eu
+!(nc 0 0 2354 1782 6 rc)kp
+!0 0 pen
+!908 106 lin
+!908 106 lin
+!nc ct 39 0 put
+!1 1 pen
+!531 86 gm
+!pt
+!603 86 pl
+!ef
+!eu
+!(nc 0 0 2354 1782 6 rc)kp
+!0 0 pen
+!603 86 lin
+!603 86 lin
+!nc ct 39 0 put
+!1 1 pen
+!pt
+!603 127 pl
+!ef
+!eu
+!(nc 0 0 2354 1782 6 rc)kp
+!0 0 pen
+!603 127 lin
+!603 127 lin
+!nc ct 39 0 put
+!1 1 pen
+!566 86 gm
+!pt
+!566 112 pl
+!ef
+!eu
+!(nc 0 0 2354 1782 6 rc)kp
+!0 0 pen
+!566 112 lin
+!566 112 lin
+!nc ct 39 0 put
+!1 1 pen
+!531 86 gm
+!pt
+!531 126 pl
+!ef
+!eu
+!(nc 0 0 2354 1782 6 rc)kp
+!0 0 pen
+!531 126 lin
+!1 1 pen
+!64 102 gm
+!(nc 46 101 76 119 6 rc)kp
+!bu fc
+!{}mark T /Helvetica-Bold /Helvetica-Bold 0 rf
+!bn
+!1 setTxMode
+!1 fs
+!18.71987 fz
+!bu fc
+!2 F /Helvetica-Bold fnt
+!bn
+!(x)show
+!F T cp
+!cd
+!end

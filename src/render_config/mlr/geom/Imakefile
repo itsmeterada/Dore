@@ -1,0 +1,12 @@
+#include <Dore.tmpl>
+
+INCLUDES = -I../h
+    SRCS = GEOM_glbl.c GEOM_init.c GEOM_line.c GEOM_point.c GEOM_tri.c \
+           geom_xfm.c
+    OBJS = GEOM_glbl.o GEOM_init.o GEOM_line.o GEOM_point.o GEOM_tri.o \
+           geom_xfm.o
+
+LibraryObjectRule()
+SubdirLibraryRule($(OBJS))
+
+DependTarget()

@@ -1,0 +1,562 @@
+.\"#ident "%W%" %G%
+.\"
+.\" Copyright (C) 1988, 1989, 1990, 1991 by Kubota Pacific Computer Inc.
+.\"         All Rights Reserved
+.\" This program is a trade secret of Kubota Pacific Computer Inc. and
+.\" it is not to be reproduced, published, disclosed to others, copied,
+.\" adapted, distributed, or displayed without the prior authorization
+.\" of Kubota Pacific Computer Inc.  Licensee agrees to attach or embed
+.\" this Notice on all copies of the program, including partial copies
+.\" or modified versions thereof.
+.\"
+.so ../macros/local.me
+.ds BT \*(Dd Programmer's Guide
+.ds CT Geometric Transformations
+.ds h1 6
+.PN 117
+.L1 G \s-2EOMETRIC\s+2
+.L2 T \s-2RANSFO\h'-1p'RMA\h'-2p'TIO\h'-1p'NS\s+2
+.CH SIX
+.rs
+.sp -1.5v
+This chapter introduces geometric transformation attribute
+objects, which can be used to affect subsequent primitive
+objects, as well as cameras and lights (see Chapter 8).  The
+current transformation matrix stack is discussed, as well as the
+use of \f2DoPushMatrix <DOPUMX>\f1
+and \f2DoPopMatrix <DOPPMX>\f1 to affect the top
+of stack.  Concepts and terms introduced in this chapter include
+translating, scaling, rotating, and shearing objects;
+right-handed coordinate systems; modeling coordinates;
+preconcatenation; relative coordinate systems; relative and absolute
+group definitions.
+.sp -.5v
+.H1 "Geometric Transformations"
+.rs
+.sp -.25v
+A \f2geometric transformation\f1 attribute object affects the
+shape and positioning of primitive objects in 3-dimensional space.
+Studio objects can also be positioned using geometric transformations.
+\f2Scaling\f1 a primitive  object affects its
+relative size by shrinking or stretching it.  \f2Translating\f1 a
+primitive  object moves its relative position.
+\f2Rotating\f1 a primitive object turns the object around a
+particular axis.  \f2Shearing\f1 a primitive object
+displaces the coordinates in two dimensions proportional to their
+distance from one of the three major planes.
+Color Plate 7 shows a sheared teapot. 
+.sp -.25v
+.lp
+The \*(Dd geometric transformation functions
+are \f2DoScale <DOSC>, DoTranslate <DOXLT>,
+DoRotate <DOROT>, and DoShear <DOSHR>\f1.
+When \f2DoRotate <DOROT>\f1 is used, the amount or rotation can be expressed
+either in degrees or radians, as specified with
+\f2DsSetAngleUnits <DSSAU>\f1.
+.sp -.5v
+.H1 "Right-Handed Coordinate System"
+.sp -.25v
+\*(Dd uses right-handed coordinate systems.
+In a right-handed coordinate system, a positive
+rotation about a particular axis is found by pointing your right thumb
+in the positive direction of the axis and curling your fingers
+around the axis.
+The direction of the curl of your fingers is a
+positive rotation. \*(FT illustrates a positive rotation about \f2y\f1.
+.(F PS/6.1ps 2.0i 0
+.sp 2i
+.)F "Right-Handed Coordinate System" rhcood
+.sp -.5v
+.H1 "Modeling Coordinates"
+Each object is defined in its own \f2modeling space\f1, and you
+can use whatever coordinates are best suited to the particular
+object.  (Another name for modeling coordinates is \f2local
+coordinates\f1.)  One object might be defined in units from 0.0
+to 1.0, and another might be defined in units from -112.56 to
+112.56.
+.lp
+Geometric transformations combine with each other.  For example,
+two consecutive rotations about the same axis add together.  The
+cumulative effect of geometric transformations enables you to
+build hierarchies of modeling spaces.  In the car wheel example
+in Chapter 3, the wheel group was defined in its own modeling
+space, then rotated and translated into the left and right wheel
+groups.  The left and right wheel groups were then rotated and
+translated into position on the axle.  If the example were
+extended further, the axle would next be rotated, scaled, and
+translated into position on the car body.  Finally, the car body
+would be transformed into position in the final scene.  This
+final scene, in which all scene elements are positioned in
+relation to each other, is said to be defined in terms of the
+\f2world coordinate system.\f1
+.H1 "Current Transformation Matrix (CTM)"
+Geometric transformation attribute objects all modify the
+\f2current transformation matrix (CTM)\f1.  This four-by-four
+matrix is a compact way of representing transformations and
+allows arbitrary scaling and positioning of objects in 3D space.
+Within a group, successive geometric transformations are
+\f2concatenated\f1 together onto the CTM.
+The graphics programming reference books cited in the \f2Preface\f1
+provide detailed explanations and examples of the transformation
+matrix. In general, however, you do not need to know about the
+form of this matrix; you need know only what transformations have
+gone into it, and in what order.
+.H2 "CTM Stack"
+In \*(Dd, every attribute is associated with a stack.
+Every time 
+the current value of an attribute is modified, the top of the 
+corresponding stack is replaced. Attribute stacks are pushed and popped at
+group boundaries. 
+Since the current values of the scale, translate and rotate attributes
+are combined into the CTM, a single
+stack storing the values of the CTM is sufficient.
+The current value of
+the CTM is pushed and popped from the CTM stack at group boundaries.
+.H2 "Preconcatenation of Transformations"
+.IX ordering geometric transformations
+When a geometric transformation attribute object is executed, the
+associated matrix is \f2preconcatenated\f1 onto the CTM.
+With preconcatenation,
+the last transformation executed is the first one to
+affect following primitive objects. You thus need to read
+backwards through the code from a given primitive object to see
+the actual order in which its transformations are \f2applied\f1
+to the object. This process is consistent with other attributes
+in that attributes specified closest to the object bind most
+tightly. The figures and examples below help you become
+accustomed to this process.
+.lp
+Alternatively,
+a transformation matrix can be specified with \f2DoTransformMatrix <DOTMX>\f1.
+The specified matrix can either be preconcatenated or postconcatenated
+with the CTM, or can also replace the CTM entirely.
+.H1 "Relative Coordinate System"
+To combine geometric transformations, \*(Dd uses a
+\f2relative coordinate system\f1. 
+The origin and orientation of the relative coordinate system are
+affected each time a geometric transformation takes place.
+For example
+.(m
+C code:
+
+.\"#	ident "@(#)ch07.ex01	1.2" 5/6/91
+.\"
+DoTranslate(2.0, 1.0, 0.0);
+DoPrimSurf(DcBox);
+
+
+\*(Fo code:
+
+.\"#	ident "@(#)ch07.ex01.f	1.2" 5/6/91
+.\"
+     CALL DOXLT(2.0D0, 1.0D0, 0.0D0)
+     CALL DOPMS(DCBOX)
+.)m
+moves the origin of the relative coordinate system for the box 
+to the new location (3.0, 2.0, 0.0), as shown
+in \*(FT. One side of the box is shaded for the purpose of reference.
+.(F
+. "./PS/6.2ps" 2.25i 0
+.sp 2.25i
+.)F "Translating a Primitive Object"
+.lp
+Any subsequent transformation will modify the coordinate system relative 
+to that new position. For instance, if the box is then rotated 45 degrees
+about the \f2y\f1 axis, the final positions of the coordinate
+system and the object would appear as in \*(FT.
+.bp
+.(m
+C code:
+
+.\"#	ident "@(#)ch07.ex02	1.2" 5/6/91
+.\"
+DsSetAngleUnits(DcAngleDegrees);
+DoRotate(DcYAxis, 45);
+DoTranslate(2.0, 1.0, 0.0);
+DoPrimSurf(DcBox);
+
+
+\*(Fo code:
+
+.\"#	ident "@(#)ch07.ex02.f	1.2" 5/6/91
+.\"
+     CALL DSSAU(DCAD)
+     CALL DOROT(DCYAX, 45.0D0)
+     CALL DOXLT(2.0D0, 1.0D0, 0.0D0)
+     CALL DOPMS(DCBOX)
+.)m
+.(F 
+.\"./PS/6.3ps" 2i 0
+.sp 2i
+.)F "Translating and Rotating a Primitive Object"
+.H1 "Example"
+The following example and figures illustrate how the matrices for
+successive geometric transformations are preconcatenated onto the
+CTM.
+
+.(m
+C code:
+
+.\"#	ident "@(#)ch07.ex04	1.3" 5/15/91
+.\"
+DtObject cone_group;
+
+/* use degrees for angles */
+DsSetAngleUnits(DcAngleDegrees);
+
+
+
+cone_group=DoGroup(DcTrue);
+     DgAddObj(DoTranslate(2.0, 2.0, -2.0));  
+     DgAddObj(DoScale(1.0, 2.0, 1.0));      
+     DgAddObj(DoRotate(DcXAxis, -90));     
+     DgAddObj(DoPrimSurf(DcCone));
+DgClose();
+
+
+\*(Fo code:
+
+.\"#	ident "@(#)ch07.ex04.f	1.3" 5/15/91
+.\"
+      INTEGER*4 CONEGR
+C
+      ! use degrees for angles
+      CALL DSSAU(DCAD)
+C
+      CONEGR = DOG(DCTRUE)
+          CALL DGAO(DOXLT(2.0D0, 2.0D0, -2.0D0))  
+          CALL DGAO(DOSC(1.0D0, 2.0D0, 1.0D0))  
+          CALL DGAO(DOROT(DCXAX, -90.0D0))  
+          CALL DGAO(DOPMS(DCCONE))
+      CALL DGCS()
+.)m
+The set of figures that follow illustrate the state of the CTM stack
+when group \f2cone_group <CONEGR>\f1 is
+entered and exited, and when the transformations are applied.
+The value of the CTM at the time the group is entered is referred to
+as the \f2PTM\f1 (the previous transformation matrix).
+\f3At all times, the top of the stack indicates what the CTM is\f1.
+.lp
+\*(FT shows the CTM stack when group \f2cone_group <CONEGR>\f1 is entered.
+The previous transformation matrix is pushed on the stack and becomes
+the CTM.
+.(F 
+.\"./PS/6.4ps" 1i -1
+.sp 1i
+.)F "Entering the Cone Group"
+.lp
+First, the translate object is executed (see \*(FT, below).
+\f3In
+the following figures, the transformations accumulated in the CTM
+are read from left to right to see the order in which their
+effects are felt.\f1
+.bp
+\ 
+.(F 
+.\"./PS/6.5ps" 1i -1
+.sp 1i
+.)F "Preconcatenating the Translation Transformation"
+.lp
+Next the scale object is executed.  As shown in \*(FT below, the
+scale transformation is preconcatenated with the current
+transformation matrix, which already includes the translation
+transformation.
+.(F 
+.\"./PS/6.6ps" 1.15i -1
+.sp 1.15i
+.)F "Preconcatenating the Scale Transformation"
+.lp
+Finally, the rotate object is executed and its associated matrix
+is preconcatenated with the current transformation matrix.  See
+\*(FT.
+.(F 
+.\"./PS/6.7ps" 2.25i -1
+.sp 2.25i
+.)F "Preconcatenating the Rotation Transformation"
+.lp
+When group \f2cone_group <CONEGR>\f1 is exited, the top of the CTM stack is
+popped, and the original value for the CTM is restored. 
+\*(FT shows the CTM set back to what it was before the group was entered
+(PTM).
+.(F 
+.\"./PS/6.8ps" .5i -1
+.sp .5i
+.)F "Exiting the Group and Popping the Stack"
+.rs
+.sp -.5v
+.H1 "Ordering Transformations"
+.IX ordering transformations
+The order in which transformations are
+applied is significant. In the previous example, the rotation is applied to the
+cone first. Then, the scaling is applied and stretches
+the apex of the cone in the \f2y\f1 direction, making it taller
+(see \*(FT).
+.(F 
+.\"	PS/6.9ps 1.5i 0
+.sp 1.5i
+.)F "Rotating then Scaling the Cone"
+.rs
+.sp -.25v
+.lp
+If instead, the same amount of scaling is applied first, the
+diameter of the cone is stretched, changing its circular shape
+into an ellipse.  After applying
+the rotation, the cone appears as in \*(FT.
+.lp
+Probably the best way to avoid confusion is to follow the general
+order of scaling closest to the object, then rotating, then
+translating.  This way, the \f2x, y, z\f1 axes used to model the
+original object will be used by the scale object.  The order in
+your program would thus be
+.sp -.25v
+.Ls
+.Li
+translate
+.Li ns
+rotate
+.Li ns
+scale
+.Li ns
+primitive
+.Le
+.bp
+\ 
+.(F 
+.\"	PS/6.10ps 1.5i 0
+.sp 1.5i
+.)F "Scaling then Rotating the Cone"
+.rs
+.sp -1v
+.H1 "Pushing and Popping the CTM"
+.IX CTM
+Sometimes, you will want to control pushing and popping
+of the CTM stack \f2within\f1 a group.  The \f2DoPushMatrix <DOPUMX>\f1
+and \f2DoPopMatrix <DOPPMX>\f1 functions provide you with this control.
+The car wheel example in Chapter 3 illustrates a simple use of
+this function pair.
+.(m
+C code:
+
+.\"#	ident "@(#)ch07.ex05	1.2" 5/6/91
+.\"
+DtObject wheel_group;
+
+DsSetAngleUnits(DcAngleDegrees);
+wheel_group=DoGroup(DcTrue);
+     DgAddObj(DoDiffuseColor(DcRGB, green));
+     DgAddObj(DoPushMatrix());
+          DgAddObj(DoRotate(DcXAxis, 90));
+          DgAddObj(DoTorus(1.0, 0.3));
+     DgAddObj(DoPopMatrix());
+     DgAddObj(DoScale(1.0, 1.0, 0.4));
+     DgAddObj(DoTranslate(0.0, 0.0, -0.5));
+     DgAddObj(DoPrimSurf(DcCylinder));
+DgClose();
+
+\*(Fo code:
+
+.\"#	ident "@(#)ch07.ex05.f	1.2" 5/6/91
+.\"
+     INTEGER*4 WHEEL
+
+     CALL DSSAU(DCAD)
+     WHEEL=DOG(DCTRUE)
+          CALL DGAO(DODIFC(DORGB, GREEN))
+          CALL DGAO(DOPUMX())
+               CALL DGAO(DOROT(DCXAX,90.0D0))
+               CALL DGAO(DOTOR(1.0D0, 0.3D0))
+          CALL DGAO(DOPPMX())
+          CALL DGAO(DOSC(1.0D0, 1.0D0, 0.4D0))
+          CALL DGAO(DOXLT(0.0D0, 0.0D0, -0.5D0))
+          CALL DGAO(DOPMS(DCCYL))
+     CALL DGCS()
+.)m
+.lp
+The addition of \f2DoPushMatrix <DOPUMX>\f1 and \f2DoPopMatrix <DOPPMX>\f1
+affect the top of stack significantly.
+In the following figures, the top of the stack indicates what the CTM is.
+The value of the CTM when group \f2wheel_group <WHEEL>\f1 is entered is referred to
+as the \f2PTM\f1 (the previous transformation matrix).
+First, the 
+group is entered, which causes the previous transformation matrix
+to be pushed onto the CTM stack
+and to become the CTM.
+Then \f2DoPushMatrix <DOPUMX>\f1 pushes this
+matrix again, as shown in \*(FT.
+.(F 
+.\"./PS/6.11ps" 1.5i -1
+.sp 1.5i
+.)F "Entering the Wheel Group and Pushing the Matrix"
+.lp
+The rotate transformation is then preconcatenated with the current
+transformation matrix, and the torus is executed (\*(FT).
+.(F 
+.\"./PS/6.12ps" 1.4i -1
+.sp 1.4i
+.)F "Preconcatenating the Rotation Transformation"
+.lp
+Next the matrix is popped with \f2DoPopMatrix <DOPPMX>\f1
+and the PTM is at the top of the stack again, making it the new CTM
+(see \*(FT). 
+.bp
+\ 
+.(F 
+.\"./PS/6.13ps" 1.5i -1.25
+.sp 1.5i
+.)F "Popping the Matrix"
+.lp
+The scale and the translate transformations are then preconcatenated with the CTM
+(see \*(FT). Finally, the cylinder is executed.
+Using this structure, the rotate transformation did not affect the cylinder at
+all.
+.(F 
+.\"./PS/6.14ps" 1.3i -1
+.sp 1.3i
+.)F "Preconcatenating the Scale and Translation Transformations"
+.lp
+When group \f2wheel_group <WHEEL>\f1 is exited, the top of the CTM stack is
+automatically popped again (\*(FT), returning it to the state
+before the group was entered.
+.(F 
+.\"./PS/6.15ps" .7i -1
+.sp .7i
+.)F "Exiting the Group and Popping the Matrix"
+.H1 DoLookAtFrom
+\f2DoLookAtFrom <DOLAF>\f1 specifies a transformation that combines
+a translation and a series of rotations (see Chapter 8 for syntax).
+Although it is most often used for cameras and lights, it
+can also be used to position and orient primitive objects.
+For example, you could model an airplane with its nose at the origin
+and pointing into the negative \f2\z\f1 direction. Then it could be positioned
+in the scene with a single \f2DoLookAtFrom <DOLAF>\f1 transformation.
+The plane could also easily be moved along a path through the
+scene by using successive pairs of points along its intended
+flight path as \f2from\f1 and \f1at\f1 points used in the
+\f2DoLookAtFrom <DOLAF>\f1 transformations for each frame of the
+sequence.
+.lp
+Another use for \f2DoLookAtFrom <DOLAF>\f1 would be to position and orient
+cylindrical objects between arbitrary points in space in order to
+model the atomic bonds between spherical atoms of a molecule.
+The \f2at\f1 and \f2from\f1 parameters could be the \f2x,
+y, z\f1 centers of the two atoms to be connected by the bond.
+Note that
+the \f2DoLookAtFrom <DOLAF>\f1 will not stretch or shrink the cylinders to fit
+exactly. To do so, scaling transformations have to be used.
+.H1 "Absolute vs Relative Group Definition"
+.IX absolute group definition
+.IX relative group definition
+The bolt shown in \*(FT is defined by a cylinder for the threaded
+portion, polygons for the top and underside of the head, and six
+polygons (rectangles) for the faces of the head. The decomposition
+of the bolt is shown in \*(FT. The group could
+be created in two different ways, as shown below.
+.(F 
+.\"	./PS/6.16ps" 2.5i -1
+.sp 2.5i
+.)F "Bolt Object" 
+.bp
+\ 
+.(F "./PS/6.17ps" 2.2i 0
+.)F "Polygons and Cylinder Forming the Bolt"
+.H2 "Absolute Group Definition"
+The absolute definition of the bolt uses absolute coordinates for
+each of the polygons making up the bolt.  Using this method, the
+group would appear as shown in \*(FT, below.
+.(F "./PS/6.18ps" 2.5i 0
+.)F "Absolute Definition of the Bolt Group"
+.H2 "Relative Group Definition"
+The relative definition of the bolt is longer than the absolute
+definition and less efficient to render, but it requires only the
+relative position of each polygon and is thus easier to generate.
+See \*(FT.
+.(F "./PS/6.19ps" 4.8i 0
+.)F "Relative Definition of the Bolt Group"
+.lp
+Polygon A is used twice, first in its original position and then
+again in a translated position.  A push and pop matrix pair is
+used to create a local geometric context for the top and bottom
+polygons of the bolt head.
+.lp
+The next push and pop matrix pair is used to isolate the effects
+of the rotations that position the side polygons so that these
+rotations do not affect the following definition of the bolt
+shaft.  Because all the sides of the bolt head are simply
+rotations of each other, only one face is modeled (polygon C).
+This face is then instanced five more times in different
+positions.  Notice also how successive rotate objects are
+inherited by the polygon objects later in the group.  Finally,
+the original matrix is
+restored, and the bolt shaft cylinder is created.
+.H2 "Pros and Cons"
+For simple parts such as the bolt, which have multiple
+references to them, the absolute group definition is recommended
+because it executes faster than the relative definition. The
+relative group requires matrix multiplications for each
+translate, rotate, and scale, which are performed every time a
+bolt is used in the database.  The absolute definition, on the
+other hand, contains only one scale and one rotate, which are
+required to size and position the cylinder.  (As shown in the car
+wheel example in Chapter 3, primitive surfaces are defined with a
+fixed size and must then be scaled, translated, and rotated into
+position.)  Because the origin of the bolt and the origin of the
+cylinder are the same, a translate was not necessary.
+.lp
+The relative definition is easier to specify and to modify
+than the absolute definition. When an object made of multiple parts
+is referenced several times, any changes made to that object
+are reflected in all places it is used. If the object is made out of a large
+number of 
+parts, it is also more space efficient to define it once and
+reference the object a number of times.
+.H1 "Chapter Summary"
+Chapter 6 describes the geometric transformation attributes that
+can be used to affect primitive objects, cameras, and lights. 
+Geometric transformation attribute objects affect
+the size, position and orientation
+of primitive or studio objects 
+by \f2scaling, translating, rotating\f1 or \f2shearing\f1
+the objects.
+.lp
+All coordinate systems in \*(Dd are \f2right-handed\f1.
+In a right-handed coordinate system,
+a positive rotation about a particular axis is found by pointing
+your right thumb in the positive direction of that axis and curling your
+fingers around the axis.  The direction of the curl of your
+fingers is a positive rotation.
+.lp
+The coordinates used to define individual objects are termed
+\f2modeling coordinates\f1.  (Another name for these coordinates
+is \f2local coordinates\f1.)  \*(Dd uses a \f2relative coordinate
+system\f1, so that the orientation and origin of the coordinate
+system are affected each time a geometric transformation takes
+place.  The cumulative effect of geometric transformations
+enables you to build hierarchies of modeling spaces.  When all
+the elements of a scene have been positioned in relation to each
+other, the scene is said to be defined in terms of \f2world
+coordinates.\f1
+.lp
+Geometric transformation attribute objects all modify the
+\f2current transformation matrix\f1 (CTM).
+The values of the CTM are stored in the CTM stack.
+The CTM stack is pushed and popped at group boundaries. Within a group,
+geometric transformations \f2modify\f1 the CTM; they do not
+replace its current value. The last
+geometric transformation executed is the first one to affect subsequent
+primitive or studio objects.
+This process is consistent with other attributes
+in that attributes specified closest to the object bind most
+tightly.
+.lp
+It is often useful to control the pushing and popping of the CTM
+\f2within\f1 a group, to localize the effects of certain
+geometric transformations.  The \f2DoPushMatrix <DOPUMX>\f1 and
+\f2DoPopMatrix <DOPPMX>\f1 functions provide you with this control.
+.lp
+Objects can be sized and positioned using \f2absolute\f1 or \f2relative\f1
+group definition. With absolute group definition, objects are defined
+in absolute coordinates. With relative group definition, 
+geometric transformations are applied to objects to determine their final
+size and position. Relative group definition is less efficient, 
+but more flexible than absolute group definition.
+

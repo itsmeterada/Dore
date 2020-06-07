@@ -1,0 +1,46 @@
+
+Title:             Dore' API (Dynamic Object Rendering Environment)
+Version:           6.0
+Description:       Dore' is a powerful 3D graphics subroutine library.
+                   It provides a comprehensive set of tools for creating
+                   graphics applications. It is also easy to use, portable,
+                   and extendable. This version has interfaces/drivers to
+                   X11, PEX, IrisGL, OpenGL, Postscript and more. It has 
+                   been ported onto most unix systems, including Linux and
+                   FreeBSD. It has also been ported to Windows NT 3.5. 
+Author(s):         The authors and contributors of Dore' came from a family 
+                   of illustrious but evanescent computer companies, whose
+                   lineage is documented below for posterity.
+
+                     - Companies -
+                    Dana Computer
+                    Ardent Computer
+                    Stellar Computer
+                    Stardent Computer
+                    Kubota Pacific Computer Inc.
+                    Kubota Graphics Corporation
+   
+                     - Key Authors/Contributors - 
+                    Michael Kaplan
+                    Mark Patrick
+                    Bruce Borden
+                    Kevin Weiler
+                    Dan McLachlan
+                    Helga Thorvaldsdottir
+                    Carolyn Houle
+                    Lori Whippler
+                    Steve Hollasch
+                    & many more
+
+                     - Public Domain Effort - 
+                    Doug Ambrisko
+                    Larry Church
+                    Rita Ozanne   
+                    Vijay Sarathy
+                   
+Maintained-by:       
+Maintained-at:     sunsite.unc.edu
+Platforms:         SunOS, OSF/1, Irix, Linux, FreeBSD, Windows NT 
+Copying-Policy:    Public Domain 
+Keywords:          Dore', 2D & 3D Graphics API, 3D Graphics subroutine library 
+

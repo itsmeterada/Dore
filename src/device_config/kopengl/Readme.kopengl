@@ -1,0 +1,175 @@
+#ident	"@(#)Readme	3.1"	3/17/92
+
+==========================================================================
+
+		     Dore' Device Driver Summary
+		     ====  ====== ====== =======
+==========================================================================
+
+Device Driver Default Name:	kopengl (Kubota's OpenGL)	
+Hardware supported:		Denali	
+Library Dependencies:	        -lGL -lGLU
+
+Supported Module Interfaces
+	DCM:			yes
+	PROM:			yes
+	DROM:			yes
+	DROMMethods:	        yes	
+
+Originator
+	Company/Institution:	Kubota Pacific Computer Inc.
+	Name:		        Vijay Sarathy	
+	Phone:			(408) 987-3309 
+	Email:			
+	Address:		2630 Walsh Avenue
+				Santa Clara, CA 95051-0905
+	Date Completed:	        November 1994 
+
+Maintainer (most recent first)
+	Company/Institution:	Kubota Graphics Corporation 
+	Name:		        Vijay Sarathy	
+	Phone:			(408) 987-3309 
+	Email:		        vijay@kgc.com	
+	Address:		2630 Walsh Avenue
+				Santa Clara, CA 95051-0905
+	Date Completed:	        November 1994	
+
+==========================================================================
+
+			 DCM Characteristics
+
+==========================================================================
+
+	Version Number:			2
+	Stereo:			 	no	
+	Double Buffered:		yes	
+	VisualTypes:			
+	ColorMaps:			
+	Return Pixel Data:		
+	Clipping list handling:		
+	Operation while obscured:	
+	geometry update handling
+	    size:			
+	    overlap change:		
+
+
+==========================================================================
+
+			 PROM Characteristics
+
+==========================================================================
+
+	Version Number:			1
+
+==========================================================================
+
+			 DROM Characteristics
+
+==========================================================================
+
+	Version Number:			2.0
+
+	Cameras
+	    DoCameraMatrix:		yes	
+	    DoParallel:			yes	
+	    DoPerspective:		yes	
+	    DoProjection:		yes	
+	    DoStereo:			
+	    DoStereoSwitch:		
+
+	Lights
+	    DoLightColor:		yes	
+	    DoLightIntens:		yes	
+	    DoLightSpreadAngles:	yes	
+	    DoLightSpreadExp:		yes	
+	    DoLightType:		yes	
+
+	Geometry
+	    DoPointList:		yes	
+	    DoLineList:			yes	
+	    DoPolyline:			yes	
+	    DoTriangleList:		yes	
+	    DoTriangleMesh:		yes	
+	    Frame coordinates:		yes	
+
+	Shading Attributes
+	    DoAmbientIntens:		
+	    DoAmbientSwitch:		
+	    DoDepthCue:			
+	    DoDepthCueSwitch:		
+	    DoDiffuseColor:		
+	    DoDiffuseIntens:		
+	    DoDiffuseSwitch:		
+	    DoInterpType:		
+	    DoLightSwitch:		
+	    DoReflectionSwitch:		
+	    DoShadowSwitch:		
+	    DoShadeIndex:		
+	    DoSpecularColor:		
+	    DoSpecularFactor:		
+	    DoSpecularIntens:		
+	    DoSpecularSwitch:		
+	    DoSurfaceEdgeColor:		
+	    DoSurfaceShade:		
+	    DoTranspColor:		
+	    DoTranspIntens:		
+	    DoTranspSwitch:		
+
+	Miscellaneous
+	    DoBackfaceCullSwitch:	
+	    DoBackfaceCullable:		
+	    DoClipVol:			
+	    DoHiddenSurfSwitch:		
+	    DoInvisSwitch:		
+	    DoLineType:			
+	    DoLineWidth:		
+	    DoRepType:			
+	    DoLocalAntiAliasSwitch:	
+	    DoLocalAntiAliasStyle:	
+
+	Texture Maps
+	    DoTextureMapBump:			
+	    DoTextureMapBumpSwitch:		
+	    DoTextureMapDiffuseColor:		
+	    DoTextureMapDiffuseColorSwitch:	
+	    DoTextureMapEnviron:		
+	    DoTextureMapEnvironSwitch:		
+	    DoTextureMapTranspIntens:		
+	    DoTextureMapTranspIntensSwitch:	
+
+
+	Geometric Transformations
+	    DoLookAtFrom:		yes	
+	    DoPushMatrix:		yes	
+	    DoPopMatrix:		yes	
+	    DoRotate:			yes	
+	    DoScale:			yes	
+	    DoTranslate:		yes	
+	    DoTransformMatrix:		yes	
+
+
+	Texture Attributes
+	    DoTextureAntiAlias:		
+	    DoTextureExtendUV:		
+	    DoTextureExtendUVW:		
+	    DoTextureMatrixUV:		
+	    DoTextureMatrixUVW:		
+	    DoTextureOp:		
+	    DoTextureScaleUV:		
+	    DoTextureScaleUVW:		
+	    DoTextureTranslateUV:	
+	    DoTextureTranslateUVW:	
+	    DoTextureUVIndex:		
+	    DoTextureUVWIndex:		
+
+	View Attributes
+	    DvSetBackgroundColor:	yes	
+	    DvSetBackgroundJust:	yes	
+	    DvSetBackgroundRaster:	yes	
+
+==========================================================================
+
+			     Limitations
+
+==========================================================================
+

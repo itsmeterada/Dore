@@ -1,0 +1,9 @@
+#include <Dore.tmpl>
+
+    SRCS = del.c rdel_method.c
+    OBJS = del.o rdel_method.o
+
+LibraryObjectRule()
+SubdirLibraryRule($(OBJS))
+
+DependTarget()

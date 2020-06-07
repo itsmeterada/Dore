@@ -1,0 +1,536 @@
+%!PS-Adobe-3.0
+%%Creator: groff version 1.06
+%%DocumentNeededResources: font Palatino-Roman
+%%+ font Helvetica
+%%+ font Palatino-Italic
+%%+ font Helvetica-BoldOblique
+%%+ font Helvetica-Bold
+%%+ font Courier
+%%+ font Symbol
+%%DocumentSuppliedResources: procset grops 1.06 0
+%%Pages: 2
+%%PageOrder: Ascend
+%%Orientation: Portrait
+%%EndComments
+%%BeginProlog
+%%BeginResource: procset grops 1.06 0
+%!PS-Adobe-3.0 Resource-ProcSet
+
+/setpacking where {
+	pop
+	currentpacking
+	true setpacking
+} if
+
+/grops 120 dict dup begin 
+
+% The ASCII code of the space character.
+/SC 32 def
+
+/A /show load def
+/B { 0 SC 3 -1 roll widthshow } bind def
+/C { 0 exch ashow } bind def
+/D { 0 exch 0 SC 5 2 roll awidthshow } bind def
+/E { 0 rmoveto show } bind def
+/F { 0 rmoveto 0 SC 3 -1 roll widthshow } bind def
+/G { 0 rmoveto 0 exch ashow } bind def
+/H { 0 rmoveto 0 exch 0 SC 5 2 roll awidthshow } bind def
+/I { 0 exch rmoveto show } bind def
+/J { 0 exch rmoveto 0 SC 3 -1 roll widthshow } bind def
+/K { 0 exch rmoveto 0 exch ashow } bind def
+/L { 0 exch rmoveto 0 exch 0 SC 5 2 roll awidthshow } bind def
+/M { rmoveto show } bind def
+/N { rmoveto 0 SC 3 -1 roll widthshow } bind def
+/O { rmoveto 0 exch ashow } bind def
+/P { rmoveto 0 exch 0 SC 5 2 roll awidthshow } bind def
+/Q { moveto show } bind def 
+/R { moveto 0 SC 3 -1 roll widthshow } bind def
+/S { moveto 0 exch ashow } bind def
+/T { moveto 0 exch 0 SC 5 2 roll awidthshow } bind def
+
+% name size font SF -
+
+/SF {
+	findfont exch
+	[ exch dup 0 exch 0 exch neg 0 0 ] makefont
+	dup setfont
+	[ exch /setfont cvx ] cvx bind def
+} bind def
+
+% name a c d font MF -
+
+/MF {
+	findfont
+	[ 5 2 roll
+	0 3 1 roll % b
+	neg 0 0 ] makefont
+	dup setfont
+	[ exch /setfont cvx ] cvx bind def
+} bind def
+
+/level0 0 def
+/RES 0 def
+/PL 0 def
+/LS 0 def
+
+% Guess the page length.
+% This assumes that the imageable area is vertically centered on the page.
+% PLG - length
+
+/PLG {
+	gsave newpath clippath pathbbox grestore
+	exch pop add exch pop
+} bind def
+
+% BP -
+
+/BP {
+	/level0 save def
+	1 setlinecap
+	1 setlinejoin
+	72 RES div dup scale
+	LS {
+		90 rotate
+	} {
+		0 PL translate
+	} ifelse
+	1 -1 scale
+} bind def
+
+/EP {
+	level0 restore
+	showpage
+} bind def
+
+
+% centerx centery radius startangle endangle DA -
+
+/DA {
+	newpath arcn stroke
+} bind def
+
+% x y SN - x' y'
+% round a position to nearest (pixel + (.25,.25))
+
+/SN {
+	transform 
+	.25 sub exch .25 sub exch
+	round .25 add exch round .25 add exch
+	itransform
+} bind def
+	
+% endx endy startx starty DL -
+% we round the endpoints of the line, so that parallel horizontal
+% and vertical lines will appear even
+
+/DL {
+	SN
+	moveto
+	SN
+	lineto stroke
+} bind def
+
+% centerx centery radius DC -
+
+/DC {
+	newpath 0 360 arc closepath
+} bind def
+
+
+/TM matrix def
+
+%  width height centerx centery DE -
+
+/DE {
+	TM currentmatrix pop
+	translate scale newpath 0 0 .5 0 360 arc closepath
+	TM setmatrix
+} bind def
+
+% these are for splines
+
+/RC /rcurveto load def
+/RL /rlineto load def
+/ST /stroke load def
+/MT /moveto load def
+/CL /closepath load def
+
+% fill the last path
+
+% amount FL -
+
+/FL {
+	currentgray exch setgray fill setgray
+} bind def
+
+% fill with the ``current color''
+
+/BL /fill load def
+
+/LW /setlinewidth load def
+% new_font_name encoding_vector old_font_name RE -
+
+/RE {
+	findfont
+	dup maxlength dict begin
+	{
+		1 index /FID ne { def } { pop pop } ifelse
+	} forall
+	/Encoding exch def
+	dup /FontName exch def
+	currentdict end definefont pop
+} bind def
+
+/DEFS 0 def
+
+% hpos vpos EBEGIN -
+
+/EBEGIN {
+	moveto
+	DEFS begin
+} bind def
+
+/EEND /end load def
+
+/CNT 0 def
+/level1 0 def
+
+% llx lly newwid wid newht ht newllx newlly PBEGIN -
+
+/PBEGIN {
+	/level1 save def
+	translate
+	div 3 1 roll div exch scale
+	neg exch neg exch translate
+	% set the graphics state to default values
+	0 setgray
+	0 setlinecap
+	1 setlinewidth
+	0 setlinejoin
+	10 setmiterlimit
+	[] 0 setdash
+	/setstrokeadjust where {
+		pop
+		false setstrokeadjust
+	} if
+	/setoverprint where {
+		pop
+		false setoverprint
+	} if
+	newpath
+	/CNT countdictstack def
+	userdict begin
+	/showpage {} def
+} bind def
+
+/PEND {
+	clear
+	countdictstack CNT sub { end } repeat
+	level1 restore
+} bind def
+
+end def
+
+/setpacking where {
+	pop
+	setpacking
+} if
+%%EndResource
+%%EndProlog
+%%BeginSetup
+%%IncludeResource: font Palatino-Roman
+%%IncludeResource: font Helvetica
+%%IncludeResource: font Palatino-Italic
+%%IncludeResource: font Helvetica-BoldOblique
+%%IncludeResource: font Helvetica-Bold
+%%IncludeResource: font Courier
+%%IncludeResource: font Symbol
+grops begin/DEFS 1 dict def DEFS begin/u{.001 mul}bind def end/RES 72 def/PL
+792 def/LS false def/ENC0[/asciicircum/asciitilde/Scaron/Zcaron/scaron/zcaron
+/Ydieresis/trademark/quotesingle/.notdef/.notdef/.notdef/.notdef/.notdef
+/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef
+/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/space
+/exclam/quotedbl/numbersign/dollar/percent/ampersand/quoteright/parenleft
+/parenright/asterisk/plus/comma/hyphen/period/slash/zero/one/two/three/four
+/five/six/seven/eight/nine/colon/semicolon/less/equal/greater/question/at/A/B/C
+/D/E/F/G/H/I/J/K/L/M/N/O/P/Q/R/S/T/U/V/W/X/Y/Z/bracketleft/backslash
+/bracketright/circumflex/underscore/quoteleft/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q
+/r/s/t/u/v/w/x/y/z/braceleft/bar/braceright/tilde/.notdef/quotesinglbase
+/guillemotleft/guillemotright/bullet/florin/fraction/perthousand/dagger
+/daggerdbl/endash/emdash/ff/fi/fl/ffi/ffl/dotlessi/dotlessj/grave/hungarumlaut
+/dotaccent/breve/caron/ring/ogonek/quotedblleft/quotedblright/oe/lslash
+/quotedblbase/OE/Lslash/.notdef/exclamdown/cent/sterling/currency/yen/brokenbar
+/section/dieresis/copyright/ordfeminine/guilsinglleft/logicalnot/minus
+/registered/macron/degree/plusminus/twosuperior/threesuperior/acute/mu
+/paragraph/periodcentered/cedilla/onesuperior/ordmasculine/guilsinglright
+/onequarter/onehalf/threequarters/questiondown/Agrave/Aacute/Acircumflex/Atilde
+/Adieresis/Aring/AE/Ccedilla/Egrave/Eacute/Ecircumflex/Edieresis/Igrave/Iacute
+/Icircumflex/Idieresis/Eth/Ntilde/Ograve/Oacute/Ocircumflex/Otilde/Odieresis
+/multiply/Oslash/Ugrave/Uacute/Ucircumflex/Udieresis/Yacute/Thorn/germandbls
+/agrave/aacute/acircumflex/atilde/adieresis/aring/ae/ccedilla/egrave/eacute
+/ecircumflex/edieresis/igrave/iacute/icircumflex/idieresis/eth/ntilde/ograve
+/oacute/ocircumflex/otilde/odieresis/divide/oslash/ugrave/uacute/ucircumflex
+/udieresis/yacute/thorn/ydieresis]def/Courier@0 ENC0/Courier RE
+/Helvetica-Bold@0 ENC0/Helvetica-Bold RE/Helvetica-BoldOblique@0 ENC0
+/Helvetica-BoldOblique RE/Palatino-Italic@0 ENC0/Palatino-Italic RE/Helvetica@0
+ENC0/Helvetica RE/Palatino-Roman@0 ENC0/Palatino-Roman RE
+%%EndSetup
+%%Page: 443 1
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 99 46.8 63 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 243 46.8 207 46.8 DL 279 46.8 243 46.8 DL 315 46.8 279 46.8 DL 351
+46.8 315 46.8 DL 387 46.8 351 46.8 DL 437.4 46.8 401.4 46.8 DL 464.4 46.8 428.4
+46.8 DL 500.4 46.8 464.4 46.8 DL 536.4 46.8 500.4 46.8 DL/F0 42
+/Palatino-Roman@0 SF(D)280.152 91 Q/F1 36/Palatino-Roman@0 SF(OR)A<b4>370.004
+83 Q(E)365.004 91 Q F0(V)243.888 133 Q F1(ER)A(TEX)-1.332 E F0(T)274.602 175 Q
+F1(YPES)A/F2 12/Helvetica@0 SF(CHAPTER FIVE)445.716 175 Q 99 186 63 186 DL 135
+186 99 186 DL 171 186 135 186 DL 207 186 171 186 DL 243 186 207 186 DL 279 186
+243 186 DL 315 186 279 186 DL 351 186 315 186 DL 387 186 351 186 DL 437.4 186
+401.4 186 DL 464.4 186 428.4 186 DL 500.4 186 464.4 186 DL 536.4 186 500.4 186
+DL/F3 11/Palatino-Roman@0 SF .936(For most Dore)63 225.6 R 4.489<b470>130.476
+225.6 S .937(rimitives you pr)145.239 225.6 R .937
+(ovide vertex data when you cr)-.198 F(e-)-.198 E .714(ate an object.)63 238.8
+R .713(In addition to the vertex locations which de\214ne the)6.214 F .185
+(shape of the object, you can pr)63 252 R .186
+(ovide information about vertex nor)-.198 F(-)-.198 E 2.859
+(mals, vertex colors, and)63 265.2 R/F4 11/Palatino-Italic@0 SF(uv)5.608 E F3
+(and)5.608 E F4(uvw)5.608 E F3(textur)5.608 E 5.608(ec)-.198 G(oor)303.38 265.2
+Q 5.608(dinates. This)-.198 F 1.988(additional information is used by Dore)63
+278.4 R 5.541<b466>257.773 278.4 S 1.988(or shading and textur)270.64 278.4 R
+(e)-.198 E(mapping.)63 291.6 Q .432(Usually all the vertex data is pr)63 313.5
+R .432(ovided in a single array and a ver)-.198 F(-)-.198 E .185
+(tex type parameter speci\214es which type of information is supplied)63 326.7
+R 3.059(for each vertex.)63 339.9 R 3.059(For variable data primitives \()8.559
+F F4(DoV)A 3.058(ar- <DOV)-.814 F(->)-.605 E F3 1.917
+(functions\) the vertex information is split up into several arrays,)63 353.1 R
+4.282(and the vertex type parameter is not used.)63 366.3 R 4.282
+(Some primitive)9.782 F 1.103(objects, such as)63 379.5 R F4 1.103
+(DoPrimSurf <DOPMS>)3.853 F F3 1.103(objects, do not use vertex)3.853 F
+(data at all.)63 392.7 Q 3.595(Av)63 414.6 S .844
+(ertex type consists of a base vertex type, optionally combined)81.368 414.6 R
+2.939(with a textur)63 427.8 R 5.689(ec)-.198 G(oor)146.98 427.8 Q 2.939
+(dinate speci\214cation.)-.198 F 2.94(The following sections)8.44 F
+(discuss these components of the vertex type.)63 441 Q .16 LW 65 460.4 63 460.4
+DL 67 460.4 65 460.4 DL 69 460.4 67 460.4 DL 71 460.4 69 460.4 DL 73 460.4 71
+460.4 DL 75 460.4 73 460.4 DL 77 460.4 75 460.4 DL 79 460.4 77 460.4 DL 81
+460.4 79 460.4 DL 83 460.4 81 460.4 DL 85 460.4 83 460.4 DL 87 460.4 85 460.4
+DL 89 460.4 87 460.4 DL 91 460.4 89 460.4 DL 93 460.4 91 460.4 DL 95 460.4 93
+460.4 DL 97 460.4 95 460.4 DL 99 460.4 97 460.4 DL 101 460.4 99 460.4 DL 103
+460.4 101 460.4 DL 105 460.4 103 460.4 DL 107 460.4 105 460.4 DL 109 460.4 107
+460.4 DL 111 460.4 109 460.4 DL 113 460.4 111 460.4 DL 115 460.4 113 460.4 DL
+117 460.4 115 460.4 DL 119 460.4 117 460.4 DL 121 460.4 119 460.4 DL 123 460.4
+121 460.4 DL 125 460.4 123 460.4 DL 127 460.4 125 460.4 DL 129 460.4 127 460.4
+DL 131 460.4 129 460.4 DL 133 460.4 131 460.4 DL 135 460.4 133 460.4 DL 137
+460.4 135 460.4 DL 139 460.4 137 460.4 DL 141 460.4 139 460.4 DL 143 460.4 141
+460.4 DL 145 460.4 143 460.4 DL 147 460.4 145 460.4 DL 149 460.4 147 460.4 DL
+151 460.4 149 460.4 DL 153 460.4 151 460.4 DL 155 460.4 153 460.4 DL 157 460.4
+155 460.4 DL 159 460.4 157 460.4 DL 161 460.4 159 460.4 DL 163 460.4 161 460.4
+DL 165 460.4 163 460.4 DL 167 460.4 165 460.4 DL 169 460.4 167 460.4 DL 171
+460.4 169 460.4 DL 173 460.4 171 460.4 DL 175 460.4 173 460.4 DL 177 460.4 175
+460.4 DL 179 460.4 177 460.4 DL 181 460.4 179 460.4 DL 183 460.4 181 460.4 DL
+185 460.4 183 460.4 DL 187 460.4 185 460.4 DL 189 460.4 187 460.4 DL 191 460.4
+189 460.4 DL 193 460.4 191 460.4 DL 195 460.4 193 460.4 DL 197 460.4 195 460.4
+DL 199 460.4 197 460.4 DL 201 460.4 199 460.4 DL 203 460.4 201 460.4 DL 205
+460.4 203 460.4 DL 207 460.4 205 460.4 DL 209 460.4 207 460.4 DL 211 460.4 209
+460.4 DL 213 460.4 211 460.4 DL 215 460.4 213 460.4 DL 217 460.4 215 460.4 DL
+219 460.4 217 460.4 DL 221 460.4 219 460.4 DL 223 460.4 221 460.4 DL 225 460.4
+223 460.4 DL 227 460.4 225 460.4 DL 229 460.4 227 460.4 DL 231 460.4 229 460.4
+DL 233 460.4 231 460.4 DL 235 460.4 233 460.4 DL 237 460.4 235 460.4 DL 239
+460.4 237 460.4 DL 241 460.4 239 460.4 DL 243 460.4 241 460.4 DL 245 460.4 243
+460.4 DL 247 460.4 245 460.4 DL 249 460.4 247 460.4 DL 251 460.4 249 460.4 DL
+253 460.4 251 460.4 DL 255 460.4 253 460.4 DL 257 460.4 255 460.4 DL 259 460.4
+257 460.4 DL 261 460.4 259 460.4 DL 263 460.4 261 460.4 DL 265 460.4 263 460.4
+DL 267 460.4 265 460.4 DL 269 460.4 267 460.4 DL 271 460.4 269 460.4 DL 273
+460.4 271 460.4 DL 275 460.4 273 460.4 DL 277 460.4 275 460.4 DL 279 460.4 277
+460.4 DL 281 460.4 279 460.4 DL 283 460.4 281 460.4 DL 285 460.4 283 460.4 DL
+287 460.4 285 460.4 DL 289 460.4 287 460.4 DL 291 460.4 289 460.4 DL 293 460.4
+291 460.4 DL 295 460.4 293 460.4 DL 297 460.4 295 460.4 DL 299 460.4 297 460.4
+DL 301 460.4 299 460.4 DL 303 460.4 301 460.4 DL 305 460.4 303 460.4 DL 307
+460.4 305 460.4 DL 309 460.4 307 460.4 DL 311 460.4 309 460.4 DL 313 460.4 311
+460.4 DL 315 460.4 313 460.4 DL 317 460.4 315 460.4 DL 319 460.4 317 460.4 DL
+321 460.4 319 460.4 DL 323 460.4 321 460.4 DL 325 460.4 323 460.4 DL 327 460.4
+325 460.4 DL 329 460.4 327 460.4 DL 331 460.4 329 460.4 DL 333 460.4 331 460.4
+DL 335 460.4 333 460.4 DL 337 460.4 335 460.4 DL 339 460.4 337 460.4 DL 341
+460.4 339 460.4 DL 343 460.4 341 460.4 DL 345 460.4 343 460.4 DL 347 460.4 345
+460.4 DL 349 460.4 347 460.4 DL 351 460.4 349 460.4 DL 353 460.4 351 460.4 DL
+355 460.4 353 460.4 DL 357 460.4 355 460.4 DL 359 460.4 357 460.4 DL 361 460.4
+359 460.4 DL 363 460.4 361 460.4 DL 365 460.4 363 460.4 DL 367 460.4 365 460.4
+DL 369 460.4 367 460.4 DL 371 460.4 369 460.4 DL 373 460.4 371 460.4 DL 375
+460.4 373 460.4 DL 377 460.4 375 460.4 DL 379 460.4 377 460.4 DL 381 460.4 379
+460.4 DL 383 460.4 381 460.4 DL 385 460.4 383 460.4 DL 387 460.4 385 460.4 DL
+1.44 LW 419.4 460.9 401.4 460.9 DL 428.4 460.9 410.4 460.9 DL 446.4 460.9 428.4
+460.9 DL 464.4 460.9 446.4 460.9 DL 482.4 460.9 464.4 460.9 DL 500.4 460.9
+482.4 460.9 DL 518.4 460.9 500.4 460.9 DL 536.4 460.9 518.4 460.9 DL/F5 12
+/Helvetica-BoldOblique@0 SF(Base)507.72 474.9 Q -.6(Ve)500.256 488.9 S .24(rt)
+.6 G -.18(ex)-.24 G -.72(Ty)509.112 502.9 S(pe).72 E F3 .926
+(All vertex arrays must include at least vertex locations.)63 485.7 R .926
+(The base)6.426 F 1.517
+(vertex type speci\214es whether the array also includes vertex nor)63 498.9 R
+(-)-.198 E 1.329(mals or vertex colors.)63 512.1 R 1.33
+(The following table lists the possible base)6.829 F(values:)63 525.3 Q/F6 9
+/Palatino-Roman@0 SF -.828(Va)82.162 549.3 S(lue of).828 E/F7 9
+/Palatino-Italic@0 SF(vertextype)2.25 E F6 -.999(Ve)236.719 549.3 S
+(rtex Information Supplied).999 E .44 LW 396.339 554.25 63 554.25 DL F7 35.508
+(DcLoc <DCL>)77.755 564.7 R F6(Only the vertex location)190.761 564.7 Q F7
+23.254(DcLocNrm <DCLN>)69.003 577.9 R F6(The vertex location and vertex normal)
+190.761 577.9 Q F7 26.504(DcLocClr <DCLC>)71.752 591.1 R F6
+(The vertex location and vertex color)190.761 591.1 Q F7 14.25
+(DcLocNrmClr <DCLNC>)63 604.3 R F6
+(The vertex location, vertex normal, and vertex color)190.761 604.3 Q 182.511
+538.85 182.511 607.05 DL F3(If)63 633.7 Q F4(DcLoc)4.594 E F3(<)4.594 E F4(DCL)
+A F3 4.594(>i)C 4.594(ss)151.208 633.7 S 1.844(peci\214ed, thr)165.13 633.7 R
+1.843(ee \215oating point values \(x, y)-.198 F 4.593(,z)-1.221 G(\))383.337
+633.7 Q 1.648(must be supplied for each vertex.)63 646.9 R 1.649
+(If other vertex information is)7.148 F 1.092(included in the array)63 660.1 R
+3.842(,a)-1.221 G 1.091(ll the values for a single vertex ar)179.095 660.1 R
+3.841(es)-.198 G(tor)361.271 660.1 Q(ed)-.198 E 3.979
+(consecutively in the array)63 673.3 R(.)-1.221 E F4(DcLocNrm)9.48 E F3(<)6.73
+E F4(DCLN)A F3 6.73(>a)C(nd)323.961 673.3 Q F4(DcLocClr)6.73 E F3(<)63 686.5 Q
+F4(DCLC)A F3 4.684(>r)C(equir)114.511 686.5 Q 4.684(et)-.198 G(hr)153.46 686.5
+Q 1.934(ee additional values for vertex normals and)-.198 F .505
+(vertex colors, r)63 699.7 R(espectively)-.198 E 6.005(.\()-1.221 G .506
+(Assuming a color model that r)201.355 699.7 R(equir)-.198 E(es)-.198 E 1.44 LW
+81 756 63 756 DL 99 756 81 756 DL 117 756 99 756 DL 135 756 117 756 DL 153 756
+135 756 DL 171 756 153 756 DL 189 756 171 756 DL 207 756 189 756 DL 225 756 207
+756 DL 243 756 225 756 DL 261 756 243 756 DL 279 756 261 756 DL 297 756 279 756
+DL 315 756 297 756 DL 333 756 315 756 DL 351 756 333 756 DL 369 756 351 756 DL
+387 756 369 756 DL 419.4 756 401.4 756 DL 428.4 756 410.4 756 DL 446.4 756
+428.4 756 DL 464.4 756 446.4 756 DL 482.4 756 464.4 756 DL 500.4 756 482.4 756
+DL 518.4 756 500.4 756 DL 536.4 756 518.4 756 DL/F8 9/Helvetica@0 SF(Dore)
+313.686 768.96 Q 3.506<b456>329.188 768.96 S -2.142(er te)340.974 768.96 R
+2.502(xT)-.27 G(ypes)367.992 768.96 Q(Dore)414.21 768.96 Q 3.506<b452>429.712
+768.96 S(ef)442.713 768.96 Q(erence Man)-.27 E(ual)-.09 E/F9 9/Helvetica-Bold@0
+SF(5-443)4.002 E EP
+%%Page: 444 2
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 108 46.8 72 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 257.4 46.8 221.4 46.8 DL 293.4 46.8 257.4 46.8 DL 329.4 46.8 293.4
+46.8 DL 365.4 46.8 329.4 46.8 DL 401.4 46.8 365.4 46.8 DL 437.4 46.8 401.4 46.8
+DL 473.4 46.8 437.4 46.8 DL 509.4 46.8 473.4 46.8 DL 545.4 46.8 509.4 46.8 DL
+/F0 10/Helvetica-BoldOblique@0 SF(Base V)72 57.6 Q -2.58(er te)-.5 F 2.78(xT)
+-.15 G(ype)137.09 57.6 Q/F1 10/Helvetica@0 SF(\(contin)72 68.4 Q(ued\))-.1 E/F2
+11/Palatino-Roman@0 SF(thr)221.5 109.2 Q 2.038(ee components per vertex.\))
+-.198 F/F3 11/Palatino-Italic@0 SF(DcLocNrmClr)7.538 E F2(<)4.788 E F3(DCLNC)A
+F2 4.787(>r)C(equir)510.157 109.2 Q(es)-.198 E .021
+(nine \215oating point values for each vertex, wher)221.5 122.4 R 2.772(et)
+-.198 G .022(he vertex normal)462.758 122.4 R .388(triple comes befor)221.5
+135.6 R 3.138(et)-.198 G .388(he vertex color triple in the array)321.686 135.6
+R 5.887(.V)-1.221 G .387(ertex nor)498 135.6 R(-)-.198 E(mals)221.5 148.8 Q F3
+(must)4.405 E F2 1.655(be unit vectors \(of length one\).)4.405 F 1.656
+(Normals that ar)7.156 F 4.406(en)-.198 G(ot)535.908 148.8 Q(unit vectors pr)
+221.5 162 Q(oduce impr)-.198 E(oper shading.)-.198 E .16 LW 223.4 181.4 221.4
+181.4 DL 225.4 181.4 223.4 181.4 DL 227.4 181.4 225.4 181.4 DL 229.4 181.4
+227.4 181.4 DL 231.4 181.4 229.4 181.4 DL 233.4 181.4 231.4 181.4 DL 235.4
+181.4 233.4 181.4 DL 237.4 181.4 235.4 181.4 DL 239.4 181.4 237.4 181.4 DL
+241.4 181.4 239.4 181.4 DL 243.4 181.4 241.4 181.4 DL 245.4 181.4 243.4 181.4
+DL 247.4 181.4 245.4 181.4 DL 249.4 181.4 247.4 181.4 DL 251.4 181.4 249.4
+181.4 DL 253.4 181.4 251.4 181.4 DL 255.4 181.4 253.4 181.4 DL 257.4 181.4
+255.4 181.4 DL 259.4 181.4 257.4 181.4 DL 261.4 181.4 259.4 181.4 DL 263.4
+181.4 261.4 181.4 DL 265.4 181.4 263.4 181.4 DL 267.4 181.4 265.4 181.4 DL
+269.4 181.4 267.4 181.4 DL 271.4 181.4 269.4 181.4 DL 273.4 181.4 271.4 181.4
+DL 275.4 181.4 273.4 181.4 DL 277.4 181.4 275.4 181.4 DL 279.4 181.4 277.4
+181.4 DL 281.4 181.4 279.4 181.4 DL 283.4 181.4 281.4 181.4 DL 285.4 181.4
+283.4 181.4 DL 287.4 181.4 285.4 181.4 DL 289.4 181.4 287.4 181.4 DL 291.4
+181.4 289.4 181.4 DL 293.4 181.4 291.4 181.4 DL 295.4 181.4 293.4 181.4 DL
+297.4 181.4 295.4 181.4 DL 299.4 181.4 297.4 181.4 DL 301.4 181.4 299.4 181.4
+DL 303.4 181.4 301.4 181.4 DL 305.4 181.4 303.4 181.4 DL 307.4 181.4 305.4
+181.4 DL 309.4 181.4 307.4 181.4 DL 311.4 181.4 309.4 181.4 DL 313.4 181.4
+311.4 181.4 DL 315.4 181.4 313.4 181.4 DL 317.4 181.4 315.4 181.4 DL 319.4
+181.4 317.4 181.4 DL 321.4 181.4 319.4 181.4 DL 323.4 181.4 321.4 181.4 DL
+325.4 181.4 323.4 181.4 DL 327.4 181.4 325.4 181.4 DL 329.4 181.4 327.4 181.4
+DL 331.4 181.4 329.4 181.4 DL 333.4 181.4 331.4 181.4 DL 335.4 181.4 333.4
+181.4 DL 337.4 181.4 335.4 181.4 DL 339.4 181.4 337.4 181.4 DL 341.4 181.4
+339.4 181.4 DL 343.4 181.4 341.4 181.4 DL 345.4 181.4 343.4 181.4 DL 347.4
+181.4 345.4 181.4 DL 349.4 181.4 347.4 181.4 DL 351.4 181.4 349.4 181.4 DL
+353.4 181.4 351.4 181.4 DL 355.4 181.4 353.4 181.4 DL 357.4 181.4 355.4 181.4
+DL 359.4 181.4 357.4 181.4 DL 361.4 181.4 359.4 181.4 DL 363.4 181.4 361.4
+181.4 DL 365.4 181.4 363.4 181.4 DL 367.4 181.4 365.4 181.4 DL 369.4 181.4
+367.4 181.4 DL 371.4 181.4 369.4 181.4 DL 373.4 181.4 371.4 181.4 DL 375.4
+181.4 373.4 181.4 DL 377.4 181.4 375.4 181.4 DL 379.4 181.4 377.4 181.4 DL
+381.4 181.4 379.4 181.4 DL 383.4 181.4 381.4 181.4 DL 385.4 181.4 383.4 181.4
+DL 387.4 181.4 385.4 181.4 DL 389.4 181.4 387.4 181.4 DL 391.4 181.4 389.4
+181.4 DL 393.4 181.4 391.4 181.4 DL 395.4 181.4 393.4 181.4 DL 397.4 181.4
+395.4 181.4 DL 399.4 181.4 397.4 181.4 DL 401.4 181.4 399.4 181.4 DL 403.4
+181.4 401.4 181.4 DL 405.4 181.4 403.4 181.4 DL 407.4 181.4 405.4 181.4 DL
+409.4 181.4 407.4 181.4 DL 411.4 181.4 409.4 181.4 DL 413.4 181.4 411.4 181.4
+DL 415.4 181.4 413.4 181.4 DL 417.4 181.4 415.4 181.4 DL 419.4 181.4 417.4
+181.4 DL 421.4 181.4 419.4 181.4 DL 423.4 181.4 421.4 181.4 DL 425.4 181.4
+423.4 181.4 DL 427.4 181.4 425.4 181.4 DL 429.4 181.4 427.4 181.4 DL 431.4
+181.4 429.4 181.4 DL 433.4 181.4 431.4 181.4 DL 435.4 181.4 433.4 181.4 DL
+437.4 181.4 435.4 181.4 DL 439.4 181.4 437.4 181.4 DL 441.4 181.4 439.4 181.4
+DL 443.4 181.4 441.4 181.4 DL 445.4 181.4 443.4 181.4 DL 447.4 181.4 445.4
+181.4 DL 449.4 181.4 447.4 181.4 DL 451.4 181.4 449.4 181.4 DL 453.4 181.4
+451.4 181.4 DL 455.4 181.4 453.4 181.4 DL 457.4 181.4 455.4 181.4 DL 459.4
+181.4 457.4 181.4 DL 461.4 181.4 459.4 181.4 DL 463.4 181.4 461.4 181.4 DL
+465.4 181.4 463.4 181.4 DL 467.4 181.4 465.4 181.4 DL 469.4 181.4 467.4 181.4
+DL 471.4 181.4 469.4 181.4 DL 473.4 181.4 471.4 181.4 DL 475.4 181.4 473.4
+181.4 DL 477.4 181.4 475.4 181.4 DL 479.4 181.4 477.4 181.4 DL 481.4 181.4
+479.4 181.4 DL 483.4 181.4 481.4 181.4 DL 485.4 181.4 483.4 181.4 DL 487.4
+181.4 485.4 181.4 DL 489.4 181.4 487.4 181.4 DL 491.4 181.4 489.4 181.4 DL
+493.4 181.4 491.4 181.4 DL 495.4 181.4 493.4 181.4 DL 497.4 181.4 495.4 181.4
+DL 499.4 181.4 497.4 181.4 DL 501.4 181.4 499.4 181.4 DL 503.4 181.4 501.4
+181.4 DL 505.4 181.4 503.4 181.4 DL 507.4 181.4 505.4 181.4 DL 509.4 181.4
+507.4 181.4 DL 511.4 181.4 509.4 181.4 DL 513.4 181.4 511.4 181.4 DL 515.4
+181.4 513.4 181.4 DL 517.4 181.4 515.4 181.4 DL 519.4 181.4 517.4 181.4 DL
+521.4 181.4 519.4 181.4 DL 523.4 181.4 521.4 181.4 DL 525.4 181.4 523.4 181.4
+DL 527.4 181.4 525.4 181.4 DL 529.4 181.4 527.4 181.4 DL 531.4 181.4 529.4
+181.4 DL 533.4 181.4 531.4 181.4 DL 535.4 181.4 533.4 181.4 DL 537.4 181.4
+535.4 181.4 DL 539.4 181.4 537.4 181.4 DL 541.4 181.4 539.4 181.4 DL 543.4
+181.4 541.4 181.4 DL 545.4 181.4 543.4 181.4 DL 1.44 LW 90 181.9 72 181.9 DL 99
+181.9 81 181.9 DL 117 181.9 99 181.9 DL 135 181.9 117 181.9 DL 153 181.9 135
+181.9 DL 171 181.9 153 181.9 DL 189 181.9 171 181.9 DL 207 181.9 189 181.9 DL
+/F4 12/Helvetica-BoldOblique@0 SF -.6(Ve)72 195.9 S .24(rt).6 G .36 -.18(ex T)
+-.24 H(ypes that)-.54 E(Contain T)72 209.9 Q -.18(ex)-.72 G(ture).18 E(Inf)72
+223.9 Q(ormation)-.24 E F2 3.279(The Dore)221.5 206.7 R 6.832<b466>265.611
+206.7 S(unctions)279.769 206.7 Q F3(DsT)6.029 E(extur)-1.221 E(eUVCount)-.198 E
+F2(<)6.029 E F3(DSTUVC)A F2 6.029(>a)C(nd)494.569 206.7 Q F3(DsT)6.029 E(ex-)
+-1.221 E(tur)221.5 219.9 Q(eUVWCount)-.198 E F2(<)2.773 E F3(DSTWC)A F2 2.773
+(>a)C .419 -.198(re u)358.133 219.9 T .023(sed in conjunction with a base ver)
+.198 F(-)-.198 E .478(tex type to specify a new vertex type that includes)221.5
+233.1 R F3(uv)3.228 E F2(and/or)3.228 E F3(uvw)3.229 E F2(coor)221.5 246.3 Q
+(dinates.)-.198 E -1.012(Yo)221.5 268.2 S 4.264(uc)1.012 G 1.514
+(an obtain the new vertex type by bitwise)249.612 268.2 R F3(or)4.264 E F2
+1.514('ing any of the)B .02(base vertex values with the values r)221.5 281.4 R
+.021(eturned fr)-.198 F .021(om the above named)-.198 F 10.102(functions. Both)
+221.5 294.6 R F3(DsT)315.36 294.6 Q(extur)-1.221 E(eUVCount)-.198 E F2(<)
+416.332 294.6 Q F3(DSTUVC)A F2 10.101(>a)C(nd)490.497 294.6 Q F3(DsT)513.721
+294.6 Q(ex-)-1.221 E(tur)221.5 307.8 Q(eUVWCount)-.198 E F2(<)3.011 E F3(DSTWC)
+A F2 3.011(>t)C .262(ake a parameter)356.695 307.8 R(,)-.814 E F3(count)3.012 E
+F2 3.012(,w)C .262(hich speci\214es)480.382 307.8 R .198(how many sets of)221.5
+321 R F3(uv)2.948 E F2(or)2.948 E F3(uvw)2.948 E F2(coor)2.948 E .197
+(dinates ar)-.198 F 2.947(es)-.198 G .197(peci\214ed for each ver)442.686 321 R
+(-)-.198 E(tex in the vertex list.)221.5 334.2 Q 2.045
+(As an example, consider the following vertex type speci\214cation)221.5 356.1
+R(within a)221.5 369.3 Q F3(DoT)2.75 E(riangleList <DOTRIL>)-1.221 E F2
+(function:)2.75 E/F5 9/Courier@0 SF
+(DoTriangleList\(DcRGB, DcLocClr | DsTextureUVCount\(2\),)221.5 392.3 Q
+(tricnt, vert\))307.9 403.3 Q
+(DOTRIL\(DCRGB, IOR\(DCLC,DSTUVC\(2\)\), TRICNT, VERT\))221.5 425.3 Q F2 3.724
+(In this function, the vertex type speci\214es that each vertex is)221.5 450.5
+R 1.979(de\214ned by ten r)221.5 463.7 R 1.98(eal values \(DtReal in C, REAL)
+-.198 F/F6 11/Symbol SF(*)A F2 4.73(8o)C 4.73(rR)481.744 463.7 S(EAL)498.167
+463.7 Q F6(*)A F2 4.73(4i)C(n)539.098 463.7 Q/F7 10/Palatino-Roman@0 SF(FOR)
+221.5 476.9 Q(TRAN)-.37 E F2(\):)A(an or)257.5 503.3 Q(der)-.198 E
+(ed triple specifying the vertex position)-.198 E(an or)257.5 516.5 Q(der)-.198
+E(ed triple specifying the r)-.198 E(ed, gr)-.198 E(een, and blue values)-.198
+E(two or)257.5 529.7 Q(der)-.198 E(ed pairs specifying)-.198 E F3(uv)2.75 E F2
+(coor)2.75 E(dinates)-.198 E(If the value of)221.5 556.1 Q F3(tricnt)2.75 E F2
+(in this example wer)2.75 E 2.75<658c>-.198 G(fteen, the)429.829 556.1 Q 90 756
+72 756 DL 99 756 81 756 DL 117 756 99 756 DL 135 756 117 756 DL 153 756 135 756
+DL 171 756 153 756 DL 189 756 171 756 DL 207 756 189 756 DL 239.4 756 221.4 756
+DL 257.4 756 239.4 756 DL 275.4 756 257.4 756 DL 293.4 756 275.4 756 DL 311.4
+756 293.4 756 DL 329.4 756 311.4 756 DL 347.4 756 329.4 756 DL 365.4 756 347.4
+756 DL 383.4 756 365.4 756 DL 401.4 756 383.4 756 DL 419.4 756 401.4 756 DL
+437.4 756 419.4 756 DL 455.4 756 437.4 756 DL 473.4 756 455.4 756 DL 491.4 756
+473.4 756 DL 509.4 756 491.4 756 DL 527.4 756 509.4 756 DL 545.4 756 527.4 756
+DL/F8 9/Helvetica-Bold@0 SF(5-444)72 768.96 Q/F9 9/Helvetica@0 SF(Dore)6.504 E
+3.506<b452>117.019 768.96 S(ef)130.02 768.96 Q(erence Man)-.27 E(ual)-.09 E
+(Dore)221.4 768.96 Q 3.506<b456>236.902 768.96 S -2.142(er te)248.688 768.96 R
+2.502(xT)-.27 G(ypes)275.706 768.96 Q EP
+%%Trailer
+end
+%%EOF

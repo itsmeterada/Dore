@@ -1,0 +1,9 @@
+#include <Dore.tmpl>
+
+    SRCS = pex_dcm.c pex_inq.c pex_output.c pex_set.c
+    OBJS = pex_dcm.o pex_inq.o pex_output.o pex_set.o
+
+LibraryObjectRule()
+SubdirLibraryRule($(OBJS))
+
+DependTarget()

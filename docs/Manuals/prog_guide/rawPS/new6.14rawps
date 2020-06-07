@@ -1,0 +1,103 @@
+%!PS-Adobe-2.0
+%%Title: Unspecified
+%%Creator: MacDraw
+%%CreationDate: Monday, September 11, 1989
+%%Pages: (atend)
+%%BoundingBox: ? ? ? ?
+%%PageBoundingBox: 30 31 582 761
+%%For: Aaron Black
+%%IncludeProcSet: "(AppleDict md)" 66
+%%EndComments
+%%EndProlog
+%%BeginDocumentSetup
+md begin
+
+T T -31 -30 761 582 100 72 72 1 F F F F T T psu
+(Aaron Black; document: Unspecified)jn
+0 mf
+od
+%%EndDocumentSetup
+%%Page: ? 1
+op
+0 0 xl
+1 1 pen
+0 0 gm
+(nc 0 0 720 540 6 rc)kp
+0.5 24.5 45.5 96.5 0 rc
+0.5 132.5 45.5 204.5 0 rc
+0.5 240.5 45.5 312.5 0 rc
+0.5 348.5 45.5 420.5 0 rc
+146 1 gm
+bu fc
+{}mark T /Helvetica /|______Helvetica 0 rf
+bn
+1 setTxMode
+0 fs
+10 fz
+bu fc
+2 F /|______Helvetica fnt
+bn
+0.30824 0.(DoAmbientIntens)ashow
+157 1 gm
+0 gr
+0.28691 0.(\(usesDoDiffuseColor\))ashow
+168 1 gm
+0.36451 0.(DoAmbientSwitch)ashow
+149 132 gm
+0.34814 0.(DoDiffuseIntens)ashow
+160 132 gm
+0.40182 0.(DoDiffuseColor)ashow
+171 132 gm
+0.40444 0.(DoDiffuseSwitch)ashow
+145 239 gm
+0.16894 0.(DoSpecularIntens)ashow
+156 239 gm
+0.20599 0.(DoSpecularColor)ashow
+167 239 gm
+0.22151 0.(DoSpecularSwitch)ashow
+178 239 gm
+0.16242 0.(DoSpecularFactor)ashow
+146 361 gm
+0.22114 0.(DoTranspIntens)ashow
+157 361 gm
+0.26870 0.(DoTranspColor)ashow
+168 361 gm
+0.28173 0.(DoTranspSwitch)ashow
+220 170 gm
+1.17980 0. 32 0.11798 0.(Related Primitive Attributes:)awidthshow
+236 185 gm
+0.31321 0.(DoReflectionSwitch)ashow
+247 185 gm
+0.43461 0.(DoShadowSwitch)ashow
+28 40 gm
+0.22131 0.(Ambient)ashow
+28 151 gm
+0.31443 0.(Diffuse)ashow
+28 257 gm
+-0.06475 0.(Specular)ashow
+28 359 gm
+0.11036 0.(Transparent)ashow
+0 0 gm
+214 160 219 165 4 ov
+214.5 160.5 218.5 164.5 0 ov
+126 26 146 46 260 308 1 ar
+45 58 gm
+128 37 lin
+0 0 gm
+127 157 147 177 246 294 1 ar
+45 166 gm
+129 166 lin
+0 0 gm
+125 265 145 285 246 294 1 ar
+45 274 gm
+127 274 lin
+0 0 gm
+125 390 145 410 235 283 1 ar
+46 382 gm
+127 397 lin
+F T cp
+%%Trailer
+cd
+end
+%%Pages: 1 0
+%%EOF

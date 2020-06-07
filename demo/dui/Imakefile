@@ -1,0 +1,10 @@
+#include <Dore.tmpl>
+
+#if HasPoll
+ DEFINES = -DHAS_POLL
+#endif
+
+    SRCS = MkModels.c MkStudios.c ParseArg.c Render.c Trnsfrmr.c
+    OBJS = MkModels.o MkStudios.o ParseArg.o Render.o Trnsfrmr.o
+
+NormalLibraryTarget(dui,$(OBJS))

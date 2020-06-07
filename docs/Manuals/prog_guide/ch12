@@ -1,0 +1,546 @@
+.\"#ident "%W%" %G%
+.\"
+.\" Copyright (C) 1988, 1989, 1990, 1991 by Kubota Pacific Computer Inc.
+.\"         All Rights Reserved
+.\" This program is a trade secret of Kubota Pacific Computer Inc. and
+.\" it is not to be reproduced, published, disclosed to others, copied,
+.\" adapted, distributed, or displayed without the prior authorization
+.\" of Kubota Pacific Computer Inc.  Licensee agrees to attach or embed
+.\" this Notice on all copies of the program, including partial copies
+.\" or modified versions thereof.
+.\"
+.so ../macros/local.me
+.ds CT System Functions
+.ds BT \*(Dd Programmer's Guide
+.ds h1 12
+.PN 241
+.L1 S YSTEM
+.L2 F UNCTIONS
+.CH TWELVE
+.rs
+.sp -1.5v
+This chapter explains how to use some of the system functions provided
+by \*(Dd.
+This includes using the naming facilities of \*(Dd,
+writing your own error handler, and
+using \f2valuators\fP to make changes in the \*(Dd
+database in response to asynchronous external events such as mouse or
+dial movements and keyboard input.
+Key system functions are also described here.
+Terms and concepts introduced in this chapter include object naming,
+error handling, valuators, and input slots.
+.sp -.5v
+.H1 "Naming Objects"
+.rs
+.sp -.25v
+\f2DsSetObjName <DSSOND, DSSONI, DSSONS>\fP allows you to associate
+either an integer or string name with any \*(Dd object.
+You can query the name associated with an object with \f2DsInqObjName
+<DSQONT, DSQONI, DSQONS>\fP.
+Once an object has been named it is then possible to get the object by
+just knowing its name.
+The function \f2DsInqObj <DSQOI, DSQOS>\fP returns an object given a
+name and class.
+For example, a set of objects could be provided by a library and then
+they could be referenced by just knowing the objects' names.
+The following code fragments show how a triangle mesh object could be
+named and then later referenced.
+The system function \f2DsHoldObj <DSHO>\fP is used in the example, so
+that when the object is no longer referenced it will not be
+automatically deleted by \*(Dd.
+.(m
+C code:
+
+.\"#	ident "@(#)ch13.ex03	1.2"	5/6/91
+.\"
+DsSetObjName(DsHoldObj(DoTriangleMesh(...),
+		       DcNameString, "objname", DcFalse));
+
+	...
+
+DtObject obj;
+
+obj = DsInqObj(DcNameString, "objname", 
+	       DsInqClassId("DoTriangleMesh"));
+.sp
+\*(Fo code:
+
+.\"#	ident "@(#)ch13.ex03.f	1.2"	5/6/91
+.\"
+
+      DSSONS(DSHO(DOTRIM(...),'objname',7,DCFAL)
+
+	...
+
+      INTEGER*4 OBJ
+
+      OBJ = DSQOS('objname',7,DSQCI('DoTriangleMesh',5))
+.)m
+.lp
+Notice that \f2DsInqObj <DSQOI, DSQOS>\fP requires that the class id
+be specified.
+The constant \f2DcTypeAny <DCTANY>\fP will match any class id.
+.H1 "Error Handling"
+\*(Dd provides a very flexible error handling mechanism.
+You can direct error messages to a file and provide your own error handler.
+The following functions are provided to control error handling:
+.ip "\f3DsSetErrorVars <DSSEV>\fP"
+installs an error file descriptor and a user-written error handler.
+With this function, you pass a file descriptor to which the error
+messages are to be written and a pointer to a function that will be
+called when an error occurs.
+The default file descriptor is 2, which is standard error.
+.ip "\f3DsInqErrorVars <DSQEV>\fP"
+returns the current error file descriptor and error handler.
+.ip "\f3DsInqErrorMessage <DSQEM>\fP"
+returns the severity level of the requested error number and 
+copies the error message to a user-supplied string.
+This function is intended to be used by a user-written error handling
+function.
+.lp
+The error handler function will be called each time a \*(Dd error
+occurs.
+The calling sequence for the error handler is:
+.(m
+C code:
+
+errfcn(fd, number, function_name, string)
+DtInt fd;
+DtInt number;
+DtPtr function_name;
+DtPtr string;
+.sp
+\*(Fo code:
+.sp
+     SUBROUTINE ERRFCN(FD, NUMBER, FCNNAM, FCNLEN, 
+    1                  STR, STRLEN)
+     INTEGER*4 FD
+     INTEGER*4 NUMBER
+     INTEGER*4 FCNLEN
+     INTEGER*4 STRLEN
+     CHARACTER*FCNLEN FCNNAM
+     CHARACTER*STRLEN STR
+.)m
+The function will be passed four parameters.
+.sp -.25v
+.ip "\f3fd      \fP
+is the file descriptor to be used when writing the error message.
+.sp -.25v
+.ip "\f3number\fP
+is the error number corresponding to the error caused the error
+handler to be invoked.
+.sp -.25v
+.ip "\f3function_name\fP
+is the name of the \*(Dd function that generated the error.
+In \*(Fo the length of the string is passed in \f2<FCNLEN>\fP.
+.sp -.25v
+.ip "\f3string\fP
+is a string (possible \f2DcNullPtr <DCNULL>\fP) with additional
+information of the error.
+In \*(Fo the length of the string is passed in \f2<STRLEN>\fP.
+.sp -.25v
+.lp
+The following example shows a sample error handler.
+It uses \f2DsInqErrorMessage <DSQEM>\fP to get the text string
+corresponding to the error number and prints a formatted message
+including the severity of the error, the function where it occurred
+and the additional string.
+If the error severity is fatal the error handler calls exit.
+.(m
+C code:
+.sp
+.\"#	ident "@(#)ch13.ex02	1.2"	5/15/91
+.\"
+#include "dore.h"
+#include <stdio.h>
+
+#define BUFSIZE 1024
+
+error_handler(fd, number, funcname, string)
+DtInt fd, number;
+DtPtr funcname, string;
+{
+    char msg[BUFSIZE];
+    char buf[BUFSIZE];
+    DtErrorStatus severity;
+    DtReadStatus status;
+    static DtFlag inerror=DcFalse;
+    static char	 badfilmsg[] =
+	 "error_handler: got bad file descriptor.\\\\n";
+
+    if(inerror) {
+	/ * error handler has recursed, 
+	 *  output only simple message
+	 */
+
+	if (funcname != DcNullPtr) {
+	    sprintf (buf, "ERROR #%d in routine %s.\\\\n", 
+		     number, funcname);
+	} else {
+	    sprintf (buf, "ERROR #%d\\\\n", number);
+	}
+	if(strlen(buf) != write(fd, buf, strlen(buf))) {
+	    fprintf(stderr, badfilmsg);
+	}
+	inerror = DcFalse;
+	return;
+    }
+
+    inerror = DcTrue;
+    status = DsInqErrorMessage(number, BUFSIZE, msg,
+			       &severity);
+
+    /* test that file descriptor is ok */
+    if(6 != write(fd, "***** ", 6)) {
+	fprintf(stderr, badfilmsg);
+	inerror = DcFalse;
+	return;
+    }
+
+    if(DcReadTrunc == status) {
+	write(fd, "Error message truncated\\\\n", 37);
+    }
+
+    if(DcReadUnsuc == status) {
+	sprintf(buf, "Error message #%d does not exist\\\\n",
+		number);
+	write(fd, buf, strlen(buf));
+	inerror = DcFalse;
+	return;
+    }
+
+    
+
+
+switch(severity) {
+    case DcErrorMinor: 
+	write(fd, "MINOR ", 6);
+	break;
+    case DcErrorSevere:
+	write(fd, "SEVERE ", 7);
+	break;
+    case DcErrorFatal:
+	write(fd, "FATAL ", 6);
+	break;
+    }
+
+    write(fd, "ERROR ***** ", 12);
+    sprintf(buf, "(#%d) ", number);
+    write(fd, buf, strlen(buf));
+    if(DcNullPtr != funcname) {
+	write(fd, "in routine ", 11);
+	write(fd, funcname, strlen(funcname));
+	write(fd, " - ", 3);
+    }
+    write(fd, "\\\\n\\\\t", 2);
+    write(fd, msg, strlen(msg)); 
+    if ((DcNullPtr != string) && (strlen(string) > 0)) {
+	write(fd, " - ", 3);
+	write(fd, string, strlen(string));
+    }
+    write(fd, "\\\\n", 1);
+	
+    inerror = DcFalse;
+    if(severity == DcErrorFatal) {
+	/* that's all folks! */
+	exit(1);
+    }
+}
+.sp
+\*(Fo code:
+
+.\"#	ident "@(#)ch13.ex02.f	1.2"	5/15/91
+.\"
+      SUBROUTINE ERRHND(ERRFIL, ERRNUM, FCNNAM, FCNNML,
+     1 ERRSTR, ERRSTL)
+
+      IMPLICIT NONE
+      INCLUDE '/usr/include/fortran/DORE'
+
+      INTEGER*4 ERRFIL
+      INTEGER*4 ERRNUM
+      INTEGER*4 FCNNML
+      INTEGER*4 ERRSTL
+      CHARACTER*(*) FCNNAM
+      CHARACTER*(*) ERRSTR
+C
+      INTEGER*4 INERR
+      DATA INERR /0/
+      COMMON /INERR/ INERR
+C
+      INTEGER*4 BUFSIZ
+      PARAMETER (BUFSIZ = 1024)
+      CHARACTER*1024 BUF
+      INTEGER*4 STATUS
+      INTEGER*4 SEVERT
+      CHARACTER*8 SEVSTR
+      INTEGER*4 SLEN
+      INTEGER*4 TLEN
+C
+ 10   FORMAT (' Error #',I4,' - in routine ', A)
+ 20   FORMAT (' Error #',I4)
+ 30   FORMAT (' Error message truncated')
+ 40   FORMAT (' Error message #',I4,' does not exist')
+ 50   FORMAT (' ***** ',A,' ERROR ***** (#',I4,
+     1     ') in routine ',A,' - ')
+ 60   FORMAT (' ***** ',A,' ERROR ***** (#',I4,')')
+ 70   FORMAT ('       ',A,' - ',A)
+ 80   FORMAT ('       ',A)
+C
+      IF (INERR .EQ. 1) THEN
+C
+      ! error handler has recursed, 
+      ! just output simple message
+          IF (FCNNML .GT. 0) THEN
+              WRITE(ERRFIL, 10) ERRNUM, FCNNAM
+          ELSE
+              WRITE(ERRFIL, 20) ERRNUM
+          ENDIF
+
+          INERR = 0
+          RETURN
+      ENDIF
+C
+      INERR = 1
+      SEVERT = -1
+      STATUS = DSQEM(ERRNUM, BUFSIZ, BUF, SEVERT)
+C
+      IF (STATUS .EQ. DCRTRN) THEN
+          WRITE(ERRFIL, 30)
+      ENDIF
+      IF (STATUS .EQ. DCRFAL) THEN
+          WRITE(ERRFIL, 40)
+          INERR = 0
+          RETURN
+      ENDIF
+C
+      DO 100 SLEN = BUFSIZ - 1, 1, -1
+          IF (BUF(SLEN:SLEN+1) .NE. ' ') GOTO 101
+ 100  CONTINUE 
+ 101  CONTINUE
+C
+      IF (SEVERT .EQ. DCEMNR) THEN
+          SEVSTR = 'MINOR'
+          TLEN = 5
+      ELSE IF (SEVERT .EQ. DCESEV) THEN
+          SEVSTR = 'SEVERE'
+          TLEN = 6
+      ELSE IF (SEVERT .EQ. DCEFAT) THEN
+          SEVSTR = 'FATAL'
+          TLEN = 5
+      ELSE
+          SEVSTR = 'UNKNOWN'
+          TLEN = 7
+      ENDIF
+C
+      IF (FCNNML .GT. 0) THEN
+          WRITE(ERRFIL,50) SEVSTR(1:TLEN), ERRNUM, FCNNAM
+      ELSE
+          WRITE(ERRFIL,60) SEVSTR(1:TLEN), ERRNUM
+      ENDIF
+C      
+      IF (ERRSTL .GT. 0) THEN
+          WRITE(ERRFIL, 70) BUF(1:SLEN), ERRSTR
+      ELSE
+          WRITE(ERRFIL, 80) BUF(1:SLEN)
+      ENDIF
+C
+      INERR = 0
+      IF (SEVERT .EQ. DCEFAT) THEN
+      ! fatal error so exit
+         CALL EXIT(1)
+      ENDIF
+C
+      RETURN
+      END
+.)m
+.H1 "\*(Dd Input"
+A common input model for interactive computer
+graphics is illustrated in \*(FT.
+In this model, the application waits for user input.
+When an input event occurs, the application updates its database and
+tells \*(Dd to redraw the image.  
+\*(Dd updates the graphics database and then renders the modified
+image.
+This standard loop is driven by input events and is under control of
+the application.
+.(F "./PS/12.1ps" 2.35i -1
+.)F "Basic Interactive Computer Graphics Model"
+.rs
+.sp -.5v
+\*(Dd also accommodates another input model by
+providing a \f2valuator\fP mechanism to handle asynchronous
+input (see \*(FT).
+.(F "./PS/12.2ps" 2.35i -1
+.)F "Using Valuators to Modify the \*(Dd Database"
+.rs
+.sp -.5v
+Input values can be used to affect the \*(Dd database directly,
+without application control.
+This capability is provided mainly for situations where the
+application and the \*(Dd database exist in separate processes,
+possibly on separate machines.
+An example of this is a simulation running on a super-computer
+at a remote site sending data to a local workstation that is
+displaying the results of the simulation.
+The user on the local workstation wants to interact with the \*(Dd
+model, by changing the point of view or other graphics parameters that
+are not directly related to the simulation.
+In this model, an event such as a mouse or dial movement causes a
+software interrupt, which generates an input value.
+This input value affects the \*(Dd database, and then \*(Dd renders
+this modified scene.
+.H2 "Input Slots and Valuators"
+An \f2input slot\fP is an organizational object with which
+\f2valuators\fP are associated.
+The input slot is an entry point for floating point values and is the
+primary interface for connecting input events and values to \*(Dd.
+A valuator is a callback object that uses the values from
+the input slot.
+.H3 "Creating Input Slots"
+For convenience, \*(Dd provides a set of standard input slots for
+translate, rotate, and scale values.  
+These are \f2DcTransXSlot <DCISTX>, DcTransYSlot <DCISTY>,
+DcTransZSlot <DCISTZ>, DcScaleXSlot <DCISSX>, DcScaleYSlot <DCISSY>,
+DcScaleZSlot <DCISSZ>, DcRotXSlot <DCISRX>, DcRotYSlot <DCISRY>,\fP
+and \f2DcRotZSlot <DCISRZ>\fP.
+These predefined slots are provided for user convenience but do not
+have prescribed functionality associated with them.
+You can create other input slots using \f2DoInputSlot <DOIS>\fP.
+.H3 "Attaching Valuators to an Input Slot"
+To associate valuators with a particular input slot,
+they are added to the \f2valuator group\fP of the input slot.
+A valuator group contains a set of callback objects associated with a
+particular input slot.
+Use \f2DsInqValuatorGroup <DSQVG>\fP to get the handle of
+the valuator group of a specified input slot object.
+.H3 "Using Input Slots and Valuators"
+A value is input to a slot with \f2DsInputValue <DSIV>\fP,
+which takes a slot object and a floating point value.
+The input values can be generated by either internal or asynchronous 
+external events. 
+\f2DsInputValue <DSIV>\fP triggers the valuators
+associated with the input slot.
+This means that the functions of the valuator callback objects
+are invoked and passed
+(1) the data with which the callback was created,
+(2) the slot, and 
+(3) the input value to that slot.
+.lp
+A system valuator switch (\f2DsValuatorSwitch <DSVS>\fP)
+specifies whether valuator callbacks are currently allowed
+to execute.
+When the switch is off, all inputs through slots are blocked.
+When the switch is turned back on, all blocked inputs
+are flushed.  
+By default, the valuator switch is on.
+.H2 "Simple Example"
+The following example creates a \*(Dd input slot, \f2my_slot <MSLOT>\fP.
+In the example, this input slot has one valuator function associated 
+with it, \f2change_xscale\fP.
+When \f2DsInputValue <DSIV>\fP inputs a value to \f2my_slot
+<MSLOT>\fP, the valuator function \f2change_xscale\fP is called and 
+is passed the user data (DcNullPtr <DCNULL>), 
+the slot (\f2my_slot <MSLOT>\fP) and the input value (12.9).
+The input value is used as the new \f2x\fP scaling parameter for the
+sphere group. 
+.(m
+C code:
+
+.\"#	ident "@(#)ch13.ex01	1.3" 5/6/91
+.\"
+change_xscale(data, slot, value)
+DtPtr data;
+DtObject slot;
+DtReal value;
+{
+    extern DtObject sphere_group;
+     
+    DgReplaceObjInGroup(sphere_group, 
+			DoScale(value, 1.0, 1.0));
+}
+
+
+DtObject callback_obj;
+DtObject my_slot;
+
+my_slot = DoInputSlot();
+callback_obj = DoCallback(change_xscale, DcNullObject);
+DgAddObjToGroup(DsInqValuatorGroup(my_slot), 
+		callback_obj);
+DsInputValue(my_slot, 12.9);
+.sp
+\*(Fo code:
+
+.\"#	ident "@(#)ch13.ex01.f	1.2" 5/6/91
+.\"
+      SUBROUTINE CHGXSC(DATA, SLOT, VALUE)
+      INTEGER*4 DATA
+      INTEGER*4 SLOT
+      REAL*8 VALUE
+C
+      EXTERNAL INTEGER*4 SPHGRP
+C
+      CALL DGROG(SPHGRP, DOSC(VALUE, 1.0D0, 1.0D0))
+      RETURN
+      END
+C
+      INTEGER*4 CBOBJ
+      INTEGER*4 MSLOT
+C
+      MSLOT = DOIS()
+      CBOBJ = DOCB(CHGXSC, DCTNUL)
+      CALL DGAOG(DSQVG(MSLOT), CBOBJ)
+      CALL DSIV(MSLOT, 12.9D0)
+.)m
+.H1 "Other System Functions"
+.H3 "Initialization and Termination
+\f2DsInitialize <DSINIT>\fP is the first \*(Dd function
+called and specifies how many processors to use in real-time rendering
+on a multiprocessor system. 
+\f2DsTerminate <DSTERM>\fP terminates the \*(Dd system and
+should be the last \*(Dd call.
+.H3 "DsPrintObj <DSPO>
+\f2DsPrintObj <DSPO>\fP can be used as a debugging tool when creating
+a \*(Dd database.
+It will print information on a whole group hierarchy when a group is
+specified (\f2DsPrintObj(group) <DSPO(GROUP)>\fP) or will print
+information on a view, including the display and definition groups
+when a view is specified.
+.H3 "Class Names and Ids
+Each type or \f2class\fP of object in \*(Dd has a string name.
+The name of each class is the string corresponding to the name of the
+C function used to create the class of object.
+For instance, DoTriangleMesh is the name of the class of objects
+created by \f2DoTriangleMesh <DOTRIM>\fP.
+.lp
+Each class also has a \f2id\fP that is assigned to the class at
+run-time.
+The class id can be determined by using the function \f2DsInqClassId
+<DSQCI>\fP. 
+Class ids are used by system functions like \f2DsInqObj <DSQOI,
+DSQOS>\fP and object creation functions like \f2DoNameSet <DONS>\fP,
+\f2DoFilter <DOFL>\fP, and \f2DoExecSet <DOES>\fP.
+.H1 "Chapter Summary"
+Chapter 12 describes some of the system functions in \*(Dd.
+You have seen how an integer or string name can be associated with
+\*(Dd objects using \f2DsSetObjName <DSSOND, DSSONI, DSSONS>\fP and
+how \f2DsInqObj <DSQOI, DSQOS>\fP can be used to get an object given its
+name and class.
+.lp
+\*(Dd provides flexible error handling.
+\f2DsSetErrorVars <DSSEV>\fP enables you to install an error file
+descriptor and a user-written error handler.
+An example error handler shows how \f2DsInqErrorMessage <DSQEM>\fP
+can be used to obtain the string and error severity of an error.
+.lp
+You have seen how \f2valuators\fP can be used to modify
+the \*(Dd database directly, without application control.
+\*(Dd provides a set of standard input slots for translate, rotate,
+and scale values, and you can create additional input slots using
+\f2DoInputSlot <DOIS>\fP.
+Each input slot contains a valuator group composed of a set of
+\f2callback functions.\fP 
+When a value is input to a slot with \f2DsInputValue <DSIV>\fP, the
+callback objects contained in the valuator group for that slot are
+activated. 

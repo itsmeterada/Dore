@@ -1,0 +1,60 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DoInterpType 3D  "Dore"
+.SH NAME
+DoInterpType \- Create an interpolation type primitive attribute object
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+DtObject DoInterpType(type)
+DtInterpType type;
+.sp
+.in -.5i
+FORTRAN:
+.in +.5i
+INTEGER*4 DOIT(TYPE)
+INTEGER*4 TYPE
+.in -.5i
+.fi
+.SH DESCRIPTION
+.IX DOIT
+.IX DoInterpType
+.I DoInterpType
+creates an interpolation type primitive attribute object.
+The parameter \f2type\fP
+specifies the information interpolated by the object when
+it shades itself.
+.PP
+The parameter \f2type\fP argument can have the following values:
+.IP "\f2DcConstantShade\fP <\f2DCCNSH\fP>"
+Average the information from each
+vertex and generate a single shade for each facet of the object.
+.IP "\f2DcVertexShade\fP <\f2DCVXSH\fP>"
+Shade each vertex of the object and then render each facet
+by linearly interpolating the vertex shades across the facet.
+.IP "\f2DcSurfaceShade\fP <\f2DCSFSH\fP>"
+Interpolate all information from each vertex linearly across 
+each facet of the object 
+and then shade each point on the object.
+.SH DEFAULTS
+The default value for \f2DoInterpType\fP is
+\f2DcConstantShade\fP <\f2DCCNSH\fP>.
+.SH "SEE ALSO"
+DoRepType(3D)
+

@@ -1,0 +1,770 @@
+.\"#ident "%W%" %G%
+.\"
+.\" Copyright (C) 1988, 1989, 1990, 1991 by Kubota Pacific Computer Inc.
+.\"         All Rights Reserved
+.\" This program is a trade secret of Kubota Pacific Computer Inc. and
+.\" it is not to be reproduced, published, disclosed to others, copied,
+.\" adapted, distributed, or displayed without the prior authorization
+.\" of Kubota Pacific Computer Inc.  Licensee agrees to attach or embed
+.\" this Notice on all copies of the program, including partial copies
+.\" or modified versions thereof.
+.\"
+.so ../macros/local.me
+.ds CT Text
+.ds BT \*(Dd Programmer's Guide
+.ds h1 7
+.PN 133
+.L1 T EXT
+.CH SEVEN
+.rs
+.sp -1.5v
+This chapter describes the text primitives and the text-specific 
+attributes.  The basic principles applying to groups, objects, and attribute
+stacking described in Chapters 3 through 6 also apply to text and
+text attributes.  This chapter offers a few examples of text
+attributes, but you will probably also want to experiment with
+the wide variety of fonts and possibilities for sizing and
+orienting text that \*(Dd offers.
+.sp -.5v
+.H1 "Text Primitives"
+.rs
+.sp -.25v
+A \f2primitive text object\f1 is a displayable string of characters, 
+numbers, and glyphs.  The two primitive text objects provided by 
+\*(Dd are \f2DoText <DOTXT>\f1 and \f2DoAnnoText <DOANNT>\f1. 
+.H2 "DoText"
+.rs
+.sp -.25v
+\f2DoText\f1 creates a primitive text object that
+specifies a text string to be drawn at an arbitrary position in
+an arbitrary plane in 3D space.  The syntax for \f2DoText <DOTXT>\f1
+is:
+.(m
+DoText (position, u, v, string)
+.)m
+where
+.sp -.25v
+.ip "\f3position\f1"
+specifies the \f2x,y,z\f1 point in local space where the text will be based.
+.sp -.25v
+.ip "\f3u, v     \f1"
+are two 3D vectors used to determine the plane in which the
+text will sit.
+.sp -.25v
+.ip "\f3string\f1"
+is the actual text string.
+.lp
+\*(FT shows the string \*(lqDoText\*(rq in the plane in which it sits 
+when \f2position\f1 is the origin and 
+\f2u\f1 and \f2v\f1 are (1.,0.,-1.) and (0.,1.,0.) respectively.  
+The \f2u\f1 and \f2v\f1 vectors need not be unit vectors, but they 
+must be perpendicular to each other for well-defined results.
+.(F 
+.\" ./PS/7.1ps 2.5i 0
+.sp 2.25i
+.)F "DoText Parameters"
+.lp
+Text objects created by \f2DoText\f1 are affected by both the
+primitive attributes described in Chapters 5 and 6, and by the text 
+primitive attributes outlined later in this chapter.  
+.H2 "DoAnnoText"
+\f2DoAnnoText\f1 creates a primitive text object that
+specifies a text string to be drawn at an arbitrary position in 
+a plane that will always be parallel to the \f2xy\f1-plane in device space. 
+The syntax for \f2DoAnnoText <DOANNT>\f1 is:
+.(m
+DoAnnoText (position, string)
+.)m
+where
+.ip "\f3position\f1"
+is an \f2x,y,z\f1 point in local space.  This point is manipulated
+to determine the plane that is parallel to the \f2xy\f1-plane of device 
+space in which the text is to be oriented, and to determine the reference
+point about which the text will be based.
+.ip "\f3string\f1"
+is the actual text string.
+.lp
+Annotation text is affected by the text primitive attributes outlined in 
+the next section, but is not affected by geometric transformations or
+projections.  However, keep in mind that the parameter 
+\f2position\f1 is affected by geometric transformations when positioning
+annotation text in local space.
+.sp -.5v
+.H1 "Text Primitive Attributes"
+.rs
+.sp -.25v
+A \f2text primitive attribute\f1 is an attribute 
+used to affect a text primitive's positioning and look.
+The text primitive attributes provided by \*(Dd are:
+.BU hs
+positioning the text string
+.(l I
+DoTextAlign <DOTA>
+DoTextPath <DOTPA>
+.)l
+.BU hs
+affecting the text's look
+.(l I
+DoTextExpFactor <DOTEF>
+DoTextFont <DOTF>
+DoTextHeight <DOTH>
+DoTextPrecision <DOTPR>
+DoTextSpace <DOTSP>
+DoTextUpVector <DOTUV>
+.)l
+.sp -.25v
+.H2 "Positioning Text"
+.rs
+.sp -.25v
+Text strings are entirely enclosed in an imaginary
+box called the \f2text rectangle\f1.  \*(FT shows a text rectangle
+and labels the components that may be used to align the string.
+The \f2baseline\f1 and \f2capline\f1 can be 
+thought of as lines on a page that guide your writing's 
+overall size and placement.  
+.(F 
+.sp 1.8i
+.)F "Text Rectangle and Alignment References"
+The \f2text position\f1 (or \f2reference point\f1)
+is determined from the \f2position\f1
+parameter of \f2DoText <DOTXT>\f1 or \f2DoAnnoText <DOANNT>\f1.
+The text rectangle is oriented about this text position based 
+on the values of the text positioning attributes, described next.
+.H3 "DoTextPath"
+\f2DoTextPath\f1 specifies the direction in which to draw 
+subsequent text primitives.  The syntax for 
+\f2DoTextPath <DOTPA>\f1 is:
+.(m
+DoTextPath (textpath)
+.)m
+.lp
+where possible values for \f2textpath\f1 are:
+.ip "\f3DcTextPathRight <DCTPR>\f1"
+each succeeding character is to the right of the previous character
+.ip "\f3DcTextPathLeft <DCTPL>\f1"
+each succeeding character is to the left of the previous character
+.ip "\f3DcTextPathUp <DCTPU>\f1"
+each succeeding character is above the previous character
+.ip "\f3DcTextPathDown <DCTPD>\f1"
+each succeeding character is below the previous character
+.lp
+The code fragment below uses each of the four possible paths;
+the results are shown in \*(FT.  Each string originates from
+the same text position; the placement of the first characters of 
+these strings is due to text
+alignment, which is discussed in the next section.
+.(m
+C code:
+
+    static DtPoint3 origin = { 0.0, 0.0, 0.0 };
+
+    DoTextHeight(7.0);
+    DoTextPath(DcTextPathRight);
+    DoAnnoText(origin, "PathRight");
+    DoTextPath(DcTextPathLeft);
+    DoAnnoText(origin, "PathLeft");
+    DoTextPath(DcTextPathUp);
+    DoAnnoText(origin, "PathUp");
+    DoTextPath(DcTextPathDown);
+    DoAnnoText(origin, "PathDown");
+
+
+\*(Fo code:
+
+      REAL*8 ORIGIN(3)
+C
+      ORIGIN(1)=0.0D0
+      ORIGIN(2)=0.0D0
+      ORIGIN(3)=0.0D0
+C
+      CALL DOTH(7.0D0)
+      CALL DOTPA(DCTPR)
+      CALL DOANNT(ORIGIN, 'PathRight', 9)
+      CALL DOTPA(DCTPL)
+      CALL DOANNT(ORIGIN, 'PathLeft', 8)
+      CALL DOTPA(DCTPU)
+      CALL DOANNT(ORIGIN, 'PathUp', 6)
+      CALL DOTPA(DCTPD)
+      CALL DOANNT(ORIGIN, 'PathDown', 8)
+.)m
+.(F 
+.\" ./PS/7.3ps 2.5i 0
+.sp 2.25i
+.)F "Text Path"
+.H3 "DoTextAlign"
+\f2DoTextAlign\f1 is used to position the \f2text rectangle\f1
+relative to the reference point that is specified in subsequent
+text primitives.  The syntax for \f2DoTextAlign <DOTA>\f1 is:
+.(m
+DoTextAlign (halign, valign)
+.)m
+where
+.ip "\f3halign, valign\f1"
+specify, respectively, the horizontal position and the
+vertical position of the text rectangle relative to the 
+reference point.  
+.lp
+Possible values for \f2halign\f1 are:
+.ip "\f3DcTextHAlignLeft <DCTHAL>\f1"
+the left side of the text rectangle passes through the reference point
+.ip "\f3DcTextHAlignCenter <DCTHAC>\f1"
+the reference point lies midway between the left and
+right sides of the text rectangle
+.ip "\f3DcTextHAlignRight <DCTHAR>\f1"
+the right side of the text rectangle passes through the reference point
+.ip "\f3DcTextHAlignNormal <DCTHAN>\f1"
+using one of the above three alignment values, align the text 
+rectangle with the reference point in the most natural 
+way based on the value of the current \f2DoTextPath <DOTPA>\f1 attribute. 
+.lp
+The code fragment below uses each of the four possible horizontal
+alignments; the results are shown in \*(FT.  The part of the text 
+rectangle that the text is aligned about is delineated by a line.  
+
+.(m
+C code:
+
+    static DtPoint3 position = { 0.0, 1.0, 0.0 };
+    static DtPoint3 u	 = { 1.0, 0.0, 0.0 };
+    static DtPoint3 v	 = { 0.0, 1.0, 0.0 };
+
+    DoTextAlign(DcTextHAlignNormal, DcTextVAlignHalf);
+    DoText(position, u, v, "DcTextHAlignNormal");
+    DoTextAlign(DcTextHAlignLeft, DcTextVAlignHalf);
+    position[1] = 0.4;
+    DoText(position, u, v, "DcTextHAlignLeft");
+    DoTextAlign(DcTextHAlignCenter, DcTextVAlignHalf);
+    position[1] = -0.2;
+    DoText(position, u, v, "DcTextHAlignCenter");
+    DoTextAlign(DcTextHAlignRight, DcTextVAlignHalf);
+    position[1] = -0.8;
+    DoText(position, u, v, "DcTextHAlignRight");
+
+
+
+
+\*(Fo Code:
+
+      REAL*8 POSITN(3), U(3), V(3)
+C
+      POSITN(1)=0.0D0
+      POSITN(2)=1.0D0
+      POSITN(3)=0.0D0
+C
+      U(1)=1.0D0
+      U(2)=0.0D0
+      U(3)=0.0D0
+C
+      V(1)=0.0D0
+      V(2)=1.0D0
+      V(3)=0.0D0
+C
+      CALL DOTA(DCTHAN, DCTVAH)
+      CALL DOTXT(POSITN, U, V, 'DcTextHAlignNormal', 18)
+C
+      CALL DOTA(DCTHAL, DCTVAH)
+      POSITN(2) = 0.4D0
+      CALL DOTXT(POSITN, U, V, 'DcTextHAlignLeft', 16)
+C
+      CALL DOTA(DCTHAC, DCTVAH)
+      POSITN(2) = -0.2D0
+      CALL DOTXT(POSITN, U, V, 'DcTextHAlignCenter', 18)
+C
+      CALL DOTA(DCTHAR, DCTVAH)
+      POSITN(2) = -0.8D0
+      CALL DOTXT(POSITN, U, V, 'DcTextHAlignRight', 17)
+.)m
+.(F
+.sp 2.2i
+.)F "Horizontal Text Alignment"
+.lp
+Possible values for \f2valign\f1 are:
+.ip "\f3DcTextVAlignTop <DCTVAT>\f1"
+the top of the text rectangle passes through the reference point
+.ip "\f3DcTextVAlignCap <DCTVAC>\f1"
+the reference point lies on the capline of the whole string
+or on the capline of the topmost character, depending on
+the current \f2DoTextPath <DOTPA>\f1 attribute
+.ip "\f3DcTextVAlignHalf <DCTVAH>\f1"
+the reference point lies on the halfline of the whole string, or 
+on the line halfway between the halfline of the top and bottom
+characters, depending on the current \f2DoTextPath <DOTPA>\f1 attribute
+.ip "\f3DcTextVAlignBase <DCTVAB>\f1"
+the text position lies on the baseline of the whole string, or
+on the baseline of the bottom character, depending on the
+current \f2DoTextPath <DOTPA>\f1 attribute
+.ip "\f3DcTextVAlignBottom <DCTVAM>\f1"
+the bottom of the text rectangle passes through the reference point
+.ip "\f3DcTextVAlignNormal <DCTVAN>\f1"
+using one of the above five alignment values, align the text
+rectangle with the reference point in the most natural way based 
+on the value of the current \f2DoTextPath <DOTPA>\f1 attribute
+.lp
+The code fragment below uses each of the six possible vertical
+alignments; the results are shown in \*(FT.  The part of the text 
+rectangle that the text is aligned about is delineated by a line.  
+.(m
+C code:
+
+    static DtPoint3 position = { -1.0, 1.5, 0.0 };
+    static DtPoint3 u	 = { 1.0, 0.0, 0.0 };
+    static DtPoint3 v	 = { 0.0, 1.0, 0.0 };
+
+    DoTextAlign(DcTextHAlignLeft, DcTextVAlignNormal);
+    DoText(position, u, v, "DcTextVAlignNormal");
+    DoTextAlign(DcTextHAlignLeft, DcTextVAlignTop);
+    position[1] = 1.0;
+    DoText(position, u, v, "DcTextVAlignTop");
+    DoTextAlign(DcTextHAlignLeft, DcTextVAlignCap);
+    position[1] = 0.5;
+    DoText(position, u, v, "DcTextVAlignCap");
+    DoTextAlign(DcTextHAlignLeft, DcTextVAlignHalf);
+    position[1] = 0.0;
+    DoText(position, u, v, "DcTextVAlignHalf");
+    DoTextAlign(DcTextHAlignLeft, DcTextVAlignBase);
+    position[1] = -0.5;
+    DoText(position, u, v, "DcTextVAlignBase");
+    DoTextAlign(DcTextHAlignLeft, DcTextVAlignBottom);
+    position[1] = -1.0;
+    DoText(position, u, v, "DcTextVAlignBottom");
+
+\*(Fo Code:
+
+      REAL*8 POSITN(3), U(3), V(3)
+C
+      POSITN(1)=-1.0D0
+      POSITN(2)=1.5D0
+      POSITN(3)=0.0D0
+C
+      U(1)=1.0D0
+      U(2)=0.0D0
+      U(3)=0.0D0
+C
+      V(1)=0.0D0
+      V(2)=1.0D0
+      V(3)=0.0D0
+C
+      CALL DOTA(DCTHAL, DCTVAN)
+      CALL DOTXT(POSITN, U, V, 'DcTextVAlignNormal', 18)
+C
+      CALL DOTA(DCTHAL, DCTVAT)
+      POSITN(2) = 1.0D0
+      CALL DOTXT(POSITN, U, V, 'DcTextVAlignTop', 15)
+C
+      CALL DOTA(DCTHAL, DCTVAC)
+      POSITN(2) = 0.5D0
+      CALL DOTXT(POSITN, U, V, 'DcTextVAlignCap', 15)
+C
+      CALL DOTA(DCTHAL, DCTVAH)
+      POSITN(2) = 0.0D0
+      CALL DOTXT(POSITN, U, V, 'DcTextVAlignHalf', 16)
+C
+      CALL DOTA(DCTHAL, DCTVAB)
+      POSITN(2) = -0.5D0
+      CALL DOTXT(POSITN, U, V, 'DcTextVAlignBase', 16)
+C
+      CALL DOTA(DCTHAL, DCTVAM)
+      POSITN(2) = -1.0D0
+      CALL DOTXT(POSITN, U, V, 'DcTextVAlignBottom', 18)
+.)m
+.bp
+\* 
+.(F
+.sp 2i
+.)F "Vertical Text Alignment"
+.H2 "Affecting the Text's Look
+A text string's look can be affected by altering
+its font, size, spacing and orientation in space.
+\*(FT shows the size, space, and orientation attributes 
+of a text string and indicates which \*(Dd functions
+alter these parameters.
+.(F
+.sp 2.7i
+.)F "Text Size, Spacing, and Orientation"
+.H3 "DoTextHeight, DoTextExpFactor"
+\f2DoTextHeight <DOTH>\f1 sets the nominal height of a
+capital letter for subsequently executed text primitives.
+Height is specified in \f2frame coordinates\f1 (see Chapter 9)
+for annotation text; the height of regular text depends on 
+the current transformation matrix (see Chapter 6).  When a character's height 
+is altered by \f2DoTextHeight\f1, \*(Dd also alters the width 
+of that character such that the height-to-width ratio does not 
+change.
+.lp
+The \f2relative character width\f1 is altered by
+\f2DoTextExpFactor <DOTEF>\f1.  
+The expansion factor scales the width of each character,
+based on the current \f2height\f1, such that the character
+height-to-width aspect ratio is changed.  A scale factor less
+than 1 contracts the width of a character; a scale factor
+greater than 1 increases the width.  This expansion factor
+also applies to the amount of space between characters.  
+.H3 "DoTextSpace"
+The amount of additional space to insert between each character,
+without altering the size of the characters, is set by 
+\f2DoTextSpace <DOTSP>\f1.  The amount of additional space is
+specified as a \f2fraction\f1 of the font-nominal character width.
+The default \f2DoTextSpace\f1
+value of 0 indicates that the spacing built into the font by
+the font designer should be used.  Negative values can cause the characters
+to overlap each other.
+.H3 "DoTextUpVector"
+\f2DoTextUpVector <DOTUV>\f1
+establishes the \f2up direction\f1 for the top of each character 
+in the text plane.  Remember that for regular text, the \f2u,v\f1 
+parameters of \f2DoText <DOTXT>\f1 orient the text plane
+in local space, and annotation text always lies parallel to
+the \f2xy\f1-plane in device space.  Here, the \f2x-up, y-up\f1 
+parameters of \f2DoTextUpVector <DOTUV>\f1 orient the up direction
+of the text rectangle on the text plane.
+.lp
+\*(FT shows how various changes to \f2x-up\f1 and \f2y-up\f1 
+in the code fragment below affect the orientation of text in
+the \f2xy\f1-plane.
+.(m
+C code:
+
+    static DtPoint3 origin = { 0.0, 0.0, 0.0 };
+    static DtPoint3 u      = { 1.0, 0.0, 0.0 };
+    static DtPoint3 v      = { 0.0, 1.0, 0.0 };
+
+    DoTextUpVector(0.0, 1.0);		 /* x-up, y-up */
+    DoText(origin, u, v, "  String One");
+    DoTextUpVector(-1.0, 1.0);
+    DoText(origin, u, v, "  String Two");
+    DoTextUpVector(-1.0, 0.0);
+    DoText(origin, u, v, "  String Three");
+    DoTextUpVector(-1.0, -1.0);
+    DoText(origin, u, v, "  String Four");
+    DoTextUpVector(0.0, -1.0);
+    DoText(origin, u, v, "  String Five");
+    DoTextUpVector(1.0, -1.0);
+    DoText(origin, u, v, "  String Six");
+    DoTextUpVector(1.0, 0.0);
+    DoText(origin, u, v, "  String Seven");
+    DoTextUpVector(1.0, 1.0);
+    DoText(origin, u, v, "  String Eight");
+
+
+\*(Fo Code:
+
+      REAL*8 ORIGIN(3), U(3), V(3)
+C
+      ORIGIN(1)=0.0D0
+      ORIGIN(2)=0.0D0
+      ORIGIN(3)=0.0D0
+C
+      U(1)=1.0D0
+      U(2)=0.0D0
+      U(3)=0.0D0
+C
+      V(1)=0.0D0
+      V(2)=1.0D0
+      V(3)=0.0D0
+C
+      CALL DOTUV(0.0D0, 1.0D0)		! x-up, y-up !
+      CALL DOTXT(ORIGIN, U, V, '  String One', 12)
+      CALL DOTUV(-1.0, 1.0)
+      CALL DOTXT(ORIGIN, U, V, '  String Two', 12)
+      CALL DOTUV(-1.0, 0.0)
+      CALL DOTXT(ORIGIN, U, V, "  String Three", 14)
+      CALL DOTUV(-1.0, -1.0)
+      CALL DOTXT(ORIGIN, U, V, "  String Four", 13)
+      CALL DOTUV(0.0, -1.0)
+      CALL DOTXT(ORIGIN, U, V, "  String Five", 13)
+      CALL DOTUV(1.0, -1.0)
+      CALL DOTXT(ORIGIN, U, V, "  String Six", 12)
+      CALL DOTUV(1.0, 0.0)
+      CALL DOTXT(ORIGIN, U, V, "  String Seven", 14)
+      CALL DOTUV(1.0, 1.0)
+      CALL DOTXT(ORIGIN, U, V, "  String Eight", 14)
+.)m
+.(F
+.sp 2.0i
+.)F "Character Orientation using the Text Up Vector"
+.rs
+.sp -1v
+.H1 "Examples"
+These simple examples pull together the concepts discussed thus
+far by mixing and matching various text attributes together.
+Camera creation is not shown to save space, but a parallel camera 
+sitting on the positive z-axis and looking at the origin is 
+used in all examples (see Chapter 8 for more information
+regarding cameras).
+.lp
+The images produced by the following four code fragments are
+shown in Figures 7-8 through 7-12.  These examples all affect the 
+alignment and/or orientation of a text string, plus its size.
+Examples 1 through 4 all use the default font, 
+\f2DcPlainRoman <DCFPR>\f1, which has only capital letters.
+.(m
+C code:
+
+.\"#	ident "@(#)ch08.ex01	1.4" 5/15/91
+.\"
+DtObject example1, example2, example3, example4;
+static DtVector3 u = {1.0, 0.0, 0.0},
+                 v = {0.0, 1.0, 0.0};
+static DtPoint3 origin = {0.0, 0.0, 0.0};
+static char name[] = "A String";
+
+example1 = DoGroup(DcTrue);
+     DgAddObj(DoTextHeight(1.0));
+     DgAddObj(DoTextUpVector(0.0, 1.0));
+     DgAddObj(DoTextPath(DcTextPathRight));
+     DgAddObj(DoTextAlign(DcTextHAlignCenter, 
+			  DcTextVAlignHalf));
+     DgAddObj(DoText(origin, u, v, name));
+DgClose();
+
+example2 = DoGroup(DcTrue);
+     DgAddObj(DoTextHeight(0.5));
+     DgAddObj(DoTextUpVector(-1.0, 0.0));
+     DgAddObj(DoTextPath(DcTextPathRight));
+     DgAddObj(DoTextAlign(DcTextHAlignLeft, 
+			  DcTextVAlignBottom));
+     DgAddObj(DoText(origin, u, v, name));
+DgClose();
+
+example3 = DoGroup(DcTrue);
+     DgAddObj(DoTextHeight(0.25));
+     DgAddObj(DoTextUpVector(0.0, 1.0));
+     DgAddObj(DoTextPath(DcTextPathDown));
+     DgAddObj(DoTextAlign(DcTextHAlignCenter, 
+			  DcTextVAlignCap));
+     DgAddObj(DoText(origin, u, v, name));
+DgClose();
+
+u[0] = -1.0;
+example4 = DoGroup(DcTrue);
+     DgAddObj(DoTextHeight(1.0));
+     DgAddObj(DoTextUpVector(0.0, 1.0));
+     DgAddObj(DoTextPath(DcTextPathRight));
+     DgAddObj(DoTextAlign(DcTextHAlignCenter, 
+			  DcTextVAlignHalf));
+     DgAddObj(DoText(origin, u, v, name));
+DgClose();
+.)m
+.(m
+\*(Fo code:
+
+.\"#	ident "@(#)ch08.ex01.f	1.2" 3/19/91
+.\"
+  INTEGER*4 EXAMPLE(7)
+       REAL*8 U(3)
+       REAL*8 V(3)
+       REAL*8 ORIGIN (3)
+       CHARACTER*8 NAME
+       DATA NAME /'A STRING'/
+C   
+       U(1)=1.0D0
+       U(2)=0.0D0
+       U(3)=0.0D0
+       V(1)=0.0D0
+       V(2)=1.0D0
+       V(3)=0.0D0
+       ORIGIN(1)=0.0D0
+       ORIGIN(2)=0.0D0
+       ORIGIN(3)=0.0D0
+C
+
+
+
+       EXAMPLE(1)=DOG(DCTRUE)
+          CALL DGAO(DOTH(1.0D0))
+          CALL DGAO(DOTUV(0.0D0, 1.0D0))
+          CALL DGAO(DOTPA(DCTPR))
+          CALL DGAO(DOTA(DCTHAC, DCTVAH))
+          CALL DGAO(DOTXT(ORIGIN, U, V, NAME))
+       CALL DGCS()
+C
+       EXAMPLE(2)=DOG(DCTRUE)
+          CALL DGAO(DOTH(0.5D0))
+          CALL DGAO(DOTUV(-1.0D0, 0.0D0))
+          CALL DGAO(DOTPA(DCTPR))
+          CALL DGAO(DOTA(DCTHAL, DCTVAM))
+          CALL DGAO(DOTXT(ORIGIN, U, V, NAME))
+       CALL DGCS()
+C
+       EXAMPLE(3)=DOG(DCTRUE)
+          CALL DGAO(DOTH(0.25D0))
+          CALL DGAO(DOTUV(0.0D0, 1.0D0))
+          CALL DGAO(DOTPA(DCTPD))
+          CALL DGAO(DOTA(DCTHAC, DCTVAC))
+          CALL DGAO(DOTXT(ORIGIN, U, V, NAME))
+       CALL DGCS()
+C
+       U(1)=-1.0D0
+       EXAMPLE(4)=DOG(DCTRUE)
+          CALL DGAO(DOTH(1.0D0))
+          CALL DGAO(DOTUV(0.0D0, 1.0D0))
+          CALL DGAO(DOTPA(DCTPR))
+          CALL DGAO(DOTA(DCTHAC, DCTVAH))
+          CALL DGAO(DOTXT(ORIGIN, U, V, NAME))
+       CALL DGCS()
+.)m
+Example 1, shown in \*(FT, uses defaults for text font, 
+height, up vector, and path. The text alignment specified 
+in (\f2DoTextAlign <DOTA>\f1) means the text position 
+specified in \f2DoText <DOTXT>\f1 is centered horizontally 
+and is vertically halfway between the top and
+bottom of the \f2text rectangle\f1. (The text
+position is marked by an x in Figures 7-8 through 7-12.)
+.(F  
+.\" ./PS/7.8ps 1.0i 0
+.sp 1i
+.)F "Example 1"
+Example 2, shown in \*(FT, changes the text height to 0.5,
+which makes the text half as large as the text in Example 1.  The
+text up vector is specified as (-1.0, 0.0), which orients the
+up direction of the text rectangle in the negative \f2x\f1
+direction.
+.(F 
+.\" ./PS/7.9ps 2.7i 0
+.sp 2.5i
+.)F "Example 2"
+.lp
+Example 3, shown in \*(FT, uses the default up vector but
+changes the text path to \f2DcTextPathDown <DCTPD>\f1 and the
+text alignment to \f2DcTextHAlignCenter <DCTHAC>, DcTextVAlignCap <DCTVAC>\f1,
+and the text size is half as large as the text in Example 2.
+.(F 
+.\" ./PS/7.10ps 2.5i 0
+.sp 2.5i
+.)F "Example 3"
+.lp
+Example 4, shown in \*(FT, is identical to Example 1 except for the
+change to the \f2uv\f1 parameters of \f2DoText <DOTXT>\f1. 
+These parameters are used to orient the text string as follows:
+.BU
+the text string's geometric normal is computed using the right-hand rule 
+such that, while the fingers of the right hand curl from \f2u\f1 
+to \f2v\f1, the thumb points in the direction of the normal.
+.BU
+the text is situated in the \f2uv\f1 plane such that it is
+directed from the text position toward the \f2u\f1 direction and its
+up direction is that of \f2v\f1.
+.(F 
+.\"./PS/7.11ps" .75i 0
+.sp 1i
+.)F "Example 4"
+The images produced by the next three code fragments are shown in
+\*(FT, \*(FT, and \*(FT.  
+These examples show how to change a string's character width and the
+spacing between characters in a string.
+Examples 5 through 7 use the \f2DcGothicItalian <DCFGI>\f1 font, 
+which has both upper and lowercase letters.  
+
+.(m
+C code:
+
+.\"#	ident "@(#)ch08.ex02	1.3" 5/15/91
+.\"
+DtObject example5, example6, example7;
+static DtVector3 u = {1.0, 0.0, 0.0},
+                 v = {0.0, 1.0, 0.0};
+static DtPoint3 origin = {0.0, 0.0, 0.0};
+static char name[] = "A String";
+
+example5 = DoGroup(DcTrue);
+     DgAddObj(DoTextFont(DcGothicItalian));
+     DgAddObj(DoTextExpFactor(1.0));
+     DgAddObj(DoTextSpace(0.0));
+     DgAddObj(DoTextAlign(DcTextHAlignCenter, 
+			  DcTextVAlignHalf));
+     DgAddObj(DoText(origin, u, v, name));
+DgClose();
+
+
+
+
+
+example6 = DoGroup(DcTrue);
+     DgAddObj(DoTextFont(DcGothicItalian));
+     DgAddObj(DoTextExpFactor(0.5));
+     DgAddObj(DoTextSpace(0.0));
+     DgAddObj(DoTextAlign(DcTextHAlignCenter, 
+			  DcTextVAlignHalf));
+     DgAddObj(DoText(origin, u, v, name));
+DgClose();
+
+example7 = DoGroup(DcTrue);
+     DgAddObj(DoTextFont(DcGothicItalian));
+     DgAddObj(DoTextExpFactor(1.0));
+     DgAddObj(DoTextSpace(0.3));
+     DgAddObj(DoTextAlign(DcTextHAlignCenter, 
+			  DcTextVAlignHalf));
+     DgAddObj(DoText(origin, u, v, name));
+DgClose();
+.)m
+.(m
+\*(Fo code:
+
+.\"#	ident "@(#)ch08.ex02.f	1.2" 3/19/91
+.\"
+   INTEGER*4 EXAMPLE(7)
+      REAL*8 U(3), V(3), ORIGIN(3)
+      CHARACTER*8 NAME
+      DATA NAME /'A STRING'/
+C
+      U(1)=1.0D0
+      U(2)=0.0D0
+      U(3)=0.0D0
+      V(1)=0.0D0
+      V(2)=1.0D0
+      V(3)=0.0D0
+      ORIGIN(1)=0.0D0
+      ORIGIN(2)=0.0D0
+      ORIGIN(3)=0.0D0
+C
+      EXAMPLE(5)=DOG(DCTRUE)
+               CALL DGAO(DOTF(DCFGI))
+               CALL DGAO(DOTEF(1.0D0))
+               CALL DGAO(DOTSP(0.0D0))
+               CALL DGAO(DOTA(DCTHAC, DCTVAH))
+               CALL DGAO(DOTXT(ORIGIN, U, V, NAME))
+      CALL DGCS()
+C
+      EXAMPLE(6)=DOG(DCTRUE)
+               CALL DGAO(DOTF(DCFGI))
+               CALL DGAO(DOTEF(0.5D0))
+               CALL DGAO(DOTSP(0.0D0))
+               CALL DGAO(DOTA(DCTHAL, DCTVAH))
+               CALL DGAO(DOTXT(ORIGIN, U, V, NAME))
+      CALL DGCS()
+C
+      EXAMPLE(7)=DOG(DCTRUE)
+               CALL DGAO(DOTF(DCFGI))
+               CALL DGAO(DOTEF(1.0D0))
+               CALL DGAO(DOTSP(0.3D0))
+               CALL DGAO(DOTA(DCTHAC, DCTVAH))
+               CALL DGAO(DOTXT(ORIGIN, U, V, NAME))
+      CALL DGCS()
+.)m
+Example 5 shows the default text
+expansion factor (1.0) and default text space (0.0).
+Example 6 changes the text expansion factor to 0.5, which
+contracts the font built-in character width (and the spacing
+between characters) by 50 percent.
+Example 7 has the same character width as Example 5, but changes 
+the text spacing to 0.3.  This increases the 
+amount of space between adjacent characters by another 0.3 times
+the font built-in space size.
+.(F "./PS/7.12ps" .7i 0
+.)F "Example 5"
+.(F "./PS/7.13ps" .7i 0
+.)F "Example 6"
+.(F "./PS/7.14ps" .7i 0
+.)F "Example 7"
+.H1 "Chapter Summary"
+Chapter 7 describes the text primitives and the primitive
+attributes that apply specifically to text.  
+The text primitive attributes can be used to alter a text
+primitive's positioning by using \f2DoTextPath <DOTPA>\f1
+and \f2DoTextAlign <DOTA>\f1.  The font, character width and height,
+and spacing between characters can be altered to affect
+the look of a text primitive. 
+.lp
+Text attributes illustrated in this chapter 
+include text height, font, expansion factor, alignment, path, 
+up vector, and spacing.

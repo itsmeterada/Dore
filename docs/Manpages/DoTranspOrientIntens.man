@@ -1,0 +1,91 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DoTranspOrientIntens 3D "Dore"
+.SH NAME
+DoTranspOrientIntens \- Create a transparent intensity primitive attribute object for orientation dependent transparency 
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+DtObject DoTranspOrientIntens(intensity)
+DtReal intensity;
+.sp
+.in  -.5i
+FORTRAN:
+.in  +.5i
+INTEGER*4 DOTOI(INTENS)
+REAL*8 INTENS
+.in  -.5i
+.fi 
+.IX "DoTranspOrientIntens"
+.IX "DOTOI"
+.SH DESCRIPTION
+.PP
+\f2DoTranspOrientIntens\fP creates a transparent intensity primitive attribute 
+object for orientation dependent transparency.
+.PP
+Orientation dependent transparency means that the transparency of
+an object varies depending on the orientation of the object and the 
+view direction.
+The transparency can also vary across the object if it is not 
+completely flat.
+.PP
+The parameter \f2intensity\fP specifies the transparent intensity 
+to be used for subsequent objects when the object is oriented such that
+the object normal is perpendicular to the viewing direction.
+If the object normal is parallel to the viewing 
+direction, the value defined by \f2DoTranspIntens <DOTI>\fP
+is used as the transparent intensity.
+For other object orientations the object transparent intensity 
+for orientation dependent transparency is calculated as follows:
+.PP
+.nf
+\f2final transpintens = 
+     orientintens + (transpintens - orientintens)*((I dot N) ** orientexp)\fP
+.fi
+.PP
+where 
+\f2orientintens\fP is the value specified by \f2DoTranspOrientIntens\fP,
+\f2transpintens\fP is the value specified by \f2DoTranspIntens\fP
+<\f2DOTI\fP>, \f2orientexp\fP is the value specified
+by \f2DoTranspOrientExp\fP <\f2DOTOE\fP>, \f2N\fP is the object normal, and 
+\f2I\fP is the viewing direction (or the incoming ray direction for ray-tracing).
+.PP
+To enable orientation dependent transparency, both
+.nh
+\f2DoTranspOrientSwitch <DOTOS>\fP 
+.hy
+and 
+.nh
+\f2DoTranspSwitch <DOTS>\fP
+.hy
+must be turned on.
+.SH DEFAULTS
+The default \f2DoTranspOrientIntens\fP is 0.5. 
+.SH SEE ALSO 
+.nh
+.na
+DoTranspOrientSwitch(3D),
+DoTranspOrientColor(3D),
+DoTranspOrientExp(3D),
+DoTranspIntens(3D),
+DoTranspColor(3D),
+DoTranspSwitch(3D)
+.hy
+.ad
+\&

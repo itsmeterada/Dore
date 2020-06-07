@@ -1,0 +1,160 @@
+C **************************************************************************
+C Copyright (C) 1994 Kubota Graphics Corp.
+C 
+C Permission to use, copy, modify, and distribute this material for
+C any purpose and without fee is hereby granted, provided that the
+C above copyright notice and this permission notice appear in all
+C copies, and that the name of Kubota Graphics not be used in
+C advertising or publicity pertaining to this material.  Kubota
+C Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+C OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+C "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+C IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+C PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+C EXPRESS OR IMPLIED.
+C **************************************************************************
+C
+C**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~**
+C**                                                                        **
+C**  This file contains all the Dore FORTRAN text constant declarations.   **
+C**                                                                        **
+C****************************************************************************
+
+C DtTextPrecision;
+C	DcStringPrecision
+      INTEGER*4 DCSTRP
+      PARAMETER (DCSTRP =0)	
+C	DcCharacterPrecision
+      INTEGER*4 DCCHRP
+      PARAMETER (DCCHRP =1)	
+C	DcStrokePrecision
+      INTEGER*4 DCSTKP
+      PARAMETER (DCSTKP =2)	
+
+C DtTextAlignHorizontal;
+C	DcTextHAlignNormal
+      INTEGER*4 DCTHAN
+      PARAMETER (DCTHAN =0)	
+C	DcTextHAlignLeft
+      INTEGER*4 DCTHAL
+      PARAMETER (DCTHAL =1)	
+C	DcTextHAlignCenter
+      INTEGER*4 DCTHAC
+      PARAMETER (DCTHAC =2)	
+C	DcTextHAlignRight
+      INTEGER*4 DCTHAR
+      PARAMETER (DCTHAR =3)	
+
+C DtTextAlignVertical;
+C	DcTextVAlignNormal
+      INTEGER*4 DCTVAN
+      PARAMETER (DCTVAN =0)	
+C	DcTextVAlignTop
+      INTEGER*4 DCTVAT
+      PARAMETER (DCTVAT =1)	
+C	DcTextVAlignCap
+      INTEGER*4 DCTVAC
+      PARAMETER (DCTVAC =2)	
+C	DcTextVAlignHalf
+      INTEGER*4 DCTVAH
+      PARAMETER (DCTVAH =3)	
+C	DcTextVAlignBase
+      INTEGER*4 DCTVAB
+      PARAMETER (DCTVAB =4)	
+C	DcTextVAlignBottom
+      INTEGER*4 DCTVAM
+      PARAMETER (DCTVAM =5)	
+
+C DtTextPath;
+C	DcTextPathRight
+      INTEGER*4 DCTPR
+      PARAMETER (DCTPR =0)	
+C	DcTextPathLeft
+      INTEGER*4 DCTPL
+      PARAMETER (DCTPL =1)	
+C	DcTextPathUp
+      INTEGER*4 DCTPU
+      PARAMETER (DCTPU =2)	
+C	DcTextPathDown
+      INTEGER*4 DCTPD
+      PARAMETER (DCTPD =3)	
+
+C DtFont;
+C	DcPlainRoman
+      INTEGER*4 DCFPR
+      PARAMETER (DCFPR =0)	
+C	DcSimplexRoman
+      INTEGER*4 DCFSR
+      PARAMETER (DCFSR =1)	
+C	DcDuplexRoman
+      INTEGER*4 DCFDR
+      PARAMETER (DCFDR =2)	
+C	DcComplexSmallRoman
+      INTEGER*4 DCFCSR
+      PARAMETER (DCFCSR =3)	
+C	DcComplexRoman
+      INTEGER*4 DCFCR
+      PARAMETER (DCFCR =4)	
+C	DcTriplexRoman
+      INTEGER*4 DCFTR
+      PARAMETER (DCFTR =5)	
+C	DcComplexSmallItalic
+      INTEGER*4 DCFCSI
+      PARAMETER (DCFCSI =6)	
+C	DcComplexItalic
+      INTEGER*4 DCFCI
+      PARAMETER (DCFCI =7)	
+C	DcTriplexItalic
+      INTEGER*4 DCFTI
+      PARAMETER (DCFTI =8)	
+C	DcSimplexScript
+      INTEGER*4 DCFSS
+      PARAMETER (DCFSS =9)	
+C	DcComplexScript
+      INTEGER*4 DCFCS
+      PARAMETER (DCFCS =10)	
+C	DcGothicGerman
+      INTEGER*4 DCFGG
+      PARAMETER (DCFGG =11)	
+C	DcGothicEnglish
+      INTEGER*4 DCFGE
+      PARAMETER (DCFGE =12)	
+C	DcGothicItalian
+      INTEGER*4 DCFGI
+      PARAMETER (DCFGI =13)	
+C	DcPlainGreek
+      INTEGER*4 DCFPG
+      PARAMETER (DCFPG =14)	
+C	DcSimplexGreek
+      INTEGER*4 DCFSG
+      PARAMETER (DCFSG =15)	
+C	DcComplexSmallGreek
+      INTEGER*4 DCFCSG
+      PARAMETER (DCFCSG =16)	
+C	DcComplexGreek
+      INTEGER*4 DCFCG
+      PARAMETER (DCFCG =17)	
+C	DcComplexCyrillic
+      INTEGER*4 DCFCC
+      PARAMETER (DCFCC =18)	
+C	DcUpperCaseMathematics
+      INTEGER*4 DCFUCM
+      PARAMETER (DCFUCM =19)	
+C	DcLowerCaseMathematics
+      INTEGER*4 DCFLCM
+      PARAMETER (DCFLCM =20)	
+C	DcMusic
+      INTEGER*4 DCFMUS
+      PARAMETER (DCFMUS =21)	
+C	DcMeteorology
+      INTEGER*4 DCFMET
+      PARAMETER (DCFMET =22)	
+C	DcSymbols
+      INTEGER*4 DCFSYM
+      PARAMETER (DCFSYM =23)	
+C	DcAstrology
+      INTEGER*4 DCFAST
+      PARAMETER (DCFAST =24)	
+C	DcHelvetica
+      INTEGER*4 DCFHLV
+      PARAMETER (DCFHLV =25)	

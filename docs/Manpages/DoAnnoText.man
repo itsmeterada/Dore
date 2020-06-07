@@ -1,0 +1,77 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DoAnnoText 3D  "Dore"
+.SH NAME
+DoAnnoText \- Create an annotation text primitive object
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+DtObject DoAnnoText(position, string)
+DtReal position[3];
+DtPtr string;
+.sp
+.in -.5i
+FORTRAN:
+.in +.5i
+INTEGER*4 DOANNT(POSITN, STRING, N)
+INTEGER*4 N
+REAL*8 POSITN(3)
+CHARACTER*N STRING
+.in -.5i
+.fi
+.SH DESCRIPTION
+.IX DOANNT
+.IX DoAnnoText
+.I DoAnnoText
+creates an annotation text primitive object that 
+defines a string of text.  This primitive object is rendered in a
+plane in frame space that is parallel to the XY-plane of the device 
+space.  Because annotation text has no geometric size, its display
+size is unaffected
+by geometric transformations or projections.
+.PP
+The textfont can be scaled using \f2DoTextHeight\fP <\f2DOTH\fP>.
+Note that the scale factor is specified in frame coordinates.
+.PP
+The parameter \f2position\fP is used to
+determine a three-dimensional point in frame
+coordinates to specify the position for the annotation text. 
+First, \f2position\fP is transformed
+into world coordinates using the current transformation matrix.
+Then it is mapped into frame space using the current
+camera projection matrix.  This point is the reference point for
+determining a plane parallel to the XY-plane of device space,
+and the plane
+becomes the text plane for the annotation text.
+The reference point, the plane, the \f2DoTextAlign\fP <\f2DOTA\fP>,
+\f2DoTextPath\fP <\f2DOTPA\fP>, and \f2DoTextUpVector\fP <\f2DOTUV\fP>
+attributes together determine the orientation of the text string.
+.PP
+The parameter \f2string\fP is the actual text.
+.SH "FORTRAN SPECIFIC"
+.LP
+FORTRAN, \f2STRING\fP is a string of \f2N\fP characters.
+.SH "SEE ALSO"
+.na
+.nh
+DoText(3D), DoTextAlign(3D), DoTextExpFactor(3D), DoTextFont(3D),
+DoTextHeight(3D), DoTextPath(3D), DoTextPrecision(3D), DoTextSpace(3D),
+DoTextUpVector(3D)
+.ad
+.hy

@@ -1,0 +1,143 @@
+#ident	"%W%"	%G%
+
+==========================================================================
+
+		     Dore' Device Driver Summary
+		     ====  ====== ====== =======
+==========================================================================
+
+Device Driver Default Name:	n.a.
+Hardware supported:		Software Graphics Pipeline
+Library Dependencies:		none
+
+Originator
+	Company/Institution:	Kubota Pacific Computer Inc.
+	Name:			Advanced Graphics Software Group
+	Phone:			(408) 727-8100
+	Email:			
+	Address:		2630 Walsh Avenue
+				Santa Clara, CA 95051-0905
+	Date Completed:		??
+
+Maintainer (most recent first)
+	Company/Institution:	Kubota Pacific Computer Inc.
+	Name:			Advanced Graphics Software Group
+	Phone:			(408) 727-8100
+	Email:			
+	Address:		2630 Walsh Avenue
+				Santa Clara, CA 95051-0905
+	Date Completed:		??
+
+==========================================================================
+
+			 DROM Characteristics
+
+==========================================================================
+
+	Version Number:			2
+
+	Cameras
+	    DoCameraMatrix:		yes
+	    DoParallel:			yes
+	    DoPerspective:		yes
+	    DoProjection:		yes
+	    DoStereo:			no
+	    DoStereoSwitch:		no
+
+	Lights
+	    DoLightColor:		yes
+	    DoLightIntens:		yes
+	    DoLightSpreadAngles:	no
+	    DoLightSpreadExp:		no
+	    DoLightType:		yes
+
+	Geometry
+	    DoPointList:		yes
+	    DoLineList:			yes
+	    DoPolyline:			yes
+	    DoTriangleList:		yes
+	    DoTriangleMesh:		yes
+	    Frame coordinates:		yes
+
+	Shading Attributes
+	    DoAmbientIntens:		yes
+	    DoAmbientSwitch:		yes
+	    DoDepthCue:			no
+	    DoDepthCueSwitch:		no
+	    DoDiffuseColor:		yes
+	    DoDiffuseIntens:		yes
+	    DoDiffuseSwitch:		yes
+	    DoInterpType:		yes
+	    DoLightSwitch:		yes
+	    DoReflectionSwitch:		no
+	    DoShadowSwitch:		no
+	    DoShadeIndex:		yes
+	    DoSpecularColor:		yes
+	    DoSpecularFactor:		yes
+	    DoSpecularIntens:		yes
+	    DoSpecularSwitch:		yes
+	    DoSurfaceEdgeColor:		no
+	    DoSurfaceShade:		yes
+	    DoTranspColor:		no
+	    DoTranspIntens:		no
+	    DoTranspSwitch:		no
+
+	Miscellaneous
+	    DoBackfaceCullSwitch:	yes
+	    DoBackfaceCullable:		yes
+	    DoClipVol:			no
+	    DoHiddenSurfSwitch:		yes
+	    DoInvisSwitch:		yes
+	    DoLineType:			no
+	    DoLineWidth:		no
+	    DoRepType:			yes
+	    DoLocalAntiAliasSwitch:	no
+	    DoLocalAntiAliasStyle:	no
+
+	Texture Maps
+	    DoTextureMapBump:			no
+	    DoTextureMapBumpSwitch:		no
+	    DoTextureMapDiffuseColor:		no
+	    DoTextureMapDiffuseColorSwitch:	no
+	    DoTextureMapEnviron:		no
+	    DoTextureMapEnvironSwitch:		no
+	    DoTextureMapTranspIntens:		no
+	    DoTextureMapTranspIntensSwitch:	no
+
+
+	Geometric Transformations
+	    DoLookAtFrom:		yes
+	    DoPushMatrix:		yes
+	    DoPopMatrix:		yes
+	    DoRotate:			yes
+	    DoScale:			yes
+	    DoTranslate:		yes
+	    DoTransformMatrix:		yes
+
+
+	Texture Attributes
+	    DoTextureAntiAlias:		no
+	    DoTextureExtendUV:		no
+	    DoTextureExtendUVW:		no
+	    DoTextureMatrixUV:		no
+	    DoTextureMatrixUVW:		no
+	    DoTextureOp:		no
+	    DoTextureScaleUV:		no
+	    DoTextureScaleUVW:		no
+	    DoTextureTranslateUV:	no
+	    DoTextureTranslateUVW:	no
+	    DoTextureUVIndex:		no
+	    DoTextureUVWIndex:		no
+
+	View Attributes
+	    DvSetBackgroundColor:	yes
+	    DvSetBackgroundJust:	no
+	    DvSetBackgroundRaster:	no
+
+==========================================================================
+
+			     Limitations
+
+==========================================================================
+
+Does not support in-scene light sources.

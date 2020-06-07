@@ -1,0 +1,56 @@
+.\"#ident "%W%" %G%
+.\"
+.\" #
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  
+.\" # 
+.\" # KUBOTA GRAPHICS Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\" #
+.\"
+.so ../macros/local.me
+.ds BT "\\*(Dd System Guide
+.ds CT "Dynamic Renderer
+.ds h1 4
+.L1 D YNAMIC
+.L2 R ENDERER
+.CH FOUR
+.rs
+.sp -1.5v
+The goal of the dynamic renderer is to display images as quickly as
+possible, so the user can interact with the models in real time.
+To this end, it is designed to allow the associated device driver to
+take total advantage of available graphics hardware.
+For the actual rendering, the dynamic renderer relies on the graphics
+pipeline of the device being accessed.
+The pipeline usually includes transformation, clipping, scan
+conversion, and shading operations. 
+Different devices have different pipeline implementations, so the
+actual output from the dynamic renderer varies from device to device.
+.rs
+.sp -.25v
+.H1 "Device Driver Support
+The dynamic renderer requires the dynamic renderer output module
+(DROM) interface in addition to the device control module (DCM) interface.
+See Section III of this document for more information on a particular
+device driver.
+.rs
+.sp -.25v
+.H1 "Renderer Dependent Functions
+The dynamic renderer depends completely on the DROM of the
+device driver.  In all cases, this means that the dynamic renderer 
+uses a function provided by the DROM of the device driver.
+Because of this dependency on the DROM of the particular device driver
+being used, the visual results may be quite varied.
+See Appendix A, \f2Supported Functions\f1, for the list of
+\*(Dd functions that are supported by the dynamic renderer 
+through the DROM of the various devices provided with this release.

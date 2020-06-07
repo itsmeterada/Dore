@@ -1,0 +1,640 @@
+.\"#ident "%W%" %G%
+.\"
+.\" Copyright (C) 1988, 1989, 1990, 1991 by Kubota Pacific Computer Inc.
+.\"         All Rights Reserved
+.\" This program is a trade secret of Kubota Pacific Computer Inc. and
+.\" it is not to be reproduced, published, disclosed to others, copied,
+.\" adapted, distributed, or displayed without the prior authorization
+.\" of Kubota Pacific Computer Inc.  Licensee agrees to attach or embed
+.\" this Notice on all copies of the program, including partial copies
+.\" or modified versions thereof.
+.\"
+.so ../macros/local.me
+.ds BT \\*(Dd Programmer's Guide
+.ds CT \*(Dd Functional Groups
+.ds h1 A
+.PN 311
+.L1 "D" OR\h'5p'\v'-8p'\(aa\v'8p'\h'-5p' "" "\h'-\w'\(aa'u'E 
+.L2 F UNCTIONAL
+.L3 G ROUPS
+.CH APPENDIX A
+.rs
+.sp -1.5v
+This appendix provides the functional groups in \*(Dd and
+then lists all \*(Dd functions within these functional groups.  
+For a complete description of all \*(Dd functions, see the 
+\f2\*(Dd Reference Manual\f1.
+.sp -.5
+.H1 "Functional Groups"
+The functional groups in the \*(Do are:
+.BU hs
+Object creation functions, which can  
+be divided into the following subgroups:
+.IX object creation functions
+.(l 
+Primitives (including user-defined primitives)
+Primitive Attributes (including text attributes)
+Studio Objects (cameras and lights)
+Studio Object Attributes
+Geometric Transformation Attributes
+Texture Attributes
+Organizational Objects
+Miscellaneous
+.)l
+Chapters 3 through 8 and 15 discuss these functions in detail.  
+Name sets, filters, and the executability set are discussed
+in Chapter 11, and raster objects are discussed in Chapter 14.
+.BU hs
+Variable Primitive Update functions. (See Chapter 4.)
+.BU hs
+Group functions. (See Chapter 3.)
+.BU hs
+View functions. (See Chapter 9) 
+.BU hs
+Frame functions. (See Chapter 9.)
+.BU hs
+Device functions. (See Chapter 9 and Chapter 10.)
+.BU hs
+System functions and object manipulation functions. (See Chapter 11 and 12.)
+.BU hs
+Functions required in creating user extensions to \*(Dd. (See Chapter 13.)
+.H1 "Function List"
+A complete \*(Dd function list, listed by functional
+groups, is presented in this section.  The object creation
+functions are actually listed by the subgroups outlined in the
+previous section.
+.H2 "Primitives"
+DoAnnoText <DOANNT>
+.sp .35v
+DoLineList <DOLINL>
+.sp .35v
+DoNURBSurf <DONRBS>
+.sp .35v
+DoPatch <DOPAT>
+.sp .35v
+DoPointList <DOPNTL>
+.sp .35v
+DoPolygon <DOPGN>
+.sp .35v
+DoPolygonMesh <DOPGNM>
+.sp .35v
+DoPolyline <DOPL>
+.sp .35v
+DoPolymarker <DOPM>
+.sp .35v
+DoPrimSurf <DOPMS>
+.sp .35v
+DoSimplePolygon <DOSPGN>
+.sp .35v
+DoSimplePolygonMesh <DOSPM>
+.sp .35v
+DoSphereList <DOSPHL>
+.sp .35v
+DoText <DOTXT>
+.sp .35v
+DoTorus <DOTOR>
+.sp .35v
+DoTriangleList <DOTRIL>
+.sp .35v
+DoTriangleMesh <DOTRIM>
+.sp .35v
+DoTriangleStrip <DOTRIS>
+.sp .35v
+DoVarLineList <DOVLNL>
+.sp .35v
+DoVarPointList <DOVPTL>
+.sp .35v
+DoVarSimplePolygonMesh <DOVSPM>
+.sp .35v
+DoVarTriangleMesh <DOVTRM>
+.sp .35v
+DoVarTriangleStrip <DOVTRS>
+.H2 "Primitive Attributes"
+DoAmbientIntens <DOAMBI>
+.sp .35v
+DoAmbientSwitch <DOAMBS>
+.sp .35v
+DoBackfaceCullable <DOBFC>
+.sp .35v
+DoBackfaceCullSwitch <DOBFCS>
+.sp .35v
+DoBoundingVol <DOBV>
+.sp .35v
+DoBoundingVolSwitch <DOBVS>
+.sp .35v
+DoClipSwitch <DOCS>
+.sp .35v
+DoClipVol <DOCV>
+.sp .35v
+DoDepthCue <DODC>
+.sp .35v
+DoDepthCueSwitch <DODCS>
+.sp .35v
+DoDiffuseColor <DODIFC>
+.sp .35v
+DoDiffuseIntens <DODIFI>
+.sp .35v
+DoDiffuseSwitch <DODIFS>
+.sp .35v
+DoExecSet <DOES>
+.sp .35v
+DoFilter <DOFL>
+.sp .35v
+DoCompTextureUVSwitch <DOCTVS>
+.sp .35v
+DoCompTextureUVCallback <DOCTVC>
+.sp .35v
+DoHiddenSurfSwitch <DOHSS>
+.sp .35v
+DoInterpType <DOIT>
+.sp .35v
+DoInvisSwitch <DOINVS>
+.sp .35v
+DoLightSwitch <DOLTS>
+.sp .35v
+DoLineType <DOLNT>
+.sp .35v
+DoLineWidth <DOLW>
+.sp .35v
+DoLocalAntiAliasStyle <DOLAST>
+.sp .35v
+DoLocalAntiAliasSwitch <DOLASW>
+.sp .35v
+DoMarkerFont <DOMF>
+.sp .35v
+DoMarkerGlyph <DOMG>
+.sp .35v
+DoMarkerScale <DOMS>
+.sp .35v
+DoMinBoundingVolExt <DOMBVE>
+.sp .35v
+DoNameSet <DONS>
+.sp .35v
+DoPickID <DOPID>
+.sp .35v
+DoPickSwitch <DOPS>
+.sp .35v
+DoReflectionSwitch <DOREFS>
+.sp .35v
+DoRefractionIndex <DORFRI>
+.sp .35v
+DoRefractionSwitch <DORFRS>
+.sp .35v
+DoRepType <DOREPT>
+.sp .35v
+DoShadeIndex <DOSI>
+.sp .35v
+DoShadowSwitch <DOSHAS>
+.sp .35v
+DoSpecularColor <DOSPCC>
+.sp .35v
+DoSpecularFactor <DOSPCF>
+.sp .35v
+DoSpecularIntens <DOSPCI>
+.sp .35v
+DoSpecularSwitch <DOSPCS>
+.sp .35v
+DoSubDivSpec <DOSDS>
+.sp .35v
+DoSurfaceEdgeColor <DOSEGC>
+.sp .35v
+DoSurfaceShade <DOSRFS>
+.sp .35v
+DoTextAlign <DOTA>
+.sp .35v
+DoTextureMapBump <DOTMB>
+.sp .35v
+DoTextExpFactor <DOTEF>
+.sp .35v
+DoTextFont <DOTF>
+.sp .35v
+DoTextHeight <DOTH>
+.sp .35v
+DoTextPath <DOTPA>
+.sp .35v
+DoTextPrecision <DOTPR>
+.sp .35v
+DoTextSpace <DOTSP>
+.sp .35v
+DoTextUpVector <DOTUV>
+.sp .35v
+DoTextureMapBumpSwitch <DOTMBS>
+.sp .35v
+DoTextureMapDiffuseColor <DOTMDC>
+.sp .35v
+DoTextureMapDiffuseColorSwitch <DOTMDS>
+.sp .35v
+DoTextureMapEnviron <DOTME>
+.sp .35v
+DoTextureMapEnvironSwitch <DOTMES>
+.sp .35v
+DoTextureMapTranspIntens <DOTMTI>
+.sp .35v
+DoTextureMapTranspIntensSwitch <DOTMTS>
+.sp .35v
+DoTranspColor <DOTC>
+.sp .35v
+DoTranspIntens <DOTI>
+.sp .35v
+DoTranspOrientColor <DOTOC>
+.bp
+DoTranspOrientExp <DOTOE>
+.sp .35v
+DoTranspOrientIntens <DOTOI>
+.sp .35v
+DoTranspOrientSwitch <DOTOS>
+.sp .35v
+DoTranspSwitch <DOTS>
+.H2 "Studio Objects"
+DoCamera <DOCM>
+.sp .35v
+DoLight <DOLT>
+.H2 "Studio Object Attributes"
+Studio object attributes include subgroups for lights and
+cameras.
+.H3 "Light Attributes"
+DoLightAttenuation <DOLTA>
+.sp .35v
+DoLightColor <DOLC>
+.sp .35v
+DoLightIntens <DOLI>
+.sp .35v
+DoLightSpreadAngles <DOLTSA>
+.sp .35v
+DoLightSpreadExp <DOLTSE>
+.sp .35v
+DoLightType <DOLTT>
+.H3 "Camera Attributes"
+DoGlbRendMaxObjs <DOGRMO>
+.sp .35v
+DoGlbRendMaxSub <DOGRMS>
+.sp .35v
+DoGlbRendRayLevel <DOGRRL>
+.sp .35v
+DoParallel <DOPAR>
+.sp .35v
+DoPerspective <DOPER>
+.sp .35v
+DoProjection <DOPRJ>
+.sp .35v
+DoSampleAdaptive <DOSADP>
+.sp .35v
+DoSampleAdaptiveSwitch <DOSASW>
+.sp .35v
+DoSampleFilter <DOSFLT>
+.sp .35v
+DoSampleJitter <DOSJIT>
+.sp .35v
+DoSampleJitterSwitch <DOSJSW>
+.sp .35v
+DoSampleSuper <DOSSPR>
+.sp .35v
+DoSampleSuperSwitch <DOSSSW>
+.sp .35v
+DoStereo <DOSTER>
+.sp .35v
+DoStereoSwitch <DOSTES>
+.H2 "Geometric Transformation Attributes"
+DoLookAtFrom <DOLAF>
+.sp .35v
+DoPopMatrix <DOPPMX>
+.sp .35v
+DoPushMatrix <DOPUMX>
+.sp .35v
+DoRotate <DOROT>
+.sp .35v
+DoScale <DOSC>
+.sp .35v
+DoShear <DOSHR>
+.sp .35v
+DoTransformMatrix <DOTMX>
+.sp .35v
+DoTranslate <DOXLT>
+.H2 "Texture Attributes"
+DoTextureAntiAlias <DOTAA>
+.sp .35v
+DoTextureExtendUV <DOTXUV>
+.sp .35v
+DoTextureExtendUVW <DOTXW>
+.sp .35v
+DoTextureIntermediateSurf <DOTIMS>
+.sp .35v
+DoTextureOp <DOTOP>
+.sp .35v
+DoTextureMatrixUV <DOTMUV>
+.sp .35v
+DoTextureMatrixUVW <DOTMW>
+.sp .35v
+DoTextureScaleUV <DOTSUV>
+.sp .35v
+DoTextureScaleUVW <DOTSW>
+.sp .35v
+DoTextureTranslateUV <DOTTUV>
+.sp .35v
+DoTextureTranslateUVW <DOTTW>
+.sp .35v
+DoTextureUVIndex <DOTUVI>
+.sp .35v
+DoTextureUVWIndex <DOTWI>
+.H2 "Organizational Objects"
+DoDevice <DOD>
+.sp .35v
+DoFrame <DOFR>
+.sp .35v
+DoGroup <DOG>
+.sp .35v
+DoInLineGroup <DOILG>
+.sp .35v
+DoInputSlot <DOIS>
+.sp .35v
+DoView <DOVW>
+.H2 "Miscellaneous Objects"
+DoCallback <DOCB>
+.sp .35v
+DoCameraMatrix <DOCMX>
+.sp .35v
+DoDataPtr <DODP>
+.sp .35v
+DoDataVal <DODV>
+.sp .35v
+DoFileRaster <DOFRS>
+.sp .35v
+DoLabel <DOLL>
+.sp .35v
+DoMatrix <DOM>
+.sp .35v
+DoPopAtts <DOPPA>
+.sp .35v
+DoPushAtts <DOPUA>
+.sp .35v
+DoRaster <DORS>
+.sp .35v
+.H1 "Variable Primitive Update Functions"
+DpUpdVarLineList <DPUVLL>
+.sp .35v
+DpUpdVarPointList <DPUVPL>
+.sp .35v
+DpUpdVarSimplePolygonMesh <DPUVSM>
+.sp .35v
+DpUpdVarSimplePolygonMeshUV <DPUSMV>
+.sp .35v
+DpUpdVarSimplePolygonMeshUVW <DPUSMW>
+.sp .35v
+DpUpdVarTriangleMesh <DPUVTM>
+.sp .35v
+DpUpdVarTriangleMeshUV <DPUTMV>
+.sp .35v
+DpUpdVarTriangleMeshUVW <DPUTMW>
+.sp .35v
+DpUpdVarTriangleStrip <DPUVTS>
+.sp .35v
+DpUpdVarTriangleStripUV <DPUTSV>
+.sp .35v
+DpUpdVarTriangleStripUVW <DPUTSW>
+.sp .35v
+.H1 "Group Functions"
+DgAddObj <DGAO>
+.sp .35v
+DgAddObjToGroup <DGAOG>
+.sp .35v
+DgCheck <DGCK>
+.sp .35v
+DgClose <DGCS>
+.sp .35v
+DgDelEle <DGDE>
+.sp .35v
+DgDelEleBetweenLabels <DGDEL>
+.sp .35v
+DgDelEleRange <DGDER>
+.sp .35v
+DgEmpty <DGE>
+.sp .35v
+DgInqElePtr <DGQEP>
+.sp .35v
+DgInqObjAtPos <DGQOP>
+.sp .35v
+DgInqOpen <DGQO>
+.sp .35v
+DgInqSize <DGQS>
+.sp .35v
+DgOpen <DGO>
+.sp .35v
+DgReplaceObj <DGRO>
+.sp .35v
+DgReplaceObjInGroup <DGROG>
+.sp .35v
+DgSetElePtr <DGSEP>
+.sp .35v
+DgSetElePtrRelLabel <DGSEPL>
+.H1 "View Functions"
+DvInqActiveCamera <DVQAC>
+.sp .35v
+DvInqBackgroundColor <DVQBC>
+.sp .35v
+DvInqBackgroundJust <DVQBJ>
+.sp .35v
+DvInqBackgroundRaster <DVQBR>
+.sp .35v
+DvInqBoundary <DVQB>
+.sp .35v
+DvInqClearFlag <DVQCF>
+.sp .35v
+DvInqDefinitionGroup <DVQDG>
+.sp .35v
+DvInqDisplayGroup <DVQIG>
+.sp .35v
+DvInqRendStyle <DVQRS>
+.sp .35v
+DvInqShadeIndex <DVQSI>
+.sp .35v
+DvInqUpdateType <DVQUT>
+.sp .35v
+DvSetActiveCamera <DVSAC>
+.sp .35v
+DvSetBackgroundColor <DVSBC>
+.sp .35v
+DvSetBackgroundJust <DVSBJ>
+.sp .35v
+DvSetBackgroundRaster <DVSBR>
+.sp .35v
+DvSetBoundary <DVSB>
+.sp .35v
+DvSetClearFlag <DVSCF>
+.sp .35v
+DvSetRendStyle <DVSRS>
+.sp .35v
+DvSetShadeIndex <DVSSI>
+.sp .35v
+DvSetUpdateType <DVSUT>
+.sp .35v
+DvUpdate
+.H1 "Frame Functions"
+DfInqBoundary <DFQB>
+.sp .35v
+DfInqJust <DFQJ>
+.sp .35v
+DfInqViewGroup <DFQVG>
+.sp .35v
+DfSetBoundary <DFSB>
+.sp .35v
+DfSetJust <DFSJ>
+.sp .35v
+DfUpdate <DFU>
+.H1 "Device Functions"
+DdInqColorEntries <DDQCE>
+.sp .35v
+DdInqColorTableSize <DDQCTS>
+.sp .35v
+DdInqExtent <DDQE>
+.sp .35v
+DdInqFonts <DDQFT>
+.sp .35v
+DdInqFrame <DDQFR>
+.sp .35v
+DdInqNumFonts <DDQNF>
+.sp .35v
+DdInqPickAperture <DDQPA>
+.sp .35v
+DdInqPickCallBack <DDQPC>
+.sp .35v
+DdInqPickPathOrder <DDQPPO>
+.sp .35v
+DdInqPixelData <DDQPXD>
+.sp .35v
+DdInqResolution <DDQR>
+.sp .35v
+DdInqShadeMode <DDQSM>
+.sp .35v
+DdInqShadeRanges <DDQSR>
+.sp .35v
+DdInqViewport <DDQV>
+.sp .35v
+DdInqVisualType <DDQVT>
+.sp .35v
+DdPickObjs <DDPO>
+.sp .35v
+DdSetColorEntries <DDSCE>
+.sp .35v
+DdSetFrame <DDSF>
+.sp .35v
+DdSetOptions <DDSO>
+.sp .35v
+DdSetPickAperture <DDSPA>
+.sp .35v
+DdSetPickCallBack <DDSPCB>
+.sp .35v
+DdSetPickPathOrder <DDSPPO>
+.sp .35v
+DdSetShadeMode <DDSSM>
+.sp .35v
+DdSetShadeRanges <DDSSR>
+.sp .35v
+DdSetViewport <DDSDV>
+.sp .35v
+DdUpdate <DDU>
+.H1 "System Functions"
+DsCompBoundingVol <DSCBV>
+.sp .35v
+DsExecuteObj <DSEO>
+.sp .35v
+DsExecutionAbort <DSEA>
+.sp .35v
+DsExecutionReturn <DSER>
+.sp .35v
+DsFileRasterRead <DSFRSR>
+.sp .35v
+DsHoldObj <DSHO>
+.sp .35v
+DsInitialize <DSINIT>
+.sp .35v
+DsInputValue <DSIV>
+.sp .35v
+DsInqAngleUnits <DSQAU>
+.sp .35v
+DsInqClassId <DSQCI>
+.sp .35v
+DsInqCurrentMethod <DSQCM>
+.sp .35v
+DsInqDriverInfo <DSQDI>
+.sp .35v
+DsInqErrorMessage <DSQEM>
+.sp .35v
+DsInqErrorVars <DSQEV>
+.sp .35v
+DsInqExeDepthLimit <DSQEDL>
+.sp .35v
+DsInqHoldObj <DSQHO>
+.sp .35v
+DsInqMethodId <DSQMI>
+.sp .35v
+DsInqNumDrivers <DSQND>
+.sp .35v
+DsInqNumRenderers <DSQNR>
+.sp .35v
+DsInqObj <DSQOI, DSQOS>
+.sp .35v
+DsInqObjClassId <DSQOCI>
+.sp .35v
+DsInqObjName <DSQONT; DSQONI, DSQONS>
+.sp .35v
+DsInqObjStatus <DSQVOS>
+.sp .35v
+DsInqRaster <DSQR>
+.sp .35v
+DsInqRendererId <DSQRI>
+.sp .35v
+DsInqRendererNames <DSQRNS>
+.sp .35v
+DsInqSafeFlag <DSQSF>
+.sp .35v
+DsInqValuatorGroup <DSQVG>
+.sp .35v
+DsInqVersion <DSQVER> 
+.sp .35v
+DsPrintObj <DSPO>
+.sp .35v
+DsRasterUpdate <DSRSU>
+.sp .35v
+DsRasterWrite <DSRSW>
+.sp .35v
+DsReleaseObj <DSRO>
+.sp .35v
+DsSetAngleUnits <DSSAU>
+.sp .35v
+DsSetErrorVars <DSSEV>
+.sp .35v
+DsSetExeDepthLimit <DSSEDL>
+.sp .35v
+DsSetObjName <DSSONI, DSSOND, DSSONS>
+.sp .35v
+DsSetSafeFlag <DSSSF>
+.sp .35v
+DsTerminate <DSTERM>
+.sp .35v
+DsTextureUVCount <DSTUVC>
+.sp .35v
+DsTextureUVWCount <DSTWC>
+.sp .35v
+DsUpdateAllViews <DSUAV>
+.sp .35v
+DsValuatorSwitch <DSVS>
+.H1 "\*(Dd Extension Functions"
+DeAddClass <DEAC>
+.sp .35v
+DeCreateObject <DECO>
+.sp .35v
+DeDeleteObject <DEDO>
+.sp .35v
+<DEDOD> (Fortran only)
+.sp .35v
+<DEROD> (Fortran only)
+.sp .35v
+<DEWOD> (Fortran only)
+.sp .35v
+DeExecuteAlternate <DEEA>
+.sp .35v
+DeInitializeObjPick <DEIOP>
+.sp .35v
+DeInqPickable <DEQP>
+.sp .35v
+DeInqRenderable <DEQR>

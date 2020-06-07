@@ -1,0 +1,9 @@
+#include <Dore.tmpl>
+
+    SRCS = gray_ini.c ray.c rayint_box.c statistics.c
+    OBJS = gray_ini.o ray.o rayint_box.o statistics.o
+
+LibraryObjectRule()
+SubdirLibraryRule($(OBJS))
+
+DependTarget()

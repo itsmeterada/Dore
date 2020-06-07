@@ -1,0 +1,99 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DoLightType 3D  "Dore"
+.SH NAME
+DoLightType \- Create a light type studio attribute object
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+DtObject DoLightType(type)
+DtObject type;
+.sp
+.in -.5i
+FORTRAN:
+.in +.5i
+INTEGER*4 DOLTT(TYPE)
+INTEGER*4 TYPE
+.in -.5i
+.fi
+.SH DESCRIPTION
+.IX DOLTT
+.IX DoLightType
+.I DoLightType
+creates a light type studio attribute object.
+The parameter \f2type\fP specifies the lighting model for subsequent
+lights. 
+Six light models are currently provided:
+.IX DcLightAmbient
+.IX DCLTAM
+.PP
+.IP "\f2DcLightAmbient\fP <\f2DCLTAM\fP>"
+Light from the light source is equally distributed throughout the scene.
+The total ambient light in the scene is the combination of all ambient 
+lights in the scene.
+.IX DcLightInfinite
+.IX DCLTIN
+.IP "\f2DcLightInfinite\fP <\f2DCLTIN\fP>"
+The light source is at infinity.  All rays of light entering the scene will
+appear to be parallel.
+The vector (0.,0.,-1.) is transformed by the current transformation
+matrix to determine the light direction.
+.IX DcLightPoint
+.IX DCLTPT
+.IP "\f2DcLightPoint\fP <\f2DCLTPT\fP>"
+The light source is a point source that radiates light outward
+uniformly in all directions from the light position.
+The point (0.,0.,0.) is transformed by the current transformation
+matrix to determine the light position.
+.IX DcLightPointAttn
+.IX DCLTPA
+.IP "\f2DcLightPointAttn\fP <\f2DCLTPA\fP>"
+The light source is just like \f2DcLightPoint\fP <\f2DCLTPT\fP> but
+with the additional attribute \f2DoLightAttenuation\fP controlling the
+falloff of the light intensity as a function of the distance from the
+light source.
+.IX DcLightSpot
+.IX DCLTSP
+.IP "\f2DcLightSpot\fP <\f2DCLTSP\fP>"
+The light source is a directed point source that radiates light
+outward from the light position and whose light intensity decreases as
+a function of the angle from the light direction.
+The point (0.,0.,0.) is transformed by the current transformation
+matrix to determine the light position.
+The vector (0.,0.,-1.) is transformed by the current transformation
+matrix to determine the light direction.
+The light attributes \f2DoLightSpreadAngles\fP and
+\f2DoLightSpreadExp\fP control the width and falloff of the light
+intensity as a function of the angle from the light direction.
+.IX DcLightSpotAttn
+.IX DCLTSA
+.IP "\f2DcLightSpotAttn\fP <\f2DCLTSA\fP>"
+The light source is just like \f2DcLightSpot\fP <\f2DCLTSP\fP> but
+with the additional attribute \f2DoLightAttenuation\fP controlling the
+falloff of the light intensity as a function of the distance from the
+light source.
+.SH DEFAULTS
+The default \f2DoLightType\fP is \f2DcLightInfinite\fP <\f2DCLTIN\fP>.
+.SH "SEE ALSO"
+.na
+.nh
+DoLight(3D), DoLightSpreadAngles(3D), DoLightSpreadExp(3D),
+DoLightAttenuation(3D)
+.ad
+.hy

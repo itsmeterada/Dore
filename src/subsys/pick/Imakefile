@@ -1,0 +1,9 @@
+#include <Dore.tmpl>
+
+    SRCS = ctlfun.c frmspc.c pck.c pick_ini.c pick_stack.c pri.c setmat.c
+    OBJS = ctlfun.o frmspc.o pck.o pick_ini.o pick_stack.o pri.o setmat.o
+
+LibraryObjectRule()
+SubdirLibraryRule($(OBJS))
+
+DependTarget()

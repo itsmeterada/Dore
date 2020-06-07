@@ -1,0 +1,3201 @@
+.\"#ident "%W%" %G%
+.\"
+.\" #
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  
+.\" # 
+.\" # KUBOTA GRAPHICS Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\" #
+.\"
+.\" .lo
+.sc
+.ds BT "\\*(Dd Developer's Guide
+.ds CT Sample Device Driver
+.ds h1 11
+.so ../macros/local.me
+.PN 121
+.L1 S AMPLE
+.L2 D EVICE
+.L3 D RIVER
+.CH \\*(h1
+.rs
+.EQ
+delim $$
+.EN
+This chapter discusses the generic portions of a typical \*(Dd
+device driver.
+The sample device driver described here does not require any specific
+knowledge of a particular hardware device.
+It shows a typical implementation for many of the
+routines in the device modules, but does not address how data would
+actually be passed to the hardware or virtual device.
+When you write your own device driver it is expected that you 
+know the details of how to access your physical device.
+The output from the sample device driver is simply text showing the data
+that would be used by the physical device.
+.lp
+The incremental approach described in Chapter 10, \f2Implementing a Device
+Driver\fP, is followed with the following exceptions.
+The first step described in Chapter 10 copies a sample device
+driver to use as a starting point for the new driver. 
+The sample device driver you copy is the one described in this chapter, 
+so obviously this driver is implemented here from scratch.
+This chapter does not describe the testing steps (4, 7, and 9).
+The driver installation routine is presented at the end of the chapter.
+.H1 "Naming Conventions"
+Because \*(Dd always invokes the device driver functions through the
+function pointers of the interface structures,
+the actual function names of a device driver implementation
+can be arbitrary.
+We do recommend that you follow a naming convention so that the names
+of functions, variables, constants and type definitions are unique.
+.lp
+By convention, each name uses lower case characters and underscores,
+and has the form:
+.(m
+dd?_dname_module_*
+.)m
+where 
+.rs
+.sp -.25v
+.ip "\f2dd\fP" 9
+stands for \*(Dd device.
+.rs
+.sp -.25v
+.ip "\f2?\fP" 9
+is \f2r\fP for routines, \f2c\fP for constants,
+\f2t\fP for type definitions, and
+\f2e\fP for external variables.
+.rs
+.sp -.25v
+.ip "\f2dname\fP" 9
+is the name of the device driver.
+.rs
+.sp -.25v
+.ip "\f2module\fP" 9
+is the name of the module where the name is used.
+.rs
+.sp -.25v
+.ip "*" 9
+is the descriptive part of the name.  
+.sp -.25v
+.lp
+For example, \f2ddr_x11_dcm_initialize\fP is an initialization 
+routine in the device control module of the 
+\f2x11\fP device driver. 
+.rs
+.sp -.5v
+.H1 "Step 2: Implement a Minimal DCM
+.rs
+.sp -.25v
+There are three categories of functions needed in the device 
+control module: control, inquiry, and output.
+The sections below will briefly discuss the functions 
+required to support production renderer output only.
+.rs
+.sp -.25v
+.H2 "Control Routines
+.rs
+.sp -.25v
+The local data and information that must be maintained in the
+device includes:
+.BU hs
+the handle to the \*(Dd device,
+.BU hs
+the location and size of the device,
+.BU hs
+the visual type,
+.BU hs
+a flag indicating if the device will allow automatic resizing, and
+.BU hs
+a flag indicating if the device is double buffered.
+.lp
+The following data structure is used to keep track of this 
+information for each instance of the sample device driver.
+.(m
+typedef struct {
+    DtObject		device;
+    DtInt		x;
+    DtInt		y;
+    DtInt		width;
+    Dtint		height;
+    DtVisualType	visualtype;
+    DtFlag		auto_size;
+    DtFlag		double_buffered;
+} ddt_sampledev_data;
+.)m
+.rs
+.sp .5v
+.H3 "dcm.create_local_data
+The routine \f2dcm.create_local_data\fP allocates the memory required
+for each instance of the device.
+This routine is straightforward.
+It allocates enough memory to hold the data needed for the device and
+returns it to \*(Dd.
+.(m
+DtPtr 
+ddr_sampledev_dcm_create_local_data (device)
+DtObject device;
+{
+    ddt_sampledev_data *device_data;
+
+    if ((device_data = (ddt_sampledev_data *)
+	 DDspace_Allocate(sizeof (ddt_sampledev_data)))
+	 == (ddt_sampledev_data *)0) {
+	DDerror (ERR_CANT_ALLOC_MEM_SIZE, 
+		 "ddr_sampledev_dcm_create_local_data",
+		 "sizeof (ddt_sampledev_data)");
+	return (DcNullPtr);
+    }
+
+    device_data->device = device;
+
+    return ((DtPtr) device_data);
+}
+.)m
+.rs
+.sp .5v
+.H3 "dcm.initialize_device
+\*(Dd calls \f2dcm.create_local_data\fP to allocate the data for a
+new instance of the device driver. Then \f2dcm.initialize_device\fP
+is called to initialize the device.
+This routine is passed a string, \f2argstring\fP, which contains device
+specific options.
+Several options that are fairly standard.
+The sample device driver accepts the following options:
+.ip "\-noautosize
+disables the automatic resizing of the device viewport when the device
+extent changes.
+.ip "\-visualtype \f2type\fP
+sets the visual type of the device.
+.ip "\-geometry \f2geomstring\fP
+specifies the size and position of the device in either
+\f2width\f3x\f2height\f1
+or \f2width\f3x\f2height\f3+\f2x\f3+\f2y\f1 format.
+This is a standard format used, for example, to specify 
+an X window's size and position.
+The sample device driver uses this notation.
+.ip "\-singlebuffered
+specifies that the device is to be single buffered.
+Double buffered is the default.
+.lp
+Any other arguments are ignored, and a warning message is printed.
+In the sample device driver, this routine handles parsing the
+argument string and storing the values in the local data space.
+This is also where the physical device is opened and
+initialized.
+The \f2dcm.initialize_device\fP routine should return \f2DcTrue\fP if the
+initialization was successful; otherwise, it should return \f2DcFalse\fP.
+.(m
+DtFlag
+ddr_sampledev_dcm_initialize_device (device, device_data, 
+				    argstring, name)
+DtObject device;
+ddt_sampledev_data *device_data;
+DtPtr argstring;
+DtPtr name;
+{
+    char *argstringcopy, *tmp, *p, *nextarg;
+    static char *funcname  = 
+	    "ddr_sampledev_dcm_initialize_device";
+    int error=0;
+    int x = 0;
+    int y = 0;
+    int width = 512;
+    int height = 512;
+
+    /*
+     * This function allocates the device driver instance
+     * specific storage and sets up the device
+     */
+
+    device_data->device = device;
+    device_data->auto_size = DcTrue;
+    device_data->visualtype = DcTrueColor;
+    device_data->double_buffered = DcTrue;
+
+
+    /*
+     * Process the argstring.  First make
+     * a copy of the user's string so you don't
+     * alter it.
+     */
+
+    argstringcopy = (char *)
+	    DDspace_Allocate(strlen(argstring)+1);
+    strcpy(argstringcopy, argstring);
+
+    tmp = argstringcopy;
+
+    /*
+     * p points to first substring
+     */
+
+    while ((p = DDstrtok(tmp, " \et,"))) {
+	tmp = 0;
+
+	if (!strcmp(p,"-noautosize")) {
+	    device_data->auto_size = DcFalse;
+
+	} else if (!strcmp(p, "-visualtype")) {
+	    if (!(nextarg = DDstrtok(0, " \et,"))) {
+		DDerror (ERR_BAD_DEVICE_OPT_VAL,
+			 funcname, "visualtype: (no value)");
+		error = 1;
+	    } else {
+		if (!strcmp("DcStaticGrey", nextarg)) {
+		    device_data->visualtype = DcStaticGrey;
+		} else if (!strcmp("DcGreyScale",nextarg)){
+		    device_data->visualtype = DcGreyScale;
+		} else if (!strcmp("DcStaticColor",nextarg)){
+		    device_data->visualtype = DcStaticColor;
+		} else if (!strcmp("DcPseudoColor",nextarg)){
+		    device_data->visualtype = DcPseudoColor;
+		} else if (!strcmp("DcTrueColor",nextarg)){
+		    device_data->visualtype = DcTrueColor;
+		} else if (!strcmp("DcDirectColor",nextarg)){
+		    device_data->visualtype = DcDirectColor;
+		} else {
+		    sprintf (DDerror_GetLine(), 
+			     "visualtype: '%s'", nextarg);
+		    DDerror (ERR_BAD_DEVICE_OPT_VAL,
+			     funcname, DDerror_GetLine());
+		    error = 1;
+		}
+	    } 
+
+
+	} else if (!strcmp(p,"-geometry")) {
+	    if (!(nextarg = DDstrtok(0," \t,"))) {
+		DDerror (ERR_BAD_DEVICE_OPT_VAL,
+			 funcname, "width: (no value)");
+		error = 1;
+	    } else {
+		parse_geometry (nextarg, &x, &y, &width,
+				&height);
+	    }
+	} else if (!strcmp(p,"-singlebuffered")) {
+	    device_data->double_buffered = DcFalse;
+	} else {
+	    sprintf(DDerror_GetLine(),
+		    "ignored flag '%s'", p);
+	    DDerror (ERR_BAD_DEVICE_OPT,
+		     funcname, DDerror_GetLine());
+	}
+    }
+
+    DDspace_Deallocate(argstringcopy);
+
+    if (error) {
+	return(DcFalse);
+    }
+
+    device_data->x = x;
+    device_data->y = y;
+    device_data->width = width;
+    device_data->height = height;
+
+    /*
+     * Do device specific stuff
+     */
+	.
+	.
+    return DcTrue;
+}
+.)m
+.rs
+.sp .5v
+.H3 "dcm.become_current_driver
+There may be several \*(Dd devices active at any given time, thus the
+device driver needs to keep track of which instance is the
+\f2current\fP device.
+\*(Dd notifies the device driver of which instance is the
+current one through the routine \f2dcm.become_current_driver\fP.
+The sample sets a global variable \f2dde_sampledev_current_device_data\fP
+to point to the current local device data.
+All the other routines in the DCM will use this global variable.
+.(m
+void
+ddr_sampledev_dcm_become_current_driver (device_data)
+ddt_sampledev_data *device_data;
+{
+    dde_sampledev_current_device_data = device_data;
+}
+.)m
+.rs
+.sp -.75v
+.H2 "Inquiry Routines
+.rs
+.sp -.25v
+The inquiry routines of the DCM provide access to
+information local to the device driver.
+These inquiry routines are very simple.
+.rs
+.sp .25v
+.H3 "dcm.inquire_device_extent
+The \f2dcm.inquire_device_extent\fP routine
+returns the device volume in \*(Dd
+device coordinates.
+\*(Dd device coordinates form a right-handed coordinate system with
+positive x going to the right, positive y going up, and positive z
+coming toward you.
+In the sample, the device extent is from zero to the width of the
+device in x, zero to the height of the device in y, and zero to one in
+z.
+.(m
+void
+ddr_sampledev_dcm_inquire_device_extent (volume)
+DtVolume *volume;
+{
+    volume->bll[0] = 0.0;
+    volume->bll[1] = 0.0;
+    volume->bll[2] = 0.0;
+    volume->fur[0] = dde_sampledev_current_device_data->width;
+    volume->fur[1] = dde_sampledev_current_device_data->height;
+    volume->fur[2] = 1.0;
+}
+.)m
+.rs
+.sp .25v
+.H3 "dcm.inquire_stereo
+The sample device will never be stereo, so \f2dcm.inquire_stereo\fP will
+always return \f2DcFalse\fP.
+.(m
+void
+ddr_sampledev_dcm_inquire_stereo (stereoflag)
+DtFlag *stereoflag;
+{
+    *stereoflag = DcFalse;
+}
+.)m
+.rs
+.sp .5v
+.H3 "dcm.inquire_ncolors
+The number of colors that the device supports is returned by
+\f2dcm.inquire_ncolors\fP.
+The sample assumes that it is 256.
+.(m
+void
+ddr_sampledev_dcm_inquire_ncolors (ncolors)
+DtInt *ncolors;
+{
+    *ncolors = 256;
+}
+.)m
+.rs
+.sp .5v
+.H3 "dcm.inquire_resolution
+The resolution of the device in millimeters is returned by this
+routine.
+The aspect ratio of the pixel is probably more important than its
+actual size.
+Renderers will be able to adjust the way they generate an image based
+on the aspect ratio of the pixel.
+The sample device has square pixels of .25 millimeters.
+.(m
+void
+ddr_sampledev_dcm_inquire_resolution (xres, yres)
+DtReal *xres;
+DtReal *yres;
+{
+    *xres = .25;
+    *yres = .25;
+}
+.)m
+.rs
+.sp .5v
+.H3 "dcm.inquire_visual_type
+The visual type of the device driver is set in \f2dcm.initialize_device\fP
+and is returned by \f2dcm.inquire_visual_type\fP.
+.(m
+void
+ddr_sampledev_dcm_inquire_visual_type (visualtype)
+DtVisualType *visualtype;
+{
+    *visualtype = 
+	dde_sampledev_current_device_data->visualtype;
+}
+.)m
+.rs
+.sp .5v
+.H3 "dcm.inquire_auto_size
+The auto sizing flag of the device driver is set in
+\f2dcm.initialize_device\fP and returned by
+\f2dcm.inquire_auto_size\fP.
+.(m
+void
+ddr_sampledev_dcm_inquire_auto_size (flag)
+DtFlag *flag;
+{
+    *flag = dde_sampledev_current_device_data->auto_size;
+}
+.)m
+.rs
+.sp -.5v
+.H3 "dcm.inquire_clip_list
+The clip list is the list of rectangles that are
+visible on the device.
+On some devices, like an X11 window, part of the device may be
+obscured.
+The \f2dcm.inquire_clip_list\fP routine returns the visible rectangles.
+For the sample device, it is not possible for a portion to be
+obscured. So, it just returns the whole device extent.
+.(m
+void
+ddr_sampledev_dcm_inquire_clip_list (nrects, clip_list, 
+			   extent, partiallyobscuredflag)
+DtUInt *nrects;
+DtReal **clip_list;
+DtReal extent[4];
+DtFlag *partiallyobscuredflag;
+{
+    extent[0] = 0;                                       
+    extent[1] = 0;                                       
+    extent[2] = dde_sampledev_current_device_data->width; 
+    extent[3] = dde_sampledev_current_device_data->height;
+
+    *nrects = 1;
+    *clip_list = extent;
+    *partiallyobscuredflag = DcFalse;
+}
+.)m
+.H2 "Output Routines
+Only one output function is necessary for
+a minimal DCM that supports production renderer output:
+\f2dcm.write_scanline_byte\fP.
+The output routines of a DCM depend totally on how you access
+the physical device.
+The sample device driver just has a null body for the 
+\f2dcm.write_scanline_byte\fP routine.
+For a real device driver, the routine
+takes a set of RGB pixel values and a
+starting location and draws the pixels on the device.
+.H1 "Step 3: Implement the PROM
+The PROM module contains only one routine,
+\f2prom.write_rectangle_byte_rgb\fP.
+Since the DCM contains a function to write a scanline of pixel data,
+the sample uses that function in implementing the PROM routine.
+.(m
+void
+ddr_sampledev_prom_write_rectangle_byte_rgb(xstart, ystart,
+		length, height, pixarr)
+DtInt xstart;
+DtInt ystart;
+DtInt length;
+DtInt height;
+DtUChar *pixarr;
+{
+    DtInt yend;
+    DtInt scanlineno;
+    DtUChar *pixeladdr;
+
+    pixeladdr = pixarr;
+    yend = ystart + height - 1;
+
+    for (scanlineno=ystart; 
+	 scanlineno<=yend; 
+	 scanlineno++){
+	ddr_sampledev_dcm_write_scanline_byte
+		(xstart,scanlineno,length,pixeladdr);
+
+	pixeladdr += 3*length;
+    }
+}
+.)m
+.H1 "Step 5: Complete the DCM
+The simple device driver described here only includes implementations
+of the routines of the minimal DCM described above.
+All other DCM routines in the sample driver are null routines.
+.H1 "Step 6: Implement a Minimal DROM
+This section describes the part of the sample dynamic renderer output
+module that is required to transform and draw the primitive 
+objects without light source shading.
+The DROM is a large module, and as a result may seem
+quite intimidating.
+The functions of this module can be broken into smaller,
+more manageable functional groups.
+For this discussion of a minimal DROM, the following groups are used:
+.BU hs
+geometric transformations
+.BU hs
+the camera and its attributes
+.BU hs
+geometry rendering
+.BU hs
+control routines
+.H2 "Data Structures
+Throughout the discussion of the DROM in this and the following paragraphs
+we build up the data
+structures that are used to store all the necessary information.
+The DROM maintains its global state in \f2dde_sampledev_drom_data\fP,
+which is defined as:
+.(m
+typedef struct {
+    DtObject		device;
+    DtObject		view;
+
+    /* matrices and stack */
+
+    DtMatrix4x4		lcstowcsmat;
+    DtMatrix4x4		lcstofcsmat;
+    DtMatrix4x4		nrmlcstowcsmat;
+
+    DtInt		max_matrices;
+    DtInt		num_matrices;
+    ddt_sampledev_drom_matrix *matrix_stack;
+
+    /* camera attributes */
+
+    DtReal		stereo_eyeseparation;
+    DtReal		stereo_distance;
+    DtSwitch		stereo_switch;
+    DtCameraMatrixType	camera_type;
+    DtMatrix4x4		projmat;
+
+    /* light attributes */
+
+    DtObject		light_type;
+    DtColorRGB		light_color;
+    DtReal		light_intensity;
+    DtReal		light_spread_angle_total;
+    DtReal		light_spread_angle_delta;
+    DtReal		light_spread_exponent;
+    DtReal		light_att_c1;
+    DtReal		light_att_c2;
+
+
+    /* appearance attributes */
+
+    DtReal		ambint;
+    DtSwitch		ambswi;
+    DtSwitch 		bacfacculble;
+    DtSwitch		bacfacculswi;
+    DtReal		depcue_zfront;
+    DtReal		depcue_zback;
+    DtReal		depcue_sfront;
+    DtReal		depcue_sback;
+    DtColorModel	depcue_colormodel;
+    DtColorRGB		depcue_color;
+    DtSwitch		depcueswi;
+    DtColorRGB		difclr;
+    DtReal		difint;
+    DtSwitch		difswi;
+    DtSwitch		hidsrfswi;
+    DtInterpType	inttyp;
+    DtLineType		lintyp;
+    DtReal		linwid;
+    DtLocalAntiAliasStyle localaasty;
+    DtSwitch		localaaswi;
+    DtSwitch		refswi;
+    DtRepType		reptyp;
+    DtSwitch		shaswi;
+    DtInt		shdidx;
+    DtColorRGB		spcclr;
+    DtReal		spcfct;
+    DtReal		spcint;
+    DtSwitch		spcswi;
+    DtColorRGB		srfedgclr;
+    DtObject		srfshd;
+    DtColorRGB		transpclr;
+    DtReal		transpint;
+    DtSwitch		transpswi;
+
+
+
+    /* Texture Mapping Attributes */
+
+    ddt_sampledev_drom_texmap mapbmp;
+    ddt_sampledev_drom_texmap mapdifclr;
+    ddt_sampledev_drom_texmap mapenv;
+    ddt_sampledev_drom_texmap maptrnint;
+
+} ddt_sampledev_drom_data;
+.)m
+Some of the data types used in this structure have not been defined yet.
+They will be defined in the paragraphs discussing the particular fields
+of the structure.
+.lp
+In addition to this global state, separate state is maintained for
+information specific to the current device, view, and window.
+The following variables are pointers to the current data:
+.(m
+ddt_sampledev_drom_device *dde_sampledev_drom_curdevdat;
+ddt_sampledev_drom_view   *dde_sampledev_drom_curviwdat;
+ddt_sampledev_drom_window *dde_sampledev_drom_curwindat;
+.)m
+The device state is:
+.(m
+typedef struct {
+    DtVisualType	visual_type;
+    DtShadeMode		shade_mode;
+    DtReal		ctodscale[3];
+    DtReal		ctodtrans[3];
+    DtReal		ftodscale[3];
+    DtReal		ftodtrans[3];
+    DtReal		annoscale[3];
+    DtFlag		stereoflag;
+} ddt_sampledev_drom_device;
+.)m
+The view state is:
+.(m
+typedef struct {
+    DtFlag		clear_flag;
+    DtInt		shade_index;
+    DtColorModel	background_color_model;
+    DtColorRGB		background_color;
+    DtReal		background_just[2];
+    ddt_sampledev_drom_camera camera_data;
+    DtInt		total_lights;
+    DtInt		max_lights;
+    ddt_sampledev_drom_light *light;
+} ddt_sampledev_drom_view;
+.)m
+The window state is:
+.(m
+typedef struct {
+    DtReal		actviewxmin;
+    DtReal		actviewymin;
+    DtReal		actviewxmax;
+    DtReal		actviewymax;
+} ddt_sampledev_drom_window;
+.)m
+The pointers to these structures must be returned to \*(Dd by
+the routines for \f2drom.create_local_device_data\fP, 
+\f2drom.create_local_view_data\fP, and \f2drom.create_local_window_data\fP:
+.(m
+DtPtr
+ddr_sampledev_drom_create_local_device_data(device)
+DtObject device;
+{
+    ddt_sampledev_drom_device *devicedata;
+
+    devicedata = (ddt_sampledev_drom_device *)DDspace_Allocate
+            (sizeof(ddt_sampledev_drom_device));
+
+    if (devicedata == (ddt_sampledev_drom_device *)0) {
+	DDerror (ERR_CANT_ALLOC_MEM, 
+		ddr_sampledev_drom_create_local_device_data",
+		DcNullPtr);
+	return ((DtPtr) 0);
+    }
+
+    dde_sampledev_drom_data.device = device;
+    dde_sampledev_drom_curdevdat = devicedata;
+
+    return ((DtPtr)devicedata);
+}
+
+DtPtr
+ddr_sampledev_drom_create_local_view_data(view)
+DtObject view;
+{
+    ddt_sampledev_drom_view *viewdata;
+
+    viewdata = (ddt_sampledev_drom_view *)DDspace_Allocate
+            (sizeof (ddt_sampledev_drom_view));
+
+    if (viewdata == (ddt_sampledev_drom_view *)0) {
+	DDerror (ERR_CANT_ALLOC_MEM, 
+		ddr_sampledev_drom_create_local_view_data",
+		DcNullPtr);
+	return ((DtPtr) 0);
+    }
+
+    viewdata->total_lights = 0;
+    viewdata->max_lights = 0;
+    viewdata->light = 0;
+
+    dde_sampledev_drom_data.view = view;
+    dde_sampledev_drom_curviwdat = viewdata;
+
+    return((DtPtr)viewdata);
+}
+
+DtPtr
+ddr_sampledev_drom_create_local_window_data (device, view)
+DtObject device;
+DtObject view;
+{
+    ddt_sampledev_drom_window *windowdata;
+
+    windowdata = (ddt_sampledev_drom_window *)DDspace_Allocate
+            (sizeof (ddt_sampledev_drom_window));
+
+    if (windowdata == (ddt_sampledev_drom_window *)0) {
+	DDerror (ERR_CANT_ALLOC_MEM, 
+		ddr_sampledev_drom_create_local_window_data",
+		DcNullPtr);
+	return ((DtPtr) 0);
+    }
+
+    dde_sampledev_drom_curwindat = windowdata;
+
+    return((DtPtr)windowdata);
+}
+.)m
+.H2 "Geometric Transformations
+The geometric transformation routines control the positioning and size
+of objects in a \*(Dd scene.
+This includes:
+.BU 
+the location of the camera,
+.BU hs
+the location and orientation of the lights, and
+.BU hs
+the location, orientation, and size of geometric primitives.
+.lp
+The sample DROM maintains a stack of three matrices:
+.ip "\f2lcstowcsmat\fP
+The local-to-world transformation matrix.
+The local coordinate system is the coordinate system in which the
+object is defined.
+The world coordinate system is the user-defined space that is the common
+frame of reference.
+For example, \f2DoPrimSurf(DcSphere)\fP objects are defined in 
+local space at (0,0,0) with a radius of 1.0,
+but the sphere might be positioned in world
+space at (10, 15, 3) and be scaled to have a radius of 4.5.
+The \f2lcstowcsmat\fP would perform this transformation.
+.ip "\f2lcstofcsmat\fP
+The local-to-frustum transformation matrix.
+This matrix is the \f2lcstowcsmat\fP concatenated with a set of
+matrices that transform the world coordinate system to the frustum
+coordinate system.
+This transformation includes the camera projection matrix and the device
+and frame scaling and translations.
+.ip "\f2nrmlcstowcsmat\fP
+The normal local-to-world transformation matrix.
+This matrix is used to transform surface normal vectors from the local
+coordinate system to the world coordinate system.
+When arbitrary transformations are applied to the vertices of
+a surface, the normal vectors defined at the vertices cannot be
+transformed using the same matrix, if they are to remain normal
+to the transformed surface.
+When the transformation includes only rotations,
+the normal matrix and the vertex matrix are identical. 
+However, with more general types of transformations 
+this is not always the case.
+The normal matrix is the inverse transpose of the \f2lcstowcsmat\fP.
+The sample maintains this matrix separately because it is more efficient to
+build this matrix concurrently with the \f2lcstowcsmat\fP rather than
+perform the inverse operation each time it is needed.
+.lp
+The matrix stack is maintained in the \f2dde_sampledev_drom_data\fP
+data structure.
+.(m
+    DtMatrix4x4		lcstowcsmat;
+    DtMatrix4x4		lcstofcsmat;
+    DtMatrix4x4		nrmlcstowcsmat;
+
+    DtInt		max_matrices;
+    DtInt		num_matrices;
+    ddt_sampledev_drom_matrix *matrix_stack;
+.)m
+where 
+.ip "\f2matrix_stack\fP" 
+is a structure of the form
+.(m
+typedef struct {
+    DtMatrix4x4		lcstowcsmat;
+    DtMatrix4x4		lcstofcsmat;
+    DtMatrix4x4		nrmlcstowcsmat;
+} ddt_sampledev_drom_matrix;
+.)m
+.ip "\f2max_matrices\fP"
+is the maximum size of \f2matrix_stack\fP.
+.ip "\f2num_matrices\fP"
+is the current top of the stack.
+.lp
+Since the DROM maintains the matrix stack, the DROM interface
+provides a mechanism for querying matrices.
+The \f2drom.get_lcstowcsmat\fP routine returns the current local-to-world
+transformation in \f2lcstowcsmat\fP:
+.(m
+void
+ddr_sampledev_drom_get_lcstowcsmat (matrix)
+DtMatrix4x4 matrix;
+{
+    ddr_sampledev_matrix_concat(matrix, 
+	dde_sampledev_drom_data.lcstowcsmat, DcReplace);
+}
+.)m
+.lp
+where \f2ddr_sampledev_matrix_concat\fP is one of the several matrix
+utility functions included in the sample driver.
+See the file \f2matrix.c\fP.
+.lp
+The \f2drom.update_lcstowcsmat_push\fP
+routine pushes the matrix stack.
+If the stack needs to be pushed and there is not enough room, 
+then the stack
+will be expanded and \f2max_matrices\fP will be adjusted.
+To reduce the number of memory allocations and memory fragmentation,
+the sample increases the stack size by 10 each time the maximum stack size
+is exceeded.
+.(m
+void
+ddr_sampledev_drom_update_lcstowcsmat_push ()
+{
+    DtInt index;
+    ddt_sampledev_drom_matrix *matrix_stack;
+
+    if (dde_sampledev_drom_data.num_matrices ==
+	dde_sampledev_drom_data.max_matrices) {
+	dde_sampledev_drom_data.matrix_stack = 
+
+	    (ddt_sampledev_drom_matrix *)DDspace_Reallocate
+		(dde_sampledev_drom_data.matrix_stack,
+		 (dde_sampledev_drom_data.max_matrices+10)*
+		 (sizeof (ddt_sampledev_drom_matrix)));
+	dde_sampledev_drom_data.max_matrices += 10;
+    }
+		
+    index = dde_sampledev_drom_data.num_matrices++;
+
+    matrix_stack = dde_sampledev_drom_data.matrix_stack;
+
+    ddr_sampledev_matrix_concat 
+	(matrix_stack[index].lcstowcsmat,
+	 dde_sampledev_drom_data.lcstowcsmat, DcReplace);
+
+    ddr_sampledev_matrix_concat 
+	(matrix_stack[index].lcstofcsmat,
+	 dde_sampledev_drom_data.lcstofcsmat, DcReplace);
+
+    ddr_sampledev_matrix_concat 
+	(matrix_stack[index].nrmlcstowcsmat,
+	 dde_sampledev_drom_data.nrmlcstowcsmat, DcReplace);
+}
+.)m
+The \f2drom.update_lcstowcsmat_pop\fP routine pops the matrix stack, moving the
+matrices from the top of the stack to the matrices in the
+\f2dde_sampledev_drom_data\fP data structure.
+.(m
+void
+ddr_sampledev_drom_update_lcstowcsmat_pop ()
+{
+    DtInt index;
+    ddt_sampledev_drom_matrix *matrix_stack;
+
+    if (dde_sampledev_drom_data.num_matrices > 0) {
+	index = --dde_sampledev_drom_data.num_matrices;
+    
+	ddr_sampledev_matrix_concat 
+	    (dde_sampledev_drom_data.lcstowcsmat,
+	     matrix_stack[index].lcstowcsmat,
+	     DcReplace);
+	
+	ddr_sampledev_matrix_concat
+	    (dde_sampledev_drom_data.lcstofcsmat,
+	     matrix_stack[index].lcstofcsmat,
+	     DcReplace);
+			 
+	
+
+	ddr_sampledev_matrix_concat
+	    (dde_sampledev_drom_data.nrmlcstowcsmat,
+	     matrix_stack[index].nrmlcstowcsmat,
+	     DcReplace);
+    }
+}
+.)m
+.lp
+The following functions modify the current transformation matrices 
+by concatenating a new matrix with each of them:
+.(l
+\f2drom.update_lcstowcsmat_lokatfrm\fP
+\f2drom.update_lcstowcsmat_rotate\fP
+\f2drom.update_lcstowcsmat_scale\fP
+\f2drom.update_lcstowcsmat_shear\fP
+\f2drom.update_lcstowcsmat_tfmmat\fP
+\f2drom.update_lcstowcsmat_transl\fP
+.)l
+.rs
+.sp -1v
+.lp
+These routines use a common routine to perform the
+concatenation and maintain all three of the matrices described above.
+The above routines create the appropriate 4x4 matrix and its inverse
+and pass them to this routine in the parameters \f2matrix\fP and
+\f2invertmatrix\fP, respectively.
+The routine is:
+.(m
+void 
+ddr_sampledev_drom_update_matrices(matrix,invertmatrix,
+	concat)
+DtMatrix4x4 matrix;
+DtMatrix4x4 invertmatrix;
+DtCompType concat;
+{
+    DtMatrix4x4 tinverse;
+    int i, j;
+
+    for (i=0; i<4; i++) {
+	for (j=0; j<4; j++) {
+	    tinverse[j][i] = invertmatrix[i][j];
+	}
+    }
+
+    switch (concat) {
+    case DcPreConcatenate:
+	ddr_sampledev_matrix_concat
+	    (dde_sampledev_drom_data.lcstowcsmat, matrix,
+	     DcPreConcatenate);
+	ddr_sampledev_matrix_concat
+	    (dde_sampledev_drom_data.lcstofcsmat, matrix,
+	     DcPreConcatenate);
+
+
+	ddr_sampledev_matrix_concat
+	    (dde_sampledev_drom_data.nrmlcstowcsmat,
+	     tinverse, DcPreConcatenate);
+	break;
+
+    case DcPostConcatenate:
+	ddr_sampledev_matrix_concat
+	    (dde_sampledev_drom_data.lcstowcsmat, matrix,
+	     DcPostConcatenate);
+	ddr_sampledev_matrix_concat
+	    (dde_sampledev_drom_data.nrmlcstowcsmat,
+	     tinverse, DcPostConcatenate);
+
+	/*
+	 * For postconcatenation of the lcstofcsmat matrix
+	 * (it contains the projection matrix) the lcstowcsmat
+	 * matrix is copied to the lcstofcsmat and then
+	 * the world-to-frustum matrix is postconcatenated
+	 * to this matrix
+	 */
+
+	ddr_sampledev_matrix_concat
+	    (dde_sampledev_drom_data.lcstofcsmat, 
+	     dde_sampledev_drom_data.lcstowcsmat,
+	     DcReplace);
+	ddr_sampledev_matrix_concat 
+	    (dde_sampledev_drom_data.lcstofcsmat,
+	     dde_sampledev_drom_curcamdat->wcstofcsmat,
+	     DcPostConcatenate);
+	break;
+
+    case DcReplace:
+	ddr_sampledev_matrix_concat
+	    (dde_sampledev_drom_data.lcstowcsmat, matrix,
+	     DcReplace);
+
+	ddr_sampledev_matrix_concat
+	    (dde_sampledev_drom_data.nrmlcstowcsmat,
+	     tinverse, DcReplace);
+
+	/*
+	 * For replacement of the lcstofcsmat matrix (it
+	 * contains the projection matrix) the world-to-
+	 * frustum matrix is copied into the lcstofcsmat
+	 * and the new matrix will be preconcatenated to
+	 * the wcstofcsmat.
+	 */
+
+	
+
+
+	ddr_sampledev_matrix_concat
+	    (dde_sampledev_drom_data.lcstofcsmat, 
+	     dde_sampledev_drom_curcamdat->wcstofcsmat,
+	     DcReplace);
+	ddr_sampledev_matrix_concat 
+	    (dde_sampledev_drom_data.lcstofcsmat, matrix,
+	     DcPreConcatenate);
+	break;
+    }
+}
+.)m
+.lp
+Because all of the transformation routines are similar, only
+two examples are shown.
+The first, \f2drom.update_lcstowcsmat_lokatfrm\fP, concatenates a
+look-at-from matrix (given two locations and an up vector) with
+the CTM.
+The sample computes the inverse using a general inverse routine.
+.(m
+void
+ddr_sampledev_drom_update_lcstowcsmat_lokatfrm
+	(at, from, up, concat)
+DtPoint3 at;
+DtPoint3 from;
+DtVector3 up;
+DtCompType concat;
+{
+    DtMatrix4x4 matrix, invertmatrix;
+
+    ddr_sampledev_matrix_look_at_from
+	(matrix, at, from, up);
+    ddr_sampledev_matrix_concat (invertmatrix, matrix,
+				DcReplace);
+    ddr_sampledev_matrix_invert (invertmatrix);
+
+    ddr_sampledev_drom_update_matrices
+	(matrix, invertmatrix, concat);
+}
+.)m
+The \f2ddr_sampledev_matrix_look_at_from\fP routine actually generates the
+look-at-from matrix.
+.(m
+void
+ddr_sampledev_matrix_look_at_from(matrix,at,from,up)
+DtMatrix4x4 matrix;
+DtPoint3 at;
+DtPoint3 from;
+DtVector3 up;
+{
+    static char *proc_name =
+	"ddr_sampledev_matrix_look_at_from";
+    DtReal u[3], v[3], n[3];
+
+    ddr_sampledev_matrix_concat
+	(matrix, dde_sampledev_identmatrix, DcReplace);
+
+    v[0] = up[0];
+    v[1] = up[1];
+    v[2] = up[2];
+
+    if ( !ddr_sampledev_math_renormalize(v) ){
+	DDerror (ERR_DEGEN_LOKATFRM, proc_name, 
+		 "null up vector");
+	return;
+    }
+
+    n[0] = from[0]-at[0];
+    n[1] = from[1]-at[1];
+    n[2] = from[2]-at[2];
+
+    if (!ddr_sampledev_math_renormalize(n)){
+	DDerror (ERR_DEGEN_LOKATFRM, proc_name, 
+		 "up and from are coincident");
+	return;
+    }
+
+    ddr_sampledev_math_crossproduct(v,n,u);
+
+    if (!ddr_sampledev_math_renormalize(u)){
+	DDerror (ERR_DEGEN_LOKATFRM, proc_name, 
+		 "view normal and up vector are parallel");
+	return;
+    }
+
+    ddr_sampledev_math_crossproduct(n,u,v);
+
+    if (!ddr_sampledev_math_renormalize(v)){
+	DDerror (ERR_DEGEN_LOKATFRM, proc_name, 
+		"view normal and u vector are parallel");
+	return;
+    }
+
+    matrix[0][0] = u[0];
+    matrix[1][0] = u[1];
+    matrix[2][0] = u[2];
+    matrix[3][0] = 0.0;
+
+    matrix[0][1] = v[0];
+    matrix[1][1] = v[1];
+    matrix[2][1] = v[2];
+    matrix[3][1] = 0.0;
+
+    
+    matrix[0][2] = n[0];
+    matrix[1][2] = n[1];
+    matrix[2][2] = n[2];
+    matrix[3][2] = 0.0;
+
+    matrix[0][3] = from[0];
+    matrix[1][3] = from[1];
+    matrix[2][3] = from[2];
+    matrix[3][3] = 1.0;
+}
+.)m
+.lp
+In contrast to \f2drom.update_lcstowcsmat_lokatfrm\fP, 
+you do not need to use a general inverse routine with
+\f2drom.update_lcstowcsmat_scale\fP, because you can generate it directly
+from the input parameters.
+.(m
+void
+ddr_sampledev_drom_update_lcstowcsmat_scale (sx, sy, sz,
+					    concat)
+DtReal sx, sy, sz;
+DtCompType concat;
+{
+    static DtMatrix4x4 matrix = { 1., 0., 0., 0., 
+				  0., 1., 0., 0.,
+				  0., 0., 1., 0., 
+				  0., 0., 0., 1.};
+    static DtMatrix4x4 invertmatrix = { 1., 0., 0., 0., 
+					0., 1., 0., 0.,
+					0., 0., 1., 0., 
+					0., 0., 0., 1.};
+
+    matrix[0][0] = sx;
+    matrix[1][1] = sy;
+    matrix[2][2] = sz;
+
+    invertmatrix[0][0] = 1./sx;
+    invertmatrix[1][1] = 1./sy;
+    invertmatrix[2][2] = 1./sz;
+
+    ddr_sampledev_drom_update_matrices (matrix, invertmatrix,
+				       concat);
+}
+.)m
+.lp
+There are three additional interface functions in the DROM 
+that are used by frame coordinate geometries (annotation text and
+polymarkers) to affect the transformation matrices.
+They are discussed in \f2The Complete DROM\fP, later.
+.H2 "The Camera and Its Attributes
+The attributes of the camera are passed to the minimal
+DROM with the routines:
+.(l
+\f2drom.set_camera_matrix\fP
+\f2drom.set_parallel_matrix\fP
+\f2drom.set_perspective_matrix\fP
+\f2drom.set_projection_matrix\fP
+.)l
+.lp
+In the sample device driver, these functions store the camera
+attributes in the \f2dde_sampledev_drom_data\fP structure.
+The corresponding fields are:
+.(m
+    DtCameraMatrixType	camera_type;
+    DtMatrix4x4		projmat;
+.)m
+.lp
+There is only one camera projection matrix, but there are
+four routines that set the matrix. 
+They all create the appropriate projection matrix, 
+overwrite the previous one (\f2projmat\fP), and
+set the camera type.
+Both the parallel and perspective routines adjust for nonsquare views.
+For example, the perspective routine is:
+.(m
+void
+ddr_sampledev_drom_set_perspective_matrix(fov,hither,yon)
+DtReal fov;
+DtReal hither,yon;
+{
+    DtReal yoverxscalefactor,extentx,extenty;
+    DtVolume volume;
+
+    dde_sampledev_drom_data.camera_type = DcCameraPerspective;
+
+    DvInqBoundary(dde_sampledev_drom_data.view, &volume);
+
+    extentx = volume.fur[0] - volume.bll[0];
+    extenty = volume.fur[1] - volume.bll[1];
+
+    yoverxscalefactor = extenty / extentx;
+
+    if ( extentx >= extenty ) {
+	ddr_sampledev_matrix_scale
+		(dde_sampledev_drom_data.projmat,
+		 yoverxscalefactor, 1., 1., DcReplace);
+    } else {
+	ddr_sampledev_matrix_scale
+
+		(dde_sampledev_drom_data.projmat,
+		 1., 1./yoverxscalefactor, 1., DcReplace);
+    }
+
+    ddr_sampledev_matrix_perspective
+		(dde_sampledev_drom_data.projmat, 
+		 fov, hither, yon, DcPostConcatenate);
+}
+.)m
+.lp
+The camera attributes are applied to the camera when it is executed.
+The camera attributes are collected and stored in a separate structure
+associated with the view when \f2drom.camera\fP is called.
+.(m
+void
+ddr_sampledev_drom_camera()
+{
+    ddr_sampledev_matrix_concat
+	(dde_sampledev_drom_curcamdat->projmat,
+	 dde_sampledev_drom_data.projmat, DcReplace);
+    dde_sampledev_drom_curcamdat->camera_type =
+		 dde_sampledev_drom_data.camera_type;
+
+    ddr_sampledev_drom_get_lcstowcsmat
+		(dde_sampledev_drom_curcamdat->camtowcsmat);
+}
+.)m
+The current local-to-world transformation matrix (\f2lcstowcsmat\fP) 
+is also stored when the camera is executed.
+This matrix indicates where the camera is located.
+.lp
+After the studio traversal is completed, the rest of the camera data
+needs to be computed.
+This data is stored in the camera structure inside the view local
+data.
+.(m
+typedef struct {
+    DtCameraMatrixType	camera_type;
+    DtMatrix4x4		projmat;
+    DtMatrix4x4		camtowcsmat;
+    DtMatrix4x4		wcstocammat;
+    DtMatrix4x4		wcstofcsmat;
+    DtReal		wcscamloc[3];
+    DtReal		wcscamnorm[3];
+} ddt_sampledev_drom_camera;
+.)m
+Because multiple cameras may be executed during the studio traversal it
+is best to leave the matrix computations until the final
+values for the camera are known.
+You have the camera-to-world transformation
+(\f2camtowcsmat\fP), but you need to compute location and orientation
+of the camera in world coordinates, as well as the 
+world-to-frustum transformation.
+These computations are discussed here, even though they are actually
+performed after the studio traversal in the \f2drom.update_studio\fP 
+control routine.
+.lp
+First, the position of the camera is determined.
+The camera is located at the origin in the local coordinate system, pointing
+down the negative z axis.
+The sample transforms the point (0,0,0) by
+the \f2camtowcsmat\fP matrix to find the
+position of the camera in world coordinates.
+Internally, for shading calculations,
+the sample stores the vector opposite to the camera direction.
+The camera points down the negative axis. So, to get the opposite
+vector the sample first transforms the point (0,0,1). 
+Subtracting the camera location from this second point and normalizing
+the result gives you a vector in world space that points toward the
+camera.
+.(m
+    static DtReal lcscamloc[4]  = { 0., 0., 0., 1.};
+    static DtReal lcscamnorm[4] = { 0., 0., 1., 1.};
+    DtReal wcscamloc[4];
+    DtReal wcscamnorm[4];
+    ddt_sampledev_drom_camera *camdat;
+    
+    camdat = dde_sampledev_drom_curcamdat;
+
+    /*
+     * Compute the location of the camera in world
+     * coordinates.  It is located at the origin 
+     * looking down -Z in camera coordinates.
+     */
+
+    ddr_sampledev_math_pnttrns
+	(lcscamloc, camdat->camtowcsmat, wcscamloc);
+    if (wcscamloc[3] != 0.0) {
+	wcscamloc[0] /=	wcscamloc[3];
+	wcscamloc[1] /=	wcscamloc[3];
+	wcscamloc[2] /=	wcscamloc[3];
+    }
+
+    /*
+     * Compute the vector toward the camera location.
+     * The camera is looking in the -Z direction so
+     * (0, 0, 1) is the vector toward the camera in
+     * camera coordinates.
+     */
+
+    ddr_sampledev_math_pnttrns
+	(lcscamnorm,camdat->camtowcsmat,wcscamnorm);
+    
+
+    if (wcscamnorm[3] != 0.0) {
+	wcscamnorm[0] /= wcscamnorm[3];
+	wcscamnorm[1] /= wcscamnorm[3];
+	wcscamnorm[2] /= wcscamnorm[3];
+    }
+
+    wcscamnorm[0] -= wcscamloc[0];
+    wcscamnorm[1] -= wcscamloc[1];
+    wcscamnorm[2] -= wcscamloc[2];
+    ddr_sampledev_math_renormalize(wcscamnorm);
+    
+    camdat->wcscamloc[0] = wcscamloc[0];
+    camdat->wcscamloc[1] = wcscamloc[1];
+    camdat->wcscamloc[2] = wcscamloc[2];
+
+    camdat->wcscamnorm[0] = wcscamnorm[0];
+    camdat->wcscamnorm[1] = wcscamnorm[1];
+    camdat->wcscamnorm[2] = wcscamnorm[2];
+.)m
+.lp
+You have the camera projection (\f2projmat\fP) and the camera-to-world
+(\f2camtowcsmat\fP) transformation matrices.
+The world-to-frustum matrix now needs to be computed.
+This matrix is the one that transforms from the world coordinate
+system to the volume that will be displayed on the device.
+This transformation needs to ensure that only the visible portion of the
+view volume is included in the frustum space.
+.lp
+The following steps are taken to compute the world-to-frustum
+transformation.
+.np
+Transform from world coordinates to camera coordinates.
+This is just the inverse of the camera-to-world transformation matrix
+(\f2camtowcsmat\fP).
+.np
+Transform from camera coordinates to normalized projection
+coordinates.
+This is the normalized volume of the view, and is defined in
+homogeneous space as any point ($x,~y~,z~,w$) that satisfies the
+following set of conditions:
+.nf
+.in +.5i
+$-w~<=~x~<=~w$
+$-w~<=~y~<=~w$
+$-w~<=~z~<=~0$
+.fi
+.in -.5i
+This is the camera projection matrix (\f2projmat\fP).
+.np
+Transform from normalized projection coordinates to view coordinates.
+This involves a scale, a translate, and an adjustment for
+nonsquare device pixels.
+.bp
+.np
+Transform from view coordinates to frustum coordinates.
+This coordinate system is like the normalized projection coordinate
+system but includes only the intersection of the view volume and the
+frame volume.
+This involves a scale and translate.
+.lp
+These steps may seem complicated, but they are required to ensure
+that only the visible view volume is displayed on the device.
+Clipping is done in frustum space, before the perspective 
+\f2w\fP-divide.
+Then a scale and translate are performed to map from frustum space to
+device coordinates.
+The \*(Dd function \f2DDdevice_InqFrustumScaleTrans\fP
+returns the scale and translate values for mapping from frustum space
+to device coordinates.
+.lp
+The code from the \f2drom.update_studio\fP routine to compute 
+the world-to-frustum transformation is shown below.
+.(m
+    DtMatrix4x4 matrix;
+    DtVolume *clipvol;
+    DtVolume viewbndry;
+    DtReal xres, yres;
+    DtReal scale[3];
+    DtReal trans[3];
+
+    /*
+     * Compute the world coordinate to camera coordinate
+     * transformation matrix.
+     * This maps from world coordinates to camera
+     * coordinates, where the camera is at the origin 
+     * looking down the -Z axis with Y up.
+     */
+
+    ddr_sampledev_matrix_concat
+	(camdat->wcstocammat, camdat->camtowcsmat,
+	 DcReplace);
+    ddr_sampledev_matrix_invert (camdat->wcstocammat);
+
+    ddr_sampledev_matrix_concat
+	(camdat->wcstofcsmat, camdat->wcstocammat,
+	 DcReplace);
+
+    /* 
+     * Map from the camera coordinates to normalized 
+     * projection coordinates 
+     * -w < x < w, -w < y < w, -w < z < 0
+     */
+
+
+
+    ddr_sampledev_matrix_concat
+	(camdat->wcstofcsmat, camdat->projmat,
+	 DcPostConcatenate);
+
+    /*
+     * Map from normalized projection coordinates to
+     * to the volume of the view
+     */
+
+    if (camdat->camera_type !=
+	 DcCameraArbitrary) {
+	DvInqBoundary(dde_sampledev_drom_data.view, 
+		      &viewbndry);
+
+	scale[0] = (viewbndry.fur[0]-viewbndry.bll[0])/2.;
+	scale[1] = (viewbndry.fur[1]-viewbndry.bll[1])/2.;
+	scale[2] = (viewbndry.fur[2]-viewbndry.bll[2]);
+
+	trans[0] = (viewbndry.fur[0]+viewbndry.bll[0])/2.;
+	trans[1] = (viewbndry.fur[1]+viewbndry.bll[1])/2.;
+	trans[2] = viewbndry.fur[2];
+
+	/*
+	 * Adjust the x scaling if the pixels of the screen
+	 * are non-square
+	 */
+
+	DdInqResolution(dde_sampledev_drom_data.device,
+			&xres,&yres);
+	if (xres != 0.0) {
+	    scale[0] *= (yres / xres);
+	}
+
+	ddr_sampledev_matrix_scale
+		(camdat->wcstofcsmat,
+		 scale[0], scale[1], scale[2], 
+		 DcPostConcatenate);
+	ddr_sampledev_matrix_translate
+		(camdat->wcstofcsmat,
+		 trans[0], trans[1], trans[2], 
+		 DcPostConcatenate);
+    }
+
+    /*
+     * Map from the view volume back to a normalized space
+     * ( -w<x<w, -w<y<w, -w<z<0). This normalized space
+     * just includes the visible portion of the volume.
+     * The clipping volume is in frame coordinates, the 
+     * same coordinates as the view volume
+     */
+
+    clipvol = DDdevice_InqClippingVolume
+		(dde_sampledev_drom_data.device);
+
+    scale[0] = 2./(clipvol->fur[0]-clipvol->bll[0]);
+    scale[1] = 2./(clipvol->fur[1]-clipvol->bll[1]);
+    scale[2] = 1./(clipvol->fur[2]-clipvol->bll[2]);
+
+    trans[0] = -scale[0]*clipvol->bll[0]-1;
+    trans[1] = -scale[1]*clipvol->bll[1]-1;
+    trans[2] = -scale[2]*clipvol->fur[2];
+
+    ddr_sampledev_matrix_scale
+		(camdat->wcstofcsmat,
+		 scale[0], scale[1], scale[2], 
+		DcPostConcatenate);
+
+    ddr_sampledev_matrix_translate
+		(camdat->wcstofcsmat,
+		 trans[0], trans[1], trans[2], 
+		 DcPostConcatenate);
+.)m
+.H2 "Control Routines
+The control routines for the DROM are called to initiate a
+particular sequence in the rendering process.
+The control functions of the minimal DROM are:
+.(l
+\f2drom.start_update\fP
+\f2drom.update_local_data\fP
+\f2drom.update_studio\fP
+\f2drom.update_display\fP
+.)l
+.lp
+The \f2drom.start_update\fP routine passes to the DROM the
+pointers to the local data it should use for the update.
+For the sample DROM, these are assigned to global variables.
+.(m
+void
+ddr_sampledev_drom_start_update (device, view, device_data,
+				view_data, window_data)
+DtObject device;
+DtObject view;
+DtPtr device_data;
+DtPtr view_data;
+DtPtr window_data;
+{
+    dde_sampledev_drom_data.device = device;
+    dde_sampledev_drom_data.view = view;
+    dde_sampledev_drom_curdevdat = device_data;
+    dde_sampledev_drom_curviwdat = view_data;
+    dde_sampledev_drom_curwindat = window_data;
+    dde_sampledev_drom_curcamdat = 
+	&(dde_sampledev_drom_curviwdat->camera_data);
+}
+.)m
+.lp
+The \f2drom.update_local_data\fP routine will be called after
+\f2drom.start_update\fP.
+It queries the device and view for data that the DROM needs to 
+store locally.
+For the device this includes data such as the actual viewport,
+the frustum-to-device scaling and translation parameters, and
+the visual type.
+For the view, it includes the background color and justification 
+and the status of the clear flag.
+.(m
+void
+ddr_sampledev_drom_update_local_data()      
+{
+    DtInt 	shaderange[2];
+    DtVolume *	actviewport;
+
+    /*
+     * Store active viewport
+     */
+
+    actviewport = DDdevice_InqActualViewport
+		(dde_sampledev_drom_data.device);
+			   
+    dde_sampledev_drom_curwindat->actviewxmin =
+		actviewport->bll[0];
+    dde_sampledev_drom_curwindat->actviewymin =
+		actviewport->bll[1];
+    dde_sampledev_drom_curwindat->actviewxmax = 
+		actviewport->fur[0];
+    dde_sampledev_drom_curwindat->actviewymax = 
+		actviewport->fur[1];
+
+    /* 
+     * Store stereo flag
+     */
+
+    dde_sampledev_drom_curdevdat->stereoflag = 
+	DDdevice_InqStereo(dde_sampledev_drom_data.device);
+
+    /* Store frustum-to-device scale and translate values,
+     * and compute frame coordinate geometry scaling (for 
+     * annotation text and poly markers)
+     */
+
+    DDdevice_InqFrustumScaleTrans 
+	    (dde_sampledev_drom_data.device,
+	     dde_sampledev_drom_curdevdat->ctodscale,
+	     dde_sampledev_drom_curdevdat->ctodtrans);
+
+    DDdevice_InqFrameScaleTrans
+	    (dde_sampledev_drom_data.device,
+	     dde_sampledev_drom_curdevdat->ftodscale,
+	     dde_sampledev_drom_curdevdat->ftodtrans);
+     
+    dde_sampledev_drom_curdevdat->annoscale[0] = 
+	    dde_sampledev_drom_curdevdat->ftodscale[0] / 
+		dde_sampledev_drom_curdevdat->ctodscale[0];
+    dde_sampledev_drom_curdevdat->annoscale[1] = 
+	    dde_sampledev_drom_curdevdat->ftodscale[1] /
+		dde_sampledev_drom_curdevdat->ctodscale[1];
+    dde_sampledev_drom_curdevdat->annoscale[2] = 
+	    dde_sampledev_drom_curdevdat->ftodscale[2] /
+		dde_sampledev_drom_curdevdat->ctodscale[2];
+
+    /* 
+     * Store view clear flag
+     */
+
+    dde_sampledev_drom_curviwdat->clear_flag = 
+	    DvInqClearFlag(dde_sampledev_drom_data.view);
+
+    /* 
+     * Store view background color and justification.
+     */
+
+    DvInqBackgroundColor 
+       (dde_sampledev_drom_data.view,
+        &dde_sampledev_drom_curviwdat->background_color_model,
+        dde_sampledev_drom_curviwdat->background_color);
+    DvInqBackgroundJust
+       (dde_sampledev_drom_data.view,
+        &dde_sampledev_drom_curviwdat->background_just[0],
+        &dde_sampledev_drom_curviwdat->background_just[1]);
+
+    /* 
+     * Store device shade index, mode and visual type 
+     */
+
+    dde_sampledev_drom_curviwdat->shade_index =
+	    DvInqShadeIndex(dde_sampledev_drom_data.view);
+
+    dde_sampledev_drom_curdevdat->shade_mode = 
+	    DdInqShadeMode (dde_sampledev_drom_data.device);
+
+    dde_sampledev_drom_curdevdat->visual_type = 
+	    DdInqVisualType (dde_sampledev_drom_data.device);
+}
+.)m
+.lp
+The \f2drom.update_studio\fP routine is called to initiate the
+studio traversal and determine the cameras and lights.
+You have already seen most of this routine in the section \f2The
+Camera and Its Attributes\fP.
+After the traversal is completed the computations for the camera are
+performed.
+.(m
+void
+ddr_sampledev_drom_update_studio(traverse_studio)
+DtPFI traverse_studio;
+{
+    static DtReal lcscamloc[4]  = { 0., 0., 0., 1.};
+    static DtReal lcscamnorm[4] = { 0., 0., 1., 1.};
+    DtReal wcscamloc[4];
+    DtReal wcscamnorm[4];
+    DtMatrix4x4 matrix;
+    DtVolume *clipvolume;
+    DtVolume viewboundary;
+    DtReal xres, yres;
+    DtReal scale[3];
+    DtReal trans[3];
+
+    /*
+     * Initialize the total number of lights to zero
+     */
+
+    dde_sampledev_drom_curviwdat->total_lights = 0;
+
+    /*
+     * Traverse the studio group
+     */
+
+    (*traverse_studio)();
+    
+    /*
+     * Compute camera and transformation data 
+	.
+	.  (see The Camera and Its Attributes)
+	.
+     */
+}
+.)m
+.lp
+The display traversal and the actual generation of the image is done
+from the \f2drom.update_display\fP.
+Before the display traversal is initiated, you need to prepare the
+background of the view if the clear flag is set.
+The background of the view may include a raster.
+In the sample DROM, the
+\f2ddr_sampledev_dcm_write_scanline_byte\fP routine of the DCM is used to
+actually draw the background raster.
+You should note that for simplicity the sample only displays background
+rasters that are in \f2DcRasterRGB\fP format.
+The sample uses the background justification to place the raster within the
+view area when there is a mismatch between the size of the raster and
+the view as mapped onto the device.
+.(m
+void
+ddr_sampledev_drom_update_display(traverse_display)
+DtPFI traverse_display;
+{
+    DtInt vwidth, vheight;
+    DtObject raster_object;
+    DtInt deltax, deltay;
+    DtInt offsetx, offsety;
+    DtInt rwidth, rheight, rdepth;
+    DtInt width, height;
+    DtRasterType rtype;
+    DtPtr rtypestring;
+    DtPtr data;
+    DtInt x, y;
+    ddt_sampledev_drom_view *viwdat;
+    ddt_sampledev_drom_window *windat;
+
+    viwdat = dde_sampledev_drom_curviwdat;
+    windat = dde_sampledev_drom_curwindat;
+    
+    if (viwdat->clear_flag) {
+	/*
+	 * Clear the view to the background color and
+	 * draw the background raster if it exists.
+	 */
+
+	DDdevice_SetBackgroundColor
+		(dde_sampledev_drom_data.device,
+		 viwdat->background_color_model,
+		 viwdat->background_color);
+	DDdevice_ClearRectangleDepthColor
+                (dde_sampledev_drom_data.device,
+                 (DtShort)windat->actviewxmin,
+                 (DtShort)windat->actviewymin,
+                 (DtShort)windat->actviewxmax,
+                 (DtShort)windat->actviewymax);
+
+	vwidth = (windat->actviewxmax-windat->actviewxmin);
+	vheight = (windat->actviewymax-windat->actviewymin);
+
+	raster_object = DDview_ResizeRaster
+		(dde_sampledev_drom_data.view,
+		 vwidth, vheight);
+
+	if (raster_object != (DtObject)0) {
+
+            if (DsInqObjType(raster_object) ==
+		DsInqClassId("DoRaster")) {
+		DsInqRaster (raster_object, &rwidth,
+			     &rheight, &rdepth, 
+			     &rtype, &rtypestring, &data);
+
+		if (rtype == DcRasterRGB) {
+		    /*
+		     * The sample only deals with RGB
+		     * rasters and ignores all other
+		     * rasters for backgrounds.
+		     * Compute how the background is
+		     * aligned to the view.
+		     */
+
+		    deltax = (vwidth - rwidth);
+		    deltay = (vheight - rheight);
+		    offsetx = 
+			deltax*viwdat->background_just[0];
+		    offsety = deltay*(1.0 -
+			viwdat->background_just[1]);
+
+		    if (deltay < 0) {
+			/*
+			 * The raster is bigger in y than
+			 * the view. Offset into the
+			 * data to get the starting
+			 * scanline, and reduce the height
+			 * of the raster to be written.
+			 */
+
+			data = (DtPtr)((int)(data) + 
+				(-offsety)*rwidth*3);
+			height = rheight + deltay;
+			offsety = 0;
+		    } else {
+			height = rheight;
+		    }
+
+		    if (deltax < 0) {
+			/*
+			 * The raster is bigger in x than
+			 * the view.  Offset into the
+			 * data to get the starting pixel,
+			 * and reduce the width of the
+			 * raster to be written.
+			 */
+
+			data = (DtPtr)((int)(data) +
+				(-offsetx)*3);
+			width = rwidth + deltax;
+			offsetx = 0;
+		    } else {
+			width = rwidth;
+		    }
+
+		    /*
+		     * Rasters have their origin at the
+		     * upper left hand corner of the raster,
+		     * while the view coordinates have
+		     * positive y extending up.  
+		     * You must compensate for the
+		     * difference in coordinate systems
+		     */
+		    x = windat->actviewxmin + offsetx;
+		    y = windat->actviewymax - offsety;
+
+		    for (; height > 0 ; height--, y--) {
+			ddr_sampledev_dcm_write_scanline_byte
+				(x, y, width, data);
+			data = (DtPtr)((int)(data) +
+					 rwidth*3);
+		    }
+		}
+	    }
+	}
+    }
+
+    /*
+     * Traverse the display group 
+     */
+
+    (*traverse_display) ();
+}
+.)m
+.H2 "Geometry Routines
+The geometry routines, like the output routines of the DCM, are device
+specific.
+These routines are:
+.(l
+\f2drom.render_point_list\fP
+\f2drom.render_line_list\fP
+\f2drom.render_connected_line_list\fP
+\f2drom.render_triangle_list\fP
+\f2drom.render_triangle_mesh\fP
+.)l
+.rs
+.sp -1v
+.lp
+In a real DROM, these routines are where all the actual drawing
+is done.
+In the minimal DROM, these routines would use the 
+\f2lcstofcsmat\fP matrix to transform the data from local coordinates
+to device coordinates and draw the geometry without shading.
+In the sample driver these routines just print out geometry information.
+.H1 "Step 8: Complete the DROM
+This section describes the functions that need to be implemented
+to complete the dynamic renderer output module.
+These remaining functions complete the categories described above, i.e.
+.BU
+geometric transformations
+.BU hs
+the camera and its attributes
+.BU hs
+geometry rendering
+.BU hs
+control routines
+.lp
+There are also functions for:
+.BU hs
+lights and their attributes
+.BU hs
+appearance attributes
+.H2 "Geometric Transformations"
+In addition to the functions described in the minimal DROM, there
+are four other functions that have to do with
+the transformation matrices.
+They are:
+.(l
+\f2drom.transform_clip_z_point\fP
+\f2drom.push_lcstofcsmat\fP
+\f2drom.pop_lcstofcsmat\fP
+\f2drom.get_wcstofcsmat\fP
+.)l
+.lp
+The first three functions are all used by geometric primitives that 
+are defined in
+frame coordinates, such as annotation text (\f2DoAnnoText\fP) and
+polymarkers (\f2DoPolymarker\fP). 
+The primitive uses the routine \f2drom.transform_clip_z_point\fP to compute a
+transformation matrix that will position and scale a glyph so that it
+can be drawn correctly on the device.
+The location of the glyph is defined in its local coordinate system.
+The location needs to be transformed by the \f2lcstofcsmat\fP.
+The resulting point is then used to construct the needed matrix.
+.(m
+DtFlag
+ddr_sampledev_drom_transform_clip_z_point(point,tfmmatrix)
+DtRealTriple point;
+DtMatrix4x4 tfmmatrix;
+{
+    DtInt row, column;
+    DtReal fcspoint[4];
+    DtReal oneoverw;
+    DtRealTriple tfmpoint;
+
+    /*
+     * Transform the point from local space to
+     * frustum space coordinates.  
+     * If the transformed point is clipped in Z
+     * return DcTrue.
+     * If the transformed point is not clipped in Z
+     * then set tfmmatrix to be a translation to the 
+     * transformed point followed by a scale by the 
+     * annotation scale for the device and return
+     * DcFalse.
+     */
+
+    /* Transform the point */
+
+    for (row=0;row<4;row++) {
+	fcspoint[row] = 
+	    dde_sampledev_drom_data.lcstofcsmat[row][3];
+
+	for (column=0;column<3;column++) {
+	    fcspoint[row] += dde_sampledev_drom_data.
+			lcstofcsmat[row][column] * 
+		    point[column];
+	}
+    }
+
+    /* Check z clipping range */
+
+    if (fcspoint[2] < -fcspoint[3])
+	    return(DcTrue);
+    if (fcspoint[2] > 0)
+	    return(DcTrue);
+
+    /* Build matrix */
+
+    oneoverw = 1. / fcspoint[3];
+
+    tfmpoint[0] = fcspoint[0] * oneoverw;
+    tfmpoint[1] = fcspoint[1] * oneoverw;
+    tfmpoint[2] = fcspoint[2] * oneoverw;
+
+    ddr_sampledev_matrix_translate(tfmmatrix, 
+		tfmpoint[0],tfmpoint[1],tfmpoint[2],
+				  DcReplace);
+
+    ddr_sampledev_matrix_scale(tfmmatrix,
+		dde_sampledev_drom_curdevdat->annoscale[0],
+		dde_sampledev_drom_curdevdat->annoscale[1],
+		dde_sampledev_drom_curdevdat->annoscale[2],
+		DcPreConcatenate);
+
+    return(DcFalse);
+}
+.)m
+The primitive then will replace the \f2lcstofcsmat\fP with a call to
+\f2drom.push_lcstofcsmat\fP.
+When it is finished, it restores the
+previous \f2lcstofcsmat\fP with a call to \f2drom.pop_lcstofcsmat\fP.
+Since frame coordinate primitives are always displayed in the plane 
+of the device, they should not be lit.
+The surface shader is set to the constant shader.
+.(m
+void
+ddr_sampledev_drom_push_lcstofcsmat(newmatrix)
+DtMatrix4x4 newmatrix;
+{
+    ddr_sampledev_matrix_concat
+	 (dde_sampledev_save_lcstofcsmat, 
+	  dde_sampledev_drom_data.lcstofcsmat,
+	  DcReplace);
+
+    ddr_sampledev_matrix_concat
+	 (dde_sampledev_drom_data.lcstofcsmat,
+	  newmatrix, DcReplace);
+
+    dde_sampledev_save_shader = 
+	dde_sampledev_drom_data.srfshd;
+
+    /*
+     * Set the shading to the constant shader.  
+     */
+
+    ddr_sampledev_drom_set_att_srfshd (DcShaderConstant);
+}
+.)m
+.(m
+void
+ddr_sampledev_drom_pop_lcstofcsmat()
+{
+    ddr_sampledev_matrix_concat
+	 (dde_sampledev_drom_data.lcstofcsmat,
+	  dde_sampledev_save_lcstofcsmat,
+	  DcReplace);
+
+    /*
+     * Restore the shader that was saved with the pop
+     */
+
+    ddr_sampledev_drom_set_att_srfshd
+	 (dde_sampledev_save_shader);
+}
+.)m
+The function \f2drom.get_wcstofcsmat\fP
+is called by the renderer when it needs access to the current
+transformation matrix that transforms data from the
+world coordinate system to the frustum coordinate system.
+.(m
+void
+ddr_sampledev_drom_get_wcstofcsmat(wcstofcsmat)
+DtMatrix4x4 wcstofcsmat;
+{
+    ddr_sampledev_matrix_concat (
+		   wcstofcsmat,
+                   dde_sampledev_drom_curcamdat->wcstofcsmat,
+                   DcReplace);
+}
+.)m
+.H2 "The Camera and Its Attributes"
+Two camera attributes were not included in the minimal DROM.
+These are the stereo attributes. 
+The DROM functions that set the stereo attributes are:
+.(l
+\f2drom.set_att_stereo\fP
+\f2drom.set_att_stereoswi\fP
+.)l
+.rs
+.sp -1v
+.lp
+They set the following fields in the \f2dde_sampledev_drom_data\fP
+structure:
+.(m
+    DtReal		stereo_eyeseparation;
+    DtReal		stereo_distance;
+    DtSwitch		stereo_switch;
+.)m
+.lp
+The stereo routines are:
+.(m
+void
+ddr_sampledev_drom_set_att_stereo (eyeseparation, distance)
+DtReal eyeseparation;
+DtReal distance;
+{
+    dde_sampledev_drom_data.stereo_eyeseparation = eyeseparation;
+    dde_sampledev_drom_data.stereo_distance = distance;
+}
+
+void
+ddr_sampledev_drom_set_att_stereoswi (switchvalue)
+DtSwitch switchvalue;
+{
+    dde_sampledev_drom_data.stereo_switch = switchvalue;
+}
+.)m
+The following code needs to be added to the \f2drom.camera\fP
+routine \f2ddr_sampledev_drom_camera\fP:
+.(m
+    dde_sampledev_drom_curcamdat->stereoswitch = 
+	    dde_sampledev_drom_data.stereo_switch;
+    dde_sampledev_drom_curcamdat->stereo_eyeseparation =
+	    dde_sampledev_drom_data.stereo_eyeseparation;
+    dde_sampledev_drom_curcamdat->stereo_distance = 
+	    dde_sampledev_drom_data.stereo_distance;
+.)m
+The complete camera structure stored in the view local data is:
+.(m
+typedef struct {
+    DtCameraMatrixType	camera_type;
+    DtSwitch		stereoswitch;
+    DtReal		stereo_eyeseparation;
+    DtReal		stereo_distance;
+    DtMatrix4x4		projmat;
+    DtMatrix4x4		camtowcsmat;
+    DtMatrix4x4		wcstocammat;
+    DtMatrix4x4		wcstofcsmat;
+    DtReal		wcscamloc[3];
+    DtReal		wcscamnorm[3];
+} ddt_sampledev_drom_camera;
+.)m
+.H2 "Lights and Their Attributes
+Lights and their corresponding attributes are 
+executed during the studio traversal.
+All the lights are defined before any geometry is presented to
+the DROM.
+The DROM routines that provide information on lights are:
+.(l
+\f2drom.light\fP
+\f2drom.set_att_lgtatn\fP
+\f2drom.set_att_lgtclr\fP
+\f2drom.set_att_lgtint\fP
+\f2drom.set_att_lgtspdang\fP
+\f2drom.set_att_lgtspdexp\fP
+\f2drom.set_att_lgtswi\fP
+\f2drom.set_att_lgttyp\fP
+.)l
+.rs
+.sp -1v
+.lp
+Each of these routines, with the exception of \f2drom.light\fP,
+just store their parameters in the \f2dde_sampledev_drom_data\fP data
+structure.
+.(m
+    DtObject		light_type;
+    DtColorRGB		light_color;
+    DtReal		light_intensity;
+    DtReal		light_spread_angle_total;
+    DtReal		light_spread_angle_delta;
+    DtReal		light_spread_exponent;
+    DtReal		light_att_c1;
+    DtReal		light_att_c2;
+.)m
+For example the implementation of \f2drom.set_att_lgtspdang\fP is:
+.(m
+void
+ddr_sampledev_drom_set_att_lgtspdang (total, delta)
+DtReal total;
+DtReal delta;
+{
+    dde_sampledev_drom_data.light_spread_angle_total = total;
+    dde_sampledev_drom_data.light_spread_angle_delta = delta;
+}
+.)m
+.lp
+When \f2drom.light\fP is executed, the light handle along with
+the current values of all the light attributes, are stored in 
+a separate data structure located in the view local data.
+The view local data structure contains the following data for lighting:
+.(m
+    DtInt		total_lights;
+    DtInt		max_lights;
+    ddt_sampledev_drom_light *light;
+.)m
+where the light structure is
+.(m
+typedef struct {
+    DtObject		light;
+    DtObject		type;
+    DtReal		position[3];
+    DtReal 		direction[3];
+    DtColorRGB		color;
+    DtReal 		angle_total;
+    DtReal		angle_delta;
+    DtReal		exponent;
+    DtReal		c1;
+    DtReal		c2;
+    DtSwitch		status;
+} ddt_sampledev_drom_light;
+.)m
+.lp
+To reduce memory fragmentation and the overhead of
+repeatedly reallocating memory, the sample DROM increases the size of
+the \f2light\fP array by 10 each time the total number of lights,
+\f2total_lights\fP, exceeds the maximum number of lights available,
+\f2max_lights\fP.
+.lp
+The light routine stores the light attributes in the
+\f2light\fP structure and computes the light position and direction
+from the current local-to-world transformation matrix
+(\f2lcstowcsmat\fP).
+Each light is defined locally as being at the origin and
+pointing in the -z direction (0,0,-1).
+.(m
+void
+ddr_sampledev_drom_light(light)
+DtObject light;
+{
+    static DtReal lcspos[4] = { 0., 0.,  0., 1.};
+    static DtReal lcsdir[4] = { 0., 0., -1., 1.};
+    DtReal pos[4];
+    DtReal dir[4];
+    DtColorRGB color;
+    int lightno;
+    DtMatrix4x4 lcstowcsmat;
+    ddt_sampledev_drom_light *light;
+
+    /* 
+     * Store light handle and attributes.
+     * Also compute and store light position and direction
+     */
+    ddr_sampledev_drom_get_lcstowcsmat(lcstowcsmat);
+
+    lightno=(dde_sampledev_drom_curviwdat->total_lights)++;
+
+    if (dde_sampledev_drom_curviwdat->total_lights > 
+	dde_sampledev_drom_curviwdat->max_lights) {
+	dde_sampledev_drom_curviwdat->light =
+	 (ddt_sampledev_drom_light *)DDspace_Reallocate
+	    (dde_sampledev_drom_curviwdat->light,
+	     (dde_sampledev_drom_curviwdat->max_lights+10)*
+	      sizeof(ddt_sampledev_drom_light));
+	dde_sampledev_drom_curviwdat->max_lights += 10;
+    }
+
+    light = dde_sampledev_drom_curviwdat->light;
+
+    ddr_sampledev_math_pnttrns(lcspos,lcstowcsmat, pos);
+    if (pos[3] != 0.0) {
+	pos[0] /= pos[3];
+	pos[1] /= pos[3];
+	pos[2] /= pos[3];
+    }
+
+    ddr_sampledev_math_pnttrns(lcsdir, lcstowcsmat, dir);
+    if (dir[3] != 0.0) {
+	dir[0] /= dir[3];
+	dir[1] /= dir[3]; 
+	dir[2] /= dir[3];
+    }
+
+    dir[0] -= pos[0];
+    dir[1] -= pos[1];
+    dir[2] -= pos[2];
+
+    ddr_sampledev_math_renormalize(dir);
+
+    color[0] = dde_sampledev_drom_data.light_color[0] *
+	    dde_sampledev_drom_data.light_intensity;
+    color[1] = dde_sampledev_drom_data.light_color[1] *
+	    dde_sampledev_drom_data.light_intensity;
+    color[2] = dde_sampledev_drom_data.light_color[2] *
+	    dde_sampledev_drom_data.light_intensity;
+
+    light[lightno].light = light;
+
+    light[lightno].type = dde_sampledev_drom_data.light_type;
+
+    
+    light[lightno].position[0] = pos[0];
+    light[lightno].position[1] = pos[1];
+    light[lightno].position[2] = pos[2];
+
+    light[lightno].direction[0] = dir[0];
+    light[lightno].direction[1] = dir[1];
+    light[lightno].direction[2] = dir[2];
+    
+    light[lightno].color[0] = color[0];
+    light[lightno].color[1] = color[1];
+    light[lightno].color[2] = color[2];
+
+    
+    light[lightno].angle_total =
+	dde_sampledev_drom_data.light_spread_angle_total;
+    light[lightno].angle_delta =
+	dde_sampledev_drom_data.light_spread_angle_delta;
+    light[lightno].exponent =
+	dde_sampledev_drom_data.light_spread_exponent;
+    
+    light[lightno].c1 = 
+	dde_sampledev_drom_data.light_att_c1;
+    light[lightno].c2 = 
+	dde_sampledev_drom_data.light_att_c2;
+
+   
+    /* 
+     * Lights are on by default 
+     */
+    light[lightno].status = DcOn;
+}
+.)m
+.lp
+An application can disable or enable lights at any time using
+the \f2DoLightSwitch\fP primitive attribute.
+During display traversal the routine \f2drom.set_att_lgtswi\fP is
+called with a list of lights that are turned off.
+This routine goes through the view light list and 
+changes the status of the lights to reflect this list.
+.(m
+void
+ddr_sampledev_drom_set_att_lgtswi (count, lights)
+DtInt count;
+DtObject *lights;
+{
+    DtInt i;
+    DtInt lidx;
+    DtInt enabled;
+
+    /*
+     * Lights are disable/enabled for subsequent primitives
+     * with DoLightSwitch
+     */
+   
+    if (dde_sampledev_drom_pre_init) 
+	    return;
+
+    if (dde_sampledev_drom_curviwdat ==
+	(ddt_sampledev_drom_view *)0)
+	    return;
+
+    for (lidx = 0;
+	 lidx < dde_sampledev_drom_curviwdat->total_lights;
+	 lidx++) {
+	enabled = DcTrue;
+	for (i=0; i<count; i++) {
+	    if (dde_sampledev_drom_curviwdat->
+			light[lidx].light == lights[i]) {
+		enabled = DcFalse;
+		break;
+	    }
+	}
+	dde_sampledev_drom_curviwdat->
+		light[lidx].status = enabled;
+    }
+}
+.)m
+.H2 "Appearance Attributes
+There are a large number of appearance attributes.
+In the sample DROM, each of these attribute routines just stores its
+parameters in the \f2dde_sampledev_drom_data\fP data structure.
+These values are then used by the geometry routines when rendering the
+geometry.
+The attributes and the data structure used are listed, but the
+code for all the attributes is not.
+The appearance attribute routines are:
+.(l
+\f2drom.set_att_ambint\fP
+\f2drom.set_att_ambswi\fP
+\f2drom.set_att_bacfacculble\fP
+\f2drom.set_att_bacfacculswi\fP
+\f2drom.set_att_depcue\fP
+\f2drom.set_att_depcueswi\fP
+\f2drom.set_att_difclr\fP
+\f2drom.set_att_difint\fP
+\f2drom.set_att_difswi\fP
+\f2drom.set_att_hidsrfswi\fP
+\f2drom.set_att_inttyp\fP
+\f2drom.set_att_lintyp\fP
+\f2drom.set_att_linwid\fP
+\f2drom.set_att_localaasty\fP
+\f2drom.set_att_localaaswi\fP
+\f2drom.set_att_refswi\fP
+\f2drom.set_att_reptyp\fP
+\f2drom.set_att_shaswi\fP
+\f2drom.set_att_shdidx\fP
+\f2drom.set_att_spcclr\fP
+\f2drom.set_att_spcfct\fP
+\f2drom.set_att_spcint\fP
+\f2drom.set_att_spcswi\fP
+\f2drom.set_att_srfedgclr\fP
+\f2drom.set_att_srfshd\fP
+\f2drom.set_att_transpclr\fP
+\f2drom.set_att_transpint\fP
+\f2drom.set_att_transpswi\fP
+.)l
+.rs
+.sp -1v
+.lp
+The fields of the \f2dde_sampledev_drom_data\fP data structure are:
+.(m
+    DtReal		ambint;
+    DtSwitch		ambswi;
+    DtSwitch 		bacfacculble;
+    DtSwitch		bacfacculswi;
+    DtReal		depcue_zfront;
+    DtReal		depcue_zback;
+    DtReal		depcue_sfront;
+    DtReal		depcue_sback;
+    DtColorModel	depcue_colormodel;
+    DtColorRGB		depcue_color;
+    DtSwitch		depcueswi;
+    DtColorRGB		difclr;
+    DtReal		difint;
+    DtSwitch		difswi;
+    DtSwitch		hidsrfswi;
+    DtInterpType	inttyp;
+    DtLineType		lintyp;
+    DtReal		linwid;
+    DtLocalAntiAliasStyle localaasty;
+    DtSwitch		localaaswi;
+    DtSwitch		refswi;
+    DtRepType		reptyp;
+    DtSwitch		shaswi;
+    DtInt		shdidx;
+    DtColorRGB		spcclr;
+    DtReal		spcfct;
+    DtReal		spcint;
+    DtSwitch		spcswi;
+    DtColorRGB		srfedgclr;
+    DtObject		srfshd;
+    DtColorRGB		transpclr;
+    DtReal		transpint;
+    DtSwitch		transpswi;
+.)m
+.lp
+In addition to these appearance attributes there are the texture mapping
+attributes.
+They deserve more attention.
+By their very nature they are more complicated, because 
+multiple texture maps can be applied to a single object, and  
+texture maps
+inherit a set of attributes of their own (the texture attributes).
+There are four texture mapping attributes and corresponding switches.
+They are for bump mapping, diffuse color
+mapping, environment mapping, and transparent intensity mapping.
+The corresponding routines in the DROM interface are:
+.(l
+\f2drom.set_att_mapbmp\fP
+\f2drom.set_att_mapbmpswi\fP
+\f2drom.set_att_mapdifclr\fP
+\f2drom.set_att_mapdifclrswi\fP
+\f2drom.set_att_mapenv\fP
+\f2drom.set_att_mapenvswi\fP
+\f2drom.set_att_maptrnint\fP
+\f2drom.set_att_maptrnintswi\fP
+.)l
+.rs
+.sp -1v
+.lp
+The data that is passed to the DROM is the same for all four types
+of texture mapping.
+However,
+the values and interpretations of how the values should
+be applied vary with each kind of mapping.
+A separate data structure stores the texture mapping
+information for each type of texture mapping.
+.(m
+typedef struct {
+    DtSwitch		status;
+    DtInt 		max_count;
+    DtInt		count;
+    DtObject		*mapping;
+    DtObject		*raster;
+    dot_stdtexatt	*attributes;
+} ddt_sampledev_drom_texmap;
+.)m
+.lp
+The data type \f2dot_stdtexatt\fP is defined by the \*(Dd kernel
+and is used by the texture map objects to store the current set of
+texture attributes to be applied to the texture object.
+The structure is defined in \f2dore_develop/private/stdtexatt.h\fP.
+.lp
+The \f2dde_sampledev_drom_data\fP data structure includes the following 
+fields:
+.(m
+    ddt_sampledev_drom_texmap mapbmp;
+    ddt_sampledev_drom_texmap mapdifclr;
+    ddt_sampledev_drom_texmap mapenv;
+    ddt_sampledev_drom_texmap maptrnint;
+.)m
+A set of arrays is maintained that contain the data necessary to define
+the active textures of each kind.
+The code to maintain these lists for bump mapping is given below.
+.(m
+void
+ddr_sampledev_drom_set_att_mapbmp
+	(count, mapping, raster, attributes)
+DtInt count;
+DtObject mapping[];
+DtObject raster[];
+dot_stdtexatt attributes[];
+{
+    DtInt i;
+
+    if (count > dde_sampledev_drom_data.mapbmp.max_count) {
+	dde_sampledev_drom_data.mapbmp.mapping=(DtObject *)
+		DDspace_Reallocate
+		    (dde_sampledev_drom_data.mapbmp.mapping,
+		     count*sizeof(DtObject));
+	dde_sampledev_drom_data.mapbmp.raster=(DtObject *)
+		DDspace_Reallocate
+		    (dde_sampledev_drom_data.mapbmp.raster,
+		     count*sizeof(DtObject));
+	dde_sampledev_drom_data.mapbmp.attributes=
+	    (dot_stdtexatt *)
+		DDspace_Reallocate
+		    (dde_sampledev_drom_data.mapbmp.attributes,
+		     count*sizeof(dot_stdtexatt));
+	if (dde_sampledev_drom_data.mapbmp.mapping
+	    == (DtObject *)0 ||
+	    dde_sampledev_drom_data.mapbmp.raster
+	    == (DtObject *)0 ||
+	    dde_sampledev_drom_data.mapbmp.attributes
+	    == (dot_stdtexatt *)0) 
+		return;
+	dde_sampledev_drom_data.mapbmp.max_count = count;
+    }
+    dde_sampledev_drom_data.mapbmp.count = count;
+
+    for (i=0; i<count; i++) {
+	dde_sampledev_drom_data.mapbmp.mapping[i] =
+		mapping[i];
+	dde_sampledev_drom_data.mapbmp.raster[i] =
+		raster[i];
+	dde_sampledev_drom_data.mapbmp.attributes[i] =
+		attributes[i];
+    }
+}
+
+
+void
+ddr_sampledev_drom_set_att_mapbmpswi (switchvalue)
+DtSwitch switchvalue;
+{
+    dde_sampledev_drom_data.mapbmp.status = switchvalue;
+}
+.)m
+.H2 "Control Routines"
+The complete DROM includes two more control functions.
+They are:
+.(l
+\f2drom.pre_initialization\fP
+\f2drom.post_initialization\fP
+.)l
+.rs
+.sp -1v
+.lp
+The pre- and post-initialization calls come before and after
+a set of calls to the attribute routines.
+They may be called more than once, so it is important to protect tasks
+that should only be executed once.
+For the sample DROM the pre-initialize routine sets the initial values
+for the current maximum size for the allocated arrays.
+This is only done once.
+.(m
+void
+ddr_sampledev_drom_pre_initialization()
+{
+    static DtMatrix4x4 identmat = { 1.,0.,0.,0.,
+				    0.,1.,0.,0.,
+				    0.,0.,1.,0.,
+				    0.,0.,0.,1.};
+
+    if (!dde_sampledev_drom_initialized) {
+	dde_sampledev_drom_data.max_matrices = 0;
+	dde_sampledev_drom_data.num_matrices = 0;
+	dde_sampledev_drom_data.matrix_stack = 
+		(ddt_sampledev_drom_matrix *)0;
+	dde_sampledev_drom_data.device = (DtObject)0;
+	dde_sampledev_drom_data.view = (DtObject)0;
+
+	ddr_sampledev_matrix_concat 
+		(dde_sampledev_drom_data.lcstowcsmat, 
+		 identmat, DcReplace);
+	ddr_sampledev_matrix_concat
+		(dde_sampledev_drom_data.lcstofcsmat, 
+		identmat, DcReplace);
+	ddr_sampledev_matrix_concat
+		(dde_sampledev_drom_data.nrmlcstowcsmat,
+		identmat, DcReplace);
+
+	dde_sampledev_drom_data.mapbmp.max_count = 0;
+	dde_sampledev_drom_data.mapbmp.count = 0;
+	dde_sampledev_drom_data.mapbmp.mapping =
+		(DtObject *)0;
+	dde_sampledev_drom_data.mapbmp.raster = 
+		(DtObject *)0;
+	dde_sampledev_drom_data.mapbmp.attributes = 
+		(dot_stdtexatt *)0;
+
+	dde_sampledev_drom_data.mapdifclr.max_count = 0;
+	dde_sampledev_drom_data.mapdifclr.count = 0;
+	dde_sampledev_drom_data.mapdifclr.mapping = 
+		(DtObject *)0;
+	dde_sampledev_drom_data.mapdifclr.raster = 
+		(DtObject *)0;
+	dde_sampledev_drom_data.mapdifclr.attributes = 
+		(dot_stdtexatt *)0;
+
+	dde_sampledev_drom_data.mapenv.max_count = 0;
+	dde_sampledev_drom_data.mapenv.count = 0;
+	dde_sampledev_drom_data.mapenv.mapping = 
+		(DtObject *)0;
+	dde_sampledev_drom_data.mapenv.raster = 
+		(DtObject *)0;
+	dde_sampledev_drom_data.mapenv.attributes = 
+		(dot_stdtexatt *)0;
+
+	dde_sampledev_drom_data.maptrnint.max_count = 0;
+	dde_sampledev_drom_data.maptrnint.count = 0;
+	dde_sampledev_drom_data.maptrnint.mapping = 
+		(DtObject *)0;
+	dde_sampledev_drom_data.maptrnint.raster = 
+		(DtObject *)0;
+	dde_sampledev_drom_data.maptrnint.attributes = 
+		(dot_stdtexatt *)0;
+
+	dde_sampledev_drom_initialized = DcTrue;
+    }
+
+    dde_sampledev_drom_pre_init = DcTrue;
+}
+.)m
+The post-initialization routine just turns off the flag indicating that
+initialization is in progress.
+.(m
+void
+ddr_sampledev_drom_post_initialization()
+{
+    dde_sampledev_drom_pre_init = DcFalse;
+}
+.)m
+.H2 "Geometry Routines"
+The geometry routines are very device specific. In the sample
+device driver they just print out geometry information.
+In a full DROM of a real device driver
+these routines would take the geometry as defined in local coordinates 
+and transform them with the \f2lcstowcsmat\fP to world coordinates 
+to perform lighting and shading calculations. 
+The matrix \f2lcstofcsmat\fP is used to transform 
+the data from local coordinates
+to device coordinates for drawing.
+All the attribute values stored by the appearance attributes should be
+used to draw the geometry.
+.H2 "Dynamic Geometry Shading"
+Many devices provide full hardware support for shading the 
+geometric objects.
+However, for some devices the shading needs to be done in software.
+When you implement a device driver that requires software shading,
+consider the tradeoffs between the quality of output and speed.
+The following paragraphs describe one way to perform the shading
+calculations. 
+Other techniques may be more applicable depending on the availability
+and capabilities of the hardware.
+.lp
+In this example, the shading equations will be broken into two classes:
+constant shading and light source shading.
+Note that even though \f2drom.set_att_srfshd\fP specifies
+light source shading (\f2DcShaderLightSource\fP), constant shading will
+be performed if the geometry does not provide normals (either element
+normals or vertex normals).
+.lp
+The following equations make several assumptions:
+.np
+Shades are computed on an element basis (e.g., per triangle in a
+triangle list) only when there is not a dependency on vertex information.
+.np
+If vertex shades are computed and the value from
+\f2drom.set_att_inttyp\fP is \f2DcConstantShade\fP, the element shade
+will be the average of the vertex shades.
+.np
+All light source shading is done in world space.
+This means that the vertex locations and vertex normals must be
+transformed from local coordinates to world coordinates.
+.np
+When only element normals are provided and shading is done 
+per vertex, the element normal will be used at each of the vertices.
+.lp
+Many of the parameters in the following equations come from data
+saved by the DROM from the interface calls
+with the \f2drom.*\fP functions.
+These parameters are described below. 
+Parameter names with a bar over them represent triples (such
+as vertices, normals, and colors).
+Other parameters are scalars.
+Each parameter has a subscript: \f2v\fP for vertex values, 
+\f2o\fP for values on a per object basis, or \f2l\fP for values that
+depend on a light.
+.ip "$aintensity sub o$
+the ambient intensity value from the function
+\f2drom.set_att_ambint\fP. 
+.ip "$dintensity sub o$
+the diffuse intensity value from the function
+\f2drom.set_att_difint\fP.  
+.ip "${dcolor sub o} bar$
+the diffuse color RGB triple from the function
+\f2drom.set_att_difclr\fP. 
+.ip "$sintensity sub o$
+the specular intensity value from the function
+\f2drom.set_att_spcint\fP. 
+.ip "${scolor sub o } bar$
+the specular color RGB triple from the function
+\f2drom.set_att_spcclr\fP.
+.ip "${ sexp sub o}$       "
+the specular factor value from the function
+\f2drom.set_att_spcfct\fP. 
+.ip "$lintensity sub l$
+the light intensity value from the function \f2drom.set_att_lgtint\fP
+stored with light $l$. 
+.ip "${lcolor sub l} bar$
+the light color RGB triple from the function \f2drom.set_att_lgtclr\fP
+stored with light $l$. 
+.ip "${ldirnorm sub l } bar$
+the unit vector representing the direction in which the light is
+aimed. 
+This light direction normal in world space is determined by 
+transforming the
+vector $(0,0,-1)$ by the current local-to-world transformation
+at the time the \f2drom.light\fP is executed for light $l$.
+The resulting vector is then normalized.
+.ip "$ltype sub l$    "
+the light type value from the function \f2drom.set_att_lgttyp\fP
+stored with light $l$.
+.ip "${lloc sub l} bar$     "
+the light position in world space.
+It is determined by transforming the
+point $(0,0,0)$ by the current local-to-world transformation 
+at the time the \f2drom.light\fP is executed for light $l$.
+.ip "${total sub l}$ and ${"delta" sub l}$
+the light spread angle values from the function
+\f2drom.set_att_lgtspdang\fP stored with light $l$.
+.ip "${lexp sub l}$      "
+the light spread exponent value from the function
+\f2drom.set_att_lgtspdexp\fP stored with light $l$.
+.ip "${c italic 1 sub l}$ and ${c italic 2 sub l}$
+the light attenuation factor values from the function
+\f2drom.set_att_lgtatn\fP stored with the light $l$.
+.ip "${vcolor sub v} bar$
+the vertex color of the object at vertex \f2v\fP from
+the \f2vtxclrs\fP array of the geometry function (\f2drom.render_*\fP).
+.ip "${normal sub v} bar$
+the surface normal of the object at vertex \f2v\fP from
+the \f2vtxnrms\fP array or the \f2elenrms\fP array
+of the geometry function (\f2drom.render_*\fP) and transformed by
+the CTM. 
+It is assumed to be unit length.
+.ip "${vloc sub v} bar$     "
+the coordinates of vertex \f2v\fP of the object from 
+the \f2vtxloc\fP array of the geometry function
+(\f2drom.render_*\fP) and transformed by the CTM.
+.ip "${eloc} bar$       "
+the location of the eye point (camera) in world coordinates.
+.lp
+Several of the parameters in the following equations are computed from
+the information provided from the DROM interface.
+These quantities are:
+.sp
+${vtoldistance sub l}~=~left | {lloc sub l} bar ~-~{ vloc sub v} bar~right |~$
+.sp
+${vtoldirnorm sub l} bar~=~{ {lloc sub l} bar ~-~{ vloc sub v} bar } over
+{vtoldistance sub l}$ 
+.sp
+$theta~=~cos~sup {-1}~ left (~ {ldirnorm sub l}bar ~cdot~ {vtoldirnorm
+sub l} bar~ right )$
+.H3 "Constant Shading
+The constant shading case is the simplest. It only uses the diffuse
+intensity and either the diffuse color or vertex colors if provided.
+.sp
+${ shade sub v } bar~=~{dintensity sub o }~times~{ dcolor sub v } bar$
+.sp
+${dcolor sub v} bar~=~left { matrix {
+lcol { { { vcolor sub v} bar }
+above  { { dcolor sub o} bar }}
+lcol { { ~~~if~(~{vcolor sub v} bar ~!=~roman NULL~)}
+above  { ~~~roman otherwise}}}$
+.sp
+.H3 "Light Source Shading
+Light source shading requires much more computation than the constant
+shading case and can be broken into three components.
+.sp
+${ shade sub v } bar~=~{ ambient sub v } bar~+~{ diffuse sub v } bar ~+~
+{ specular sub v } bar$
+.sp
+Each of these components can individually be enabled or disabled by a
+corresponding switch attribute: \f2drom.set_att_ambswi\fP,
+\f2drom.set_att_difswi\fP and \f2drom.set_att_spcswi\fP.
+.lp
+1) The ambient component is:
+.EQ L
+{ ambient sub v } bar~=~{ aintensity sub o }~times~{ dcolor sub v } bar
+~times~sum from l=0 to { l=alights } 
+{ lintensity sub l } ~times~ { lcolor sub l } bar
+.EN
+where \f2alights\fP is the number of ambient lights in the scene.
+.lp
+2) The diffuse component is:
+.EQ L
+{diffuse sub v} bar~=~ { dintensity sub o } ~times~ { dcolor sub v } bar
+~times~ sum from l=0 to { l=lights }
+{ lintensity sub l } ~times~ { lcolor sub l } bar~times~ {dillum sub l}
+.EN
+where \f2lights\fP is the number of non-ambient light sources in
+the scene.
+.lp
+The illumination from each light source ( $dillum sub l$) depends of
+the type of the light. 
+.EQ L
+{dillum sub l}~=~left { matrix {
+ccol { { ldir sub l}
+above  { lpoint sub l} 
+above  { { lpoint sub l} ~times~ { lspread sub l} }
+above  { { lpoint sub l} ~times~ { lattn sub l } }
+above  { { lpoint sub l} ~times~ { lspread sub l} ~times~ { lattn sub l } } }
+lcol { { ~~~if~(~{ltype sub l}~==~roman "DcLightInfinite"~ ) }
+above  { ~~~if~(~{ltype sub l}~==~roman "DcLightPoint"~ ) }
+above  { ~~~if~(~{ltype sub l}~==~roman "DcLightSpot"~ ) }
+above  { ~~~if~(~{ltype sub l}~==~roman "DcLightPointAttn"~ ) }
+above  { ~~~if~(~{ltype sub l}~==~roman "DcLightSpotAttn"~ ) } } }
+.EN
+.EQ L
+{ldir sub l}~=~ {ldirnorm sub l} bar ~cdot~ { normal sub v } bar
+.EN
+.EQ L
+{lpoint sub l}~=~ { vtoldirnorm sub l} bar ~cdot~ { normal sub v } bar
+.EN
+.EQ L
+{lspread sub l}~=~ { lspread italic 1 sub l}~times~{ lspread italic 2 sub l}
+.EN
+.EQ L
+{lspread italic 1 sub l}~=~ left { matrix {
+ccol { {1.0} above {0.0} above {{ { total sub l}~-~{ theta } }
+ over { "delta" sub l }} }
+lcol { { ~~~if~(~theta~ <~({ total sub l}~-~{ "delta" sub l} ~))}
+above { ~~~if~(~theta~>~{total sub l}) } above ~~~{roman otherwise}}}
+.EN
+.EQ L
+{lspread italic 2 sub l}~=~ left { matrix {
+ccol { { { cos~(~theta~) } sup { lexp sub l} } above {0.0}}
+lcol { {~~~{ -~pi over 2 }~ <= ~theta~ <= ~ { pi over 2}} above ~~~{roman
+otherwise}}}
+.EN
+.EQ L
+{lattn sub l}~=~ {1.0} over { {c italic 1 sub l}~+~{c italic 2 sub l}
+~times~{vtoldistance sub l}}
+.EN
+.lp
+3) The specular component is:
+.EQ L
+{ specular sub v } bar~=~ { sintensity sub o}~times~ { scolor sub o } bar
+~times~sum from l=0 to { l=lights }
+{ lintensity sub l} ~times~{ lcolor sub l } bar ~times~{sillum sub l}
+.EN
+There are two ways to compute the specular illumination (${sillum sub l}$),
+generating two different approximations of specular highlights.
+These are based on Blinn's and Phong's lighting models.
+.sp
+.EQ L
+{sillum sub l}~=~ left { matrix {
+lcol  { { left ( { H } bar ~cdot~ {normal sub v} bar right ) sup
+{ sexp sub o } } above { left ( { R } bar ~cdot~ left ( { eloc } bar ~cdot~
+{ vloc sub l} bar right ) right ) sup { sexp sub o} } } 
+lcol { { ~~~~~~~~~~( ~ roman Blinn ~ ) } above { ~~~~~~~~~~( ~ roman Phong
+~  ) } } }
+.EN
+where 
+.EQ L
+{ H } bar ~=~ { { left ( { eloc } bar ~-~ { vloc sub v } bar right ) ~+~
+{ vtoldirnorm sub l } bar } over 2.0 }
+.EN
+.EQ L
+{ R } bar ~=~ { { normal sub v } bar ~times~ left ( 2.0 ~times~ 
+{ normal sub v } bar ~cdot~ { vtoldirnorm sub l} bar right ) ~-~ 
+{vtoldirnrorm sub l} bar }
+.EN
+.H1 "The Installation Routine
+You must provide a routine that will
+install the device driver into \*(Dd.
+This installation routine is the only device driver routine whose
+name is known outside the device driver itself.
+It will typically be called by the \*(Dd system.
+(Portable \*(Dd users see \f2dor_doresys_install_drivers\fP in the
+system module.)
+\*(Dd application users can also install new device drivers 
+by calling the driver installation routine directly from the
+application after \f2DsInitialize\fP.
+.lp
+The device driver installation routine sets the name and 
+short description of the device driver,
+and installs it into the \*(Dd system by calling 
+\f2DDdevice_InstallDriver\fP.
+If any of the device modules need to be notified of new classes being
+installed, the routine would also install the notify routine with
+\f2DDclass_AddNotify\fP.
+For the sample device driver the installation routine looks like:
+.(m
+void
+ddr_sampledev_install_driver (name)
+DtPtr name;
+{
+    DDdevice_InstallDriver
+	    ((name == DcNullPtr) ? (DtPtr)"sample" : name,
+	     (DtPtr)"Sample Driver",
+	     (DtPFI)ddr_sampledev_return_functions);
+}
+.)m
+.lp
+The caller can specify the name of the
+device with the \f2name\fP parameter.
+If \f2name\fP is \f2DcNullPtr\fP, then the default name of the driver,
+"\f2sample\fP", will be used instead.
+.lp
+One of the required arguments for \f2DDdevice_InstallDriver\fP
+is a device driver routine that returns pointers
+to the interface structures: DCM, PROM, DROM, and DROM Methods.
+The output from the renderers is handled through these interface
+structures.
+This routine is named \f2ddr_sampledev_return_functions\fP in
+the sample device driver.
+Since the sample device driver supports the DCM, PROM, and DROM interfaces, the
+\f2ddr_sampledev_return_functions\fP routine calls the appropriate
+routine to return a pointer to the requested interface structure.
+If, for example, the sample driver supported only the DCM and the PROM,
+it would return \f2DcNullPtr\fP when the DROM interface structure
+is requested.
+.(m
+void
+ddr_sampledev_return_functions(type, fcns)
+DtInt type;
+DtPtr *fcns;
+{
+    extern DtPtr ddr_sampledev_return_DCM_fcns();
+    extern DtPtr ddr_sampledev_return_PROM_fcns();
+    extern DtPtr ddr_sampledev_return_DROM_fcns();
+
+    switch (type) {
+    case DDc_DCM:
+	*fcns = ddr_sampledev_return_DCM_fcns();
+	break;
+
+    case DDc_PROM:
+	*fcns = ddr_sampledev_return_PROM_fcns();
+	break;
+
+    case DDc_DROM:
+	*fcns = ddr_sampledev_return_DROM_fcns();
+	break;
+
+    case DDc_DROMMethods:
+	*fcns = (DtPtr) 0;
+	break;
+
+
+    default:
+	*fcns = (DtPtr) 0;
+	break;
+    }
+}
+.)m
+.lp
+The function \f2ddr_sampledev_return_DCM_fcns\fP returns
+the interface structure containing the DCM implementation. 
+The first time that this routine is called, it allocates the data
+structure, fills in the routine pointers, and stores
+a pointer to the structure in the global variable:
+.(m
+DDt_DCM *dde_sampledev_DCM_fcns = (DDt_DCM *)0;
+.)m
+.lp
+For each subsequent call the function just returns this global
+pointer.
+The routine is:
+.(m
+DtPtr
+ddr_sampledev_return_DCM_fcns()
+{
+    DDt_DCM *fcns;
+
+    if (dde_sampledev_DCM_fcns == (DDt_DCM *)0) {
+	fcns = DDdevice_CreateDCMStruct();
+
+	if (fcns == (DDt_DCM *)0) {
+	    DDerror (ERR_CANT_ALLOC_MEM, 
+		     "dde_sampledev_return_DCM_fcns",
+		     DcNullPtr);
+	}
+
+	fcns->version_number = 2;
+
+	/* Version 1 Functions */
+	fcns->create_local_data = (DtPFI)
+	     ddr_sampledev_dcm_create_local_data;
+	fcns->initialize_device = (DtPFI)
+	     ddr_sampledev_dcm_initialize_device;
+	fcns->become_current_driver = (DtPFI)
+	     ddr_sampledev_dcm_become_current_driver;
+	fcns->inquire_device_extent = (DtPFI)
+	     ddr_sampledev_dcm_inquire_device_extent;
+	fcns->inquire_stereo = (DtPFI)
+	     ddr_sampledev_dcm_inquire_stereo;
+	fcns->inquire_ncolors = (DtPFI)
+	     ddr_sampledev_dcm_inquire_ncolors;
+	fcns->inquire_resolution = (DtPFI)
+	     ddr_sampledev_dcm_inquire_resolution;
+	fcns->inquire_visual_type = (DtPFI)
+	     ddr_sampledev_dcm_inquire_visual_type;
+	fcns->inquire_auto_size = (DtPFI)
+	     ddr_sampledev_dcm_inquire_auto_size;
+	fcns->inquire_clip_list = (DtPFI)
+	     ddr_sampledev_dcm_inquire_clip_list;
+	fcns->clear_rectangle_depth_and_color = (DtPFI)
+	     ddr_sampledev_dcm_clear_rectangle_depth_and_color;
+	fcns->write_scanline_byte = (DtPFI)
+	ddr_sampledev_dcm_write_scanline_byte;
+
+	/* Version 2 Functions */
+	fcns->set_options = (DtPFI)
+	     ddr_sampledev_dcm_set_options;
+
+	dde_sampledev_DCM_fcns = fcns;
+    }
+    return (DtPtr)dde_sampledev_DCM_fcns;
+}
+.)m
+.lp
+Notice that only the functions that have been implemented in 
+the sample DCM are filled in.
+.lp
+Similarly, the function \f2ddr_sampledev_return_PROM_fcns\fP 
+returns the structure containing the sample PROM implementation:
+.(m
+DtPtr
+ddr_sampledev_return_PROM_fcns()
+{
+    DDt_PROM *fcns;
+
+    if (dde_sampledev_PROM_fcns == (DDt_PROM *)0) {
+	fcns = DDdevice_CreatePROMStruct();
+
+	if (fcns == (DDt_PROM *)0) {
+	    DDerror (ERR_CANT_ALLOC_MEM, 
+		     "dde_sampledev_return_PROM_fcns",
+		     DcNullPtr);
+	}
+
+	fcns->version_number = 1;
+
+	fcns->write_rectangle_byte_rgb= (DtPFI)
+	     ddr_sampledev_prom_write_rectangle_byte_rgb;
+
+	dde_sampledev_PROM_fcns = fcns;
+    }
+    return (DtPtr) dde_sampledev_PROM_fcns;
+}
+.)m
+.lp
+Finally, 
+the function \f2ddr_sampledev_return_DROM_fcns\fP
+returns the interface structure with the sample DROM implementation:
+.(m
+DtPtr
+ddr_sampledev_return_DROM_fcns()
+{
+    DDt_DROM *fcns;
+
+    if (dde_sampledev_DROM_fcns == (DDt_DROM *)0) {
+	fcns = DDdevice_CreateDROMStruct();
+
+	if (fcns == (DDt_DROM *)0) {
+	    DDerror (ERR_CANT_ALLOC_MEM, 
+		     "dde_sampledev_return_DROM_fcns",
+		     DcNullPtr);
+	}
+
+	fcns->version_number = 2;
+
+	/* version 1 fields */
+
+	fcns->pre_initialization = (DtPFI) 
+	     ddr_sampledev_drom_pre_initialization;
+	fcns->post_initialization = (DtPFI) 
+	     ddr_sampledev_drom_post_initialization;
+	fcns->create_local_device_data = (DtPFI)
+	     ddr_sampledev_drom_create_local_device_data;
+	fcns->create_local_view_data = (DtPFI)
+	     ddr_sampledev_drom_create_local_view_data;
+	fcns->create_local_window_data = (DtPFI)
+	     ddr_sampledev_drom_create_local_window_data;
+	fcns->start_update = (DtPFI)
+	     ddr_sampledev_drom_start_update;
+	fcns->update_local_data = (DtPFI)
+	     ddr_sampledev_drom_update_local_data;
+	fcns->update_studio = (DtPFI)
+	     ddr_sampledev_drom_update_studio;
+	fcns->update_display = (DtPFI)
+	     ddr_sampledev_drom_update_display;
+	fcns->camera = (DtPFI)
+	     ddr_sampledev_drom_camera;
+	fcns->light = (DtPFI)
+	     ddr_sampledev_drom_light;
+	fcns->set_camera_matrix = (DtPFI)
+	     ddr_sampledev_drom_set_camera_matrix;
+	fcns->set_parallel_matrix = (DtPFI)
+	     ddr_sampledev_drom_set_parallel_matrix;
+	fcns->set_perspective_matrix = (DtPFI)
+	     ddr_sampledev_drom_set_perspective_matrix;
+	fcns->set_projection_matrix = (DtPFI)
+	     ddr_sampledev_drom_set_projection_matrix;
+	fcns->push_att_clpvol = (DtPFI)
+	     ddr_sampledev_drom_push_att_clpvol;
+	fcns->pop_att_clpvol = (DtPFI)
+	     ddr_sampledev_drom_pop_att_clpvol;
+	fcns->set_att_clpvol = (DtPFI)
+	     ddr_sampledev_drom_set_att_clpvol;
+	fcns->apply_att_clpvol = (DtPFI)
+	     ddr_sampledev_drom_apply_att_clpvol;
+	fcns->get_wcstofcsmat = (DtPFI)
+	     ddr_sampledev_drom_get_wcstofcsmat;
+	fcns->pop_lcstofcsmat = (DtPFI)
+	     ddr_sampledev_drom_pop_lcstofcsmat;
+	fcns->push_lcstofcsmat = (DtPFI)
+	     ddr_sampledev_drom_push_lcstofcsmat;
+	fcns->transform_clip_z_point = (DtPFI)
+	     ddr_sampledev_drom_transform_clip_z_point;
+	fcns->render_point_list = (DtPFI)
+	     ddr_sampledev_drom_render_point_list;
+	fcns->render_line_list = (DtPFI)
+	     ddr_sampledev_drom_render_line_list;
+	fcns->render_connected_line_list = (DtPFI)
+	     ddr_sampledev_drom_render_connected_line_list;
+	fcns->render_triangle_list = (DtPFI)
+	     ddr_sampledev_drom_render_triangle_list;
+	fcns->render_triangle_mesh = (DtPFI)
+	     ddr_sampledev_drom_render_triangle_mesh;
+	fcns->set_att_ambint = (DtPFI)
+	     ddr_sampledev_drom_set_att_ambint;
+	fcns->set_att_ambswi = (DtPFI)
+	     ddr_sampledev_drom_set_att_ambswi;
+	fcns->set_att_bacfacculble = (DtPFI)
+	     ddr_sampledev_drom_set_att_bacfacculble;
+	fcns->set_att_bacfacculswi = (DtPFI)
+	     ddr_sampledev_drom_set_att_bacfacculswi;
+	fcns->set_att_clpswi = (DtPFI)
+	     ddr_sampledev_drom_set_att_clpswi;
+	fcns->set_att_depcue = (DtPFI)
+	     ddr_sampledev_drom_set_att_depcue;
+	fcns->set_att_depcueswi = (DtPFI)
+	     ddr_sampledev_drom_set_att_depcueswi;
+	fcns->set_att_difclr = (DtPFI)
+	     ddr_sampledev_drom_set_att_difclr;
+	fcns->set_att_difint = (DtPFI)
+	     ddr_sampledev_drom_set_att_difint;
+	fcns->set_att_difswi = (DtPFI)
+	     ddr_sampledev_drom_set_att_difswi;
+	fcns->set_att_hidsrfswi = (DtPFI)
+	     ddr_sampledev_drom_set_att_hidsrfswi;
+	fcns->set_att_inttyp = (DtPFI)
+	     ddr_sampledev_drom_set_att_inttyp;
+	fcns->set_att_lgtclr = (DtPFI)
+	     ddr_sampledev_drom_set_att_lgtclr;
+	fcns->set_att_lgtint = (DtPFI)
+	     ddr_sampledev_drom_set_att_lgtint;
+	fcns->set_att_lgttyp = (DtPFI)
+	     ddr_sampledev_drom_set_att_lgttyp;
+	fcns->set_att_lintyp = (DtPFI)
+	     ddr_sampledev_drom_set_att_lintyp;
+	fcns->set_att_linwid = (DtPFI)
+	     ddr_sampledev_drom_set_att_linwid;
+	fcns->set_att_refswi = (DtPFI)
+	     ddr_sampledev_drom_set_att_refswi;
+	fcns->set_att_reptyp = (DtPFI)
+	     ddr_sampledev_drom_set_att_reptyp;
+	fcns->set_att_shaswi = (DtPFI)
+	     ddr_sampledev_drom_set_att_shaswi;
+	fcns->set_att_shdidx = (DtPFI)
+	     ddr_sampledev_drom_set_att_shdidx;
+	fcns->set_att_spcclr = (DtPFI)
+	     ddr_sampledev_drom_set_att_spcclr;
+	fcns->set_att_spcfct = (DtPFI)
+	     ddr_sampledev_drom_set_att_spcfct;
+	fcns->set_att_spcint = (DtPFI)
+	     ddr_sampledev_drom_set_att_spcint;
+	fcns->set_att_spcswi = (DtPFI)
+	     ddr_sampledev_drom_set_att_spcswi;
+	fcns->set_att_srfshd = (DtPFI)
+	     ddr_sampledev_drom_set_att_srfshd;
+	fcns->set_att_stereo = (DtPFI)
+	     ddr_sampledev_drom_set_att_stereo;
+	fcns->set_att_stereoswi = (DtPFI)
+	     ddr_sampledev_drom_set_att_stereoswi;
+	fcns->set_att_transpclr = (DtPFI)
+	     ddr_sampledev_drom_set_att_transpclr;
+	fcns->set_att_transpint = (DtPFI)
+	     ddr_sampledev_drom_set_att_transpint;
+	fcns->set_att_transpswi = (DtPFI)
+	     ddr_sampledev_drom_set_att_transpswi;
+	fcns->update_lcstowcsmat_lokatfrm = (DtPFI)
+	     ddr_sampledev_drom_update_lcstowcsmat_lokatfrm;
+	fcns->update_lcstowcsmat_pop = (DtPFI)
+	     ddr_sampledev_drom_update_lcstowcsmat_pop;
+	fcns->update_lcstowcsmat_push = (DtPFI)
+	     ddr_sampledev_drom_update_lcstowcsmat_push;
+	fcns->update_lcstowcsmat_rotate = (DtPFI)
+	     ddr_sampledev_drom_update_lcstowcsmat_rotate;
+	fcns->update_lcstowcsmat_scale = (DtPFI)
+	     ddr_sampledev_drom_update_lcstowcsmat_scale;
+	fcns->update_lcstowcsmat_shear = (DtPFI)
+	     ddr_sampledev_drom_update_lcstowcsmat_shear;
+	fcns->update_lcstowcsmat_tfmmat = (DtPFI)
+	     ddr_sampledev_drom_update_lcstowcsmat_tfmmat;
+	fcns->update_lcstowcsmat_transl = (DtPFI)
+	     ddr_sampledev_drom_update_lcstowcsmat_transl;
+	fcns->get_lcstowcsmat = (DtPFI)
+	     ddr_sampledev_drom_get_lcstowcsmat;
+	fcns->set_att_lgtswi = (DtPFI)
+	     ddr_sampledev_drom_set_att_lgtswi;
+	fcns->set_att_lgtspdexp = (DtPFI)
+	     ddr_sampledev_drom_set_att_lgtspdexp;
+	fcns->set_att_lgtspdang = (DtPFI)
+	     ddr_sampledev_drom_set_att_lgtspdang;
+	fcns->set_att_lgtatn = (DtPFI)
+	     ddr_sampledev_drom_set_att_lgtatn;
+	fcns->set_att_mapbmpswi = (DtPFI)
+	     ddr_sampledev_drom_set_att_mapbmpswi;
+	fcns->set_att_mapbmp = (DtPFI)
+	     ddr_sampledev_drom_set_att_mapbmp;
+	fcns->set_att_mapdifclrswi = (DtPFI)
+	     ddr_sampledev_drom_set_att_mapdifclrswi;
+	fcns->set_att_mapdifclr = (DtPFI)
+	     ddr_sampledev_drom_set_att_mapdifclr;
+	fcns->set_att_mapenvswi = (DtPFI)
+	     ddr_sampledev_drom_set_att_mapenvswi;
+	fcns->set_att_mapenv = (DtPFI)
+	     ddr_sampledev_drom_set_att_mapenv;
+	fcns->set_att_maptrnintswi = (DtPFI)
+	     ddr_sampledev_drom_set_att_maptrnintswi;
+	fcns->set_att_maptrnint = (DtPFI)
+	     ddr_sampledev_drom_set_att_maptrnint;
+	fcns->get_lcstowcsmat = (DtPFI)
+	     ddr_sampledev_drom_get_lcstowcsmat;
+	fcns->delete_local_device_data = (DtPFI)
+	     ddr_sampledev_drom_delete_local_device_data;
+	fcns->delete_local_view_data = (DtPFI)
+	     ddr_sampledev_drom_delete_local_view_data;
+	fcns->delete_local_window_data = (DtPFI)
+	     ddr_sampledev_drom_delete_local_window_data;
+	fcns->use_separate_wireframe = DcFalse;
+
+	/* version 2 fields */
+	fcns->set_att_srfedgclr = (DtPFI)
+	     ddr_sampledev_drom_set_att_srfedgclr;
+	fcns->set_att_localaaswi = (DtPFI)
+	     ddr_sampledev_drom_set_att_localaaswi;
+	fcns->set_att_localaasty = (DtPFI)
+	     ddr_sampledev_drom_set_att_localaasty;
+
+	dde_sampledev_DROM_fcns = fcns;
+    }
+
+    return (DtPtr) dde_sampledev_DROM_fcns;
+}
+.)m

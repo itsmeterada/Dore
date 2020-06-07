@@ -1,0 +1,11 @@
+#include <Dore.tmpl>
+
+    SRCS = lokatfrm.c popmat.c pshmat.c rotate.c scale.c shear.c \
+           tfmmat.c transl.c
+    OBJS = lokatfrm.o popmat.o pshmat.o rotate.o scale.o shear.o \
+           tfmmat.o transl.o
+
+LibraryObjectRule()
+SubdirLibraryRule($(OBJS))
+
+DependTarget()

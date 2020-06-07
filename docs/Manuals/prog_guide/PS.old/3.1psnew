@@ -1,0 +1,203 @@
+!md begin
+!/note {} def
+!/legal {} def
+!md /lnop known not { /lnop [ {} ] cvx def } if
+!/bigs [lnop lnop lnop lnop lnop lnop lnop lnop] def
+!/smalls [lnop lnop lnop lnop lnop lnop lnop lnop] def
+!/cp {pm restore pop pop} def
+!
+!T F -37 -39 728 951 80 72 72 1 F F F F T T psu
+!(Aaron Black; document: 3-1.newpict)jn
+!0 mf
+!od
+!op
+!0 0 691 912 fr
+!0 0 xl
+!0.0 72 mul 4.0 72 mul translate %DO NOT CHANGE
+!0.7 0.7 scale
+!-90 rotate %added PAusick
+!-9.0 72 mul -1.0 72 mul translate %change this line to position figure
+!1 1 pen
+!0 0 gm
+!(nc 0 0 0 0 6 rc)kp
+!(nc 0 0 684 900 6 rc)kp
+!64 gr
+!130 36 143 57 2 rc
+!140 37 gm
+!bu fc
+!{}mark T /Helvetica /Helvetica 0 rf
+!bn
+!1 setTxMode
+!0 fs
+!12 fz
+!bu fc
+!2 F /Helvetica fnt
+!bn
+!0.66590 0.(Do)ashow
+!64 gr
+!130 53 143 76 2 rc
+!140 54 gm
+!0 gr
+!4 fs
+!18 ul
+!(xxx)show
+!431 254 gm
+!0 fs
+!0.66590 0.(Dg)ashow
+!431 271 gm
+!4 fs
+!18 ul
+!(xxx)show
+!348 256 412 392 4 rc
+!348.5 256.5 411.5 391.5 0 rc
+!64 gr
+!344 252 408 388 4 rc
+!0 gr
+!344.5 252.5 407.5 387.5 0 rc
+!378 301 gm
+!0 fs
+!0.16508 0.(Group)ashow
+!140 253 gm
+!0.66590 0.(Dd)ashow
+!140 270 gm
+!4 fs
+!18 ul
+!(xxx)show
+!158 255 222 391 4 rc
+!158.5 255.5 221.5 390.5 0 rc
+!64 gr
+!154 251 218 387 4 rc
+!0 gr
+!154.5 251.5 217.5 386.5 0 rc
+!190 297 gm
+!0 fs
+!0.08540 0.(Frame)ashow
+!238 254 gm
+!(Df)show
+!237 267 gm
+!4 fs
+!18 ul
+!(xxx)show
+!254 256 318 392 4 rc
+!254.5 256.5 317.5 391.5 0 rc
+!64 gr
+!250 252 314 388 4 rc
+!0 gr
+!250.5 252.5 313.5 387.5 0 rc
+!285 303 gm
+!0 fs
+!0.66639 0.(View)ashow
+!333 254 gm
+!1.33685 0.(Dv)ashow
+!4 fs
+!18 ul
+!(xxx)show
+!179 80 gm
+!0 fs
+!0.11280 0.(Primitives)ashow
+!199 79 gm
+!0.12690 0.(Primitive)ashow
+!212 79 gm
+!-0.02458 0.(     Attributes)ashow
+!233 79 gm
+!0.19721 0.(Studio)ashow
+!246 79 gm
+!(  - cameras)show
+!259 79 gm
+!(  - lights)show
+!280 79 gm
+!0.19721 0.(Studio)ashow
+!293 79 gm
+!-0.02458 0.(     Attributes)ashow
+!57 472 121 608 4 rc
+!57.5 472.5 120.5 607.5 0 rc
+!64 gr
+!53 468 117 604 4 rc
+!0 gr
+!53.5 468.5 116.5 603.5 0 rc
+!89 516 gm
+!(System)show
+!140 469 gm
+!0.33695 0.(Ds)ashow
+!4 fs
+!18 ul
+!(xxx)show
+!36 469 gm
+!0 fs
+!1.06140 0. 32 0.10614 0.(System Functions)awidthshow
+!36 39 gm
+!1.43417 0. 32 0.14341 0.(Object Creation Functions)awidthshow
+!36 252 gm
+!1.52999 0. 32 0.15299 0.(Editing Functions)awidthshow
+!38 686 gm
+!1.41815 0. 32 0.14181 0.(Extension Functions)awidthshow
+!57 255 121 391 4 rc
+!57.5 255.5 120.5 390.5 0 rc
+!64 gr
+!53 251 117 387 4 rc
+!0 gr
+!53.5 251.5 116.5 386.5 0 rc
+!89 297 gm
+!0.66638 0.(Device)ashow
+!57 40 121 176 4 rc
+!57.5 40.5 120.5 175.5 0 rc
+!64 gr
+!53 36 117 172 4 rc
+!0 gr
+!53.5 36.5 116.5 171.5 0 rc
+!89 82 gm
+!0.46546 0.(Object)ashow
+!57 687 121 823 4 rc
+!57.5 687.5 120.5 822.5 0 rc
+!64 gr
+!53 683 117 819 4 rc
+!0 gr
+!53.5 683.5 116.5 818.5 0 rc
+!89 723 gm
+!0.16439 0.(Extension)ashow
+!141 685 gm
+!0.66590 0.(De)ashow
+!4 fs
+!18 ul
+!(xxx)show
+!531 255 gm
+!0 fs
+!0.66590 0.(Dp)ashow
+!4 fs
+!18 ul
+!(xxx)show
+!449 256 513 392 4 rc
+!449.5 256.5 512.5 391.5 0 rc
+!64 gr
+!445 252 509 388 4 rc
+!0 gr
+!445.5 252.5 508.5 387.5 0 rc
+!480 295 gm
+!0 fs
+!0.12690 0.(Primitive)ashow
+!171 70 176 75 4 ov
+!171.5 70.5 175.5 74.5 0 ov
+!272 70 277 75 4 ov
+!272.5 70.5 276.5 74.5 0 ov
+!192 70 197 75 4 ov
+!192.5 70.5 196.5 74.5 0 ov
+!225 70 230 75 4 ov
+!225.5 70.5 229.5 74.5 0 ov
+!401 36 gm
+!0.49760 0.(DUo)ashow
+!4 fs
+!18 ul
+!(xxx)show
+!64 gr
+!321 37 385 173 4 rc
+!32<3366CC993366CC99>pat
+!321.5 37.5 384.5 172.5 0 rc
+!349 70 gm
+!0 gr
+!0 fs
+!-0.16123 0.(User-Defined                  )ashow
+!362 70 gm
+!0.11280 0.(Primitives)ashow
+!F T cp
+!cd
+!end

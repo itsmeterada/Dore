@@ -1,0 +1,1309 @@
+.\"	January, 1987 -- PAusick
+.\"
+.\" text fonts in positions 1,2,3; constant space in 5 & 6;
+.\" display fonts in 4, 7, 8; postions 9 & 10 reserved for
+.\" special troff fonts - don't mount any fonts in 9 or 10.
+.\" NB: Use only one unmounted font on any single line of output!
+.\"
+.\"
+.fp 1 PA
+.fp 2 PI
+.fp 3 PB
+.fp 4 H
+.fp 5 CW
+.fp 6 CB
+.fp 7 HX
+.fp 8 HI
+'\"	 set general page layout here
+.po 3.0i	\"pseudo page offset
+.nr LL 4.5i	\"length of text line
+.nr PL 11.0i	\"page length for 8.5 x 11 inch
+.lt 4.5i	\"length of text title
+.nr pp 11	\"paragraph point size
+.nr qp 11	\"quoted paragraph point size
+.nr tf 4	\"header/footer font
+.nr tp 9	\"header/footer point size
+.nr hm 3v	\"top of page to header
+.nr tm 8v	\"top of page to top of text
+.nr bm 7v	\"bottom of page to bottom of text
+.nr fm 3v	\"bottom of page to footer
+.nr ps 1v	\"space between paragraphs
+.nr TL 72	\"point size of thick lines
+.nr ML 36	\"point size of medium lines
+.nr HL 12	\"point size of thin lines
+.nr [c 1	\"custom header on first page
+.nr oP 1.0i	\"page offset for even headers/footers
+.nr op 0.875i	\"page offset for odd pages and odd headers/footers
+.nr ep 3.0i+1.1n	\"page offset for even pages
+.if \nZ \{\
+.nr oP 0.875i
+.nr Op 3.0i-1n	\"page offset for tech overview manual; requires -rZ1
+.po \\n(Opu \}
+.nr i_ 5n	\"indent for bullet, secondary, tertiary lists
+.nr lh 6.5i	\"length of line for headers/footers
+.nr xi 0.2i	\"gutter between columns
+.nr lx 1.875i	\"width of narrow column
+.nr cF 5	\"constant space font
+.nr cP 9	\"constant space point size
+.nr cV 11	\"constant space vertical spacing
+.nr CP 42	\"point size for chapter title large caps
+.nr Cp 36	\"point size for chapter title small caps
+.nr Cf 1	\"font for chapter titles
+.nr 1f 7	\"font for H1 headings
+.nr 1s 12	\"point size for H1 headings
+.nr S1 2v	\"space before H1 headings
+.nr 2f 8	\"font for H2 headings
+.nr 2s 12	\"point size for H2 headings
+.nr S2 2v	\"space before H2 headings
+.nr 3f 7	\"font for H3 headings
+.nr 3s 11	\"point size for H3 headings
+.nr S3 2v	\"space before H3 headings
+.nr NS 9 	\"point size/vert space for notes
+.nr NF 1 	\"font for note text
+.nr tN 0 1	\"table number counter
+.nr TT 0 1	\"table number counter(floats)
+.nr fN 0 1	\"figure number counter
+.nr FT 0 1	\"figure number counter(floats)
+.nr c[ 1
+.hy 14
+.ll \n(LLu
+.pl \n(PLu
+'\"	 .$h - internal - prints page headers (-me)
+.de $h
+.ie o .po \\n(opu
+.el .po \\n(oPu
+.ps \\n(TL
+.if o .ie !\nZ \{\
+.		ta \\n(LLu+\\n(xiu
+\l'\\n(LLu'\t\l'\\n(lxu'
+.		if \\n([c .if !\\n(HD \{\
+.			sp 2.3v
+.\"	\t\f(Lg\s32A\fP\s0
+.			nr c[ 0
+.			br
+.		\}
+.	\}
+.	el \{\
+.		ta \\n(lxu+\\n(xiu
+\l'\\n(lxu'\t\l'\\n(LLu'
+.\".		if \nQ \{\
+.\".			ll \\n(lxu
+.\".			nh
+.\".			fi
+.\".			ps 10
+.\".			ad l
+.\"\\f(HX\&\\*(R>
+.\".			br
+.\".			if \w'\\*(>R' \f\\n(tf\\*(>R
+.\".		\}
+.		if \\n([c .if !\\n(HD \{\
+.			sp 4.5v
+.\"	\h'0.5i'\f(Lg\s(64A\fP\s0
+.			nr c[ 0
+.			br
+.		\}
+.	\}
+.\}
+.if e \{\
+.	ta \\n(lxu+\\n(xiu
+\l'\\n(lxu'\t\l'\\n(LLu'
+.\".	if \nQ \{\
+.\".		ll \\n(lxu
+.\".		nh
+.\".		fi
+.\".		ps 10
+.\".		ad l
+.\"\\f(HX\&\\*(R>
+.\".		br
+.\".		if \w'\\*(>R' \f\\n(tf\\*(>R
+.\".	\}
+.\}
+.if \\n([c=0 .if !\nZ \{\
+.	ie o .po \\n(opu
+.	el .po \\n(oPu
+.	ll \\n(lxu
+.	nh
+.	fi
+.	ps 10
+.	ad l
+.	if o .ta \\n(lxR
+.	if o .ad r
+.	if o .po +(\\n(LLu+\\n(xiu)
+\\f(HX\&\\*(R>
+.	br
+.	if o .if \w'\\*(>R' \t\c
+\f\\n(tf\\*(>R
+.	ll \\n(LLu
+.	ad b
+.	hy 14
+.	re
+.	if o .po -(\\n(LLu+\\n(xiu)
+.\}
+.re
+.ps \\n(pp
+..
+'\"	 .$f - internal - prints page footers (-me)
+.de $f
+.ie o .po \\n(opu
+.el .po \\n(oPu
+.ps \\n(ML
+.if \nU .ie o .ds UD Update \\*(dT\ \-\ 
+.	el .ds UD "\ \-\ Update \\*(dT
+.ie !\nZ \{\
+.	if o \{\
+.		ta \\n(LLu+\\n(xiu
+\l'\\n(LLu'\t\l'\\n(lxu'
+.		ps \\n(tp
+.		sp .2v
+.		ta \\n(LLuR
+\t\\*(UD\\*(CT
+.		sp -1v
+.		ta (\\n(LLu+\\n(xiu+\\n(lxu)R
+\t\\*(BT\ \|\f(HB\\*(hH\\n%\fP
+.	\}
+.	if e \{\
+.		ta \\n(lxu+\\n(xiu
+\l'\\n(lxu'\t\l'\\n(LLu'
+.		ps \\n(tp
+.		sp .2v
+\f(HB\\*(hH\\n%\fP\ \| \\*(BT
+.		sp -1v
+.		ta \\n(lxu+\\n(xiu
+\t\\*(CT\\*(UD
+.	\}
+.\}
+.el \{\
+.	ta \\n(lxu+\\n(xiu
+\l'\\n(lxu'\t\l'\\n(LLu'
+.	ps \\n(tp
+.	sp .2v
+.	if \nQ .ds Qq \\*(h1-
+.	if e \{\
+.		ie \nQ \{\
+\f(HB\\*(Qq\\n%\fP\ \| \\*(BT
+.		sp -1v
+.		ta \\n(lxu+\\n(xiu
+\t\\*(CT
+.		re
+.		\}
+.		el \f(HB\\n%\fP\ \|\\*(BT
+.	\}
+.	if o \{\
+.		ie \nQ \{\
+\&\\*(CT
+.		sp -1v
+.               ta (\\n(lxu+\\n(xiu+\\n(LLu)R
+\t\\*(BT\ \|\f(HB\\*(Qq\\n%\fP
+.		re
+.		\}
+.		el \{\
+.               ta (\\n(lxu+\\n(xiu+\\n(LLu)R
+\t\\*(BT\ \|\f(HB\\*(Qq\\n%\fP\}
+.		\}
+.	\}
+.re
+..
+'\"	 .@n - internal - permits printing of .TS H (but not boxed tables)
+.rn @n n@
+.de @n
+.rn |h h&
+.rm |h
+.n@
+..
+'\"	 .$H - internal - top of page processing (-me)
+.de $H
+.ie \\n(kk .PD KK
+.el .ie o .po \\n(opu
+.el .po \\n(epu
+.if \\n(xy .if e .if \\n(Mw .po (\\n(.ou-(\\n(Mwu-\\n(LLu))
+.if \\n(?T .h&
+.if \nZ \{\
+.po \\n(Opu
+.if \\n(xy .po (\\n(Opu-(\\n(Mwu-\\n(LLu))\}
+..
+'\"	 .Pu - internal - save many settings for reuse
+.de Pu
+.nr [l \\n(.l
+.nr [i \\n(.i
+.nr [f \\n(.f
+.nr [s \\n(.s
+.nr [v \\n(.v
+.nr [j \\n(.j
+..
+'\"	 .Po - internal - pop settings saved with .Pu
+.de Po
+.ll \\n([lu
+'in \\n([iu
+.ft \\n([f
+.ps \\n([su
+.vs \\n([vu
+.ad \\n([j
+.rr [l
+.rr [i
+.rr [f
+.rr [s
+.rr [v
+.rr [j
+..
+'\"	 .PN - specify page# format and start - defaults to Arabic and 1
+.de PN
+.nr PN \\$1
+.ie \\n(.$-1 .af % \\$2
+.el .af % 1
+..
+'\"	 .L1 - first line of chapter title
+.de L1
+.di LN
+.if !\nZ .ad r
+.ps \\n(CP
+.vs \\n(.s
+\&\\$1\s\\n(Cp\\$2\s0\\$3\s\\n(Cp\\$4\s0\\$5\s\\n(Cp\\$6\s0\\$7\s\\n(Cp\\$8\s0
+.br
+.di
+..
+'\"	 .L2 - [second] line of chapter title
+.de L2
+.da LN
+\s(\\n(CP\&\\$1\s\\n(Cp\\$2\s0\\$3\s\\n(Cp\\$4\s0\\$5\s\\n(Cp\\$6\s0\\$7\s\\n(Cp\\$8\s0
+.br
+.da
+..
+'\"	 .L3 - [third] line of chapter title
+.de L3
+.da LN
+\s(\\n(CP\&\\$1\s\\n(Cp\\$2\s0\\$3\s\\n(Cp\\$4\s0\\$5\s\\n(Cp\\$6\s0\\$7\s\\n(Cp\\$8\s0
+.br
+.da
+..
+'\"	 .CH - chapter title
+.de CH
+.ie !\\n(PN .pa 1
+.el .pa \\n(PN
+.ie \w'\\*(h1' .ds hH \\*(h1-
+.el \{\
+.	ie '\\*(CT'Index' .ds hH I-
+.	el .ds hH \}
+.ie '\\$1'app' .ds cA APPENDIX \\*(h1
+.el .ds cA CHAPTER \\$1 \}
+.if "\\*(CT"Preface" .ds cA 
+.if "\\*(CT"Introduction" .ds cA
+.if "\\*(CT"Contents" .ds cA
+.if "\\*(CT"Permuted Index" .ds cA
+.if "\\*(CT"Index" .ds cA
+.if "\\$1"NT" .ds cA
+.ds Cx ".C0 "\\*(CT" \\*(h1
+.if \nC .tm \\*(Cx
+.rs
+.sp -(\\n(Cpp+\\n(tpp+2p)
+.mk
+.nf
+.ie !\nZ \
+.	LN
+.el \{\
+.	po \\n(opu
+.	in +(\\n(lxu+\\n(xiu)
+.	LN
+.	in -(\\n(lxu+\\n(xiu)
+.\}
+.if \w'\\*(h1' .if !\nZ\{\
+.	fi
+.	rt
+.	sp 7P
+.	ta (\\n(LLu+\\n(xiu+\\n(lxu)R
+.	nf
+\t\f4\s12\\*(cA\fP\s0
+.	fi
+.\}
+.if \nZ \{\
+.	fi
+.	rt
+.	sp 7P
+.	nf
+\f4\s12\\*(cA\fP\s0
+.	fi
+.\}
+.ad b
+.rm LN
+.sp |2i
+.ps \\n(TL
+.ie !\nZ \{\
+.	ta \\n(LLu+\\n(xiu
+\l'\\n(LLu'\t\l'\\n(lxu'
+.	\}
+.el \{\
+.	ta \\n(lxu+\\n(xiu
+\l'\\n(lxu'\t\l'\\n(LLu'
+.\}
+.sp |3.15i
+.nr [c 0
+.re
+.nr a$ 0 1
+.if \nZ .po \\n(Opu
+.lp
+..
+'\"	 .H - internal - heading diversion macro
+.de H
+.br
+.if \\n(kk .BP
+.nr h \\$1
+.ie \w'\\*(nH' .ds cY \\*(nH \\*(cZ
+.el .ds cY \\*(cZ
+.ds Cx ".C\\nh "\\*(cY"
+.lp
+.if !"\\n(.z"" .tm .z=\\n(.z
+.\".if !"\\n(.z"" .ab .H\\nh "\\*(cZ" illegal inside floating keeps -- EXITING
+.ce 0
+.nr hs \\n(S\\nhu
+.nr DL \\n(ML
+.Pu
+.ev 1
+.di [H
+.in 0
+.ft \\n(\\nhf
+.ps \\n(\\nhs
+.vs \\n(.s+2
+.ll \\n(lxu
+.nr v[ \\n(.v
+.fi
+.nh
+.na
+\s(\\n(DL\f3\l'\\n(lxu'\fP\s0
+.br
+.if \\n(.$-1 \&\\*(nH
+.br
+\&\\*(cZ
+.]H
+..
+'\"	 .H1 - first-level unnumbered heading
+.de H1
+.br
+.ds cZ "\\$1
+.H 1
+..
+'\"	 .H2 - second-level unnumbered heading
+.de H2
+.br
+.ds cZ "\\$1
+.H 2
+..
+'\"	 .H3 - third-level unnumbered heading
+.de H3
+.ce 0
+.in 0
+.if \\n(.t<4.1v .bp
+.ds Cx ".C3 "\&\\$1"
+.if \nC .tm \\*(Cx \\*(hH\\n%
+.sp \\n(S3u
+.ft \\n(3f
+.ps \\n(3s
+\&\\$1
+.br
+.lp
+..
+'\"	 .H4 - fourth-level unnumbered heading
+.de H4
+.lp
+.ce 0
+.in 0
+.ft \\n(3f
+.ps \\n(pp
+\&\\$1.\ \|\f1\c
+..
+'\"	 .H5 - fourth-level unnumbered heading
+.de H5
+.lp
+.ce 0
+.in 0
+.ft \\n(3f
+.ps \\n(pp
+\&\\$1.\ \|\f1\c
+..
+'\"	 .N1 - first-level numbered heading
+.de N1
+.br
+.ds nH \\*(h1.\\n+(a$
+.ds cX "\\$1
+.ds cZ \\*(cX
+.nr b$ 0 1
+.H 1 1
+..
+'\"	 .N2 - second-level numbered heading
+.de N2
+.br
+.ds nH \\*(h1.\\n(a$.\\n+(b$
+.ds cZ \\$1
+.nr c$ 0 1
+.H 2 2
+..
+'\"	 .N3 - third-level numbered heading
+.de N3
+.br
+.ds nH \\*(h1.\\n(a$.\\n(b$.\\n+(c$
+.ds cZ \\$1
+.ds Cx ".C3 "\\*(nH \&\\*(cZ"
+.if \nC .tm \\*(Cx \\*(hH\\n%
+.nr d$ 0 1
+.ce 0
+.in 0
+.ne 3.1v
+.sp \\n(S3u
+.ft \\n(3f
+.ps \\n(3s
+\&\\*(nH\ \|\\*(cZ
+.br
+.lp
+..
+'\"	 .N4 - fourth-level numbered heading
+.de N4
+.br
+.ds nH \\*(h1.\\n(a$.\\n(b$.\\n(c$.\\n+(d$
+.ds cZ \\$1
+.lp
+.ce 0
+.in 0
+.ft \\n(3f
+.ps \\n(pp
+\&\\*(nH\ \|\\$1.\ \|\f1\c
+..
+'\"	 .]H - internal - ends heading diversion
+.de ]H
+.br
+.di
+.nr [L \\n([l
+.if \\nh=1 \{\
+.ds R>
+.ds >R\}
+.if \\n(dn+2.1v>\\n(.t .BP
+.nf
+.ie o .po \\n(opu
+.el .po \\n(oPu
+.sp 2v
+.ie !\nZ \{\
+.	if o \s4\l'\\n(LLu'\s0
+.	if e \h'\\n(lxu+\\n(xiu'\s4\l'\\n(LLu'\s0\}
+.el \h'\\n(lxu'\s4\l'\\n(xiu+\\n(LLu'\s0
+'if o 'if !\nZ 'in +(\\n([Lu+\\n(xiu)
+'sp -(1v-0.5p)
+.mk U
+.if o .if !\nZ \{\
+.	di >H
+.	fi
+.	ad r
+.	[H
+.	br
+.	di
+.\}
+.if e .rn [H >H
+.if \nZ .rn [H >H
+.nf
+.>H
+.Po
+.nr mL \\n(nl
+.nr [d 2v+2.5p
+.if e .po \\n(epu
+.if \nZ .po \\n(Opu
+.sp |\\nUu+\\n([du
+.rr [d [L
+.if \nC .tm \\*(Cx \\*(hH\\n%
+.rm [H
+.rm >H
+.ad b
+.ev 0
+.if \\nh=1 \{\
+.ds R> \\*(cZ
+.ds >R (continued)\}
+.ns
+.lp
+..
+'\"	.Bp - clear running head and force page break
+.de Bp
+.br
+.rm R>
+.rm >R
+.rs
+.sp \\n(.t+1v
+..
+.de CL
+.rm R>
+.rm >R
+..
+'\"	 .RH - heading for routine names
+.de RH
+.lp
+.ce 0
+.nr hs \\n(S3u
+.if \\n(nl>\\n(tm .SP \\n(hsu
+.Pu
+.di [H
+.in 0
+.ft \\n(3f
+.ps \\n(3s
+.ll \\n(lxu
+.nr v[ \\n(.v
+.fi
+.na
+.nh
+\&\\$1
+.ds Cx ".C3 "\\$1"
+.]H
+..
+'\"	 .HD formats opcode headings: .HD mnemonic "Desc" "moreDesc"
+.de HD
+.ie \\n(.$-2 .ds cX \\$1 \\$3
+.el .ds cX \\$1
+.nr HD 1
+.ds R>
+.ds >R
+.nr [c 1
+.br
+.bp
+.ds R> "\\$1
+.ds >R (continued)
+.nr [c 0
+.Pu
+.ll \\n(lhu
+.if e .po \\n(opu
+.ps 18
+.vs 22
+.ft 7
+.ie o .tl @\\$2@@\\$1@
+.el .tl @\\$1@@\\$2@
+.if \\n(.$-2 .ie e .tl @@@\\$3@
+.el .tl @\\$3@@@
+.Po
+.po
+.if \nC \{\
+.       ie \\n(.$-2 .tm .C1 "\\$1\\$3" \\*(hH\\n%
+.       el .tm .C1 "\\$1" \\*(hH\\n%
+.\}
+.sp
+.lp
+..
+'\"	 .D1 & .D2 format graphics primitives
+.de D1
+.br
+.rs
+.ds cZ Class
+.H 2
+\s12\\$1\s0
+..
+.de D2
+.H2 "Value Returned"
+..
+'\"	 .BU - bullet list - may take ns arg to prevent spacing
+.de BU
+.ie t .ds Bu \(bu
+.el .ds Bu o
+.@p
+.if '\\$1'ns' \{\
+.	rs
+.	sp -\\n(psu \}
+.if '\\$1'hs' \{\
+.	rs
+.	sp -\\n(psu/2u \}
+.in \\n(i_u
+.nr i{ \\n(.i
+.ti -\\n(i_u
+\\*(Bu\h'|\\n(i_u'\c
+..
+'\"	 .SL - second-level list - may take ns arg to prevent spacing
+.de SL
+.ie t .ds sB \s6\(ci\s0
+.el .ds sB --
+.@p
+.ie '\\$1'ns' \{\
+.	rs
+.	sp -\\n(psu \}
+.el .ie '\\$1'hs' \{\
+.	rs
+.	sp -\\n(psu/2u \}
+.el \{\
+.	rs
+.	if \\n(nl>\\n(tm .sp -\\n(psu/2u \}
+.in \\n(i{u+\\n(i_u
+.nr i} \\n(.i
+.ti -\\n(i_u
+\\*(sB\h'|\\n(i_u'\c
+..
+'\"	 .TL - third-level list - may take ns arg to prevent spacing
+.de TL
+.ie t .ds tB \s8\(em\s0
+.el .ds tB -
+.@p
+.ie '\\$1'ns' \{\
+.	rs
+.	sp -\\n(psu \}
+.el .ie '\\$1'hs' \{\
+.	rs
+.	sp -\\n(psu/2u \}
+.el \{\
+.	rs
+.	if \\n(nl>\\n(tm .sp -\\n(psu/2u \}
+.in \\n(i}u+\\n(i_u
+.ti -\\n(i_u
+\\*(tB\h'|\\n(i_u'\c
+..
+'\"	 .NB - begin note, caution or warning .NB N|C|W
+.de NB
+.ie "\\$1"N" .ds No NOTE
+.el .ie "\\$1"C" .ds No CAUTION
+.el .ie "\\$1"W" .ds No WARNING
+.el .ds No \\$1
+.nr N \\n%
+.Pu
+.ev 1
+.di [N
+'in 0
+.ft \\n(NF
+.ps \\n(NS
+.vs \\n(NS
+'ll \\n(lxu
+'fi
+'nh
+'na
+\f7\&\\*(No\f1
+'ad l
+.br
+..
+'\"	 .NE - end note, caution or warning
+.de NE
+.br
+.di
+.nr [L \\n([l
+.nr Ml \\n(nlu-\\n(mLu
+.if (\\n(dn+2.1v>\\n(.t) .bp
+.if !\\n(Ml-0 .if \\n%=\nN .tm Check output from troff -- .NB page \\*(hH\\n%
+'nf
+.if e 'po \\n(oPu
+.if o .if !\nZ 'in +(\\n([Lu+\\n(xiu)
+.if \nZ .po \\n(opu
+'sp |\\n(nlu+4p
+'[N
+.Po
+.ad b
+.re
+.nr mL \\n(nl
+.if e 'po \\n(epu
+.if \nZ 'po \\n(Opu
+.ev 0
+.rm [N
+'sp -(\\n(dnu+4p)
+..
+'\"	 .PC - temp macro to illustrate omitted material
+.de PC
+.ce 0
+.(b
+.sp 2v
+.ft 3
+.ce
+TO BE ADDED *** TO BE ADDED ***
+.sp 2v
+.)b
+..
+'\"	 .Cs - begin constant space font
+.de Cs
+.nr Cs 1
+.ce 0
+.Pu
+.ft \\n(cF
+.ps \\n(cP
+.vs \\n(cV
+.lg 0
+.nf
+.TA xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx xxxxxxxx
+..
+'\"	 .Ce - end constant space font
+.de Ce
+.ce 0
+.Po
+.lg
+.re
+.rr Cs
+..
+'\"	 .P> - prompt string inside .Cs/.Ce pair
+.de P>
+.br
+\&\\$1\ \f6\\$2 \\$3 \\$4 \\$5 \\$6 \\$7 \\$8 \\$9\fP
+.br
+..
+'\"	 .(m - monospace displays for code listings, screen examples, etc.
+.de (m
+.ce 0
+.if \\n(kk 'bp
+.br
+.rr P$
+.if !'\\n(.z'' .ab Illegally nested keeps - EXITING - Check output
+.ne 4v
+.if e .if !\nZ .po \\n(epu
+.if \nZ .po \\n(Opu
+.br
+.@C 1
+.di ]M
+.nr xy 1
+.sp \\n(psu
+.Cs
+.in \\n(.iu
+..
+'\"	 .)m - end monospace listing
+.de )m
+.br
+.di
+.if \\n(dl>\\n(.l .nr Mw \\n(dl-\\n(.H
+.if e .if \\n(Mw .po (\\n(.ou-(\\n(Mwu-\\n(LLu))
+.if \nZ .if o .if \\n(Mw .po (\\n(.ou-(\\n(Mwu-\\n(LLu))
+.nf
+.]M
+.rm ]M
+.Ce
+.ft 1
+.if e .if !\nZ .po \\n(epu
+.if \nZ .po \\n(Opu
+.ev 0
+.rr xy Mw
+.if \\n($p .nr P$ \\n($p
+.lp
+.if \\n(P$ .nr $p \\n(P$
+..
+'\"	 .SP - internal spacing - throws out smaller of two stacked requests
+.de SP
+.br
+.nr ;4 0
+.if \\n(.$ .nr ;4 \\$1v
+.if !(\\n(nl=\\n(:N) .nr :A 0
+.nr ;4 -\\n(:Au
+.if \\n(;4 \{\
+.	sp \\n(;4u
+.	nr :A +\\n(;4u
+.\}
+.nr :N \\n(nl
+..
+'\"	 .TA - set tabs by example - use .re (-me) to reset to default
+.de TA
+.ta \w'\\$1'u +\w'\\$2'u +\w'\\$3'u +\w'\\$4'u +\w'\\$5'u +\w'\\$6'u +\w'\\$7'u +\w'\\$8'u
+..
+'\"	 .SM - print arg one size smaller
+.de SM
+.if '\\n(.$'1' \s-1\&\\$1\s0
+.if '\\n(.$'2' \s-1\&\\$1\s0\&\\$2
+.if '\\n(.$'3' \&\\$1\s-1\&\\$2\s0\&\\$3
+..
+'\"	 .R - change to text font
+.de R
+.ft 1
+..
+'\"	 .I - change to italic-text font
+.de I
+.if !\\n(.$ .ft 2
+.if '\\n(.$'1' \f2\&\\$1\fP
+.if '\\n(.$'2' \f2\&\\$1\fP\&\\$2
+.if '\\n(.$'3' \&\\$1\f2\&\\$2\fP\&\\$3
+..
+'\"	 .B - change to bold-text font
+.de B
+.if !\\n(.$ .ft 3
+.if '\\n(.$'1' \f3\&\\$1\fP
+.if '\\n(.$'2' \f3\&\\$1\fP\&\\$2
+.if '\\n(.$'3' \&\\$1\f3\&\\$2\fP\&\\$3
+..
+'\"	 table of contents format macros: SC, C0, C1, C2, C3, LT, LF
+'\"	 .SC - toc section entry: .SC # "Title"
+.de SC
+.br
+.nf
+.rm hH
+.ll \n(.lu
+.lt \n(.lu
+.SP \\n(S1u
+.ft 3
+.ps 14
+.in 0
+'tl @\h'2P'\s18Section\ \&\\$1\s0@@\&\\$2@
+'sp -0.8v
+\l'\\n(.lu\(ul'
+.SP \\n(S1u/2u
+.br
+..
+'\"	 .C0 - toc chap title: .C0 chap# "Chap Title"
+.de C0
+.nf
+.rm hH
+.if "\\$1"Preface" .nr pR 1
+.if "\\$1"Notation Conventions" .nr nR 1
+.ll \n(.lu
+.lt \n(.lu
+.ie \\n(nR .SP \\n(S1u
+.el .SP (\\n(S1+1v)u
+.ft 3
+.ps 12
+.in 0
+'tl @\h'2P'\s18\&\\$2\s0@@\&\\$1@
+.if !(\\n(pR:\\n(nR) \{\
+'	sp -0.8v
+\l'\\n(.lu\(ul'
+.\}
+.if \\n(pR .rr pR
+.if \\n(nR .rr nR
+.br
+..
+.de >I
+.ta \n(.lu-2P-\w'00-000'u \n(.lu-2PR-.001i
+.ie \w'\\$1\t\\$2'u>(\\n(LL-1.5P) \{\
+.	nr >I \\n(.i
+.	ll (\\n(LLu-4P)
+.	fi
+.	na
+.	nh
+.	in 5P
+.	ti \\n(>Iu
+.	ta \n(.lu-2PR-.001i
+\&\\$1\h'|(\\n(LL-\w'\\$2'u)'\\$2
+.	ll \\n(LLu
+.	in \\n(>Iu\}
+.el \{\
+.	ta \n(.lu-2P-\w'00-000'u \n(.lu-2PR-.001i
+#\&\\$1\a\t\\$2\t#\}
+.br
+..
+'\"	 .C1 - toc chap 1-head: .C1 "First Level Heading" Page#
+.de C1
+.nf
+.rm hH
+.ll \n(.lu-2P
+.fc # ^
+.lc
+.ft 1
+.ps 10
+.in +2P
+.ta \n(.lu-2P-\w'00-000'u \n(.lu-2PR-.001i
+#\&\\$1\a\t\\$2\t#
+.br
+.in -2P
+..
+'\"	 .C2 - toc chap 2-head: .C2 "Second Level Heading" Page#
+.de C2
+.nf
+.rm hH
+.ll \n(.lu-3P
+.fc # ^
+.lc
+.ft 1
+.ps 10
+.in +3P
+.ta \n(.lu-3P-\w'00-000'u \n(.lu-3PR-.001i
+#\&\\$1\a\t\\$2\t#
+.br
+.in -3P
+..
+'\"	 .C3 - toc chap 3-head: .C3 "Third Level Heading" Page#
+.de C3
+.nf
+.rm hH
+.ll \n(.lu-4P
+.fc # ^
+.lc
+.ft 1
+.ps 10
+.in +4P
+.ta \n(.lu-4P-\w'00-000'u \n(.lu-4PR-.001i
+#\&\\$1\a\t\\$2\t#
+.br
+.in -4P
+..
+'\"	 .LT - toc list of tables: .LT "Table Title" Page#
+.de LT
+.C1 "\\$1" "\\$2"
+..
+'\"	 .LF - toc list of figures: .LF "Figure Title" Page#
+.de LF
+.C1 "\\$1" "\\$2"
+..
+'\"	 index macros follow: .I1 .I2 .IH .IX (others may follow)
+'\"	 .I1 - first level entry
+.de I1
+.ce 0
+.ns
+.@p
+.in +4n
+.ti 0
+.if \\n(.$-0 .ds iX \\$1\h'2n'
+.if \\n(.$-1 .ds iX \\$1 \\$2\h'2n'
+.if \\n(.$-2 .ds iX \\$1 \\$2 \\$3\h'2n'
+.if \\n(.$-3 .ds iX \\$1 \\$2 \\$3 \\$4\h'2n'
+.if \\n(.$-4 .ds iX \\$1 \\$2 \\$3 \\$4 \\$5\h'2n'
+.if \\n(.$-5 .ds iX \\$1 \\$2 \\$3 \\$4 \\$5 \\$6\h'2n'
+.if \\n(.$-6 .ds iX \\$1 \\$2 \\$3 \\$4 \\$5 \\$6 \\$7\h'2n'
+.if \\n(.$-7 .ds iX \\$1 \\$2 \\$3 \\$4 \\$5 \\$6 \\$7 \\$8\h'2n'
+.if \\n(.$-8 .ds iX \\$1 \\$2 \\$3 \\$4 \\$5 \\$6 \\$7 \\$8 \\$9\h'2n'
+\&\\*(iX
+..
+'\"	 .I2 - prints second-level entries
+.de I2
+.ce 0
+.ns
+.@p
+.in +4n
+.ti 2n
+.if \\n(.$-0 .ds iX \\$1\h'2n'
+.if \\n(.$-1 .ds iX \\$1 \\$2\h'2n'
+.if \\n(.$-2 .ds iX \\$1 \\$2 \\$3\h'2n'
+.if \\n(.$-3 .ds iX \\$1 \\$2 \\$3 \\$4\h'2n'
+.if \\n(.$-4 .ds iX \\$1 \\$2 \\$3 \\$4 \\$5\h'2n'
+.if \\n(.$-5 .ds iX \\$1 \\$2 \\$3 \\$4 \\$5 \\$6\h'2n'
+.if \\n(.$-6 .ds iX \\$1 \\$2 \\$3 \\$4 \\$5 \\$6 \\$7\h'2n'
+.if \\n(.$-7 .ds iX \\$1 \\$2 \\$3 \\$4 \\$5 \\$6 \\$7 \\$8\h'2n'
+.if \\n(.$-8 .ds iX \\$1 \\$2 \\$3 \\$4 \\$5 \\$6 \\$7 \\$8 \\$9\h'2n'
+\&\\*(iX
+..
+'\"	 .IH - prints alpha headings
+.de IH
+.ce 0
+.@p
+.sz +6
+.ft 3
+.ne 4v
+\\$1
+.lp
+..
+'\"	 .IX - generates index file
+'\"	 .IN - generates index file for X11r2
+.if !\nX .ig
+.de IX
+.if \\n(.$=1 \
+.	tm \\$1@\\*(h1@\\n%
+.if \\n(.$=2 \{\
+.	tm \\$1 \\$2@\\*(h1@\\n%
+.	tm \\$2, \\$1@\\*(h1@\\n%
+.\}
+.if \\n(.$=3 \{\
+.	tm \\$1 \\$2 \\$3@\\*(h1@\\n%
+.	tm \\$3, \\$1 \\$2@\\*(h1@\\n%
+.\}
+.if \\n(.$=4 \{\
+.	tm \\$1 \\$2 \\$3 \\$4@\\*(h1@\\n%
+.	tm \\$4, \\$1 \\$2 \\$3@\\*(h1@\\n%
+.\}
+..
+.if !\nX .ig
+.de IN
+.if \\n(.$ \
+.	tm \\$1@\\*(h1@\\n%
+..
+'\"	redefine .bx to use keycapfont
+.de bx
+.nr >f \\n(.f
+.nr >s \\n(.s
+.ps 10
+.ft Kc
+.ie \\n(.$-1 \
+\\$1\|\s\\n(>s\f\\n(>f\\$2
+.el \{\
+\\$1
+.ps \\n(>s
+.ft \\n(>f
+.\}
+.rr >s >f
+..
+'\"	 .AS and .AP - added for Xwindow dox
+.de AS
+.nr )A 10n
+.if !"\\$1"" .nr )A \w'\\$1'u+3n
+.nr )B \\n()Au+15n
+.if !"\\$2"" .nr )B \w'\\$2'u+\\n()Au+3n
+.nr )C \\n()Bu+\w'(in/out)'u+2n
+..
+.de AP
+.in 0
+.sp \\n(psu/2u
+'in +\\n()Cu
+'ti 0
+.ie !"\\$3"" \{\
+.	ta \\n()Au \\n()Bu \\n()Cu
+\&\\$1\t\f2\\$2\fP\t(\\$3)\t\c
+.	\}
+.el \{\
+.	br
+.	ie !"\\$2"" \{\
+\&\\$1\t\f2\\$2\fP\t\c
+.	\}
+.	el \{\
+\&\f2\\$1\fP\t\c
+.	\}
+.\}
+..
+'\"	macro to include notes to reviewers in text
+.de Rn
+.ie \nR \{\
+.NB "\f(Bx\s+9REVIEWER NOTE\s-9"
+\\$1
+.NE
+.\}
+.el .ig
+..
+'\"	macro to format bug reports for Release Notes
+.de BR
+.lp
+.ce 0
+.in 0
+.ft \\n(3f
+.ps \\n(pp
+\&\\$1\ \|\f4\&\\$2\f1
+.ip
+.if \nB .tm .XB "\\$2" [\\$1] \\n%
+..
+'\"	macro to format bug report index
+.de XB
+.nf
+.rm hH
+.ll \n(.lu-3P
+.fc # ^
+.lc
+.ft 1
+.ps 10
+.in +3P
+.ta \n(.lu-3P-\w'00-000'u \n(.lu-3PR-.001i
+#\&\\$1 \\$2\a\t\\$3\t#
+.br
+.in -3P
+..
+.de Pf \"read in PostScript file $1; save vert space $2; indent from left $3
+.br
+\!!
+\!!/SaVeAll save def
+\!!\\n(.o \\n(.i add 10 div \\$3 72 mul add \\n(.d 10 div neg translate
+.cf \\$1
+\!!clear
+\!!SaVeAll restore
+.rs
+.sp \\$2
+..
+.nr ]m \n(.pu-(\n(tmu+\n(bmu)	\"image area of page
+.so ../macros/local.strings
+.so ../macros/local.keeps
+.so ../macros/local.lists
+.so ../macros/local.date
+.if !\nM .ig IG
+.tm this is local.man.dore
+.de TH
+.tm calling TH
+.ie \\n(.$-2 .ds cX \\$1 \\$3
+.el .ds cX \\$1
+.ds cZ "\\$1
+.nr HD 1
+.ds R>
+.ds >R
+.nr [c 1
+.br
+.bp
+.ds R> "\\$1
+.ds >R (continued)
+.nr [c 0
+.Pu
+.ll \\n(lhu
+.if e .po \\n(opu
+.ps 18
+.vs 22
+.ft 7
+.ie o .tl @@@\\$1@
+.el .tl @\\$1@@@
+.Po
+.po
+.if \nC \{\
+.       ie \\n(.$-2 .tm .C1 "\\$1\\$3" \\*(hH\\n%
+.       el .tm .C1 "\\$1" \\*(hH\\n%
+.\}
+.sp
+.lp
+..
+.de SH
+.br
+.H 1
+..
+'	# reset the basic page layout
+.de }E
+.}f
+'in \\n()Ru+\\n(INu
+'ll \\n(LLu
+..
+'	# set type font and size
+.de }f
+.ps 10
+.ft 1
+..
+'	# sub section heading
+.de SS
+.}X 0
+\&\\$1 \|\\$2 \|\\$3 \|\\$4 \|\\$5 \|\\$6
+.br
+..
+'	# subroutine for section heading
+.de }X
+.}E
+.ti \\$1
+.sp \\n()Pu
+.ne 2.1
+.nr )R \\n(r$
+'fi
+.ss 12
+.if \\$2SYNOPSIS .ss 18
+.it 1 }N
+.ft 8
+..
+'	# roman (text)
+.de I
+.ft 1
+.it 1 }N
+.if !"\\$1"" \&\\$1 \\$2 \\$3 \\$4 \\$5 \\$6
+..
+'	# italic
+.de I
+.ft 2
+.it 1 }N
+.if !"\\$1"" \&\\$1 \\$2 \\$3 \\$4 \\$5 \\$6
+..
+'	# bold
+.de B
+.ft 3
+.it 1 }N
+.if !"\\$1"" \&\\$1 \\$2 \\$3 \\$4 \\$5 \\$6
+..
+'	# small
+.de SM
+.ps 9
+.it 1 }N
+.if !"\\$1"" \&\\$1 \\$2 \\$3 \\$4 \\$5 \\$6
+..
+'	# combinations of Roman, italic, bold
+.de RI
+.}S 1 2 \& "\\$1" "\\$2" "\\$3" "\\$4" "\\$5" "\\$6"
+..
+.de VS
+'if '\\$1'4' .mc \s12\(br\s0
+..
+.de VE
+'mc
+..
+.de RB
+.}S 1 3 \& "\\$1" "\\$2" "\\$3" "\\$4" "\\$5" "\\$6"
+..
+.de IR
+.}S 2 1 \& "\\$1" "\\$2" "\\$3" "\\$4" "\\$5" "\\$6"
+..
+.de IB
+.}S 2 3 \& "\\$1" "\\$2" "\\$3" "\\$4" "\\$5" "\\$6"
+..
+.de BR
+.}S 3 1 \& "\\$1" "\\$2" "\\$3" "\\$4" "\\$5" "\\$6"
+..
+.de BI
+.}S 3 2 \& "\\$1" "\\$2" "\\$3" "\\$4" "\\$5" "\\$6"
+..
+'	# make special case of shift out of italic
+.de }S
+.ds ]F
+.if "\\$1"2" .if !"\\$5"" .ds ]F\^
+.ie !"\\$4"" .}S \\$2 \\$1 "\\$3\f\\$1\\$4\\*(]F" "\\$5" "\\$6" "\\$7" "\\$8" "\\$9"
+.el \\$3
+.}f
+..
+'	# paragraph
+.de LP
+.PP
+..
+.de P
+.PP
+..
+.de PP
+.sp \\n()Pu
+.ne 2.1
+.}E
+.nr )I \\n(i$
+.ns
+..
+'	# paragraph distance
+.de PD
+.if t .nr )P .4v
+.if n .nr )P 1v
+.if !"\\$1"" .nr )P \\$1v
+..
+'	# hanging indent
+.de HP
+.sp \\n()Pu
+.ne 2.1
+.if !"\\$1"" .nr )I \\$1n
+.\"	.el .nr )I \\n(i$n
+.ll \\n(LLu
+.in \\n()Ru+\\n(INu+\\n()Iu
+.ti \\n()Ru+\\n(INu
+.}f
+..
+'	# indented paragraph
+.de IP
+.TP \\$2
+\&\\$1
+..
+'	# hanging label
+.de TP
+.if !"\\$1"" .nr )I \\$1n
+.sp \\n()Pu
+.in \\n()Ru
+.ne 2.1
+.nr )E 1
+.ns
+.it 1 }N
+.\".di ]B
+..
+'	# end of TP (cf }N below)
+.de }1
+.ds ]X \&\\*(]B\\
+.nr )E 0
+.if !"\\$1"" .nr )I \\$1n
+.}f
+.ll \\n(LLu
+.in \\n()Ru+\\n(INu+\\n()Iu
+.ti \\n(INu
+.ie !\\n()Iu+\\n()Ru-\w\\*(]Xu-3p \{\\*(]X
+.br\}
+.el \\*(]X\h|\\n()Iu+\\n()Ru\c
+.}f
+..
+'	# handle end of 1-line features
+.de }N
+.if \\n()E .br
+.di
+.if "\\n()E"0" .}f
+.if "\\n()E"1" .}1
+.if "\\n()E"2" .}2
+.nr )E 0
+..
+'	# increase relative indent
+.de RS
+.nr ]\\n+()p \\n()I
+.nr )\\n()p \\n()R
+.ie !"\\$1"" .nr )R +\\$1n
+.el .nr )R +\\n()I
+.nr )I \\n(i$u
+.}E
+..
+'	# decrease relative indent
+.de RE
+.if !"\\$1"" \{.ie "\\$1"0" .nr )p 1 1
+.		el .nr )p \\$1 1\}
+.ds ]i \\*(]I\\n()p
+.ds ]r \\*(]R\\n()p
+.nr )I \\*(]i
+.nr )R \\*(]r
+.if \\n()p .nr )p -1
+.}E
+..
+.nr r$ (1.25i-5n)u	\"value of nr)R - major indent - PAusick 2/87
+.nr i$ 5n		\"value of nr)I - relative indent - PAusick 2/87
+.if t .po 1i
+.nr )p 0 1
+.ds ]I \\\\n(]
+.ds ]R \\\\n()
+.bd S 3 3
+.ds S \s10
+.hy 14
+.IG
+'\"	 end of mandc macros
+'\"	 end of local.me.PS

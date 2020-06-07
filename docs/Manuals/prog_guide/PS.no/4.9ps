@@ -1,0 +1,32 @@
+!md begin
+!/note {} def
+!/legal {} def
+!md /lnop known not { /lnop [ {} ] cvx def } if
+!/bigs [lnop lnop lnop lnop lnop lnop lnop lnop] def
+!/smalls [lnop lnop lnop lnop lnop lnop lnop lnop] def
+!/cp {pm restore pop pop} def
+!
+!T T -31 -30 761 582 100 72 72 1 F F F F T T psu
+!(Aaron Black; document: Unspecified)jn
+!0 mf
+!od
+!op
+!0 0 xl
+!0 72 mul -0.6 72 mul translate
+!0.25 0.25 scale
+!1 1 pen
+!0 0 gm
+!(nc 0 0 720 540 6 rc)kp
+!72.5 0.5 288.5 216.5 0 rc
+!0.5 72.5 216.5 288.5 0 rc
+!0 72 gm
+!72 0 lin
+!216 288 gm
+!288 216 lin
+!0 288 gm
+!72 216 lin
+!216 72 gm
+!288 0 lin
+!F T cp
+!cd
+!end

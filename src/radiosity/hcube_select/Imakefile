@@ -1,0 +1,13 @@
+#include <Dore.tmpl>
+
+    SRCS = hcs_lcswcs.c hcs_method.c hcs_simply.c hcs_simplymsh.c \
+           hcs_trilst.c hcs_trimsh.c hcs_tristrip.c hcs_varsplymsh.c \
+	   hcs_vartrimsh.c hcs_vartristrp.c
+    OBJS = hcs_lcswcs.o hcs_method.o hcs_simply.o hcs_simplymsh.o \
+           hcs_trilst.o hcs_trimsh.o hcs_tristrip.o hcs_varsplymsh.o \
+	   hcs_vartrimsh.o hcs_vartristrp.o
+
+LibraryObjectRule()
+SubdirLibraryRule($(OBJS))
+
+DependTarget()

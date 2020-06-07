@@ -1,0 +1,7 @@
+#include <Dore.tmpl>
+#define	IHaveSubdirs
+
+SUBDIRS = /* develop_guide prog_guide ref_manual sys_guide */
+
+MakeSubdirs($(SUBDIRS))
+DependSubdirs($(SUBDIRS))

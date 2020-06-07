@@ -1,0 +1,86 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DsTextureUVCount 3D "Dore"
+.SH NAME
+DsTextureUVCount \- Set the number of \f2uv\fP sets in the vertex type specification
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+DtInt DsTextureUVCount(count)
+DtInt count;
+.sp
+.in  -.5i
+FORTRAN:
+.in  +.5i
+INTEGER*4 DSTUVC(COUNT)
+INTEGER*4 COUNT
+.in  -.5i
+.fi 
+.IX "DsTextureUVCount"
+.IX "DSTUVC"
+.SH DESCRIPTION
+.LP
+\f2DsTextureUVCount\fP is a system function that returns 
+a value to be combined by a bitwise \f2or\fP
+with a base vertex type to create a new vertex type
+that includes \f2uv\fP coordinates.
+The new vertex type is specified when primitive objects
+requiring the specification of vertices are created.
+The parameter \f2count\fP specifies the number of \f2uv\fP coordinates 
+that are present for each vertex in the vertex list.
+For example, if the vertices of a primitive were to contain locations,
+normals, and 2 \f2uv\fP coordinates, 
+you could set the vertex type in C with
+FORTRAN with
+IOR(DCLN, DSTUVC(2).
+Each vertex in this example requires ten \f2DtReal <REAL*8>\fP values.
+Thus, for vertex \f2n\fP the array would look like:
+.sp
+.nf
+.in  +.5i
+vertices[10*n+0] = x
+vertices[10*n+1] = y
+vertices[10*n+2] = z
+vertices[10*n+3] = nx
+vertices[10*n+4] = ny
+vertices[10*n+5] = nz
+vertices[10*n+6] = u1
+vertices[10*n+7] = v1
+vertices[10*n+8] = u2
+vertices[10*n+9] = v2
+.in  -.5i
+.fi
+.sp
+where the position of vertex \f2n\fP is (x,y,z), the normal is (nx, ny, nz),
+the first \f2uv\fP coordinate is (u1,v1), and the second \f2uv\fP coordinate is
+(u2,v2).
+.LP
+Note that a vertex type may include \f2uvw\fP coordinates in addition to
+\f2uv\fP coordinates.
+In that case both \f2DsTextureUVWCount\fP <\f2DSTWC\fP> and 
+\f2DsTextureUVCount\fP are used in conjunction with the base vertex
+type, and in the vertex array all the \f2uv\fP coordinates of a vertex
+come before the \f2uvw\fP coordinates for that vertex.
+.SH SEE ALSO
+.na
+.nh
+DsTextureUVWCount(3D), VertexTypes(3D)
+.ad
+.hy
+\&

@@ -1,0 +1,9 @@
+#!/bin/sh
+
+FILES=${@:-"ch?? appA chcon  title "}
+
+for file in $FILES 
+do
+	echo "Processing $file"
+	groff -Tps -me $file > $file.ps
+done

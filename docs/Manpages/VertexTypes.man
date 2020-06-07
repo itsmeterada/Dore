@@ -1,0 +1,110 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH VertexTypes 3D "Dore"
+.SH NAME
+VertexTypes \- An explanation of Dore primitive vertex types
+.SH DESCRIPTION
+The information in this 
+manual page pertains to most Dore primitive objects.
+Notable exceptions are variable data primitives (\f2DoVar-\fP <\f2DOV-\fP>
+functions), which use a different syntax to obtain vertex information,
+and \f2DoPrimSurf\fP <\f2DOPMS\fP> primitives, which do not allow
+user-defined vertex information.
+.PP
+When entering primitive object data into the Dore database, 
+you may provide information about vertex normals, vertex colors,
+vertex alpha, 
+\f2uv\fP coordinates, and \f2uvw\fP coordinates.
+This additional information is used by Dore to more accurately
+shade the object during rendering.
+.PP
+When a Dore primitive object is created, all the vertex data 
+(locations, normals, colors, alpha, \f2uv\fP coordinates, and \f2uvw\fP
+coordinates) are specified in a single
+array.  A base \f2vertextype\fP parameter must be set to reflect the
+type of information supplied for each vertex.
+(Note that these color counts assume a color model
+that requires three components per vertex, such as
+the RGB color model.)
+The following table lists the possible constant values for \f2vertextype\fP:
+.sp .25i
+.nf
+.ta 1i 2i
+Value of \f2vertextype\fP	Vertex Information Supplied
+
+\f2DcLoc\fP <\f2DCL\fP>               Only vertex location
+\f2DcLocNrm\fP <\f2DCLN\fP>	      Location and normal 
+\f2DcLocClr\fP <\f2DCLC\fP>	      Location and color 
+\f2DcLocNrmClr\fP <\f2DCLNC\fP>	      Location, normal and color
+\f2DcLocAlpha\fP <\f2DCLA\fP>	      Location and alpha
+\f2DcLocNrmAlpha\fP <\f2DCLNA\fP>     Location, normal and alpha
+\f2DcLocClrAlpha\fP <\f2DCLCA\fP>     Location, color and alpha
+\f2DcLocNrmClrAlpha\fP <\f2DCLNCA\fP> Location, normal, color and alpha
+.re
+.fi
+.PP
+Locations are specified as three floating point values (x,y,z) for
+each vertex.  Normals and colors are also specified as three
+floating point values.  Note that Dore assumes a color model
+that requires three components per vertex, such as
+the RGB color model.  Alpha (or transparency) values
+are specified as one floating point value per vertex.
+.PP
+Vertex normals \f2must\fP be unit vectors (of length one).
+Normals that are not unit vectors will produce improper shading.
+.PP
+The Dore functions \f2DsTextureUVCount\fP <\f2DSTUVC\fP> and
+\f2DsTextureUVWCount\fP <\f2DSTWC\fP> can be used in conjunction
+with a base \f2vertextype\fP parameter to specify a new vertex type
+that includes \f2uv\fP and/or \f2uvw\fP coordinates.
+The new vertex type is specified by ORing one of the base vertex
+values with the above named functions.  Both \f2DsTextureUVCount\fP
+<\f2DSTUVC\fP> and \f2DsTextureUVWCount\fP <\f2DSTWC\fP> take a
+parameter, \f2count\fP, which specifies how many sets of \f2uv\fP
+or \f2uvw\fP coordinates are specified for each vertex in the vertex list.
+.PP
+As an example, consider the following vertex type specification
+within a \f2DoTriangleList\fP <\f2DOTRIL\fP> function.
+In C:
+\f2
+.nf
+
+DoTriangleList(DcRGB, DcLocClr | DsTextureUVCount(2), tri_cnt, vert)\fP
+
+FORTRAN:
+
+DOTRIL (DCRGB, IOR (DCLC, DSTUVC(2)) TCNT, VERT)
+
+.fi
+In this function, the vertex type specifies that each vertex
+is defined by ten \f2DtReal\fP \f2<REAL*8>\fP values:
+.nf
+
+        an ordered triple specifying the vertex position
+        an ordered triple specifying the red, green and blue values
+        two ordered pairs specifying \f2uv\fP coordinates
+
+.fi
+If the value of \f2tri_cnt\fP in this example were fifteen, the
+array \f2vert\fP would contain 150 \f2DtReal\fP \f2<REAL*8>\fP values.
+.PP
+A vertex type may specify both \f2uv\fP and \f2uvw\fP coordinates.
+Associated vertex arrays would list \f2uv\fP data before
+\f2uvw\fP data.
+.PP
+Examples of various vertex arrays can be found in Chapter 4
+of the \f2Dore Programmer's Guide\fP.

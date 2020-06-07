@@ -1,0 +1,76 @@
+!md begin
+!/note {} def
+!/legal {} def
+!md /lnop known not { /lnop [ {} ] cvx def } if
+!/bigs [lnop lnop lnop lnop lnop lnop lnop lnop] def
+!/smalls [lnop lnop lnop lnop lnop lnop lnop lnop] def
+!/cp {pm restore pop pop} def
+!
+!T T -46 -44 1136 869 67 72 72 1 F F F F T T psu
+!(TechPubs#1; document: 7-5ExitingGroupPopping)jn
+!0 mf
+!od
+!op
+!0 0 xl
+!0 72 mul -1.25 72 mul translate
+!1 1 scale
+!1 1 pen
+!0 0 gm
+!(nc 0 0 1090 825 6 rc)kp
+!64 gr
+!71 185 108 281 4 rc
+!0 gr
+!71.5 185.5 107.5 280.5 0 rc
+!64 gr
+!78 72 97 154 2 rc
+!90 73 gm
+!(nc 78 72 97 154 6 rc)kp
+!bu fc
+!{}mark T /Helvetica /Helvetica 0 rf
+!bn
+!1 setTxMode
+!0 fs
+!12.47991 fz
+!bu fc
+!2 F /Helvetica fnt
+!bn
+!1.99462 0. 32 0.19946 0.(Top Of Stack)awidthshow
+!109 73 gm
+!(nc 0 0 1090 825 6 rc)kp
+!64 gr
+!79 218 98 246 2 rc
+!91 220 gm
+!(nc 79 218 98 246 6 rc)kp
+!0 gr
+!-0.66999 0.(PTM)ashow
+!0 0 pen
+!110 232 gm
+!(nc 0 0 1090 825 6 rc)kp
+!110 232 lin
+!nc ct 39 0 put
+!1 1 pen
+!86 185 gm
+!pr
+!86 185 pl
+!89 176 pl
+!83 176 pl
+!86 185 pl
+!1 ep
+!pr
+!86 185 pl
+!89 176 pl
+!83 176 pl
+!86 185 pl
+!0 ep
+!86 163 gm
+!pt
+!86 177 pl
+!rh
+!ef
+!eu
+!(nc 0 0 1090 825 6 rc)kp
+!0 0 pen
+!86 177 lin
+!F T cp
+!cd
+!end

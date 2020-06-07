@@ -1,0 +1,47 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DoGlbRendMaxSub 3D "Dore"
+.SH NAME
+DoGlbRendMaxSub \- Create a studio attribute object that defines the maximum number of subdivisions for global ray tracing
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+DtObject DoGlbRendMaxSub(maxsub)
+DtInt maxsub;
+.sp
+.in -.5i
+FORTRAN:
+.in +.5i
+INTEGER*4 DOGRMS(MAXSUB)
+INTEGER*4 MAXSUB
+.in -.5i
+.fi
+.SH DESCRIPTION
+.IX DOGRMS
+.IX DoGlbRendMaxSub
+.I DoGlbRendMaxSub
+creates a studio attribute object that defines the maximum number of
+branch subdivisions for global ray tracing.
+The parameter \f2maxsub\fP specifies the maximum level of
+adaptive spatial subdivision prior to ray tracing.  See
+\f2DoGlbRendMaxObjs\fP for a detailed explanation of spatial subdivision.
+.SH DEFAULTS
+The default value for \f2DoGlbRendMaxSub\fP is 10.
+.SH "SEE ALSO"
+DoGlbRendMaxObjs(3D), DoGlbRendRayLevel(3D)

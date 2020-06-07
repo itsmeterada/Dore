@@ -1,0 +1,11 @@
+#include <Dore.tmpl>
+
+#define	IHaveSubdirs
+
+ SUBDIRS = private
+ HEADERS = develop.h error.h
+
+AllTarget()
+BuildIncludes($(HEADERS),dore_develop,..)
+/* InstallMultipleFlags($(HEADERS),$(INCDIR)/dore_internal,$(INSTINCFLAGS)) */
+DependTarget()

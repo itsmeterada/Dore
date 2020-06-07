@@ -1,0 +1,104 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DoGlbRendMaxObjs 3D "Dore"
+.SH NAME
+DoGlbRendMaxObjs \- Create a studio attribute object that defines the maximum number of objects per spatial subdivision for global ray tracing
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+DtObject DoGlbRendMaxObjs(maxobjs)
+DtInt maxobjs;
+.sp
+.in -.5i
+FORTRAN:
+.in +.5i
+INTEGER*4 DOGRMO(MAXOBJ)
+INTEGER*4 MAXOBJ
+.in -.5i
+.fi
+.SH DESCRIPTION
+.IX DOGRMO
+.IX DoGlbRendMaxObjs
+.I DoGlbRendMaxObjs
+creates a studio attribute object that defines the maximum number of objects
+per spatial subdivision for global ray tracing.
+The parameter \f2maxobjs\fP specifies the maximum number of
+geometric entities allowed per spatial subdivision 
+prior to ray tracing.
+.PP
+\f2DoGlbRendMaxObjs\fP affects only renderers that use ray tracing.
+The rendering style is set with \f2DvSetRendStyle\fP <\f2DVSRS\fP>.
+.PP
+Ray tracing is the process of determining which objects in the scene
+are in the path of an arbitrary vector (ray) in space.
+Ray casting is used in the generation of global shading
+effects like shadows, object-to-object reflections, and
+transparency.
+.PP
+Many renderers use a ray tracing algorithm 
+based on spatial subdivisions to  
+facilitate the ray tracing process in complex scenes containing 
+many geometric entities. 
+A preprocessing step is performed on the scene
+to collect information about all geometric entities in the environment and
+then to perform a regular binary subdivision of all space containing geometric
+entities.  
+.PP
+The subdivision creates a three-dimensional
+grid of boxes; i.e, the first level subdivision creates 8 equal boxes placed 2
+wide by 2 high by 2 deep. 
+The second level subdivision, if fully subdivided, 
+creates 64
+boxes, and so on.
+Each box can contain 0 or more geometric entities with
+more boxes wherever the density of geometric entities is higher.
+.PP
+In Dore, the amount of spatial subdivision performed is
+controlled by these factors (the latter two 
+factors have user-defined control):
+.PP
+.IP
+The number, density, and distribution of geometric 
+entities in the scene.
+.IP
+The maximum number of geometric entries
+allowed per spatial subdivision, using \f2DoGlbRendMaxObjs\fP.
+.IP
+The maximum number of subdivisions allowed, using
+\f2DoGlbRendMaxSub\fP <\f2DOGRMS\fP>.
+.PP
+\f2DoGlbRendMaxObjs\fP determines the maximum number of geometric entities that
+a box may contain without being further subdivided.  For example, if the
+maximum number is set to 2, then boxes containing 2 and fewer entities will not
+be subdivided further; boxes containing more than 2 will be subdivided.  Often
+a given area of space will always contain more than the maximum number of
+geometric entities; i.e., if 5 geometric entities intersect at a given point,
+then the area of space containing that point will never contain less than 5
+geometric entities.
+.PP
+\f2DoGlbRendMaxSub\fP <\f2DOGRMS\fP> 
+indicates how many levels to subdivide
+before subdivision of that branch is terminated; i.e., it 
+indicates when to stop subdividing regardless of the number of geometric
+entities per box.
+.SH DEFAULTS
+The default value for \f2DoGlbRendMaxObjs\fP is 1.
+.SH "SEE ALSO"
+DoGlbRendMaxSub(3D), DoGlbRendRayLevel(3D)
+

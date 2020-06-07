@@ -1,0 +1,215 @@
+.\"#ident "%W%" %G%
+.\"
+.\" #
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  
+.\" # 
+.\" # KUBOTA GRAPHICS Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\" #
+.\"
+.so ../macros/local.me
+.ds BT "\\*(Dd System Guide
+.ds CT "GL Driver
+.ds h1 6
+.L1 G L
+.L2 D RIVER
+.CH SIX
+.rs
+.sp -1v
+The GL device driver is a \*(Dd device that provides access to
+the Silicon Graphics IRIS family of workstations through the GL
+graphics library.
+.H1 "Using the Driver
+The initialization options for the GL device driver 
+are:
+.ip "-width \f2size\f1"
+requests the width of the window to be equal to \f2size\fP.
+.ip "-height \f2size\f1"
+requests the height of the window to be equal to \f2size\fP.
+.ip "-visualtype \f2vtype\f1"
+requests the given visual type for the window.
+The possible values for \f2vtype\fP are \f2DcTrueColor\fP for a full 24\-bit
+color window or \f2DcPseudoColor\fP for an 8\-bit pseudocolor window.
+.ip "-window \f2window\f1"
+requests that the GL window handle, \f2window\fP, opened by the application
+be used for drawing.  The \f2\-width\fP, \f2\-height\fP, and
+\f2\-visualtype\fP options are ignored when this option is specified.
+.H1 "Output Modules
+The GL device driver supports both the production renderer output
+module (PROM) interface and the dynamic renderer output module (DROM)
+interface.  The implementations of the PROM and DROM for the GL device
+driver will be referred to as the \f2GL PROM\f1 and \f2GL DROM\f1,
+respectively.
+.H1 "PROM Dependent Functions
+The interface to the PROM is a very simple one, intended for renderers
+that generate pixel data, such as the standard production renderer.
+The GL PROM implements all functions of the PROM interface.  As a result,
+any renderer that uses the PROM interface will be fully supported by the
+GL device driver.
+.H1 "DROM Dependent Functions
+When using the dynamic renderer, a function is supported only if the DROM
+of the device driver being used also supports it.
+The following subsections list the renderer dependent functions that
+are supported by the GL DROM.
+.H2 "Studio Attributes
+The studio attributes are attributes that will be executed during a
+studio traversal.
+Studio attributes include camera and light attributes.
+The GL DROM does not use any of the rendering control attributes.
+.H3 "Camera Attributes
+The camera attributes supported by the GL DROM are:
+.(l I
+DoCameraMatrix <DOCM>
+DoParallel <DOPAR>
+DoPerspective <DOPER>
+DoProjection <DOPRJ>
+.)l
+.H3 "Lighting Attributes
+The light attributes define the characteristics of the lights
+used in a scene.
+They are:
+.(l I
+DoLightColor <DOLC>
+DoLightIntens <DOLI>
+DoLightSpreadAngles <DOLTSA>
+DoLightSpreadExp <DOLTSE>
+DoLightType <DOLTT>
+
+.)l
+.bp
+.H2 "Primitives
+The GL DROM supports the five \f2base\fP primitives of the DROM
+interface.  These are point lists, line lists, connected line lists,
+triangle lists, and triangle meshes.
+.H2 "Primitive Attributes
+The GL DROM supports the following primitive attributes:
+.H3 "Shading Attributes
+The shading attributes supported by the GL DROM are:
+.(l I
+DoAmbientIntens <DOAMBI>
+DoAmbientSwitch <DOAMBS>
+DoDepthCue <DODC>
+DoDepthCueSwitch <DODCS>
+DoDiffuseColor <DODIFC>
+DoDiffuseIntens <DODIFI>
+DoDiffuseSwitch <DODIFS>
+DoInterpType <DOIT>
+DoLightSwitch <DOLTS>
+DoShadeIndex <DOSI>
+DoSpecularColor <DOSPCC>
+DoSpecularFactor <DOSPCF>
+DoSpecularIntens <DOSPCI>
+DoSpecularSwitch <DOSPCS>
+DoSurfaceShade <DOSRFS>
+DoTranspIntens <DOTI>
+DoTranspSwitch <DOTS>
+.)l
+.H3 "Texture Maps
+Only 2D textures are supported and only one map 
+can be applied to any object; thus, the mapping operator 
+is effectively always set to \f2DcMapReplace <DCMR>\fP.
+The texture map attributes supported by the GL DROM are:
+.(l I
+DoTextureMapDiffuseColor <DOTMDC>
+DoTextureMapDiffuseColorSwitch <DOTMDS>
+.)l
+.H3 "Miscellaneous
+Other renderer dependent primitive attributes used by the GL DROM
+are:
+.(l I
+DoBackfaceCullSwitch <DOBFCS>
+DoBackfaceCullable <DOBFC>
+DoHiddenSurfSwitch <DOHSS>
+DoInvisSwitch <DOINVS>
+DoLineType <DOLNT>
+DoLineWidth <DOLW>
+DoRepType <DOREPT>
+.)l
+.H2 "Texture Attributes
+The texture attributes affect how a given texture map is applied to a
+primitive object.
+These attributes are bound to the texture map object during traversal.
+The texture objects are attributes that are in turn applied to the
+primitive objects.
+The texture attributes supported by the GL DROM are:
+.(l I
+DoTextureAntiAlias <DOTAA>
+DoTextureExtendUV <DOTXUV>
+DoTextureMatrixUV <DOTMUV>
+DoTextureOp <DOTOP>
+DoTextureScaleUV <DOTSUV>
+DoTextureTranslateUV <DOTTUV>
+DoTextureUVIndex <DOTUVI>
+.)l
+.H2 "View Functions
+The GL DROM supports background color and rasters for
+views through the calls:
+.(l I
+DvInqBackgroundColor <DVQBC>
+DvInqBackgroundJust <DVQBJ>
+DvInqBackgroundRaster <DVQBR>
+DvSetBackgroundColor <DVSBC>
+DvSetBackgroundJust <DVSBJ>
+DvSetBackgroundRaster <DVSBR>
+.)l
+.H1 "Limitations
+The GL DROM has the following limitations:
+.BU
+It supports ambient, infinite, point, and spot light types as available on
+the particular hardware.
+The attenuated light sources are not supported and will be
+approximated by their unattenuated versions.
+.BU 
+It supports a maximum of 8 lights.
+.BU
+It does not support the interpolation type \f2DcSurfaceShade\fP for
+\f2DoInterpType\fP.
+.BU
+\f2DoAmbientIntens\fP is only supported in full color mode.
+.BU
+Depth cueing (\f2DoDepthCueSwitch\fP) effectively turns off all
+lighting attributes. 
+Vertex colors do work with depth cueing.
+.BU
+\f2DoTranspIntens\fP uses a patterned write masking facility to
+emulate transparency.
+A 4x4 dither allows for 17 levels of transparency, which have been
+uniformly distributed over the 0 to 1 range.
+.BU
+Texture mapping is only provided on VGX systems.
+.BU
+\f2DoTextureAntiAlias\fP supports \f2DcTextureAntiAliasNone\fP,
+\f2DcTextureAntiaAliasMIP\fP, and \f2DcTextureAntiAliasBilinear\fP.
+All other types will be interpreted as \f2DcTextureAntiAliasNone\fP.
+.BU
+\f2DoTextureExtendUV\fP supports only \f2DcExtendRepeat\fP and
+\f2DcExtendClamp\fP.
+All other types will be interpreted as \f2DcExtendClamp\fP.
+.BU
+The raster format \f2DcRasterABGR\fP is the native internal format for
+texture maps.
+If this format of raster is used, the raster data will not need to be
+reformatted.
+.BU
+\f2DoTextureOp\fP supports only \f2DcTextureReplace\fP and
+\f2DcTextureMultiply\fP.
+All other types will be interpreted as \f2DcTextureReplace\fP.
+.H1 "Requirements
+Applications built with a \*(Dd library that includes the GL device
+driver will require that the GL library be linked into the
+applications by using:
+.(m
+    -lgl_s  or -lgl
+.)m
+For portability across the Silicon Graphics product line you should
+use the shared library (\f2-lgl_s\f1) rather than the unshared library
+(\f2-lgl\f1).

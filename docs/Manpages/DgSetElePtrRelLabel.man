@@ -1,0 +1,67 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DgSetElePtrRelLabel 3D  "Dore"
+.SH NAME
+DgSetElePtrRelLabel \- Set the group element pointer relative to a label
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+DtFlag DgSetElePtrRelLabel(label, offset)
+DtInt label;
+DtInt offset;
+.sp
+.in -.5i
+FORTRAN:
+.in +.5i
+INTEGER*4 DGSEPL(LABEL, OFFSET)
+INTEGER*4 LABEL
+INTEGER*4 OFFSET
+.in -.5i
+.fi
+.SH DESCRIPTION
+.IX DGSEPL
+.IX DgSetElePtrRelLabel
+.I DgSetElePtrRelLabel
+sets the group element pointer to a position relative to the
+label, \f2label\fP, within the current open group.
+Labels are elements that can be placed anywhere within a group to
+mark a special location.  There can be more than one label with the
+same value.
+.PP
+\f2DgSetElePtrRelLabel\fP searches for the first occurrence of
+\f2label\fP starting from the current element pointer position. If
+no occurrence of the specified label exists between the element pointer
+and the end of the open group, \f2DcFalse\fP <\f2DCFALS\fP> is returned 
+and the element pointer is left unchanged.  
+If the label is found, \f2offset\fP (either a positive or 
+negative integer) is added to the label's location to determine the new current 
+group element pointer location.  Locations less than zero are set to zero; 
+locations beyond the end of the group are set to the end of the group.
+\f2DcTrue\fP <\f2DCTRUE\fP> is returned on completion.
+.SH ERRORS
+.I DgSetElePtrRelLabel
+will fail if no group is currently open.
+.TP 15
+[WARNING - a group is not currently open]
+.SH "SEE ALSO"
+.na
+.nh
+DgInqElePtr(3D), DgSetElePtr(3D), DgSetElePtrRelLabel(3D), DoLabel(3D)
+.ad
+.hy

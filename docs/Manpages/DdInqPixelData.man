@@ -1,0 +1,111 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DdInqPixelData 3D "Dore"
+.SH NAME
+DdInqPixelData \- Return pixel information about an image on a given device
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+DtFlag DdInqPixelData(device, requesttype, width, 
+		height, type, data, userdelete)
+DtObject device;
+DtRasterType requesttype;
+DtInt *width;
+DtInt *height;
+DtRasterType *type;
+DtPtr *data;
+DtFlag *userdelete;
+.sp
+.in  -.5i
+FORTRAN:
+.in  +.5i
+INTEGER*4 DDQPXD(DEVICE, REQTYP, WIDTH, 
+		HEIGHT, TYPE, DATA, USRDEL)
+INTEGER*4 DEVICE
+INTEGER*4 REQTYP
+INTEGER*4 WIDTH
+INTEGER*4 HEIGHT
+INTEGER*4 TYPE
+INTEGER*4 DATA
+INTEGER*4 USRDEL
+.in  -.5i
+.fi 
+.IX "DdInqPixelData"
+.IX "DDQPXD"
+.SH DESCRIPTION
+.LP
+\f2DdInqPixelData\fP returns pixel information about an image on the
+device \f2device\fP.
+This information can be used to create a raster object with \f2DoRaster\fP
+<\f2DORS\fP>.
+\f2DdInqPixelData\fP will return \f2DcFalse\fP <\f2DCFALS\fP> if the 
+device cannot return the pixel information.
+.PP
+The return parameters \f2width\fP and \f2height\fP are the dimensions 
+of the image.
+.PP
+The parameter \f2requesttype\fP is the type and format of pixel information
+requested.
+The return parameter \f2type\fP is the type and format of the pixel 
+information returned.
+Possible values for \f2requesttype\fP and \f2type\fP are:
+.IP "\f2DcRasterABGR\fP <\f2DCRAR\fP>"
+Each pixel has alpha, blue, green, and red information.
+.IX DcRasterABGR
+.IX DCRAR
+.IP "\f2DcRasterRGB\fP <\f2DCRGB\fP>"
+Each pixel has red, green, and blue information.
+.IX DcRasterRGBA
+.IX DCRRA
+.IP "\f2DcRasterRGBA\fP <\f2DCRRA\fP>"
+Each pixel has red, green, blue and alpha information.
+.IX DcRasterRGBAZ
+.IX DCRRAZ
+.IP "\f2DcRasterRGBAZ\fP <\f2DCRRAZ\fP>"
+Each pixel has red, green, blue, alpha and z information.
+.IX DcRasterRGBZ
+.IX DCRRZ
+.IP "\f2DcRasterRGBZ\fP <\f2DCRRZ\fP>"
+Each pixel has red, green, blue and z information.
+.IX DcRasterA
+.IX DCRA
+.IP "\f2DcRasterA\fP <\f2DCRA\fP>"
+Each pixel has alpha information.
+.IX DcRasterZ
+.IX DCRZ
+.IP "\f2DcRasterZ\fP <\f2DCRZ\fP>"
+Each pixel has z information.
+.LP
+The return parameter \f2data\fP is a pointer to the pixel data.
+The return parameter \f2userdelete\fP is a flag specifying whether 
+the application is responsible for deallocating the space pointed to 
+by \f2data\fP.
+Possible values for \f2userdelete\fP are:
+.IP "\f2DcTrue\fP <\f2DCTRUE\fP>"
+The application is responsible for deleting the space pointed to by \f2data\fP
+when it no longer needs the data. 
+.IP "\f2DcFalse\fP <\f2DCFALS\fP>"
+The application must not delete the space pointed to by \f2data\fP.
+.SH ERRORS
+.I DdInqPixelData
+will fail if passed an invalid device handle.
+.TP 15
+[WARNING - invalid device handle]
+.SH SEE ALSO
+DoRaster(3D)

@@ -1,0 +1,272 @@
+.\"#ident "%W%" %G%
+.\"
+.\" #
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  
+.\" # 
+.\" # KUBOTA GRAPHICS Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\" #
+.\"
+.ds BT "\\*(Dd Developer's Guide
+.ds CT Contents
+.so ../macros/local.me
+.PN 3 i
+.L1 C ONTENTS
+.CH
+.rs
+.C0 "Preface" 
+.SC I "Introduction"
+.C0 "\*(Dd Overview" 1
+.C1 "\*(Dd as a Graphics Application Environment" 1-1
+.C1 "\*(Dd as a Graphics Architecture" 1-3
+.C0 "\*(Dd Functional Structure" 2
+.C1 "\*(Dd Modules" 2-5
+.C2 "The C Interface Module" 2-7
+.C2 "The FORTRAN Interface Module " 2-7
+.C2 "The \*(Dd Kernel" 2-7
+.C2 "The System Module" 2-7
+.C2 "The Utility Module" 2-7
+.C2 "The Renderers" 2-7
+.C2 "The Device Drivers " 2-8
+.C1 "\*(Dd Interfaces" 2-8
+.C2 "The \*(Dd Developer's Interface\fP" 2-11
+.C2 "The \*(Dd Renderer Interface" 2-11
+.C2 "The \*(Dd Device Driver Interface" 2-11
+.C1 "Replacing and Adding Dor\o.e\(aa. Modules" 2-12
+.C0 "Classes and Methods" 3
+.C1 "Classes and Objects" 3-15
+.C1 "Global Attribute Classes" 3-15
+.C1 "Class Names and Identifiers" 3-16
+.C1 "Methods and Method Routines" 3-17
+.C1 "\*(Dd Standard Methods vs. New Methods" 3-18
+.C1 "Method Names and Identifiers" 3-20
+.SC II "Renderers"
+.C0 "Renderers Section Introduction" 4
+.C0 "Rendering Process" 5
+.C1 "Selecting a Renderer" 5-23
+.C1 "The Rendering Process" 5-24
+.C2 "Invoking the Renderer" 5-25
+.C2 "Updating Renderer State" 5-25
+.C2 "Studio Group Traversal" 5-26
+.C2 "Display Group Traversal" 5-26
+.C2 "Attribute Value Access" 5-27
+.C2 "Output" 5-28
+.C0 "Interfacing a Renderer" 6
+.C1 "Steps to Interface a Renderer" 6-29
+.C1 "Step 1: Determine the Set of Base Primitives " 6-30
+.C1 "Step 2: Determine the Set of Attributes" 6-31
+.C1 "Step 3: Select a Style for Attribute Value Access" 6-31
+.C3 "Query Value" 6-32
+.C3 "Notification of Value " 6-32
+.C3 "Which Style to Select?" 6-32
+.C1 "Step 4: Select a Device Output Interface" 6-33
+.C1 "Step 5: Implement the Renderer Installation Routine" 6-33
+.C2 "Create New Traversal Methods" 6-34
+.C2 "Allocate Additional Data Space" 6-35
+.C2 "Inform Dor\o.e\(aa. of the New Renderer" 6-36
+.C1 "Step 6: Implement Maintenance Routines for 
+.C1 "  Additional Object Data" 6-37
+.C1 "Step 7: Implement Method Routines" 6-38
+.C1 "Step 8: Implement Renderer Access Routines" 6-39
+.C2 "Rendering Routine" 6-39
+.C2 "Renderer Deletion Routine" 6-40
+.C2 "New Class Notification Routine" 6-40
+.C2 "World to Frustum Matrix Query Routine" 6-41
+.C0 "Sample Renderer" 7
+.C1 "Naming Conventions" 7-43
+.C1 "Step 1: Determine the Set of Base Primitives" 7-44
+.C1 "Step 2: Determine the Set of Attributes" 7-44
+.C1 "Step 3: Select a Style for Attribute Value Access" 7-45
+.C1 "Step 4: Select a Device Output Interface" 7-45
+.C1 "Step 5: Implement the Renderer Installation Routine" 7-45
+.C1 "Step 6: Implement Maintenance Routines for 
+.C1 "  Additional Object Data" 7-52
+.C2 "Additional View Data" 7-53
+.C2 "Additional Device Data" 7-55
+.C2 "Additional Point List Data" 7-56
+.C1 "Step 7: Implement Method Routines" 7-58
+.C2 "Primitive Object Method Routines" 7-58
+.C2 "Studio Object Method Routines" 7-61
+.C2 "Global Attribute Method Routines" 7-66
+.C1 "Step 8: Implement the Renderer Access Routines" 7-67
+.C2 "Rendering Routine" 7-67
+.C2 "Renderer Delete Routine" 7-74
+.C2 "New Class Notification Routine" 7-75
+.C2 "World to Frustum Matrix Query Routine" 7-76
+.C1 "A Sample Application Program" 7-76
+.SC III "Device Drivers"
+.C0 "Device Drivers Section Introduction" 8
+.C0 "Device Driver Modules and Interfaces" 9
+.C1 "The Components of a Device Driver" 9-81
+.C1 "Device Driver Interfaces" 9-81
+.C1 "Device Control Module Interface" 9-83
+.C2 "Generic Functions" 9-84
+.C2 "Functions Supporting Production Renderer Output" 9-89
+.C2 "Functions Supporting Dynamic Renderer Output" 9-90
+.C1 "Production Renderer Output Module Interface" 9-91
+.C1 "Dynamic Renderer Output Module Interface" 9-92
+.C2 "Dynamic Rendering Overview" 9-95
+.C2 "Dynamic Renderer Output Module Initialization" 9-96
+.C2 "Studio and Display Group Rendering" 9-97
+.C2 "Studio Attributes" 9-99
+.C2 "Appearance Attributes" 9-100
+.C2 "Transformation Attributes" 9-101
+.C2 "Modeling Clip Volumes" 9-102
+.C2 "Geometry" 9-103
+.C2 "Miscellaneous Dynamic Renderer Support Routines" 9-105
+.C1 "Adding Methods to the Dynamic Renderer" 9-106
+.C1 "Device Driver Installation Routine" 9-109
+.C0 "Implementing a Device Driver" 10
+.C1 "Steps to Implement a Device Driver" 10-113
+.C1 "Step 1: Copy the Sample Device Driver" 10-114
+.C1 "Step 2: Implement a Minimal DCM" 10-114
+.C1 "Step 3: Implement the PROM" 10-115
+.C1 "Step 4: Build and Test (1)" 10-115
+.C1 "Step 5: Complete the DCM" 10-117
+.C1 "Step 6: Implement a Minimal DROM" 10-118
+.C1 "Step 7: Build and Test (2)" 10-119
+.C1 "Step 8: Complete the DROM" 10-119
+.C1 "Step 9: Build and Test (3)" 10-120
+.C0 "Sample Device Driver" 11
+.C1 "Naming Conventions" 11-121
+.C1 "Step 2: Implement a Minimal DCM" 11-122
+.C2 "Control Routines" 11-122
+.C3 "dcm.create_local_data" 11-123
+.C3 "dcm.initialize_device" 11-123
+.C3 "dcm.become_current_driver" 11-126
+.C2 "Inquiry Routines" 11-127
+.C3 "dcm.inquire_device_extent" 11-127
+.C3 "dcm.inquire_stereo" 11-127
+.C3 "dcm.inquire_ncolors" 11-128
+.C3 "dcm.inquire_resolution" 11-128
+.C3 "dcm.inquire_visual_type" 11-128
+.C3 "dcm.inquire_auto_size" 11-129
+.C3 "dcm.inquire_clip_list" 11-129
+.C2 "Output Routines" 11-129
+.C1 "Step 3: Implement the PROM" 11-130
+.C1 "Step 5: Complete the DCM" 11-130
+.C1 "Step 6: Implement a Minimal DROM" 11-131
+.C2 "Data Structures" 11-131
+.C2 "Geometric Transformations" 11-135
+.C2 "The Camera and Its Attributes" 11-144
+.C2 "Control Routines" 11-150
+.C2 "Geometry Routines" 11-156
+.C1 "Step 8: Complete the DROM" 11-157
+.C2 "Geometric Transformations" 11-157
+.C2 "The Camera and Its Attributes" 11-160
+.C2 "Lights and Their Attributes" 11-161
+.C2 "Appearance Attributes" 11-166
+.C2 "Control Routines" 11-169
+.C2 "Geometry Routines" 11-171
+.C2 "Dynamic Geometry Shading" 11-171
+.C3 "Constant Shading" 11-174
+.C3 "Light Source Shading" 11-174
+.C1 "The Installation Routine" 11-176
+.SC IV "Porting"
+.C0 "Porting Section Introduction" 12
+.C1 "Platform Requirements" 12-185
+.C2 "Processor Hardware Characteristics" 12-186
+.C2 "Graphics Hardware Characteristics" 12-186
+.C2 "File System Space Availability" 12-189
+.C2 "Operating System Support Tool Availability" 12-189
+.C1 "Porting Strategies for Less Powerful Platforms" 12-189
+.C1 "Effort to Perform a Port" 12-190
+.C1 "Relationship with Window Systems" 12-190
+.C2 "Window Clipping" 12-191
+.C2 "Double Buffering" 12-191
+.C0 "\*(Dd Implementation Conventions" 13
+.C1 "C Language Portability Issues" 13-193
+.C1 "\*(Dd Naming Conventions" 13-193
+.C2 "\*(Dd Developer's Interface" 13-194
+.C2 "Internal Names" 13-194
+.C1 "The \*(Dd Directory Structure" 13-195
+.C2 "The dore Directory" 13-195
+.C2 "The dore/src Directory" 13-196
+.C2 "dore/src/C_interface" 13-198
+.C2 "dore/src/objs" 13-198
+.C2 "dore/src/subsys" 13-200
+.C2 "dore/src/device_config" 13-201
+.C2 "dore/src/doresys_config" 13-201
+.C2 "dore/src/fortran_config" 13-201
+.C1 "\*(Dd Makefiles" 13-202
+.C0 "Building the Sample Configurations" 14
+.C1 "Building \*(Dd" 14-205
+.C1 "Step 1: Get \*(Dd From the Distribution Tape" 14-206
+.C1 "Step 2: Initialize the Top Level Makefile" 14-206
+.C1 "Step 3: Build the \*(Dd Library" 14-207
+.C1 "Step 4: Build the \*(Dd Data Files" 14-208
+.C1 "Step 5: Install the Data Files" 14-209
+.C1 "Step 6: Build and Run Test Programs " 14-209
+.C1 "Step 7: Install \*(Dd" 14-210
+.C1 "Step 8: Remove Object Files" 14-211
+.C0 "Porting \*(Dd" 15
+.C1 "Porting Process Steps" 15-213
+.C1 "Step 1: Determine if the Target Machine is Appropriate" 15-214
+.C1 "Step 2: Get \*(Dd From the Distribution Tape" 15-214
+.C1 "Step 3: Set Up for an Initial Port" 15-215
+.C1 "Step 4: Initialize the Top Level Makefile" 15-215
+.C1 "Step 5: Initial Compile and Build " 15-217
+.C1 "Step 6: Build and Run Test Programs" 15-218
+.C1 "Step 7: Set Up for a New Device Driver " 15-219
+.C1 "Step 8: Implement New Device Driver" 15-220
+.C1 "Step 9: Add the New Device Driver to \*(Dd" 15-220
+.C1 "Step 10: Test the New Device Driver" 15-221
+.C1 "Step 11: Select FORTRAN Interface Module" 15-222
+.C1 "Step 12: Add Other Drivers and Renderers " 15-223
+.C1 "Step 13: Install \*(Dd" 15-224
+.C1 "Step 14: Remove Object Files" 15-224
+.C1 "Incremental Builds" 15-225
+.SC V "Testing"
+.C0 "Testing \*(Dd" 16
+.C1 "The Test Programs" 16-227
+.C2 "Building the Tests" 16-229
+.C2 "Displaying Production Renderer Rasterfile Output" 16-231
+.C3 "dor2iris" 16-231
+.C3 "dor2sunras" 16-231
+.C3 "dor2X11" 16-232
+.C2 "Creating Your Own Test Objects" 16-233
+.C1 "\*(Dd Demonstration Programs" 16-233
+.C2 "Building the Demonstration Programs" 16-234
+." .SC VI "Functions"
+." .C0 "Developer's Interface Functions" 17
+." .C0 "Device Driver Interface Functions" 18
+." .C1 "DCM" 18-269
+." .C1 "DROM" 18-286
+." .C1 "PROM" 18-351
+.SC VI "Appendices"
+.C0 "Glossary" A
+.C0 "Global Attribute Access" B
+.C1 "Attributes and Global Attributes" B-365
+.C1 "Querying Current Attribute Values " B-366
+.C2 "Studio Attributes" B-366
+.C2 "Geometric Transformations" B-369
+.C2 "Primitive Attributes" B-369
+.C2 "Texture Attributes" B-377
+.C0 "Object Data Structures" C
+.C1 "Object Data Structure" C-381
+.C1 "Private Data Structures" C-382
+.C2 "Primitive Objects" C-382
+.C2 "Studio Objects " C-393
+.C2 "Geometric Transformation Objects " C-394
+.C2 "Texture Mapping Objects" C-395
+.C2 "Miscellaneous Objects" C-396
+." .C0 "List of Figures
+." .LF "Figure 2-1. \*(Dd Modules" 2-6
+." .LF "Figure 2-2. \*(Dd Interfaces" 2-9
+." .LF "Figure 2-3. Renderer and Device Driver Access Paths" 2-10
+." .LF "Figure 5-1. Renderering Execution Control Flow" 5-25
+." .LF "Figure 9-1. Dynamic Renderer Output Control Flow" 9-95
+." .LF "Figure 13-1. Top Level Dor\o.e\(aa. Directories" 13-196
+." .LF "Figure 13-2. The dore/src Directory and some 
+." .LF "                           Subdirectory Contents" 13-199
+." .LF "Figure 16-1. Contents of the dore/test Directory" 16-230
+." .LF "Figure 16-2. Contents of the dore/demo Directory" 16-236

@@ -1,0 +1,109 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DoPolygon 3D  "Dore"
+.SH NAME
+DoPolygon \- Create a polygon primitive object
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+DtObject DoPolygon(colormodel, vertextype, contourcount, 
+	contours, vertices, shape) 
+DtColorModel colormodel;
+DtVertexType vertextype;
+DtInt contourcount;
+DtInt contours[contourcount];
+DtReal vertices[\|];
+DtShapeType shape;
+.sp
+.in -.5i
+FORTRAN:
+.in +.5i
+INTEGER*4 DOPGN(COLMOD, VTXTYP, CONCNT, 
+	CONTURS, VTXS, SHAPE)
+INTEGER*4 COLMOD
+INTEGER*4 VTXTYP
+INTEGER*4 CONCNT
+INTEGER*4 CONTURS(CONCNT)
+REAL*8 VTXS(*)
+INTEGER*4 SHAPE
+.in -.5i
+.fi
+.SH DESCRIPTION
+.IX DOPGN
+.IX DoPolygon
+.I DoPolygon
+creates a general polygon primitive object.
+A general polygon consists of a number of contours comprising the outer
+boundary (or boundaries) plus any interior holes and/or islands.
+Contours may be self-intersecting and may intersect each other.  The
+polygon is assumed to be planar.
+.PP
+The parameter \f2colormodel\fP specifies the color model used if the vertices
+contain color information for shading purposes.  The parameter \f2vertextype\fP
+specifies the exact nature of the vertices.  
+for more information, refer to Chapter 6, \f2Dore Vertex Types\fP,
+in the \f2Dore Reference Manual\fP or 
+to the \f2VertexTypes\fP on-line manual page.)
+The parameter \f2vertices\fP is a
+one-dimensional array of vertex data.
+.PP
+The parameter \f2contourcount\fP specifies the number of contours in the
+polygon.  The parameter \f2contours\fP is an array of \f2contourcount\fP
+integers, each of which specifies the number of vertices in the
+associated contour.  The first contour in the polygon begins with
+vertex 0 in the \f2vertices\fP array and continues for the length (in
+vertices) of the contour.  The last vertex of a contour is implicitly
+connected to its first vertex.  The next contour in the polygon begins
+with the next vertex in the \f2vertices\fP array.
+.PP
+The parameter \f2shape\fP hints at the geometry of the polygon.
+This argument has meaning only for polygons that consist of
+a single contour, i.e., whose \f2contourcount\fP is 1.  For these
+polygons, correctly specifying the shape of the contour will result in
+optimal polygon decomposition when necessary.
+Incorrectly specifying the shape may result in an incorrect or aborted
+decomposition.  The possible values for \f2shape\fP are:
+.IP "\f2DcConvex\fP <\f2DCCNVX\fP>"
+Path is wholly convex.
+.IP "\f2DcConcave\fP <\f2DCCNCV\fP>"
+Path may be concave but not self-intersecting.
+.IP "\f2DcComplex\fP <\f2DCCPLX\fP>"
+Path may be self-intersecting.
+.PP
+The geometric normal to the polygon is calculated using the right-hand
+rule (the fingers of the right hand point in the order of vertices
+and the thumb points in the direction of the normal).
+This normal is sometimes used by Dore for
+backface culling and facet shading.
+.SH ERRORS
+\f2DoPolygon\fP must be called with a valid specification for \f2shape\fP.
+.TP 15
+[WARNING - invalid parameter]
+.PP
+\f2DoPolygon\fP must be called with at least one contour of three
+vertices.
+.TP 15
+[WARNING - insufficient information]
+.SH "SEE ALSO"
+.na
+.nh
+DoPolygonMesh(3D), DoSimplePolygon(3D),
+DoSimplePolygonMesh(3D), VertexTypes(3D)
+.ad
+.hy

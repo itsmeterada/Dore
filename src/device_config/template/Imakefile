@@ -1,0 +1,14 @@
+#include <Dore.tmpl>
+#define IHaveSubdirs
+
+ SUBDIRS = dcm drom prom
+    SRCS = tpl_extern.c tpl_math.c tpl_matrix.c
+    OBJS = tpl_extern.o tpl_math.o tpl_matrix.o
+
+LibraryObjectRule()
+SubdirLibraryRule($(OBJS))
+
+MakeSubdirs($(SUBDIRS))
+DependSubdirs($(SUBDIRS))
+
+DependTarget()

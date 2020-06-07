@@ -1,0 +1,15 @@
+#include <Dore.tmpl>
+#define IHaveSubdirs
+
+ SUBDIRS = del_datalsts find_dsptyp hcube_distrib hcube_render hcube_select \
+        hcube_setup show_render
+    SRCS = install.c rad.c rad_data.c rad_update.c rad_util.c toto.c
+    OBJS = install.o rad.o rad_data.o rad_update.o rad_util.o toto.o
+
+LibraryObjectRule()
+SubdirLibraryRule($(OBJS))
+
+MakeSubdirs($(SUBDIRS))
+DependSubdirs($(SUBDIRS))
+
+DependTarget()

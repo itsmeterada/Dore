@@ -1,0 +1,1420 @@
+%!PS-Adobe-3.0
+%%Creator: groff version 1.06
+%%DocumentNeededResources: font Palatino-Roman
+%%+ font Helvetica
+%%+ font Helvetica-BoldOblique
+%%+ font Palatino-Italic
+%%+ font Courier
+%%+ font Symbol
+%%+ font Helvetica-Bold
+%%+ font Helvetica-Oblique
+%%+ font Palatino-Bold
+%%DocumentSuppliedResources: procset grops 1.06 0
+%%Pages: 15
+%%PageOrder: Ascend
+%%Orientation: Portrait
+%%EndComments
+%%BeginProlog
+%%BeginResource: procset grops 1.06 0
+%!PS-Adobe-3.0 Resource-ProcSet
+
+/setpacking where {
+	pop
+	currentpacking
+	true setpacking
+} if
+
+/grops 120 dict dup begin 
+
+% The ASCII code of the space character.
+/SC 32 def
+
+/A /show load def
+/B { 0 SC 3 -1 roll widthshow } bind def
+/C { 0 exch ashow } bind def
+/D { 0 exch 0 SC 5 2 roll awidthshow } bind def
+/E { 0 rmoveto show } bind def
+/F { 0 rmoveto 0 SC 3 -1 roll widthshow } bind def
+/G { 0 rmoveto 0 exch ashow } bind def
+/H { 0 rmoveto 0 exch 0 SC 5 2 roll awidthshow } bind def
+/I { 0 exch rmoveto show } bind def
+/J { 0 exch rmoveto 0 SC 3 -1 roll widthshow } bind def
+/K { 0 exch rmoveto 0 exch ashow } bind def
+/L { 0 exch rmoveto 0 exch 0 SC 5 2 roll awidthshow } bind def
+/M { rmoveto show } bind def
+/N { rmoveto 0 SC 3 -1 roll widthshow } bind def
+/O { rmoveto 0 exch ashow } bind def
+/P { rmoveto 0 exch 0 SC 5 2 roll awidthshow } bind def
+/Q { moveto show } bind def 
+/R { moveto 0 SC 3 -1 roll widthshow } bind def
+/S { moveto 0 exch ashow } bind def
+/T { moveto 0 exch 0 SC 5 2 roll awidthshow } bind def
+
+% name size font SF -
+
+/SF {
+	findfont exch
+	[ exch dup 0 exch 0 exch neg 0 0 ] makefont
+	dup setfont
+	[ exch /setfont cvx ] cvx bind def
+} bind def
+
+% name a c d font MF -
+
+/MF {
+	findfont
+	[ 5 2 roll
+	0 3 1 roll % b
+	neg 0 0 ] makefont
+	dup setfont
+	[ exch /setfont cvx ] cvx bind def
+} bind def
+
+/level0 0 def
+/RES 0 def
+/PL 0 def
+/LS 0 def
+
+% Guess the page length.
+% This assumes that the imageable area is vertically centered on the page.
+% PLG - length
+
+/PLG {
+	gsave newpath clippath pathbbox grestore
+	exch pop add exch pop
+} bind def
+
+% BP -
+
+/BP {
+	/level0 save def
+	1 setlinecap
+	1 setlinejoin
+	72 RES div dup scale
+	LS {
+		90 rotate
+	} {
+		0 PL translate
+	} ifelse
+	1 -1 scale
+} bind def
+
+/EP {
+	level0 restore
+	showpage
+} bind def
+
+
+% centerx centery radius startangle endangle DA -
+
+/DA {
+	newpath arcn stroke
+} bind def
+
+% x y SN - x' y'
+% round a position to nearest (pixel + (.25,.25))
+
+/SN {
+	transform 
+	.25 sub exch .25 sub exch
+	round .25 add exch round .25 add exch
+	itransform
+} bind def
+	
+% endx endy startx starty DL -
+% we round the endpoints of the line, so that parallel horizontal
+% and vertical lines will appear even
+
+/DL {
+	SN
+	moveto
+	SN
+	lineto stroke
+} bind def
+
+% centerx centery radius DC -
+
+/DC {
+	newpath 0 360 arc closepath
+} bind def
+
+
+/TM matrix def
+
+%  width height centerx centery DE -
+
+/DE {
+	TM currentmatrix pop
+	translate scale newpath 0 0 .5 0 360 arc closepath
+	TM setmatrix
+} bind def
+
+% these are for splines
+
+/RC /rcurveto load def
+/RL /rlineto load def
+/ST /stroke load def
+/MT /moveto load def
+/CL /closepath load def
+
+% fill the last path
+
+% amount FL -
+
+/FL {
+	currentgray exch setgray fill setgray
+} bind def
+
+% fill with the ``current color''
+
+/BL /fill load def
+
+/LW /setlinewidth load def
+% new_font_name encoding_vector old_font_name RE -
+
+/RE {
+	findfont
+	dup maxlength dict begin
+	{
+		1 index /FID ne { def } { pop pop } ifelse
+	} forall
+	/Encoding exch def
+	dup /FontName exch def
+	currentdict end definefont pop
+} bind def
+
+/DEFS 0 def
+
+% hpos vpos EBEGIN -
+
+/EBEGIN {
+	moveto
+	DEFS begin
+} bind def
+
+/EEND /end load def
+
+/CNT 0 def
+/level1 0 def
+
+% llx lly newwid wid newht ht newllx newlly PBEGIN -
+
+/PBEGIN {
+	/level1 save def
+	translate
+	div 3 1 roll div exch scale
+	neg exch neg exch translate
+	% set the graphics state to default values
+	0 setgray
+	0 setlinecap
+	1 setlinewidth
+	0 setlinejoin
+	10 setmiterlimit
+	[] 0 setdash
+	/setstrokeadjust where {
+		pop
+		false setstrokeadjust
+	} if
+	/setoverprint where {
+		pop
+		false setoverprint
+	} if
+	newpath
+	/CNT countdictstack def
+	userdict begin
+	/showpage {} def
+} bind def
+
+/PEND {
+	clear
+	countdictstack CNT sub { end } repeat
+	level1 restore
+} bind def
+
+end def
+
+/setpacking where {
+	pop
+	setpacking
+} if
+%%EndResource
+%%EndProlog
+%%BeginSetup
+%%IncludeResource: font Palatino-Roman
+%%IncludeResource: font Helvetica
+%%IncludeResource: font Helvetica-BoldOblique
+%%IncludeResource: font Palatino-Italic
+%%IncludeResource: font Courier
+%%IncludeResource: font Symbol
+%%IncludeResource: font Helvetica-Bold
+%%IncludeResource: font Helvetica-Oblique
+%%IncludeResource: font Palatino-Bold
+grops begin/DEFS 1 dict def DEFS begin/u{.001 mul}bind def end/RES 72 def/PL
+792 def/LS false def/ENC0[/asciicircum/asciitilde/Scaron/Zcaron/scaron/zcaron
+/Ydieresis/trademark/quotesingle/.notdef/.notdef/.notdef/.notdef/.notdef
+/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef
+/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/space
+/exclam/quotedbl/numbersign/dollar/percent/ampersand/quoteright/parenleft
+/parenright/asterisk/plus/comma/hyphen/period/slash/zero/one/two/three/four
+/five/six/seven/eight/nine/colon/semicolon/less/equal/greater/question/at/A/B/C
+/D/E/F/G/H/I/J/K/L/M/N/O/P/Q/R/S/T/U/V/W/X/Y/Z/bracketleft/backslash
+/bracketright/circumflex/underscore/quoteleft/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q
+/r/s/t/u/v/w/x/y/z/braceleft/bar/braceright/tilde/.notdef/quotesinglbase
+/guillemotleft/guillemotright/bullet/florin/fraction/perthousand/dagger
+/daggerdbl/endash/emdash/ff/fi/fl/ffi/ffl/dotlessi/dotlessj/grave/hungarumlaut
+/dotaccent/breve/caron/ring/ogonek/quotedblleft/quotedblright/oe/lslash
+/quotedblbase/OE/Lslash/.notdef/exclamdown/cent/sterling/currency/yen/brokenbar
+/section/dieresis/copyright/ordfeminine/guilsinglleft/logicalnot/minus
+/registered/macron/degree/plusminus/twosuperior/threesuperior/acute/mu
+/paragraph/periodcentered/cedilla/onesuperior/ordmasculine/guilsinglright
+/onequarter/onehalf/threequarters/questiondown/Agrave/Aacute/Acircumflex/Atilde
+/Adieresis/Aring/AE/Ccedilla/Egrave/Eacute/Ecircumflex/Edieresis/Igrave/Iacute
+/Icircumflex/Idieresis/Eth/Ntilde/Ograve/Oacute/Ocircumflex/Otilde/Odieresis
+/multiply/Oslash/Ugrave/Uacute/Ucircumflex/Udieresis/Yacute/Thorn/germandbls
+/agrave/aacute/acircumflex/atilde/adieresis/aring/ae/ccedilla/egrave/eacute
+/ecircumflex/edieresis/igrave/iacute/icircumflex/idieresis/eth/ntilde/ograve
+/oacute/ocircumflex/otilde/odieresis/divide/oslash/ugrave/uacute/ucircumflex
+/udieresis/yacute/thorn/ydieresis]def/Palatino-Bold@0 ENC0/Palatino-Bold RE
+/Helvetica-Oblique@0 ENC0/Helvetica-Oblique RE/Helvetica-Bold@0 ENC0
+/Helvetica-Bold RE/Courier@0 ENC0/Courier RE/Palatino-Italic@0 ENC0
+/Palatino-Italic RE/Helvetica-BoldOblique@0 ENC0/Helvetica-BoldOblique RE
+/Helvetica@0 ENC0/Helvetica RE/Palatino-Roman@0 ENC0/Palatino-Roman RE
+%%EndSetup
+%%Page: 381 1
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 99 46.8 63 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 243 46.8 207 46.8 DL 279 46.8 243 46.8 DL 315 46.8 279 46.8 DL 351
+46.8 315 46.8 DL 387 46.8 351 46.8 DL 437.4 46.8 401.4 46.8 DL 464.4 46.8 428.4
+46.8 DL 500.4 46.8 464.4 46.8 DL 536.4 46.8 500.4 46.8 DL/F0 42
+/Palatino-Roman@0 SF(O)250.416 91 Q/F1 36/Palatino-Roman@0 SF(BJECT)A F0(D)
+281.736 133 Q F1 -2.664(ATA)C F0(S)150.282 175 Q F1(TRUCTURES)A/F2 12
+/Helvetica@0 SF(APPENDIX C)463.716 175 Q 99 186 63 186 DL 135 186 99 186 DL 171
+186 135 186 DL 207 186 171 186 DL 243 186 207 186 DL 279 186 243 186 DL 315 186
+279 186 DL 351 186 315 186 DL 387 186 351 186 DL 437.4 186 401.4 186 DL 464.4
+186 428.4 186 DL 500.4 186 464.4 186 DL 536.4 186 500.4 186 DL/F3 11
+/Palatino-Roman@0 SF .241
+(This appendix contains descriptions of some of the data str)63 252 R(uctur)
+-.088 E(es)-.198 E 3.528(the Dore)63 265.2 R 7.081<b473>104.203 265.2 S 3.528
+(ystem uses to stor)119.611 265.2 R 6.278(ei)-.198 G 3.528
+(nformation speci\214c to objects.)231.766 265.2 R 1.568
+(These include the standar)63 278.4 R 4.319(do)-.198 G 1.569(bject str)209.436
+278.4 R(uctur)-.088 E 4.319(ea)-.198 G 1.569(nd the private data)289.629 278.4
+R(str)63 291.6 Q(uctur)-.088 E .864
+(es for primitive and studio objects, geometric transforma-)-.198 F 2.107
+(tion objects, textur)63 304.8 R 4.858(em)-.198 G 2.108
+(apping objects, and a few other miscella-)176.462 304.8 R 1.225(neous Dore)63
+318 R 4.777<b46f>115.617 318 S 3.974(bjects. These)130.063 318 R(str)3.974 E
+(uctur)-.088 E 1.224(es can be accessed by method)-.198 F -.198(ro)63 331.2 S
+(utines, including method r).198 E(outines for non-standar)-.198 E 2.75(dm)
+-.198 G(ethods.)335.965 331.2 Q .16 LW 65 353.24 63 353.24 DL 67 353.24 65
+353.24 DL 69 353.24 67 353.24 DL 71 353.24 69 353.24 DL 73 353.24 71 353.24 DL
+75 353.24 73 353.24 DL 77 353.24 75 353.24 DL 79 353.24 77 353.24 DL 81 353.24
+79 353.24 DL 83 353.24 81 353.24 DL 85 353.24 83 353.24 DL 87 353.24 85 353.24
+DL 89 353.24 87 353.24 DL 91 353.24 89 353.24 DL 93 353.24 91 353.24 DL 95
+353.24 93 353.24 DL 97 353.24 95 353.24 DL 99 353.24 97 353.24 DL 101 353.24 99
+353.24 DL 103 353.24 101 353.24 DL 105 353.24 103 353.24 DL 107 353.24 105
+353.24 DL 109 353.24 107 353.24 DL 111 353.24 109 353.24 DL 113 353.24 111
+353.24 DL 115 353.24 113 353.24 DL 117 353.24 115 353.24 DL 119 353.24 117
+353.24 DL 121 353.24 119 353.24 DL 123 353.24 121 353.24 DL 125 353.24 123
+353.24 DL 127 353.24 125 353.24 DL 129 353.24 127 353.24 DL 131 353.24 129
+353.24 DL 133 353.24 131 353.24 DL 135 353.24 133 353.24 DL 137 353.24 135
+353.24 DL 139 353.24 137 353.24 DL 141 353.24 139 353.24 DL 143 353.24 141
+353.24 DL 145 353.24 143 353.24 DL 147 353.24 145 353.24 DL 149 353.24 147
+353.24 DL 151 353.24 149 353.24 DL 153 353.24 151 353.24 DL 155 353.24 153
+353.24 DL 157 353.24 155 353.24 DL 159 353.24 157 353.24 DL 161 353.24 159
+353.24 DL 163 353.24 161 353.24 DL 165 353.24 163 353.24 DL 167 353.24 165
+353.24 DL 169 353.24 167 353.24 DL 171 353.24 169 353.24 DL 173 353.24 171
+353.24 DL 175 353.24 173 353.24 DL 177 353.24 175 353.24 DL 179 353.24 177
+353.24 DL 181 353.24 179 353.24 DL 183 353.24 181 353.24 DL 185 353.24 183
+353.24 DL 187 353.24 185 353.24 DL 189 353.24 187 353.24 DL 191 353.24 189
+353.24 DL 193 353.24 191 353.24 DL 195 353.24 193 353.24 DL 197 353.24 195
+353.24 DL 199 353.24 197 353.24 DL 201 353.24 199 353.24 DL 203 353.24 201
+353.24 DL 205 353.24 203 353.24 DL 207 353.24 205 353.24 DL 209 353.24 207
+353.24 DL 211 353.24 209 353.24 DL 213 353.24 211 353.24 DL 215 353.24 213
+353.24 DL 217 353.24 215 353.24 DL 219 353.24 217 353.24 DL 221 353.24 219
+353.24 DL 223 353.24 221 353.24 DL 225 353.24 223 353.24 DL 227 353.24 225
+353.24 DL 229 353.24 227 353.24 DL 231 353.24 229 353.24 DL 233 353.24 231
+353.24 DL 235 353.24 233 353.24 DL 237 353.24 235 353.24 DL 239 353.24 237
+353.24 DL 241 353.24 239 353.24 DL 243 353.24 241 353.24 DL 245 353.24 243
+353.24 DL 247 353.24 245 353.24 DL 249 353.24 247 353.24 DL 251 353.24 249
+353.24 DL 253 353.24 251 353.24 DL 255 353.24 253 353.24 DL 257 353.24 255
+353.24 DL 259 353.24 257 353.24 DL 261 353.24 259 353.24 DL 263 353.24 261
+353.24 DL 265 353.24 263 353.24 DL 267 353.24 265 353.24 DL 269 353.24 267
+353.24 DL 271 353.24 269 353.24 DL 273 353.24 271 353.24 DL 275 353.24 273
+353.24 DL 277 353.24 275 353.24 DL 279 353.24 277 353.24 DL 281 353.24 279
+353.24 DL 283 353.24 281 353.24 DL 285 353.24 283 353.24 DL 287 353.24 285
+353.24 DL 289 353.24 287 353.24 DL 291 353.24 289 353.24 DL 293 353.24 291
+353.24 DL 295 353.24 293 353.24 DL 297 353.24 295 353.24 DL 299 353.24 297
+353.24 DL 301 353.24 299 353.24 DL 303 353.24 301 353.24 DL 305 353.24 303
+353.24 DL 307 353.24 305 353.24 DL 309 353.24 307 353.24 DL 311 353.24 309
+353.24 DL 313 353.24 311 353.24 DL 315 353.24 313 353.24 DL 317 353.24 315
+353.24 DL 319 353.24 317 353.24 DL 321 353.24 319 353.24 DL 323 353.24 321
+353.24 DL 325 353.24 323 353.24 DL 327 353.24 325 353.24 DL 329 353.24 327
+353.24 DL 331 353.24 329 353.24 DL 333 353.24 331 353.24 DL 335 353.24 333
+353.24 DL 337 353.24 335 353.24 DL 339 353.24 337 353.24 DL 341 353.24 339
+353.24 DL 343 353.24 341 353.24 DL 345 353.24 343 353.24 DL 347 353.24 345
+353.24 DL 349 353.24 347 353.24 DL 351 353.24 349 353.24 DL 353 353.24 351
+353.24 DL 355 353.24 353 353.24 DL 357 353.24 355 353.24 DL 359 353.24 357
+353.24 DL 361 353.24 359 353.24 DL 363 353.24 361 353.24 DL 365 353.24 363
+353.24 DL 367 353.24 365 353.24 DL 369 353.24 367 353.24 DL 371 353.24 369
+353.24 DL 373 353.24 371 353.24 DL 375 353.24 373 353.24 DL 377 353.24 375
+353.24 DL 379 353.24 377 353.24 DL 381 353.24 379 353.24 DL 383 353.24 381
+353.24 DL 385 353.24 383 353.24 DL 387 353.24 385 353.24 DL 1.44 LW 419.4
+353.74 401.4 353.74 DL 428.4 353.74 410.4 353.74 DL 446.4 353.74 428.4 353.74
+DL 464.4 353.74 446.4 353.74 DL 482.4 353.74 464.4 353.74 DL 500.4 353.74 482.4
+353.74 DL 518.4 353.74 500.4 353.74 DL 536.4 353.74 518.4 353.74 DL/F4 12
+/Helvetica-BoldOblique@0 SF(Object)499.056 367.74 Q(Data)510.396 381.74 Q
+(Structure)483.06 395.74 Q/F5 11/Palatino-Italic@0 SF(DtObjectStructur)63
+381.84 Q(e)-.198 E F3 1.243(is the data str)3.993 F(uctur)-.088 E 3.992(eu)
+-.198 G 1.242(sed for the standar)261.824 381.84 R 3.992(dp)-.198 G(art)373.569
+381.84 Q 1.5(of all Dore)63 395.04 R 5.053<b46f>112.739 395.04 S 4.25
+(bjects. It)127.461 395.04 R 1.5(is de\214ned in the general Dore)4.25 F 5.054
+<b469>322.596 395.04 S 1.501(nclude \214le)334.514 395.04 R F5(dor)63 408.24 Q
+(e.h)-.198 E F3 5.5(.T)C(he str)104.987 408.24 Q(uctur)-.088 E 2.75(ei)-.198 G
+2.75(sd)169.018 408.24 S(e\214ned as:)183.153 408.24 Q/F6 9/Courier@0 SF
+(typedef struct {)63 427.28 Q(DtShort info;)79.2 438.28 Q(DtShort ref_count;)
+79.2 449.28 Q(DtPtr data;)79.2 460.28 Q(DtPtr)79.2 471.28 Q/F7 9/Symbol SF(*)
+5.4 E F6(additional_data;)A 5.4(}D)63 482.28 S(tObjectStructure;)79.2 482.28 Q
+F5(info)63 507.48 Q F3 1.495(This \214eld is divided up into sub\214elds, the)
+88 520.68 R F5 1.495(hold \215ag)4.245 F F3 1.494(and the)4.244 F F5 1.294
+(object class)88 533.88 R F3 6.794(.T)C 1.294(he Dore)154.762 533.88 R 4.847
+<b473>190.145 533.88 S 1.294(ystem maintains this \214eld.)203.319 533.88 R
+1.295(The hold)6.794 F 1.178
+(\215ag indicates whether or not a hold has been placed on the)88 547.08 R
+1.314(object using)88 560.28 R F5(DsHoldObj)4.065 E F3 6.815(.T)C 1.315
+(he object class is the integer class)219.401 560.28 R
+(identi\214er of the corr)88 573.48 Q(esponding class.)-.198 E F5 -.198(re)63
+594.72 S(f_count).198 E F3 2.315(The number of r)88 607.92 R(efer)-.198 E 2.315
+(ences to this object.)-.198 F 2.314(The Dore)7.814 F 5.867<b473>343.458 607.92
+S(ystem)357.652 607.92 Q .633(maintains this \214eld.)88 621.12 R(Refer)6.133 E
+.634(ences can explicitly be added with)-.198 F F5(DDobject_AddRefer)88 634.32
+Q(ence)-.198 E F3 15.93(and r)215.878 634.32 R 15.93(emoved with)-.198 F F5
+(DDob-)356.244 634.32 Q(ject_DeleteRefer)88 647.52 Q(ence)-.198 E F3(.)A F5
+(data)63 672.72 Q F3 2.355
+(This is a pointer to the private data speci\214c to the object.)88 685.92 R
+2.502(This data is allocated, deallocated, and maintained by the)88 699.12 R
+-.198(ro)88 712.32 S(utines of the class implementation.).198 E 81 756 63 756
+DL 99 756 81 756 DL 117 756 99 756 DL 135 756 117 756 DL 153 756 135 756 DL 171
+756 153 756 DL 189 756 171 756 DL 207 756 189 756 DL 225 756 207 756 DL 243 756
+225 756 DL 261 756 243 756 DL 279 756 261 756 DL 297 756 279 756 DL 315 756 297
+756 DL 333 756 315 756 DL 351 756 333 756 DL 369 756 351 756 DL 387 756 369 756
+DL 419.4 756 401.4 756 DL 428.4 756 410.4 756 DL 446.4 756 428.4 756 DL 464.4
+756 446.4 756 DL 482.4 756 464.4 756 DL 500.4 756 482.4 756 DL 518.4 756 500.4
+756 DL 536.4 756 518.4 756 DL/F8 9/Helvetica@0 SF(Object Data Str)295.83 768.96
+Q(uctures).135 E(Dore)412.806 768.96 Q 3.506<b444>428.308 768.96 S -2.187 -.27
+(ev e)441.309 768.96 T(loper').27 E 2.502(sG)-.45 G(uide)490.881 768.96 Q/F9 9
+/Helvetica-Bold@0 SF(C-381)4.002 E EP
+%%Page: 382 2
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 108 46.8 72 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 257.4 46.8 221.4 46.8 DL 293.4 46.8 257.4 46.8 DL 329.4 46.8 293.4
+46.8 DL 365.4 46.8 329.4 46.8 DL 401.4 46.8 365.4 46.8 DL 437.4 46.8 401.4 46.8
+DL 473.4 46.8 437.4 46.8 DL 509.4 46.8 473.4 46.8 DL 545.4 46.8 509.4 46.8 DL
+/F0 10/Helvetica-BoldOblique@0 SF(Object Data Structure)72 57.6 Q/F1 10
+/Helvetica@0 SF(\(contin)72 68.4 Q(ued\))-.1 E/F2 11/Palatino-Italic@0 SF
+(additional_data)221.5 109.2 Q/F3 11/Palatino-Roman@0 SF 1.925
+(This is an array of pointers to data used by r)246.5 122.4 R(ender)-.198 E
+1.925(ers and)-.198 F .694(methods other than the standar)246.5 135.6 R 3.444
+(dm)-.198 G 3.444(ethods. A)421.79 135.6 R .694(speci\214c slot in)3.444 F
+5.487(this array is allocated at r)246.5 148.8 R 5.487(un time by a call to)
+-.088 F F2(DD-)8.237 E(class_AddObjectData)246.5 162 Q F3 8.466(.T)C(he)360.995
+162 Q F2(additional_data)5.716 E F3 2.966(array is never ac-)5.716 F
+(cessed by the Dore)246.5 175.2 Q 3.553<b46b>333.345 175.2 S(ernel.)346.677
+175.2 Q .16 LW 223.4 201.2 221.4 201.2 DL 225.4 201.2 223.4 201.2 DL 227.4
+201.2 225.4 201.2 DL 229.4 201.2 227.4 201.2 DL 231.4 201.2 229.4 201.2 DL
+233.4 201.2 231.4 201.2 DL 235.4 201.2 233.4 201.2 DL 237.4 201.2 235.4 201.2
+DL 239.4 201.2 237.4 201.2 DL 241.4 201.2 239.4 201.2 DL 243.4 201.2 241.4
+201.2 DL 245.4 201.2 243.4 201.2 DL 247.4 201.2 245.4 201.2 DL 249.4 201.2
+247.4 201.2 DL 251.4 201.2 249.4 201.2 DL 253.4 201.2 251.4 201.2 DL 255.4
+201.2 253.4 201.2 DL 257.4 201.2 255.4 201.2 DL 259.4 201.2 257.4 201.2 DL
+261.4 201.2 259.4 201.2 DL 263.4 201.2 261.4 201.2 DL 265.4 201.2 263.4 201.2
+DL 267.4 201.2 265.4 201.2 DL 269.4 201.2 267.4 201.2 DL 271.4 201.2 269.4
+201.2 DL 273.4 201.2 271.4 201.2 DL 275.4 201.2 273.4 201.2 DL 277.4 201.2
+275.4 201.2 DL 279.4 201.2 277.4 201.2 DL 281.4 201.2 279.4 201.2 DL 283.4
+201.2 281.4 201.2 DL 285.4 201.2 283.4 201.2 DL 287.4 201.2 285.4 201.2 DL
+289.4 201.2 287.4 201.2 DL 291.4 201.2 289.4 201.2 DL 293.4 201.2 291.4 201.2
+DL 295.4 201.2 293.4 201.2 DL 297.4 201.2 295.4 201.2 DL 299.4 201.2 297.4
+201.2 DL 301.4 201.2 299.4 201.2 DL 303.4 201.2 301.4 201.2 DL 305.4 201.2
+303.4 201.2 DL 307.4 201.2 305.4 201.2 DL 309.4 201.2 307.4 201.2 DL 311.4
+201.2 309.4 201.2 DL 313.4 201.2 311.4 201.2 DL 315.4 201.2 313.4 201.2 DL
+317.4 201.2 315.4 201.2 DL 319.4 201.2 317.4 201.2 DL 321.4 201.2 319.4 201.2
+DL 323.4 201.2 321.4 201.2 DL 325.4 201.2 323.4 201.2 DL 327.4 201.2 325.4
+201.2 DL 329.4 201.2 327.4 201.2 DL 331.4 201.2 329.4 201.2 DL 333.4 201.2
+331.4 201.2 DL 335.4 201.2 333.4 201.2 DL 337.4 201.2 335.4 201.2 DL 339.4
+201.2 337.4 201.2 DL 341.4 201.2 339.4 201.2 DL 343.4 201.2 341.4 201.2 DL
+345.4 201.2 343.4 201.2 DL 347.4 201.2 345.4 201.2 DL 349.4 201.2 347.4 201.2
+DL 351.4 201.2 349.4 201.2 DL 353.4 201.2 351.4 201.2 DL 355.4 201.2 353.4
+201.2 DL 357.4 201.2 355.4 201.2 DL 359.4 201.2 357.4 201.2 DL 361.4 201.2
+359.4 201.2 DL 363.4 201.2 361.4 201.2 DL 365.4 201.2 363.4 201.2 DL 367.4
+201.2 365.4 201.2 DL 369.4 201.2 367.4 201.2 DL 371.4 201.2 369.4 201.2 DL
+373.4 201.2 371.4 201.2 DL 375.4 201.2 373.4 201.2 DL 377.4 201.2 375.4 201.2
+DL 379.4 201.2 377.4 201.2 DL 381.4 201.2 379.4 201.2 DL 383.4 201.2 381.4
+201.2 DL 385.4 201.2 383.4 201.2 DL 387.4 201.2 385.4 201.2 DL 389.4 201.2
+387.4 201.2 DL 391.4 201.2 389.4 201.2 DL 393.4 201.2 391.4 201.2 DL 395.4
+201.2 393.4 201.2 DL 397.4 201.2 395.4 201.2 DL 399.4 201.2 397.4 201.2 DL
+401.4 201.2 399.4 201.2 DL 403.4 201.2 401.4 201.2 DL 405.4 201.2 403.4 201.2
+DL 407.4 201.2 405.4 201.2 DL 409.4 201.2 407.4 201.2 DL 411.4 201.2 409.4
+201.2 DL 413.4 201.2 411.4 201.2 DL 415.4 201.2 413.4 201.2 DL 417.4 201.2
+415.4 201.2 DL 419.4 201.2 417.4 201.2 DL 421.4 201.2 419.4 201.2 DL 423.4
+201.2 421.4 201.2 DL 425.4 201.2 423.4 201.2 DL 427.4 201.2 425.4 201.2 DL
+429.4 201.2 427.4 201.2 DL 431.4 201.2 429.4 201.2 DL 433.4 201.2 431.4 201.2
+DL 435.4 201.2 433.4 201.2 DL 437.4 201.2 435.4 201.2 DL 439.4 201.2 437.4
+201.2 DL 441.4 201.2 439.4 201.2 DL 443.4 201.2 441.4 201.2 DL 445.4 201.2
+443.4 201.2 DL 447.4 201.2 445.4 201.2 DL 449.4 201.2 447.4 201.2 DL 451.4
+201.2 449.4 201.2 DL 453.4 201.2 451.4 201.2 DL 455.4 201.2 453.4 201.2 DL
+457.4 201.2 455.4 201.2 DL 459.4 201.2 457.4 201.2 DL 461.4 201.2 459.4 201.2
+DL 463.4 201.2 461.4 201.2 DL 465.4 201.2 463.4 201.2 DL 467.4 201.2 465.4
+201.2 DL 469.4 201.2 467.4 201.2 DL 471.4 201.2 469.4 201.2 DL 473.4 201.2
+471.4 201.2 DL 475.4 201.2 473.4 201.2 DL 477.4 201.2 475.4 201.2 DL 479.4
+201.2 477.4 201.2 DL 481.4 201.2 479.4 201.2 DL 483.4 201.2 481.4 201.2 DL
+485.4 201.2 483.4 201.2 DL 487.4 201.2 485.4 201.2 DL 489.4 201.2 487.4 201.2
+DL 491.4 201.2 489.4 201.2 DL 493.4 201.2 491.4 201.2 DL 495.4 201.2 493.4
+201.2 DL 497.4 201.2 495.4 201.2 DL 499.4 201.2 497.4 201.2 DL 501.4 201.2
+499.4 201.2 DL 503.4 201.2 501.4 201.2 DL 505.4 201.2 503.4 201.2 DL 507.4
+201.2 505.4 201.2 DL 509.4 201.2 507.4 201.2 DL 511.4 201.2 509.4 201.2 DL
+513.4 201.2 511.4 201.2 DL 515.4 201.2 513.4 201.2 DL 517.4 201.2 515.4 201.2
+DL 519.4 201.2 517.4 201.2 DL 521.4 201.2 519.4 201.2 DL 523.4 201.2 521.4
+201.2 DL 525.4 201.2 523.4 201.2 DL 527.4 201.2 525.4 201.2 DL 529.4 201.2
+527.4 201.2 DL 531.4 201.2 529.4 201.2 DL 533.4 201.2 531.4 201.2 DL 535.4
+201.2 533.4 201.2 DL 537.4 201.2 535.4 201.2 DL 539.4 201.2 537.4 201.2 DL
+541.4 201.2 539.4 201.2 DL 543.4 201.2 541.4 201.2 DL 545.4 201.2 543.4 201.2
+DL 1.44 LW 90 201.7 72 201.7 DL 99 201.7 81 201.7 DL 117 201.7 99 201.7 DL 135
+201.7 117 201.7 DL 153 201.7 135 201.7 DL 171 201.7 153 201.7 DL 189 201.7 171
+201.7 DL 207 201.7 189 201.7 DL/F4 12/Helvetica-BoldOblique@0 SF(Priv)72 215.7
+Q(ate Data Structures)-.24 E F3 1.479
+(The following sections describe the data str)221.5 229.8 R(uctur)-.088 E 1.48
+(es used to stor)-.198 F(e)-.198 E .553
+(object private data for a variety of Dore)221.5 243 R 4.105<b463>412.139 243 S
+3.302(lasses. These)424.791 243 R .552(data str)3.302 F(uc-)-.088 E(tur)221.5
+256.2 Q 1.254(es ar)-.198 F 4.004(et)-.198 G 1.254(he ones pointed to by the)
+272.309 256.2 R F2(data)4.005 E F3 1.255(pointer of the)4.005 F F2(DtObject-)
+4.005 E(Structur)221.5 269.4 Q(e)-.198 E F3 26.161(.T)C 20.661(hey ar)299.944
+269.4 R 23.411(ed)-.198 G 20.661(e\214ned in \214les under)386.19 269.4 R F2
+(dor)221.5 282.6 Q(e/include/dor)-.198 E(e_develop/private)-.198 E F3 11.197
+(.T)C 5.697(hey ar)391.713 282.6 R 8.447(eu)-.198 G 5.697(sually installed in)
+447.943 282.6 R F2(/usr/include/dor)221.5 295.8 Q(e_develop/private)-.198 E F3
+(.)A .16 LW 223.4 321.8 221.4 321.8 DL 225.4 321.8 223.4 321.8 DL 227.4 321.8
+225.4 321.8 DL 229.4 321.8 227.4 321.8 DL 231.4 321.8 229.4 321.8 DL 233.4
+321.8 231.4 321.8 DL 235.4 321.8 233.4 321.8 DL 237.4 321.8 235.4 321.8 DL
+239.4 321.8 237.4 321.8 DL 241.4 321.8 239.4 321.8 DL 243.4 321.8 241.4 321.8
+DL 245.4 321.8 243.4 321.8 DL 247.4 321.8 245.4 321.8 DL 249.4 321.8 247.4
+321.8 DL 251.4 321.8 249.4 321.8 DL 253.4 321.8 251.4 321.8 DL 255.4 321.8
+253.4 321.8 DL 257.4 321.8 255.4 321.8 DL 259.4 321.8 257.4 321.8 DL 261.4
+321.8 259.4 321.8 DL 263.4 321.8 261.4 321.8 DL 265.4 321.8 263.4 321.8 DL
+267.4 321.8 265.4 321.8 DL 269.4 321.8 267.4 321.8 DL 271.4 321.8 269.4 321.8
+DL 273.4 321.8 271.4 321.8 DL 275.4 321.8 273.4 321.8 DL 277.4 321.8 275.4
+321.8 DL 279.4 321.8 277.4 321.8 DL 281.4 321.8 279.4 321.8 DL 283.4 321.8
+281.4 321.8 DL 285.4 321.8 283.4 321.8 DL 287.4 321.8 285.4 321.8 DL 289.4
+321.8 287.4 321.8 DL 291.4 321.8 289.4 321.8 DL 293.4 321.8 291.4 321.8 DL
+295.4 321.8 293.4 321.8 DL 297.4 321.8 295.4 321.8 DL 299.4 321.8 297.4 321.8
+DL 301.4 321.8 299.4 321.8 DL 303.4 321.8 301.4 321.8 DL 305.4 321.8 303.4
+321.8 DL 307.4 321.8 305.4 321.8 DL 309.4 321.8 307.4 321.8 DL 311.4 321.8
+309.4 321.8 DL 313.4 321.8 311.4 321.8 DL 315.4 321.8 313.4 321.8 DL 317.4
+321.8 315.4 321.8 DL 319.4 321.8 317.4 321.8 DL 321.4 321.8 319.4 321.8 DL
+323.4 321.8 321.4 321.8 DL 325.4 321.8 323.4 321.8 DL 327.4 321.8 325.4 321.8
+DL 329.4 321.8 327.4 321.8 DL 331.4 321.8 329.4 321.8 DL 333.4 321.8 331.4
+321.8 DL 335.4 321.8 333.4 321.8 DL 337.4 321.8 335.4 321.8 DL 339.4 321.8
+337.4 321.8 DL 341.4 321.8 339.4 321.8 DL 343.4 321.8 341.4 321.8 DL 345.4
+321.8 343.4 321.8 DL 347.4 321.8 345.4 321.8 DL 349.4 321.8 347.4 321.8 DL
+351.4 321.8 349.4 321.8 DL 353.4 321.8 351.4 321.8 DL 355.4 321.8 353.4 321.8
+DL 357.4 321.8 355.4 321.8 DL 359.4 321.8 357.4 321.8 DL 361.4 321.8 359.4
+321.8 DL 363.4 321.8 361.4 321.8 DL 365.4 321.8 363.4 321.8 DL 367.4 321.8
+365.4 321.8 DL 369.4 321.8 367.4 321.8 DL 371.4 321.8 369.4 321.8 DL 373.4
+321.8 371.4 321.8 DL 375.4 321.8 373.4 321.8 DL 377.4 321.8 375.4 321.8 DL
+379.4 321.8 377.4 321.8 DL 381.4 321.8 379.4 321.8 DL 383.4 321.8 381.4 321.8
+DL 385.4 321.8 383.4 321.8 DL 387.4 321.8 385.4 321.8 DL 389.4 321.8 387.4
+321.8 DL 391.4 321.8 389.4 321.8 DL 393.4 321.8 391.4 321.8 DL 395.4 321.8
+393.4 321.8 DL 397.4 321.8 395.4 321.8 DL 399.4 321.8 397.4 321.8 DL 401.4
+321.8 399.4 321.8 DL 403.4 321.8 401.4 321.8 DL 405.4 321.8 403.4 321.8 DL
+407.4 321.8 405.4 321.8 DL 409.4 321.8 407.4 321.8 DL 411.4 321.8 409.4 321.8
+DL 413.4 321.8 411.4 321.8 DL 415.4 321.8 413.4 321.8 DL 417.4 321.8 415.4
+321.8 DL 419.4 321.8 417.4 321.8 DL 421.4 321.8 419.4 321.8 DL 423.4 321.8
+421.4 321.8 DL 425.4 321.8 423.4 321.8 DL 427.4 321.8 425.4 321.8 DL 429.4
+321.8 427.4 321.8 DL 431.4 321.8 429.4 321.8 DL 433.4 321.8 431.4 321.8 DL
+435.4 321.8 433.4 321.8 DL 437.4 321.8 435.4 321.8 DL 439.4 321.8 437.4 321.8
+DL 441.4 321.8 439.4 321.8 DL 443.4 321.8 441.4 321.8 DL 445.4 321.8 443.4
+321.8 DL 447.4 321.8 445.4 321.8 DL 449.4 321.8 447.4 321.8 DL 451.4 321.8
+449.4 321.8 DL 453.4 321.8 451.4 321.8 DL 455.4 321.8 453.4 321.8 DL 457.4
+321.8 455.4 321.8 DL 459.4 321.8 457.4 321.8 DL 461.4 321.8 459.4 321.8 DL
+463.4 321.8 461.4 321.8 DL 465.4 321.8 463.4 321.8 DL 467.4 321.8 465.4 321.8
+DL 469.4 321.8 467.4 321.8 DL 471.4 321.8 469.4 321.8 DL 473.4 321.8 471.4
+321.8 DL 475.4 321.8 473.4 321.8 DL 477.4 321.8 475.4 321.8 DL 479.4 321.8
+477.4 321.8 DL 481.4 321.8 479.4 321.8 DL 483.4 321.8 481.4 321.8 DL 485.4
+321.8 483.4 321.8 DL 487.4 321.8 485.4 321.8 DL 489.4 321.8 487.4 321.8 DL
+491.4 321.8 489.4 321.8 DL 493.4 321.8 491.4 321.8 DL 495.4 321.8 493.4 321.8
+DL 497.4 321.8 495.4 321.8 DL 499.4 321.8 497.4 321.8 DL 501.4 321.8 499.4
+321.8 DL 503.4 321.8 501.4 321.8 DL 505.4 321.8 503.4 321.8 DL 507.4 321.8
+505.4 321.8 DL 509.4 321.8 507.4 321.8 DL 511.4 321.8 509.4 321.8 DL 513.4
+321.8 511.4 321.8 DL 515.4 321.8 513.4 321.8 DL 517.4 321.8 515.4 321.8 DL
+519.4 321.8 517.4 321.8 DL 521.4 321.8 519.4 321.8 DL 523.4 321.8 521.4 321.8
+DL 525.4 321.8 523.4 321.8 DL 527.4 321.8 525.4 321.8 DL 529.4 321.8 527.4
+321.8 DL 531.4 321.8 529.4 321.8 DL 533.4 321.8 531.4 321.8 DL 535.4 321.8
+533.4 321.8 DL 537.4 321.8 535.4 321.8 DL 539.4 321.8 537.4 321.8 DL 541.4
+321.8 539.4 321.8 DL 543.4 321.8 541.4 321.8 DL 545.4 321.8 543.4 321.8 DL 1.44
+LW 90 322.3 72 322.3 DL 99 322.3 81 322.3 DL 117 322.3 99 322.3 DL 135 322.3
+117 322.3 DL 153 322.3 135 322.3 DL 171 322.3 153 322.3 DL 189 322.3 171 322.3
+DL 207 322.3 189 322.3 DL/F5 12/Helvetica-Oblique@0 SF -3.156(Pr imitiv)72
+336.3 R 3.336(eO)-.3 G(bjects)130.548 336.3 Q F3(class name:)221.5 350.4 Q/F6
+11/Palatino-Bold@0 SF(DoAnnoT)2.75 E(ext)-1.221 E F3(\214le name: anntxt.h)
+221.5 363.6 Q/F7 9/Courier@0 SF(typedef struct anntxt {)221.5 386.6 Q
+(DtPoint3 position;)264.7 397.6 Q(unsigned char)264.7 408.6 Q/F8 9/Symbol SF(*)
+5.4 E F7(string;)A(DtTextAlignHorizontal halign;)264.7 419.6 Q
+(DtTextAlignVertical valign;)264.7 430.6 Q(DtReal textexp;)264.7 441.6 Q
+(DtFont font;)264.7 452.6 Q(DtReal textheight;)264.7 463.6 Q
+(DtTextPath textpath;)264.7 474.6 Q(DtTextPrecision precision;)264.7 485.6 Q
+(DtReal textspace;)264.7 496.6 Q(DtReal xup, yup;)264.7 507.6 Q
+(DtObjectStructure)264.7 518.6 Q F8(*)5.4 E F7(alternate_object_lines;)A
+(DtObjectStructure)264.7 529.6 Q F8(*)5.4 E F7(alternate_object_triangles;)A
+(};)264.7 540.6 Q F3(class name:)221.5 579 Q F6(DoLineList)2.75 E F3
+(\214le name: linlst.h)221.5 592.2 Q F7(struct linlst {)221.5 615.2 Q
+(DtColorModel colormodel;)264.7 626.2 Q(DtInt line_count;)264.7 637.2 Q
+(DtVertexType vertex_type;)264.7 648.2 Q(DtRealTriple)264.7 659.2 Q F8(*)5.4 E
+F7(vertex_location;)A(DtRealTriple)264.7 670.2 Q F8(*)5.4 E F7(vertex_normal;)A
+(DtRealTriple)264.7 681.2 Q F8(*)5.4 E F7(vertex_color;)A
+(DtInt space_estimate;)264.7 692.2 Q(DtInt line_space;)264.7 703.2 Q 90 756 72
+756 DL 99 756 81 756 DL 117 756 99 756 DL 135 756 117 756 DL 153 756 135 756 DL
+171 756 153 756 DL 189 756 171 756 DL 207 756 189 756 DL 239.4 756 221.4 756 DL
+257.4 756 239.4 756 DL 275.4 756 257.4 756 DL 293.4 756 275.4 756 DL 311.4 756
+293.4 756 DL 329.4 756 311.4 756 DL 347.4 756 329.4 756 DL 365.4 756 347.4 756
+DL 383.4 756 365.4 756 DL 401.4 756 383.4 756 DL 419.4 756 401.4 756 DL 437.4
+756 419.4 756 DL 455.4 756 437.4 756 DL 473.4 756 455.4 756 DL 491.4 756 473.4
+756 DL 509.4 756 491.4 756 DL 527.4 756 509.4 756 DL 545.4 756 527.4 756 DL/F9
+9/Helvetica-Bold@0 SF(C-382)72 768.96 Q/F10 9/Helvetica@0 SF(Dore)6.504 E 3.506
+<b444>118.513 768.96 S -2.187 -.27(ev e)131.514 768.96 T(loper').27 E 2.502(sG)
+-.45 G(uide)181.086 768.96 Q(Object Data Str)221.4 768.96 Q(uctures).135 E EP
+%%Page: 383 3
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 99 46.8 63 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 243 46.8 207 46.8 DL 279 46.8 243 46.8 DL 315 46.8 279 46.8 DL 351
+46.8 315 46.8 DL 387 46.8 351 46.8 DL 437.4 46.8 401.4 46.8 DL 464.4 46.8 428.4
+46.8 DL 500.4 46.8 464.4 46.8 DL 536.4 46.8 500.4 46.8 DL/F0 10
+/Helvetica-BoldOblique@0 SF(Priv)426.01 57.6 Q(ate Data Structures)-.2 E/F1 10
+/Helvetica@0 SF(\(contin)486.48 68.4 Q(ued\))-.1 E/F2 9/Courier@0 SF
+(DtRealTriple bounding_box_pts[8];)106.2 107 Q(DtInt uv_count;)106.2 118 Q
+(DtRealCouple)106.2 129 Q/F3 9/Symbol SF(**)5.4 E F2(uv_list;)A
+(DtInt uvw_count;)106.2 140 Q(DtRealTriple)106.2 151 Q F3(**)5.4 E F2
+(uvw_list;)A(};)106.2 162 Q/F4 11/Palatino-Roman@0 SF(class name:)63 187.2 Q/F5
+11/Palatino-Bold@0 SF(DoNURBSurf)2.75 E F4(\214le name: nurbsurf.h)63 200.4 Q
+F2(struct newknot {int n; DtReal)63 223.4 Q F3(*)5.4 E F2(p;};)A
+(struct nurbsurf {)63 245.4 Q(DtReal subdivlvl[5];)106.2 256.4 Q(short)106.2
+267.4 Q 16.2(u_closed:1, /)117 278.4 R F3(*)A F2(1==> closed in u)5.4 E F3(*)
+5.4 E F2(/)A 16.2(u_period:1, /)117 289.4 R F3(*)A F2(1==> periodic in u)5.4 E
+F3(*)5.4 E F2(/)A 16.2(v_closed:1, /)117 300.4 R F3(*)A F2(1==> closed in v)5.4
+E F3(*)5.4 E F2(/)A 16.2(v_period:1, /)117 311.4 R F3(*)A F2
+(1==> periodic in v)5.4 E F3(*)5.4 E F2(/)A 16.2(rational:1, /)117 322.4 R F3
+(*)A F2(1==> rational)5.4 E F3(*)5.4 E F2(/)A(/)117 333.4 Q F3(*)A F2
+(0==>polynomial)5.4 E F3(*)5.4 E F2(/)A 21.6(u_owner:1, /)117 344.4 R F3(*)A F2
+(1==> allocated)5.4 E F3(*)5.4 E F2(u)A F3(*)5.4 E F2(/)A 21.6(v_owner:1, /)117
+355.4 R F3(*)A F2(1==> allocated)5.4 E F3(*)5.4 E F2(v)A F3(*)5.4 E F2(/)A 16.2
+(cp_owner:1; /)117 366.4 R F3(*)A F2(1==> allocated)5.4 E F3(*)5.4 E F2(cptp)A
+F3(*)5.4 E F2(/)A(char u_order;)106.2 377.4 Q(/)198 377.4 Q F3(*)A F2
+(1+degree in u)5.4 E F3(*)5.4 E F2(/)A(char v_order;)106.2 388.4 Q(/)198 388.4
+Q F3(*)A F2(1+degree in v)5.4 E F3(*)5.4 E F2(/)A(DtShort u_nknot; /)106.2
+399.4 Q F3(*)A F2(number of knots in u)5.4 E F3(*)5.4 E F2(/)A
+(DtShort v_nknot; /)106.2 410.4 Q F3(*)A F2(number of knots in v)5.4 E F3(*)5.4
+E F2(/)A(DtShort u_nctrl; /)106.2 421.4 Q F3(*)A F2 5.4(#o)5.4 G 5.4(fc)229.5
+421.4 S(ontrol points along u)245.7 421.4 Q F3(*)5.4 E F2(/)A
+(DtShort v_nctrl; /)106.2 432.4 Q F3(*)A F2 5.4(#o)5.4 G 5.4(fc)229.5 432.4 S
+(ontrol points along v)245.7 432.4 Q F3(*)5.4 E F2(/)A(/)106.2 443.4 Q F3(*)A
+F2(u_nknot = u_nctrl + u_order)5.4 E F3(*)5.4 E F2(/)A(/)106.2 454.4 Q F3(*)A
+F2(v_nknot = v_nctrl + v_order)5.4 E F3(*)5.4 E F2(/)A(DtReal)106.2 465.4 Q F3
+(*)5.4 E F2 33.3(u; /)B F3(*)A F2(1st knot sequence)5.4 E F3(*)5.4 E F2(/)A
+(DtReal)106.2 476.4 Q F3(*)5.4 E F2 33.3(v; /)B F3(*)A F2(2nd knot sequence)5.4
+E F3(*)5.4 E F2(/)A(DtNPoint4)106.2 487.4 Q F3(**)5.4 E F2(cptp;/)A F3(*)A F2
+(-> v_nctrl ptrs to row of)5.4 E F3(*)5.4 E F2(/)A(/)106.2 498.4 Q F3(*)A F2
+(u_nctrl 4D pts)5.4 E F3(*)5.4 E F2(/)A(DtObjectStructure)106.2 509.4 Q F3(*)
+5.4 E F2(alternate_object;)A(DtNArea uv_area; /)106.2 520.4 Q F3(*)A F2
+(bounds of para intervals)5.4 E F3(*)5.4 E F2(/)A(char cornerflat[4];)106.2
+531.4 Q(char edgeflat[4];)106.2 542.4 Q(DtNPoint3 corner[4];)106.2 553.4 Q(/)
+225 553.4 Q F3(*)A F2(crack prevention)5.4 E F3(*)5.4 E F2(/)A(};)106.2 564.4 Q
+F4(class name:)63 589.6 Q F5(DoPatch)2.75 E F4(\214le name: patch.h)63 602.8 Q
+F2(struct patch_control {)106.2 625.8 Q(short nrow,ncol;)106.2 636.8 Q
+(DtNPoint3 corner00;)106.2 647.8 Q(DtNPoint3 corner03;)106.2 658.8 Q
+(DtNPoint3 corner30;)106.2 669.8 Q(DtNPoint3 corner33;)106.2 680.8 Q
+(DtNPoint3 point[4][4];)106.2 691.8 Q(};)106.2 702.8 Q 1.44 LW 81 756 63 756 DL
+99 756 81 756 DL 117 756 99 756 DL 135 756 117 756 DL 153 756 135 756 DL 171
+756 153 756 DL 189 756 171 756 DL 207 756 189 756 DL 225 756 207 756 DL 243 756
+225 756 DL 261 756 243 756 DL 279 756 261 756 DL 297 756 279 756 DL 315 756 297
+756 DL 333 756 315 756 DL 351 756 333 756 DL 369 756 351 756 DL 387 756 369 756
+DL 419.4 756 401.4 756 DL 428.4 756 410.4 756 DL 446.4 756 428.4 756 DL 464.4
+756 446.4 756 DL 482.4 756 464.4 756 DL 500.4 756 482.4 756 DL 518.4 756 500.4
+756 DL 536.4 756 518.4 756 DL/F6 9/Helvetica@0 SF(Object Data Str)295.83 768.96
+Q(uctures).135 E(Dore)412.806 768.96 Q 3.506<b444>428.308 768.96 S -2.187 -.27
+(ev e)441.309 768.96 T(loper').27 E 2.502(sG)-.45 G(uide)490.881 768.96 Q/F7 9
+/Helvetica-Bold@0 SF(C-383)4.002 E EP
+%%Page: 384 4
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 108 46.8 72 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 257.4 46.8 221.4 46.8 DL 293.4 46.8 257.4 46.8 DL 329.4 46.8 293.4
+46.8 DL 365.4 46.8 329.4 46.8 DL 401.4 46.8 365.4 46.8 DL 437.4 46.8 401.4 46.8
+DL 473.4 46.8 437.4 46.8 DL 509.4 46.8 473.4 46.8 DL 545.4 46.8 509.4 46.8 DL
+/F0 10/Helvetica-BoldOblique@0 SF(Priv)72 57.6 Q(ate Data Structures)-.2 E/F1
+10/Helvetica@0 SF(\(contin)72 68.4 Q(ued\))-.1 E/F2 9/Courier@0 SF
+(struct patch {)221.5 107 Q(DtShort patch_type;)264.7 118 Q(DtInt subdivtype;)
+264.7 129 Q(DtReal subdivlvl[5];)264.7 140 Q(short)264.7 151 Q(edge0flat:1,)
+275.5 162 Q(edge1flat:1,)275.5 173 Q(edge2flat:1,)275.5 184 Q(edge3flat:1,)
+275.5 195 Q(corner00flat:1,)275.5 206 Q(corner03flat:1,)275.5 217 Q
+(corner30flat:1,)275.5 228 Q(corner33flat:1,)275.5 239 Q(has_colors:1;)275.5
+250 Q(DtColorModel colormodel;)264.7 261 Q(DtVertexType vertextype;)264.7 272 Q
+(DtObject lmatrix,rmatrix;)264.7 283 Q(struct patch_control)264.7 294 Q/F3 9
+/Symbol SF(*)5.4 E F2(points;)A(struct patch_control)264.7 305 Q F3(*)5.4 E F2
+(colors;)A(DtObjectStructure)264.7 316 Q F3(*)5.4 E F2(alternate_object;)A(};)
+264.7 327 Q/F4 11/Palatino-Roman@0 SF(class name:)221.5 352.2 Q/F5 11
+/Palatino-Bold@0 SF(DoMatrix)2.75 E F4(\214le name: patchmat.h)221.5 365.4 Q F2
+(struct matrix {)221.5 388.4 Q(short nrow,ncol;)264.7 399.4 Q(DtReal)264.7
+410.4 Q F3(*)5.4 E F2(data;)A(};)264.7 421.4 Q F4(class name:)221.5 446.6 Q F5
+(DoPointList)2.75 E F4(\214le name: pntlst.h)221.5 459.8 Q F2(struct pntlst {)
+221.5 482.8 Q(DtColorModel colormodel;)264.7 493.8 Q(DtInt point_count;)264.7
+504.8 Q(DtVertexType vertex_type;)264.7 515.8 Q(DtRealTriple)264.7 526.8 Q F3
+(*)5.4 E F2(vertex_location;)A(DtRealTriple)264.7 537.8 Q F3(*)5.4 E F2
+(vertex_normal;)A(DtRealTriple)264.7 548.8 Q F3(*)5.4 E F2(vertex_color;)A
+(DtInt point_space;)264.7 559.8 Q(DtRealTriple bounding_box_pts[8];)264.7 570.8
+Q(DtInt uv_count;)264.7 581.8 Q(DtRealCouple)264.7 592.8 Q F3(**)5.4 E F2
+(uv_list;)A(DtInt uvw_count;)264.7 603.8 Q(DtRealTriple)264.7 614.8 Q F3(**)5.4
+E F2(uvw_list;)A(};)264.7 625.8 Q F4(class name:)221.5 651 Q F5(DoPolygon)2.75
+E F4(\214le name: ply)221.5 664.2 Q(.h)-1.221 E 1.44 LW 90 756 72 756 DL 99 756
+81 756 DL 117 756 99 756 DL 135 756 117 756 DL 153 756 135 756 DL 171 756 153
+756 DL 189 756 171 756 DL 207 756 189 756 DL 239.4 756 221.4 756 DL 257.4 756
+239.4 756 DL 275.4 756 257.4 756 DL 293.4 756 275.4 756 DL 311.4 756 293.4 756
+DL 329.4 756 311.4 756 DL 347.4 756 329.4 756 DL 365.4 756 347.4 756 DL 383.4
+756 365.4 756 DL 401.4 756 383.4 756 DL 419.4 756 401.4 756 DL 437.4 756 419.4
+756 DL 455.4 756 437.4 756 DL 473.4 756 455.4 756 DL 491.4 756 473.4 756 DL
+509.4 756 491.4 756 DL 527.4 756 509.4 756 DL 545.4 756 527.4 756 DL/F6 9
+/Helvetica-Bold@0 SF(C-384)72 768.96 Q/F7 9/Helvetica@0 SF(Dore)6.504 E 3.506
+<b444>118.513 768.96 S -2.187 -.27(ev e)131.514 768.96 T(loper').27 E 2.502(sG)
+-.45 G(uide)181.086 768.96 Q(Object Data Str)221.4 768.96 Q(uctures).135 E EP
+%%Page: 385 5
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 99 46.8 63 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 243 46.8 207 46.8 DL 279 46.8 243 46.8 DL 315 46.8 279 46.8 DL 351
+46.8 315 46.8 DL 387 46.8 351 46.8 DL 437.4 46.8 401.4 46.8 DL 464.4 46.8 428.4
+46.8 DL 500.4 46.8 464.4 46.8 DL 536.4 46.8 500.4 46.8 DL/F0 10
+/Helvetica-BoldOblique@0 SF(Priv)426.01 57.6 Q(ate Data Structures)-.2 E/F1 10
+/Helvetica@0 SF(\(contin)486.48 68.4 Q(ued\))-.1 E/F2 9/Courier@0 SF
+(struct ply {)63 107 Q(DtColorModel colormodel;)106.2 118 Q
+(DtVertexType vertextype;)106.2 129 Q(DtInt contour_count;)106.2 140 Q(DtInt)
+106.2 151 Q/F3 9/Symbol SF(*)5.4 E F2(contours;)A(DtInt vertex_count;)106.2 162
+Q(DtRealTriple)106.2 173 Q F3(*)5.4 E F2(vertex_location;)A(DtRealTriple)106.2
+184 Q F3(*)5.4 E F2(vertex_normal;)A(DtColorRGB)106.2 195 Q F3(*)5.4 E F2
+(vertex_color;)A(DtShapeType shape;)106.2 206 Q(DtObjectStructure)106.2 217 Q
+F3(*)5.4 E F2(alt_object_lines;)A(DtObjectStructure)106.2 228 Q F3(*)5.4 E F2
+(alt_object_tris;)A(DtVertexType fullvtxtype;)106.2 239 Q(DtInt uv_count;)106.2
+250 Q(DtRealCouple)106.2 261 Q F3(**)5.4 E F2(uv_list;)A(DtInt uvw_count;)106.2
+272 Q(DtRealTriple)106.2 283 Q F3(**)5.4 E F2(uvw_list;)A(};)106.2 294 Q/F4 11
+/Palatino-Roman@0 SF(class name:)63 319.2 Q/F5 11/Palatino-Bold@0 SF
+(DoPolygonMesh)2.75 E F4(\214le name: plymsh.h)63 332.4 Q F2(struct plymsh {)63
+355.4 Q(DtColorModel colormodel;)106.2 366.4 Q(DtVertexType vertextype;)106.2
+377.4 Q(DtInt vertex_count;)106.2 388.4 Q(DtRealTriple)106.2 399.4 Q F3(*)5.4 E
+F2(vertex_location;)A(DtRealTriple)106.2 410.4 Q F3(*)5.4 E F2(vertex_normal;)A
+(DtColorRGB)106.2 421.4 Q F3(*)5.4 E F2(vertex_color;)A(DtInt polygon_count;)
+106.2 432.4 Q(DtInt)106.2 443.4 Q F3(*)5.4 E F2(polygons;)A(DtInt)106.2 454.4 Q
+F3(*)5.4 E F2(contours;)A(DtInt)106.2 465.4 Q F3(*)5.4 E F2(vertexlist;)A
+(DtFlag smoothflag;)106.2 476.4 Q(DtShapeType shape;)106.2 487.4 Q
+(DtObjectStructure)106.2 498.4 Q F3(*)5.4 E F2(alt_object_lines;)A
+(DtObjectStructure)106.2 509.4 Q F3(*)5.4 E F2(alt_object_tris;)A
+(DtVertexType fullvtxtype;)106.2 520.4 Q(DtInt uv_count;)106.2 531.4 Q
+(DtRealCouple)106.2 542.4 Q F3(**)5.4 E F2(uv_list;)A(DtInt uvw_count;)106.2
+553.4 Q(DtRealTriple)106.2 564.4 Q F3(**)5.4 E F2(uvw_list;)A(};)106.2 575.4 Q
+F4(class name:)63 600.6 Q F5(DoPolyline)2.75 E F4(\214le name: plylin.h)63
+613.8 Q F2(struct plylin {)63 636.8 Q(DtColorModel colormodel;)106.2 647.8 Q
+(DtVertexType vertex_type;)106.2 658.8 Q(DtInt vertex_count;)106.2 669.8 Q
+(DtRealTriple)106.2 680.8 Q F3(*)5.4 E F2(vertex_location;)A(DtRealTriple)106.2
+691.8 Q F3(*)5.4 E F2(vertex_normal;)A(DtRealTriple)106.2 702.8 Q F3(*)5.4 E F2
+(vertex_color;)A 1.44 LW 81 756 63 756 DL 99 756 81 756 DL 117 756 99 756 DL
+135 756 117 756 DL 153 756 135 756 DL 171 756 153 756 DL 189 756 171 756 DL 207
+756 189 756 DL 225 756 207 756 DL 243 756 225 756 DL 261 756 243 756 DL 279 756
+261 756 DL 297 756 279 756 DL 315 756 297 756 DL 333 756 315 756 DL 351 756 333
+756 DL 369 756 351 756 DL 387 756 369 756 DL 419.4 756 401.4 756 DL 428.4 756
+410.4 756 DL 446.4 756 428.4 756 DL 464.4 756 446.4 756 DL 482.4 756 464.4 756
+DL 500.4 756 482.4 756 DL 518.4 756 500.4 756 DL 536.4 756 518.4 756 DL/F6 9
+/Helvetica@0 SF(Object Data Str)295.83 768.96 Q(uctures).135 E(Dore)412.806
+768.96 Q 3.506<b444>428.308 768.96 S -2.187 -.27(ev e)441.309 768.96 T(loper')
+.27 E 2.502(sG)-.45 G(uide)490.881 768.96 Q/F7 9/Helvetica-Bold@0 SF(C-385)
+4.002 E EP
+%%Page: 386 6
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 108 46.8 72 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 257.4 46.8 221.4 46.8 DL 293.4 46.8 257.4 46.8 DL 329.4 46.8 293.4
+46.8 DL 365.4 46.8 329.4 46.8 DL 401.4 46.8 365.4 46.8 DL 437.4 46.8 401.4 46.8
+DL 473.4 46.8 437.4 46.8 DL 509.4 46.8 473.4 46.8 DL 545.4 46.8 509.4 46.8 DL
+/F0 10/Helvetica-BoldOblique@0 SF(Priv)72 57.6 Q(ate Data Structures)-.2 E/F1
+10/Helvetica@0 SF(\(contin)72 68.4 Q(ued\))-.1 E/F2 9/Courier@0 SF
+(DtRealTriple bounding_box_pts[8];)264.7 107 Q(DtInt uv_count;)264.7 118 Q
+(DtRealCouple)264.7 129 Q/F3 9/Symbol SF(**)5.4 E F2(uv_list;)A
+(DtInt uvw_count;)264.7 140 Q(DtRealTriple)264.7 151 Q F3(**)5.4 E F2
+(uvw_list;)A(};)264.7 162 Q/F4 11/Palatino-Roman@0 SF(class name:)221.5 187.2 Q
+/F5 11/Palatino-Bold@0 SF(DoPolymarker)2.75 E F4(\214le name: plymkr)221.5
+200.4 Q(.h)-.814 E F2(typedef struct plymkr {)221.5 223.4 Q(DtInt count;)264.7
+234.4 Q(DtPoint3)264.7 245.4 Q F3(*)5.4 E F2(position;)A(DtFont font;)264.7
+256.4 Q(DtInt glyph;)264.7 267.4 Q(DtReal scale;)264.7 278.4 Q(DtReal textexp;)
+264.7 289.4 Q(DtReal xup, yup;)264.7 300.4 Q(DtObjectStructure)264.7 311.4 Q F3
+(*)5.4 E F2(alternate_object_lines;)A(DtObjectStructure)264.7 322.4 Q F3(*)5.4
+E F2(alternate_object_triangles;)A(};)264.7 333.4 Q F4(class name:)221.5 358.6
+Q F5(DoPrimSurf)2.75 E F4(\214le name: prisrf.h)221.5 371.8 Q F2
+(struct prisrf {)221.5 394.8 Q(DtSurface surface_type;)264.7 405.8 Q
+(DtInt subdivtype;)264.7 416.8 Q(DtReal subdivparms[1];)264.7 427.8 Q
+(DtObjectStructure)264.7 438.8 Q F3(*)5.4 E F2(alternate_object;)A(};)264.7
+449.8 Q F4(class name:)221.5 475 Q F5(DoSimplePolygon)2.75 E F4
+(\214le name: simply)221.5 488.2 Q(.h)-1.221 E F2(struct simply {)221.5 511.2 Q
+(DtColorModel colormodel;)264.7 522.2 Q(DtVertexType vertextype;)264.7 533.2 Q
+(DtInt vertex_count;)264.7 544.2 Q(DtRealTriple)264.7 555.2 Q F3(*)5.4 E F2
+(vertex_location;)A(DtRealTriple)264.7 566.2 Q F3(*)5.4 E F2(vertex_normal;)A
+(DtColorRGB)264.7 577.2 Q F3(*)5.4 E F2(vertex_color;)A(DtShapeType shape;)
+264.7 588.2 Q(DtObjectStructure)264.7 599.2 Q F3(*)5.4 E F2(alt_object_lines;)A
+(DtObjectStructure)264.7 610.2 Q F3(*)5.4 E F2(alt_object_tris;)A
+(DtVertexType fullvtxtype;)264.7 621.2 Q(DtInt uv_count;)264.7 632.2 Q
+(DtRealCouple)264.7 643.2 Q F3(**)5.4 E F2(uv_list;)A(DtInt uvw_count;)264.7
+654.2 Q(DtRealTriple)264.7 665.2 Q F3(**)5.4 E F2(uvw_list;)A(};)264.7 676.2 Q
+1.44 LW 90 756 72 756 DL 99 756 81 756 DL 117 756 99 756 DL 135 756 117 756 DL
+153 756 135 756 DL 171 756 153 756 DL 189 756 171 756 DL 207 756 189 756 DL
+239.4 756 221.4 756 DL 257.4 756 239.4 756 DL 275.4 756 257.4 756 DL 293.4 756
+275.4 756 DL 311.4 756 293.4 756 DL 329.4 756 311.4 756 DL 347.4 756 329.4 756
+DL 365.4 756 347.4 756 DL 383.4 756 365.4 756 DL 401.4 756 383.4 756 DL 419.4
+756 401.4 756 DL 437.4 756 419.4 756 DL 455.4 756 437.4 756 DL 473.4 756 455.4
+756 DL 491.4 756 473.4 756 DL 509.4 756 491.4 756 DL 527.4 756 509.4 756 DL
+545.4 756 527.4 756 DL/F6 9/Helvetica-Bold@0 SF(C-386)72 768.96 Q/F7 9
+/Helvetica@0 SF(Dore)6.504 E 3.506<b444>118.513 768.96 S -2.187 -.27(ev e)
+131.514 768.96 T(loper').27 E 2.502(sG)-.45 G(uide)181.086 768.96 Q
+(Object Data Str)221.4 768.96 Q(uctures).135 E EP
+%%Page: 387 7
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 99 46.8 63 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 243 46.8 207 46.8 DL 279 46.8 243 46.8 DL 315 46.8 279 46.8 DL 351
+46.8 315 46.8 DL 387 46.8 351 46.8 DL 437.4 46.8 401.4 46.8 DL 464.4 46.8 428.4
+46.8 DL 500.4 46.8 464.4 46.8 DL 536.4 46.8 500.4 46.8 DL/F0 10
+/Helvetica-BoldOblique@0 SF(Priv)426.01 57.6 Q(ate Data Structures)-.2 E/F1 10
+/Helvetica@0 SF(\(contin)486.48 68.4 Q(ued\))-.1 E/F2 11/Palatino-Roman@0 SF
+(class name:)63 109.2 Q/F3 11/Palatino-Bold@0 SF(DoSimplePolygonMesh)2.75 E F2
+(\214le name: simplymsh.h)63 122.4 Q/F4 9/Courier@0 SF(struct simplymsh {)63
+145.4 Q(DtColorModel colormodel;)106.2 156.4 Q(DtVertexType vertextype;)106.2
+167.4 Q(DtInt vertex_count;)106.2 178.4 Q(DtRealTriple)106.2 189.4 Q/F5 9
+/Symbol SF(*)5.4 E F4(vertex_location;)A(DtRealTriple)106.2 200.4 Q F5(*)5.4 E
+F4(vertex_normal;)A(DtColorRGB)106.2 211.4 Q F5(*)5.4 E F4(vertex_color;)A
+(DtInt polygon_count;)106.2 222.4 Q(DtInt)106.2 233.4 Q F5(*)5.4 E F4
+(contours;)A(DtInt)106.2 244.4 Q F5(*)5.4 E F4(vertexlist;)A
+(DtShapeType shape;)106.2 255.4 Q(DtFlag smoothflag;)106.2 266.4 Q
+(DtObjectStructure)106.2 277.4 Q F5(*)5.4 E F4(alt_object_lines;)A
+(DtObjectStructure)106.2 288.4 Q F5(*)5.4 E F4(alt_object_tris;)A
+(DtVertexType fullvtxtype;)106.2 299.4 Q(DtInt uv_count;)106.2 310.4 Q
+(DtRealCouple)106.2 321.4 Q F5(**)5.4 E F4(uv_list;)A(DtInt uvw_count;)106.2
+332.4 Q(DtRealTriple)106.2 343.4 Q F5(**)5.4 E F4(uvw_list;)A(};)106.2 354.4 Q
+F2(class name:)63 397.2 Q F3(DoSphereList)2.75 E F2(\214le name: sphlst.h)63
+410.4 Q F4(struct sphlst {)63 433.4 Q(DtInt sphere_count;)106.2 444.4 Q(DtReal)
+106.2 455.4 Q F5(*)5.4 E F4(locations;)A(DtReal)106.2 466.4 Q F5(*)5.4 E F4
+(radii;)A(DtReal)106.2 477.4 Q F5(*)5.4 E F4(colors;)A(DtInt subdivtype;)106.2
+488.4 Q(DtReal subdivparms[1];)106.2 499.4 Q(DtObject alternate_object;)106.2
+510.4 Q(};)106.2 521.4 Q F2(class name:)63 553.2 Q F3(DoT)2.75 E(ext)-1.221 E
+F2(\214le name: text.h)63 566.4 Q F4(typedef struct text {)63 589.4 Q
+(DtPoint3 position;)106.2 600.4 Q(DtVector3 u;)106.2 611.4 Q(DtVector3 v;)106.2
+622.4 Q(unsigned char)106.2 633.4 Q F5(*)5.4 E F4(string;)A
+(DtTextAlignHorizontal halign;)106.2 644.4 Q(DtTextAlignVertical valign;)106.2
+655.4 Q(DtReal textexp;)106.2 666.4 Q(DtFont font;)106.2 677.4 Q
+(DtReal textheight;)106.2 688.4 Q(DtTextPath textpath;)106.2 699.4 Q
+(DtTextPrecision precision;)106.2 710.4 Q 1.44 LW 81 756 63 756 DL 99 756 81
+756 DL 117 756 99 756 DL 135 756 117 756 DL 153 756 135 756 DL 171 756 153 756
+DL 189 756 171 756 DL 207 756 189 756 DL 225 756 207 756 DL 243 756 225 756 DL
+261 756 243 756 DL 279 756 261 756 DL 297 756 279 756 DL 315 756 297 756 DL 333
+756 315 756 DL 351 756 333 756 DL 369 756 351 756 DL 387 756 369 756 DL 419.4
+756 401.4 756 DL 428.4 756 410.4 756 DL 446.4 756 428.4 756 DL 464.4 756 446.4
+756 DL 482.4 756 464.4 756 DL 500.4 756 482.4 756 DL 518.4 756 500.4 756 DL
+536.4 756 518.4 756 DL/F6 9/Helvetica@0 SF(Object Data Str)295.83 768.96 Q
+(uctures).135 E(Dore)412.806 768.96 Q 3.506<b444>428.308 768.96 S -2.187 -.27
+(ev e)441.309 768.96 T(loper').27 E 2.502(sG)-.45 G(uide)490.881 768.96 Q/F7 9
+/Helvetica-Bold@0 SF(C-387)4.002 E EP
+%%Page: 388 8
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 108 46.8 72 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 257.4 46.8 221.4 46.8 DL 293.4 46.8 257.4 46.8 DL 329.4 46.8 293.4
+46.8 DL 365.4 46.8 329.4 46.8 DL 401.4 46.8 365.4 46.8 DL 437.4 46.8 401.4 46.8
+DL 473.4 46.8 437.4 46.8 DL 509.4 46.8 473.4 46.8 DL 545.4 46.8 509.4 46.8 DL
+/F0 10/Helvetica-BoldOblique@0 SF(Priv)72 57.6 Q(ate Data Structures)-.2 E/F1
+10/Helvetica@0 SF(\(contin)72 68.4 Q(ued\))-.1 E/F2 9/Courier@0 SF
+(DtReal textspace;)264.7 107 Q(DtReal xup, yup;)264.7 118 Q
+(DtMatrix4x4 planematrix;)264.7 129 Q(DtObjectStructure)264.7 140 Q/F3 9/Symbol
+SF(*)5.4 E F2(alternate_object_lines;)A(DtObjectStructure)264.7 151 Q F3(*)5.4
+E F2(alternate_object_triangles;)A(};)264.7 162 Q/F4 11/Palatino-Roman@0 SF
+(class name:)221.5 200.4 Q/F5 11/Palatino-Bold@0 SF(DoT)2.75 E(orus)-1.221 E F4
+(\214le name: tor)221.5 213.6 Q(us.h)-.088 E F2(struct torus {)221.5 236.6 Q
+(DtReal R;)264.7 247.6 Q(DtReal r;)264.7 258.6 Q(DtInt subdivtype;)264.7 269.6
+Q(DtReal subdivparms[1];)264.7 280.6 Q(DtObjectStructure)264.7 291.6 Q F3(*)5.4
+E F2(alternate_object;)A(};)264.7 302.6 Q F4(class name:)221.5 327.8 Q F5(DoT)
+2.75 E(riangleList)-1.221 E F4(\214le name: trilst.h)221.5 341 Q F2
+(struct trilst {)221.5 364 Q(DtColorModel colormodel;)264.7 375 Q
+(DtInt triangle_count;)264.7 386 Q(DtVertexType vertex_type;)264.7 397 Q
+(DtRealTriple)264.7 408 Q F3(*)5.4 E F2(vertex_location;)A(DtRealTriple)264.7
+419 Q F3(*)5.4 E F2(vertex_normal;)A(DtRealTriple)264.7 430 Q F3(*)5.4 E F2
+(vertex_color;)A(DtRealTriple)264.7 441 Q F3(*)5.4 E F2(element_normal;)A
+(DtInt triangle_space;)264.7 452 Q(DtInt space_estimate;)264.7 463 Q
+(DtRealTriple bounding_box_pts[8];)264.7 474 Q(DtInt uv_count;)264.7 485 Q
+(DtRealCouple)264.7 496 Q F3(**)5.4 E F2(uv_list;)A(DtInt uvw_count;)264.7 507
+Q(DtRealTriple)264.7 518 Q F3(**)5.4 E F2(uvw_list;)A(DtObjectStructure)264.7
+529 Q F3(*)5.4 E F2(alt_object_lines;)A(DtInt)264.7 540 Q F3(*)5.4 E F2
+(edge_enable;)A(};)264.7 551 Q F4(class name:)221.5 576.2 Q F5(DoT)2.75 E
+(riangleMesh)-1.221 E F4(\214le name: trimsh.h)221.5 589.4 Q F2
+(typedef DtInt trimsh_vertexlist[3];)221.5 612.4 Q(struct trimsh {)221.5 634.4
+Q(DtColorModel colormodel;)264.7 645.4 Q(DtVertexType vertextype;)264.7 656.4 Q
+(DtInt vertex_count;)264.7 667.4 Q(DtRealTriple)264.7 678.4 Q F3(*)5.4 E F2
+(vertex_location;)A(DtRealTriple)264.7 689.4 Q F3(*)5.4 E F2(vertex_normal;)A
+(DtColorRGB)264.7 700.4 Q F3(*)5.4 E F2(vertex_color;)A(DtInt triangle_count;)
+264.7 711.4 Q 1.44 LW 90 756 72 756 DL 99 756 81 756 DL 117 756 99 756 DL 135
+756 117 756 DL 153 756 135 756 DL 171 756 153 756 DL 189 756 171 756 DL 207 756
+189 756 DL 239.4 756 221.4 756 DL 257.4 756 239.4 756 DL 275.4 756 257.4 756 DL
+293.4 756 275.4 756 DL 311.4 756 293.4 756 DL 329.4 756 311.4 756 DL 347.4 756
+329.4 756 DL 365.4 756 347.4 756 DL 383.4 756 365.4 756 DL 401.4 756 383.4 756
+DL 419.4 756 401.4 756 DL 437.4 756 419.4 756 DL 455.4 756 437.4 756 DL 473.4
+756 455.4 756 DL 491.4 756 473.4 756 DL 509.4 756 491.4 756 DL 527.4 756 509.4
+756 DL 545.4 756 527.4 756 DL/F6 9/Helvetica-Bold@0 SF(C-388)72 768.96 Q/F7 9
+/Helvetica@0 SF(Dore)6.504 E 3.506<b444>118.513 768.96 S -2.187 -.27(ev e)
+131.514 768.96 T(loper').27 E 2.502(sG)-.45 G(uide)181.086 768.96 Q
+(Object Data Str)221.4 768.96 Q(uctures).135 E EP
+%%Page: 389 9
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 99 46.8 63 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 243 46.8 207 46.8 DL 279 46.8 243 46.8 DL 315 46.8 279 46.8 DL 351
+46.8 315 46.8 DL 387 46.8 351 46.8 DL 437.4 46.8 401.4 46.8 DL 464.4 46.8 428.4
+46.8 DL 500.4 46.8 464.4 46.8 DL 536.4 46.8 500.4 46.8 DL/F0 10
+/Helvetica-BoldOblique@0 SF(Priv)426.01 57.6 Q(ate Data Structures)-.2 E/F1 10
+/Helvetica@0 SF(\(contin)486.48 68.4 Q(ued\))-.1 E/F2 9/Courier@0 SF
+(trimsh_vertexlist)106.2 107 Q/F3 9/Symbol SF(*)5.4 E F2(triangle_vertexlist;)A
+(trimsh_vertexlist)106.2 118 Q F3(*)5.4 E F2(compiled_triangle_vertexlist;)A
+(DtRealTriple)106.2 129 Q F3(*)5.4 E F2(element_normal;)A(DtFlag smoothflag;)
+106.2 140 Q(DtRealTriple bounding_box_pts[8];)106.2 151 Q(DtInt uv_count;)106.2
+162 Q(DtRealCouple)106.2 173 Q F3(**)5.4 E F2(uv_list;)A(DtInt uvw_count;)106.2
+184 Q(DtRealTriple)106.2 195 Q F3(**)5.4 E F2(uvw_list;)A(DtObjectStructure)
+106.2 206 Q F3(*)5.4 E F2(alt_object_lines;)A(};)106.2 217 Q/F4 11
+/Palatino-Roman@0 SF(class name:)63 242.2 Q/F5 11/Palatino-Bold@0 SF(DoT)2.75 E
+(riangleStrip)-1.221 E F4(\214le name: tristrip.h)63 255.4 Q F2
+(struct tristrip {)63 278.4 Q(DtColorModel colormodel;)106.2 289.4 Q
+(DtVertexType vertex_type;)106.2 300.4 Q(DtRealTriple)106.2 311.4 Q F3(*)5.4 E
+F2(vertex_location;)A(DtRealTriple)106.2 322.4 Q F3(*)5.4 E F2(vertex_normal;)A
+(DtRealTriple)106.2 333.4 Q F3(*)5.4 E F2(vertex_color;)A(DtInt vertex_count;)
+106.2 344.4 Q(DtObjectStructure)106.2 355.4 Q F3(*)5.4 E F2(alt_object_lines;)A
+(DtRealTriple bounding_box_pts[8];)106.2 366.4 Q(DtInt uv_count;)106.2 377.4 Q
+(DtRealCouple)106.2 388.4 Q F3(**)5.4 E F2(uv_list;)A(DtInt uvw_count;)106.2
+399.4 Q(DtRealTriple)106.2 410.4 Q F3(**)5.4 E F2(uvw_list;)A(DtRealTriple)
+106.2 421.4 Q F3(*)5.4 E F2(element_normal;)A(DtIntTriple)106.2 432.4 Q F3(*)
+5.4 E F2(triangle_vertexlist;)A(DtIntTriple)106.2 443.4 Q F3(*)5.4 E F2
+(compiled_triangle_vertexlist;)A(};)106.2 454.4 Q F4(class name:)63 479.6 Q F5
+(DoV)2.75 E(arLineList)-1.221 E F4(\214le name: varlinlst.h)63 492.8 Q F2
+(struct varlinlst {)63 515.8 Q(DtColorModel colormodel;)106.2 526.8 Q
+(DtInt line_count;)106.2 537.8 Q(DtRealTriple)106.2 548.8 Q F3(*)5.4 E F2
+(vertex_location;)A(DtRealTriple)106.2 559.8 Q F3(*)5.4 E F2(vertex_normal;)A
+(DtColorRGB)106.2 570.8 Q F3(*)5.4 E F2(vertex_color;)A(DtInt line_space;)106.2
+581.8 Q(DtRealTriple bounding_box_pts[8];)106.2 592.8 Q
+(DtInt sequence_number; /)106.2 603.8 Q F3(*)A F2(incremented when the object)
+5.4 E(is updated with DpUpd..)235.8 614.8 Q F3(*)5.4 E F2(/)A(};)106.2 625.8 Q
+F4(class name:)63 664.2 Q F5(DoV)2.75 E(arPointList)-1.221 E F4
+(\214le name: varpntlst.h)63 677.4 Q 1.44 LW 81 756 63 756 DL 99 756 81 756 DL
+117 756 99 756 DL 135 756 117 756 DL 153 756 135 756 DL 171 756 153 756 DL 189
+756 171 756 DL 207 756 189 756 DL 225 756 207 756 DL 243 756 225 756 DL 261 756
+243 756 DL 279 756 261 756 DL 297 756 279 756 DL 315 756 297 756 DL 333 756 315
+756 DL 351 756 333 756 DL 369 756 351 756 DL 387 756 369 756 DL 419.4 756 401.4
+756 DL 428.4 756 410.4 756 DL 446.4 756 428.4 756 DL 464.4 756 446.4 756 DL
+482.4 756 464.4 756 DL 500.4 756 482.4 756 DL 518.4 756 500.4 756 DL 536.4 756
+518.4 756 DL/F6 9/Helvetica@0 SF(Object Data Str)295.83 768.96 Q(uctures).135 E
+(Dore)412.806 768.96 Q 3.506<b444>428.308 768.96 S -2.187 -.27(ev e)441.309
+768.96 T(loper').27 E 2.502(sG)-.45 G(uide)490.881 768.96 Q/F7 9
+/Helvetica-Bold@0 SF(C-389)4.002 E EP
+%%Page: 390 10
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 108 46.8 72 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 257.4 46.8 221.4 46.8 DL 293.4 46.8 257.4 46.8 DL 329.4 46.8 293.4
+46.8 DL 365.4 46.8 329.4 46.8 DL 401.4 46.8 365.4 46.8 DL 437.4 46.8 401.4 46.8
+DL 473.4 46.8 437.4 46.8 DL 509.4 46.8 473.4 46.8 DL 545.4 46.8 509.4 46.8 DL
+/F0 10/Helvetica-BoldOblique@0 SF(Priv)72 57.6 Q(ate Data Structures)-.2 E/F1
+10/Helvetica@0 SF(\(contin)72 68.4 Q(ued\))-.1 E/F2 9/Courier@0 SF
+(struct varpntlst {)217.001 107 Q(DtColorModel colormodel;)260.201 118 Q
+(DtInt point_count;)260.201 129 Q(DtRealTriple)260.201 140 Q/F3 9/Symbol SF(*)
+5.4 E F2(vertex_location;)A(DtRealTriple)260.201 151 Q F3(*)5.4 E F2
+(vertex_normal;)A(DtColorRGB)260.201 162 Q F3(*)5.4 E F2(vertex_color;)A
+(DtInt point_space;)260.201 173 Q(DtRealTriple bounding_box_pts[8];)260.201 184
+Q(DtInt sequence_number; /)260.201 195 Q F3(*)A F2(incremented when the object)
+5.4 E(is updated with DpUpd..)389.801 206 Q F3(*)5.4 E F2(/)A(};)260.201 217 Q
+/F4 11/Palatino-Roman@0 SF(class name:)221.5 242.2 Q/F5 11/Palatino-Bold@0 SF
+(DoV)2.75 E(arSimplePolygonMesh)-1.221 E F4(\214le name: varsplymsh.h)221.5
+255.4 Q F2(struct varsimplymsh {)217.001 278.4 Q(DtColorModel colormodel;)
+260.201 289.4 Q(DtInt vertex_count;)260.201 300.4 Q(DtRealTriple)260.201 311.4
+Q F3(*)5.4 E F2(vertex_location;)A(DtRealTriple)260.201 322.4 Q F3(*)5.4 E F2
+(vertex_normal;)A(DtColorRGB)260.201 333.4 Q F3(*)5.4 E F2(vertex_color;)A
+(DtInt polygon_count;)260.201 344.4 Q(DtInt)260.201 355.4 Q F3(*)5.4 E F2
+(contours;)A(DtInt)260.201 366.4 Q F3(*)5.4 E F2(vertexlist;)A
+(DtShapeType shape;)260.201 377.4 Q(DtFlag smoothflag;)260.201 388.4 Q
+(DtFlag needvertnrms;)260.201 399.4 Q(DtObjectStructure)260.201 410.4 Q F3(*)
+5.4 E F2(alt_object_lines;)A(DtInt alt_tricount;)260.201 421.4 Q(DtIntTriple)
+260.201 432.4 Q F3(*)330.401 432.4 Q F2(alt_trilist;)A(DtFlag decompose_lines;)
+260.201 443.4 Q(DtObjectStructure)260.201 454.4 Q F3(*)5.4 E F2
+(alt_object_tris;)A(DtRealTriple)260.201 465.4 Q F3(*)5.4 E F2(alt_linevtx;)A
+(DtRealTriple)260.201 476.4 Q F3(*)5.4 E F2(alt_linenrm;)A(DtRealTriple)260.201
+487.4 Q F3(*)5.4 E F2(alt_lineclr;)A(DtFlag decompose_tris;)260.201 498.4 Q
+(DtInt sequence_number; /)260.201 509.4 Q F3(*)A F2
+(incremented when the object)5.4 E(is updated with DpUpd..)389.801 520.4 Q F3
+(*)5.4 E F2(/)A(DtInt uv_count;)260.201 531.4 Q(DtRealCouple)260.201 542.4 Q F3
+(**)5.4 E F2(uv_list;)A(DtInt uvw_count;)260.201 553.4 Q(DtRealTriple)260.201
+564.4 Q F3(**)5.4 E F2(uvw_list;)A(DtInt)260.201 575.4 Q F3(*)5.4 E F2
+(edge_enable;)A(};)260.201 586.4 Q F4(class name:)221.5 611.6 Q F5(DoV)2.75 E
+(arT)-1.221 E(riangleMesh)-1.221 E F4(\214le name: vartrimsh.h)221.5 624.8 Q F2
+(typedef DtInt vartrimsh_vertexlist[3];)217.001 647.8 Q(struct vartrimsh {)
+217.001 669.8 Q(DtColorModel colormodel;)260.201 680.8 Q(DtInt vertex_count;)
+260.201 691.8 Q(DtRealTriple)260.201 702.8 Q F3(*)5.4 E F2(vertex_location;)A
+1.44 LW 90 756 72 756 DL 99 756 81 756 DL 117 756 99 756 DL 135 756 117 756 DL
+153 756 135 756 DL 171 756 153 756 DL 189 756 171 756 DL 207 756 189 756 DL
+239.4 756 221.4 756 DL 257.4 756 239.4 756 DL 275.4 756 257.4 756 DL 293.4 756
+275.4 756 DL 311.4 756 293.4 756 DL 329.4 756 311.4 756 DL 347.4 756 329.4 756
+DL 365.4 756 347.4 756 DL 383.4 756 365.4 756 DL 401.4 756 383.4 756 DL 419.4
+756 401.4 756 DL 437.4 756 419.4 756 DL 455.4 756 437.4 756 DL 473.4 756 455.4
+756 DL 491.4 756 473.4 756 DL 509.4 756 491.4 756 DL 527.4 756 509.4 756 DL
+545.4 756 527.4 756 DL/F6 9/Helvetica-Bold@0 SF(C-390)72 768.96 Q/F7 9
+/Helvetica@0 SF(Dore)6.504 E 3.506<b444>118.513 768.96 S -2.187 -.27(ev e)
+131.514 768.96 T(loper').27 E 2.502(sG)-.45 G(uide)181.086 768.96 Q
+(Object Data Str)221.4 768.96 Q(uctures).135 E EP
+%%Page: 391 11
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 99 46.8 63 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 243 46.8 207 46.8 DL 279 46.8 243 46.8 DL 315 46.8 279 46.8 DL 351
+46.8 315 46.8 DL 387 46.8 351 46.8 DL 437.4 46.8 401.4 46.8 DL 464.4 46.8 428.4
+46.8 DL 500.4 46.8 464.4 46.8 DL 536.4 46.8 500.4 46.8 DL/F0 10
+/Helvetica-BoldOblique@0 SF(Priv)426.01 57.6 Q(ate Data Structures)-.2 E/F1 10
+/Helvetica@0 SF(\(contin)486.48 68.4 Q(ued\))-.1 E/F2 9/Courier@0 SF
+(DtRealTriple)106.2 107 Q/F3 9/Symbol SF(*)5.4 E F2(vertex_normal;)A
+(DtColorRGB)106.2 118 Q F3(*)5.4 E F2(vertex_color;)A(DtInt triangle_count;)
+106.2 129 Q(vartrimsh_vertexlist)106.2 140 Q F3(*)5.4 E F2
+(triangle_vertexlist;)A(vartrimsh_vertexlist)106.2 151 Q F3(*)5.4 E F2
+(compiled_triangle_vertexlist;)A(DtRealTriple)106.2 162 Q F3(*)5.4 E F2
+(element_normal;)A(DtFlag smoothflag;)106.2 173 Q(DtFlag needelemnrms;)106.2
+184 Q(DtFlag needvertnrms;)106.2 195 Q(DtRealTriple bounding_box_pts[8];)106.2
+206 Q(DtFlag decompose_lines;)106.2 217 Q(DtObjectStructure)106.2 228 Q F3(*)
+5.4 E F2(alt_object_lines;)A(DtRealTriple)106.2 239 Q F3(*)5.4 E F2
+(alt_linevtx;)A(DtRealTriple)106.2 250 Q F3(*)5.4 E F2(alt_linenrm;)A
+(DtRealTriple)106.2 261 Q F3(*)5.4 E F2(alt_lineclr;)A
+(DtInt sequence_number; /)106.2 272 Q F3(*)A F2(incremented when the object)5.4
+E(is updated with DpUpd..)235.8 283 Q F3(*)5.4 E F2(/)A(DtInt uv_count;)106.2
+294 Q(DtRealCouple)106.2 305 Q F3(**)5.4 E F2(uv_list;)A(DtInt uvw_count;)106.2
+316 Q(DtRealTriple)106.2 327 Q F3(**)5.4 E F2(uvw_list;)A(DtInt)106.2 338 Q F3
+(*)5.4 E F2(edge_enable;)A(};)106.2 349 Q/F4 11/Palatino-Roman@0 SF
+(class name:)63 374.2 Q/F5 11/Palatino-Bold@0 SF(DoV)2.75 E(arT)-1.221 E
+(riangleStrip)-1.221 E F4(\214le name: vartristrp.h)63 387.4 Q F2
+(struct vartristrip {)63 410.4 Q(DtColorModel colormodel;)106.2 421.4 Q
+(DtRealTriple)106.2 432.4 Q F3(*)5.4 E F2(vertex_location;)A(DtRealTriple)106.2
+443.4 Q F3(*)5.4 E F2(vertex_normal;)A(DtRealTriple)106.2 454.4 Q F3(*)5.4 E F2
+(vertex_color;)A(DtInt vertex_count;)106.2 465.4 Q
+(DtRealTriple bounding_box_pts[8];)106.2 476.4 Q(DtFlag needelemnrms;)106.2
+487.4 Q(DtFlag decompose_lines;)106.2 498.4 Q(DtObjectStructure)106.2 509.4 Q
+F3(*)5.4 E F2(alt_object_lines;)A(DtRealTriple)106.2 520.4 Q F3(*)5.4 E F2
+(alt_linevtx;)A(DtRealTriple)106.2 531.4 Q F3(*)5.4 E F2(alt_linenrm;)A
+(DtRealTriple)106.2 542.4 Q F3(*)5.4 E F2(alt_lineclr;)A
+(DtInt alt_vertexcount;)106.2 553.4 Q(DtRealTriple)106.2 564.4 Q F3(*)5.4 E F2
+(element_normal;)A(DtIntTriple)106.2 575.4 Q F3(*)5.4 E F2
+(triangle_vertexlist;)A(DtIntTriple)106.2 586.4 Q F3(*)5.4 E F2
+(compiled_triangle_vertexlist;)A(DtInt sequence_number; /)106.2 597.4 Q F3(*)A
+F2(incremented when the object)5.4 E(is updated with DpUpd..)235.8 608.4 Q F3
+(*)5.4 E F2(/)A(DtInt uv_count;)106.2 619.4 Q(DtRealCouple)106.2 630.4 Q F3(**)
+5.4 E F2(uv_list;)A(DtInt uvw_count;)106.2 641.4 Q(DtRealTriple)106.2 652.4 Q
+F3(**)5.4 E F2(uvw_list;)A(};)106.2 663.4 Q 1.44 LW 81 756 63 756 DL 99 756 81
+756 DL 117 756 99 756 DL 135 756 117 756 DL 153 756 135 756 DL 171 756 153 756
+DL 189 756 171 756 DL 207 756 189 756 DL 225 756 207 756 DL 243 756 225 756 DL
+261 756 243 756 DL 279 756 261 756 DL 297 756 279 756 DL 315 756 297 756 DL 333
+756 315 756 DL 351 756 333 756 DL 369 756 351 756 DL 387 756 369 756 DL 419.4
+756 401.4 756 DL 428.4 756 410.4 756 DL 446.4 756 428.4 756 DL 464.4 756 446.4
+756 DL 482.4 756 464.4 756 DL 500.4 756 482.4 756 DL 518.4 756 500.4 756 DL
+536.4 756 518.4 756 DL/F6 9/Helvetica@0 SF(Object Data Str)295.83 768.96 Q
+(uctures).135 E(Dore)412.806 768.96 Q 3.506<b444>428.308 768.96 S -2.187 -.27
+(ev e)441.309 768.96 T(loper').27 E 2.502(sG)-.45 G(uide)490.881 768.96 Q/F7 9
+/Helvetica-Bold@0 SF(C-391)4.002 E EP
+%%Page: 392 12
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 108 46.8 72 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 257.4 46.8 221.4 46.8 DL 293.4 46.8 257.4 46.8 DL 329.4 46.8 293.4
+46.8 DL 365.4 46.8 329.4 46.8 DL 401.4 46.8 365.4 46.8 DL 437.4 46.8 401.4 46.8
+DL 473.4 46.8 437.4 46.8 DL 509.4 46.8 473.4 46.8 DL 545.4 46.8 509.4 46.8 DL
+/F0 10/Helvetica-BoldOblique@0 SF(Priv)72 57.6 Q(ate Data Structures)-.2 E/F1
+10/Helvetica@0 SF(\(contin)72 68.4 Q(ued\))-.1 E .16 LW 223.4 110 221.4 110 DL
+225.4 110 223.4 110 DL 227.4 110 225.4 110 DL 229.4 110 227.4 110 DL 231.4 110
+229.4 110 DL 233.4 110 231.4 110 DL 235.4 110 233.4 110 DL 237.4 110 235.4 110
+DL 239.4 110 237.4 110 DL 241.4 110 239.4 110 DL 243.4 110 241.4 110 DL 245.4
+110 243.4 110 DL 247.4 110 245.4 110 DL 249.4 110 247.4 110 DL 251.4 110 249.4
+110 DL 253.4 110 251.4 110 DL 255.4 110 253.4 110 DL 257.4 110 255.4 110 DL
+259.4 110 257.4 110 DL 261.4 110 259.4 110 DL 263.4 110 261.4 110 DL 265.4 110
+263.4 110 DL 267.4 110 265.4 110 DL 269.4 110 267.4 110 DL 271.4 110 269.4 110
+DL 273.4 110 271.4 110 DL 275.4 110 273.4 110 DL 277.4 110 275.4 110 DL 279.4
+110 277.4 110 DL 281.4 110 279.4 110 DL 283.4 110 281.4 110 DL 285.4 110 283.4
+110 DL 287.4 110 285.4 110 DL 289.4 110 287.4 110 DL 291.4 110 289.4 110 DL
+293.4 110 291.4 110 DL 295.4 110 293.4 110 DL 297.4 110 295.4 110 DL 299.4 110
+297.4 110 DL 301.4 110 299.4 110 DL 303.4 110 301.4 110 DL 305.4 110 303.4 110
+DL 307.4 110 305.4 110 DL 309.4 110 307.4 110 DL 311.4 110 309.4 110 DL 313.4
+110 311.4 110 DL 315.4 110 313.4 110 DL 317.4 110 315.4 110 DL 319.4 110 317.4
+110 DL 321.4 110 319.4 110 DL 323.4 110 321.4 110 DL 325.4 110 323.4 110 DL
+327.4 110 325.4 110 DL 329.4 110 327.4 110 DL 331.4 110 329.4 110 DL 333.4 110
+331.4 110 DL 335.4 110 333.4 110 DL 337.4 110 335.4 110 DL 339.4 110 337.4 110
+DL 341.4 110 339.4 110 DL 343.4 110 341.4 110 DL 345.4 110 343.4 110 DL 347.4
+110 345.4 110 DL 349.4 110 347.4 110 DL 351.4 110 349.4 110 DL 353.4 110 351.4
+110 DL 355.4 110 353.4 110 DL 357.4 110 355.4 110 DL 359.4 110 357.4 110 DL
+361.4 110 359.4 110 DL 363.4 110 361.4 110 DL 365.4 110 363.4 110 DL 367.4 110
+365.4 110 DL 369.4 110 367.4 110 DL 371.4 110 369.4 110 DL 373.4 110 371.4 110
+DL 375.4 110 373.4 110 DL 377.4 110 375.4 110 DL 379.4 110 377.4 110 DL 381.4
+110 379.4 110 DL 383.4 110 381.4 110 DL 385.4 110 383.4 110 DL 387.4 110 385.4
+110 DL 389.4 110 387.4 110 DL 391.4 110 389.4 110 DL 393.4 110 391.4 110 DL
+395.4 110 393.4 110 DL 397.4 110 395.4 110 DL 399.4 110 397.4 110 DL 401.4 110
+399.4 110 DL 403.4 110 401.4 110 DL 405.4 110 403.4 110 DL 407.4 110 405.4 110
+DL 409.4 110 407.4 110 DL 411.4 110 409.4 110 DL 413.4 110 411.4 110 DL 415.4
+110 413.4 110 DL 417.4 110 415.4 110 DL 419.4 110 417.4 110 DL 421.4 110 419.4
+110 DL 423.4 110 421.4 110 DL 425.4 110 423.4 110 DL 427.4 110 425.4 110 DL
+429.4 110 427.4 110 DL 431.4 110 429.4 110 DL 433.4 110 431.4 110 DL 435.4 110
+433.4 110 DL 437.4 110 435.4 110 DL 439.4 110 437.4 110 DL 441.4 110 439.4 110
+DL 443.4 110 441.4 110 DL 445.4 110 443.4 110 DL 447.4 110 445.4 110 DL 449.4
+110 447.4 110 DL 451.4 110 449.4 110 DL 453.4 110 451.4 110 DL 455.4 110 453.4
+110 DL 457.4 110 455.4 110 DL 459.4 110 457.4 110 DL 461.4 110 459.4 110 DL
+463.4 110 461.4 110 DL 465.4 110 463.4 110 DL 467.4 110 465.4 110 DL 469.4 110
+467.4 110 DL 471.4 110 469.4 110 DL 473.4 110 471.4 110 DL 475.4 110 473.4 110
+DL 477.4 110 475.4 110 DL 479.4 110 477.4 110 DL 481.4 110 479.4 110 DL 483.4
+110 481.4 110 DL 485.4 110 483.4 110 DL 487.4 110 485.4 110 DL 489.4 110 487.4
+110 DL 491.4 110 489.4 110 DL 493.4 110 491.4 110 DL 495.4 110 493.4 110 DL
+497.4 110 495.4 110 DL 499.4 110 497.4 110 DL 501.4 110 499.4 110 DL 503.4 110
+501.4 110 DL 505.4 110 503.4 110 DL 507.4 110 505.4 110 DL 509.4 110 507.4 110
+DL 511.4 110 509.4 110 DL 513.4 110 511.4 110 DL 515.4 110 513.4 110 DL 517.4
+110 515.4 110 DL 519.4 110 517.4 110 DL 521.4 110 519.4 110 DL 523.4 110 521.4
+110 DL 525.4 110 523.4 110 DL 527.4 110 525.4 110 DL 529.4 110 527.4 110 DL
+531.4 110 529.4 110 DL 533.4 110 531.4 110 DL 535.4 110 533.4 110 DL 537.4 110
+535.4 110 DL 539.4 110 537.4 110 DL 541.4 110 539.4 110 DL 543.4 110 541.4 110
+DL 545.4 110 543.4 110 DL 1.44 LW 90 110.5 72 110.5 DL 99 110.5 81 110.5 DL 117
+110.5 99 110.5 DL 135 110.5 117 110.5 DL 153 110.5 135 110.5 DL 171 110.5 153
+110.5 DL 189 110.5 171 110.5 DL 207 110.5 189 110.5 DL/F2 12
+/Helvetica-Oblique@0 SF(Studio Objects)72 124.5 Q/F3 11/Palatino-Roman@0 SF
+(class name:)221.5 145.2 Q/F4 11/Palatino-Bold@0 SF(DoCameraMatrix)2.75 E F3
+(\214le name: cammat.h)221.5 158.4 Q/F5 9/Courier@0 SF(struct cammat_data {)
+221.5 181.4 Q(DtMatrix4x4 matrix;)264.7 192.4 Q(};)264.7 203.4 Q F3
+(class name:)221.5 235.2 Q F4(DoParallel)2.75 E F3(\214le name: parmat.h)221.5
+248.4 Q F5(struct parallel_data {)221.5 271.4 Q(DtReal fov_degree;)264.7 282.4
+Q(DtReal hither;)264.7 293.4 Q(DtReal yon;)264.7 304.4 Q(};)264.7 315.4 Q F3
+(class name:)221.5 347.2 Q F4(DoPerspective)2.75 E F3(\214le name: permat.h)
+221.5 360.4 Q F5(struct perspective_data {)221.5 383.4 Q(DtReal fov_degree;)
+264.7 394.4 Q(DtReal hither;)264.7 405.4 Q(DtReal yon;)264.7 416.4 Q(};)264.7
+427.4 Q F3(class name:)221.5 465.8 Q F4(DoProjection)2.75 E F3
+(\214le name: prjmat.h)221.5 479 Q F5(struct projection_data {)221.5 502 Q
+(DtArea window;)264.7 513 Q(DtProjectionType ptype;)264.7 524 Q(DtPoint3 prp;)
+264.7 535 Q(DtReal view_plane;)264.7 546 Q(DtReal hither;)264.7 557 Q
+(DtReal yon;)264.7 568 Q(};)264.7 579 Q .16 LW 223.4 630.2 221.4 630.2 DL 225.4
+630.2 223.4 630.2 DL 227.4 630.2 225.4 630.2 DL 229.4 630.2 227.4 630.2 DL
+231.4 630.2 229.4 630.2 DL 233.4 630.2 231.4 630.2 DL 235.4 630.2 233.4 630.2
+DL 237.4 630.2 235.4 630.2 DL 239.4 630.2 237.4 630.2 DL 241.4 630.2 239.4
+630.2 DL 243.4 630.2 241.4 630.2 DL 245.4 630.2 243.4 630.2 DL 247.4 630.2
+245.4 630.2 DL 249.4 630.2 247.4 630.2 DL 251.4 630.2 249.4 630.2 DL 253.4
+630.2 251.4 630.2 DL 255.4 630.2 253.4 630.2 DL 257.4 630.2 255.4 630.2 DL
+259.4 630.2 257.4 630.2 DL 261.4 630.2 259.4 630.2 DL 263.4 630.2 261.4 630.2
+DL 265.4 630.2 263.4 630.2 DL 267.4 630.2 265.4 630.2 DL 269.4 630.2 267.4
+630.2 DL 271.4 630.2 269.4 630.2 DL 273.4 630.2 271.4 630.2 DL 275.4 630.2
+273.4 630.2 DL 277.4 630.2 275.4 630.2 DL 279.4 630.2 277.4 630.2 DL 281.4
+630.2 279.4 630.2 DL 283.4 630.2 281.4 630.2 DL 285.4 630.2 283.4 630.2 DL
+287.4 630.2 285.4 630.2 DL 289.4 630.2 287.4 630.2 DL 291.4 630.2 289.4 630.2
+DL 293.4 630.2 291.4 630.2 DL 295.4 630.2 293.4 630.2 DL 297.4 630.2 295.4
+630.2 DL 299.4 630.2 297.4 630.2 DL 301.4 630.2 299.4 630.2 DL 303.4 630.2
+301.4 630.2 DL 305.4 630.2 303.4 630.2 DL 307.4 630.2 305.4 630.2 DL 309.4
+630.2 307.4 630.2 DL 311.4 630.2 309.4 630.2 DL 313.4 630.2 311.4 630.2 DL
+315.4 630.2 313.4 630.2 DL 317.4 630.2 315.4 630.2 DL 319.4 630.2 317.4 630.2
+DL 321.4 630.2 319.4 630.2 DL 323.4 630.2 321.4 630.2 DL 325.4 630.2 323.4
+630.2 DL 327.4 630.2 325.4 630.2 DL 329.4 630.2 327.4 630.2 DL 331.4 630.2
+329.4 630.2 DL 333.4 630.2 331.4 630.2 DL 335.4 630.2 333.4 630.2 DL 337.4
+630.2 335.4 630.2 DL 339.4 630.2 337.4 630.2 DL 341.4 630.2 339.4 630.2 DL
+343.4 630.2 341.4 630.2 DL 345.4 630.2 343.4 630.2 DL 347.4 630.2 345.4 630.2
+DL 349.4 630.2 347.4 630.2 DL 351.4 630.2 349.4 630.2 DL 353.4 630.2 351.4
+630.2 DL 355.4 630.2 353.4 630.2 DL 357.4 630.2 355.4 630.2 DL 359.4 630.2
+357.4 630.2 DL 361.4 630.2 359.4 630.2 DL 363.4 630.2 361.4 630.2 DL 365.4
+630.2 363.4 630.2 DL 367.4 630.2 365.4 630.2 DL 369.4 630.2 367.4 630.2 DL
+371.4 630.2 369.4 630.2 DL 373.4 630.2 371.4 630.2 DL 375.4 630.2 373.4 630.2
+DL 377.4 630.2 375.4 630.2 DL 379.4 630.2 377.4 630.2 DL 381.4 630.2 379.4
+630.2 DL 383.4 630.2 381.4 630.2 DL 385.4 630.2 383.4 630.2 DL 387.4 630.2
+385.4 630.2 DL 389.4 630.2 387.4 630.2 DL 391.4 630.2 389.4 630.2 DL 393.4
+630.2 391.4 630.2 DL 395.4 630.2 393.4 630.2 DL 397.4 630.2 395.4 630.2 DL
+399.4 630.2 397.4 630.2 DL 401.4 630.2 399.4 630.2 DL 403.4 630.2 401.4 630.2
+DL 405.4 630.2 403.4 630.2 DL 407.4 630.2 405.4 630.2 DL 409.4 630.2 407.4
+630.2 DL 411.4 630.2 409.4 630.2 DL 413.4 630.2 411.4 630.2 DL 415.4 630.2
+413.4 630.2 DL 417.4 630.2 415.4 630.2 DL 419.4 630.2 417.4 630.2 DL 421.4
+630.2 419.4 630.2 DL 423.4 630.2 421.4 630.2 DL 425.4 630.2 423.4 630.2 DL
+427.4 630.2 425.4 630.2 DL 429.4 630.2 427.4 630.2 DL 431.4 630.2 429.4 630.2
+DL 433.4 630.2 431.4 630.2 DL 435.4 630.2 433.4 630.2 DL 437.4 630.2 435.4
+630.2 DL 439.4 630.2 437.4 630.2 DL 441.4 630.2 439.4 630.2 DL 443.4 630.2
+441.4 630.2 DL 445.4 630.2 443.4 630.2 DL 447.4 630.2 445.4 630.2 DL 449.4
+630.2 447.4 630.2 DL 451.4 630.2 449.4 630.2 DL 453.4 630.2 451.4 630.2 DL
+455.4 630.2 453.4 630.2 DL 457.4 630.2 455.4 630.2 DL 459.4 630.2 457.4 630.2
+DL 461.4 630.2 459.4 630.2 DL 463.4 630.2 461.4 630.2 DL 465.4 630.2 463.4
+630.2 DL 467.4 630.2 465.4 630.2 DL 469.4 630.2 467.4 630.2 DL 471.4 630.2
+469.4 630.2 DL 473.4 630.2 471.4 630.2 DL 475.4 630.2 473.4 630.2 DL 477.4
+630.2 475.4 630.2 DL 479.4 630.2 477.4 630.2 DL 481.4 630.2 479.4 630.2 DL
+483.4 630.2 481.4 630.2 DL 485.4 630.2 483.4 630.2 DL 487.4 630.2 485.4 630.2
+DL 489.4 630.2 487.4 630.2 DL 491.4 630.2 489.4 630.2 DL 493.4 630.2 491.4
+630.2 DL 495.4 630.2 493.4 630.2 DL 497.4 630.2 495.4 630.2 DL 499.4 630.2
+497.4 630.2 DL 501.4 630.2 499.4 630.2 DL 503.4 630.2 501.4 630.2 DL 505.4
+630.2 503.4 630.2 DL 507.4 630.2 505.4 630.2 DL 509.4 630.2 507.4 630.2 DL
+511.4 630.2 509.4 630.2 DL 513.4 630.2 511.4 630.2 DL 515.4 630.2 513.4 630.2
+DL 517.4 630.2 515.4 630.2 DL 519.4 630.2 517.4 630.2 DL 521.4 630.2 519.4
+630.2 DL 523.4 630.2 521.4 630.2 DL 525.4 630.2 523.4 630.2 DL 527.4 630.2
+525.4 630.2 DL 529.4 630.2 527.4 630.2 DL 531.4 630.2 529.4 630.2 DL 533.4
+630.2 531.4 630.2 DL 535.4 630.2 533.4 630.2 DL 537.4 630.2 535.4 630.2 DL
+539.4 630.2 537.4 630.2 DL 541.4 630.2 539.4 630.2 DL 543.4 630.2 541.4 630.2
+DL 545.4 630.2 543.4 630.2 DL 1.44 LW 90 630.7 72 630.7 DL 99 630.7 81 630.7 DL
+117 630.7 99 630.7 DL 135 630.7 117 630.7 DL 153 630.7 135 630.7 DL 171 630.7
+153 630.7 DL 189 630.7 171 630.7 DL 207 630.7 189 630.7 DL F2 -3.156
+(Geometr ic)72 644.7 R -.576 -1.44(Tr a)72 658.7 T(nsf)1.44 E -3.036(or mation)
+-.36 F(Objects)3.336 E F3(class name:)221.5 665.4 Q F4(DoLookAtFrom)2.75 E F3
+(\214le name: lokatfrm.h)221.5 678.6 Q 90 756 72 756 DL 99 756 81 756 DL 117
+756 99 756 DL 135 756 117 756 DL 153 756 135 756 DL 171 756 153 756 DL 189 756
+171 756 DL 207 756 189 756 DL 239.4 756 221.4 756 DL 257.4 756 239.4 756 DL
+275.4 756 257.4 756 DL 293.4 756 275.4 756 DL 311.4 756 293.4 756 DL 329.4 756
+311.4 756 DL 347.4 756 329.4 756 DL 365.4 756 347.4 756 DL 383.4 756 365.4 756
+DL 401.4 756 383.4 756 DL 419.4 756 401.4 756 DL 437.4 756 419.4 756 DL 455.4
+756 437.4 756 DL 473.4 756 455.4 756 DL 491.4 756 473.4 756 DL 509.4 756 491.4
+756 DL 527.4 756 509.4 756 DL 545.4 756 527.4 756 DL/F6 9/Helvetica-Bold@0 SF
+(C-392)72 768.96 Q/F7 9/Helvetica@0 SF(Dore)6.504 E 3.506<b444>118.513 768.96 S
+-2.187 -.27(ev e)131.514 768.96 T(loper').27 E 2.502(sG)-.45 G(uide)181.086
+768.96 Q(Object Data Str)221.4 768.96 Q(uctures).135 E EP
+%%Page: 393 13
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 99 46.8 63 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 243 46.8 207 46.8 DL 279 46.8 243 46.8 DL 315 46.8 279 46.8 DL 351
+46.8 315 46.8 DL 387 46.8 351 46.8 DL 437.4 46.8 401.4 46.8 DL 464.4 46.8 428.4
+46.8 DL 500.4 46.8 464.4 46.8 DL 536.4 46.8 500.4 46.8 DL/F0 10
+/Helvetica-BoldOblique@0 SF(Priv)426.01 57.6 Q(ate Data Structures)-.2 E/F1 10
+/Helvetica@0 SF(\(contin)486.48 68.4 Q(ued\))-.1 E/F2 9/Courier@0 SF
+(struct lokatfrm_data {)63 107 Q(DtPoint3 from;)106.2 118 Q(DtPoint3 at;)106.2
+129 Q(DtVector3 up;)106.2 140 Q(DtFlag preflag;)106.2 151 Q(};)106.2 162 Q/F3
+11/Palatino-Roman@0 SF(class name:)63 193.8 Q/F4 11/Palatino-Bold@0 SF
+(DoRotate)2.75 E F3(\214le name: r)63 207 Q(otate.h)-.198 E F2
+(struct rotate_data {)63 230 Q(DtAxis axis;)106.2 241 Q(DtReal radians;)106.2
+252 Q(};)106.2 263 Q F3(class name:)63 294.8 Q F4(DoScale)2.75 E F3
+(\214le name: scale.h)63 308 Q F2(struct scale_data {)63 331 Q
+(DtReal scalevalue[3];)106.2 342 Q(};)106.2 353 Q F3(class name:)63 391.4 Q F4
+(DoShear)2.75 E F3(\214le name: shear)63 404.6 Q(.h)-.814 E F2
+(struct shear_data {)63 427.6 Q(DtMajorPlane plane;)106.2 438.6 Q
+(DtReal firstdirectionshearvalue;)106.2 449.6 Q
+(DtReal seconddirectionshearvalue;)106.2 460.6 Q(};)106.2 471.6 Q F3
+(class name:)63 496.8 Q F4(DoT)2.75 E(ransformMatrix)-1.221 E F3
+(\214le name: tfmmat.h)63 510 Q F2(struct tfmmat_data {)63 533 Q
+(DtMatrix4x4 tfmmat;)106.2 544 Q(DtCompType comptype;)106.2 555 Q(};)106.2 566
+Q F3(class name:)63 591.2 Q F4(DoT)2.75 E(ranslate)-1.221 E F3
+(\214le name: transl.h)63 604.4 Q F2(struct transl_data {)63 627.4 Q
+(DtPoint3 delta;)106.2 638.4 Q(};)106.2 649.4 Q 1.44 LW 81 756 63 756 DL 99 756
+81 756 DL 117 756 99 756 DL 135 756 117 756 DL 153 756 135 756 DL 171 756 153
+756 DL 189 756 171 756 DL 207 756 189 756 DL 225 756 207 756 DL 243 756 225 756
+DL 261 756 243 756 DL 279 756 261 756 DL 297 756 279 756 DL 315 756 297 756 DL
+333 756 315 756 DL 351 756 333 756 DL 369 756 351 756 DL 387 756 369 756 DL
+419.4 756 401.4 756 DL 428.4 756 410.4 756 DL 446.4 756 428.4 756 DL 464.4 756
+446.4 756 DL 482.4 756 464.4 756 DL 500.4 756 482.4 756 DL 518.4 756 500.4 756
+DL 536.4 756 518.4 756 DL/F5 9/Helvetica@0 SF(Object Data Str)295.83 768.96 Q
+(uctures).135 E(Dore)412.806 768.96 Q 3.506<b444>428.308 768.96 S -2.187 -.27
+(ev e)441.309 768.96 T(loper').27 E 2.502(sG)-.45 G(uide)490.881 768.96 Q/F6 9
+/Helvetica-Bold@0 SF(C-393)4.002 E EP
+%%Page: 394 14
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 108 46.8 72 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 257.4 46.8 221.4 46.8 DL 293.4 46.8 257.4 46.8 DL 329.4 46.8 293.4
+46.8 DL 365.4 46.8 329.4 46.8 DL 401.4 46.8 365.4 46.8 DL 437.4 46.8 401.4 46.8
+DL 473.4 46.8 437.4 46.8 DL 509.4 46.8 473.4 46.8 DL 545.4 46.8 509.4 46.8 DL
+/F0 10/Helvetica-BoldOblique@0 SF(Priv)72 57.6 Q(ate Data Structures)-.2 E/F1
+10/Helvetica@0 SF(\(contin)72 68.4 Q(ued\))-.1 E .16 LW 223.4 110 221.4 110 DL
+225.4 110 223.4 110 DL 227.4 110 225.4 110 DL 229.4 110 227.4 110 DL 231.4 110
+229.4 110 DL 233.4 110 231.4 110 DL 235.4 110 233.4 110 DL 237.4 110 235.4 110
+DL 239.4 110 237.4 110 DL 241.4 110 239.4 110 DL 243.4 110 241.4 110 DL 245.4
+110 243.4 110 DL 247.4 110 245.4 110 DL 249.4 110 247.4 110 DL 251.4 110 249.4
+110 DL 253.4 110 251.4 110 DL 255.4 110 253.4 110 DL 257.4 110 255.4 110 DL
+259.4 110 257.4 110 DL 261.4 110 259.4 110 DL 263.4 110 261.4 110 DL 265.4 110
+263.4 110 DL 267.4 110 265.4 110 DL 269.4 110 267.4 110 DL 271.4 110 269.4 110
+DL 273.4 110 271.4 110 DL 275.4 110 273.4 110 DL 277.4 110 275.4 110 DL 279.4
+110 277.4 110 DL 281.4 110 279.4 110 DL 283.4 110 281.4 110 DL 285.4 110 283.4
+110 DL 287.4 110 285.4 110 DL 289.4 110 287.4 110 DL 291.4 110 289.4 110 DL
+293.4 110 291.4 110 DL 295.4 110 293.4 110 DL 297.4 110 295.4 110 DL 299.4 110
+297.4 110 DL 301.4 110 299.4 110 DL 303.4 110 301.4 110 DL 305.4 110 303.4 110
+DL 307.4 110 305.4 110 DL 309.4 110 307.4 110 DL 311.4 110 309.4 110 DL 313.4
+110 311.4 110 DL 315.4 110 313.4 110 DL 317.4 110 315.4 110 DL 319.4 110 317.4
+110 DL 321.4 110 319.4 110 DL 323.4 110 321.4 110 DL 325.4 110 323.4 110 DL
+327.4 110 325.4 110 DL 329.4 110 327.4 110 DL 331.4 110 329.4 110 DL 333.4 110
+331.4 110 DL 335.4 110 333.4 110 DL 337.4 110 335.4 110 DL 339.4 110 337.4 110
+DL 341.4 110 339.4 110 DL 343.4 110 341.4 110 DL 345.4 110 343.4 110 DL 347.4
+110 345.4 110 DL 349.4 110 347.4 110 DL 351.4 110 349.4 110 DL 353.4 110 351.4
+110 DL 355.4 110 353.4 110 DL 357.4 110 355.4 110 DL 359.4 110 357.4 110 DL
+361.4 110 359.4 110 DL 363.4 110 361.4 110 DL 365.4 110 363.4 110 DL 367.4 110
+365.4 110 DL 369.4 110 367.4 110 DL 371.4 110 369.4 110 DL 373.4 110 371.4 110
+DL 375.4 110 373.4 110 DL 377.4 110 375.4 110 DL 379.4 110 377.4 110 DL 381.4
+110 379.4 110 DL 383.4 110 381.4 110 DL 385.4 110 383.4 110 DL 387.4 110 385.4
+110 DL 389.4 110 387.4 110 DL 391.4 110 389.4 110 DL 393.4 110 391.4 110 DL
+395.4 110 393.4 110 DL 397.4 110 395.4 110 DL 399.4 110 397.4 110 DL 401.4 110
+399.4 110 DL 403.4 110 401.4 110 DL 405.4 110 403.4 110 DL 407.4 110 405.4 110
+DL 409.4 110 407.4 110 DL 411.4 110 409.4 110 DL 413.4 110 411.4 110 DL 415.4
+110 413.4 110 DL 417.4 110 415.4 110 DL 419.4 110 417.4 110 DL 421.4 110 419.4
+110 DL 423.4 110 421.4 110 DL 425.4 110 423.4 110 DL 427.4 110 425.4 110 DL
+429.4 110 427.4 110 DL 431.4 110 429.4 110 DL 433.4 110 431.4 110 DL 435.4 110
+433.4 110 DL 437.4 110 435.4 110 DL 439.4 110 437.4 110 DL 441.4 110 439.4 110
+DL 443.4 110 441.4 110 DL 445.4 110 443.4 110 DL 447.4 110 445.4 110 DL 449.4
+110 447.4 110 DL 451.4 110 449.4 110 DL 453.4 110 451.4 110 DL 455.4 110 453.4
+110 DL 457.4 110 455.4 110 DL 459.4 110 457.4 110 DL 461.4 110 459.4 110 DL
+463.4 110 461.4 110 DL 465.4 110 463.4 110 DL 467.4 110 465.4 110 DL 469.4 110
+467.4 110 DL 471.4 110 469.4 110 DL 473.4 110 471.4 110 DL 475.4 110 473.4 110
+DL 477.4 110 475.4 110 DL 479.4 110 477.4 110 DL 481.4 110 479.4 110 DL 483.4
+110 481.4 110 DL 485.4 110 483.4 110 DL 487.4 110 485.4 110 DL 489.4 110 487.4
+110 DL 491.4 110 489.4 110 DL 493.4 110 491.4 110 DL 495.4 110 493.4 110 DL
+497.4 110 495.4 110 DL 499.4 110 497.4 110 DL 501.4 110 499.4 110 DL 503.4 110
+501.4 110 DL 505.4 110 503.4 110 DL 507.4 110 505.4 110 DL 509.4 110 507.4 110
+DL 511.4 110 509.4 110 DL 513.4 110 511.4 110 DL 515.4 110 513.4 110 DL 517.4
+110 515.4 110 DL 519.4 110 517.4 110 DL 521.4 110 519.4 110 DL 523.4 110 521.4
+110 DL 525.4 110 523.4 110 DL 527.4 110 525.4 110 DL 529.4 110 527.4 110 DL
+531.4 110 529.4 110 DL 533.4 110 531.4 110 DL 535.4 110 533.4 110 DL 537.4 110
+535.4 110 DL 539.4 110 537.4 110 DL 541.4 110 539.4 110 DL 543.4 110 541.4 110
+DL 545.4 110 543.4 110 DL 1.44 LW 90 110.5 72 110.5 DL 99 110.5 81 110.5 DL 117
+110.5 99 110.5 DL 135 110.5 117 110.5 DL 153 110.5 135 110.5 DL 171 110.5 153
+110.5 DL 189 110.5 171 110.5 DL 207 110.5 189 110.5 DL/F2 12
+/Helvetica-Oblique@0 SF -.816 -1.44(Te x)72 124.5 T(ture Mapping Objects)1.44 E
+/F3 11/Palatino-Roman@0 SF(class name:)221.5 138.6 Q/F4 11/Palatino-Bold@0 SF
+(DoT)2.75 E(extureMapBump)-1.221 E F3(\214le name: mapbmp.h)221.5 151.8 Q/F5 9
+/Courier@0 SF(struct mapbmp_data {)221.5 174.8 Q(DtMapOperator operator;)264.7
+185.8 Q(DtObject mapping;)264.7 196.8 Q(DtObject raster;)264.7 207.8 Q(};)264.7
+218.8 Q F3(class name:)221.5 244 Q F4(DoT)2.75 E(extureMapDif)-1.221 E
+(fuseColor)-.198 E F3(\214le name: mapdifclr)221.5 257.2 Q(.h)-.814 E F5
+(struct mapdifclr_data {)221.5 280.2 Q(DtMapOperator operator;)264.7 291.2 Q
+(DtObject mapping;)264.7 302.2 Q(DtObject raster;)264.7 313.2 Q(};)264.7 324.2
+Q F3(class name:)221.5 349.4 Q F4(DoT)2.75 E(extureMapEnviron)-1.221 E F3
+(\214le name: mapenv)221.5 362.6 Q(.h)-1.221 E F5(struct mapenv_data {)221.5
+385.6 Q(DtMapOperator operator;)264.7 396.6 Q(DtObject mapping;)264.7 407.6 Q
+(DtObject raster;)264.7 418.6 Q(};)264.7 429.6 Q F3(class name:)221.5 461.4 Q
+F4(DoT)2.75 E(extureMapT)-1.221 E(ranspIntens)-1.221 E F3
+(\214le name: maptrnint.h)221.5 474.6 Q F5(struct maptrnint_data {)221.5 497.6
+Q(DtMapOperator operator;)264.7 508.6 Q(DtObject mapping;)264.7 519.6 Q
+(DtObject raster;)264.7 530.6 Q(};)264.7 541.6 Q .16 LW 223.4 567.6 221.4 567.6
+DL 225.4 567.6 223.4 567.6 DL 227.4 567.6 225.4 567.6 DL 229.4 567.6 227.4
+567.6 DL 231.4 567.6 229.4 567.6 DL 233.4 567.6 231.4 567.6 DL 235.4 567.6
+233.4 567.6 DL 237.4 567.6 235.4 567.6 DL 239.4 567.6 237.4 567.6 DL 241.4
+567.6 239.4 567.6 DL 243.4 567.6 241.4 567.6 DL 245.4 567.6 243.4 567.6 DL
+247.4 567.6 245.4 567.6 DL 249.4 567.6 247.4 567.6 DL 251.4 567.6 249.4 567.6
+DL 253.4 567.6 251.4 567.6 DL 255.4 567.6 253.4 567.6 DL 257.4 567.6 255.4
+567.6 DL 259.4 567.6 257.4 567.6 DL 261.4 567.6 259.4 567.6 DL 263.4 567.6
+261.4 567.6 DL 265.4 567.6 263.4 567.6 DL 267.4 567.6 265.4 567.6 DL 269.4
+567.6 267.4 567.6 DL 271.4 567.6 269.4 567.6 DL 273.4 567.6 271.4 567.6 DL
+275.4 567.6 273.4 567.6 DL 277.4 567.6 275.4 567.6 DL 279.4 567.6 277.4 567.6
+DL 281.4 567.6 279.4 567.6 DL 283.4 567.6 281.4 567.6 DL 285.4 567.6 283.4
+567.6 DL 287.4 567.6 285.4 567.6 DL 289.4 567.6 287.4 567.6 DL 291.4 567.6
+289.4 567.6 DL 293.4 567.6 291.4 567.6 DL 295.4 567.6 293.4 567.6 DL 297.4
+567.6 295.4 567.6 DL 299.4 567.6 297.4 567.6 DL 301.4 567.6 299.4 567.6 DL
+303.4 567.6 301.4 567.6 DL 305.4 567.6 303.4 567.6 DL 307.4 567.6 305.4 567.6
+DL 309.4 567.6 307.4 567.6 DL 311.4 567.6 309.4 567.6 DL 313.4 567.6 311.4
+567.6 DL 315.4 567.6 313.4 567.6 DL 317.4 567.6 315.4 567.6 DL 319.4 567.6
+317.4 567.6 DL 321.4 567.6 319.4 567.6 DL 323.4 567.6 321.4 567.6 DL 325.4
+567.6 323.4 567.6 DL 327.4 567.6 325.4 567.6 DL 329.4 567.6 327.4 567.6 DL
+331.4 567.6 329.4 567.6 DL 333.4 567.6 331.4 567.6 DL 335.4 567.6 333.4 567.6
+DL 337.4 567.6 335.4 567.6 DL 339.4 567.6 337.4 567.6 DL 341.4 567.6 339.4
+567.6 DL 343.4 567.6 341.4 567.6 DL 345.4 567.6 343.4 567.6 DL 347.4 567.6
+345.4 567.6 DL 349.4 567.6 347.4 567.6 DL 351.4 567.6 349.4 567.6 DL 353.4
+567.6 351.4 567.6 DL 355.4 567.6 353.4 567.6 DL 357.4 567.6 355.4 567.6 DL
+359.4 567.6 357.4 567.6 DL 361.4 567.6 359.4 567.6 DL 363.4 567.6 361.4 567.6
+DL 365.4 567.6 363.4 567.6 DL 367.4 567.6 365.4 567.6 DL 369.4 567.6 367.4
+567.6 DL 371.4 567.6 369.4 567.6 DL 373.4 567.6 371.4 567.6 DL 375.4 567.6
+373.4 567.6 DL 377.4 567.6 375.4 567.6 DL 379.4 567.6 377.4 567.6 DL 381.4
+567.6 379.4 567.6 DL 383.4 567.6 381.4 567.6 DL 385.4 567.6 383.4 567.6 DL
+387.4 567.6 385.4 567.6 DL 389.4 567.6 387.4 567.6 DL 391.4 567.6 389.4 567.6
+DL 393.4 567.6 391.4 567.6 DL 395.4 567.6 393.4 567.6 DL 397.4 567.6 395.4
+567.6 DL 399.4 567.6 397.4 567.6 DL 401.4 567.6 399.4 567.6 DL 403.4 567.6
+401.4 567.6 DL 405.4 567.6 403.4 567.6 DL 407.4 567.6 405.4 567.6 DL 409.4
+567.6 407.4 567.6 DL 411.4 567.6 409.4 567.6 DL 413.4 567.6 411.4 567.6 DL
+415.4 567.6 413.4 567.6 DL 417.4 567.6 415.4 567.6 DL 419.4 567.6 417.4 567.6
+DL 421.4 567.6 419.4 567.6 DL 423.4 567.6 421.4 567.6 DL 425.4 567.6 423.4
+567.6 DL 427.4 567.6 425.4 567.6 DL 429.4 567.6 427.4 567.6 DL 431.4 567.6
+429.4 567.6 DL 433.4 567.6 431.4 567.6 DL 435.4 567.6 433.4 567.6 DL 437.4
+567.6 435.4 567.6 DL 439.4 567.6 437.4 567.6 DL 441.4 567.6 439.4 567.6 DL
+443.4 567.6 441.4 567.6 DL 445.4 567.6 443.4 567.6 DL 447.4 567.6 445.4 567.6
+DL 449.4 567.6 447.4 567.6 DL 451.4 567.6 449.4 567.6 DL 453.4 567.6 451.4
+567.6 DL 455.4 567.6 453.4 567.6 DL 457.4 567.6 455.4 567.6 DL 459.4 567.6
+457.4 567.6 DL 461.4 567.6 459.4 567.6 DL 463.4 567.6 461.4 567.6 DL 465.4
+567.6 463.4 567.6 DL 467.4 567.6 465.4 567.6 DL 469.4 567.6 467.4 567.6 DL
+471.4 567.6 469.4 567.6 DL 473.4 567.6 471.4 567.6 DL 475.4 567.6 473.4 567.6
+DL 477.4 567.6 475.4 567.6 DL 479.4 567.6 477.4 567.6 DL 481.4 567.6 479.4
+567.6 DL 483.4 567.6 481.4 567.6 DL 485.4 567.6 483.4 567.6 DL 487.4 567.6
+485.4 567.6 DL 489.4 567.6 487.4 567.6 DL 491.4 567.6 489.4 567.6 DL 493.4
+567.6 491.4 567.6 DL 495.4 567.6 493.4 567.6 DL 497.4 567.6 495.4 567.6 DL
+499.4 567.6 497.4 567.6 DL 501.4 567.6 499.4 567.6 DL 503.4 567.6 501.4 567.6
+DL 505.4 567.6 503.4 567.6 DL 507.4 567.6 505.4 567.6 DL 509.4 567.6 507.4
+567.6 DL 511.4 567.6 509.4 567.6 DL 513.4 567.6 511.4 567.6 DL 515.4 567.6
+513.4 567.6 DL 517.4 567.6 515.4 567.6 DL 519.4 567.6 517.4 567.6 DL 521.4
+567.6 519.4 567.6 DL 523.4 567.6 521.4 567.6 DL 525.4 567.6 523.4 567.6 DL
+527.4 567.6 525.4 567.6 DL 529.4 567.6 527.4 567.6 DL 531.4 567.6 529.4 567.6
+DL 533.4 567.6 531.4 567.6 DL 535.4 567.6 533.4 567.6 DL 537.4 567.6 535.4
+567.6 DL 539.4 567.6 537.4 567.6 DL 541.4 567.6 539.4 567.6 DL 543.4 567.6
+541.4 567.6 DL 545.4 567.6 543.4 567.6 DL 1.44 LW 90 568.1 72 568.1 DL 99 568.1
+81 568.1 DL 117 568.1 99 568.1 DL 135 568.1 117 568.1 DL 153 568.1 135 568.1 DL
+171 568.1 153 568.1 DL 189 568.1 171 568.1 DL 207 568.1 189 568.1 DL F2
+(Miscellaneous Objects)72 582.1 Q F3(class name:)221.5 602.8 Q F4(DoClipV)2.75
+E(ol)-1.221 E F3(\214le name: clpvol.h)221.5 616 Q F5(struct clpvol_data {)
+221.5 639 Q(DtClipOperator operator;)264.7 650 Q(DtInt halfspacecount;)264.7
+661 Q(DtHalfSpace)264.7 672 Q/F6 9/Symbol SF(*)5.4 E F5(halfspaces;)A(};)264.7
+683 Q 90 756 72 756 DL 99 756 81 756 DL 117 756 99 756 DL 135 756 117 756 DL
+153 756 135 756 DL 171 756 153 756 DL 189 756 171 756 DL 207 756 189 756 DL
+239.4 756 221.4 756 DL 257.4 756 239.4 756 DL 275.4 756 257.4 756 DL 293.4 756
+275.4 756 DL 311.4 756 293.4 756 DL 329.4 756 311.4 756 DL 347.4 756 329.4 756
+DL 365.4 756 347.4 756 DL 383.4 756 365.4 756 DL 401.4 756 383.4 756 DL 419.4
+756 401.4 756 DL 437.4 756 419.4 756 DL 455.4 756 437.4 756 DL 473.4 756 455.4
+756 DL 491.4 756 473.4 756 DL 509.4 756 491.4 756 DL 527.4 756 509.4 756 DL
+545.4 756 527.4 756 DL/F7 9/Helvetica-Bold@0 SF(C-394)72 768.96 Q/F8 9
+/Helvetica@0 SF(Dore)6.504 E 3.506<b444>118.513 768.96 S -2.187 -.27(ev e)
+131.514 768.96 T(loper').27 E 2.502(sG)-.45 G(uide)181.086 768.96 Q
+(Object Data Str)221.4 768.96 Q(uctures).135 E EP
+%%Page: 395 15
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 99 46.8 63 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 243 46.8 207 46.8 DL 279 46.8 243 46.8 DL 315 46.8 279 46.8 DL 351
+46.8 315 46.8 DL 387 46.8 351 46.8 DL 437.4 46.8 401.4 46.8 DL 464.4 46.8 428.4
+46.8 DL 500.4 46.8 464.4 46.8 DL 536.4 46.8 500.4 46.8 DL/F0 10
+/Helvetica-BoldOblique@0 SF(Priv)426.01 57.6 Q(ate Data Structures)-.2 E/F1 10
+/Helvetica@0 SF(\(contin)486.48 68.4 Q(ued\))-.1 E/F2 11/Palatino-Roman@0 SF
+(class name:)63 115.8 Q/F3 11/Palatino-Bold@0 SF(DoDataPtr)2.75 E F2
+(\214le name: datptr)63 129 Q(.h)-.814 E/F4 9/Courier@0 SF
+(struct datptr_data {)63 152 Q(DtPtr value;)106.2 163 Q(};)106.2 174 Q F2
+(class name:)63 205.8 Q F3(DoDataV)2.75 E(al)-1.221 E F2(\214le name: datval.h)
+63 219 Q F4(struct datval_data {)63 242 Q(Dt32Bits value;)106.2 253 Q(};)106.2
+264 Q F2(class name:)63 289.2 Q F3(DoFileRaster)2.75 E F2
+(\214le name: \214lerstr)63 302.4 Q(.h)-.814 E F4(struct filerstr {)63 325.4 Q
+(DtPtr filename;)106.2 336.4 Q(DtPtr type;)106.2 347.4 Q(};)106.2 358.4 Q F2
+(class name:)63 383.6 Q F3(DoRaster)2.75 E F2(\214le name: rstr)63 396.8 Q(.h)
+-.814 E F4(struct rstr {)63 419.8 Q(DtInt width;)106.2 430.8 Q(DtInt height;)
+106.2 441.8 Q(DtInt depth;)106.2 452.8 Q(DtRasterType type;)106.2 463.8 Q
+(unsigned char)106.2 474.8 Q/F5 9/Symbol SF(*)5.4 E F4(typestring;)A
+(DtPtr data;)106.2 485.8 Q(DtObject delcallback;)106.2 496.8 Q
+(DtInt sequence_number; /)106.2 507.8 Q F5(*)A F4(incremented when the object)
+5.4 E(is updated with DsRasterUpdate)235.8 518.8 Q F5(*)5.4 E F4(/)A(};)106.2
+529.8 Q 1.44 LW 81 756 63 756 DL 99 756 81 756 DL 117 756 99 756 DL 135 756 117
+756 DL 153 756 135 756 DL 171 756 153 756 DL 189 756 171 756 DL 207 756 189 756
+DL 225 756 207 756 DL 243 756 225 756 DL 261 756 243 756 DL 279 756 261 756 DL
+297 756 279 756 DL 315 756 297 756 DL 333 756 315 756 DL 351 756 333 756 DL 369
+756 351 756 DL 387 756 369 756 DL 419.4 756 401.4 756 DL 428.4 756 410.4 756 DL
+446.4 756 428.4 756 DL 464.4 756 446.4 756 DL 482.4 756 464.4 756 DL 500.4 756
+482.4 756 DL 518.4 756 500.4 756 DL 536.4 756 518.4 756 DL/F6 9/Helvetica@0 SF
+(Object Data Str)295.83 768.96 Q(uctures).135 E(Dore)412.806 768.96 Q 3.506
+<b444>428.308 768.96 S -2.187 -.27(ev e)441.309 768.96 T(loper').27 E 2.502(sG)
+-.45 G(uide)490.881 768.96 Q/F7 9/Helvetica-Bold@0 SF(C-395)4.002 E EP
+%%Trailer
+end
+%%EOF

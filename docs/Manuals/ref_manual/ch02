@@ -1,0 +1,2457 @@
+.\"#ident "%W%" %G%
+.\"
+.\" #
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  
+.\" # 
+.\" # KUBOTA GRAPHICS Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\" #
+.\"
+.ds BT \\*(Dd Reference Manual
+.ds CT Quick Reference
+.ds h1 2
+.so ../macros/local.me
+.PN 347
+.L1 Q UICK 
+.L2 R EFERENCE
+.CH TWO
+.sp -1.5v
+This chapter lists the \*(Dd functions alphabetically
+by their C function names. 
+Each function is listed with its \*(Fo equivalent,
+its C and \*(Fo parameters, and a synopsis
+of what the function does. 
+.lp
+Chapter 1 lists the \*(Dd functions alphabetically by
+their \*(Fo names.
+.lp
+.nf
+\f3DdInqColorEntries\fP (device, colormodel, start, count, entries)
+\s-1DDQCE (DEVICE, COLMOD, START, COUNT, ENTRYS)\s+1
+.in+.5i
+Return color lookup table entries of a device
+.in-.5i
+.lp
+\f3DdInqColorTableSize\fP (device)
+.br
+\s-1DDQCTS (DEVICE)\s+1
+.in+.5i
+Return the number of entries in the color lookup table
+.in-.5i
+.lp
+\f3DdInqExtent\fP (device, volume)
+.br
+\s-1DDQE (DEVICE, VOLUME)\s+1
+.in+.5i
+Return the extent of a device
+.in-.5i
+.lp
+\f3DdInqFonts\fP (device, fonts)
+.br
+\s-1DDQFT (DEVICE, FONTS)\s+1
+.in+.5i
+Return the set of fonts supported by a device
+.in-.5i
+.lp
+\f3DdInqFrame\fP (device)
+.br
+\s-1DDQFR (DEVICE)\s+1
+.in+.5i
+Return the frame of a device
+.in-.5i
+.lp
+\f3DdInqNumFonts\fP (device)
+.br
+\s-1DDQNF (DEVICE)\s+1
+.in+.5i
+Return the number of fonts supported by a device
+.in-.5i
+.lp
+\f3DdInqPickAperture\fP (device, aperture)
+.br
+\s-1DDQPA (DEVICE, APRTUR)\s+1
+.in+.5i
+Return the pick aperture of a device
+.in-.5i
+.lp
+\f3DdInqPickCallback\fP (device)
+.br
+\s-1DDQPC (DEVICE)\s+1
+.in+.5i
+Return the pick callback object of a device
+.in-.5i
+.lp
+\f3DdInqPickPathOrder\fP (device)
+.br
+\s-1DDQPPO (DEVICE)\s+1
+.in+.5i
+Return the pick path order of a device
+.in-.5i
+.lp
+\f3DdInqPixelData\fP (device, requesttype, width, height, type, data,
+.in+.25i
+ userdelete)
+.in-.25i
+.br
+\s-1DDQPXD (DEVICE, REQTYP, WIDTH, HEIGHT, TYPE, DATA, USRDEL)\s+1
+.in+.5i
+Return pixel information about an image on a given
+device
+.in-.5i
+.lp
+\f3DdInqResolution\fP (device, x, y)
+.br
+\s-1DDQR (DEVICE, X, Y)\s+1
+.in+.5i
+Return the resolution of a device in millimeters
+.in-.5i
+.lp
+\f3DdInqShadeMode\fP (device)
+.br
+\s-1DDQSM (DEVICE)\s+1
+.in+.5i
+Return the shade mode of a device
+.in-.5i
+.lp
+\f3DdInqShadeRanges\fP (device, start, count, entries)
+.br
+\s-1DDQSR (DEVICE, START, COUNT, ENTRYS)\s+1
+.in+.5i
+Return the shade range table entries of a device
+.in-.5i
+.lp
+\f3DdInqViewport\fP (device, viewport)
+.br
+\s-1DDQV (DEVICE, VWPORT)\s+1
+.in+.5i
+Return the size of the device viewport of a device
+.in-.5i
+.lp
+\f3DdInqVisualType\fP (device)
+.br
+\s-1DDQVT (DEVICE)\s+1
+.in+.5i
+Return the visual type of a device
+.in-.5i
+.lp
+\f3DdPickObjs\fP (device, pick_point, hit_count, index_size, index,
+.na
+.in+.25i
+list_size, hit_list, z_values, wcs_values, lcs_values,
+views, error_word)
+.in-.25i
+.br
+\s-1DDPO (DEVICE, PICKPT, HITCNT, IDXSIZ, INDEX, LSTSIZ, HITLST,
+.in+.25i
+ZVALUS, WCSVAL, LCSVAL, VIEWS, ERRWRD)\s+1
+.in-.25i
+.in+.5i
+.ad
+Initiate a pick on a device
+.in-.5i
+.lp
+\f3DdSetColorEntries\fP (device, colormodel, start, count, entries)
+.br
+\s-1DDSCE (DEVICE, COLMOD, START, COUNT, ENTRYS)\s+1
+.in+.5i
+Set the color lookup table entries of a device
+.in-.5i
+.lp
+\f3DdSetFrame\fP (device, frame)
+.br
+\s-1DDSF (DEVICE, FRAME)\s+1
+.in+.5i
+Attach a frame to a device
+.in-.5i
+.lp
+\f3DdSetOptions\fP (device, argstring)
+.br
+\s-1DDSO (DEVICE, ARGSTR, LARG) \s+1
+.in+.5i
+Set driver specific values of a device 
+.in-.5i
+.lp
+\f3DdSetPickAperture\fP (device, aperture)
+.br
+\s-1DDSPA (DEVICE, APRTUR)\s+1
+.in+.5i
+Set the pick aperture of a device
+.in-.5i
+.lp
+\f3DdSetPickCallback\fP (device, pickcallbackobj)
+.br
+\s-1DDSPCB (DEVICE, PKCBOJ)\s+1
+.in+.5i
+Set the picking callback object of a device
+.in-.5i
+.lp
+\f3DdSetPickPathOrder\fP (device, pathorder)
+.br
+\s-1DDSPPO (DEVICE, PTHORD)\s+1
+.in+.5i
+Set the order of pick path elements returned
+to \f2DdPickObjs\fP
+.in-.5i
+.lp
+\f3DdSetShadeMode\fP (device, mode)
+.br
+\s-1DDSSM (DEVICE, MODE)\s+1
+.in+.5i
+Set the shade mode of a device
+.in-.5i
+.lp
+\f3DdSetShadeRanges\fP (device, start, count, entries)
+.br
+\s-1DDSSR (DEVICE, START, COUNT, ENTRYS)\s+1
+.in+.5i
+Set one or more shade range table entries of a device
+.in-.5i
+.lp
+\f3DdSetViewport\fP (device, viewport)
+.br
+\s-1DDSDV (DEVICE, VWPORT)\s+1
+.in+.5i
+Define a device viewport for a device
+.in-.5i
+.lp
+\f3DdUpdate\fP (device)
+.br
+\s-1DDU (DEVICE)\s+1
+.in+.5i
+Update the specified device
+.in-.5i
+.lp
+\f3DeAddClass\fP (name, count, list, default_routine)
+.br
+\s-1DEAC (NAME, N, COUNT, LIST, DFLTRT)\s+1
+.in+.5i
+Add a new class (object type)
+.in-.5i
+.lp
+\s-1\f3DEAMTH\fP (LIST, METHOD, RTN, MTHCNT)\s+1
+.in+.5i
+Build a method list (\*(Fo only \- used with DEAC)
+.in-.5i
+.rs
+.sp -.15v
+.lp
+\f3DeCreateObject\fP (class_id, object_data)
+.br
+\s-1DECO (CLASID, DATA, SIZE)\s+1
+.in+.5i
+Create an internal \*(Dd object
+.in-.5i
+.rs
+.sp -.15v
+.lp
+\f3DeDeleteObject\fP (object)
+.br
+\s-1DEDO (OBJECT)\s+1
+.in+.5i
+Delete a \*(Dd object
+.in-.5i
+.rs
+.sp -.15v
+.lp
+\s-1\f3DEDOD\fP (OBJECT)\s+1
+.in+.5i
+Deallocate space used by the private data of an object
+of a user-defined class (\*(Fo only)
+.in-.5i
+.rs
+.sp -.15v
+.lp
+\f3DeExecuteAlternate\fP (object)
+.br
+\s-1DEEA (OBJECT)\s+1
+.in+.5i
+Execute the current method on an alternate object
+.in-.5i
+.sp -.15v
+.lp
+\f3DeInitializeObjPick\fP (object)
+.br
+\s-1DEIOP (OBJECT)\s+1
+.in+.5i
+Initialize picking for an object
+.in-.5i
+.rs
+.sp -.15v
+.lp
+\f3DeInqPickable\fP (class_id)
+.br
+\s-1DEQP (CLSID)\s+1
+.in+.5i
+Return whether a class is pickable
+.in-.5i
+.rs
+.sp -.15v
+.lp
+\f3DeInqRenderable\fP (class_id)
+.br
+\s-1DEQR (CLSID)\s+1
+.in+.5i
+Return whether a class is renderable
+.in-.5i
+.sp -.15v
+.lp
+\s-1\f3DEROD\fP (OBJECT, TODATA, SIZE)\s+1
+.in+.5i
+.fi
+Read private data of an object of a user-defined class
+(\*(Fo only)
+.in-.5i
+.nf
+.sp -.15v
+.lp
+\s-1\f3DEWOD\fP (OBJECT, FROMDATA, SIZE)\s+1
+.in+.5i
+.fi
+Write private data of an object of a user-defined class
+(\*(Fo only)
+.in-.5i
+.nf
+.sp -.15v
+.lp
+\f3DfInqBoundary\fP (frame, boundary)
+.br
+\s-1DFQB (FRAME, BNDRY)\s+1
+.in+.5i
+Return the frame boundary
+.in-.5i
+.sp -.15v
+.lp
+\f3DfInqJust\fP (frame, left, bottom)
+.br
+\s-1DFQJ (FRAME, LEFT, BOTTOM)\s+1
+.in+.5i
+Return the frame justification
+.in-.5i
+.lp
+\f3DfInqViewGroup\fP (frame)
+.br
+\s-1DFQVG (FRAME)\s+1
+.in+.5i
+Return the handle for a frame's view group
+.in-.5i
+.lp
+\f3DfSetBoundary\fP (frame, boundary)
+.br
+\s-1DFSB (FRAME, BNDRY)\s+1
+.in+.5i
+Set the frame boundary
+.in-.5i
+.lp
+\f3DfSetJust\fP (frame, left, bottom)
+.br
+\s-1DFSJ (FRAME, LEFT, BOTTOM)\s+1
+.in+.5i
+Set the frame justification
+.in-.5i
+.lp
+\f3DfUpdate\fP (frame)
+.br
+\s-1DFU (FRAME)\s+1
+.in+.5i
+Update the specified frame
+.in-.5i
+.lp
+\f3DgAddObj\fP (object)
+.br
+\s-1DGAO (OBJECT)\s+1
+.in+.5i
+Add an object to the currently open group
+.in-.5i
+.lp
+\f3DgAddObjToGroup\fP (group, object)
+.br
+\s-1DGAOG (GROUP, OBJECT)\s+1
+.in+.5i
+Add an object to a specified group
+.in-.5i
+.lp
+\f3DgCheck\fP (group)
+.br
+\s-1DGCK (GROUP)\s+1
+.in+.5i
+Check for circularities within a group network
+.in-.5i
+.lp
+\f3DgClose\fP ()
+.br
+\s-1DGCS ()\s+1
+.in+.5i
+Close a group object
+.in-.5i
+.lp
+\f3DgDelEle\fP (count)
+.br
+\s-1DGDE (COUNT)\s+1
+.in+.5i
+Remove elements from the currently open group
+.in-.5i
+.lp
+\f3DgDelEleBetweenLabels\fP (label1, label2)
+.br
+\s-1DGDEL (LABEL1, LABEL2)\s+1
+.in+.5i
+.fi
+Remove all elements between labels from the
+currently open group
+.in-.5i
+.nf
+.lp
+\f3DgDelEleRange\fP (from, to)
+.br
+\s-1DGDER (FROM, TO)\s+1
+.in+.5i
+Remove a range of elements from the currently
+open group
+.in-.5i
+.lp
+\f3DgEmpty\fP (group)
+.br
+\s-1DGE (GROUP)\s+1
+.in+.5i
+Remove all elements from a specified group
+.in-.5i
+.lp
+\f3DgInqElePtr\fP ()
+.br
+\s-1DGQEP ()\s+1
+.in+.5i
+.fi
+Return the location of the group element pointer of
+the current group
+.in-.5i
+.nf
+.lp
+\f3DgInqObjAtPos\fP (group, offset, position_orientation)
+.br
+\s-1DGQOP (GROUP, OFFSET, POSORT)\s+1
+.in+.5i
+Return the object at a specified position in a group
+.in-.5i
+.lp
+\f3DgInqOpen\fP ()
+.br
+\s-1DGQO ()\s+1
+.in+.5i
+Determine which group, if any, is open
+.in-.5i
+.lp
+\f3DgInqSize\fP (group)
+.br
+\s-1DGQS (GROUP)\s+1
+.in+.5i
+Return the number of elements in the specified group
+.in-.5i
+.lp
+\f3DgOpen\fP (group, append)
+.br
+\s-1DGO (GROUP, APPEND)\s+1
+.in+.5i
+Open a group object
+.in-.5i
+.lp
+\f3DgReplaceObj\fP (object)
+.br
+\s-1DGRO (OBJECT)\s+1
+.in+.5i
+Replace an object in the currently open group
+.in-.5i
+.lp
+\f3DgReplaceObjInGroup\fP (group, object)
+.br
+\s-1DGROG (GROUP, OBJECT)\s+1
+.in+.5i
+Replace an object in a specified group
+.in-.5i
+.lp
+\f3DgSetElePtr\fP (element_ptr, position_orientation)
+.br
+\s-1DGSEP (ELEPTR, POSORT)\s+1
+.in+.5i
+Set the group element pointer within the current
+group
+.in-.5i
+.lp
+\f3DgSetElePtrRelLabel\fP (label, offset)
+.br
+\s-1DGSEPL (LABEL, OFFSET)\s+1
+.in+.5i
+Set the group element pointer relative to a label
+.in-.5i
+.lp
+\f3DoAmbientIntens\fP (intensity)
+.br
+\s-1DOAMBI (INTENS)\s+1
+.in+.5i
+Create an ambient intensity primitive attribute object
+.in-.5i
+.lp
+\f3DoAmbientSwitch\fP (switchvalue)
+.br
+\s-1DOAMBS (SWVAL)\s+1
+.in+.5i
+.fi
+Create a primitive attribute object to enable or
+disable use of the ambient component of a surface's
+response to light
+.in-.5i
+.nf
+.lp
+\f3DoAnnoText\fP (position, string)
+.br
+\s-1DOANNT (POSITN, STRING, N)\s+1
+.in+.5i
+Create an annotation text primitive object
+.in-.5i
+.lp
+\f3DoBackfaceCullable\fP (switchvalue)
+.br
+\s-1DOBFC (SWVAL)\s+1
+.in+.5i
+.fi
+Create a primitive attribute object defining backface
+cullability
+.nf
+.in-.5i
+.lp
+\f3DoBackfaceCullSwitch\fP (switchvalue)
+.br
+\s-1DOBFCS (SWVAL)\s+1
+.in+.5i
+.fi
+Create a primitive attribute object to enable or
+disable backface culling
+.in-5i
+.nf
+.lp
+\f3DoBoundingVol\fP (volume, alternate_object)
+.br
+\s-1DOBV (VOLUME, ALTOBJ)\s+1
+.in+.5i
+Create a bounding volume object
+.in-.5i
+.lp
+\f3DoBoundingVolSwitch\fP (switchvalue)
+.br
+\s-1DOBVS (SWVAL)\s+1
+.in+.5i
+.fi
+Create a primitive attribute object to enable or
+disable the use of bounding volumes
+.in-.5i
+.nf
+.lp
+\f3DoCallback\fP (function, dataobject)
+.br
+\s-1DOCB (FUNCT, DATOBJ)\s+1
+.in+.5i
+Create a callback object
+.in-.5i
+.lp
+\f3DoCamera\fP ()
+.br
+\s-1DOCM ()\s+1
+.in+.5i
+Create a camera studio object
+.in-.5i
+.lp
+\f3DoCameraMatrix\fP (matrix)
+.br
+\s-1DOCMX (MATRIX)\s+1
+.in+.5i
+Create a camera matrix studio attribute object
+.in-.5i
+.lp
+\f3DoClipSwitch\fP (switchvalue)
+.br
+\s-1DOCS (SWVAL)\s+1
+.in+.5i
+.fi
+Create a primitive attribute object to enable or
+disable model clipping
+.in-.5i
+.nf
+.lp
+\f3DoClipVol\fP (operator, numhalfspaces, halfspaces)
+.br
+\s-1DOCV (OPRATR, NHLFSP, HLFSPS)\s+1
+.in+.5i
+.fi
+Create a primitive attribute object defining a model
+clipping volume
+.in-.5i
+.nf
+.lp
+\f3DoCompTextureUVCallback\fP (callback_object)
+.br
+\s-1DOCTVC (CBKOBJ)\s+1
+.in+.5i
+.fi
+Create a primitive attribute object for computing
+the \f2uv\fP texture coordinates of a nonvertex primitive
+.in-.5i
+.nf
+.lp
+\f3DoCompTextureUVSwitch\fP (switchvalue)
+.br
+\s-1DOCTVC (SWVAL)\s+1
+.in+.5i
+.fi
+Create a primitive attribute object for enabling/disabling
+generation of \f2uv\fP texture coordinates
+.in -.5i
+.nf
+.lp
+\f3DoDataPtr\fP (dataptr)
+.br
+\s-1DODP (DATPTR)\s+1
+.in+.5i
+Create a data pointer object
+.in-.5i
+.lp
+\f3DoDataVal\fP (dataval)
+.br
+\s-1DODV (DATVAL)\s+1
+.in+.5i
+Create a data value object
+.in-.5i
+.lp
+\f3DoDepthCue\fP (zfront, zback, sfront, sback, colormodel, color)
+.br
+\s-1DODC (ZFRONT, ZBACK, SFRONT, SBACK, COLMOD, COLOR)\s+1
+.in+.5i
+Create a primitive attribute object defining depth
+cueing
+.in-.5i
+.lp
+\f3DoDepthCueSwitch\fP (switchvalue)
+.br
+\s-1DODCS (SWVAL)\s+1
+.in+.5i
+Create a primitive attribute object to enable or
+disable depth cueing
+.in-.5i
+.lp
+\f3DoDevice\fP (devicetype, argstring)
+.br
+\s-1DOD (DEVTYP, LDEV, ARGSTR, LARG)\s+1
+.in+.5i
+Open a device
+.in-.5i
+.lp
+\f3DoDiffuseColor\fP (colormodel, color)
+.br
+\s-1DODIFC (COLMOD, COLOR)\s+1
+.in+.5i
+Create a diffuse color primitive attribute object
+.in-.5i
+.lp
+\f3DoDiffuseIntens\fP (intensity)
+.br
+\s-1DODIFI (INTENS)\s+1
+.in+.5i
+Create a diffuse intensity primitive attribute object
+.in-.5i
+.lp
+\f3DoDiffuseSwitch\fP (switchvalue)
+.br
+\s-1DODIFS (SWVAL)\s+1
+.in+.5i
+.fi
+Create a primitive attribute object to enable or
+disable use of the diffuse component of a surface's
+response to light
+.in-.5i
+.nf
+.lp
+\f3DoExecSet\fP (n, list, setop)
+.br
+\s-1DOES (N, LIST, SETOP)\s+1
+.in+.5i
+Create an object that modifies the executability of
+objects
+.in-.5i
+.lp
+\f3DoFileRaster\fP (filename, specialstring)
+.br
+\s-1DOFRS (FNAME, FLEN, SPCSTR, SLEN)\s+1
+.in+.5i
+Create a file raster object
+.in-.5i
+.lp
+\f3DoFilter\fP (filter, n, members, setop)
+.br
+\s-1DOFL (FILTER, N, MEMBER, SETOP)\s+1
+.in+.5i
+Create a filter modifying object
+.in-.5i
+.lp
+\f3DoFrame\fP ()
+.br
+\s-1DOFR ()\s+1
+.in+.5i
+Create a frame object
+.in-.5i
+.lp
+\f3DoGlbRendMaxObjs\fP (maxobjs)
+.br
+\s-1DOGRMO (MAXOBJ)\s+1
+.in+.5i
+.fi
+Create a studio attribute object that defines the
+maximum number of objects per spatial subdivision
+for global ray casting
+.in-.5i
+.nf
+.lp
+\f3DoGlbRendMaxSub\fP (maxsub)
+.br
+\s-1DOGRMS (MAXSUB)\s+1
+.in+.5i
+.fi
+Create a studio attribute object that defines the
+maximum number of subdivisions for global ray
+casting
+.in-.5i
+.nf
+.lp
+\f3DoGlbRendRayLevel\fP (raylevel)
+.br
+\s-1DOGRRL (RAYLEV)\s+1
+.in+.5i
+Create a ray level studio attribute object
+.in-.5i
+.lp
+\f3DoGroup\fP (open)
+.br
+\s-1DOG (OPEN)\s+1
+.in+.5i
+Create a group organizational object
+.in-.5i
+.lp
+\f3DoHiddenSurfSwitch\fP (switchvalue)
+.br
+\s-1DOHSS (SWVAL)\s+1
+.in+.5i
+.fi
+Create a primitive attribute object to enable or
+disable rendering of hidden surfaces
+.in-.5i
+.nf
+.rs
+.sp -.15v
+.lp
+\f3DoInLineGroup\fP (open)
+.br
+\s-1DOILG (OPEN)\s+1
+.in+.5i
+Create an inline group object
+.in-.5i
+.rs
+.sp -.15v
+.lp
+\f3DoInputSlot\fP ()
+.br
+\s-1DOIS ()\s+1
+.in+.5i
+Create an input slot organizational object
+.in-.5i
+.rs
+.sp -.15v
+.lp
+\f3DoInterpType\fP (type)
+.br
+\s-1DOIT (TYPE)\s+1
+.in+.5i
+Create an interpolation type primitive attribute object
+.in-.5i
+.rs
+.sp -.15v
+.lp
+\f3DoInvisSwitch\fP (switchvalue)
+.br
+\s-1DOINVS (SWVAL)\s+1
+.in+.5i
+.fi
+Create a primitive attribute object to enable or
+disable invisibility of primitive objects
+.in-.5i
+.nf
+.rs
+.sp -.15v
+.lp
+\f3DoLabel\fP (label)
+.br
+\s-1DOLL (LABEL)\s+1
+.in+.5i
+Create a label organization object
+.in-.5i
+.rs
+.sp -.15v
+.lp
+\f3DoLight\fP ()
+.br
+\s-1DOLT ()\s+1
+.in+.5i
+Create a light studio object
+.in-.5i
+.rs
+.sp -.15v
+.lp
+\f3DoLightAttenuation\fP (c1, c2)
+.br
+\s-1DOLTA (C1, C2)\s+1
+.in+.5i
+.fi
+Create a light attribute object defining light intensity
+falloff with distance
+.in-.5i
+.nf
+.rs
+.sp -.15v
+.lp
+\f3DoLightColor\fP (colormodel, color)
+.br
+\s-1DOLC (COLMOD, COLOR)\s+1
+.in+.5i
+Create a light color studio attribute object
+.in-.5i
+.rs
+.sp -.15v
+.lp
+\f3DoLightIntens\fP (intensity)
+.br
+\s-1DOLI (INTENS)\s+1
+.in+.5i
+Create a light intensity studio attribute object
+.in-.5i
+.rs
+.sp -.15v
+.lp
+\f3DoLightSpreadAngles\fP (total_angle, delta_angle)
+.br
+\s-1DOLTSA (TANGLE, DANGLE)\s+1
+.in+.5i
+Create a light attribute defining the width of the
+light beam
+.in-.5i
+.lp
+\f3DoLightSpreadExp\fP (exponent)
+.br
+\s-1DOLTSE (EXPN)\s+1
+.in+.5i
+.fi
+Create a light attribute object defining light intensity
+falloff with angle
+.in-.5i
+.nf
+.lp
+\f3DoLightSwitch\fP (light, switchvalue)
+.br
+\s-1DOLTS (LIGHT, SWVAL)\s+1
+.in+.5i
+.fi
+Create a primitive attribute object to enable or
+disable illumination from a light
+.in-.5i
+.nf
+.lp
+\f3DoLightType\fP (type)
+.br
+\s-1DOLTT (TYPE)\s+1
+.in+.5i
+Create a light type studio attribute object
+.in-.5i
+.lp
+\f3DoLineList\fP (colormodel, vertextype, linecount, vertices)
+.br
+\s-1DOLINL (COLMOD, VTXTYP, LINCNT, VTXS)\s+1
+.in+.5i
+Create a line list primitive object
+.in-.5i
+.lp
+\f3DoLineType\fP (type)
+.br
+\s-1DOLNT (TYPE)\s+1
+.in+.5i
+Create a line type primitive attribute object
+.in-.5i
+.lp
+\f3DoLineWidth\fP (linewidth)
+.br
+\s-1DOLW (LINWID)\s+1
+.in+.5i
+Create a line width primitive attribute object
+.in-.5i
+.lp
+\f3DoLocalAntiAliasStyle\fP (style)
+.br
+\s-1DOLAST (STYLE)\s+1
+.in+.5i
+.fi
+Create a primitive attribute object for setting 
+the style of local antialiasing
+.in-.5i
+.nf
+.lp
+\f3DoLocalAntiAliasSwitch\fP (switchvalue)
+.br
+\s-1DOLASW (SWVAL)\s+1
+.in+.5i
+.fi
+Create a primitive attribute object to enable or
+disable the use of local antialiasing
+.in-.5i
+.nf
+.lp
+\f3DoLookAtFrom\fP (at, from, up)
+.br
+\s-1DOLAF (AT, FROM, UP)\s+1
+.in+.5i
+Create an orienting geometric transformation object
+.in-.5i
+.lp
+\f3DoMarkerFont\fP (font)
+.br
+\s-1DOMF (FONT)\s+1
+.in+.5i
+Create a marker font primitive attribute object
+.in-.5i
+.lp
+\f3DoMarkerGlyph\fP (glyph)
+.br
+\s-1DOMG (GLYPH)\s+1
+.in+.5i
+Create a marker glyph primitive attribute object
+.in-.5i
+.lp
+\f3DoMarkerScale\fP (scale)
+.br
+\s-1DOMS (SCALE)\s+1
+.in+.5i
+Create a marker scale factor primitive attribute object
+.in-.5i
+.lp
+\f3DoMatrix\fP (n, m, data)
+.br
+\s-1DOM (N, M, DATA)\s+1
+.in+.5i
+Create a matrix object
+.in-.5i
+.lp
+\f3DoMinBoundingVolExt\fP (Extension)
+.br
+\s-1DOMBVE (EXTENS)\s+1
+.in+.5i
+Create an attribute object which specifies the
+minimum renderable bounding extent
+.in-.5i
+.lp
+\f3DoNameSet\fP (n, members, setop)
+.br
+\s-1DONS (N, MEMBER, SETUP)\s+1
+.in+.5i
+Create a nameset modifying object
+.in-.5i
+.lp
+\f3DoNURBSurf\fP (colormodel, ctrlpointtype, uv_area, order_u, 
+.in+.25i
+.na
+n_knot_u, knot_u, order_v, n_knot_v, knot_v, n_ctrl_u, 
+n_ctrl_v, ctrl_vertices)
+.in-.25i
+.br
+.ad
+\s-1DONRBS, (COLMOD, CPTTYP, UVAREA, ORDERU, NKNOTU, KNOTU,
+.in+.25i
+ORDERV, NKNOTV, KNOTV, NCTRLU, NCTRLV, CTLVTX)\s+1
+.in-.25i
+.in+.5i
+Create a nonuniform rational B-Spline surface
+primitive object
+.in-.5i
+.lp
+\f3DoParallel\fP (window_size, hither, yon)
+.br
+\s-1DOPAR (WWSIZE, HITHER, YON)\s+1
+.in+.5i
+Create a parallel studio attribute object for cameras
+.in-.5i
+.lp
+\f3DoPatch\fP (colormodel, vertextype, matrixl, vertices, matrixr)
+.br
+\s-1DOPAT (COLMOD, VTXTYP, MATRXL, VTXS, MATRXR)\s+1
+.in+.5i
+Create a patch primitive object
+.in-.5i
+.lp
+\f3DoPerspective\fP (fov, hither, yon)
+.br
+\s-1DOPER (FOV, HITHER, YON)\s+1
+.in+.5i
+Create a perspective studio attribute object for
+cameras
+.in-.5i
+.lp
+\f3DoPickID\fP (pickid)
+.br
+\s-1DOPID (PICKID)\s+1
+.in+.5i
+Create a pick identifier object
+.in-.5i
+.lp
+\f3DoPickSwitch\fP (switchvalue)
+.br
+\s-1DOPS (SWVAL)\s+1
+.in+.5i
+Create a primitive attribute object to enable or
+disable picking
+.in-.5i
+.lp
+\f3DoPointList\fP (colormodel, vertextype, pointcount, vertices)
+.br
+\s-1DOPNTL (COLMOD, VTXTYP, PNTCNT, VTXS)\s+1
+.in+.5i
+Create a point list primitive object
+.in-.5i
+.lp
+\f3DoPolygon\fP (colormodel, vertextype, contourcount, contours,
+.in+.25i
+vertices, shape)
+.in-.25i
+.br
+\s-1DOPGN (COLMOD, VTXTYP, CONCNT, CONTURS, VTXS,
+.in+.25i
+SHAPE)\s+1
+.in-.25i
+.in+.5i
+Create a polygon primitive object
+.in-.5i
+.lp
+\f3DoPolygonMesh\fP (colormodel, vertextype, vertexcount, vertices,
+.in+.25i
+polygoncount, polygons, contours, vertexlist,
+shape, smoothflag)
+.in-.25i
+.br
+\s-1DOPGNM (COMOD, VTXTYP, VTXCNT, VTXS, PLYCNT, PLYGON,
+.in+.25i
+CONTURS, VTXLST, SHAPE, SMOOFL)\s+1
+.in-.25i
+.in+.5i
+Create a polygon mesh primitive object
+.in-.5i
+.lp
+\f3DoPolyline\fP (colormodel, vertextype, vertexcount, vertices)
+.br
+\s-1DOPL (COLMOD, VTXTYP, VTXCNT, VTXS)\s+1
+.in+.5i
+Create a connected line segment primitive object
+.in-.5i
+.lp
+\f3DoPolymarker\fP (markercount, markerpositions)
+.br
+\s-1DOPM (MKRCNT, MKRPOS)\s+1
+.in+.5i
+Create a polymarker primitive object
+.in-.5i
+.lp
+\f3DoPopAtts\fP ()
+.br
+\s-1DOPPA ()\s+1
+.in+.5i
+Create an organization object that pops all attributes
+.in-.5i
+.lp
+\f3DoPopMatrix\fP ()
+.br
+\s-1DOPPMX ()\s+1
+.in+.5i
+.fi
+Create an organization object that pops the current
+transformation matrix
+.in-.5i
+.nf
+.lp
+\f3DoPrimSurf\fP (surfacetype)
+.br
+\s-1DOPMS (SRFTYP)\s+1
+.in+.5i
+Create a primitive surface primitive object
+.in-.5i
+.lp
+\f3DoProjection\fP (window, ptype, prp, viewplane, hither, yon)
+.br
+\s-1DOPRJ (WINDOW, PTYPE, PRP, VWPLAN, HITHER, YON)\s+1
+.in+.5i
+Create a projection studio attribute object for cameras
+.in-.5i
+.lp
+\f3DoPushAtts\fP ()
+.br
+\s-1DOPUA ()\s+1
+.in+.5i
+Create an organization object that pushes all attributes
+.in-.5i
+.rs
+.sp -.15v
+.lp
+\f3DoPushMatrix\fP ()
+.br
+\s-1DOPUMX ()\s+1
+.in+.5i
+Create an organization object that pushes the current
+transformation  matrix
+.in-.5i
+.rs
+.sp -.15v
+.lp
+\f3DoRaster\fP (width, height, depth, type, typestring, data, delcallback)
+.br
+\s-1DORS (WIDTH, HEIGHT, DEPTH, TYPE, TYPSTR, TLEN, DATA, DELCBK)\s+1
+.in+.5i
+Create a raster object
+.in-.5i
+.rs
+.sp -.15v
+.lp
+\f3DoReflectionSwitch\fP (switchvalue)
+.br
+\s-1DOREFS (SWVAL)\s+1
+.in+.5i
+Create a primitive attribute object to enable or
+disable the use of reflection
+.in-.5i
+.rs
+.sp -.15v
+.lp
+\f3DoRefractionIndex\fP (index)
+.br
+\s-1DORFRI (INDEX)\s+1
+.in+.5i
+Create a refraction index primitive attribute object
+.in-.5i
+.rs
+.sp -.15v
+.lp
+\f3DoRefractionSwitch\fP (switchvalue)
+.br
+\s-1DORFRS (SWVAL)\s+1
+.in+.5i
+Create a primitive attribute object to enable or
+disable the use of refraction
+.in-.5i
+.rs
+.sp -.15v
+.lp
+\f3DoRepType\fP (type)
+.br
+\s-1DOREPT (TYPE)\s+1
+.in+.5i
+Create a representation type primitive attribute object
+.in-.5i
+.rs
+.sp -.15v
+.lp
+\f3DoRotate\fP (axis, angle)
+.br
+\s-1DOROT (AXIS, ANGLE)\s+1
+.in+.5i
+Create a rotation geometric transformation object
+.in-.5i
+.rs
+.sp -.15v
+.lp
+\f3DoSampleAdaptive\fP (variance)
+.br
+\s-1DOSADP (VARNCE)\s+1
+.in+.5i
+Create an adaptive sampling camera attribute object
+for antialiasing
+.in-.5i
+.rs
+.sp -.15v
+.lp
+\f3DoSampleAdaptiveSwitch\fP (switchvalue)
+.br
+\s-1DOSASW (SWVAL)\s+1
+.in+.5i
+Create a camera attribute object to enable or disable
+the use of adaptive sampling for antialiasing
+.in-.5i
+.rs
+.sp -.15v
+.lp
+\f3DoSampleFilter\fP (filter, xwidth, ywidth)
+.br
+\s-1DOSFLT (FILTER, XWIDTH, YWIDTH)\s+1
+.in+.5i
+.fi
+Create a supersampling filter camera attribute object
+for antialiasing
+.in-.5i
+.nf
+.lp
+\f3DoSampleJitter\fP (factor)
+.br
+\s-1DOSJIT (FACTOR)\s+1
+.in+.5i
+Create a jitter sampling camera attribute object for
+antialiasing
+.in-.5i
+.lp
+\f3DoSampleJitterSwitch\fP (switchvalue)
+.br
+\s-1DOSJSW (SWVAL)\s+1
+.in+.5i
+.fi
+Create a camera attribute object to enable or disable
+the use of jitter sampling for antialiasing
+.in-.5i
+.nf
+.lp
+\f3DoSampleSuper\fP (xsamples, ysamples)
+.br
+\s-1DOSSPR (XSAMP, YSAMP)\s+1
+.in+.5i
+Create a supersampling camera attribute object for
+antialiasing
+.in-.5i
+.lp
+\f3DoSampleSuperSwitch\fP (switchvalue)
+.br
+\s-1DOSSSW (SWVAL)\s+1
+.in+.5i
+.fi
+Create a camera attribute object to enable or
+disable the use of supersampling for antialiasing
+.in-.5i
+.nf
+.lp
+\f3DoScale\fP (x, y, z)
+.br\s-1DOSC (X, Y, Z)\s+1
+.in+.5i
+Create a scale geometric transformation object
+.in-.5i
+.lp
+\f3DoShadeIndex\fP (index)
+.br
+\s-1DOSI (INDEX)\s+1
+.in+.5i
+Create a shade index primitive attribute object
+.in-.5i
+.lp
+\f3DoShadowSwitch\fP (switchvalue)
+.br
+\s-1DOSHAS (SWVAL)\s+1
+.in+.5i
+Create a primitive attribute object to enable or
+disable shadows
+.in-.5i
+.lp
+\f3DoShear\fP (plane, firstdirectionshearvalue, seconddirectionshearvalue)
+.br
+\s-1DOSHR (PLANE, D1SHRV, D2SHRV)\s+1
+.in+.5i
+Create a shear geometric transformation object
+.in-.5i
+.lp
+\f3DoSimplePolygon\fP (colormodel, vertextype, vertexcount, vertices,
+.in+.25i
+shape)
+.in-.25i
+.br
+\s-1DOSPGN (COMOD, VTXTYP, VTXCNT, VTXS, SHAPE)\s+1
+.in+.5i
+Create a simple polygon primitive object
+.in-.5i
+.lp
+\f3DoSimplePolygonMesh\fP (colormodel, vertextype, vertexcount,
+.in+.25i
+vertices, polygoncount, contours,
+vertexlist, shape, smoothflag)
+.in-.25i
+.br
+\s-1DOSPM (COLMOD, VTXTYP, VTXCNT, VTXS, PLYCNT, CONTURS,
+.in+.25i
+VTXLST, SHAPE, SMOOFL)\s+1
+.in-.25i
+.in+.5i
+Create a simple polygon mesh primitive object
+.in-.5i
+.lp
+\f3DoSpecularColor\fP (colormodel, color)
+.br
+\s-1DOSPCC (COLMOD, COLOR)\s+1
+.in+.5i
+Create a specular color primitive attribute object
+.in-.5i
+.lp
+\f3DoSpecularFactor\fP (factor)
+.br
+\s-1DOSPCF (FACTOR)\s+1
+.in+.5i
+Create a specular factor primitive attribute object
+.in-.5i
+.lp
+\f3DoSpecularIntens\fP (intensity)
+.br
+\s-1DOSPCI (INTENS)\s+1
+.in+.5i
+Create a specular intensity primitive attribute object
+.in-.5i
+.lp
+\f3DoSpecularSwitch\fP (switchvalue)
+.br
+\s-1DOSPCS (SWVAL)\s+1
+.in+.5i
+.fi
+Create a primitive attribute object to enable or
+disable specular highlights
+.in-.5i
+.nf
+.lp
+\f3DoSphereList\fP (colormodel, spherecount, locations,
+.in+.25i
+radii, colors)
+.in-.25i
+.br
+\s-1DOSPHL (COLMOD, SPHCNT, LOCS, RADII, COLORS)\s+1
+.in+.5i
+Create a sphere list primitive object
+.in-.5i
+.lp
+\f3DoStereo\fP (eyeseparation, distance)
+.br
+\s-1DOSTER (EYESEP, DISTNC)\s+1
+.in+.5i
+Create a stereo studio attribute object
+.in-.5i
+.lp
+\f3DoStereoSwitch\fP (switchvalue)
+.br
+\s-1DOSTES (SWVAL)\s+1
+.in+.5i
+Create a studio attribute object to enable or
+disable the use of stereo
+.in-.5i
+.lp
+\f3DoSubDivSpec\fP (type, parms)
+.br
+\s-1DOSDS (TYPE, PARMS)\s+1
+.in+.5i
+Create a subdivision specification primitive attribute
+object
+.in-.5i
+.lp
+\f3DoSurfaceEdgeColor\fP (colormodel, color)
+.br
+\s-1DOSEGC (COLMOD, COLOR)\s+1
+.in+.5i
+ Create a surface edge color primitive attribute object
+.in-.5i
+.lp
+\f3DoSurfaceShade\fP (object)
+.br
+\s-1DOSRFS (OBJ)\s+1
+.in+.5i
+Create a surface shading primitive attribute object
+.in-.5i
+.lp
+\f3DoText\fP (position, u, v, string)
+.br
+\s-1DOTXT (POSITN, U, V, STRING, N)\s+1
+.in+.5i
+Create a text primitive object
+.in-.5i
+.lp
+\f3DoTextAlign\fP (halign, valign)
+.br
+\s-1DOTA (HALIGN, VALIGN)\s+1
+.in+.5i
+Create a text alignment primitive attribute object
+.in-.5i
+.lp
+\f3DoTextExpFactor\fP (textexp)
+.br
+\s-1DOTEF (TXEXP)\s+1
+.in+.5i
+Create a text expansion factor primitive attribute
+object
+.in-.5i
+.lp
+\f3DoTextFont\fP (font)
+.br
+\s-1DOTF (FONT)\s+1
+.in+.5i
+Create a text font primitive attribute object
+.in-.5i
+.lp
+\f3DoTextHeight\fP (textheight)
+.br
+\s-1DOTH (TXHGHT)\s+1
+.in+.5i
+Create a text height primitive attribute object
+.in-.5i
+.lp
+\f3DoTextPath\fP (textpath)
+.br
+\s-1DOTPA (TXPATH)\s+1
+.in+.5i
+Create a text path primitive attribute object
+.in-.5i
+.lp
+\f3DoTextPrecision\fP (precision)
+.br
+\s-1DOTPR (PRECIS)\s+1
+.in+.5i
+Create a text precision primitive attribute object
+.in-.5i
+.lp
+\f3DoTextSpace\fP (textspace)
+.br
+\s-1DOTSP (TXSPAC)\s+1
+.in+.5i
+Create a text space primitive attribute object
+.in-.5i
+.lp
+\f3DoTextUpVector\fP (xup, yup)
+.br
+\s-1DOTUV (XUP, YUP)\s+1
+.in+.5i
+Create a text up vector primitive attribute object
+.in-.5i
+.lp
+\f3DoTextureAntiAlias\fP (mode)
+.br
+\s-1DOTAA (MODE)\s+1
+.in+.5i
+.fi
+Create a texture attribute object that controls
+antialiasing of textures
+.in-.5i
+.nf
+.lp
+\f3DoTextureExtendUV\fP (umode, vmode)
+.br
+\s-1DOTXUV (UMODE, VMODE)\s+1
+.in+.5i
+.fi
+Create a texture attribute object that controls
+texturing behavior beyond the boundary of a
+2-dimensional texture
+.in-.5i
+.nf
+.rs
+.sp -.15v
+.lp
+\f3DoTextureExtendUVW\fP (umode, vmode, wmode)
+.br
+\s-1DOTXW (UMODE, VMODE, WMODE)\s+1
+.in+.5i
+.fi
+Create a texture attribute object that controls
+texturing behavior beyond the boundary of a
+3-dimensional texture
+.in-.5i
+.nf
+.rs
+.sp -.15v
+.lp
+\f3DoTextureIntermediateSurf\fP (surface_object, projection_type)
+.br
+\s-1DOTIMS (SRFOBJ, PRJTYP)\s+1
+.in+.5i
+.fi
+Create an intermediate surface texture attribute object
+for two-part texture mapping
+.in-.5i
+.nf
+.rs
+.sp -.15v
+.lp
+\f3DoTextureMapBump\fP (operator, mapping, raster)
+.br
+\s-1DOTMB (OPRATR, MAPPNG, RASTER)\s+1
+.in+.5i
+Create a bump map primitive attribute object
+.in-.5i
+.rs
+.sp -.15v
+.lp
+\f3DoTextureMapBumpSwitch\fP (switchvalue)
+.br
+\s-1DOTMBS (SWVAL)\s+1
+.in+.5i
+.fi
+Create a primitive attribute object to enable
+or disable bump mapping
+.in-.5i
+.nf
+.rs
+.sp -.15v
+.lp
+\f3DoTextureMapDiffuseColor\fP (operator, mapping, raster)
+.br
+\s-1DOTMDC (OPRATR, MAPPNG, RASTER)\s+1
+.in+.5i
+Create a diffuse color texture map primitive attribute
+object
+.in-.5i
+.rs
+.sp -.15v
+.lp
+\f3DoTextureMapDiffuseColorSwitch\fP (switchvalue)
+.br
+\s-1DOTMDS (SWVAL)\s+1
+.in+.5i
+.fi
+Create a primitive attribute object to enable or
+disable texture mapping of diffuse color
+.in-.5i
+.nf
+.rs
+.sp -.15v
+.lp
+\f3DoTextureMapEnviron\fP (operator, mapping, raster)
+.br
+\s-1DOTME (OPRATR, MAPPNG, RASTER)\s+1
+.in+.5i
+Create an environment map primitive attribute object
+.in-.5i
+.rs
+.sp -.15v
+.lp
+\f3DoTextureMapEnvironSwitch\fP (switchvalue)
+.br
+\s-1DOTMES (SWVAL)\s+1
+.in+.5i
+.fi
+Create a primitive attribute object to enable or
+disable environment mapping
+.in-.5i
+.nf
+.rs
+.sp -.15v
+.lp
+\f3DoTextureMapTranspIntens\fP (operator, mapping, raster)
+.br
+\s-1DOTMTI (OPRATR, MAPPNG, RASTER)\s+1
+.in+.5i
+.fi
+Create a transparent intensity texture map primitive
+attribute object
+.in-.5i
+.nf
+.lp
+\f3DoTextureMapTranspIntensSwitch\fP (switchvalue)
+.br
+\s-1DOTMTS (SWVAL)\s+1
+.in+.5i
+.fi
+Create a primitive attribute object to enable or
+disable texture mapping of transparent intensity
+.in-.5i
+.nf
+.lp
+\f3DoTextureMatrixUV\fP (matrix)
+.br
+\s-1DOTMUV (MATRIX)\s+1
+.in+.5i
+.fi
+Create a texture attribute object that sets the 
+texture matrix for primitive \f2uv\fP coordinates
+.in-.5i
+.nf
+.lp
+\f3DoTextureMatrixUVW\fP (matrix)
+.br
+\s-1DOTMW (MATRIX)\s+1
+.in+.5i
+.fi
+Create a texture attribute object that sets
+the texture matrix for primitive \f2uvw\fP coordinates
+.in-.5i
+.nf
+.lp
+\f3DoTextureOp\fP (operator)
+.br
+\s-1DOTOP (OP)\s+1
+.in+.5i
+.fi
+Create a texture attribute object that controls how the
+texture value is combined with the current value
+.in-.5i
+.nf
+.lp
+\f3DoTextureScaleUV\fP (su, sv)
+.br
+\s-1DOTSUV (SU, SV)\s+1
+.in+.5i
+.fi
+Create a texture attribute object that sets the scale
+factors for primitive \f2uv\fP coordinates
+.in-.5i
+.nf
+.lp
+\f3DoTextureScaleUVW\fP (su, sv, sw)
+.br
+\s-1DOTSW (SU, SV, SW)\s+1
+.in+.5i
+.fi
+Create a texture attribute object that sets the scale
+factors for primitive \f2uvw\fP coordinates
+.in-.5i
+.nf
+.lp
+\f3DoTextureTranslateUV\fP (tu, tv)
+.br
+\s-1DOTTUV (TU, TV)\s+1
+.in+.5i
+.fi
+Create a texture attribute object that sets the
+translate factors for primitive \f2uv\fP coordinates
+.in-.5i
+.nf
+.lp
+\f3DoTextureTranslateUVW\fP (tu, tv, tw)
+.br
+\s-1DOTTW (TU, TV, TW)\s+1
+.in+.5i
+.fi
+Create a texture attribute object that sets the
+translate factors for primitive \f2uvw\fP coordinates
+.in-.5i
+.nf
+.lp
+\f3DoTextureUVIndex\fP (index)
+.br
+\s-1DOTUVI (INDEX)\s+1
+.in+.5i
+.fi
+Create a texture attribute object that specifies which \f2uv\fP
+coordinates of a primitive object to use
+.in-.5i
+.nf
+.lp
+\f3DoTextureUVWIndex\fP (index)
+.br
+\s-1DOTWI (INDEX)\s+1
+.in+.5i
+.fi
+Create a texture attribute object that specifies which \f2uvw\fP
+coordinates of a primitive object to use
+.in-.5i
+.nf
+.lp
+\f3DoTorus\fP (bigradius, xsectionradius)
+.br
+\s-1DOTOR (BIGRAD, XRAD)\s+1
+.in+.5i
+Create a torus primitive object
+.in-.5i
+.lp
+\f3DoTransformMatrix\fP (matrix, comptype)
+.br
+\s-1DOTMX (MATRIX, COMTYP)\s+1
+.in+.5i
+Create a transformation matrix geometric
+transformation object
+.in-.5i
+.lp
+\f3DoTranslate\fP (x, y, z)
+.br
+\s-1DOXLT (X, Y, Z)\s+1
+.in+.5i
+Create a translation geometric transformation object
+.in-.5i
+.lp
+\f3DoTranspColor\fP (colormodel, color)
+.br
+\s-1DOTC (COLMOD, COLOR)\s+1
+.in+.5i
+Create a transparent color primitive attribute object
+.in-.5i
+.lp
+\f3DoTranspIntens\fP (intensity)
+.br
+\s-1DOTI (INTENS)\s+1
+.in+.5i
+Create a transparent intensity primitive attribute
+object
+.in-.5i
+.lp
+\f3DoTranspOrientColor\fP (colormodel, color)
+.br
+\s-1DOTOC (COLMOD, COLOR)\s+1
+.in+.5i
+.fi
+Create a transparent color primitive attribute object for
+orientation dependent transparency
+.in-.5i
+.nf
+.lp
+\f3DoTranspOrientExp\fP (exponent)
+.br
+\s-1DOTOE (EXPONENT)\s+1
+.in+.5i
+.fi
+Create a transparent exponent primitive attribute object
+for orientation dependent transparency
+.in-.5i
+.nf
+.lp
+\f3DoTranspOrientIntens\fP (intensity)
+.br
+\s-1DOTOI (INTENS)\s+1
+.in+.5i
+.fi
+Create a transparent intensity primitive attribute
+object for orientation dependent transparency
+.in-.5i
+.nf
+.lp
+\f3DoTranspOrientSwitch\fP (switchvalue)
+.br
+\s-1DOTOS (SWVAL)\s+1
+.in+.5i
+.fi
+Create a primitive attribute object to enable or
+disable orientation dependent transparency
+.in-.5i
+.nf
+.lp
+\f3DoTranspSwitch\fP (switchvalue)
+.br
+\s-1DOTS (SWVAL)\s+1
+.in+.5i
+.fi
+Create a primitive attribute object to enable or
+disable transparency
+.in-.5i
+.nf
+.sp .25v
+.lp
+\f3DoTriangleList\fP (colormodel, vertextype, trianglecount, vertices)
+.br
+\s-1DOTRIL (COLMOD, VTXTYP, TRICNT, VTXS)\s+1
+.in+.5i
+Create a triangle list primitive object
+.in-.5i
+.sp .25v
+.lp
+\f3DoTriangleMesh\fP (colormodel, vertextype, vertexcount, vertices,
+.in+.25i
+trianglecount, triangles, smoothflag)
+.in-.25i
+.br
+\s-1DOTRIM (COLMOD, VTXTXP, VTXCNT, VTXS, TRICNT, TRIS, SMOOFL)\s+1
+.in+.5i
+Create a triangle mesh primitive object
+.in-.5i
+.sp .25v
+.lp
+\f3DoTriangleStrip\fP (colormodel, vertextype, vertexcount,
+.in+.25i
+vertices)
+.in-.25i
+.br
+\s-1DOTRIS (COLMOD, VTXTYP, VTXCNT, VTXS)\s+1
+.in+.5i
+Create a triangle strip primitive
+.in-.5i
+.sp .25v
+.lp
+\f3DoVarLineList\fP (colormodel, linecount, vertlocs, vertnorms,
+.in+.25i
+vertcolors)
+.in-.25i
+.br
+\s-1DOVLNL (COLMOD, LINCNT, VTXLOC, VTXNRM, VTXCLR)\s+1
+.in+.5i
+Create a variable line list primitive object
+.in-.5i
+.sp .25v
+.lp
+\f3DoVarPointList\fP (colormodel, pointcount, vertlocs, vertnorms,
+.in+.25i
+vertcolors)
+.in-.25i
+.br
+\s-1DOVPTL (COLMOD, PNTCNT, VTXLOC, VTXNRM, VTXCLR)\s+1
+.in+.5i
+Create a variable point list primitive object
+.in-.5i
+.sp .25v
+.lp
+\f3DoVarSimplePolygonMesh\fP (colormodel, vertexcount, vertlocs,
+.in+.25i
+.ad
+vertnorms, vertcolors, polygoncount, contours,
+vertexlist, shape, smoothflag)
+.in-.25i
+.br
+.na
+\s-1DOVSPM (COLMOD, VTXCNT, VTXLOC, VTXNRM, VTXCLR, PLYCNT,
+.in+.25i
+CONTURS, VTXLST, SHAPE, SMOOFL)\s+1
+.in-.25i
+.in+.5i
+Create a variable simple polygon mesh primitive
+object
+.in-.5i
+.sp .25v
+.lp
+\f3DoVarTriangleMesh\fP (colormodel, vertexcount, vertlocs, vertnorms,
+.in+.25i
+vertcolors, trianglecount, triangles, smoothflag)
+.in-.25i
+.br
+\s-1DOVTRM (COLMOD, VTXCNT, VTXLOC, VTXNRM, VTXCLR, TRICNT,
+.in+.25i
+TRIS, SMOOFL)\s+1
+.in-.25i
+.in+.5i
+Create a variable triangle mesh primitive object
+.in-.5i
+.sp .25v
+.lp
+\f3DoVarTriangleStrip\fP (colormodel, vertexcount, vertlocs, vertnorms,
+.in+.25i
+vertcolors)
+.in-.25i
+.br
+\s-1DOVTRS (COLMOD, VTXCNT, VTXLOC, VTXNRM, VTXCLR)\s+1
+.in+.5i
+Create a variable triangle strip primitive object
+.in-.5i
+.lp
+\f3DoView\fP ()
+.br
+\s-1DOVW ()\s+1
+.in+.5i
+Create a view organizational object
+.in-.5i
+.lp
+\f3DpUpdVarLineList\fP (object, linecount, vertlocs, vertnorms,
+.in+.25i
+vertcolors)
+.in-.25i
+.br
+\s-1DPUVLL (OBJECT, LINCNT, VTXLOC, VTXNRM, VTXCLR)\s+1
+.in+.5i
+Update a variable line list primitive object
+.in-.5i
+.lp
+\f3DpUpdVarPointList\fP (object, linecount, vertlocs, vertnorms,
+.in+.25i
+vertcolors)
+.in-.25i
+.br
+\s-1DPUVPL (OBJECT, LINCNT, VTXLOC, VTXNRM, VTXCLR)\s+1
+.in+.5i
+Update a variable point list primitive object
+.in-.5i
+.lp
+\f3DpUpdVarSimplePolygonMesh\fP (object, vertlocs, vertnorms,
+.in+.25i
+vertcolors, shape, decompose, recompute_norms)
+.in-.25i
+.br
+\s-1DPUVSM (OBJECT, VTXLOC, VTXNRM, VTXCLR, SHAPE, DECOMP,
+.in+.25i
+CMPNRM)\s+1
+.in-.25i
+.in+.5i
+Update a variable simple polygon mesh primitive
+object
+.in-.5i
+.lp
+\f3DpUpdVarSimplePolygonMeshUV\fP (object, uvindex, uvlist)
+.br
+\s-1DPUSMV (OBJECT, UVIDX, UVLIST)\s+1
+.in+.5i
+.fi
+Update the \f2uv\fP texture coordinates of a variable simple
+polygon mesh primitive object
+.in-.5i
+.nf
+.lp
+\f3DpUpdVarSimplePolygonMeshUVW\fP (object, uvwindex, uvwlist)
+.br
+\s-1DPUSMW (OBJECT, UVWIDX, UVWLIST)\s+1
+.in+.5i
+.fi
+Update the \f2uvw\fP texture coordinates of a variable simple
+polygon mesh primitive object
+.in-.5i
+.nf
+.lp
+\f3DpUpdVarTriangleMesh\fP (object, vertlocs, vertnorms, vertcolors,
+.in+.25i
+recompute_norms)
+.in-.25i
+.br
+\s-1DPUVTM (OBJECT, VTXLOC, VTXNRM, VTXCLR, CMPNRM)\s+1
+.in+.5i
+Update a variable triangle mesh primitive object
+.in-.5i
+.lp
+\f3DpUpdVarTriangleMeshUV\fP (object, uvindex, uvlist)
+.br
+\s-1DPUTMV (OBJECT, UVIDX, UVLIST)\s+1
+.in+.5i
+.fi
+Update the \f2uv\fP texture coordinates of a variable
+triangle mesh primitive object
+.in-.5i
+.nf
+.lp
+\f3DpUpdVarTriangleMeshUVW\fP (object, uvwindex, uvwlist)
+.br
+\s-1DPUTMW (OBJECT, UVWIDX, UVWLIST)\s+1
+.in+.5i
+.fi
+Update the \f2uvw\fP texture coordinates of a variable
+triangle mesh primitive object
+.in-.5i
+.nf
+.lp
+\f3DpUpdVarTriangleStrip\fP (object,  vertcount, vertlocs, vertnorms,
+.in+.25i
+vertcolors)
+.in-.25i
+.br
+\s-1DPUVTS (OBJECT, VTXCNT, VTXLOC, VTXNRM, VTXCLR)\s+1
+.in+.5i
+Update a variable triangle strip primitive object
+.in-.5i
+.lp
+\f3DpUpdVarTriangleStripUV\fP (object, uvindex, uvlist)
+.br
+\s-1DPUTSV (OBJECT, UVIDX, UVLIST)\s+1
+.in+.5i
+.fi
+Update the \f2uv\fP texture coordinates of a variable
+triangle strip primitive object
+.in-.5i
+.nf
+.lp
+\f3DpUpdVarTriangleStripUVW\fP (object, uvwindex, uvwlist)
+.br
+\s-1DPUTSW (OBJECT, UVWIDX, UVWLIST)\s+1
+.in+.5i
+.fi
+Update the \f2uvw\fP texture coordinates of a variable
+triangle strip primitive object
+.in-.5i
+.nf
+.lp
+\f3DsCompBoundingVol\fP (volume, object)
+.br
+\s-1DSCBV (VOLUME, OBJECT)\s+1
+.in+.5i
+Compute dimensions of a bounding volume for an
+object
+.in-.5i
+.lp
+\f3DsExecuteObj\fP (object)
+.br
+\s-1DSEO (OBJECT)\s+1
+.in+.5i
+Execute an object immediately
+.in-.5i
+.lp
+\f3DsExecutionAbort\fP ()
+.br
+\s-1DSEA ()\s+1
+.in+.5i
+Abort traversal of the current method
+.in-.5i
+.lp
+\f3DsExecutionReturn\fP ()
+.br
+\s-1DSER ()\s+1
+.in+.5i
+Abort traversal of the current group
+.in-.5i
+.lp
+\f3DsFileRasterRead\fP (filename, width, height, depth, type, data)
+.br
+\s-1DSFRSR (FILENM, FLEN, WIDTH, HEIGHT, DEPTH, TYPE, DATA)\s+1
+.in+.5i
+Read raster information from a file
+.in-.5i
+.lp
+\f3DsHoldObj\fP (object)
+.br
+\s-1DSHO (OBEJCT)\s+1
+.in+.5i
+Place a hold on an object
+.in-.5i
+.lp
+\f3DsInitialize\fP (processors)
+.br
+\s-1DSINIT (PROS)\s+1
+.in+.5i
+Initialize \*(Dd
+.in-.5i
+.lp
+\f3DsInputValue\fP (slot, value)
+.br
+\s-1DSIV (SLOT, VALUE)\s+1
+.in+.5i
+Post a value to an input slot
+.in-.5i
+.lp
+\f3DsInqAngleUnits\fP ()
+.br
+\s-1DSQAU ()\s+1
+.in+.5i
+Return the current angle units
+.in-.5i
+.lp
+\f3DsInqClassId\fP (class_name)
+.br
+\s-1DSQCI (CLSNME, N)\s+1
+.in+.5i
+Return the class identifier of a named class
+.in-.5i
+.lp
+\f3DsInqCurrentMethod\fP ()
+.br
+\s-1DSQCM ()\s+1
+.in+.5i
+Return the current method being executed
+.in-.5i
+.lp
+\f3DsInqDriverInfo\fP (count, name, description)
+.br
+\s-1DSQDI (COUNT, NAME, NAMLEN, DESC, DESLEN)\s+1
+.in+.5i
+Return the names and descriptions of the 
+installed device drivers
+.in-.5i
+.lp
+\f3DsInqErrorMessage\fP (errornumber, bufbytes, buf, severity)
+.br
+\s-1DSQEM (ERRNUM, BUFSIZ, BUF, SEVERT)\s+1
+.in+.5i
+Return an error message
+.in-.5i
+.lp
+\f3DsInqErrorVars\fP (errorfile, errorhandler)
+.br
+\s-1DSQEV (ERRFIL, ERRHND)\s+1
+.in+.5i
+Return current error file and error handler
+.in-.5i
+.lp
+\f3DsInqExeDepthLimit\fP ()
+.br
+\s-1DSQEDL ()\s+1
+.in+.5i
+Return the maximum depth to which objects will be
+executed
+.in-.5i
+.lp
+\f3DsInqHoldObj\fP (object)
+.br
+\s-1DSQHO (OBJECT)\s+1
+.in+.5i
+Return whether a hold has been placed on the object
+.in-.5i
+.lp
+\f3DsInqMethodId\fP (method_name)
+.br
+\s-1DSQMI (METNME, N)\s+1
+.in+.5i
+Return the method identifier of a named method
+.in-.5i
+.lp
+\f3DsInqNumDrivers\fP ()
+.br
+\s-1DSQND ()\s+1
+.in+.5i
+Return the number of installed device drivers
+.in-.5i
+.lp
+\f3DsInqNumRenderers\fP ()
+.br
+\s-1DSQNR ()\s+1
+.in+.5i
+Return the number of installed renderers
+.in-.5i
+.lp
+\f3DsInqObj\fP (object_name_type, object_name, class_id)
+.br
+\s-1DSQOI (OBJNUM, OBJTYP)\s+1
+\s-1DSQOS (OBJSTR, N, OBJTYP)\s+1
+.in+.5i
+Return an object specified by name
+.in-.5i
+.lp
+\f3DsInqObjClassId\fP (object)
+.br
+\s-1DSQOCI (OBJECT)\s+1
+.in+.5i
+Return an object's class id from its
+object handle
+.in-.5i
+.lp
+\f3DsInqObjName\fP (object, object_name_type, object_name)
+.br
+\s-1DSQONT (OBJECT)\s+1
+.br
+\s-1DSQONI (OBJECT)\s+1
+.br
+\s-1DSQONS (OBJECT, FNAME, LENGTH)\s+1
+.in+.5i
+Return an object's name from its object handle
+.in-.5i
+.lp
+\f3DsInqObjStatus\fP (object)
+.br
+\s-1DSQVOS (OBJECT)\s+1
+.in+.5i
+Check the existence of an object
+.in-.5i
+.lp
+\f3DsInqRaster\fP (raster, width, height, depth, type,
+.in+.25i
+typestring, data)
+.in-.25i
+.br
+\s-1DSQR (RASTER, WIDTH, HEIGHT, DEPTH, TYPE, TYPESTR,
+.in+.25i
+TLEN, DATA) \s+1
+.in-.25i
+.in+.5i
+Return the data of a raster object
+.in-.5i
+.lp
+\f3DsInqRendererId\fP (renderer_name)
+.br
+\s-1DSQRI (RENNME, N)\s+1
+.in+.5i
+Return the renderer identifier of a named renderer
+.in-.5i
+.lp
+\f3DsInqRendererNames\fP (names)
+.br
+\s-1DSQRNS (NAMES, LENGTH)\s+1
+.in+.5i
+Return a list of the names of the installed renderers
+.in-.5i
+.lp
+\f3DsInqSafeFlag\fP ()
+.br
+\s-1DSQSF ()\s+1
+.in+.5i
+Query the safe flag
+.in-.5i
+.lp
+\f3DsInqValuatorGroup\fP (slot)
+.br
+\s-1DSQVG (SLOT)\s+1
+.in+.5i
+Return the handle for an input slot's valuator group
+.in-.5i
+.rs
+.sp -.15v
+.lp
+\f3DsInqVersion\fP (version)
+.br
+\s-1DSQVER (VERSN, LENGTH)\s+1
+.in+.5i
+Return the string describing the current version
+.in-.5i
+.rs
+.sp -.15v
+.lp
+\f3DsPrintObj\fP (object)
+.br
+\s-1DSPO (OBJECT)\s+1
+.in+.5i
+Print information about an object
+.in-.5i
+.rs
+.sp -.15v
+.lp
+\f3DsRasterUpdate\fP (raster)
+.br
+\s-1DSRSU (RASTER)\s+1
+.in+.5i
+Update a raster object
+.in-.5i
+.rs
+.sp -.15v
+.lp
+\f3DsRasterWrite\fP (raster, filename)
+.br
+\s-1DSRSW (RASTER, FNAME, FLEN)\s+1
+.in+.5i
+Write a raster object to a file
+.in-.5i
+.rs
+.sp -.15v
+.lp
+\f3DsReleaseObj\fP (object)
+.br
+\s-1DSRO (OBJECT)\s+1
+.in+.5i
+Release a hold previously placed on an object
+.in-.5i
+.rs
+.sp -.15v
+.lp
+\f3DsSetAngleUnits\fP (units)
+.br
+\s-1DSSAU (UNITS)\s+1
+.in+.5i
+Set the current angle units
+.in-.5i
+.rs
+.sp -.15v
+.lp
+\f3DsSetErrorVars\fP (errorfile, errorhandler)
+.br
+\s-1DSSEV (ERRFIL, ERRHND)\s+1
+.in+.5i
+Specify an error file and error handler
+.in-.5i
+.rs
+.sp -.15v
+.lp
+\f3DsSetExeDepthLimit\fP (limit)
+.br
+\s-1DSSEDL (LIMIT)\s+1
+.in+.5i
+Specify the maximum allowed depth to which objects
+will be executed
+.in-.5i
+.rs
+.sp -.15v
+.lp
+\f3DsSetObjName\fP (object, name_type, object_name, replace)
+.br
+\s-1DSSOND (OBJECT)\s+1
+.br
+\s-1DSSONI (OBJECT, OBJNUM, REPL)\s+1
+.br
+\s-1DSSONS (OBJECT, OBJSTR, N, REPL)\s+1
+.in+.5i
+Set the name of an object
+.in-.5i
+.rs
+.sp -.15v
+.lp
+\f3DsSetSafeFlag\fP (flag)
+.br
+\s-1DSSSF (FLAG)\s+1
+.in+.5i
+Set the safe flag
+.in-.5i
+.lp
+\f3DsTerminate\fP ()
+.br
+\s-1DSTERM ()\s+1
+.in+.5i
+Terminate \*(Dd
+.in-.5i
+.lp
+\f3DsTextureUVCount\fP (count)
+.br
+\s-1DSTUVC (COUNT)\s+1
+.in+.5i
+.fi
+Set the number of \f2uv\fP sets in the vertex type
+specification
+.in-.5i
+.nf
+.lp
+\f3DsTextureUVWCount\fP (count)
+.br
+\s-1DSTWC (COUNT)\s+1
+.in+.5i
+.fi
+Set the number of \f2uvw\fP coordinates in the
+vertex type specification
+.in-.5i
+.nf
+.lp
+\f3DsUpdateAllViews\fP ()
+.br
+\s-1DSUAV ()\s+1
+.in+.5i
+Update all views
+.in-.5i
+.lp
+\f3DsValuatorSwitch\fP (switchvalue)
+.br
+\s-1DSVS (SWVAL)\s+1
+.in+.5i
+Enable or disable valuators
+.in-.5i
+.lp
+\f3DvInqActiveCamera\fP (view)
+.br
+\s-1DVQAC (VIEW)\s+1
+.in+.5i
+Return the active camera for a view
+.in-.5i
+.lp
+\f3DvInqBackgroundColor\fP (view, colormodel, color)
+.br
+\s-1DVQBC (VIEW, COLMOD, COLOR)\s+1
+.in+.5i
+Return the background color of a view
+.in-.5i
+.lp
+\f3DvInqBackgroundJust\fP (view, left, bottom)
+.br
+\s-1DVQBJ (VIEW, LEFT, BOT)\s+1
+.in+.5i
+Return the background raster justification
+.in-.5i
+.lp
+\f3DvInqBackgroundRaster\fP (view, raster, callback)
+.br
+\s-1DVQBR (VIEW, RASTER, CBACK)\s+1
+.in+.5i
+Return the raster object for a view background
+.in-.5i
+.lp
+\f3DvInqBoundary\fP (view, boundary)
+.br
+\s-1DVQB (VIEW, BNDRY)\s+1
+.in+.5i
+Return the view boundary
+.in-.5i
+.lp
+\f3DvInqClearFlag\fP (view)
+.br
+\s-1DVQCF (VIEW)\s+1
+.in+.5i
+Return the clear flag of a view
+.in-.5i
+.lp
+\f3DvInqDefinitionGroup\fP (view)
+.br
+\s-1DVQDG (VIEW)\s+1
+.in+.5i
+Return the definition group for a view
+.in-.5i
+.lp
+\f3DvInqDisplayGroup\fP (view)
+.br
+\s-1DVQIG (VIEW)\s+1
+.in+.5i
+Return the handle for a view's display group
+.in-.5i
+.lp
+\f3DvInqRendStyle\fP (view)
+.br
+\s-1DVQRS (VIEW)\s+1
+.in+.5i
+Return the rendering style of a view
+.in-.5i
+.lp
+\f3DvInqShadeIndex\fP (view)
+.br
+\s-1DVQSI (VIEW)\s+1
+.in+.5i
+Return the shade index of a view
+.in-.5i
+.lp
+\f3DvInqUpdateType\fP (view)
+.br
+\s-1DVQUT (VIEW)\s+1
+.in+.5i
+Return the update type of a view
+.in-.5i
+.lp
+\f3DvSetActiveCamera\fP (view, camera)
+.br
+\s-1DVSAC (VIEW, CAMERA)\s+1
+.in+.5i
+Set the active camera for a view
+.in-.5i
+.lp
+\f3DvSetBackgroundColor\fP (view, colormodel, color)
+.br
+\s-1DVSBC (VIEW, COLMOD, COLOR)\s+1
+.in+.5i
+Set the background color of a view
+.in-.5i
+.lp
+\f3DvSetBackgroundJust\fP (view, left, bottom)
+.br
+\s-1DVSBJ (VIEW, LEFT, BOT)\s+1
+.in+.5i
+Set the background raster justification
+.in-.5i
+.lp
+\f3DvSetBackgroundRaster\fP (view, raster, callback)
+.br
+\s-1DVSBR (VIEW, RASTER, CBACK)\s+1
+.in+.5i
+Set the raster object for view background
+.in-.5i
+.lp
+\f3DvSetBoundary\fP (view, boundary)
+.br
+\s-1DVSB (VIEW, BNDRY)\s+1
+.in+.5i
+Set the view boundary
+.in-.5i
+.lp
+\f3DvSetClearFlag\fP (view, clearflag)
+.br
+\s-1DVSCF (VIEW, CLRFLG)\s+1
+.in+.5i
+Set the clear flag of a view
+.in-.5i
+.lp
+\f3DvSetRendStyle\fP (view, renderstyle)
+.br
+\s-1DVSRS (VIEW, RNDSTL)\s+1
+.in+.5i
+Set the rendering style of a view
+.in-.5i
+.lp
+\f3DvSetShadeIndex\fP (view, index)
+.br
+\s-1DVSSI (VIEW, INDEX)\s+1
+.in+.5i
+Set the shade index of a view
+.in-.5i
+.lp
+\f3DvSetUpdateType\fP (view, updatetype)
+.br
+\s-1DVSUT (VIEW, UPDTYP)\s+1
+.in+.5i
+Set the update type of a view
+.in-.5i
+.lp
+\f3DvUpdate\fP (view)
+.br
+\s-1DVU (VIEW)\s+1
+.in+.5i
+Redisplay the specified view
+.ad
+.hy
+.fi

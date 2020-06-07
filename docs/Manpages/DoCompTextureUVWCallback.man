@@ -1,0 +1,107 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DoCompTextureUVWCallback 3D "Dore"
+.SH NAME
+DoCompTextureUVWCallback \- Create a primitive attribute object 
+for computing the \f2uvw\fP texture coordinates of a nonvertex primitive
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+DtObject DoCompTextureUVWCallback(callback_object)
+DtObject callback_object;
+.sp
+.in  -.5i
+FORTRAN:
+.in  +.5i
+INTEGER*4 DOCTWC(CBKOBJ)
+INTEGER*4 CBKOBJ
+.in  -.5i
+.fi 
+.IX "DoCompTextureUVWCallback"
+.IX "DOCTWC"
+.SH DESCRIPTION
+.LP
+\f2DoCompTextureUVWCallback\fP creates a primitive attribute 
+object that controls the generation of \f2uvw\f1 texture coordinates for 
+primitives that do not have user-provided vertex information 
+(e.g \f2DoTorus <DOTOR>\fP).
+.LP
+The parameter \f2callback_object\f1 can have the following 
+values:
+.IP "\f2DcStdUVWCallback <DCSWC>\f1"
+the parameterization of the object is controlled by Dore
+.IP "a \f2DoCallback <DOCB>\f1 object handle"
+the parameterization of the object is controlled by a
+user-defined function that was hooked into Dore as a callback
+using \f2DoCallback <DOCB>\f1
+.LP
+If the renderer draws the primitive as a tessellated alternate object,
+the callback function is called for every vertex of the alternate object.
+In that case \f2DoCompTextureUVWSwitch <DOCTWS>\f1 must first be enabled.
+If the renderer draws the primitive directly it will either ignore
+this attribute, or call the callback function for every visible
+point on the object's surface.
+See your \f2Dore System Guide\fP for details of the renderers on
+your system.
+.LP
+The information passed to this function consists of user 
+data, the coordinates of a point on the object surface 
+in local space, and the surface normal at that point.  
+The function computes and passes back a 
+\f2u\f1, \f2v\f1, and \f2w\f1 value for that point.  
+.LP
+In C, the user-written function must have the following format:
+.nf
+	my_uvw_callback (data, x,y,z, nx,ny,nz, u,v,w)
+	DtPtr data;	 /* if \f2data\f1 is a pointer to data */
+	Dt32Bits data;   /* if \f2data\f1 is a value */
+	DtReal x,y,z;    /* vertex */
+	DtReal nx,ny,nz; /* vertex normal */
+	DtReal *u,*v,*w; /* returned u,v,w values */
+.fi
+.LP
+FORTRAN, the user-defined function can be either a subroutine
+or a function.  The format is either:
+.sp
+.nf
+	SUBROUTINE MYWCB (DATA, X,Y,Z, NX,NY,NZ, U,V,W)
+	INTEGER*4 DATA
+	REAL*8 X,Y,Z
+	REAL*8 NX,NY,NZ
+	REAL*8 U,V,W
+.fi
+or
+.nf
+	FUNCTION MYWCB (DATA, X,Y,Z, NX,NY,NZ, U,V,W)
+	INTEGER*4 DATA
+	REAL*8 X,Y,Z
+	REAL*8 NX,NY,NZ
+	REAL*8 U,V,W
+.fi
+.SH DEFAULTS
+The default for \f2DoCompTextureUVWCallback\fP is \f2DcStdUVWCallback\f1.
+.SH "SEE ALSO"
+.na
+.nh
+DoCallback (3D), DoCompTextureUVWSwitch(3D),
+DoTextureMapBump(3D), DoTextureMapDiffuseColor(3D), 
+DoTextureMapTranspIntens(3D)
+.ad
+.hy
+\&

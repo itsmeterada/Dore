@@ -1,0 +1,11 @@
+#include <Dore.tmpl>
+
+    SRCS = odev_compute.c odev_driver.c odev_inq.c odev_inqdevp.c \
+           odev_obj.c odev_output.c odev_set.c odev_setdevp.c odev_update.c
+    OBJS = odev_compute.o odev_driver.o odev_inq.o odev_inqdevp.o \
+           odev_obj.o odev_output.o odev_set.o odev_setdevp.o odev_update.o
+
+LibraryObjectRule()
+SubdirLibraryRule($(OBJS))
+
+DependTarget()

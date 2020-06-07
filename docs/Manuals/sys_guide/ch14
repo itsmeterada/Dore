@@ -1,0 +1,133 @@
+.\"#ident "%W%" %G%
+.\"
+.\" #
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  
+.\" # 
+.\" # KUBOTA GRAPHICS Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\" #
+.\"
+.so ../macros/local.me
+.ds BT "\\*(Dd System Guide
+.ds CT "Titan 3000 Driver
+.ds h1 14
+.L1 T ITAN " 3000"
+.L2 D RIVER
+.CH FOURTEEN
+.lp
+The Titan 3000 device driver provides access to the
+high performance 3D graphics of the Titan 3000 graphics supercomputers.
+The Titan 3000, manufactured by Kubota Pacific Computer, Inc., is a double
+buffered 24\-bit color workstation that runs the X11+ windowing system. 
+.H1 "Using the Driver
+A Titan 3000 device object can be created using one of the following
+calls to \f2DoDevice\f1:
+.(m
+        DoDevice(devicetype, optionstring);
+.)m
+where \f2devicetype\f1 is the device type and \f2optionstring\f1 is
+a list of initialization options for the Titan 3000 driver.
+In this release, any of the \f2devicetype\f1 strings "\f2display\f1",
+"\f2localx11\f1", "\f2ardentx11\f1", or "\f2stardentx11\f1" can be used
+to open a Titan 3000 device object.
+The \f2DoDevice <DOD>\f1 and \f2DdSetOptions <DDSO>\f1
+manpages with Titan 3000 driver-specific
+information are provided in Section IV, \f2Manpages\f1, of this document.
+.H3 "Initialization Options"
+The initialization options for the Titan 3000 device driver are:
+.ip "\-noautosize"
+specifies that the device viewport not be automatically be set to the
+device extent when the device extent changes.
+.ip "\-singlebuffered"
+specifies a single buffered window.
+The default is a double buffered window.
+.ip "\-geometry \f2geomstring\fP"
+specifies a window with a particular position and size.
+The format for \f2geomstring\fP is ``WxH+X+Y'' or ``WxH''
+(where W, H, X, and Y are the integer values for width, height,
+and the X, Y position of the upper left corner of the window).
+If the ``WxH'' format is used, X and Y are assumed to be zero.
+.ip "\-visualtype \f2vtype\fP"
+specifies a window with the given visual type.
+The possible values for \f2vtype\fP are \f2DcDirectColor\fP for a full 24\-bit
+color window or \f2DcPseudoColor\fP for an 8\-bit pseudocolor window.
+.ip "\-window \f2xwindow\fP"
+specifies that the X window handle \f2xwindow\fP that the application
+has previously opened be used for drawing.
+When using this option, the \f2\-display\fP option should also be
+specified. 
+The \f2\-singlebuffered\fP, \f2\-geometry\fP, and
+\f2\-visualtype\fP options are ignored when a window is specified.
+.ip "\-display \f2xdisplay\fP"
+specifies that the X display handle \f2xdisplay\fP that the application
+has previously opened be used as the X display device.
+.ip "\-stereo"
+specifies a stereo window.
+.lp
+None of the Titan 3000 device driver options are modifiable after
+initialization.
+.H1 "Output Modules
+The Titan 3000 device driver supports both the production renderer
+output module (PROM) interface and the dynamic renderer output module
+(DROM) interface.
+.H1 "PROM Dependent Functions
+The interface to the PROM is a very simple one, intended for renderers
+that generate pixel data, such as the standard production renderer.
+The Titan 3000 PROM implements all functions of the PROM interface.
+As a result, any renderer that uses the PROM interface will be fully
+supported by the Titan 3000 device driver.
+.H1 "DROM Dependent Functions
+The Titan 3000 device driver uses many, but not all, of the
+\*(Dd attributes that are passed to the DROM.  Refer to Appendix A, 
+\f2Supported Functions\fP, for a list 
+of the \*(Dd functions supported 
+by the Titan 3000 DROM.
+.H1 "Notes
+.H3 "Device Extents
+The device extent of the Titan 3000 device, as returned by
+\f2DdInqExtent\fP, has a Z range from 0 to 1.
+Note that in some previous releases it has been 0 to 65535.
+.H1 "Limitations
+The Titan 3000 DROM has the following limitations:
+.BU
+Does not support advanced features such as texture mapping, 
+antialiasing, and shadows.
+.BU
+Does not support the interpolation type \f2DcSurfaceShade\fP for
+\f2DoInterpType\fP.
+.BU
+The \f2operator\fP parameter of the \f2DoClipVol\fP function is
+ignored and is assumed to be \f2DcClipAnd\fP.
+.BU
+Only 20 clipping planes are supported.
+.BU
+Only three representation types for \f2DoRepType\f1 are supported.
+These are \f2DcPoints\f1, \f2DcWireframe\f1, and \f2DcSurface\f1.
+\f2DcOutlines\f1 behaves as \f2DcWireframe\f1, and both 
+\f2DcSurfaceWireframeEdges\f1 and \f2DcSurfaceOutlineEdges\f1
+behave as \f2DcSurface\f1.
+.BU
+Does not support wide lines.
+.BU
+To get consistent shading results, user-supplied normals of objects 
+that cross the Z=0 plane are constrained by the geometric normal,
+i.e., they must be on the same side of the triangle/polygon that the
+geometric normal is.  \*(Dd computes the geometric normal using the
+right-hand rule typically.  See the \f2\*(Dd Programmer's Guide\f1
+for details on how the geometric normal is computed for the various
+primitive objects.
+.BU
+Primitives, especially those that are highly tessellated, are 
+occasionally rendered with very small holes in them.
+This is due to minor rasterization inaccuracies in the Titan 3000 hardware
+when triangles are being drawn.
+Rendered results may be improved by turning on backface culling.

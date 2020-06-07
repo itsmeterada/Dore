@@ -1,0 +1,51 @@
+#ident "%W%" %G%
+ 
+/**************************************************************************
+# Copyright (C) 1994 Kubota Graphics Corp.
+# 
+# Permission to use, copy, modify, and distribute this material for
+# any purpose and without fee is hereby granted, provided that the
+# above copyright notice and this permission notice appear in all
+# copies, and that the name of Kubota Graphics not be used in
+# advertising or publicity pertaining to this material.  Kubota
+# Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+# OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+# "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+# PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+# EXPRESS OR IMPLIED.
+**************************************************************************/
+ 
+				PICKING
+
+This program demonstrates examples of the following:
+	1: Dore picking functionality.
+	2: Creating most kinds of Dore primitives.
+	3: printing of primitives
+	4: Dore "compute bounding volume" functionality.
+	5: creating single buffered, double buffered and stereo windows.
+	   suitable for passing to Dore for those applications that need the
+	   handle of the Dore window.
+	6: using overlay graphics with the Direct Graphics Interface.
+
+This program must open its own window to pass to Dore instead of simply
+having Dore do it because it needs the window handle in order to track the
+position of the pointer in the window which is used to select pick points.
+An overlay window is also created which overlaps the Dore window.  The program
+uses this window to draw a box around the pick aperture so that the user can
+see which objects will be picked.
+
+There are three command line options that may be specified:
+
+The width of the pick aperture can be specified with the -xap option, and the
+height with the -yap option.  To use a 30 by 40 pick aperture, give the command:
+	render -xap 30 -yap 40
+
+The other option is to run in stereo.  If you have a stereo monitor and want
+to run this program in stereo, you need to do the following things:
+	1: use the -stereo option to xinit
+	2: in an xterm window, type "setenv DISPLAY unix:0.1 ; awm &"
+	3: hit <ALT><F2> to toggle to the stereo screen
+	4: create an xterm window on that screen with the right mouse button
+	5: run the program from that window with the stereo option:
+		render -stereo 1

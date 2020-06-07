@@ -1,0 +1,152 @@
+.\"#ident "%W%" %G%
+.\"
+.\" #
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  
+.\" # 
+.\" # KUBOTA GRAPHICS Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\" #
+.\"
+.so ../macros/local.me
+.ds BT "\\*(Dd System Guide
+.ds CT "SunView CXP Driver
+.ds h1 10
+.L1 S UN V IEW " CXP"
+.L2 D RIVER
+.CH TEN
+.lp
+The SunView CXP device driver provides access to the 3D graphics
+accelerators on Sun Microsystems Sun/3 and Sun/4-CXP workstations.
+The Sun/3-CXP and Sun/4-CXP are 8\-bit color workstations with CG
+framebuffers and GP graphics accelerators, running the SunView
+windowing system. 
+The SunView CXP device driver makes use of the Sun GPSI Graphics
+interface.
+.H1 "Using the Driver
+The initialization options for the SunView CXP device driver are:
+.ip "-singlebuffered"
+requests a single buffered window.
+The default is a double buffered window.
+.ip "-width \f2size\fP"
+requests a width of \f2size\fP pixels for the window. 
+The default width is 512.
+.ip "-height \f2size\fP"
+requests a height of \f2size\fP pixels for the window.
+The default height is 512.
+.ip "-canvas \f2canvasid\fP"
+requests that the SunView canvas \f2canvasid\f1 opened by the application 
+be used for drawing.  The \f2\-singlebuffered\fP, \f2\-width\fP, and 
+\f2\-height\fP options are ignored when a canvas is specified.
+.H1 "Output Modules
+The SunView CXP device driver supports both the production renderer
+output module (PROM) interface and the dynamic renderer output module
+(DROM) interface.  The implementations of the PROM and DROM for the 
+SunView CXP device driver will be referred to as the \f2SunView CXP PROM\f1 
+and \f2Sunview CXP DROM\f1, respectively.
+.H1 "PROM Dependent Functions
+The interface to the PROM is a very simple one, intended for renderers
+that generate pixel data, such as the standard production renderer.
+The SunView CXP PROM implements all functions of the PROM interface.  As a result,
+any renderer that uses the PROM interface will be fully supported by the
+SunView CXP device driver.
+.H1 "DROM Dependent Functions
+When using the dynamic renderer, a function is supported only if the DROM
+of the device driver being used also supports it.
+The following subsections list the renderer dependent functions that
+are supported by the SunView CXP DROM.
+.H2 "Studio Attributes
+The studio attributes are attributes that will be executed during a
+studio traversal.
+Studio attributes include camera and light attributes.
+The SunView CXP DROM does not use any of the rendering control attributes.
+.H3 "Camera Attributes
+The camera attributes supported by the SunView CXP DROM are:
+.(l I
+DoCameraMatrix <DOCM>
+DoParallel <DOPAR>
+DoPerspective <DOPER>
+DoProjection <DOPRJ>
+.)l
+.H3 "Lighting Attributes
+The light attributes define the characteristics of the lights
+used in a scene.
+They are:
+.(l I
+DoLightColor <DOLC>
+DoLightIntens <DOLI>
+DoLightType <DOLTT>
+.)l
+.rs
+.sp .5v
+.H2 "Primitives
+The SunView CXP DROM supports the five \f2base\fP primitives of the DROM
+interface.  These are point lists, line lists, connected line lists,
+triangle lists, and triangle meshes.
+.rs
+.sp .5v
+.H2 "Primitive Attributes
+The SunView CXP driver supports the following primitive attributes:
+.rs
+.sp .5v
+.H3 "Shading Attributes
+The shading attributes supported by the SunView CXP DROM are:
+.(l I
+DoAmbientIntens <DOAMBI>
+DoAmbientSwitch <DOAMBS>
+DoDepthCue <DODC>
+DoDepthCueSwitch <DODCS>
+DoDiffuseColor <DODIFC>
+DoDiffuseIntens <DODIFI>
+DoDiffuseSwitch <DODIFS>
+DoInterpType <DOIT>
+DoLightSwitch <DOLTS>
+DoShadeIndex <DOSI>
+DoSpecularColor <DOSPCC>
+DoSpecularFactor <DOSPCF>
+DoSpecularIntens <DOSPCI>
+DoSpecularSwitch <DOSPCS>
+DoSurfaceShade <DOSRFS>
+.)l
+.bp
+.H3 "Miscellaneous
+Other renderer dependent primitive attributes used by the SunView CXP DROM
+are:
+.(l I
+DoBackfaceCullSwitch <DOBFCS>
+DoBackfaceCullable <DOBFC>
+DoHiddenSurfSwitch <DOHSS>
+DoInvisSwitch <DOINVS>
+DoRepType <DOREPT>
+.)l
+.H2 "View Functions
+The SunView CXP DROM supports background color for
+views through the call:
+.(l I
+DvSetBackgroundColor <DVSBC>
+.)l
+.H1 "Limitations
+The SunView CXP DROM has the following limitations:
+.BU
+It supports only ambient and infinite light types.
+All other types will be approximated by one of these two types.
+.BU
+It does not support the interpolation type \f2DcSurfaceShade\fP for
+\f2DoInterpType\fP.
+.BU
+It does not support the \f2DdInqPixelData\fP function.
+.H1 "Requirements
+Applications built with a \*(Dd library that includes the SunView CXP
+driver will require that the SunView libraries be linked into the
+applications by using:
+.(m
+    -lsuntool -lsunwindow -lpixrect
+.)m

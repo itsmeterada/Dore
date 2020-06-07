@@ -1,0 +1,144 @@
+%!PS-Adobe-2.0
+%%Title: Unspecified
+%%Creator: MacDraw
+%%CreationDate: Monday, September 11, 1989
+%%Pages: (atend)
+%%BoundingBox: ? ? ? ?
+%%PageBoundingBox: 30 31 582 761
+%%For: Aaron Black
+%%IncludeProcSet: "(AppleDict md)" 66
+%%EndComments
+%%EndProlog
+%%BeginDocumentSetup
+md begin
+
+T T -31 -30 761 582 100 72 72 1 F F F F T T psu
+(Aaron Black; document: Unspecified)jn
+0 mf
+od
+%%EndDocumentSetup
+%%Page: ? 1
+op
+0 0 xl
+1 1 pen
+0 0 gm
+(nc 0 0 720 540 6 rc)kp
+64 gr
+76 123 104 174 4 rc
+0 gr
+76.5 123.5 103.5 173.5 0 rc
+86 144 93 151 4 ov
+86.5 144.5 92.5 150.5 0 ov
+78.5 202.5 100.5 345.5 26.5 26.5 0 rr
+64 gr
+103 123 131 174 4 rc
+0 gr
+103.5 123.5 130.5 173.5 0 rc
+113 144 120 151 4 ov
+113.5 144.5 119.5 150.5 0 ov
+64 gr
+130 123 158 174 4 rc
+0 gr
+130.5 123.5 157.5 173.5 0 rc
+140 144 147 151 4 ov
+140.5 144.5 146.5 150.5 0 ov
+64 gr
+157 123 185 174 4 rc
+0 gr
+157.5 123.5 184.5 173.5 0 rc
+167 144 174 151 4 ov
+167.5 144.5 173.5 150.5 0 ov
+63.5 110.5 253.5 185.5 44.5 44.5 0 rr
+28.5 123.5 44.5 173.5 0 rc
+33 144 40 151 4 ov
+33.5 144.5 39.5 150.5 0 ov
+54 138 74 158 246 294 1 ar
+36 147 gm
+56 147 lin
+0 0 gm
+106 193 126 213 156 204 1 ar
+116 147 gm
+116 194 lin
+0 0 gm
+133 191 153 211 156 204 1 ar
+143 149 gm
+143 192 lin
+0 0 gm
+160 189 180 209 156 204 1 ar
+170 149 gm
+170 190 lin
+0 0 gm
+79 192 99 212 156 204 1 ar
+89 148 gm
+89 193 lin
+0 0 gm
+133.5 201.5 155.5 346.5 26.5 26.5 0 rr
+2 2 pen
+81 82 188 130 180 270 0 ar
+103 82 208 130 90 180 0 ar
+123 70 145 82 0 90 0 ar
+145 70 166 82 270 360 0 ar
+208 93 235 121 180 270 0 ar
+213 93 240 121 90 180 0 ar
+219 85 224 93 0 90 0 ar
+224 85 229 93 270 360 0 ar
+1 1 pen
+148 19 gm
+bu fc
+{}mark T /Helvetica /|______Helvetica 0 rf
+bn
+1 setTxMode
+0 fs
+12 fz
+bu fc
+2 F /|______Helvetica fnt
+bn
+0.14726 0.(Attributes)ashow
+229 38 gm
+0 gr
+0.12690 0.(Primitive)ashow
+0 0 gm
+159.5 200.5 182.5 346.5 26.5 26.5 0 rr
+186.5 199.5 209.5 346.5 26.5 26.5 0 rr
+213.5 198.5 235.5 345.5 26.5 26.5 0 rr
+64 gr
+184 123 212 174 4 rc
+0 gr
+184.5 123.5 211.5 173.5 0 rc
+194 144 201 151 4 ov
+194.5 144.5 200.5 150.5 0 ov
+187 189 207 209 156 204 1 ar
+197 149 gm
+197 190 lin
+0 0 gm
+64 gr
+211 123 239 174 4 rc
+0 gr
+211.5 123.5 238.5 173.5 0 rc
+221 144 228 151 4 ov
+221.5 144.5 227.5 150.5 0 ov
+214 189 234 209 156 204 1 ar
+224 149 gm
+224 190 lin
+0 0 gm
+106.5 202.5 128.5 345.5 26.5 26.5 0 rr
+94 251 gm
+0.53302 0.(Yellow)ashow
+121 228 gm
+0.82138 0. 32 0.08213 0.(Constant Shader)awidthshow
+150 243 gm
+-0.03945 0.(Wireframe)ashow
+175 254 gm
+-0.06871 0.(Rotate)ashow
+202 254 gm
+0.49784 0.(Scale)ashow
+229 247 gm
+0.42926 0.(Cylinder)ashow
+22 136 gm
+0.10806 0.(post)ashow
+F T cp
+%%Trailer
+cd
+end
+%%Pages: 1 0
+%%EOF

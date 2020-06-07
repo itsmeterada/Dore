@@ -1,0 +1,849 @@
+.\"#ident "%W%" %G%
+.\"
+.\" #
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  
+.\" # 
+.\" # KUBOTA GRAPHICS Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\" #
+.\"
+.sc
+.ds BT "\\*(Dd Developer's Guide
+.ds CT "Object Data Structures
+.ds h1 C
+.so ../macros/local.me
+.PN 381
+.L1 O BJECT
+.L3 D ATA
+.L3 S TRUCTURES
+.CH app
+This appendix contains descriptions of some of the data structures
+the \*(Dd system uses to store information specific to objects.
+These include the standard object structure 
+and the private data structures for 
+primitive and studio objects, geometric transformation objects, 
+texture mapping objects, and
+a few other miscellaneous \*(Dd objects.
+These structures can be accessed by method routines, including method
+routines for non-standard methods. 
+.rs
+.sp -.3v
+.H1 "Object Data Structure
+\f2DtObjectStructure\fP is the data structure used for the standard
+part of all \*(Dd objects.
+It is defined in the general \*(Dd include file \f2dore.h\fP.
+The structure is defined as:
+.rs
+.sp -.3v
+.(m
+typedef struct {
+   DtShort info;
+   DtShort ref_count;
+   DtPtr data;
+   DtPtr *additional_data;
+} DtObjectStructure;
+.)m
+.IX "data structures"
+.IX "Rendering interface data structures"
+.IX DtObjectStructure
+.ip "\f2info            \f1"
+This field is divided up into subfields,
+the \f2hold flag\f1 and the \f2object class\f1. 
+The \*(Dd system maintains this field.
+The hold flag indicates whether or not a hold has been placed on the object
+using 
+.nh
+\f2DsHoldObj\f1. 
+.hy
+The object class is the integer class identifier of the corresponding class. 
+.rs
+.sp -.3v
+.ip \f2ref_count\f1
+The number of references to this object.
+The \*(Dd system maintains this field.
+References can explicitly be added with \f2DDobject_AddReference\fP and removed
+with \f2DDobject_DeleteReference\fP.
+.ip "\f2data          \f1"
+This is a pointer to the private data specific to the object.
+This data is allocated, deallocated, and maintained by the routines of
+the class implementation. 
+.ip \f2additional_data\f1
+This is an array of pointers to data used by
+renderers and methods other than the standard methods.
+A specific slot in this array is allocated at run time by a call to
+\f2DDclass_AddObjectData\fP. 
+The \f2additional_data\f1 array is never accessed by the \*(Dd kernel.
+.H1 "Private Data Structures
+The following sections describe the data structures used to store 
+object private data for a variety of \*(Dd classes.
+These data structures are the ones pointed to by the \f2data\f1
+pointer of the \f2DtObjectStructure\fP.
+They are defined in files under \f2dore/include/dore_develop/private\fP.
+They are usually installed in \f2/usr/include/dore_develop/private\fP.
+.H2 "Primitive Objects
+.nf
+class name: \f3DoAnnoText\fP
+file name: anntxt.h
+.(m
+typedef struct anntxt {
+        DtPoint3 position;
+        unsigned char *string;
+        DtTextAlignHorizontal halign;
+        DtTextAlignVertical valign;
+        DtReal textexp;
+        DtFont font;
+        DtReal textheight;
+        DtTextPath textpath;
+        DtTextPrecision precision;
+        DtReal textspace;
+        DtReal xup, yup;
+        DtObjectStructure *alternate_object_lines;
+        DtObjectStructure *alternate_object_triangles;
+        };
+.)m
+\ 
+.nf
+class name: \f3DoLineList\fP
+file name: linlst.h
+.(m
+struct linlst {
+        DtColorModel colormodel;
+        DtInt line_count;
+        DtVertexType vertex_type;
+        DtRealTriple *vertex_location;
+        DtRealTriple *vertex_normal;
+        DtRealTriple *vertex_color;
+        DtInt space_estimate;
+        DtInt line_space;
+        DtRealTriple bounding_box_pts[8];
+        DtInt uv_count;
+        DtRealCouple **uv_list;
+        DtInt uvw_count;
+        DtRealTriple **uvw_list;
+        };
+.)m
+.nf
+class name: \f3DoNURBSurf\fP
+file name: nurbsurf.h
+.(m
+struct newknot {int n; DtReal *p;};
+
+struct nurbsurf {
+        DtReal subdivlvl[5];
+        short
+          u_closed:1,    /* 1==> closed in u */
+          u_period:1,    /* 1==> periodic in u */
+          v_closed:1,    /* 1==> closed in v */
+          v_period:1,    /* 1==> periodic in v */
+          rational:1,    /* 1==> rational */
+          /* 0==>polynomial */
+          u_owner:1,     /* 1==> allocated *u */
+          v_owner:1,     /* 1==> allocated *v */
+          cp_owner:1;    /* 1==> allocated *cptp */
+        char u_order;	 /* 1+degree in u */
+        char v_order;	 /* 1+degree in v */
+        DtShort u_nknot; /* number of knots in u */
+        DtShort v_nknot; /* number of knots in v */
+        DtShort u_nctrl; /* # of control points along u */
+        DtShort v_nctrl; /* # of control points along v */
+        /* u_nknot = u_nctrl + u_order */
+        /* v_nknot = v_nctrl + v_order */
+        DtReal *u;	 /* 1st knot sequence */
+        DtReal *v;	 /* 2nd knot sequence */
+        DtNPoint4 **cptp;/* -> v_nctrl ptrs to row of */
+        /* u_nctrl 4D pts */
+        DtObjectStructure *alternate_object;
+        DtNArea uv_area; /* bounds of para intervals */
+        char cornerflat[4];
+        char edgeflat[4];
+        DtNPoint3 corner[4];  /* crack prevention */
+        };
+.)m
+.nf
+class name: \f3DoPatch\fP
+file name: patch.h
+.(m
+        struct patch_control {
+        short nrow,ncol;
+        DtNPoint3 corner00;
+        DtNPoint3 corner03;
+        DtNPoint3 corner30;
+        DtNPoint3 corner33;
+        DtNPoint3 point[4][4];
+        };
+
+struct patch {
+        DtShort patch_type;
+        DtInt subdivtype;
+        DtReal subdivlvl[5];
+        short
+          edge0flat:1,
+          edge1flat:1,
+          edge2flat:1,
+          edge3flat:1,
+          corner00flat:1,
+          corner03flat:1,
+          corner30flat:1,
+          corner33flat:1,
+          has_colors:1;
+        DtColorModel colormodel;
+        DtVertexType vertextype;
+        DtObject lmatrix,rmatrix;
+        struct patch_control *points;
+        struct patch_control *colors;
+        DtObjectStructure *alternate_object;
+        };
+.)m
+.nf
+class name: \f3DoMatrix\fP
+file name: patchmat.h
+.(m
+struct matrix {
+        short nrow,ncol;
+        DtReal *data;
+        };
+.)m
+.nf
+class name: \f3DoPointList\fP
+file name: pntlst.h
+.(m
+struct pntlst {
+        DtColorModel colormodel;
+        DtInt point_count;
+        DtVertexType vertex_type;
+        DtRealTriple *vertex_location;
+        DtRealTriple *vertex_normal;
+        DtRealTriple *vertex_color;
+        DtInt point_space;
+        DtRealTriple bounding_box_pts[8];
+        DtInt uv_count;
+        DtRealCouple **uv_list;
+        DtInt uvw_count;
+        DtRealTriple **uvw_list;
+        };
+.)m
+.nf
+class name: \f3DoPolygon\fP
+file name: ply.h
+.(m
+struct ply {
+        DtColorModel colormodel;
+        DtVertexType vertextype;
+        DtInt contour_count;
+        DtInt *contours;
+        DtInt vertex_count;
+        DtRealTriple *vertex_location;
+        DtRealTriple *vertex_normal;
+        DtColorRGB *vertex_color;
+        DtShapeType shape;
+        DtObjectStructure *alt_object_lines;
+        DtObjectStructure *alt_object_tris;
+        DtVertexType fullvtxtype;
+        DtInt uv_count;
+        DtRealCouple **uv_list;
+        DtInt uvw_count;
+        DtRealTriple **uvw_list;
+        };
+.)m
+.nf
+class name: \f3DoPolygonMesh\fP
+file name: plymsh.h
+.(m
+struct plymsh {
+        DtColorModel colormodel;
+        DtVertexType vertextype;
+        DtInt vertex_count;
+        DtRealTriple *vertex_location;
+        DtRealTriple *vertex_normal;
+        DtColorRGB *vertex_color;
+        DtInt polygon_count;
+        DtInt *polygons;
+        DtInt *contours;
+        DtInt *vertexlist;
+        DtFlag smoothflag;
+        DtShapeType shape;
+        DtObjectStructure *alt_object_lines;
+        DtObjectStructure *alt_object_tris;
+        DtVertexType fullvtxtype;
+        DtInt uv_count;
+        DtRealCouple **uv_list;
+        DtInt uvw_count;
+        DtRealTriple **uvw_list;
+        };
+.)m
+.nf
+class name: \f3DoPolyline\fP
+file name: plylin.h
+.(m
+struct plylin {
+        DtColorModel colormodel;
+        DtVertexType vertex_type;
+        DtInt vertex_count;
+        DtRealTriple *vertex_location;
+        DtRealTriple *vertex_normal;
+        DtRealTriple *vertex_color;
+        DtRealTriple bounding_box_pts[8];
+        DtInt uv_count;
+        DtRealCouple **uv_list;
+        DtInt uvw_count;
+        DtRealTriple **uvw_list;
+        };
+.)m
+.nf
+class name: \f3DoPolymarker\fP
+file name: plymkr.h
+.(m
+typedef struct plymkr {
+        DtInt count;
+        DtPoint3 *position;
+        DtFont font;
+        DtInt glyph;
+        DtReal scale;
+        DtReal textexp;
+        DtReal xup, yup;
+        DtObjectStructure *alternate_object_lines;
+        DtObjectStructure *alternate_object_triangles;
+        };
+.)m
+.nf
+class name: \f3DoPrimSurf\fP
+file name: prisrf.h
+.(m
+struct prisrf {
+        DtSurface surface_type;
+        DtInt subdivtype;
+        DtReal subdivparms[1];
+        DtObjectStructure *alternate_object;
+        };
+.)m
+.nf
+class name: \f3DoSimplePolygon\fP
+file name: simply.h
+.(m
+struct simply {
+        DtColorModel colormodel;
+        DtVertexType vertextype;
+        DtInt vertex_count;
+        DtRealTriple *vertex_location;
+        DtRealTriple *vertex_normal;
+        DtColorRGB *vertex_color;
+        DtShapeType shape;
+        DtObjectStructure *alt_object_lines;
+        DtObjectStructure *alt_object_tris;
+        DtVertexType fullvtxtype;
+        DtInt uv_count;
+        DtRealCouple **uv_list;
+        DtInt uvw_count;
+        DtRealTriple **uvw_list;
+        };
+.)m
+.nf
+class name: \f3DoSimplePolygonMesh\fP
+file name: simplymsh.h
+.(m
+struct simplymsh {
+        DtColorModel colormodel;
+        DtVertexType vertextype;
+        DtInt vertex_count;
+        DtRealTriple *vertex_location;
+        DtRealTriple *vertex_normal;
+        DtColorRGB *vertex_color;
+        DtInt polygon_count;
+        DtInt *contours;
+        DtInt *vertexlist;
+        DtShapeType shape;
+        DtFlag smoothflag;
+        DtObjectStructure *alt_object_lines;
+        DtObjectStructure *alt_object_tris;
+        DtVertexType fullvtxtype;
+        DtInt uv_count;
+        DtRealCouple **uv_list;
+        DtInt uvw_count;
+        DtRealTriple **uvw_list;
+        };
+
+.)m
+.rs
+.sp .5v
+.nf
+class name: \f3DoSphereList\fP
+file name: sphlst.h
+.(m
+struct sphlst {
+        DtInt sphere_count;
+        DtReal *locations;
+        DtReal *radii;
+        DtReal *colors;
+        DtInt subdivtype;
+        DtReal subdivparms[1];
+        DtObject alternate_object;
+        };
+.)m
+.rs
+.sp .5v
+.nf
+class name: \f3DoText\fP
+file name: text.h
+.(m
+typedef struct text {
+        DtPoint3 position;
+        DtVector3 u;
+        DtVector3 v;
+        unsigned char *string;
+        DtTextAlignHorizontal halign;
+        DtTextAlignVertical valign;
+        DtReal textexp;
+        DtFont font;
+        DtReal textheight;
+        DtTextPath textpath;
+        DtTextPrecision precision;
+        DtReal textspace;
+        DtReal xup, yup;
+        DtMatrix4x4 planematrix;
+        DtObjectStructure *alternate_object_lines;
+        DtObjectStructure *alternate_object_triangles;
+        };
+.)m
+\ 
+.nf
+class name: \f3DoTorus\fP
+file name: torus.h
+.(m
+struct torus {
+        DtReal R;
+        DtReal r;
+        DtInt subdivtype;
+        DtReal subdivparms[1];
+        DtObjectStructure *alternate_object;
+        };
+.)m
+.nf
+class name: \f3DoTriangleList\fP
+file name: trilst.h
+.(m
+struct trilst {
+        DtColorModel colormodel;
+        DtInt triangle_count;
+        DtVertexType vertex_type;
+        DtRealTriple *vertex_location;
+        DtRealTriple *vertex_normal;
+        DtRealTriple *vertex_color;
+        DtRealTriple *element_normal;
+        DtInt triangle_space;
+        DtInt space_estimate;
+        DtRealTriple bounding_box_pts[8];
+        DtInt uv_count;
+        DtRealCouple **uv_list;
+        DtInt uvw_count;
+        DtRealTriple **uvw_list;
+        DtObjectStructure *alt_object_lines;
+        DtInt *edge_enable;
+        };
+.)m
+.nf
+class name: \f3DoTriangleMesh\fP
+file name: trimsh.h
+.(m
+typedef DtInt trimsh_vertexlist[3];
+
+struct trimsh {
+        DtColorModel colormodel;
+        DtVertexType vertextype;
+        DtInt vertex_count;
+        DtRealTriple *vertex_location;
+        DtRealTriple *vertex_normal;
+        DtColorRGB *vertex_color;
+        DtInt triangle_count;
+        trimsh_vertexlist *triangle_vertexlist;
+        trimsh_vertexlist *compiled_triangle_vertexlist;
+        DtRealTriple *element_normal;
+        DtFlag smoothflag;
+        DtRealTriple bounding_box_pts[8];
+        DtInt uv_count;
+        DtRealCouple **uv_list;
+        DtInt uvw_count;
+        DtRealTriple **uvw_list;
+        DtObjectStructure *alt_object_lines;
+        };
+.)m
+.nf
+class name: \f3DoTriangleStrip\fP
+file name: tristrip.h
+.(m
+struct tristrip {
+        DtColorModel colormodel;
+        DtVertexType vertex_type;
+        DtRealTriple *vertex_location;
+        DtRealTriple *vertex_normal;
+        DtRealTriple *vertex_color;
+        DtInt vertex_count;
+        DtObjectStructure *alt_object_lines;
+        DtRealTriple bounding_box_pts[8];
+        DtInt uv_count;
+        DtRealCouple **uv_list;
+        DtInt uvw_count;
+        DtRealTriple **uvw_list;
+        DtRealTriple *element_normal;
+        DtIntTriple *triangle_vertexlist;
+        DtIntTriple *compiled_triangle_vertexlist;
+        };
+.)m
+.nf
+class name: \f3DoVarLineList\fP
+file name: varlinlst.h
+.(m
+struct varlinlst {
+        DtColorModel colormodel;
+        DtInt line_count;
+        DtRealTriple *vertex_location;
+        DtRealTriple *vertex_normal;
+        DtColorRGB *vertex_color;
+        DtInt line_space;
+        DtRealTriple bounding_box_pts[8];
+        DtInt sequence_number; /* incremented when the object
+				is updated with DpUpd.. */
+        };
+.)m
+\ 
+.nf
+class name: \f3DoVarPointList\fP
+file name: varpntlst.h
+.(m
+struct varpntlst {
+        DtColorModel colormodel;
+        DtInt point_count;
+        DtRealTriple *vertex_location;
+        DtRealTriple *vertex_normal;
+        DtColorRGB *vertex_color;
+        DtInt point_space;
+        DtRealTriple bounding_box_pts[8];
+        DtInt sequence_number; /* incremented when the object
+				is updated with DpUpd.. */
+        };
+.)m
+.nf
+class name: \f3DoVarSimplePolygonMesh\fP
+file name: varsplymsh.h
+.(m
+struct varsimplymsh {
+        DtColorModel colormodel;
+        DtInt vertex_count;
+        DtRealTriple *vertex_location;
+        DtRealTriple *vertex_normal;
+        DtColorRGB *vertex_color;
+        DtInt polygon_count;
+        DtInt *contours;
+        DtInt *vertexlist;
+        DtShapeType shape;
+        DtFlag smoothflag;
+        DtFlag needvertnrms;
+        DtObjectStructure *alt_object_lines;
+        DtInt alt_tricount;
+        DtIntTriple  *alt_trilist;
+        DtFlag decompose_lines;
+        DtObjectStructure *alt_object_tris;
+        DtRealTriple *alt_linevtx;
+        DtRealTriple *alt_linenrm;
+        DtRealTriple *alt_lineclr;
+        DtFlag decompose_tris;
+        DtInt sequence_number; /* incremented when the object
+				is updated with DpUpd.. */
+        DtInt uv_count;
+        DtRealCouple **uv_list;
+        DtInt uvw_count;
+        DtRealTriple **uvw_list;
+        DtInt *edge_enable;
+        };
+.)m
+.nf
+class name: \f3DoVarTriangleMesh\fP
+file name: vartrimsh.h
+.(m
+typedef DtInt vartrimsh_vertexlist[3];
+
+struct vartrimsh {
+        DtColorModel colormodel;
+        DtInt vertex_count;
+        DtRealTriple *vertex_location;
+        DtRealTriple *vertex_normal;
+        DtColorRGB *vertex_color;
+        DtInt triangle_count;
+        vartrimsh_vertexlist *triangle_vertexlist;
+        vartrimsh_vertexlist *compiled_triangle_vertexlist;
+        DtRealTriple *element_normal;
+        DtFlag smoothflag;
+        DtFlag needelemnrms;
+        DtFlag needvertnrms;
+        DtRealTriple bounding_box_pts[8];
+        DtFlag decompose_lines;
+        DtObjectStructure *alt_object_lines;
+        DtRealTriple *alt_linevtx;
+        DtRealTriple *alt_linenrm;
+        DtRealTriple *alt_lineclr;
+        DtInt sequence_number; /* incremented when the object
+				is updated with DpUpd.. */
+        DtInt uv_count;
+        DtRealCouple **uv_list;
+        DtInt uvw_count;
+        DtRealTriple **uvw_list;
+        DtInt *edge_enable;
+        };
+.)m
+.nf
+class name: \f3DoVarTriangleStrip\fP
+file name: vartristrp.h
+.(m
+struct vartristrip {
+        DtColorModel colormodel;
+        DtRealTriple *vertex_location;
+        DtRealTriple *vertex_normal;
+        DtRealTriple *vertex_color;
+        DtInt vertex_count;
+        DtRealTriple bounding_box_pts[8];
+        DtFlag needelemnrms;
+        DtFlag decompose_lines;
+        DtObjectStructure *alt_object_lines;
+        DtRealTriple *alt_linevtx;
+        DtRealTriple *alt_linenrm;
+        DtRealTriple *alt_lineclr;
+        DtInt alt_vertexcount;
+        DtRealTriple *element_normal;
+        DtIntTriple *triangle_vertexlist;
+        DtIntTriple *compiled_triangle_vertexlist;
+        DtInt sequence_number; /* incremented when the object
+				is updated with DpUpd.. */
+        DtInt uv_count;
+        DtRealCouple **uv_list;
+        DtInt uvw_count;
+        DtRealTriple **uvw_list;
+        };
+.)m
+\
+.rs
+.sp 1v
+.H2 "Studio Objects 
+.rs
+.sp .5v
+.nf
+class name: \f3DoCameraMatrix\fP
+file name: cammat.h
+.(m
+struct cammat_data {
+        DtMatrix4x4 matrix;
+        };
+.)m
+.rs
+.sp .5v
+.nf
+class name: \f3DoParallel\fP
+file name: parmat.h
+.(m
+struct parallel_data {
+        DtReal fov_degree;
+        DtReal hither;
+        DtReal yon;
+        };
+.)m
+.rs
+.sp .5v
+.nf
+class name: \f3DoPerspective\fP
+file name: permat.h
+.(m
+struct perspective_data {
+        DtReal fov_degree;
+        DtReal hither;
+        DtReal yon;
+        };
+.)m
+\ 
+.nf
+class name: \f3DoProjection\fP
+file name: prjmat.h
+.(m
+struct projection_data {
+        DtArea window;
+        DtProjectionType ptype;
+        DtPoint3 prp;
+        DtReal view_plane;
+        DtReal hither;
+        DtReal yon;
+        };
+.)m
+\ 
+.H2 "Geometric Transformation Objects 
+.rs
+.sp .5v
+.nf
+class name: \f3DoLookAtFrom\fP
+file name: lokatfrm.h
+.(m
+struct lokatfrm_data {
+        DtPoint3 from;
+        DtPoint3 at;
+        DtVector3 up;
+        DtFlag preflag;
+        };
+.)m
+.rs
+.sp .5v
+.nf
+class name: \f3DoRotate\fP
+file name: rotate.h
+.(m
+struct rotate_data {
+        DtAxis axis;
+        DtReal radians;
+        };
+.)m
+.rs
+.sp .5v
+.nf
+class name: \f3DoScale\fP
+file name: scale.h
+.(m
+struct scale_data {
+        DtReal scalevalue[3];
+        };
+.)m
+\ 
+.nf
+class name: \f3DoShear\fP
+file name: shear.h
+.(m
+struct shear_data {
+        DtMajorPlane plane;
+        DtReal firstdirectionshearvalue;
+        DtReal seconddirectionshearvalue;
+        };
+.)m
+.nf
+class name: \f3DoTransformMatrix\fP
+file name: tfmmat.h
+.(m
+struct tfmmat_data {
+        DtMatrix4x4 tfmmat;
+        DtCompType comptype;
+        };
+.)m
+.nf
+class name: \f3DoTranslate\fP
+file name: transl.h
+.(m
+struct transl_data {
+        DtPoint3 delta;
+        };
+.)m
+.nf
+\
+.H2 "Texture Mapping Objects"
+.nf
+class name: \f3DoTextureMapBump\fP
+file name: mapbmp.h
+.(m
+struct mapbmp_data {
+	DtMapOperator operator;
+	DtObject mapping;
+	DtObject raster;
+   	};
+.)m
+.nf
+class name: \f3DoTextureMapDiffuseColor\fP
+file name: mapdifclr.h
+.(m
+struct mapdifclr_data {
+   	DtMapOperator operator;
+   	DtObject mapping;
+   	DtObject raster;
+	};
+.)m
+.nf
+class name: \f3DoTextureMapEnviron\fP
+file name: mapenv.h
+.(m
+struct mapenv_data {
+   	DtMapOperator operator;
+   	DtObject mapping;
+   	DtObject raster;
+	};
+.)m
+.rs
+.sp .5v
+.nf
+class name: \f3DoTextureMapTranspIntens\fP
+file name: maptrnint.h
+.(m
+struct maptrnint_data {
+   	DtMapOperator operator;
+   	DtObject mapping;
+   	DtObject raster;
+	};
+.)m
+\
+.H2 "Miscellaneous Objects
+.rs
+.sp .5v
+.nf
+class name: \f3DoClipVol\fP
+file name: clpvol.h
+.(m
+struct clpvol_data {
+        DtClipOperator operator;
+        DtInt halfspacecount;
+        DtHalfSpace *halfspaces;
+        };
+.)m
+.rs
+.sp .5v
+.nf
+class name: \f3DoDataPtr\fP
+file name: datptr.h
+.(m
+struct datptr_data {
+        DtPtr value;
+        };
+.)m
+.rs
+.sp .5v
+.nf
+class name: \f3DoDataVal\fP
+file name: datval.h
+.(m
+struct datval_data {
+        Dt32Bits value;
+        };
+.)m
+.nf
+class name: \f3DoFileRaster\fP
+file name: filerstr.h
+.(m
+struct filerstr {
+        DtPtr filename;
+        DtPtr type;
+        };
+.)m
+.nf
+class name: \f3DoRaster\fP
+file name: rstr.h
+.(m
+struct rstr {
+        DtInt width;
+        DtInt height;
+        DtInt depth;
+        DtRasterType type;
+        unsigned char *typestring;
+        DtPtr data;
+        DtObject delcallback;
+        DtInt sequence_number; /* incremented when the object
+				is updated with DsRasterUpdate */
+        };
+.)m

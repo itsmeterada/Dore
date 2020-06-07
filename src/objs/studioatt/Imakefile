@@ -1,0 +1,19 @@
+#include <Dore.tmpl>
+
+    SRCS = glbmaxobj.c glbmaxsub.c glbraylvl.c ost_cammat.c osta_intdsp.c \
+           osta_lgtatn.c osta_lgtclr.c osta_lgtint.c osta_lgtspdang.c \
+	   osta_lgtspdexp.c osta_lgttyp.c osta_smpadapt.c osta_smpfilter.c \
+	   osta_smpjitter.c osta_smpsuper.c osta_stereo.c osta_stereoswi.c \
+	   parallel.c perspectv.c projection.c smpadaptsw.c smpjittswi.c \
+	   smpsupersw.c
+    OBJS = glbmaxobj.o glbmaxsub.o glbraylvl.o ost_cammat.o osta_intdsp.o \
+           osta_lgtatn.o osta_lgtclr.o osta_lgtint.o osta_lgtspdang.o \
+	   osta_lgtspdexp.o osta_lgttyp.o osta_smpadapt.o osta_smpfilter.o \
+	   osta_smpjitter.o osta_smpsuper.o osta_stereo.o osta_stereoswi.o \
+	   parallel.o perspectv.o projection.o smpadaptsw.o smpjittswi.o \
+	   smpsupersw.o
+
+LibraryObjectRule()
+SubdirLibraryRule($(OBJS))
+
+DependTarget()

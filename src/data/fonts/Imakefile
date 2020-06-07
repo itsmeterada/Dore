@@ -1,0 +1,27 @@
+#include <Dore.tmpl>
+
+FONTSRCS = astrology.fs cyrillic.fs gothgbt.fs gothgrt.fs gothitt.fs \
+	   greekc.fs greekcs.fs greekp.fs greeks.fs helvetica.fs \
+	   italicc.fs italiccs.fs italict.fs lcmath.fs meteorology.fs \
+	   music.fs romanc.fs romancs.fs romand.fs romanp.fs romans.fs \
+	   romant.fs scriptc.fs scripts.fs symbols.fs ucmath.fs unused.fs
+FONTOBJS = astrology.df cyrillic.df gothgbt.df gothgrt.df gothitt.df \
+	   greekc.df greekcs.df greekp.df greeks.df helvetica.df \
+	   italicc.df italiccs.df italict.df lcmath.df meteorology.df \
+	   music.df romanc.df romancs.df romand.df romanp.df romans.df \
+	   romant.df scriptc.df scripts.df symbols.df ucmath.df unused.df
+     DFC = dfc
+
+.SUFFIXES: .fs .df
+.fs.df:
+	./$(DFC) $< $@
+
+AllTarget($(DFC))
+AllTarget($(FONTOBJS))
+
+InstallMultiple($(FONTOBJS),$(FONTDIR))
+NormalProgramTarget($(DFC),$(DFC).o,,,$(SYS_LIBRARIES) $(EXTRA_LIBRARIES))
+
+clean::
+	RemoveFiles($(FONTOBJS))
+

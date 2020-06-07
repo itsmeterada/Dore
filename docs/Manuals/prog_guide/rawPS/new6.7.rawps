@@ -1,0 +1,133 @@
+%!PS-Adobe-2.0
+%%Title: 6-7.pict
+%%Creator: MacDraw
+%%CreationDate: Friday, August 11, 1989
+%%Pages: (atend)
+%%BoundingBox: ? ? ? ?
+%%PageBoundingBox: 30 31 582 761
+%%For: aaron                         
+%%IncludeProcSet: "(AppleDict md)" 66
+%%EndComments
+%%EndProlog
+%%BeginDocumentSetup
+md begin
+
+T T -31 -30 761 582 100 72 72 1 F F F F T T psu
+(aaron                         ; document: 6-7.pict)jn
+0 mf
+userdict /#copies 2 put
+od
+%%EndDocumentSetup
+%%Page: ? 1
+op
+0 0 xl
+1 1 pen
+0 0 gm
+(nc 0 0 720 540 6 rc)kp
+nc ct 39 0 put
+306 18 gm
+pt
+306 414 pl
+ef
+eu
+(nc 0 0 720 540 6 rc)kp
+359 94 gm
+64 gr
+347 36 363 96 2 rc
+359 39 gm
+bu fc
+{}mark T /Helvetica /|______Helvetica 0 rf
+bn
+1 setTxMode
+0 fs
+12.47991 fz
+bu fc
+2 F /|______Helvetica fnt
+bn
+0.53497 0. 32 0.05349 0.(Rep Type)awidthshow
+359 288 gm
+64 gr
+347 239 363 290 2 rc
+359 242 gm
+0 gr
+1.19514 0.(Diffuse)ashow
+375 281 gm
+64 gr
+363 239 379 290 2 rc
+375 248 gm
+0 gr
+0.79811 0.(Color)ashow
+0 0 gm
+64 gr
+306 28 343 105 4 rc
+0 gr
+306.5 28.5 342.5 104.5 0 rc
+326 90 gm
+64 gr
+314 41 330 92 2 rc
+326 44 gm
+0 gr
+1.07890 0.(Default)ashow
+0 0 gm
+64 gr
+306 127 343 204 4 rc
+0 gr
+306.5 127.5 342.5 203.5 0 rc
+326 189 gm
+64 gr
+314 140 330 191 2 rc
+326 143 gm
+0 gr
+1.07890 0.(Default)ashow
+0 0 gm
+64 gr
+306 226 343 303 4 rc
+0 gr
+306.5 226.5 342.5 302.5 0 rc
+326 288 gm
+64 gr
+314 239 330 290 2 rc
+326 242 gm
+0 gr
+1.07890 0.(Default)ashow
+0 0 gm
+64 gr
+306 325 343 402 4 rc
+0 gr
+306.5 325.5 342.5 401.5 0 rc
+326 387 gm
+64 gr
+314 338 330 389 2 rc
+326 341 gm
+0 gr
+1.07890 0.(Default)ashow
+358 125 gm
+0.04612 0.(Sub.Div.SPec.)ashow
+362 342 gm
+3.25637 0. 32 0.32563 0.(Surface )awidthshow
+378 348 gm
+-0.01872 0.(Shade)ashow
+0 0 gm
+270.5 325.5 306.5 401.5 0 rc
+290 341 gm
+1.07890 0.(Default)ashow
+311 419 gm
+1.03736 0.(obj-group)ashow
+0 0 gm
+270.5 28.5 306.5 104.5 0 rc
+291 43 gm
+0.83377 0.(Surface)ashow
+0 0 gm
+270.5 127.5 306.5 203.5 0 rc
+292 139 gm
+0.99009 0.(Relative)ashow
+0 0 gm
+270.5 226.5 306.5 302.5 0 rc
+294 236 gm
+0.57522 0.(magenta)ashow
+F T cp
+%%Trailer
+cd
+end
+%%Pages: 1 0
+%%EOF

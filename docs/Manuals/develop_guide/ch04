@@ -1,0 +1,77 @@
+.\"#ident "%W%" %G%
+.\"
+.\" #
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  
+.\" # 
+.\" # KUBOTA GRAPHICS Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\" #
+.\"
+.sc
+.ds BT "\\*(Dd Developer's Guide
+.ds CT "Renderers Section Introduction"
+.ds h1 4
+.so ../macros/local.me
+.PN 21
+.L1 R ENDERERS
+.L2 S ECTION
+.L3 I NTRODUCTION
+.CH \\*(h1
+A \*(Dd renderer is responsible for converting the graphical
+object database into an image.
+Renderers vary in the techniques they use to draw the geometry
+of the objects and in the attributes they consider. As a result,
+the way an image looks not only depends on the specific objects
+in the database, but also on which renderer is selected. 
+In addition
+to the renderers already available with your \*(Dd system, \*(Dd
+allows you to add new renderers to the set.
+It is not necessary to have access to \*(Dd source code
+in order to interface your renderer to the \*(Dd system.
+.lp
+This section is about renderers, the way \*(Dd interacts with them,
+and the way they interact with the output devices.
+The purpose of the following chapters is not to teach you how 
+to write a renderer, but rather to show you how to interface an 
+existing renderer with the \*(Dd system. 
+.lp
+As described in Chapter 2, \f2\*(Dd Functional Structure\fP, 
+the renderer accesses 
+the \*(Dd kernel through the \f2DD-\fP routines
+of the developer's interface.
+The kernel's only access to the renderer is through the function pointers
+of the renderer interface and through methods created and installed
+by the renderer.
+The renderer interface functions include functions to
+invoke the renderer on a view and to delete the renderer. 
+The methods include the display and studio group rendering methods
+particular to the renderer.
+.lp
+A renderer does not access a display medium directly.
+It interacts with a device driver to display the rendering results. 
+With \*(Dd, the application controls which device is used.
+A device object provides the renderer with pointers to functions that
+implement the output modules for the corresponding device driver.
+The renderer then calls these routines to access the display device.
+Device drivers and output modules are discussed later in Section III,
+\f2Device Drivers\fP.
+.lp
+Chapter 5, \f2Rendering Process\fP, outlines
+the major steps involved in the rendering process.
+For instance,
+it describes what generally takes place during studio and display traversals.
+Chapter 6, \f2Interfacing a Renderer\fP,
+offers a step-by-step description of how to interface a
+renderer to \*(Dd. 
+Finally, in Chapter 7, \f2Sample Renderer\fP, the techniques suggested in 
+the previous chapter are applied to interface a sample
+renderer to \*(Dd.

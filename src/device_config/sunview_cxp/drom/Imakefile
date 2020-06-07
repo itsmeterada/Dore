@@ -1,0 +1,13 @@
+#include <Dore.tmpl>
+
+    SRCS = cxp_appatt.c cxp_camera.c cxp_data.c cxp_drom.c cxp_geoatt.c \
+           cxp_light.c cxp_map.c cxp_modclip.c cxp_shade.c cxp_update.c \
+	   cxpdr_output.c
+    OBJS = cxp_appatt.o cxp_camera.o cxp_data.o cxp_drom.o cxp_geoatt.o \
+           cxp_light.o cxp_map.o cxp_modclip.o cxp_shade.o cxp_update.o \
+	   cxpdr_output.o
+
+LibraryObjectRule()
+SubdirLibraryRule($(OBJS))
+
+DependTarget()

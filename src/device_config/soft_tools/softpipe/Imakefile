@@ -1,0 +1,15 @@
+#include <Dore.tmpl>
+
+    SRCS = sft_appatt.c sft_camera.c sft_clip.c sft_clip2d.c sft_clip3d.c \
+           sft_data.c sft_drom.c sft_geoatt.c sft_light.c sft_map.c \
+	   sft_modclip.c sft_out2d.c sft_output.c sft_shade.c sft_unfold.c \
+	   sft_update.c sft_xform.c
+    OBJS = sft_appatt.o sft_camera.o sft_clip.o sft_clip2d.o sft_clip3d.o \
+           sft_data.o sft_drom.o sft_geoatt.o sft_light.o sft_map.o \
+	   sft_modclip.o sft_out2d.o sft_output.o sft_shade.o sft_unfold.o \
+	   sft_update.o sft_xform.o
+
+LibraryObjectRule()
+SubdirLibraryRule($(OBJS))
+
+DependTarget()

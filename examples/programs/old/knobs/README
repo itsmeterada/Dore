@@ -1,0 +1,36 @@
+#ident "%W%" %G%
+ 
+/**************************************************************************
+# Copyright (C) 1994 Kubota Graphics Corp.
+# 
+# Permission to use, copy, modify, and distribute this material for
+# any purpose and without fee is hereby granted, provided that the
+# above copyright notice and this permission notice appear in all
+# copies, and that the name of Kubota Graphics not be used in
+# advertising or publicity pertaining to this material.  Kubota
+# Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+# OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+# "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+# PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+# EXPRESS OR IMPLIED.
+**************************************************************************/
+ 
+				KNOBS
+
+This program demonstrates the use of the knobs and transformer utilities.
+A hermite patch object is created and displayed.  The user then
+manipulates it via the knob box.  The top three knobs on the left side
+of the knob box control the x, y, and z rotations, while the right three
+knobs control the x, y, and z translations.  Two transformers are used to
+do this.  The rorate transformer affects before the translate transformer
+(because both transformers are post_concatenating and the rotate transformer
+is before the translate transformer in the group).  New transformations
+that arrive via the knobs are post concatenated onto the appropriate
+transformer which causes all transformations to happen in screen space.
+This particular combination makes it easy for a person to easily orient an
+object in three space.
+
+To exit the program, turn the bottom right knob.  This knob is connected to
+an input slot which contains a single valuator that sets a global
+"done" flag which is checked in the main loop.

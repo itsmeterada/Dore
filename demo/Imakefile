@@ -1,0 +1,8 @@
+#include <Dore.tmpl>
+
+#define	IHaveSubdirs
+
+SUBDIRS = dui breath flag lwave trunk
+
+MakeSubdirs($(SUBDIRS))
+DependSubdirs($(SUBDIRS))

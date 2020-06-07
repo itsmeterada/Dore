@@ -1,0 +1,10 @@
+#include <Dore.tmpl>
+
+INCLUDES = -I../h
+    SRCS = MATD_glbl.c MATD_init.c MATD_make.c MATD_map.c
+    OBJS = MATD_glbl.o MATD_init.o MATD_make.o MATD_map.o
+
+LibraryObjectRule()
+SubdirLibraryRule($(OBJS))
+
+DependTarget()

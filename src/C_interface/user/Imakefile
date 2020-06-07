@@ -1,0 +1,14 @@
+#include <Dore.tmpl>
+#define IHaveSubdirs
+
+ SUBDIRS = geoatt map misc pri priatt studio studioatt system userext
+    SRCS = cdevice.c cframe.c cgroup.c cview.c
+    OBJS = cdevice.o cframe.o cgroup.o cview.o
+
+LibraryObjectRule()
+SubdirLibraryRule($(OBJS))
+
+MakeSubdirs($(SUBDIRS))
+DependSubdirs($(SUBDIRS))
+
+DependTarget()

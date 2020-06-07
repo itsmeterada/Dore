@@ -1,0 +1,14 @@
+#include <Dore.tmpl>
+
+           SRCS = geom_spec.c user_parse.c
+           OBJS = geom_spec.o user_parse.o
+        DEPLIBS = $(DEPDORELIB) $(DUILIB)
+         DUILIB = ../dui/LibraryTargetName(dui)
+        PROGRAM = lwave
+
+AllTarget($(PROGRAM))
+
+NormalProgramTarget($(PROGRAM),$(OBJS),$(DEPLIBS),$(DORELIB) $(DUILIB) $(DORE_DEV_LIBS),)
+InstallProgram($(PROGRAM),$(BINDIR))
+
+DependTarget()

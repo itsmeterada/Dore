@@ -1,0 +1,11 @@
+#include <Dore.tmpl>
+
+    SRCS = dyn_camera.c dyn_data.c dyn_extern.c dyn_geoatt.c dyn_light.c \
+           dyn_map.c dyn_modclip.c dyn_output.c dyn_update.c ren_appatt.c
+    OBJS = dyn_camera.o dyn_data.o dyn_extern.o dyn_geoatt.o dyn_light.o \
+           dyn_map.o dyn_modclip.o dyn_output.o dyn_update.o ren_appatt.o
+
+LibraryObjectRule()
+SubdirLibraryRule($(OBJS))
+
+DependTarget()

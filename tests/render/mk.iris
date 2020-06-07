@@ -1,0 +1,135 @@
+#ident "%W%" %G%
+ 
+# Copyright (C) 1994 Kubota Graphics Corp.
+# 
+# Permission to use, copy, modify, and distribute this material for
+# any purpose and without fee is hereby granted, provided that the
+# above copyright notice and this permission notice appear in all
+# copies, and that the name of Kubota Graphics not be used in
+# advertising or publicity pertaining to this material.  Kubota
+# Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+# OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+# "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+# PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+# EXPRESS OR IMPLIED.
+ 
+SHELL=/bin/sh
+DORE_OBJTYPE=	iris
+
+###########################################################################
+#                                                                         #
+# This makefile makes three applications:                                 #
+#     render                                                              #
+#     dfshow                                                              #
+#     foodpros                                                            #
+#                                                                         #
+# By default, the standard (installed) Dore unshared library is used.     #
+# To test with a development library and include files, make sure your    #
+# DORE_LOC environment variable is set properly and use:                  #
+#                                                                         #
+# make DORLIBDIR=${DORE_LOC}/dore/lib/iris INCLDIR=${DORE_LOC}/dore      #
+#                                                                         #
+###########################################################################
+
+DORLIBDIR =  /usr/lib
+INCLDIR   =  /usr
+LOCALDIR  =  /nfs/matrix/u/local
+
+CFLAGS    =  -I$(INCLDIR)/include -DDORE_REAL_SINGLE -DNEW_DORE
+
+DORELIB   =  $(DORLIBDIR)/libUdore.a
+SCENELIB  =  $(LOCALDIR)/lib/$(DORE_OBJTYPE)/libscene.a
+PRSARGLIB =  $(LOCALDIR)/lib/$(DORE_OBJTYPE)/libprsarg.a
+OTHERLIBS =  -lgl -lX11 -lm -lmalloc
+
+###########################################################################
+
+RENDER_DEP=	$(DORE_OBJTYPE)/render.o $(DORE_OBJTYPE)/makeobjs.o \
+		$(DORE_OBJTYPE)/Trnsfrmr.o \
+		$(DORE_OBJTYPE)/g3crtemap.o $(DORE_OBJTYPE)/rstrlib.o \
+		$(DORE_OBJTYPE)/calbak.o $(DORE_OBJTYPE)/x11.o \
+		$(DORE_OBJTYPE)/gl.o
+
+FOODPROS_DEP= $(DORE_OBJTYPE)/render.o $(DORE_OBJTYPE)/foodpros.o \
+		$(DORE_OBJTYPE)/Trnsfrmr.o \
+		$(DORE_OBJTYPE)/g3crtemap.o $(DORE_OBJTYPE)/rstrlib.o \
+		$(DORE_OBJTYPE)/calbak.o $(DORE_OBJTYPE)/x11.o \
+		$(DORE_OBJTYPE)/tiles.o $(DORE_OBJTYPE)/stkgrp.o  \
+		$(DORE_OBJTYPE)/gl.o
+
+###########################################################################
+
+render:  	$(DORE_OBJTYPE) $(DORE_OBJTYPE)/render
+dfshow:		$(DORE_OBJTYPE) $(DORE_OBJTYPE)/dfshow
+foodpros:	$(DORE_OBJTYPE) $(DORE_OBJTYPE)/foodpros
+
+clean:		
+	rm -f $(DORE_OBJTYPE)/*.o $(DORE_OBJTYPE)/render \
+	$(DORE_OBJTYPE)/dfshow $(DORE_OBJTYPE)/foodpros
+
+###########################################################################
+
+$(DORE_OBJTYPE):
+	@if [ ! -d $(DORE_OBJTYPE) ]; then \
+	   echo "Creating directory $(DORE_OBJTYPE)" ; \
+	   mkdir $(DORE_OBJTYPE) ; \
+	fi
+
+$(DORE_OBJTYPE)/render: $(RENDER_DEP) 
+	rm -f $(DORE_OBJTYPE)/render
+	cc $(CFLAGS) $(RENDER_DEP) $(SCENELIB) $(PRSARGLIB) \
+	$(DORELIB) $(OTHERLIBS) -o $(DORE_OBJTYPE)/render
+	-@chmod +x $(DORE_OBJTYPE)/render
+
+$(DORE_OBJTYPE)/dfshow: $(RENDER_DEP) 
+	rm -f $(DORE_OBJTYPE)/dfshow
+	cc $(CFLAGS) $(RENDER_DEP) $(SCENELIB) $(PRSARGLIB) \
+	$(DORELIB) $(OTHERLIBS) -o $(DORE_OBJTYPE)/dfshow
+	-@chmod +x $(DORE_OBJTYPE)/dfshow
+
+$(DORE_OBJTYPE)/foodpros: $(FOODPROS_DEP) 
+	rm -f $(DORE_OBJTYPE)/foodpros
+	cc $(CFLAGS) $(FOODPROS_DEP) $(SCENELIB) $(PRSARGLIB) \
+	$(DORELIB) $(OTHERLIBS) -o $(DORE_OBJTYPE)/foodpros
+	-@chmod +x $(DORE_OBJTYPE)/foodpros
+
+###########################################################################
+
+$(DORE_OBJTYPE)/render.o: src/render.c
+	cc -c $(CFLAGS) src/render.c -o $(DORE_OBJTYPE)/render.o
+
+$(DORE_OBJTYPE)/dfshow.o: src/dfshow.c
+	cc -c $(CFLAGS) src/dfshow.c -o $(DORE_OBJTYPE)/dfshow.o
+
+$(DORE_OBJTYPE)/foodpros.o: src/foodpros.c
+	cc -c $(CFLAGS) src/foodpros.c -o $(DORE_OBJTYPE)/foodpros.o
+
+$(DORE_OBJTYPE)/calbak.o: src/calbak.c
+	cc -c $(CFLAGS) src/calbak.c -o $(DORE_OBJTYPE)/calbak.o
+
+$(DORE_OBJTYPE)/x11.o: src/x11.c
+	cc -c $(CFLAGS) src/x11.c -o $(DORE_OBJTYPE)/x11.o
+
+$(DORE_OBJTYPE)/makeobjs.o: src/makeobjs.c
+	cc -c $(CFLAGS) src/makeobjs.c -o $(DORE_OBJTYPE)/makeobjs.o
+
+$(DORE_OBJTYPE)/Trnsfrmr.o: src/Trnsfrmr.c
+	cc -c $(CFLAGS) src/Trnsfrmr.c -o $(DORE_OBJTYPE)/Trnsfrmr.o
+
+$(DORE_OBJTYPE)/rstrlib.o: src/rstrlib.c 
+	cc -c $(CFLAGS) src/rstrlib.c -o $(DORE_OBJTYPE)/rstrlib.o
+
+$(DORE_OBJTYPE)/g3crtemap.o: src/g3crtemap.c 
+	cc -c $(CFLAGS) src/g3crtemap.c -o $(DORE_OBJTYPE)/g3crtemap.o
+
+$(DORE_OBJTYPE)/gl.o: src/malloc.c 
+	cc -c $(CFLAGS) src/gl.c -o $(DORE_OBJTYPE)/malloc.o
+
+$(DORE_OBJTYPE)/tiles.o: src/tiles.c 
+	cc -c $(CFLAGS) src/tiles.c -o $(DORE_OBJTYPE)/tiles.o
+
+$(DORE_OBJTYPE)/stkgrp.o: src/stkgrp.c 
+	cc -c $(CFLAGS) src/stkgrp.c -o $(DORE_OBJTYPE)/stkgrp.o
+
+###########################################################################

@@ -1,0 +1,8 @@
+#include <Dore.tmpl>
+
+#define	IHaveSubdirs
+
+SUBDIRS = frond mesh pseudo radiosity simple userprim views
+
+MakeSubdirs($(SUBDIRS))
+DependSubdirs($(SUBDIRS))

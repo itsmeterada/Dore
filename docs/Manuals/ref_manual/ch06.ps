@@ -1,0 +1,1949 @@
+%!PS-Adobe-3.0
+%%Creator: groff version 1.06
+%%DocumentNeededResources: font Palatino-Roman
+%%+ font Helvetica
+%%+ font Helvetica-BoldOblique
+%%+ font Symbol
+%%+ font Palatino-Italic
+%%+ font Helvetica-Bold
+%%+ font Helvetica-Oblique
+%%+ font Courier
+%%DocumentSuppliedResources: procset grops 1.06 0
+%%+ font Symbol-Slanted
+%%Pages: 13
+%%PageOrder: Ascend
+%%Orientation: Portrait
+%%EndComments
+%%BeginProlog
+%%BeginResource: procset grops 1.06 0
+%!PS-Adobe-3.0 Resource-ProcSet
+
+/setpacking where {
+	pop
+	currentpacking
+	true setpacking
+} if
+
+/grops 120 dict dup begin 
+
+% The ASCII code of the space character.
+/SC 32 def
+
+/A /show load def
+/B { 0 SC 3 -1 roll widthshow } bind def
+/C { 0 exch ashow } bind def
+/D { 0 exch 0 SC 5 2 roll awidthshow } bind def
+/E { 0 rmoveto show } bind def
+/F { 0 rmoveto 0 SC 3 -1 roll widthshow } bind def
+/G { 0 rmoveto 0 exch ashow } bind def
+/H { 0 rmoveto 0 exch 0 SC 5 2 roll awidthshow } bind def
+/I { 0 exch rmoveto show } bind def
+/J { 0 exch rmoveto 0 SC 3 -1 roll widthshow } bind def
+/K { 0 exch rmoveto 0 exch ashow } bind def
+/L { 0 exch rmoveto 0 exch 0 SC 5 2 roll awidthshow } bind def
+/M { rmoveto show } bind def
+/N { rmoveto 0 SC 3 -1 roll widthshow } bind def
+/O { rmoveto 0 exch ashow } bind def
+/P { rmoveto 0 exch 0 SC 5 2 roll awidthshow } bind def
+/Q { moveto show } bind def 
+/R { moveto 0 SC 3 -1 roll widthshow } bind def
+/S { moveto 0 exch ashow } bind def
+/T { moveto 0 exch 0 SC 5 2 roll awidthshow } bind def
+
+% name size font SF -
+
+/SF {
+	findfont exch
+	[ exch dup 0 exch 0 exch neg 0 0 ] makefont
+	dup setfont
+	[ exch /setfont cvx ] cvx bind def
+} bind def
+
+% name a c d font MF -
+
+/MF {
+	findfont
+	[ 5 2 roll
+	0 3 1 roll % b
+	neg 0 0 ] makefont
+	dup setfont
+	[ exch /setfont cvx ] cvx bind def
+} bind def
+
+/level0 0 def
+/RES 0 def
+/PL 0 def
+/LS 0 def
+
+% Guess the page length.
+% This assumes that the imageable area is vertically centered on the page.
+% PLG - length
+
+/PLG {
+	gsave newpath clippath pathbbox grestore
+	exch pop add exch pop
+} bind def
+
+% BP -
+
+/BP {
+	/level0 save def
+	1 setlinecap
+	1 setlinejoin
+	72 RES div dup scale
+	LS {
+		90 rotate
+	} {
+		0 PL translate
+	} ifelse
+	1 -1 scale
+} bind def
+
+/EP {
+	level0 restore
+	showpage
+} bind def
+
+
+% centerx centery radius startangle endangle DA -
+
+/DA {
+	newpath arcn stroke
+} bind def
+
+% x y SN - x' y'
+% round a position to nearest (pixel + (.25,.25))
+
+/SN {
+	transform 
+	.25 sub exch .25 sub exch
+	round .25 add exch round .25 add exch
+	itransform
+} bind def
+	
+% endx endy startx starty DL -
+% we round the endpoints of the line, so that parallel horizontal
+% and vertical lines will appear even
+
+/DL {
+	SN
+	moveto
+	SN
+	lineto stroke
+} bind def
+
+% centerx centery radius DC -
+
+/DC {
+	newpath 0 360 arc closepath
+} bind def
+
+
+/TM matrix def
+
+%  width height centerx centery DE -
+
+/DE {
+	TM currentmatrix pop
+	translate scale newpath 0 0 .5 0 360 arc closepath
+	TM setmatrix
+} bind def
+
+% these are for splines
+
+/RC /rcurveto load def
+/RL /rlineto load def
+/ST /stroke load def
+/MT /moveto load def
+/CL /closepath load def
+
+% fill the last path
+
+% amount FL -
+
+/FL {
+	currentgray exch setgray fill setgray
+} bind def
+
+% fill with the ``current color''
+
+/BL /fill load def
+
+/LW /setlinewidth load def
+% new_font_name encoding_vector old_font_name RE -
+
+/RE {
+	findfont
+	dup maxlength dict begin
+	{
+		1 index /FID ne { def } { pop pop } ifelse
+	} forall
+	/Encoding exch def
+	dup /FontName exch def
+	currentdict end definefont pop
+} bind def
+
+/DEFS 0 def
+
+% hpos vpos EBEGIN -
+
+/EBEGIN {
+	moveto
+	DEFS begin
+} bind def
+
+/EEND /end load def
+
+/CNT 0 def
+/level1 0 def
+
+% llx lly newwid wid newht ht newllx newlly PBEGIN -
+
+/PBEGIN {
+	/level1 save def
+	translate
+	div 3 1 roll div exch scale
+	neg exch neg exch translate
+	% set the graphics state to default values
+	0 setgray
+	0 setlinecap
+	1 setlinewidth
+	0 setlinejoin
+	10 setmiterlimit
+	[] 0 setdash
+	/setstrokeadjust where {
+		pop
+		false setstrokeadjust
+	} if
+	/setoverprint where {
+		pop
+		false setoverprint
+	} if
+	newpath
+	/CNT countdictstack def
+	userdict begin
+	/showpage {} def
+} bind def
+
+/PEND {
+	clear
+	countdictstack CNT sub { end } repeat
+	level1 restore
+} bind def
+
+end def
+
+/setpacking where {
+	pop
+	setpacking
+} if
+%%EndResource
+%%EndProlog
+%%BeginSetup
+%%IncludeResource: font Symbol
+%%IncludeResource: font Palatino-Roman
+%%IncludeResource: font Helvetica
+%%IncludeResource: font Helvetica-BoldOblique
+%%IncludeResource: font Palatino-Italic
+%%IncludeResource: font Helvetica-Bold
+%%IncludeResource: font Helvetica-Oblique
+%%IncludeResource: font Courier
+%%BeginResource: font Symbol-Slanted
+%!PS-Adobe-3.0 Resource-Font
+%%DocumentNeededResources: font Symbol
+
+% newfontname matrix oldfontname MakeTransformedFont
+
+/MakeTransformedFont {
+	findfont dup maxlength dict begin
+		{
+			exch dup dup /FID ne exch /UniqueID ne and {
+				exch def
+			} {
+				pop pop
+			} ifelse
+		} forall
+		% first copy FontBBox
+		/FontBBox 
+		% FontBBox sometimes seems to have the executable
+		% attribute set
+		% so to get the array on the stack, we have to do this
+		currentdict /FontBBox get
+		4 array copy def
+		% now transform it
+		FontBBox aload pop
+		4 index transform 4 2 roll
+		4 index transform 4 2 roll
+		FontBBox astore pop
+		% matrix
+		% now transform FontMatrix
+		FontMatrix exch matrix concatmatrix
+		/FontMatrix exch def
+		dup /FontName exch def
+	currentdict end
+	definefont pop
+} bind def
+
+
+/Symbol-Slanted
+[.89 0.0 15.5 dup sin exch cos div .89 0.0 0.0]
+/Symbol
+MakeTransformedFont
+%%EndResource
+grops begin/DEFS 1 dict def DEFS begin/u{.001 mul}bind def end/RES 72 def/PL
+792 def/LS false def/ENC0[/asciicircum/asciitilde/Scaron/Zcaron/scaron/zcaron
+/Ydieresis/trademark/quotesingle/.notdef/.notdef/.notdef/.notdef/.notdef
+/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef
+/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/space
+/exclam/quotedbl/numbersign/dollar/percent/ampersand/quoteright/parenleft
+/parenright/asterisk/plus/comma/hyphen/period/slash/zero/one/two/three/four
+/five/six/seven/eight/nine/colon/semicolon/less/equal/greater/question/at/A/B/C
+/D/E/F/G/H/I/J/K/L/M/N/O/P/Q/R/S/T/U/V/W/X/Y/Z/bracketleft/backslash
+/bracketright/circumflex/underscore/quoteleft/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q
+/r/s/t/u/v/w/x/y/z/braceleft/bar/braceright/tilde/.notdef/quotesinglbase
+/guillemotleft/guillemotright/bullet/florin/fraction/perthousand/dagger
+/daggerdbl/endash/emdash/ff/fi/fl/ffi/ffl/dotlessi/dotlessj/grave/hungarumlaut
+/dotaccent/breve/caron/ring/ogonek/quotedblleft/quotedblright/oe/lslash
+/quotedblbase/OE/Lslash/.notdef/exclamdown/cent/sterling/currency/yen/brokenbar
+/section/dieresis/copyright/ordfeminine/guilsinglleft/logicalnot/minus
+/registered/macron/degree/plusminus/twosuperior/threesuperior/acute/mu
+/paragraph/periodcentered/cedilla/onesuperior/ordmasculine/guilsinglright
+/onequarter/onehalf/threequarters/questiondown/Agrave/Aacute/Acircumflex/Atilde
+/Adieresis/Aring/AE/Ccedilla/Egrave/Eacute/Ecircumflex/Edieresis/Igrave/Iacute
+/Icircumflex/Idieresis/Eth/Ntilde/Ograve/Oacute/Ocircumflex/Otilde/Odieresis
+/multiply/Oslash/Ugrave/Uacute/Ucircumflex/Udieresis/Yacute/Thorn/germandbls
+/agrave/aacute/acircumflex/atilde/adieresis/aring/ae/ccedilla/egrave/eacute
+/ecircumflex/edieresis/igrave/iacute/icircumflex/idieresis/eth/ntilde/ograve
+/oacute/ocircumflex/otilde/odieresis/divide/oslash/ugrave/uacute/ucircumflex
+/udieresis/yacute/thorn/ydieresis]def/Courier@0 ENC0/Courier RE
+/Helvetica-Oblique@0 ENC0/Helvetica-Oblique RE/Helvetica-Bold@0 ENC0
+/Helvetica-Bold RE/Palatino-Italic@0 ENC0/Palatino-Italic RE
+/Helvetica-BoldOblique@0 ENC0/Helvetica-BoldOblique RE/Helvetica@0 ENC0
+/Helvetica RE/Palatino-Roman@0 ENC0/Palatino-Roman RE
+%%EndSetup
+%%Page: 445 1
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 99 46.8 63 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 243 46.8 207 46.8 DL 279 46.8 243 46.8 DL 315 46.8 279 46.8 DL 351
+46.8 315 46.8 DL 387 46.8 351 46.8 DL 437.4 46.8 401.4 46.8 DL 464.4 46.8 428.4
+46.8 DL 500.4 46.8 464.4 46.8 DL 536.4 46.8 500.4 46.8 DL/F0 42
+/Palatino-Roman@0 SF(D)280.152 91 Q/F1 36/Palatino-Roman@0 SF(OR)A<b4>370.004
+83 Q(E)365.004 91 Q F0(T)55.752 133 Q/F2 34/Palatino-Roman@0 SF(RANSFO)A(RMA)-1
+E(TIO)300.722 133 Q(N)-1 E F0(M)205.59 175 Q F2 -2.516(AT)C(RICES)2.516 E/F3 12
+/Helvetica@0 SF(CHAPTER SIX)453.048 175 Q 99 186 63 186 DL 135 186 99 186 DL
+171 186 135 186 DL 207 186 171 186 DL 243 186 207 186 DL 279 186 243 186 DL 315
+186 279 186 DL 351 186 315 186 DL 387 186 351 186 DL 437.4 186 401.4 186 DL
+464.4 186 428.4 186 DL 500.4 186 464.4 186 DL 536.4 186 500.4 186 DL/F4 11
+/Palatino-Roman@0 SF 1.94
+(This chapter documents the speci\214c matrix forms that the Dore)63 252 R<b4>
+382.534 252 Q .431(Library uses.)63 265.2 R .431
+(It describes matrices for the transformation pipeline)5.931 F 2.637
+(\(including matrices for modeling and viewing transformations\))63 278.4 R
+(and matrices for transforming textur)63 291.6 Q 2.75(em)-.198 G(ap coor)
+258.371 291.6 Q(dinates.)-.198 E .16 LW 65 317.6 63 317.6 DL 67 317.6 65 317.6
+DL 69 317.6 67 317.6 DL 71 317.6 69 317.6 DL 73 317.6 71 317.6 DL 75 317.6 73
+317.6 DL 77 317.6 75 317.6 DL 79 317.6 77 317.6 DL 81 317.6 79 317.6 DL 83
+317.6 81 317.6 DL 85 317.6 83 317.6 DL 87 317.6 85 317.6 DL 89 317.6 87 317.6
+DL 91 317.6 89 317.6 DL 93 317.6 91 317.6 DL 95 317.6 93 317.6 DL 97 317.6 95
+317.6 DL 99 317.6 97 317.6 DL 101 317.6 99 317.6 DL 103 317.6 101 317.6 DL 105
+317.6 103 317.6 DL 107 317.6 105 317.6 DL 109 317.6 107 317.6 DL 111 317.6 109
+317.6 DL 113 317.6 111 317.6 DL 115 317.6 113 317.6 DL 117 317.6 115 317.6 DL
+119 317.6 117 317.6 DL 121 317.6 119 317.6 DL 123 317.6 121 317.6 DL 125 317.6
+123 317.6 DL 127 317.6 125 317.6 DL 129 317.6 127 317.6 DL 131 317.6 129 317.6
+DL 133 317.6 131 317.6 DL 135 317.6 133 317.6 DL 137 317.6 135 317.6 DL 139
+317.6 137 317.6 DL 141 317.6 139 317.6 DL 143 317.6 141 317.6 DL 145 317.6 143
+317.6 DL 147 317.6 145 317.6 DL 149 317.6 147 317.6 DL 151 317.6 149 317.6 DL
+153 317.6 151 317.6 DL 155 317.6 153 317.6 DL 157 317.6 155 317.6 DL 159 317.6
+157 317.6 DL 161 317.6 159 317.6 DL 163 317.6 161 317.6 DL 165 317.6 163 317.6
+DL 167 317.6 165 317.6 DL 169 317.6 167 317.6 DL 171 317.6 169 317.6 DL 173
+317.6 171 317.6 DL 175 317.6 173 317.6 DL 177 317.6 175 317.6 DL 179 317.6 177
+317.6 DL 181 317.6 179 317.6 DL 183 317.6 181 317.6 DL 185 317.6 183 317.6 DL
+187 317.6 185 317.6 DL 189 317.6 187 317.6 DL 191 317.6 189 317.6 DL 193 317.6
+191 317.6 DL 195 317.6 193 317.6 DL 197 317.6 195 317.6 DL 199 317.6 197 317.6
+DL 201 317.6 199 317.6 DL 203 317.6 201 317.6 DL 205 317.6 203 317.6 DL 207
+317.6 205 317.6 DL 209 317.6 207 317.6 DL 211 317.6 209 317.6 DL 213 317.6 211
+317.6 DL 215 317.6 213 317.6 DL 217 317.6 215 317.6 DL 219 317.6 217 317.6 DL
+221 317.6 219 317.6 DL 223 317.6 221 317.6 DL 225 317.6 223 317.6 DL 227 317.6
+225 317.6 DL 229 317.6 227 317.6 DL 231 317.6 229 317.6 DL 233 317.6 231 317.6
+DL 235 317.6 233 317.6 DL 237 317.6 235 317.6 DL 239 317.6 237 317.6 DL 241
+317.6 239 317.6 DL 243 317.6 241 317.6 DL 245 317.6 243 317.6 DL 247 317.6 245
+317.6 DL 249 317.6 247 317.6 DL 251 317.6 249 317.6 DL 253 317.6 251 317.6 DL
+255 317.6 253 317.6 DL 257 317.6 255 317.6 DL 259 317.6 257 317.6 DL 261 317.6
+259 317.6 DL 263 317.6 261 317.6 DL 265 317.6 263 317.6 DL 267 317.6 265 317.6
+DL 269 317.6 267 317.6 DL 271 317.6 269 317.6 DL 273 317.6 271 317.6 DL 275
+317.6 273 317.6 DL 277 317.6 275 317.6 DL 279 317.6 277 317.6 DL 281 317.6 279
+317.6 DL 283 317.6 281 317.6 DL 285 317.6 283 317.6 DL 287 317.6 285 317.6 DL
+289 317.6 287 317.6 DL 291 317.6 289 317.6 DL 293 317.6 291 317.6 DL 295 317.6
+293 317.6 DL 297 317.6 295 317.6 DL 299 317.6 297 317.6 DL 301 317.6 299 317.6
+DL 303 317.6 301 317.6 DL 305 317.6 303 317.6 DL 307 317.6 305 317.6 DL 309
+317.6 307 317.6 DL 311 317.6 309 317.6 DL 313 317.6 311 317.6 DL 315 317.6 313
+317.6 DL 317 317.6 315 317.6 DL 319 317.6 317 317.6 DL 321 317.6 319 317.6 DL
+323 317.6 321 317.6 DL 325 317.6 323 317.6 DL 327 317.6 325 317.6 DL 329 317.6
+327 317.6 DL 331 317.6 329 317.6 DL 333 317.6 331 317.6 DL 335 317.6 333 317.6
+DL 337 317.6 335 317.6 DL 339 317.6 337 317.6 DL 341 317.6 339 317.6 DL 343
+317.6 341 317.6 DL 345 317.6 343 317.6 DL 347 317.6 345 317.6 DL 349 317.6 347
+317.6 DL 351 317.6 349 317.6 DL 353 317.6 351 317.6 DL 355 317.6 353 317.6 DL
+357 317.6 355 317.6 DL 359 317.6 357 317.6 DL 361 317.6 359 317.6 DL 363 317.6
+361 317.6 DL 365 317.6 363 317.6 DL 367 317.6 365 317.6 DL 369 317.6 367 317.6
+DL 371 317.6 369 317.6 DL 373 317.6 371 317.6 DL 375 317.6 373 317.6 DL 377
+317.6 375 317.6 DL 379 317.6 377 317.6 DL 381 317.6 379 317.6 DL 383 317.6 381
+317.6 DL 385 317.6 383 317.6 DL 387 317.6 385 317.6 DL 1.44 LW 419.4 318.1
+401.4 318.1 DL 428.4 318.1 410.4 318.1 DL 446.4 318.1 428.4 318.1 DL 464.4
+318.1 446.4 318.1 DL 482.4 318.1 464.4 318.1 DL 500.4 318.1 482.4 318.1 DL
+518.4 318.1 500.4 318.1 DL 536.4 318.1 518.4 318.1 DL/F5 12
+/Helvetica-BoldOblique@0 SF(Matrix)501.06 332.1 Q(Format)495.732 346.1 Q F4
+(Dore)63 346.2 Q 4.071<b475>82.668 346.2 S .519(ses homogeneous coor)97.035
+346.2 R .519(dinates, which means that a point in)-.198 F 1.362(3-space \(x, y)
+63 359.4 R 4.112(,z)-1.221 G 4.112(\)i)136.661 359.4 S 4.112(sa)147.637 359.4 S
+1.362(ctually r)161.913 359.4 R(epr)-.198 E 1.361
+(esented by a 4-vector in homoge-)-.198 F .634(neous space \(wx, wy)63 372.6 R
+3.384(,w)-1.221 G .634(z, w\).)179.694 372.6 R .635
+(The fourth component is a nonzer)6.135 F(o)-.198 E 1.305(scale factor)63 385.8
+R 6.805(.A)-.814 G 1.304(homogeneous point \(a, b, c, w\) is converted back)
+139.911 385.8 R 4.138(into or)63 399 R 4.139(dinary thr)-.198 F 4.139
+(ee-dimensional coor)-.198 F 4.139(dinates by dividing each)-.198 F
+(point by the scale factor)63 412.2 Q 2.75(,a)-.814 G 2.75(si)188.95 412.2 S
+2.75(na)199.565 412.2 S(/w)214.217 412.2 Q 2.75(,b)-1.012 G(/w)240.628 412.2 Q
+2.75(,c)-1.012 G(/w)265.84 412.2 Q(.)-1.012 E -.99(Tr)63 437.4 S 1.67
+(ansformations ar).99 F 4.42(er)-.198 G(epr)170.653 437.4 Q 1.67
+(esented as 4x4 matrices.)-.198 F(Dore)7.17 E 5.223<b475>334.71 437.4 S 1.67
+(ses col-)350.229 437.4 R .139(umn vectors to r)63 450.6 R(epr)-.198 E .14
+(esent points so the general form to transform a)-.198 F(point is:)63 463.8 Q
+/F6 11/Symbol SF<e9>63 499.401 Q<ea>63 510.401 Q<ea>63 521.401 Q<ea>63 532.401
+Q<eb>63 543.401 Q/F7 11/Helvetica@0 SF(p)68.112 496.486 Q/F8 8/Helvetica@0 SF
+(x)2.2 I F6<a2>.55 -2.2 M F4(p)68.112 511.886 Q/F9 8/Palatino-Roman@0 SF(y)2.2
+I F6<a2>.102 -2.2 M F7(p)68.607 527.286 Q F8(z)2.2 I F6<a2>.55 -2.2 M F4(p)
+67.719 542.686 Q F9(w)2.2 I F6<a2>-.346 -2.2 M<f9>83.373 499.401 Q<fa>83.373
+510.401 Q<fa>83.373 521.401 Q<fa>83.373 532.401 Q<fb>83.373 543.401 Q(=)90.677
+519.586 Q<e6>99.796 497.036 Q<e7>99.796 510.379 Q<e7>99.796 521.379 Q<e7>99.796
+532.379 Q<e8>99.796 543.379 Q F4(m)109.146 496.486 Q F9(0)2.2 I F8(0)A F4(m)
+109.696 511.886 Q F9(1)2.2 I F8(0)A F4(m)110.246 527.286 Q F9(2)2.2 I F8(0)A F4
+(m)110.796 542.686 Q F9(3)2.2 I F8(0)A F4(m)140.507 496.486 Q F9(0)2.2 I F8(1)A
+F4(m)141.057 511.886 Q F9(1)2.2 I F8(1)A F4(m)141.607 527.286 Q F9(2)2.2 I F8
+(1)A F4(m)142.157 542.686 Q F9(3)2.2 I F8(1)A F4(m)171.868 496.486 Q F9(0)2.2 I
+F8(2)A F4(m)172.418 511.886 Q F9(1)2.2 I F8(2)A F4(m)172.968 527.286 Q F9(2)2.2
+I F8(2)A F4(m)173.518 542.686 Q F9(3)2.2 I F8(2)A F4(m)203.229 496.486 Q F9(0)
+2.2 I F8(3)A F4(m)203.779 511.886 Q F9(1)2.2 I F8(3)A F4(m)204.329 527.286 Q F9
+(2)2.2 I F8(3)A F4(m)204.879 542.686 Q F9(3)2.2 I F8(3)A F6<f6>225.46 497.036 Q
+<f7>225.46 510.379 Q<f7>225.46 521.379 Q<f7>225.46 532.379 Q<f8>225.46 543.379
+Q<b4>232.94 519.586 Q<e9>242.059 499.401 Q<ea>242.059 510.401 Q<ea>242.059
+521.401 Q<ea>242.059 532.401 Q<eb>242.059 543.401 Q F7(p)247.171 496.486 Q F8
+(x)2.2 I F7(p)247.171 511.886 Q F8(y)2.2 I F7(p)247.171 527.286 Q F8(z)2.2 I F7
+(p)246.283 542.686 Q F8(w)2.2 I F6<f9>258.725 499.401 Q<fa>258.725 510.401 Q
+<fa>258.725 521.401 Q<fa>258.725 532.401 Q<fb>258.725 543.401 Q F4 .19
+(Matrices ar)63 573.952 R 2.939(em)-.198 G .189
+(ultiplied to form one combined matrix r)135.363 573.952 R(epr)-.198 E
+(esenting)-.198 E 3.003(ac)63 587.152 S .254(omposite transformation.)76.387
+587.152 R/F10 11/Palatino-Italic@0 SF(Pr)5.754 E(econcatenating)-.198 E .44 LW
+327.081 577.912 323.671 577.912 DL F4(matrix)286.072 587.152 Q F10(A)3.763 E
+385.345 578 381.935 578 DL F4 .254(to matrix)332.659 587.152 R F10(B)3.268 E F4
+.632(means that the matrices ar)63 600.352 R 3.381(ec)-.198 G 386.046 591.057
+382.636 591.057 DL .631(ombined such that transformation)206.749 600.352 R F10
+(A)4.14 E F4 .433(is ef)63 613.552 R .433
+(fectively applied to the points befor)-.198 F 3.184(et)-.198 G 348.93 604.4
+345.52 604.4 DL(ransformation)269.742 613.552 Q F10(B)3.448 E F4 5.934(.W)-.001
+G(hen)368.927 613.552 Q .989(column vectors ar)63 626.752 R 3.739(eu)-.198 G
+.988(sed, as is the case in Dore)167.574 626.752 R -.618 .803(\264, p)292.281
+626.752 T -.198(re)-.803 G(concatenating).198 E 105.994 630.657 102.584 630.657
+DL(matrix)63 639.952 Q F10(A)3.93 E 164.745 630.8 161.335 630.8 DL F4 .421
+(to matrix)110.119 639.952 R F10(B)3.435 E 275.084 630.8 271.674 630.8 DL F4
+.421(implies multiplying)168.229 639.952 R F10(B)3.436 E 295.398 630.657
+291.988 630.657 DL F6<b4>278.477 639.952 Q F4 2.776 .198(A. C)3.08 H(onversely)
+-.198 E(,)-1.221 E F10(post-)3.172 E(concatenation)63 653.152 Q 173.663 643.857
+170.253 643.857 DL F4(implies)127.251 653.152 Q F10(A)3.509 E 193.487 644
+190.077 644 DL F6<b4>177.697 653.152 Q F4 .263(B.)3.08 G 2.843(Note that Dore)
+63 678.352 R 6.396<b475>136.93 678.352 S 2.843(ses right-handed coor)153.622
+678.352 R 2.843(dinate systems for both)-.198 F(modeling and viewing.)63
+691.552 Q 1.44 LW 81 756 63 756 DL 99 756 81 756 DL 117 756 99 756 DL 135 756
+117 756 DL 153 756 135 756 DL 171 756 153 756 DL 189 756 171 756 DL 207 756 189
+756 DL 225 756 207 756 DL 243 756 225 756 DL 261 756 243 756 DL 279 756 261 756
+DL 297 756 279 756 DL 315 756 297 756 DL 333 756 315 756 DL 351 756 333 756 DL
+369 756 351 756 DL 387 756 369 756 DL 419.4 756 401.4 756 DL 428.4 756 410.4
+756 DL 446.4 756 428.4 756 DL 464.4 756 446.4 756 DL 482.4 756 464.4 756 DL
+500.4 756 482.4 756 DL 518.4 756 500.4 756 DL 536.4 756 518.4 756 DL/F11 9
+/Helvetica@0 SF(Dore)269.055 768.96 Q 3.506<b454>284.557 768.96 S -.09(ra)
+295.479 768.96 S(nsf).09 E -2.277(or mation)-.27 F -2.367(Matr ices)2.502 F
+(Dore)414.21 768.96 Q 3.506<b452>429.712 768.96 S(ef)442.713 768.96 Q
+(erence Man)-.27 E(ual)-.09 E/F12 9/Helvetica-Bold@0 SF(6-445)4.002 E EP
+%%Page: 446 2
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 108 46.8 72 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 257.4 46.8 221.4 46.8 DL 293.4 46.8 257.4 46.8 DL 329.4 46.8 293.4
+46.8 DL 365.4 46.8 329.4 46.8 DL 401.4 46.8 365.4 46.8 DL 437.4 46.8 401.4 46.8
+DL 473.4 46.8 437.4 46.8 DL 509.4 46.8 473.4 46.8 DL 545.4 46.8 509.4 46.8 DL
+/F0 10/Helvetica-BoldOblique@0 SF(Matrix Format)72 57.6 Q/F1 10/Helvetica@0 SF
+(\(contin)72 68.4 Q(ued\))-.1 E .16 LW 223.4 110 221.4 110 DL 225.4 110 223.4
+110 DL 227.4 110 225.4 110 DL 229.4 110 227.4 110 DL 231.4 110 229.4 110 DL
+233.4 110 231.4 110 DL 235.4 110 233.4 110 DL 237.4 110 235.4 110 DL 239.4 110
+237.4 110 DL 241.4 110 239.4 110 DL 243.4 110 241.4 110 DL 245.4 110 243.4 110
+DL 247.4 110 245.4 110 DL 249.4 110 247.4 110 DL 251.4 110 249.4 110 DL 253.4
+110 251.4 110 DL 255.4 110 253.4 110 DL 257.4 110 255.4 110 DL 259.4 110 257.4
+110 DL 261.4 110 259.4 110 DL 263.4 110 261.4 110 DL 265.4 110 263.4 110 DL
+267.4 110 265.4 110 DL 269.4 110 267.4 110 DL 271.4 110 269.4 110 DL 273.4 110
+271.4 110 DL 275.4 110 273.4 110 DL 277.4 110 275.4 110 DL 279.4 110 277.4 110
+DL 281.4 110 279.4 110 DL 283.4 110 281.4 110 DL 285.4 110 283.4 110 DL 287.4
+110 285.4 110 DL 289.4 110 287.4 110 DL 291.4 110 289.4 110 DL 293.4 110 291.4
+110 DL 295.4 110 293.4 110 DL 297.4 110 295.4 110 DL 299.4 110 297.4 110 DL
+301.4 110 299.4 110 DL 303.4 110 301.4 110 DL 305.4 110 303.4 110 DL 307.4 110
+305.4 110 DL 309.4 110 307.4 110 DL 311.4 110 309.4 110 DL 313.4 110 311.4 110
+DL 315.4 110 313.4 110 DL 317.4 110 315.4 110 DL 319.4 110 317.4 110 DL 321.4
+110 319.4 110 DL 323.4 110 321.4 110 DL 325.4 110 323.4 110 DL 327.4 110 325.4
+110 DL 329.4 110 327.4 110 DL 331.4 110 329.4 110 DL 333.4 110 331.4 110 DL
+335.4 110 333.4 110 DL 337.4 110 335.4 110 DL 339.4 110 337.4 110 DL 341.4 110
+339.4 110 DL 343.4 110 341.4 110 DL 345.4 110 343.4 110 DL 347.4 110 345.4 110
+DL 349.4 110 347.4 110 DL 351.4 110 349.4 110 DL 353.4 110 351.4 110 DL 355.4
+110 353.4 110 DL 357.4 110 355.4 110 DL 359.4 110 357.4 110 DL 361.4 110 359.4
+110 DL 363.4 110 361.4 110 DL 365.4 110 363.4 110 DL 367.4 110 365.4 110 DL
+369.4 110 367.4 110 DL 371.4 110 369.4 110 DL 373.4 110 371.4 110 DL 375.4 110
+373.4 110 DL 377.4 110 375.4 110 DL 379.4 110 377.4 110 DL 381.4 110 379.4 110
+DL 383.4 110 381.4 110 DL 385.4 110 383.4 110 DL 387.4 110 385.4 110 DL 389.4
+110 387.4 110 DL 391.4 110 389.4 110 DL 393.4 110 391.4 110 DL 395.4 110 393.4
+110 DL 397.4 110 395.4 110 DL 399.4 110 397.4 110 DL 401.4 110 399.4 110 DL
+403.4 110 401.4 110 DL 405.4 110 403.4 110 DL 407.4 110 405.4 110 DL 409.4 110
+407.4 110 DL 411.4 110 409.4 110 DL 413.4 110 411.4 110 DL 415.4 110 413.4 110
+DL 417.4 110 415.4 110 DL 419.4 110 417.4 110 DL 421.4 110 419.4 110 DL 423.4
+110 421.4 110 DL 425.4 110 423.4 110 DL 427.4 110 425.4 110 DL 429.4 110 427.4
+110 DL 431.4 110 429.4 110 DL 433.4 110 431.4 110 DL 435.4 110 433.4 110 DL
+437.4 110 435.4 110 DL 439.4 110 437.4 110 DL 441.4 110 439.4 110 DL 443.4 110
+441.4 110 DL 445.4 110 443.4 110 DL 447.4 110 445.4 110 DL 449.4 110 447.4 110
+DL 451.4 110 449.4 110 DL 453.4 110 451.4 110 DL 455.4 110 453.4 110 DL 457.4
+110 455.4 110 DL 459.4 110 457.4 110 DL 461.4 110 459.4 110 DL 463.4 110 461.4
+110 DL 465.4 110 463.4 110 DL 467.4 110 465.4 110 DL 469.4 110 467.4 110 DL
+471.4 110 469.4 110 DL 473.4 110 471.4 110 DL 475.4 110 473.4 110 DL 477.4 110
+475.4 110 DL 479.4 110 477.4 110 DL 481.4 110 479.4 110 DL 483.4 110 481.4 110
+DL 485.4 110 483.4 110 DL 487.4 110 485.4 110 DL 489.4 110 487.4 110 DL 491.4
+110 489.4 110 DL 493.4 110 491.4 110 DL 495.4 110 493.4 110 DL 497.4 110 495.4
+110 DL 499.4 110 497.4 110 DL 501.4 110 499.4 110 DL 503.4 110 501.4 110 DL
+505.4 110 503.4 110 DL 507.4 110 505.4 110 DL 509.4 110 507.4 110 DL 511.4 110
+509.4 110 DL 513.4 110 511.4 110 DL 515.4 110 513.4 110 DL 517.4 110 515.4 110
+DL 519.4 110 517.4 110 DL 521.4 110 519.4 110 DL 523.4 110 521.4 110 DL 525.4
+110 523.4 110 DL 527.4 110 525.4 110 DL 529.4 110 527.4 110 DL 531.4 110 529.4
+110 DL 533.4 110 531.4 110 DL 535.4 110 533.4 110 DL 537.4 110 535.4 110 DL
+539.4 110 537.4 110 DL 541.4 110 539.4 110 DL 543.4 110 541.4 110 DL 545.4 110
+543.4 110 DL 1.44 LW 90 110.5 72 110.5 DL 99 110.5 81 110.5 DL 117 110.5 99
+110.5 DL 135 110.5 117 110.5 DL 153 110.5 135 110.5 DL 171 110.5 153 110.5 DL
+189 110.5 171 110.5 DL 207 110.5 189 110.5 DL/F2 12/Helvetica-BoldOblique@0 SF
+-.96(Tr)72 124.5 S(ansf).96 E(ormation)-.24 E(Pipeline)72 138.5 Q/F3 11
+/Palatino-Roman@0 SF(The complete transformation pipeline is:)221.5 135.3 Q/F4
+11/Symbol SF<e9>221.5 162.75 Q<ea>221.5 173.75 Q<ea>221.5 184.75 Q<ea>221.5
+195.75 Q<eb>221.5 206.75 Q/F5 11/Helvetica@0 SF(p)226.612 159.835 Q/F6 8
+/Helvetica@0 SF(x)2.2 I F4<a2>.55 -2.2 M F3(p)226.612 175.235 Q/F7 8
+/Palatino-Roman@0 SF(y)2.2 I F4<a2>.102 -2.2 M F5(p)227.107 190.635 Q F6(z)2.2
+I F4<a2>.55 -2.2 M F3(p)226.219 206.035 Q F7(w)2.2 I F4<a2>-.346 -2.2 M<f9>
+241.873 162.75 Q<fa>241.873 173.75 Q<fa>241.873 184.75 Q<fa>241.873 195.75 Q
+<fb>241.873 206.75 Q .44 LW 263.669 173.497 260.259 173.497 DL(=)249.177
+182.935 Q F3(V)3.08 E 283.507 173.288 280.097 173.288 DL F4<b4>268.712 182.935
+Q F5(C)3.08 E 321.798 173.288 297.972 173.288 DL F4<b4>288.853 182.935 Q F3
+(CTM)3.08 E F4<b4>3.08 E<e9>335.119 162.75 Q<ea>335.119 173.75 Q<ea>335.119
+184.75 Q<ea>335.119 195.75 Q<eb>335.119 206.75 Q F5(p)340.231 159.835 Q F6(x)
+2.2 I F5(p)340.231 175.235 Q F6(y)2.2 I F5(p)340.231 190.635 Q F6(z)2.2 I F5(p)
+339.343 206.035 Q F6(w)2.2 I F4<f9>351.785 162.75 Q<fa>351.785 173.75 Q<fa>
+351.785 184.75 Q<fa>351.785 195.75 Q<fb>351.785 206.75 Q F3(wher)221.5 230.262
+Q(e:)-.198 E .412(is the curr)221.5 248.862 R .413
+(ent transformation matrix, that is, the composite model-)-.198 F
+(ing transformation)221.5 262.062 Q(is the camera positioning transformation)
+221.5 280.662 Q(is the viewing transformation)221.5 299.262 Q 429.892 311.823
+426.482 311.823 DL 2.462
+(The camera positioning transformation C is determined during)221.5 321.162 R
+-.198(re)221.5 334.362 S 1.498(ndering initialization, and is the curr).198 F
+1.499(ent transformation matrix)-.198 F 1.459(at the time the)221.5 347.562 R
+/F8 11/Palatino-Italic@0 SF 1.459(DoCamera <DOCM>)4.209 F F3 1.458
+(object is executed.)4.209 F 1.458(It can be)6.958 F 1.577
+(formed by any combination of geometric transformation objects,)221.5 360.762 R
+1.013(but is usually done with the)221.5 373.962 R F8(DoLookAtFr)3.763 E 1.012
+(om <DOLAF>)-.198 F F3(command.)3.762 E 1.616(The curr)221.5 387.778 R 422.587
+378.472 397.584 378.472 DL 1.616(ent transformation matrix)264.289 387.778 R F8
+(CTM)4.421 E F3 1.617(is discussed in the next)4.872 F 5.819(section. T)221.5
+400.978 R 354.479 391.826 351.069 391.826 DL(ransformation)272.584 400.978 Q F8
+(V)5.544 E F3 3.068(is discussed later in the section on)6.72 F F8 -.814(Vi)
+221.5 414.178 S(ewing T).814 E(ransformation.)-1.221 E .16 LW 223.4 433.578
+221.4 433.578 DL 225.4 433.578 223.4 433.578 DL 227.4 433.578 225.4 433.578 DL
+229.4 433.578 227.4 433.578 DL 231.4 433.578 229.4 433.578 DL 233.4 433.578
+231.4 433.578 DL 235.4 433.578 233.4 433.578 DL 237.4 433.578 235.4 433.578 DL
+239.4 433.578 237.4 433.578 DL 241.4 433.578 239.4 433.578 DL 243.4 433.578
+241.4 433.578 DL 245.4 433.578 243.4 433.578 DL 247.4 433.578 245.4 433.578 DL
+249.4 433.578 247.4 433.578 DL 251.4 433.578 249.4 433.578 DL 253.4 433.578
+251.4 433.578 DL 255.4 433.578 253.4 433.578 DL 257.4 433.578 255.4 433.578 DL
+259.4 433.578 257.4 433.578 DL 261.4 433.578 259.4 433.578 DL 263.4 433.578
+261.4 433.578 DL 265.4 433.578 263.4 433.578 DL 267.4 433.578 265.4 433.578 DL
+269.4 433.578 267.4 433.578 DL 271.4 433.578 269.4 433.578 DL 273.4 433.578
+271.4 433.578 DL 275.4 433.578 273.4 433.578 DL 277.4 433.578 275.4 433.578 DL
+279.4 433.578 277.4 433.578 DL 281.4 433.578 279.4 433.578 DL 283.4 433.578
+281.4 433.578 DL 285.4 433.578 283.4 433.578 DL 287.4 433.578 285.4 433.578 DL
+289.4 433.578 287.4 433.578 DL 291.4 433.578 289.4 433.578 DL 293.4 433.578
+291.4 433.578 DL 295.4 433.578 293.4 433.578 DL 297.4 433.578 295.4 433.578 DL
+299.4 433.578 297.4 433.578 DL 301.4 433.578 299.4 433.578 DL 303.4 433.578
+301.4 433.578 DL 305.4 433.578 303.4 433.578 DL 307.4 433.578 305.4 433.578 DL
+309.4 433.578 307.4 433.578 DL 311.4 433.578 309.4 433.578 DL 313.4 433.578
+311.4 433.578 DL 315.4 433.578 313.4 433.578 DL 317.4 433.578 315.4 433.578 DL
+319.4 433.578 317.4 433.578 DL 321.4 433.578 319.4 433.578 DL 323.4 433.578
+321.4 433.578 DL 325.4 433.578 323.4 433.578 DL 327.4 433.578 325.4 433.578 DL
+329.4 433.578 327.4 433.578 DL 331.4 433.578 329.4 433.578 DL 333.4 433.578
+331.4 433.578 DL 335.4 433.578 333.4 433.578 DL 337.4 433.578 335.4 433.578 DL
+339.4 433.578 337.4 433.578 DL 341.4 433.578 339.4 433.578 DL 343.4 433.578
+341.4 433.578 DL 345.4 433.578 343.4 433.578 DL 347.4 433.578 345.4 433.578 DL
+349.4 433.578 347.4 433.578 DL 351.4 433.578 349.4 433.578 DL 353.4 433.578
+351.4 433.578 DL 355.4 433.578 353.4 433.578 DL 357.4 433.578 355.4 433.578 DL
+359.4 433.578 357.4 433.578 DL 361.4 433.578 359.4 433.578 DL 363.4 433.578
+361.4 433.578 DL 365.4 433.578 363.4 433.578 DL 367.4 433.578 365.4 433.578 DL
+369.4 433.578 367.4 433.578 DL 371.4 433.578 369.4 433.578 DL 373.4 433.578
+371.4 433.578 DL 375.4 433.578 373.4 433.578 DL 377.4 433.578 375.4 433.578 DL
+379.4 433.578 377.4 433.578 DL 381.4 433.578 379.4 433.578 DL 383.4 433.578
+381.4 433.578 DL 385.4 433.578 383.4 433.578 DL 387.4 433.578 385.4 433.578 DL
+389.4 433.578 387.4 433.578 DL 391.4 433.578 389.4 433.578 DL 393.4 433.578
+391.4 433.578 DL 395.4 433.578 393.4 433.578 DL 397.4 433.578 395.4 433.578 DL
+399.4 433.578 397.4 433.578 DL 401.4 433.578 399.4 433.578 DL 403.4 433.578
+401.4 433.578 DL 405.4 433.578 403.4 433.578 DL 407.4 433.578 405.4 433.578 DL
+409.4 433.578 407.4 433.578 DL 411.4 433.578 409.4 433.578 DL 413.4 433.578
+411.4 433.578 DL 415.4 433.578 413.4 433.578 DL 417.4 433.578 415.4 433.578 DL
+419.4 433.578 417.4 433.578 DL 421.4 433.578 419.4 433.578 DL 423.4 433.578
+421.4 433.578 DL 425.4 433.578 423.4 433.578 DL 427.4 433.578 425.4 433.578 DL
+429.4 433.578 427.4 433.578 DL 431.4 433.578 429.4 433.578 DL 433.4 433.578
+431.4 433.578 DL 435.4 433.578 433.4 433.578 DL 437.4 433.578 435.4 433.578 DL
+439.4 433.578 437.4 433.578 DL 441.4 433.578 439.4 433.578 DL 443.4 433.578
+441.4 433.578 DL 445.4 433.578 443.4 433.578 DL 447.4 433.578 445.4 433.578 DL
+449.4 433.578 447.4 433.578 DL 451.4 433.578 449.4 433.578 DL 453.4 433.578
+451.4 433.578 DL 455.4 433.578 453.4 433.578 DL 457.4 433.578 455.4 433.578 DL
+459.4 433.578 457.4 433.578 DL 461.4 433.578 459.4 433.578 DL 463.4 433.578
+461.4 433.578 DL 465.4 433.578 463.4 433.578 DL 467.4 433.578 465.4 433.578 DL
+469.4 433.578 467.4 433.578 DL 471.4 433.578 469.4 433.578 DL 473.4 433.578
+471.4 433.578 DL 475.4 433.578 473.4 433.578 DL 477.4 433.578 475.4 433.578 DL
+479.4 433.578 477.4 433.578 DL 481.4 433.578 479.4 433.578 DL 483.4 433.578
+481.4 433.578 DL 485.4 433.578 483.4 433.578 DL 487.4 433.578 485.4 433.578 DL
+489.4 433.578 487.4 433.578 DL 491.4 433.578 489.4 433.578 DL 493.4 433.578
+491.4 433.578 DL 495.4 433.578 493.4 433.578 DL 497.4 433.578 495.4 433.578 DL
+499.4 433.578 497.4 433.578 DL 501.4 433.578 499.4 433.578 DL 503.4 433.578
+501.4 433.578 DL 505.4 433.578 503.4 433.578 DL 507.4 433.578 505.4 433.578 DL
+509.4 433.578 507.4 433.578 DL 511.4 433.578 509.4 433.578 DL 513.4 433.578
+511.4 433.578 DL 515.4 433.578 513.4 433.578 DL 517.4 433.578 515.4 433.578 DL
+519.4 433.578 517.4 433.578 DL 521.4 433.578 519.4 433.578 DL 523.4 433.578
+521.4 433.578 DL 525.4 433.578 523.4 433.578 DL 527.4 433.578 525.4 433.578 DL
+529.4 433.578 527.4 433.578 DL 531.4 433.578 529.4 433.578 DL 533.4 433.578
+531.4 433.578 DL 535.4 433.578 533.4 433.578 DL 537.4 433.578 535.4 433.578 DL
+539.4 433.578 537.4 433.578 DL 541.4 433.578 539.4 433.578 DL 543.4 433.578
+541.4 433.578 DL 545.4 433.578 543.4 433.578 DL 1.44 LW 90 434.078 72 434.078
+DL 99 434.078 81 434.078 DL 117 434.078 99 434.078 DL 135 434.078 117 434.078
+DL 153 434.078 135 434.078 DL 171 434.078 153 434.078 DL 189 434.078 171
+434.078 DL 207 434.078 189 434.078 DL F2(Geometric)72 448.078 Q -.96(Tr)72
+462.078 S(ansf).96 E(ormation)-.24 E(Attrib)72 476.078 Q(utes)-.24 E F3 4.003
+(The geometric transformation attributes modify the modeling)221.5 458.878 R
+(coor)221.5 472.078 Q 2.244(dinate system.)-.198 F 4.995(At)7.744 G 2.245
+(ransformation matrix is cr)339.861 472.078 R 2.245(eated for each)-.198 F
+2.121(geometric transformation object \(DoT)221.5 485.278 R 2.12
+(ranslate, etc.\).)-.99 F 2.12(When these)7.62 F .507(objects ar)221.5 498.478
+R 3.257(ee)-.198 G .508(xecuted during traversal they cause their matrix to be)
+281.265 498.478 R(pr)221.5 511.678 Q 6.741(econcatenated to the curr)-.198 F
+6.74(ent transformation matrix.)-.198 F(For)529.033 511.678 Q .44 LW 448.246
+515.638 444.836 515.638 DL .817
+(instance, if an object that generates a matrix X is executed during)221.5
+524.878 R .714(traversal of the Dore)221.5 538.078 R 4.267<b464>319.111 538.078
+S 435.655 528.838 432.245 528.838 DL .713(atabase, the matrix X)333.762 538.078
+R .713(is pr)3.462 F .713(econcatenated to)-.198 F 1.024(the curr)221.5 551.927
+R 417.01 542.588 392.062 542.588 DL 1.025(ent transformation matrix CTM to cr)
+260.54 551.927 R 1.025(eate the new curr)-.198 F(ent)-.198 E 357.824 556.437
+332.876 556.437 DL .468(transformation matrix CTM)221.5 565.776 R F4<a2>A F3
+5.968(.I)C 3.218(ns)372.966 565.776 S 483.351 556.437 458.403 556.437 DL .467
+(ymbols this is CTM)387.25 565.776 R 523.215 556.437 498.267 556.437 DL F4 3.08
+<a23d>483.351 565.776 S F3(CTM)A 540.787 556.536 537.377 556.536 DL F4<b4>
+526.295 565.776 Q F3 -.001(X.)3.08 G .59
+(The following sections describe the matrices cr)221.5 587.676 R .59
+(eated for each type)-.198 F(of geometric transformation attribute.)221.5
+600.876 Q/F9 11/Helvetica-BoldOblique@0 SF(DoT)221.5 638.076 Q(ranslate <DO)
+-.88 E(XL)-.55 E(T>)-.99 E .693(DoTranslate \()221.214 663.276 R F3(t)A F7(x)
+-.539 2.2 M F3(,)2.286 -2.2 M F9(t)2.53 E/F10 8/Helvetica-BoldOblique@0 SF(y)
+1.054 2.2 M F9(,)1.96 -2.2 M F3(t)3.267 E F7(z)-.539 2.2 M F3 4.396(\)c)1.854
+-2.2 O 1.646(auses a translation by)346.232 663.276 R F9(t)3.845 E F10(x)1.27
+2.2 M F3(,)1.686 -2.2 M F9(t)3.845 E F10(y)1.054 2.2 M F3 4.395(,a)1.718 -2.2 O
+(nd)501.277 663.276 Q F9(t)3.845 E F10(z)1.23 2.2 M F3 4.395(,i)1.614 -2.2 O(n)
+539.098 663.276 Q(the)221.5 676.538 Q F8 .412(x, y)3.162 F F3(and)3.162 E F8(z)
+3.162 E F3(dir)3.162 E .412(ections r)-.198 F(espectively)-.198 E 5.912(.T)
+-1.221 G .412(he corr)413.683 676.538 R .412(esponding matrix is)-.198 F
+227.875 680.586 224.465 680.586 DL F8(T)221.467 689.738 Q F3 2.75(,w).814 G
+(her)243.676 689.738 Q(e:)-.198 E 1.44 LW 90 756 72 756 DL 99 756 81 756 DL 117
+756 99 756 DL 135 756 117 756 DL 153 756 135 756 DL 171 756 153 756 DL 189 756
+171 756 DL 207 756 189 756 DL 239.4 756 221.4 756 DL 257.4 756 239.4 756 DL
+275.4 756 257.4 756 DL 293.4 756 275.4 756 DL 311.4 756 293.4 756 DL 329.4 756
+311.4 756 DL 347.4 756 329.4 756 DL 365.4 756 347.4 756 DL 383.4 756 365.4 756
+DL 401.4 756 383.4 756 DL 419.4 756 401.4 756 DL 437.4 756 419.4 756 DL 455.4
+756 437.4 756 DL 473.4 756 455.4 756 DL 491.4 756 473.4 756 DL 509.4 756 491.4
+756 DL 527.4 756 509.4 756 DL 545.4 756 527.4 756 DL/F11 9/Helvetica-Bold@0 SF
+(6-446)72 768.96 Q/F12 9/Helvetica@0 SF(Dore)6.504 E 3.506<b452>117.019 768.96
+S(ef)130.02 768.96 Q(erence Man)-.27 E(ual)-.09 E(Dore)221.4 768.96 Q 3.506
+<b454>236.902 768.96 S -.09(ra)247.824 768.96 S(nsf).09 E -2.277(or mation)-.27
+F -2.367(Matr ices)2.502 F EP
+%%Page: 447 3
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 99 46.8 63 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 243 46.8 207 46.8 DL 279 46.8 243 46.8 DL 315 46.8 279 46.8 DL 351
+46.8 315 46.8 DL 387 46.8 351 46.8 DL 437.4 46.8 401.4 46.8 DL 464.4 46.8 428.4
+46.8 DL 500.4 46.8 464.4 46.8 DL 536.4 46.8 500.4 46.8 DL/F0 10
+/Helvetica-BoldOblique@0 SF(Geometric T)411.82 57.6 Q(ransf)-.8 E(ormation)-.2
+E(Attrib)489.38 68.4 Q(utes)-.2 E/F1 10/Helvetica@0 SF(\(contin)486.48 79.2 Q
+(ued\))-.1 E .44 LW 68.065 123.148 64.655 123.148 DL/F2 11/Helvetica@0 SF(T)63
+132.586 Q/F3 11/Symbol SF(=)3.079 E<e6>81.919 110.036 Q<e7>81.919 123.379 Q<e7>
+81.919 134.379 Q<e7>81.919 145.379 Q<e8>81.919 156.379 Q/F4 11/Palatino-Roman@0
+SF(1)91.269 109.486 Q F2(0)90.653 124.886 Q F4(0)90.653 140.286 Q F2(0)90.037
+155.686 Q F4(0)107.153 109.486 Q F2(1)106.537 124.886 Q F4(0)106.537 140.286 Q
+F2(0)105.921 155.686 Q F4(0)123.037 109.486 Q F2(0)122.421 124.886 Q F4(1)
+122.421 140.286 Q F2(0)121.805 155.686 Q F4(t)138.921 109.486 Q/F5 8
+/Palatino-Roman@0 SF(x)2.2 I F4(t)139.449 124.886 Q F5(y)2.2 I F4(t)139.977
+140.286 Q F5(z)2.2 I F4(1)141.251 155.686 Q F3<f6>152.447 110.036 Q<f7>152.447
+123.379 Q<f7>152.447 134.379 Q<f7>152.447 145.379 Q<f8>152.447 156.379 Q/F6 11
+/Helvetica-BoldOblique@0 SF(DoScale <DOSC>)63 198.952 Q .693(DoScale \()62.714
+224.152 R F4(s)A F5(x)2.2 I F4(,)2.286 -2.2 M F6(s)2.937 E/F7 8
+/Helvetica-BoldOblique@0 SF(y).922 2.2 M F6(,)1.96 -2.2 M F4(s)3.267 E F5(z)2.2
+I F4 3.787(\)c)1.854 -2.2 O 1.037(auses a scale by)172.922 224.152 R F6(s)3.644
+E F7(x)1.138 2.2 M F4(,)1.686 -2.2 M F6(s)3.644 E F7(y).922 2.2 M F4 3.787(,a)
+1.718 -2.2 O(nd)300.897 224.152 Q F6(s)3.644 E F7(z)1.098 2.2 M F4 3.787(,i)
+1.614 -2.2 O 3.787(nt)340.23 224.152 S(he)354.005 224.152 Q/F8 11
+/Palatino-Italic@0 SF 1.037(x, y)3.787 F F4(and)63 237.414 Q F8(z)6.457 E F4
+(dir)6.457 E 3.707(ections r)-.198 F(espectively)-.198 E 9.207(.T)-1.221 G
+3.707(he corr)229.87 237.414 R 384.25 228.108 380.84 228.108 DL 3.707
+(esponding matrix is)267.38 237.414 R F8(S)6.546 E F4(,).016 E(wher)63 250.614
+Q(e:)-.198 E 67.592 297.061 64.182 297.061 DL(S)63 306.4 Q F3(=)3.079 E<e6>
+80.973 283.85 Q<e7>80.973 297.193 Q<e7>80.973 308.193 Q<e7>80.973 319.193 Q<e8>
+80.973 330.193 Q F4(s)90.323 283.3 Q F5(x)2.2 I F4(0)92.244 298.7 Q(0)92.244
+314.1 Q(0)92.244 329.5 Q(0)112.746 283.3 Q(s)110.665 298.7 Q F5(y)2.2 I F4(0)
+112.746 314.1 Q(0)112.746 329.5 Q(0)133.184 283.3 Q(0)133.184 298.7 Q(s)131.327
+314.1 Q F5(z)2.2 I F4(0)133.184 329.5 Q(0)151.541 283.3 Q(0)151.541 298.7 Q(0)
+151.541 314.1 Q(1)151.541 329.5 Q F3<f6>161.991 283.85 Q<f7>161.991 297.193 Q
+<f7>161.991 308.193 Q<f7>161.991 319.193 Q<f8>161.991 330.193 Q F6
+(DoRotate <DOR)63 372.766 Q -.44(OT)-.22 G(>).44 E .693(DoRotate \()62.714
+397.966 R F4(axis,)A/F9 11/Symbol-Slanted SF(q)2.497 E F4 3.495(\)c)1.54 G .745
+(auses a r)161.986 397.966 R .745(otation by)-.198 F F9(q)2.912 E F4 .745
+(about the speci\214ed axis.)5.035 F(The corr)63 411.166 Q 199.625 402.014
+196.215 402.014 DL(esponding matrix)103.546 411.166 Q F8(R)3.201 E F4
+(depends on the axis:)2.992 E 68.379 455.424 64.969 455.424 DL(R)63 464.576 Q
+F3(=)3.08 E<ec>82.547 444.391 Q<ef>82.547 455.391 Q<ed>82.547 466.391 Q<ef>
+82.547 477.391 Q 101.877 438.948 89.851 438.948 DL<ee>82.547 488.391 Q F4(R)
+89.851 448.1 Q 102.197 455.424 89.851 455.424 DL F5(x)97.199 450.3 Q F4(R)
+89.851 464.576 Q 101.749 471.9 89.851 471.9 DL F5(y)97.199 466.776 Q F4(R)
+89.851 481.052 Q F5(z)2.2 I F4 .33(if axis)113.197 448.1 R F3<ba>3.08 E F4 .33
+(DcXAxis < DCXAX >)3.08 F .33(if axis)113.197 464.576 R F3<ba>3.08 E F4 .33
+(DcYAxis < DCYAX >)3.08 F .33(if axis)113.197 481.052 R F3<ba>3.08 E F4 .33
+(DcZAxis < DCZAX >)3.08 F(and)63 504.566 Q 75.026 551.2 63 551.2 DL(R)63
+560.352 Q F5(x)2.2 I F3(=)3.63 -2.2 M<e6>87.225 537.802 Q<e7>87.225 551.145 Q
+<e7>87.225 562.145 Q<e7>87.225 573.145 Q<e8>87.225 584.145 Q F4(1)96.575
+537.252 Q(0)96.575 552.652 Q(0)96.575 568.052 Q(0)96.575 583.452 Q(0)124.795
+537.252 Q(cos\()113.075 552.652 Q F9(q)-.583 E F4(\))1.54 E(sin\()113.718
+568.052 Q F9(q)-.583 E F4(\))1.54 E(0)124.795 583.452 Q(0)167.112 537.252 Q F3
+(-)153.016 552.652 Q F4(sin\()A F9(q)-.583 E F4(\))1.54 E(cos\()155.392 568.052
+Q F9(q)-.583 E F4(\))1.54 E(0)167.112 583.452 Q(0)197.709 537.252 Q(0)197.709
+552.652 Q(0)197.709 568.052 Q(1)197.709 583.452 Q F3<f6>208.159 537.802 Q<f7>
+208.159 551.145 Q<f7>208.159 562.145 Q<f7>208.159 573.145 Q<f8>208.159 584.145
+Q 75.346 636.152 63 636.152 DL F4(R)63 645.304 Q F5(y)2.2 I F3(=)3.63 -2.2 M
+<e6>87.545 622.754 Q<e7>87.545 636.097 Q<e7>87.545 647.097 Q<e7>87.545 658.097
+Q<e8>87.545 669.097 Q F4(cos\()99.271 622.204 Q F9(q)-.583 E F4(\))1.54 E(0)
+110.991 637.604 Q F3(-)96.895 653.004 Q F4(sin\()A F9(q)-.583 E F4(\))1.54 E(0)
+110.991 668.404 Q(0)141.588 622.204 Q(1)141.588 637.604 Q(0)141.588 653.004 Q
+(0)141.588 668.404 Q(sin\()158.731 622.204 Q F9(q)-.583 E F4(\))1.54 E(0)
+169.808 637.604 Q(cos\()158.088 653.004 Q F9(q)-.583 E F4(\))1.54 E(0)169.808
+668.404 Q(0)198.029 622.204 Q(0)198.029 637.604 Q(0)198.029 653.004 Q(1)198.029
+668.404 Q F3<f6>208.479 622.754 Q<f7>208.479 636.097 Q<f7>208.479 647.097 Q<f7>
+208.479 658.097 Q<f8>208.479 669.097 Q 1.44 LW 81 756 63 756 DL 99 756 81 756
+DL 117 756 99 756 DL 135 756 117 756 DL 153 756 135 756 DL 171 756 153 756 DL
+189 756 171 756 DL 207 756 189 756 DL 225 756 207 756 DL 243 756 225 756 DL 261
+756 243 756 DL 279 756 261 756 DL 297 756 279 756 DL 315 756 297 756 DL 333 756
+315 756 DL 351 756 333 756 DL 369 756 351 756 DL 387 756 369 756 DL 419.4 756
+401.4 756 DL 428.4 756 410.4 756 DL 446.4 756 428.4 756 DL 464.4 756 446.4 756
+DL 482.4 756 464.4 756 DL 500.4 756 482.4 756 DL 518.4 756 500.4 756 DL 536.4
+756 518.4 756 DL/F10 9/Helvetica@0 SF(Dore)269.055 768.96 Q 3.506<b454>284.557
+768.96 S -.09(ra)295.479 768.96 S(nsf).09 E -2.277(or mation)-.27 F -2.367
+(Matr ices)2.502 F(Dore)414.21 768.96 Q 3.506<b452>429.712 768.96 S(ef)442.713
+768.96 Q(erence Man)-.27 E(ual)-.09 E/F11 9/Helvetica-Bold@0 SF(6-447)4.002 E
+EP
+%%Page: 448 4
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 108 46.8 72 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 257.4 46.8 221.4 46.8 DL 293.4 46.8 257.4 46.8 DL 329.4 46.8 293.4
+46.8 DL 365.4 46.8 329.4 46.8 DL 401.4 46.8 365.4 46.8 DL 437.4 46.8 401.4 46.8
+DL 473.4 46.8 437.4 46.8 DL 509.4 46.8 473.4 46.8 DL 545.4 46.8 509.4 46.8 DL
+/F0 10/Helvetica-BoldOblique@0 SF(Geometric T)72 57.6 Q(ransf)-.8 E(ormation)
+-.2 E(Attrib)72 68.4 Q(utes)-.2 E/F1 10/Helvetica@0 SF(\(contin)72 79.2 Q
+(ued\))-.1 E .44 LW 233.398 121.034 221.5 121.034 DL/F2 11/Palatino-Roman@0 SF
+(R)221.5 130.186 Q/F3 8/Palatino-Roman@0 SF(z)2.2 I/F4 11/Symbol SF(=)3.63 -2.2
+M<e6>245.597 107.636 Q<e7>245.597 120.979 Q<e7>245.597 131.979 Q<e7>245.597
+142.979 Q<e8>245.597 153.979 Q F2(cos\()254.947 107.086 Q/F5 11/Symbol-Slanted
+SF(q)-.583 E F2(\))1.54 E(sin\()255.59 122.486 Q F5(q)-.583 E F2(\))1.54 E(0)
+266.667 137.886 Q(0)266.667 153.286 Q F4(-)294.888 107.086 Q F2(sin\()A F5(q)
+-.583 E F2(\))1.54 E(cos\()297.264 122.486 Q F5(q)-.583 E F2(\))1.54 E(0)
+308.984 137.886 Q(0)308.984 153.286 Q(0)339.581 107.086 Q(0)339.581 122.486 Q
+(1)339.581 137.886 Q(0)339.581 153.286 Q(0)356.081 107.086 Q(0)356.081 122.486
+Q(0)356.081 137.886 Q(1)356.081 153.286 Q F4<f6>366.531 107.636 Q<f7>366.531
+120.979 Q<f7>366.531 131.979 Q<f7>366.531 142.979 Q<f8>366.531 153.979 Q/F6 11
+/Helvetica-BoldOblique@0 SF(DoShear <DOSHR>)221.5 198.952 Q 1.386(DoShear \()
+221.214 224.152 R F2(plane,)A F6(d)2.728 E/F7 8/Helvetica-BoldOblique@0 SF(1)
+.006 2.2 M F2(,).734 -2.2 M F6(d)2.728 E F7(2)1.182 2.2 M F2 4.049(\)c)1.454
+-2.2 O 1.299(auses a dir)350.802 224.152 R 1.298(ectional shear by)-.198 F F6
+(d)3.696 E F7(1).006 2.2 M F2(and)4.782 -2.2 M F6(d)3.696 E F7(2)1.182 2.2 M F2
+2.42(about the speci\214ed major plane.)221.5 238.309 R 2.421(The corr)7.921 F
+545.5 228.662 531.035 228.662 DL 2.421(esponding matrix)437.28 238.309 R F6(Sh)
+4.83 E F2(depends on the major plane:)221.5 251.509 Q 234.953 295.272 221.5
+295.272 DL/F8 11/Helvetica@0 SF(Sh)221.5 304.919 Q F4(=)3.08 E<ec>247.152
+284.734 Q<ef>247.152 295.734 Q<ed>247.152 306.734 Q<ef>247.152 317.734 Q
+276.459 278.853 254.456 278.853 DL<ee>247.152 328.734 Q F2(Sh)254.456 288.5 Q
+275.183 295.272 253.18 295.272 DL F3(yz)266.633 290.7 Q F2(Sh)253.18 304.919 Q
+273.907 311.691 251.904 311.691 DL F3(xz)265.357 307.119 Q F2(Sh)251.904
+321.338 Q F3(xy)2.2 I F2(if)283.631 288.5 Q F8(plane)3.08 E F4<ba>3.08 E F2 .33
+(DcYZ <)3.08 F F8 .022(DCYZ >)3.08 F F2(if)285.809 304.919 Q F8(plane)3.08 E F4
+<ba>3.08 E F2 .33(DcXZ <)3.08 F F8 .022(DCXZ >)3.08 F F2(if)287.987 321.338 Q
+F8(plane)3.08 E F4<ba>3.08 E F2 .33(DcXY <)3.08 F F8 .022(DCXY >)3.08 F F2(and)
+221.5 344.909 Q 242.675 391.169 221.5 391.169 DL(Sh)221.5 400.695 Q F3(yz)2.2 I
+F4(=)3.63 -2.2 M<e6>254.874 378.145 Q<e7>254.874 391.488 Q<e7>254.874 402.488 Q
+<e7>254.874 413.488 Q<e8>254.874 424.488 Q F2(1)267.109 377.595 Q(d)264.224
+392.995 Q F3(1)2.2 I F2(d)264.224 408.395 Q F3(2)2.2 I F2(0)267.109 423.795 Q
+(0)286.495 377.595 Q(1)286.495 392.995 Q(0)286.495 408.395 Q(0)286.495 423.795
+Q(0)302.995 377.595 Q(0)302.995 392.995 Q(1)302.995 408.395 Q(0)302.995 423.795
+Q(0)319.495 377.595 Q(0)319.495 392.995 Q(0)319.495 408.395 Q(1)319.495 423.795
+Q F4<f6>329.945 378.145 Q<f7>329.945 391.488 Q<f7>329.945 402.488 Q<f7>329.945
+413.488 Q<f8>329.945 424.488 Q 242.355 476.121 221.5 476.121 DL F2(Sh)221.5
+485.647 Q F3(xz)2.2 I F4(=)3.63 -2.2 M<e6>254.554 463.097 Q<e7>254.554 476.44 Q
+<e7>254.554 487.44 Q<e7>254.554 498.44 Q<e8>254.554 509.44 Q F2(1)263.904
+462.547 Q(0)263.904 477.947 Q(0)263.904 493.347 Q(0)263.904 508.747 Q(d)280.404
+462.547 Q F3(1)2.2 I F2(1)283.289 477.947 Q(d)280.404 493.347 Q F3(2)2.2 I F2
+(0)283.289 508.747 Q(0)302.675 462.547 Q(0)302.675 477.947 Q(1)302.675 493.347
+Q(0)302.675 508.747 Q(0)319.175 462.547 Q(0)319.175 477.947 Q(0)319.175 493.347
+Q(1)319.175 508.747 Q F4<f6>329.625 463.097 Q<f7>329.625 476.44 Q<f7>329.625
+487.44 Q<f7>329.625 498.44 Q<f8>329.625 509.44 Q 242.803 561.073 221.5 561.073
+DL F2(Sh)221.5 570.599 Q F3(xy)2.2 I F4(=)3.63 -2.2 M<e6>255.002 548.049 Q<e7>
+255.002 561.392 Q<e7>255.002 572.392 Q<e7>255.002 583.392 Q<e8>255.002 594.392
+Q F2(1)264.352 547.499 Q(0)264.352 562.899 Q(0)264.352 578.299 Q(0)264.352
+593.699 Q(0)280.852 547.499 Q(1)280.852 562.899 Q(0)280.852 578.299 Q(0)280.852
+593.699 Q(d)297.352 547.499 Q F3(1)2.2 I F2(d)297.352 562.899 Q F3(2)2.2 I F2
+(1)300.237 578.299 Q(0)300.237 593.699 Q(0)319.623 547.499 Q(0)319.623 562.899
+Q(0)319.623 578.299 Q(1)319.623 593.699 Q F4<f6>330.073 548.049 Q<f7>330.073
+561.392 Q<f7>330.073 572.392 Q<f7>330.073 583.392 Q<f8>330.073 594.392 Q F6
+(DoT)221.5 636.965 Q(ransf)-.88 E(ormMatrix <DO)-.22 E(TMX>)-.44 E 340.191
+652.815 336.781 652.815 DL 1.298(DoTransformMatrix \()221.214 662.253 R F2
+2.309(X,)2.057 G F6 -2.101(comptype \)).452 F F2 15.024(causes transformation)
+423.193 662.253 R 264.889 666.103 261.479 666.103 DL(matrix)221.5 675.541 Q F6
+(X)4.316 E F2 1.17(to be combined with the curr)5.833 F 1.171
+(ent transformation matrix)-.198 F 246.184 680.051 221.5 680.051 DL F6(CTM)
+220.873 689.698 Q F2 2.75(,g)1.485 G(iven the speci\214ed combination type:)
+257.8 689.698 Q 1.44 LW 90 756 72 756 DL 99 756 81 756 DL 117 756 99 756 DL 135
+756 117 756 DL 153 756 135 756 DL 171 756 153 756 DL 189 756 171 756 DL 207 756
+189 756 DL 239.4 756 221.4 756 DL 257.4 756 239.4 756 DL 275.4 756 257.4 756 DL
+293.4 756 275.4 756 DL 311.4 756 293.4 756 DL 329.4 756 311.4 756 DL 347.4 756
+329.4 756 DL 365.4 756 347.4 756 DL 383.4 756 365.4 756 DL 401.4 756 383.4 756
+DL 419.4 756 401.4 756 DL 437.4 756 419.4 756 DL 455.4 756 437.4 756 DL 473.4
+756 455.4 756 DL 491.4 756 473.4 756 DL 509.4 756 491.4 756 DL 527.4 756 509.4
+756 DL 545.4 756 527.4 756 DL/F9 9/Helvetica-Bold@0 SF(6-448)72 768.96 Q/F10 9
+/Helvetica@0 SF(Dore)6.504 E 3.506<b452>117.019 768.96 S(ef)130.02 768.96 Q
+(erence Man)-.27 E(ual)-.09 E(Dore)221.4 768.96 Q 3.506<b454>236.902 768.96 S
+-.09(ra)247.824 768.96 S(nsf).09 E -2.277(or mation)-.27 F -2.367(Matr ices)
+2.502 F EP
+%%Page: 449 5
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 99 46.8 63 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 243 46.8 207 46.8 DL 279 46.8 243 46.8 DL 315 46.8 279 46.8 DL 351
+46.8 315 46.8 DL 387 46.8 351 46.8 DL 437.4 46.8 401.4 46.8 DL 464.4 46.8 428.4
+46.8 DL 500.4 46.8 464.4 46.8 DL 536.4 46.8 500.4 46.8 DL/F0 10
+/Helvetica-BoldOblique@0 SF(Geometric T)411.82 57.6 Q(ransf)-.8 E(ormation)-.2
+E(Attrib)489.38 68.4 Q(utes)-.2 E/F1 10/Helvetica@0 SF(\(contin)486.48 79.2 Q
+(ued\))-.1 E .44 LW 86.826 120.563 63 120.563 DL/F2 11/Helvetica@0 SF(CTM)63
+130.21 Q/F3 11/Symbol SF 3.08<a23d>C<ec>101.742 110.025 Q<ef>101.742 121.025 Q
+<ed>101.742 132.025 Q<ef>101.742 143.025 Q 114.419 105.372 111.009 105.372 DL
+<ee>101.742 154.025 Q 132.872 120.563 109.046 120.563 DL F2(X)109.046 114.81 Q
+(CTM)109.046 130.21 Q 150.444 120.772 147.034 120.772 DL F3<b4>135.952 130.21 Q
+114.419 136.172 111.009 136.172 DL/F4 11/Palatino-Roman@0 SF(X)145.071 130.21 Q
+(X)109.046 145.61 Q 152.407 135.963 128.581 135.963 DL F3<b4>119.462 145.61 Q
+F2(CTM)3.08 E .022(if comptype)163.407 114.81 R F3<ba>3.08 E F2 .022
+(DcReplace < DCREP >)3.08 F .022(if comptype)163.407 130.21 R F3<ba>3.08 E F2
+.022(DcPreConcatenate < DCPREC >)3.08 F .022(if comptype)163.407 145.61 R F3
+<ba>3.08 E F2 .022(DcPostConcatenate < DCPSTC >)3.08 F F4 1.256
+(Note that this is the only geometric transformation attribute that)63 182.2 R
+.87(allows the user to r)63 195.4 R .871(eplace the curr)-.198 F .871
+(ent transformation matrix or to)-.198 F .101
+(postconcatenate a matrix to the curr)63 208.6 R .101
+(ent transformation matrix.)-.198 F(All)5.601 E 3.764(other commands only pr)63
+221.8 R 3.764(econcatenate a matrix to the curr)-.198 F(ent)-.198 E
+(transformation matrix.)63 235 Q(Remember)63 260.2 Q 4.689(,b)-.814 G 1.939
+(ecause Dore)128.717 260.2 R 5.492<b475>185.293 260.2 S 1.939
+(ses column vectors,)201.081 260.2 R/F5 11/Palatino-Italic@0 SF(DcPr)4.688 E
+(eConcatenate)-.198 E(<DCPREC>)63 273.4 Q 218.715 264.248 215.305 264.248 DL F4
+.299(means the matrix)123.392 273.4 R F5(X)3.38 E F4 .3
+(is the second operand when mul-)3.732 F 256.064 277.91 231.061 277.91 DL .588
+(tiplied with the composite matrix)63 287.216 R F5(CTM)3.393 E F4 6.088(.C).506
+G(onversely)272.701 287.216 Q 3.338(,w)-1.221 G(ith)334.229 287.216 Q F5
+(DcPost-)3.337 E 1.866(Concatenate <DCPSTC>)63 300.416 R F4 4.616(,t)C 249.544
+291.264 246.134 291.264 DL 1.866(he matrix)189.272 300.416 R F5(X)4.946 E F4
+1.866(is the \214rst operand of the)5.298 F
+(multiplication \(see the equations above\).)63 313.616 Q/F6 11
+/Helvetica-BoldOblique@0 SF(DoLookAtFr)63 350.816 Q(om <DOLAF>)-.22 E 163.298
+367.887 152.045 367.887 DL .506(DoLookAtFrom \()62.714 376.863 R 191.183
+367.326 166.961 367.326 DL F4(at,)152.045 376.863 Q F6(fr)3.08 E 211.192
+369.317 197.75 369.317 DL -2.816(om ,)174.683 376.863 R F4 5.658
+(up\) speci\214es a transformation that)3.267 F .944
+(combines a translation and a series of r)63 390.063 R(otations.)-.198 E F6
+(DoLookAtFrom)6.158 E F4 .962(transforms the curr)63 403.263 R .962(ent coor)
+-.198 F .962(dinate system so that it forms a right-)-.198 F 1.135(handed coor)
+63 417.31 R 247.876 407.773 223.654 407.773 DL 1.135(dinate system with)124.943
+417.31 R F6(fr)3.886 E(om)-.22 E 333.226 409.764 319.784 409.764 DL F4 1.136
+(at the origin,)251.762 417.31 R F6(up)3.886 E F4 1.136(aligned to)3.886 F .666
+(the positive)63 431.357 R F6(y)3.504 E F4 .666(axis and)5.022 F 209.22 421.82
+184.998 421.82 DL F6(\()179.278 431.357 Q F4(fr)2.057 E(om)-.198 E 231.979
+422.381 220.726 422.381 DL F3(-)211.607 431.357 Q F6 -.704(at \))3.025 F F4
+.665(aligned to the positive)4.362 F F6(z)3.745 E F4(axis.)4.878 E(The corr)63
+444.645 Q 274.586 435.207 271.176 435.207 DL(esponding transformation matrix)
+103.546 444.645 Q F6(L)2.464 E F4(is:)3.299 E 68.065 491.279 64.655 491.279 DL
+(L)63 500.431 Q F3(=)3.079 E<e6>81.919 477.881 Q<e7>81.919 491.224 Q<e7>81.919
+502.224 Q<e7>81.919 513.224 Q<e8>81.919 524.224 Q F4(u)91.429 477.331 Q/F7 8
+/Palatino-Roman@0 SF(x)2.2 I F4(u)91.269 492.731 Q F7(y)2.2 I F4(u)91.493
+508.131 Q F7(z)2.2 I F4(0)94.334 523.531 Q(v)114.06 477.331 Q F7(x)2.2 I F4(v)
+113.9 492.731 Q F7(y)2.2 I F4(v)114.124 508.131 Q F7(z)2.2 I F4(0)116.756
+523.531 Q(n)136.273 477.331 Q F7(x)2.2 I F4(n)136.113 492.731 Q F7(y)2.2 I F4
+(n)136.337 508.131 Q F7(z)2.2 I F4(0)139.063 523.531 Q(fr)158.673 477.331 Q(om)
+-.198 E F7(x)2.2 I F4(fr)158.513 492.731 Q(om)-.198 E F7(y)2.2 I F4(fr)158.737
+508.131 Q(om)-.198 E F7(z)2.2 I F4(1)170.026 523.531 Q F3<f6>191.99 477.881 Q
+<f7>191.99 491.224 Q<f7>191.99 502.224 Q<f7>191.99 513.224 Q<f8>191.99 524.224
+Q F4(wher)63 542.797 Q(e:)-.198 E 105.178 562.498 101.768 562.498 DL F6(n)
+98.835 570.044 Q 142.725 560.507 118.503 560.507 DL F3(=)109.384 570.044 Q F4
+(fr)3.08 E(om)-.198 E 165.484 561.068 154.231 561.068 DL F3(-)145.112 570.044 Q
+F6(at)3.025 E 104.782 575.852 101.372 575.852 DL(u)98.472 583.244 Q 131.901
+575.698 118.459 575.698 DL F3(=)109.34 583.244 Q F4(up)3.08 E 150.08 575.698
+146.67 575.698 DL F3<b4>134.783 583.244 Q F6(n)2.915 E 104.171 589.052 100.761
+589.052 DL(v)98.164 596.444 Q 124.307 588.898 120.897 588.898 DL F3(=)109.01
+596.444 Q F4(n)3.08 E 143.414 589.052 140.004 589.052 DL F3<b4>128.513 596.444
+Q F6(u)2.552 E F4 .499
+(This command is especially useful for positioning lights and cam-)63 622.844 R
+(eras.)63 636.044 Q 1.44 LW 81 756 63 756 DL 99 756 81 756 DL 117 756 99 756 DL
+135 756 117 756 DL 153 756 135 756 DL 171 756 153 756 DL 189 756 171 756 DL 207
+756 189 756 DL 225 756 207 756 DL 243 756 225 756 DL 261 756 243 756 DL 279 756
+261 756 DL 297 756 279 756 DL 315 756 297 756 DL 333 756 315 756 DL 351 756 333
+756 DL 369 756 351 756 DL 387 756 369 756 DL 419.4 756 401.4 756 DL 428.4 756
+410.4 756 DL 446.4 756 428.4 756 DL 464.4 756 446.4 756 DL 482.4 756 464.4 756
+DL 500.4 756 482.4 756 DL 518.4 756 500.4 756 DL 536.4 756 518.4 756 DL/F8 9
+/Helvetica@0 SF(Dore)269.055 768.96 Q 3.506<b454>284.557 768.96 S -.09(ra)
+295.479 768.96 S(nsf).09 E -2.277(or mation)-.27 F -2.367(Matr ices)2.502 F
+(Dore)414.21 768.96 Q 3.506<b452>429.712 768.96 S(ef)442.713 768.96 Q
+(erence Man)-.27 E(ual)-.09 E/F9 9/Helvetica-Bold@0 SF(6-449)4.002 E EP
+%%Page: 450 6
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 108 46.8 72 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 257.4 46.8 221.4 46.8 DL 293.4 46.8 257.4 46.8 DL 329.4 46.8 293.4
+46.8 DL 365.4 46.8 329.4 46.8 DL 401.4 46.8 365.4 46.8 DL 437.4 46.8 401.4 46.8
+DL 473.4 46.8 437.4 46.8 DL 509.4 46.8 473.4 46.8 DL 545.4 46.8 509.4 46.8 DL
+/F0 10/Helvetica@0 SF(\(contin)72 68.4 Q(ued\))-.1 E .16 LW 223.4 110 221.4 110
+DL 225.4 110 223.4 110 DL 227.4 110 225.4 110 DL 229.4 110 227.4 110 DL 231.4
+110 229.4 110 DL 233.4 110 231.4 110 DL 235.4 110 233.4 110 DL 237.4 110 235.4
+110 DL 239.4 110 237.4 110 DL 241.4 110 239.4 110 DL 243.4 110 241.4 110 DL
+245.4 110 243.4 110 DL 247.4 110 245.4 110 DL 249.4 110 247.4 110 DL 251.4 110
+249.4 110 DL 253.4 110 251.4 110 DL 255.4 110 253.4 110 DL 257.4 110 255.4 110
+DL 259.4 110 257.4 110 DL 261.4 110 259.4 110 DL 263.4 110 261.4 110 DL 265.4
+110 263.4 110 DL 267.4 110 265.4 110 DL 269.4 110 267.4 110 DL 271.4 110 269.4
+110 DL 273.4 110 271.4 110 DL 275.4 110 273.4 110 DL 277.4 110 275.4 110 DL
+279.4 110 277.4 110 DL 281.4 110 279.4 110 DL 283.4 110 281.4 110 DL 285.4 110
+283.4 110 DL 287.4 110 285.4 110 DL 289.4 110 287.4 110 DL 291.4 110 289.4 110
+DL 293.4 110 291.4 110 DL 295.4 110 293.4 110 DL 297.4 110 295.4 110 DL 299.4
+110 297.4 110 DL 301.4 110 299.4 110 DL 303.4 110 301.4 110 DL 305.4 110 303.4
+110 DL 307.4 110 305.4 110 DL 309.4 110 307.4 110 DL 311.4 110 309.4 110 DL
+313.4 110 311.4 110 DL 315.4 110 313.4 110 DL 317.4 110 315.4 110 DL 319.4 110
+317.4 110 DL 321.4 110 319.4 110 DL 323.4 110 321.4 110 DL 325.4 110 323.4 110
+DL 327.4 110 325.4 110 DL 329.4 110 327.4 110 DL 331.4 110 329.4 110 DL 333.4
+110 331.4 110 DL 335.4 110 333.4 110 DL 337.4 110 335.4 110 DL 339.4 110 337.4
+110 DL 341.4 110 339.4 110 DL 343.4 110 341.4 110 DL 345.4 110 343.4 110 DL
+347.4 110 345.4 110 DL 349.4 110 347.4 110 DL 351.4 110 349.4 110 DL 353.4 110
+351.4 110 DL 355.4 110 353.4 110 DL 357.4 110 355.4 110 DL 359.4 110 357.4 110
+DL 361.4 110 359.4 110 DL 363.4 110 361.4 110 DL 365.4 110 363.4 110 DL 367.4
+110 365.4 110 DL 369.4 110 367.4 110 DL 371.4 110 369.4 110 DL 373.4 110 371.4
+110 DL 375.4 110 373.4 110 DL 377.4 110 375.4 110 DL 379.4 110 377.4 110 DL
+381.4 110 379.4 110 DL 383.4 110 381.4 110 DL 385.4 110 383.4 110 DL 387.4 110
+385.4 110 DL 389.4 110 387.4 110 DL 391.4 110 389.4 110 DL 393.4 110 391.4 110
+DL 395.4 110 393.4 110 DL 397.4 110 395.4 110 DL 399.4 110 397.4 110 DL 401.4
+110 399.4 110 DL 403.4 110 401.4 110 DL 405.4 110 403.4 110 DL 407.4 110 405.4
+110 DL 409.4 110 407.4 110 DL 411.4 110 409.4 110 DL 413.4 110 411.4 110 DL
+415.4 110 413.4 110 DL 417.4 110 415.4 110 DL 419.4 110 417.4 110 DL 421.4 110
+419.4 110 DL 423.4 110 421.4 110 DL 425.4 110 423.4 110 DL 427.4 110 425.4 110
+DL 429.4 110 427.4 110 DL 431.4 110 429.4 110 DL 433.4 110 431.4 110 DL 435.4
+110 433.4 110 DL 437.4 110 435.4 110 DL 439.4 110 437.4 110 DL 441.4 110 439.4
+110 DL 443.4 110 441.4 110 DL 445.4 110 443.4 110 DL 447.4 110 445.4 110 DL
+449.4 110 447.4 110 DL 451.4 110 449.4 110 DL 453.4 110 451.4 110 DL 455.4 110
+453.4 110 DL 457.4 110 455.4 110 DL 459.4 110 457.4 110 DL 461.4 110 459.4 110
+DL 463.4 110 461.4 110 DL 465.4 110 463.4 110 DL 467.4 110 465.4 110 DL 469.4
+110 467.4 110 DL 471.4 110 469.4 110 DL 473.4 110 471.4 110 DL 475.4 110 473.4
+110 DL 477.4 110 475.4 110 DL 479.4 110 477.4 110 DL 481.4 110 479.4 110 DL
+483.4 110 481.4 110 DL 485.4 110 483.4 110 DL 487.4 110 485.4 110 DL 489.4 110
+487.4 110 DL 491.4 110 489.4 110 DL 493.4 110 491.4 110 DL 495.4 110 493.4 110
+DL 497.4 110 495.4 110 DL 499.4 110 497.4 110 DL 501.4 110 499.4 110 DL 503.4
+110 501.4 110 DL 505.4 110 503.4 110 DL 507.4 110 505.4 110 DL 509.4 110 507.4
+110 DL 511.4 110 509.4 110 DL 513.4 110 511.4 110 DL 515.4 110 513.4 110 DL
+517.4 110 515.4 110 DL 519.4 110 517.4 110 DL 521.4 110 519.4 110 DL 523.4 110
+521.4 110 DL 525.4 110 523.4 110 DL 527.4 110 525.4 110 DL 529.4 110 527.4 110
+DL 531.4 110 529.4 110 DL 533.4 110 531.4 110 DL 535.4 110 533.4 110 DL 537.4
+110 535.4 110 DL 539.4 110 537.4 110 DL 541.4 110 539.4 110 DL 543.4 110 541.4
+110 DL 545.4 110 543.4 110 DL 1.44 LW 90 110.5 72 110.5 DL 99 110.5 81 110.5 DL
+117 110.5 99 110.5 DL 135 110.5 117 110.5 DL 153 110.5 135 110.5 DL 171 110.5
+153 110.5 DL 189 110.5 171 110.5 DL 207 110.5 189 110.5 DL/F1 12
+/Helvetica-BoldOblique@0 SF(Vie)72 124.5 Q(wing)-.18 E -.96(Tr)72 138.5 S(ansf)
+.96 E(ormation)-.24 E/F2 11/Palatino-Roman@0 SF 2.221
+(The viewing transformation de\214nes the volume of world space)221.5 138.6 R
+(visible in the \214nal image, the)221.5 151.8 Q/F3 11/Palatino-Italic@0 SF
+(frustum space)2.75 E F2(.)A 1.636(The fr)221.5 177 R 1.636
+(ustum space encloses all points p for which the following)-.088 F(thr)221.5
+190.2 Q(ee equations ar)-.198 E 2.75(es)-.198 G(atis\214ed:)321.424 190.2 Q/F4
+11/Symbol SF(-)257.5 216.6 Q F2(p)A/F5 8/Palatino-Roman@0 SF(w)2.2 I F4 3.08
+<a2a3>.55 -2.2 O F2(p)A F5(x)2.2 I F4 3.08<a2a3>.55 -2.2 O F2(p)A F5(w)2.2 I F4
+<a2>.55 -2.2 M(-)257.5 229.8 Q F2(p)A F5(w)2.2 I F4 3.08<a2a3>.55 -2.2 O F2(p)A
+F5(y)2.2 I F4 3.08<a2a3>.55 -2.2 O F2(p)A F5(w)2.2 I F4<a2>.55 -2.2 M(-)257.5
+243.614 Q F2(p)A F5(w)2.2 I F4 3.08<a2a3>.55 -2.2 O F2(p)A F5(z)2.2 I F4 3.08
+<a2a3>.55 -2.2 O F2(0)A(wher)221.5 268.814 Q(e)-.198 E 21.139(pi)221.5 294.014
+S 2.75(sap)252.451 294.014 S(oint in world space.)274.726 294.014 Q(p)221.5
+319.863 Q .44 LW 248.703 310.711 245.293 310.711 DL F4 3.08<a23d>228.111
+319.863 S F2(V)A 268.772 310.524 265.362 310.524 DL F4<b4>254.049 319.863 Q F2
+(C)3.08 E 308.113 310.524 283.165 310.524 DL F4<b4>274.046 319.863 Q F2(CTM)
+3.08 E F4<b4>3.08 E F2(p)3.08 E F4(=)3.08 E F2(\(p)3.08 E F5(x)2.2 I F4<a2>.55
+-2.2 M F2 1.87(,p)C F5(y)-1.87 2.2 M F4<a2>.55 -2.2 M F2 1.87(,p)C F5(z)-1.87
+2.2 M F4<a2>.55 -2.2 M F2 1.87(,p)C F5(w)-1.87 2.2 M F4<a2>.55 -2.2 M F2(\))A
+.194(is the r)246.5 333.677 R .194
+(esulting point after applying the complete transforma-)-.198 F .241
+(tion pipeline to p \(see)246.5 346.877 R F3 -1.221(Tr)2.992 G .242
+(ansformation Pipeline)1.221 F F2 .242(at the beginning)2.992 F
+(of this chapter\).)246.5 360.077 Q 329.663 376.125 326.253 376.125 DL 1.408
+(The viewing matrix V depends on the type of camera pr)221.5 385.277 R
+(ojection)-.198 E(\()221.5 398.477 Q F3 7.874(DoParallel <DOP)B 7.875
+(AR>, DoPerspective <DOPER>, DoPr)-1.419 F(ojection)-.198 E 3.378
+(<DOPRJ>, DoCameraMatrix <DOCMX>)221.5 411.677 R F2 6.128(\). For)B 3.378
+(parallel and per)6.128 F(-)-.198 E 1.084(spective pr)221.5 424.877 R 331.711
+415.725 328.301 415.725 DL(ojections,)275.791 424.877 Q F3(V)3.56 E F2 1.085
+(also depends on the aspect ratio speci\214ed)4.736 F 2.019(for the Dore)221.5
+438.077 R 5.572<b476>279.977 438.077 S(iew)295.427 438.077 Q 7.519(.T)-1.012 G
+2.018(he following sections describe the viewing)329.071 438.077 R 303.912
+442.125 300.502 442.125 DL(transformation)221.5 451.277 Q F3(V)2.475 E F2(cr)
+3.651 E(eated for each type of camera pr)-.198 E(ojection.)-.198 E .16 LW 223.4
+477.277 221.4 477.277 DL 225.4 477.277 223.4 477.277 DL 227.4 477.277 225.4
+477.277 DL 229.4 477.277 227.4 477.277 DL 231.4 477.277 229.4 477.277 DL 233.4
+477.277 231.4 477.277 DL 235.4 477.277 233.4 477.277 DL 237.4 477.277 235.4
+477.277 DL 239.4 477.277 237.4 477.277 DL 241.4 477.277 239.4 477.277 DL 243.4
+477.277 241.4 477.277 DL 245.4 477.277 243.4 477.277 DL 247.4 477.277 245.4
+477.277 DL 249.4 477.277 247.4 477.277 DL 251.4 477.277 249.4 477.277 DL 253.4
+477.277 251.4 477.277 DL 255.4 477.277 253.4 477.277 DL 257.4 477.277 255.4
+477.277 DL 259.4 477.277 257.4 477.277 DL 261.4 477.277 259.4 477.277 DL 263.4
+477.277 261.4 477.277 DL 265.4 477.277 263.4 477.277 DL 267.4 477.277 265.4
+477.277 DL 269.4 477.277 267.4 477.277 DL 271.4 477.277 269.4 477.277 DL 273.4
+477.277 271.4 477.277 DL 275.4 477.277 273.4 477.277 DL 277.4 477.277 275.4
+477.277 DL 279.4 477.277 277.4 477.277 DL 281.4 477.277 279.4 477.277 DL 283.4
+477.277 281.4 477.277 DL 285.4 477.277 283.4 477.277 DL 287.4 477.277 285.4
+477.277 DL 289.4 477.277 287.4 477.277 DL 291.4 477.277 289.4 477.277 DL 293.4
+477.277 291.4 477.277 DL 295.4 477.277 293.4 477.277 DL 297.4 477.277 295.4
+477.277 DL 299.4 477.277 297.4 477.277 DL 301.4 477.277 299.4 477.277 DL 303.4
+477.277 301.4 477.277 DL 305.4 477.277 303.4 477.277 DL 307.4 477.277 305.4
+477.277 DL 309.4 477.277 307.4 477.277 DL 311.4 477.277 309.4 477.277 DL 313.4
+477.277 311.4 477.277 DL 315.4 477.277 313.4 477.277 DL 317.4 477.277 315.4
+477.277 DL 319.4 477.277 317.4 477.277 DL 321.4 477.277 319.4 477.277 DL 323.4
+477.277 321.4 477.277 DL 325.4 477.277 323.4 477.277 DL 327.4 477.277 325.4
+477.277 DL 329.4 477.277 327.4 477.277 DL 331.4 477.277 329.4 477.277 DL 333.4
+477.277 331.4 477.277 DL 335.4 477.277 333.4 477.277 DL 337.4 477.277 335.4
+477.277 DL 339.4 477.277 337.4 477.277 DL 341.4 477.277 339.4 477.277 DL 343.4
+477.277 341.4 477.277 DL 345.4 477.277 343.4 477.277 DL 347.4 477.277 345.4
+477.277 DL 349.4 477.277 347.4 477.277 DL 351.4 477.277 349.4 477.277 DL 353.4
+477.277 351.4 477.277 DL 355.4 477.277 353.4 477.277 DL 357.4 477.277 355.4
+477.277 DL 359.4 477.277 357.4 477.277 DL 361.4 477.277 359.4 477.277 DL 363.4
+477.277 361.4 477.277 DL 365.4 477.277 363.4 477.277 DL 367.4 477.277 365.4
+477.277 DL 369.4 477.277 367.4 477.277 DL 371.4 477.277 369.4 477.277 DL 373.4
+477.277 371.4 477.277 DL 375.4 477.277 373.4 477.277 DL 377.4 477.277 375.4
+477.277 DL 379.4 477.277 377.4 477.277 DL 381.4 477.277 379.4 477.277 DL 383.4
+477.277 381.4 477.277 DL 385.4 477.277 383.4 477.277 DL 387.4 477.277 385.4
+477.277 DL 389.4 477.277 387.4 477.277 DL 391.4 477.277 389.4 477.277 DL 393.4
+477.277 391.4 477.277 DL 395.4 477.277 393.4 477.277 DL 397.4 477.277 395.4
+477.277 DL 399.4 477.277 397.4 477.277 DL 401.4 477.277 399.4 477.277 DL 403.4
+477.277 401.4 477.277 DL 405.4 477.277 403.4 477.277 DL 407.4 477.277 405.4
+477.277 DL 409.4 477.277 407.4 477.277 DL 411.4 477.277 409.4 477.277 DL 413.4
+477.277 411.4 477.277 DL 415.4 477.277 413.4 477.277 DL 417.4 477.277 415.4
+477.277 DL 419.4 477.277 417.4 477.277 DL 421.4 477.277 419.4 477.277 DL 423.4
+477.277 421.4 477.277 DL 425.4 477.277 423.4 477.277 DL 427.4 477.277 425.4
+477.277 DL 429.4 477.277 427.4 477.277 DL 431.4 477.277 429.4 477.277 DL 433.4
+477.277 431.4 477.277 DL 435.4 477.277 433.4 477.277 DL 437.4 477.277 435.4
+477.277 DL 439.4 477.277 437.4 477.277 DL 441.4 477.277 439.4 477.277 DL 443.4
+477.277 441.4 477.277 DL 445.4 477.277 443.4 477.277 DL 447.4 477.277 445.4
+477.277 DL 449.4 477.277 447.4 477.277 DL 451.4 477.277 449.4 477.277 DL 453.4
+477.277 451.4 477.277 DL 455.4 477.277 453.4 477.277 DL 457.4 477.277 455.4
+477.277 DL 459.4 477.277 457.4 477.277 DL 461.4 477.277 459.4 477.277 DL 463.4
+477.277 461.4 477.277 DL 465.4 477.277 463.4 477.277 DL 467.4 477.277 465.4
+477.277 DL 469.4 477.277 467.4 477.277 DL 471.4 477.277 469.4 477.277 DL 473.4
+477.277 471.4 477.277 DL 475.4 477.277 473.4 477.277 DL 477.4 477.277 475.4
+477.277 DL 479.4 477.277 477.4 477.277 DL 481.4 477.277 479.4 477.277 DL 483.4
+477.277 481.4 477.277 DL 485.4 477.277 483.4 477.277 DL 487.4 477.277 485.4
+477.277 DL 489.4 477.277 487.4 477.277 DL 491.4 477.277 489.4 477.277 DL 493.4
+477.277 491.4 477.277 DL 495.4 477.277 493.4 477.277 DL 497.4 477.277 495.4
+477.277 DL 499.4 477.277 497.4 477.277 DL 501.4 477.277 499.4 477.277 DL 503.4
+477.277 501.4 477.277 DL 505.4 477.277 503.4 477.277 DL 507.4 477.277 505.4
+477.277 DL 509.4 477.277 507.4 477.277 DL 511.4 477.277 509.4 477.277 DL 513.4
+477.277 511.4 477.277 DL 515.4 477.277 513.4 477.277 DL 517.4 477.277 515.4
+477.277 DL 519.4 477.277 517.4 477.277 DL 521.4 477.277 519.4 477.277 DL 523.4
+477.277 521.4 477.277 DL 525.4 477.277 523.4 477.277 DL 527.4 477.277 525.4
+477.277 DL 529.4 477.277 527.4 477.277 DL 531.4 477.277 529.4 477.277 DL 533.4
+477.277 531.4 477.277 DL 535.4 477.277 533.4 477.277 DL 537.4 477.277 535.4
+477.277 DL 539.4 477.277 537.4 477.277 DL 541.4 477.277 539.4 477.277 DL 543.4
+477.277 541.4 477.277 DL 545.4 477.277 543.4 477.277 DL 1.44 LW 90 477.777 72
+477.777 DL 99 477.777 81 477.777 DL 117 477.777 99 477.777 DL 135 477.777 117
+477.777 DL 153 477.777 135 477.777 DL 171 477.777 153 477.777 DL 189 477.777
+171 477.777 DL 207 477.777 189 477.777 DL/F6 12/Helvetica-Oblique@0 SF(Vie)72
+491.777 Q 3.336(wA)-.24 G(spect Ratio)109.104 491.777 Q F2 .416
+(For both the perspective and parallel camera pr)221.5 505.877 R .416
+(ojections, the cam-)-.198 F 2.933(era pr)221.5 519.077 R 2.933
+(ojection matrices ar)-.198 F 5.683(ep)-.198 G -.198(re)370.721 519.077 S 2.933
+(concatenated with an additional).198 F .44 LW 303.834 523.587 292.989 523.587
+DL(scaling matrix S)221.5 532.926 Q F5(v)2.2 I F2
+(to handle the aspect ratio of the view)3.3 -2.2 M 2.75(,w)-1.012 G(her)499.777
+532.926 Q(e:)-.198 E 233.387 552.489 221.5 552.489 DL/F7 11/Helvetica@0 SF(S)
+221.5 562.136 Q/F8 8/Helvetica@0 SF(v)2.2 I F4(=)3.63 -2.2 M<ec>245.586 552.951
+Q<ed>245.586 563.951 Q 271.289 544.28 253.05 544.28 DL<ee>245.586 574.951 Q F2
+(S)253.05 553.927 Q F5(y/)2.2 I 269.887 560.699 251.328 560.699 DL F8(x)268.121
+556.127 Q F7(S)251.328 570.346 Q F8(x/)2.2 I F5(y)A F2(if)280.887 553.927 Q F7
+(viewsize)3.08 E F8(x)2.2 I F7(>)3.63 -2.2 M F2(viewsize)3.08 E F5(y)2.2 I F2
+(if)283.378 570.346 Q F7(viewsize)3.08 E F8(x)2.2 I F4<a3>3.63 -2.2 M F2
+(viewsize)3.08 E F5(y)2.2 I F2(and)221.5 591.126 Q 241.249 637.612 221.5
+637.612 DL(S)221.5 646.951 Q F5(y/x)2.2 I F4(=)3.63 -2.2 M<e6>253.448 613.401 Q
+<e7>253.448 626.744 Q<e7>253.448 637.744 Q<e7>253.448 648.744 Q<e7>253.448
+659.744 Q<e7>253.448 670.744 Q<e8>253.448 681.744 Q F2(viewsize)264.118 620.533
+Q F5(y)2.2 I F2(viewsize)264.278 637.097 Q 311.609 626.537 264.118 626.537 DL
+F5(x)306.771 639.297 Q F2(0)285.113 649.1 Q(0)285.113 668.803 Q(0)285.113
+688.506 Q(0)323.929 629.397 Q(1)323.929 649.1 Q(0)323.929 668.803 Q(0)323.929
+688.506 Q(0)340.429 629.397 Q(0)340.429 649.1 Q(1)340.429 668.803 Q(0)340.429
+688.506 Q(0)356.929 629.397 Q(0)356.929 649.1 Q(0)356.929 668.803 Q(1)356.929
+688.506 Q F4<f6>367.379 613.401 Q<f7>367.379 626.744 Q<f7>367.379 637.744 Q<f7>
+367.379 648.744 Q<f7>367.379 659.744 Q<f7>367.379 670.744 Q<f8>367.379 681.744
+Q 1.44 LW 90 756 72 756 DL 99 756 81 756 DL 117 756 99 756 DL 135 756 117 756
+DL 153 756 135 756 DL 171 756 153 756 DL 189 756 171 756 DL 207 756 189 756 DL
+239.4 756 221.4 756 DL 257.4 756 239.4 756 DL 275.4 756 257.4 756 DL 293.4 756
+275.4 756 DL 311.4 756 293.4 756 DL 329.4 756 311.4 756 DL 347.4 756 329.4 756
+DL 365.4 756 347.4 756 DL 383.4 756 365.4 756 DL 401.4 756 383.4 756 DL 419.4
+756 401.4 756 DL 437.4 756 419.4 756 DL 455.4 756 437.4 756 DL 473.4 756 455.4
+756 DL 491.4 756 473.4 756 DL 509.4 756 491.4 756 DL 527.4 756 509.4 756 DL
+545.4 756 527.4 756 DL/F9 9/Helvetica-Bold@0 SF(6-450)72 768.96 Q/F10 9
+/Helvetica@0 SF(Dore)6.504 E 3.506<b452>117.019 768.96 S(ef)130.02 768.96 Q
+(erence Man)-.27 E(ual)-.09 E(Dore)221.4 768.96 Q 3.506<b454>236.902 768.96 S
+-.09(ra)247.824 768.96 S(nsf).09 E -2.277(or mation)-.27 F -2.367(Matr ices)
+2.502 F EP
+%%Page: 451 7
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 99 46.8 63 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 243 46.8 207 46.8 DL 279 46.8 243 46.8 DL 315 46.8 279 46.8 DL 351
+46.8 315 46.8 DL 387 46.8 351 46.8 DL 437.4 46.8 401.4 46.8 DL 464.4 46.8 428.4
+46.8 DL 500.4 46.8 464.4 46.8 DL 536.4 46.8 500.4 46.8 DL/F0 10
+/Helvetica-BoldOblique@0 SF(Vie)423.64 57.6 Q(wing T)-.15 E(ransf)-.8 E
+(ormation)-.2 E/F1 10/Helvetica@0 SF(\(contin)486.48 68.4 Q(ued\))-.1 E .12 LW
+73.115 117.531 63 117.531 DL/F2 3/Palatino-Roman@0 SF(S)63 120.078 Q/F3 5
+/Palatino-Roman@0 SF(x/y)2.55 I/F4 3/Symbol SF(=).99 -2.55 M<e6>76.442 109.428
+Q<e7>-1.152 3.639 M<e7>-1.152 3 M<e7>-1.152 3 M<e7>-1.152 3 M<e7>-1.152 3 M<e7>
+-1.152 3 M<e8>-1.152 3 M F2(1)78.992 120.983 Q(0)78.992 128.38 Q(0)78.992
+135.777 Q(0)78.992 143.174 Q(0)90.361 120.983 Q(viewsize)83.952 125.9 Q F3(x)
+1.265 I F2(viewsize)83.852 130.48 Q 98.371 127.6 83.852 127.6 DL F3(y)95.441
+131.695 Q F2(0)90.361 135.777 Q(0)90.361 143.174 Q(0)101.731 120.983 Q(0)
+101.731 128.38 Q(1)101.731 135.777 Q(0)101.731 143.174 Q(0)106.231 120.983 Q(0)
+106.231 128.38 Q(0)106.231 135.777 Q(1)106.231 143.174 Q F4<f6>109.081 109.428
+Q<f7>-1.152 3.639 M<f7>-1.152 3 M<f7>-1.152 3 M<f7>-1.152 3 M<f7>-1.152 3 M<f7>
+-1.152 3 M<f8>-1.152 3 M F2(viewsize)99 163.428 Q F3(x)1.265 I F4(=).99 -1.265
+M F2(fur).84 E F3(x)1.265 I F4(-).99 -1.265 M F2(bll).84 E F3(x)1.265 I F2
+(viewsize)99 176.858 Q F3(y)1.215 I F4(=).99 -1.215 M F2(fur).84 E F3(y)1.215 I
+F4(-).99 -1.215 M F2(bll).84 E F3(y)1.215 I .44 LW 77.641 194.948 63 194.948 DL
+125.881 194.97 113.396 194.97 DL/F5 11/Palatino-Roman@0 SF 5.816
+(fur and bll ar)63 204.496 R 8.566<658c>-.198 G 5.816
+(elds of the view boundary r)164.584 204.496 R 5.817(eturned by)-.198 F
+(DvInqBoundary)63 217.696 Q 4.847(.T)-1.221 G 2.096
+(hey de\214ne the extent of the r)155.561 217.696 R 2.096(ectangular view)-.198
+F(volume.)63 230.896 Q .16 LW 65 263.496 63 263.496 DL 67 263.496 65 263.496 DL
+69 263.496 67 263.496 DL 71 263.496 69 263.496 DL 73 263.496 71 263.496 DL 75
+263.496 73 263.496 DL 77 263.496 75 263.496 DL 79 263.496 77 263.496 DL 81
+263.496 79 263.496 DL 83 263.496 81 263.496 DL 85 263.496 83 263.496 DL 87
+263.496 85 263.496 DL 89 263.496 87 263.496 DL 91 263.496 89 263.496 DL 93
+263.496 91 263.496 DL 95 263.496 93 263.496 DL 97 263.496 95 263.496 DL 99
+263.496 97 263.496 DL 101 263.496 99 263.496 DL 103 263.496 101 263.496 DL 105
+263.496 103 263.496 DL 107 263.496 105 263.496 DL 109 263.496 107 263.496 DL
+111 263.496 109 263.496 DL 113 263.496 111 263.496 DL 115 263.496 113 263.496
+DL 117 263.496 115 263.496 DL 119 263.496 117 263.496 DL 121 263.496 119
+263.496 DL 123 263.496 121 263.496 DL 125 263.496 123 263.496 DL 127 263.496
+125 263.496 DL 129 263.496 127 263.496 DL 131 263.496 129 263.496 DL 133
+263.496 131 263.496 DL 135 263.496 133 263.496 DL 137 263.496 135 263.496 DL
+139 263.496 137 263.496 DL 141 263.496 139 263.496 DL 143 263.496 141 263.496
+DL 145 263.496 143 263.496 DL 147 263.496 145 263.496 DL 149 263.496 147
+263.496 DL 151 263.496 149 263.496 DL 153 263.496 151 263.496 DL 155 263.496
+153 263.496 DL 157 263.496 155 263.496 DL 159 263.496 157 263.496 DL 161
+263.496 159 263.496 DL 163 263.496 161 263.496 DL 165 263.496 163 263.496 DL
+167 263.496 165 263.496 DL 169 263.496 167 263.496 DL 171 263.496 169 263.496
+DL 173 263.496 171 263.496 DL 175 263.496 173 263.496 DL 177 263.496 175
+263.496 DL 179 263.496 177 263.496 DL 181 263.496 179 263.496 DL 183 263.496
+181 263.496 DL 185 263.496 183 263.496 DL 187 263.496 185 263.496 DL 189
+263.496 187 263.496 DL 191 263.496 189 263.496 DL 193 263.496 191 263.496 DL
+195 263.496 193 263.496 DL 197 263.496 195 263.496 DL 199 263.496 197 263.496
+DL 201 263.496 199 263.496 DL 203 263.496 201 263.496 DL 205 263.496 203
+263.496 DL 207 263.496 205 263.496 DL 209 263.496 207 263.496 DL 211 263.496
+209 263.496 DL 213 263.496 211 263.496 DL 215 263.496 213 263.496 DL 217
+263.496 215 263.496 DL 219 263.496 217 263.496 DL 221 263.496 219 263.496 DL
+223 263.496 221 263.496 DL 225 263.496 223 263.496 DL 227 263.496 225 263.496
+DL 229 263.496 227 263.496 DL 231 263.496 229 263.496 DL 233 263.496 231
+263.496 DL 235 263.496 233 263.496 DL 237 263.496 235 263.496 DL 239 263.496
+237 263.496 DL 241 263.496 239 263.496 DL 243 263.496 241 263.496 DL 245
+263.496 243 263.496 DL 247 263.496 245 263.496 DL 249 263.496 247 263.496 DL
+251 263.496 249 263.496 DL 253 263.496 251 263.496 DL 255 263.496 253 263.496
+DL 257 263.496 255 263.496 DL 259 263.496 257 263.496 DL 261 263.496 259
+263.496 DL 263 263.496 261 263.496 DL 265 263.496 263 263.496 DL 267 263.496
+265 263.496 DL 269 263.496 267 263.496 DL 271 263.496 269 263.496 DL 273
+263.496 271 263.496 DL 275 263.496 273 263.496 DL 277 263.496 275 263.496 DL
+279 263.496 277 263.496 DL 281 263.496 279 263.496 DL 283 263.496 281 263.496
+DL 285 263.496 283 263.496 DL 287 263.496 285 263.496 DL 289 263.496 287
+263.496 DL 291 263.496 289 263.496 DL 293 263.496 291 263.496 DL 295 263.496
+293 263.496 DL 297 263.496 295 263.496 DL 299 263.496 297 263.496 DL 301
+263.496 299 263.496 DL 303 263.496 301 263.496 DL 305 263.496 303 263.496 DL
+307 263.496 305 263.496 DL 309 263.496 307 263.496 DL 311 263.496 309 263.496
+DL 313 263.496 311 263.496 DL 315 263.496 313 263.496 DL 317 263.496 315
+263.496 DL 319 263.496 317 263.496 DL 321 263.496 319 263.496 DL 323 263.496
+321 263.496 DL 325 263.496 323 263.496 DL 327 263.496 325 263.496 DL 329
+263.496 327 263.496 DL 331 263.496 329 263.496 DL 333 263.496 331 263.496 DL
+335 263.496 333 263.496 DL 337 263.496 335 263.496 DL 339 263.496 337 263.496
+DL 341 263.496 339 263.496 DL 343 263.496 341 263.496 DL 345 263.496 343
+263.496 DL 347 263.496 345 263.496 DL 349 263.496 347 263.496 DL 351 263.496
+349 263.496 DL 353 263.496 351 263.496 DL 355 263.496 353 263.496 DL 357
+263.496 355 263.496 DL 359 263.496 357 263.496 DL 361 263.496 359 263.496 DL
+363 263.496 361 263.496 DL 365 263.496 363 263.496 DL 367 263.496 365 263.496
+DL 369 263.496 367 263.496 DL 371 263.496 369 263.496 DL 373 263.496 371
+263.496 DL 375 263.496 373 263.496 DL 377 263.496 375 263.496 DL 379 263.496
+377 263.496 DL 381 263.496 379 263.496 DL 383 263.496 381 263.496 DL 385
+263.496 383 263.496 DL 387 263.496 385 263.496 DL 1.44 LW 419.4 263.996 401.4
+263.996 DL 428.4 263.996 410.4 263.996 DL 446.4 263.996 428.4 263.996 DL 464.4
+263.996 446.4 263.996 DL 482.4 263.996 464.4 263.996 DL 500.4 263.996 482.4
+263.996 DL 518.4 263.996 500.4 263.996 DL 536.4 263.996 518.4 263.996 DL/F6 12
+/Helvetica-Oblique@0 SF(Projection)483.048 277.996 Q -1.44(Ty)505.164 291.996 S
+(pes)1.44 E F5 5.009(Ad)63 298.696 S(if)83.288 298.696 Q(fer)-.198 E 2.26
+(ent expr)-.198 F .44 LW 384.734 289.544 381.324 289.544 DL 2.26
+(ession for the viewing transformation matrix V)145.003 298.696 R(corr)63
+311.896 Q(esponds to each camera pr)-.198 E(ojection type.)-.198 E/F7 11
+/Helvetica-BoldOblique@0 SF(DoP)63 355.696 Q(er)-.33 E(spective <DOPER>)-.165 E
+.693(DoPerspective \()62.714 387.496 R F5(fov)A(,)-1.221 E F7 -1.408(hither ,)
+2.915 F F5 1.308(yon\) cr)3.267 F 1.308(eates an object that generates)-.198 F
+6.906(ac)63 400.696 S 4.156(amera pr)80.29 400.696 R 4.156(ojection matrix.)
+-.198 F 4.156(When multiplied by the scaling)9.656 F 111.347 405.206 97.771
+405.206 DL(matrix)63 414.853 Q F7(S)2.409 E/F8 8/Helvetica-BoldOblique@0 SF(v)
+.382 2.2 M F5 2.75(,t)1.75 -2.2 O(he r)120.433 414.853 Q 339.301 405.415
+335.891 405.415 DL(esulting viewing transformation matrix)139.001 414.853 Q F7
+(V)1.408 E F5(is:)4.773 E 68.676 496.901 65.266 496.901 DL(V)63 506.053 Q/F9 11
+/Symbol SF(=)3.08 E<e6>83.141 450.503 Q<e7>83.141 463.846 Q<e7>83.141 474.846 Q
+<e7>83.141 485.846 Q<e7>83.141 496.846 Q<e7>83.141 507.846 Q<e7>83.141 518.846
+Q<e7>83.141 529.846 Q<e7>83.141 540.846 Q<e7>83.141 551.846 Q<e8>83.141 562.846
+Q F5(1)113.402 469.537 Q(tan)93.811 492.153 Q F9<e6>111.169 486.103 Q<e8>
+111.169 499.446 Q F5(fov)116.889 484.453 Q 132.773 489.293 116.889 489.293 DL
+(2)122.081 499.853 Q F9<f6>134.093 486.103 Q 138.493 474.377 93.811 474.377 DL
+<f8>134.093 499.446 Q F5(0)113.402 512.448 Q(0)113.402 547.659 Q(0)113.402
+582.87 Q(0)171.724 477.237 Q(1)171.724 504.748 Q(tan)152.133 527.364 Q F9<e6>
+169.491 521.314 Q<e8>169.491 534.657 Q F5(fov)175.211 519.664 Q 191.095 524.504
+175.211 524.504 DL(2)180.403 535.064 Q F9<f6>192.415 521.314 Q 196.815 509.588
+152.133 509.588 DL<f8>192.415 534.657 Q F5(0)171.724 547.659 Q(0)171.724 582.87
+Q(0)232.477 477.237 Q(0)232.477 512.448 Q(1)232.477 539.959 Q(1)210.455 562.025
+Q F9(-)3.08 E F5(hither)229.474 554.325 Q 258.679 559.165 229.474 559.165 DL
+259.999 544.799 210.455 544.799 DL(yon)234.814 569.725 Q F9(-)229.457 582.87 Q
+F5(1)A(0)295.661 477.237 Q(0)295.661 512.448 Q F9(-)280.789 539.959 Q F5
+(hither)A(1)273.639 562.025 Q F9(-)3.08 E F5(hither)292.658 554.325 Q 321.863
+559.165 292.658 559.165 DL 323.183 544.799 273.639 544.799 DL(yon)297.998
+569.725 Q(0)295.661 582.87 Q F9<f6>329.453 450.503 Q<f7>329.453 463.846 Q<f7>
+329.453 474.846 Q<f7>329.453 485.846 Q<f7>329.453 496.846 Q<f7>329.453 507.846
+Q<f7>329.453 518.846 Q<f7>329.453 529.846 Q<f7>329.453 540.846 Q<f7>329.453
+551.846 Q<f8>329.453 562.846 Q 356.897 496.714 346.052 496.714 DL<b4>336.933
+506.053 Q F5(S)3.08 E/F10 8/Palatino-Roman@0 SF(v)2.2 I F2(Note that both)63
+594.619 Q/F11 3/Palatino-Italic@0 SF(hither).75 E F2(and).75 E F11(yon).75 E F2
+(must be negative.).75 E F7(DoP)63 631.819 Q(arallel <DOP)-.33 E(AR>)-1.1 E
+1.21(DoParallel \()62.714 657.019 R F5(winsize,)A F7 -1.408(hither ,)2.915 F F5
+1.179(yon\) cr)3.267 F 1.178(eates an object that generates)-.198 F 6.906(ac)63
+670.219 S 4.156(amera pr)80.29 670.219 R 4.156(ojection matrix.)-.198 F 4.156
+(When multiplied by the scaling)9.656 F 111.347 674.729 97.771 674.729 DL
+(matrix)63 684.376 Q F7(S)2.409 E F8(v).382 2.2 M F5 2.75(,t)1.75 -2.2 O(he r)
+120.433 684.376 Q 339.301 674.938 335.891 674.938 DL
+(esulting viewing transformation matrix)139.001 684.376 Q F7(V)1.408 E F5(is:)
+4.773 E 1.44 LW 81 756 63 756 DL 99 756 81 756 DL 117 756 99 756 DL 135 756 117
+756 DL 153 756 135 756 DL 171 756 153 756 DL 189 756 171 756 DL 207 756 189 756
+DL 225 756 207 756 DL 243 756 225 756 DL 261 756 243 756 DL 279 756 261 756 DL
+297 756 279 756 DL 315 756 297 756 DL 333 756 315 756 DL 351 756 333 756 DL 369
+756 351 756 DL 387 756 369 756 DL 419.4 756 401.4 756 DL 428.4 756 410.4 756 DL
+446.4 756 428.4 756 DL 464.4 756 446.4 756 DL 482.4 756 464.4 756 DL 500.4 756
+482.4 756 DL 518.4 756 500.4 756 DL 536.4 756 518.4 756 DL/F12 9/Helvetica@0 SF
+(Dore)269.055 768.96 Q 3.506<b454>284.557 768.96 S -.09(ra)295.479 768.96 S
+(nsf).09 E -2.277(or mation)-.27 F -2.367(Matr ices)2.502 F(Dore)414.21 768.96
+Q 3.506<b452>429.712 768.96 S(ef)442.713 768.96 Q(erence Man)-.27 E(ual)-.09 E
+/F13 9/Helvetica-Bold@0 SF(6-451)4.002 E EP
+%%Page: 452 8
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 108 46.8 72 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 257.4 46.8 221.4 46.8 DL 293.4 46.8 257.4 46.8 DL 329.4 46.8 293.4
+46.8 DL 365.4 46.8 329.4 46.8 DL 401.4 46.8 365.4 46.8 DL 437.4 46.8 401.4 46.8
+DL 473.4 46.8 437.4 46.8 DL 509.4 46.8 473.4 46.8 DL 545.4 46.8 509.4 46.8 DL
+/F0 10/Helvetica-BoldOblique@0 SF(Vie)72 57.6 Q(wing T)-.15 E(ransf)-.8 E
+(ormation)-.2 E/F1 10/Helvetica@0 SF(\(contin)72 68.4 Q(ued\))-.1 E .44 LW
+226.873 139.648 223.463 139.648 DL/F2 11/Helvetica@0 SF(V)221.5 149.086 Q/F3 11
+/Symbol SF(=)3.079 E<e6>241.035 110.036 Q<e7>241.035 123.379 Q<e7>241.035
+134.379 Q<e7>241.035 145.379 Q<e7>241.035 156.379 Q<e7>241.035 167.379 Q<e7>
+241.035 178.379 Q<e8>241.035 189.379 Q/F4 11/Palatino-Roman@0 SF(2)266.676
+110.267 Q 287.763 115.107 251.705 115.107 DL F2(winsize)251.705 125.667 Q(0)
+266.676 138.713 Q F4(0)266.676 159.459 Q F2(0)266.06 180.205 Q F4(0)315.758
+117.967 Q F2(2)315.142 131.013 Q 336.229 135.853 300.171 135.853 DL F4(winsize)
+300.171 146.413 Q(0)315.142 159.459 Q F2(0)314.526 180.205 Q F4(0)375.312
+117.967 Q F2(0)374.696 138.713 Q F4(1)374.696 151.759 Q F2(hither)348.637
+167.159 Q F3(-)3.08 E 406.871 156.599 348.637 156.599 DL F4(yon)388.347 167.159
+Q(0)374.696 180.205 Q F2(0)418.575 117.967 Q F4(0)418.575 138.713 Q F2(0)
+417.959 159.459 Q F4(1)417.959 180.205 Q F3<f6>428.409 110.036 Q<f7>428.409
+123.379 Q<f7>428.409 134.379 Q<f7>428.409 145.379 Q<f7>428.409 156.379 Q<f7>
+428.409 167.379 Q<f7>428.409 178.379 Q<f8>428.409 189.379 Q<b4>435.889 149.086
+Q<e6>445.008 126.536 Q<e7>445.008 139.879 Q<e7>445.008 150.879 Q<e7>445.008
+161.879 Q<e8>445.008 172.879 Q F4(1)454.358 125.986 Q F2(0)453.742 141.386 Q F4
+(0)453.742 156.786 Q F2(0)453.126 172.186 Q F4(0)470.242 125.986 Q F2(1)469.626
+141.386 Q F4(0)469.626 156.786 Q F2(0)469.01 172.186 Q F4(0)486.126 125.986 Q
+F2(0)485.51 141.386 Q F4(1)485.51 156.786 Q F2(0)484.894 172.186 Q F4(0)516.574
+125.986 Q F2(0)515.958 141.386 Q F3(-)501.394 156.786 Q F2(hither)A(1)514.264
+172.186 Q F3<f6>539.894 126.536 Q<f7>539.894 139.879 Q<f7>539.894 150.879 Q<f7>
+539.894 161.879 Q<f8>539.894 172.879 Q 568.38 139.439 556.493 139.439 DL<b4>
+547.374 149.086 Q F2(S)3.08 E/F5 8/Helvetica@0 SF(v)2.2 I/F6 11
+/Helvetica-BoldOblique@0 SF(DoPr)221.5 219.952 Q(ojection <DOPRJ>)-.22 E .484
+(DoProjection \()221.214 245.152 R F4(window)A(,)-1.012 E F6 -2.101(type ,)2.53
+F F4(prp,)3.267 E F6 -2.101(plane ,)3.432 F F4(hither)3.267 E(,)-.814 E F6
+-2.31(yon \))3.168 F F4(cr)5.734 E 2.038(eates an)-.198 F 501.15 249.002 497.74
+249.002 DL 1.539(object that generates a viewing transformation matrix)221.5
+258.44 R F6(V)2.948 E F4 7.04(.I)2.023 G 4.29(nt)516.955 258.44 S(his)531.233
+258.44 Q 5.334(case, the viewing transformation matrix corr)221.5 271.64 R
+5.334(esponds to the)-.198 F .292(camera pr)221.5 284.84 R .292
+(ojection matrix.)-.198 F .292(Note that both)5.792 F F6(hither)2.877 E F4(and)
+4.692 E F6(yon)3.13 E F4 .293(must be)3.79 F 281.321 289.35 273.94 289.35 DL
+(negative.)221.5 298.788 Q F6(ll)7.923 E 322.83 291.242 310.708 291.242 DL F4
+(and)286.703 298.788 Q F6(ur)4.854 E F4(ar)7.032 E 5.382<658c>-.198 G 2.632
+(elds of the parameter)355.165 298.788 R F6(window)4.578 E F4 5.381(.T)1.694 G
+(hey)527.713 298.788 Q(de\214ne an arbitrary r)221.5 311.988 Q(ectangular r)
+-.198 E(egion on the viewing plane.)-.198 E(wher)221.5 377.988 Q(e:)-.198 E
+228.408 477.422 224.998 477.422 DL(M)221.5 486.574 Q F3(=)3.08 E<e6>244.105
+398.024 Q<e7>244.105 411.367 Q<e7>244.105 422.367 Q<e7>244.105 433.367 Q<e7>
+244.105 444.367 Q<e7>244.105 455.367 Q<e7>244.105 466.367 Q<e7>244.105 477.367
+Q<e7>244.105 488.367 Q<e7>244.105 499.367 Q<e7>244.105 510.367 Q<e7>244.105
+521.367 Q<e7>244.105 532.367 Q<e7>244.105 543.367 Q<e7>244.105 554.367 Q<e7>
+244.105 565.367 Q<e8>244.105 576.367 Q F4(1)253.455 455.439 Q(0)253.455 500.196
+Q(0)253.455 544.953 Q(0)253.455 589.71 Q(0)269.955 455.439 Q(1)269.955 500.196
+Q(0)269.955 544.953 Q(0)269.955 589.71 Q F3<e6>288.255 434.473 Q<e8>288.255
+447.816 Q(-)292.655 440.523 Q F4(\(ll)303.094 432.823 Q/F7 8/Palatino-Roman@0
+SF(x)2.2 I F3(+)3.63 -2.2 M F4(ur)3.08 E F7(x)2.2 I F4(\)).55 -2.2 M 349.355
+437.663 303.094 437.663 DL(2)323.474 448.223 Q F3(-)353.755 440.523 Q F4(prp)
+3.08 E F7(x)2.2 I F3<f6>385.119 434.473 Q<f8>385.119 447.816 Q 389.519 452.579
+288.255 452.579 DL F4(vp)332.474 463.139 Q F3<e6>287.775 479.23 Q<e8>287.775
+492.573 Q(-)292.175 485.28 Q F4(\(ll)302.614 476.416 Q F7(y)2.2 I F3(+)3.63
+-2.2 M F4(ur)3.08 E F7(y)2.2 I F4(\)).55 -2.2 M 349.515 482.42 302.614 482.42
+DL(2)323.314 492.98 Q F3(-)353.915 485.28 Q F4(prp)3.08 E F7(y)2.2 I F3<f6>
+385.599 479.23 Q<f8>385.599 492.573 Q 389.999 497.336 287.775 497.336 DL F4(vp)
+332.474 507.896 Q(1)336.137 544.953 Q(0)336.137 589.71 Q(0)402.319 455.439 Q(0)
+402.319 500.196 Q(0)402.319 544.953 Q(1)402.319 589.71 Q F3<f6>412.769 398.024
+Q<f7>412.769 411.367 Q<f7>412.769 422.367 Q<f7>412.769 433.367 Q<f7>412.769
+444.367 Q<f7>412.769 455.367 Q<f7>412.769 466.367 Q<f7>412.769 477.367 Q<f7>
+412.769 488.367 Q<f7>412.769 499.367 Q<f7>412.769 510.367 Q<f7>412.769 521.367
+Q<f7>412.769 532.367 Q<f7>412.769 543.367 Q<f7>412.769 554.367 Q<f7>412.769
+565.367 Q<f8>412.769 576.367 Q<b4>420.249 486.574 Q<e6>429.368 464.024 Q<e7>
+429.368 477.367 Q<e7>429.368 488.367 Q<e7>429.368 499.367 Q<e8>429.368 510.367
+Q F4(1)438.718 463.474 Q(0)438.718 478.874 Q(0)438.718 494.274 Q(0)438.718
+509.674 Q(0)455.218 463.474 Q(1)455.218 478.874 Q(0)455.218 494.274 Q(0)455.218
+509.674 Q(0)471.718 463.474 Q(0)471.718 478.874 Q(1)471.718 494.274 Q(0)471.718
+509.674 Q F3(-)488.378 463.474 Q F4(prp)A F7(x)2.2 I F3(-)488.218 478.874 Q F4
+(prp)A F7(y)2.2 I F3(-)488.442 494.274 Q F4(prp)A F7(z)2.2 I F4(1)499.77
+509.674 Q F3<f6>521.772 464.024 Q<f7>521.772 477.367 Q<f7>521.772 488.367 Q<f7>
+521.772 499.367 Q<f8>521.772 510.367 Q .12 LW 249.236 627.022 221.5 627.022 DL
+/F8 3/Palatino-Roman@0 SF(V)221.5 629.518 Q/F9 5/Palatino-Roman@0 SF
+(perspective)2.355 I/F10 3/Symbol SF(=).99 -2.355 M<e6>252.563 614.368 Q<e7>
+-1.152 3.639 M<e7>-1.152 3 M<e7>-1.152 3 M<e7>-1.152 3 M<e7>-1.152 3 M<e7>
+-1.152 3 M<e7>-1.152 3 M<e7>-1.152 3 M<e7>-1.152 3 M<e8>-1.152 3 M F8(vp)257.36
+613.095 Q(xur)255.473 617.295 Q 262.745 614.415 255.473 614.415 DL F9(x)260.015
+618.56 Q F8(0)258.359 624.744 Q(0)258.359 634.293 Q(0)258.359 643.842 Q(0)
+269.451 615.195 Q(vp)268.452 622.644 Q(xur)266.465 626.844 Q 273.937 623.964
+266.465 623.964 DL F9(y)271.007 628.059 Q F8(0)269.451 634.293 Q(0)269.451
+643.842 Q(0)280.553 615.195 Q(0)280.553 624.744 Q(1)280.553 632.193 Q(1)277.657
+638.211 Q F10(-).84 E F8(h)1.2 -2.1 M 284.59 637.431 282.844 637.431 DL 284.95
+633.513 277.657 633.513 DL(y)282.883 640.311 Q F10(-)279.73 643.842 Q F8(1)A(0)
+291.566 615.195 Q(0)291.566 624.744 Q F10(-)290.62 632.193 Q F8(h)A(1)288.67
+638.211 Q F10(-).84 E F8(h)1.2 -2.1 M 295.603 637.431 293.857 637.431 DL
+295.963 633.513 288.67 633.513 DL(y)293.896 640.311 Q(0)291.566 643.842 Q F10
+<f6>296.833 614.368 Q<f7>-1.152 3.639 M<f7>-1.152 3 M<f7>-1.152 3 M<f7>-1.152 3
+M<f7>-1.152 3 M<f7>-1.152 3 M<f7>-1.152 3 M<f7>-1.152 3 M<f7>-1.152 3 M<f8>
+-1.152 3 M 1.44 LW 90 756 72 756 DL 99 756 81 756 DL 117 756 99 756 DL 135 756
+117 756 DL 153 756 135 756 DL 171 756 153 756 DL 189 756 171 756 DL 207 756 189
+756 DL 239.4 756 221.4 756 DL 257.4 756 239.4 756 DL 275.4 756 257.4 756 DL
+293.4 756 275.4 756 DL 311.4 756 293.4 756 DL 329.4 756 311.4 756 DL 347.4 756
+329.4 756 DL 365.4 756 347.4 756 DL 383.4 756 365.4 756 DL 401.4 756 383.4 756
+DL 419.4 756 401.4 756 DL 437.4 756 419.4 756 DL 455.4 756 437.4 756 DL 473.4
+756 455.4 756 DL 491.4 756 473.4 756 DL 509.4 756 491.4 756 DL 527.4 756 509.4
+756 DL 545.4 756 527.4 756 DL/F11 9/Helvetica-Bold@0 SF(6-452)72 768.96 Q/F12 9
+/Helvetica@0 SF(Dore)6.504 E 3.506<b452>117.019 768.96 S(ef)130.02 768.96 Q
+(erence Man)-.27 E(ual)-.09 E(Dore)221.4 768.96 Q 3.506<b454>236.902 768.96 S
+-.09(ra)247.824 768.96 S(nsf).09 E -2.277(or mation)-.27 F -2.367(Matr ices)
+2.502 F EP
+%%Page: 453 9
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 99 46.8 63 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 243 46.8 207 46.8 DL 279 46.8 243 46.8 DL 315 46.8 279 46.8 DL 351
+46.8 315 46.8 DL 387 46.8 351 46.8 DL 437.4 46.8 401.4 46.8 DL 464.4 46.8 428.4
+46.8 DL 500.4 46.8 464.4 46.8 DL 536.4 46.8 500.4 46.8 DL/F0 10
+/Helvetica-BoldOblique@0 SF(Vie)423.64 57.6 Q(wing T)-.15 E(ransf)-.8 E
+(ormation)-.2 E/F1 10/Helvetica@0 SF(\(contin)486.48 68.4 Q(ued\))-.1 E .12 LW
+90.736 117.031 71.68 117.031 DL/F2 3/Palatino-Roman@0 SF(V)71.68 119.527 Q/F3 5
+/Palatino-Roman@0 SF(parallel)2.55 I/F4 3/Symbol SF(=).99 -2.55 M<e6>94.063
+107.377 Q<e7>-1.152 3.639 M<e7>-1.152 3 M<e7>-1.152 3 M<e7>-1.152 3 M<e7>-1.152
+3 M<e7>-1.152 3 M<e7>-1.152 3 M<e8>-1.152 3 M F2(1)99.859 118.332 Q(xur)96.973
+122.532 Q 104.245 119.652 96.973 119.652 DL F3(x)101.515 123.797 Q F2(0)99.859
+127.829 Q(0)99.859 135.226 Q(0)99.859 142.623 Q(0)110.951 120.432 Q(1)110.951
+125.729 Q(xur)107.965 129.929 Q 115.437 127.049 107.965 127.049 DL F3(y)112.507
+131.144 Q F2(0)110.951 135.226 Q(0)110.951 142.623 Q(0)121.777 120.432 Q(0)
+121.777 127.829 Q(1)121.777 133.126 Q(h)119.157 137.326 Q F4(-).84 E 125.898
+134.446 119.157 134.446 DL F2(y)124.23 137.326 Q(0)121.777 142.623 Q(0)132.238
+120.432 Q(0)132.238 127.829 Q F4(-)131.292 133.126 Q F2(h)A(h)129.618 137.326 Q
+F4(-).84 E 136.359 134.446 129.618 134.446 DL F2(y)134.691 137.326 Q(1)132.238
+142.623 Q F4<f6>138.069 107.377 Q<f7>-1.152 3.639 M<f7>-1.152 3 M<f7>-1.152 3 M
+<f7>-1.152 3 M<f7>-1.152 3 M<f7>-1.152 3 M<f7>-1.152 3 M<f8>-1.152 3 M F2(and)
+63 179.845 Q(vp)99 193.045 Q F4(=).84 E F2(prp).84 E F3(z)1.23 I F4(-).99 -1.23
+M F2(plane).84 E(h)99 206.44 Q F4(=).84 E F2(hither).84 E F4(-).84 E F2(prp).84
+E F3(z)1.23 I F2(y)99 219.835 Q F4(=).84 E F2(yon).84 E F4(-).84 E F2(prp).84 E
+F3(z)1.23 I F4<e9>99 248.155 Q<ea>-1.152 3 M<ea>-1.152 3 M<ea>-1.152 3 M<eb>
+-1.152 3 M F2(xur)100.152 246.705 Q F3(x)1.265 I F2(xur)100.152 251.342 Q F3(y)
+1.215 I F2(xur)100.152 255.979 Q F3(z)1.23 I F2(1)100.152 260.616 Q F4<f9>
+107.624 248.155 Q<fa>-1.152 3 M<fa>-1.152 3 M<fa>-1.152 3 M<fb>-1.152 3 M
+113.987 251.164 113.057 251.164 DL(=)109.616 253.66 Q F2(M).84 E F4<b4>.84 E
+<e9>118.268 246.655 Q<ea>-1.152 3 M<ea>-1.152 3 M<ea>-1.152 3 M<ea>-1.152 3 M
+<eb>-1.152 3 M F2(ur)119.42 245.548 Q F3(x)1.265 I F2(ur)119.42 250.956 Q F3(y)
+1.215 I F2(plane)119.42 256.364 Q(1)119.42 261.772 Q F4<f9>126.779 246.655 Q
+<fa>-1.152 3 M<fa>-1.152 3 M<fa>-1.152 3 M<fa>-1.152 3 M<fb>-1.152 3 M/F5 11
+/Helvetica-BoldOblique@0 SF(DoCameraMatrix <DOCMX>)63 311.23 Q .44 LW 165.906
+327.08 162.496 327.08 DL 1.298(DoCameraMatrix \()62.714 336.518 R/F6 11
+/Palatino-Roman@0 SF 4.781 .076(V\) c)2.057 H -.198(re)-.076 G 4.932
+(ates an object that sets the camera).198 F(pr)63 349.718 Q 9.287
+(ojection matrix \(which is the same as the viewing)-.198 F
+(transformation matrix in this case\) to the user)63 363.006 Q 368.119 353.568
+364.709 353.568 DL(-de\214ned matrix)284.188 363.006 Q F5(V)1.408 E F6(.)2.023
+E .16 LW 65 389.006 63 389.006 DL 67 389.006 65 389.006 DL 69 389.006 67
+389.006 DL 71 389.006 69 389.006 DL 73 389.006 71 389.006 DL 75 389.006 73
+389.006 DL 77 389.006 75 389.006 DL 79 389.006 77 389.006 DL 81 389.006 79
+389.006 DL 83 389.006 81 389.006 DL 85 389.006 83 389.006 DL 87 389.006 85
+389.006 DL 89 389.006 87 389.006 DL 91 389.006 89 389.006 DL 93 389.006 91
+389.006 DL 95 389.006 93 389.006 DL 97 389.006 95 389.006 DL 99 389.006 97
+389.006 DL 101 389.006 99 389.006 DL 103 389.006 101 389.006 DL 105 389.006 103
+389.006 DL 107 389.006 105 389.006 DL 109 389.006 107 389.006 DL 111 389.006
+109 389.006 DL 113 389.006 111 389.006 DL 115 389.006 113 389.006 DL 117
+389.006 115 389.006 DL 119 389.006 117 389.006 DL 121 389.006 119 389.006 DL
+123 389.006 121 389.006 DL 125 389.006 123 389.006 DL 127 389.006 125 389.006
+DL 129 389.006 127 389.006 DL 131 389.006 129 389.006 DL 133 389.006 131
+389.006 DL 135 389.006 133 389.006 DL 137 389.006 135 389.006 DL 139 389.006
+137 389.006 DL 141 389.006 139 389.006 DL 143 389.006 141 389.006 DL 145
+389.006 143 389.006 DL 147 389.006 145 389.006 DL 149 389.006 147 389.006 DL
+151 389.006 149 389.006 DL 153 389.006 151 389.006 DL 155 389.006 153 389.006
+DL 157 389.006 155 389.006 DL 159 389.006 157 389.006 DL 161 389.006 159
+389.006 DL 163 389.006 161 389.006 DL 165 389.006 163 389.006 DL 167 389.006
+165 389.006 DL 169 389.006 167 389.006 DL 171 389.006 169 389.006 DL 173
+389.006 171 389.006 DL 175 389.006 173 389.006 DL 177 389.006 175 389.006 DL
+179 389.006 177 389.006 DL 181 389.006 179 389.006 DL 183 389.006 181 389.006
+DL 185 389.006 183 389.006 DL 187 389.006 185 389.006 DL 189 389.006 187
+389.006 DL 191 389.006 189 389.006 DL 193 389.006 191 389.006 DL 195 389.006
+193 389.006 DL 197 389.006 195 389.006 DL 199 389.006 197 389.006 DL 201
+389.006 199 389.006 DL 203 389.006 201 389.006 DL 205 389.006 203 389.006 DL
+207 389.006 205 389.006 DL 209 389.006 207 389.006 DL 211 389.006 209 389.006
+DL 213 389.006 211 389.006 DL 215 389.006 213 389.006 DL 217 389.006 215
+389.006 DL 219 389.006 217 389.006 DL 221 389.006 219 389.006 DL 223 389.006
+221 389.006 DL 225 389.006 223 389.006 DL 227 389.006 225 389.006 DL 229
+389.006 227 389.006 DL 231 389.006 229 389.006 DL 233 389.006 231 389.006 DL
+235 389.006 233 389.006 DL 237 389.006 235 389.006 DL 239 389.006 237 389.006
+DL 241 389.006 239 389.006 DL 243 389.006 241 389.006 DL 245 389.006 243
+389.006 DL 247 389.006 245 389.006 DL 249 389.006 247 389.006 DL 251 389.006
+249 389.006 DL 253 389.006 251 389.006 DL 255 389.006 253 389.006 DL 257
+389.006 255 389.006 DL 259 389.006 257 389.006 DL 261 389.006 259 389.006 DL
+263 389.006 261 389.006 DL 265 389.006 263 389.006 DL 267 389.006 265 389.006
+DL 269 389.006 267 389.006 DL 271 389.006 269 389.006 DL 273 389.006 271
+389.006 DL 275 389.006 273 389.006 DL 277 389.006 275 389.006 DL 279 389.006
+277 389.006 DL 281 389.006 279 389.006 DL 283 389.006 281 389.006 DL 285
+389.006 283 389.006 DL 287 389.006 285 389.006 DL 289 389.006 287 389.006 DL
+291 389.006 289 389.006 DL 293 389.006 291 389.006 DL 295 389.006 293 389.006
+DL 297 389.006 295 389.006 DL 299 389.006 297 389.006 DL 301 389.006 299
+389.006 DL 303 389.006 301 389.006 DL 305 389.006 303 389.006 DL 307 389.006
+305 389.006 DL 309 389.006 307 389.006 DL 311 389.006 309 389.006 DL 313
+389.006 311 389.006 DL 315 389.006 313 389.006 DL 317 389.006 315 389.006 DL
+319 389.006 317 389.006 DL 321 389.006 319 389.006 DL 323 389.006 321 389.006
+DL 325 389.006 323 389.006 DL 327 389.006 325 389.006 DL 329 389.006 327
+389.006 DL 331 389.006 329 389.006 DL 333 389.006 331 389.006 DL 335 389.006
+333 389.006 DL 337 389.006 335 389.006 DL 339 389.006 337 389.006 DL 341
+389.006 339 389.006 DL 343 389.006 341 389.006 DL 345 389.006 343 389.006 DL
+347 389.006 345 389.006 DL 349 389.006 347 389.006 DL 351 389.006 349 389.006
+DL 353 389.006 351 389.006 DL 355 389.006 353 389.006 DL 357 389.006 355
+389.006 DL 359 389.006 357 389.006 DL 361 389.006 359 389.006 DL 363 389.006
+361 389.006 DL 365 389.006 363 389.006 DL 367 389.006 365 389.006 DL 369
+389.006 367 389.006 DL 371 389.006 369 389.006 DL 373 389.006 371 389.006 DL
+375 389.006 373 389.006 DL 377 389.006 375 389.006 DL 379 389.006 377 389.006
+DL 381 389.006 379 389.006 DL 383 389.006 381 389.006 DL 385 389.006 383
+389.006 DL 387 389.006 385 389.006 DL 1.44 LW 419.4 389.506 401.4 389.506 DL
+428.4 389.506 410.4 389.506 DL 446.4 389.506 428.4 389.506 DL 464.4 389.506
+446.4 389.506 DL 482.4 389.506 464.4 389.506 DL 500.4 389.506 482.4 389.506 DL
+518.4 389.506 500.4 389.506 DL 536.4 389.506 518.4 389.506 DL/F7 12
+/Helvetica-BoldOblique@0 SF(Pr)487.296 403.506 Q(ogram)-.24 E(Examples)480.372
+417.506 Q F6 4.771(The following two examples show how additional types of)63
+417.606 R 5.235(composite transformations could be cr)63 430.806 R 5.236
+(eated using the Dore)-.198 F<b4>382.534 430.806 Q(transformation objects.)63
+444.006 Q .16 LW 65 470.006 63 470.006 DL 67 470.006 65 470.006 DL 69 470.006
+67 470.006 DL 71 470.006 69 470.006 DL 73 470.006 71 470.006 DL 75 470.006 73
+470.006 DL 77 470.006 75 470.006 DL 79 470.006 77 470.006 DL 81 470.006 79
+470.006 DL 83 470.006 81 470.006 DL 85 470.006 83 470.006 DL 87 470.006 85
+470.006 DL 89 470.006 87 470.006 DL 91 470.006 89 470.006 DL 93 470.006 91
+470.006 DL 95 470.006 93 470.006 DL 97 470.006 95 470.006 DL 99 470.006 97
+470.006 DL 101 470.006 99 470.006 DL 103 470.006 101 470.006 DL 105 470.006 103
+470.006 DL 107 470.006 105 470.006 DL 109 470.006 107 470.006 DL 111 470.006
+109 470.006 DL 113 470.006 111 470.006 DL 115 470.006 113 470.006 DL 117
+470.006 115 470.006 DL 119 470.006 117 470.006 DL 121 470.006 119 470.006 DL
+123 470.006 121 470.006 DL 125 470.006 123 470.006 DL 127 470.006 125 470.006
+DL 129 470.006 127 470.006 DL 131 470.006 129 470.006 DL 133 470.006 131
+470.006 DL 135 470.006 133 470.006 DL 137 470.006 135 470.006 DL 139 470.006
+137 470.006 DL 141 470.006 139 470.006 DL 143 470.006 141 470.006 DL 145
+470.006 143 470.006 DL 147 470.006 145 470.006 DL 149 470.006 147 470.006 DL
+151 470.006 149 470.006 DL 153 470.006 151 470.006 DL 155 470.006 153 470.006
+DL 157 470.006 155 470.006 DL 159 470.006 157 470.006 DL 161 470.006 159
+470.006 DL 163 470.006 161 470.006 DL 165 470.006 163 470.006 DL 167 470.006
+165 470.006 DL 169 470.006 167 470.006 DL 171 470.006 169 470.006 DL 173
+470.006 171 470.006 DL 175 470.006 173 470.006 DL 177 470.006 175 470.006 DL
+179 470.006 177 470.006 DL 181 470.006 179 470.006 DL 183 470.006 181 470.006
+DL 185 470.006 183 470.006 DL 187 470.006 185 470.006 DL 189 470.006 187
+470.006 DL 191 470.006 189 470.006 DL 193 470.006 191 470.006 DL 195 470.006
+193 470.006 DL 197 470.006 195 470.006 DL 199 470.006 197 470.006 DL 201
+470.006 199 470.006 DL 203 470.006 201 470.006 DL 205 470.006 203 470.006 DL
+207 470.006 205 470.006 DL 209 470.006 207 470.006 DL 211 470.006 209 470.006
+DL 213 470.006 211 470.006 DL 215 470.006 213 470.006 DL 217 470.006 215
+470.006 DL 219 470.006 217 470.006 DL 221 470.006 219 470.006 DL 223 470.006
+221 470.006 DL 225 470.006 223 470.006 DL 227 470.006 225 470.006 DL 229
+470.006 227 470.006 DL 231 470.006 229 470.006 DL 233 470.006 231 470.006 DL
+235 470.006 233 470.006 DL 237 470.006 235 470.006 DL 239 470.006 237 470.006
+DL 241 470.006 239 470.006 DL 243 470.006 241 470.006 DL 245 470.006 243
+470.006 DL 247 470.006 245 470.006 DL 249 470.006 247 470.006 DL 251 470.006
+249 470.006 DL 253 470.006 251 470.006 DL 255 470.006 253 470.006 DL 257
+470.006 255 470.006 DL 259 470.006 257 470.006 DL 261 470.006 259 470.006 DL
+263 470.006 261 470.006 DL 265 470.006 263 470.006 DL 267 470.006 265 470.006
+DL 269 470.006 267 470.006 DL 271 470.006 269 470.006 DL 273 470.006 271
+470.006 DL 275 470.006 273 470.006 DL 277 470.006 275 470.006 DL 279 470.006
+277 470.006 DL 281 470.006 279 470.006 DL 283 470.006 281 470.006 DL 285
+470.006 283 470.006 DL 287 470.006 285 470.006 DL 289 470.006 287 470.006 DL
+291 470.006 289 470.006 DL 293 470.006 291 470.006 DL 295 470.006 293 470.006
+DL 297 470.006 295 470.006 DL 299 470.006 297 470.006 DL 301 470.006 299
+470.006 DL 303 470.006 301 470.006 DL 305 470.006 303 470.006 DL 307 470.006
+305 470.006 DL 309 470.006 307 470.006 DL 311 470.006 309 470.006 DL 313
+470.006 311 470.006 DL 315 470.006 313 470.006 DL 317 470.006 315 470.006 DL
+319 470.006 317 470.006 DL 321 470.006 319 470.006 DL 323 470.006 321 470.006
+DL 325 470.006 323 470.006 DL 327 470.006 325 470.006 DL 329 470.006 327
+470.006 DL 331 470.006 329 470.006 DL 333 470.006 331 470.006 DL 335 470.006
+333 470.006 DL 337 470.006 335 470.006 DL 339 470.006 337 470.006 DL 341
+470.006 339 470.006 DL 343 470.006 341 470.006 DL 345 470.006 343 470.006 DL
+347 470.006 345 470.006 DL 349 470.006 347 470.006 DL 351 470.006 349 470.006
+DL 353 470.006 351 470.006 DL 355 470.006 353 470.006 DL 357 470.006 355
+470.006 DL 359 470.006 357 470.006 DL 361 470.006 359 470.006 DL 363 470.006
+361 470.006 DL 365 470.006 363 470.006 DL 367 470.006 365 470.006 DL 369
+470.006 367 470.006 DL 371 470.006 369 470.006 DL 373 470.006 371 470.006 DL
+375 470.006 373 470.006 DL 377 470.006 375 470.006 DL 379 470.006 377 470.006
+DL 381 470.006 379 470.006 DL 383 470.006 381 470.006 DL 385 470.006 383
+470.006 DL 387 470.006 385 470.006 DL 1.44 LW 419.4 470.506 401.4 470.506 DL
+428.4 470.506 410.4 470.506 DL 446.4 470.506 428.4 470.506 DL 464.4 470.506
+446.4 470.506 DL 482.4 470.506 464.4 470.506 DL 500.4 470.506 482.4 470.506 DL
+518.4 470.506 500.4 470.506 DL 536.4 470.506 518.4 470.506 DL/F8 12
+/Helvetica-Oblique@0 SF(Example)489.72 484.506 Q(1:)526.392 498.506 Q
+(RotateAxis)478.38 512.506 Q F6 5.577(The \214rst example is a complete subr)63
+498.606 R 5.578(outine that r)-.198 F 5.578(eturns a)-.198 F/F9 11
+/Palatino-Italic@0 SF(DoT)63 511.806 Q(ransformMatrix)-1.221 E F6 4.528
+(object that r)7.279 F 4.528(otates about an arbitrary axis)-.198 F
+(passing thr)63 525.006 Q(ough the origin.)-.198 E .33(RotateAxis \(x,)63
+550.206 R 1.562 -1.221(y, z)1.87 H(,)1.221 E/F10 11/Symbol-Slanted SF(q)2.497 E
+F6 2.75(\)g)1.54 G(enerates the matrix:)172.868 550.206 Q/F11 9/Symbol SF<e6>63
+582.204 Q<e7>63 593.121 Q<e7>63 602.121 Q<e7>63 611.121 Q<e8>63 620.121 Q/F12 9
+/Helvetica@0 SF(x)80.089 581.754 Q/F13 6/Helvetica@0 SF(2)-3.78 I F11(+)2.97
+3.78 M F12(\()2.52 E/F14 9/Palatino-Roman@0 SF(1)A F11(-)2.52 E F14(x)2.52 E
+/F15 6/Palatino-Roman@0 SF(2)-3.78 I F12(\)).786 3.78 M F14(cos\()2.52 E/F16 9
+/Symbol-Slanted SF(q)-.477 E F14(\))1.26 E F12(xy\()70.29 594.354 Q F14(1)A F11
+(-)2.52 E F14(cos\()2.52 E F16(q)-.477 E F14(\))1.26 E F12(\))A F11(+)2.52 E
+F12 2.52(zs)2.52 G(in\()144.945 594.354 Q F16(q)-.477 E F12(\))1.26 E F14(xz\()
+70.29 606.954 Q F12(1)A F11(-)2.52 E F12(cos\()2.52 E F16(q)-.477 E F12(\))1.26
+E F14(\))A F11(-)2.52 E F14 2.52(ys)2.52 G(in\()146.691 606.954 Q F16(q)-.477 E
+F14(\))1.26 E F12(0)116.694 619.554 Q F14(xy\()174.501 581.754 Q F12(1)A F11(-)
+2.52 E F12(cos\()2.52 E F16(q)-.477 E F12(\))1.26 E F14(\))A F11(-)2.52 E F14
+2.52(zs)2.52 G(in\()250.902 581.754 Q F16(q)-.477 E F14(\))1.26 E F12(y)186.541
+594.354 Q F13(2)-3.78 I F11(+)2.97 3.78 M F12(\()2.52 E F14(1)A F11(-)2.52 E
+F14(y)2.52 E F15(2)-3.78 I F12(\)).786 3.78 M F14(cos\()2.52 E F16(q)-.477 E
+F14(\))1.26 E F12(yz\()177.102 606.954 Q F14(1)A F11(-)2.52 E F14(cos\()2.52 E
+F16(q)-.477 E F14(\))1.26 E F12(\))A F11(+)2.52 E F12 2.52(xs)2.52 G(in\()
+251.757 606.954 Q F16(q)-.477 E F12(\))1.26 E F14(0)220.905 619.554 Q F12(xz\()
+278.208 581.754 Q F14(1)A F11(-)2.52 E F14(cos\()2.52 E F16(q)-.477 E F14(\))
+1.26 E F12(\))A F11(+)2.52 E F12 2.52(ys)2.52 G(in\()352.863 581.754 Q F16(q)
+-.477 E F12(\))1.26 E F14(yz\()278.208 594.354 Q F12(1)A F11(-)2.52 E F12
+(cos\()2.52 E F16(q)-.477 E F12(\))1.26 E F14(\))A F11(-)2.52 E F14 2.52(xs)
+2.52 G(in\()354.609 594.354 Q F16(q)-.477 E F14(\))1.26 E F12(z)290.248 606.954
+Q F13(2)-3.78 I F11(+)2.97 3.78 M F12(\()2.52 E F14(1)A F11(-)2.52 E F14(z)2.52
+E F15(2)-3.78 I F12(\)).786 3.78 M F14(cos\()2.52 E F16(q)-.477 E F14(\))1.26 E
+F12(0)324.108 619.554 Q F14(0)381.915 581.754 Q F12(0)381.411 594.354 Q F14(0)
+381.411 606.954 Q F12(1)380.907 619.554 Q F11<f6>389.961 582.204 Q<f7>389.961
+593.121 Q<f7>389.961 602.121 Q<f7>389.961 611.121 Q<f8>389.961 620.121 Q/F17 10
+/Palatino-Roman@0 SF(The C code is as follows:)63 650.808 Q 81 756 63 756 DL 99
+756 81 756 DL 117 756 99 756 DL 135 756 117 756 DL 153 756 135 756 DL 171 756
+153 756 DL 189 756 171 756 DL 207 756 189 756 DL 225 756 207 756 DL 243 756 225
+756 DL 261 756 243 756 DL 279 756 261 756 DL 297 756 279 756 DL 315 756 297 756
+DL 333 756 315 756 DL 351 756 333 756 DL 369 756 351 756 DL 387 756 369 756 DL
+419.4 756 401.4 756 DL 428.4 756 410.4 756 DL 446.4 756 428.4 756 DL 464.4 756
+446.4 756 DL 482.4 756 464.4 756 DL 500.4 756 482.4 756 DL 518.4 756 500.4 756
+DL 536.4 756 518.4 756 DL F12(Dore)269.055 768.96 Q 3.506<b454>284.557 768.96 S
+-.09(ra)295.479 768.96 S(nsf).09 E -2.277(or mation)-.27 F -2.367(Matr ices)
+2.502 F(Dore)414.21 768.96 Q 3.506<b452>429.712 768.96 S(ef)442.713 768.96 Q
+(erence Man)-.27 E(ual)-.09 E/F18 9/Helvetica-Bold@0 SF(6-453)4.002 E EP
+%%Page: 454 10
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 108 46.8 72 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 257.4 46.8 221.4 46.8 DL 293.4 46.8 257.4 46.8 DL 329.4 46.8 293.4
+46.8 DL 365.4 46.8 329.4 46.8 DL 401.4 46.8 365.4 46.8 DL 437.4 46.8 401.4 46.8
+DL 473.4 46.8 437.4 46.8 DL 509.4 46.8 473.4 46.8 DL 545.4 46.8 509.4 46.8 DL
+/F0 10/Helvetica-BoldOblique@0 SF(Pr)72 57.6 Q(ogram Examples)-.2 E/F1 10
+/Helvetica@0 SF(\(contin)72 68.4 Q(ued\))-.1 E/F2 9/Courier@0 SF
+(#include <dore.h>)221.5 107 Q(#include <math.h>)221.5 118 Q
+(DtObject RotateAxis \(x, y, z, theta\))221.5 140 Q(DtReal x, y, z;)221.5 151 Q
+(DtReal theta;)221.5 162 Q({)221.5 173 Q(DtReal costheta;)237.7 206 Q
+(DtReal sintheta;)237.7 217 Q(DtMatrix4x4 matrix;)237.7 228 Q
+(costheta = cos \(theta\);)237.7 250 Q(sintheta = sin \(theta\);)237.7 261 Q
+(matrix[0][0] = x)237.7 283 Q/F3 9/Symbol SF(*)A F2 5.4(x+\()C 5.4(1-x)355.6
+283 S F3(*)382.6 283 Q F2(x\))A F3(*)A F2(costheta;)A(matrix[0][1] = x)237.7
+294 Q F3(*)A F2(y)A F3(*)A F2(\(1 - costheta\) - z)A F3(*)A F2(sintheta;)A
+(matrix[0][2] = x)237.7 305 Q F3(*)A F2(z)A F3(*)A F2(\(1 - costheta\) + y)A F3
+(*)A F2(sintheta;)A(matrix[0][3] = 0.0;)237.7 316 Q(matrix[1][0] = x)237.7 338
+Q F3(*)A F2(y)A F3(*)A F2(\(1 - costheta\) + z)A F3(*)A F2(sintheta;)A
+(matrix[1][1] = y)237.7 349 Q F3(*)A F2 5.4(y+\()C 5.4(1-y)355.6 349 S F3(*)
+382.6 349 Q F2(y\))A F3(*)A F2(costheta;)A(matrix[1][2] = y)237.7 360 Q F3(*)A
+F2(z)A F3(*)A F2(\(1 - costheta\) - x)A F3(*)A F2(sintheta;)A
+(matrix[1][3] = 0.0;)237.7 371 Q(matrix[2][0] = x)237.7 393 Q F3(*)A F2(z)A F3
+(*)A F2(\(1 - costheta\) - y)A F3(*)A F2(sintheta;)A(matrix[2][1] = y)237.7 404
+Q F3(*)A F2(z)A F3(*)A F2(\(1 - costheta\) + x)A F3(*)A F2(sintheta;)A
+(matrix[2][2] = z)237.7 415 Q F3(*)A F2 5.4(z+\()C 5.4(1-z)355.6 415 S F3(*)
+382.6 415 Q F2(z\))A F3(*)A F2(costheta;)A(matrix[2][3] = 0.0;)237.7 426 Q
+(matrix[3][0] = 0.0;)237.7 448 Q(matrix[3][1] = 0.0;)237.7 459 Q
+(matrix[3][2] = 0.0;)237.7 470 Q(matrix[3][3] = 1.0;)237.7 481 Q
+(return \(DoTransformMatrix \(matrix, DcPreConcatenate\)\);)237.7 503 Q(})221.5
+514 Q(The)221.5 547 Q/F4 8/Courier@0 SF(FORTRAN)5.4 E F2
+(code for the same operation is:)5.4 E(INTEGER)253.9 569 Q F3(*)A F2 5.4(4F)C
+(UNCTION ROTAX\(X,Y,Z,THETA\))312.4 569 Q(C)221.5 580 Q
+(INCLUDE '/usr/include/fortran/DORE')253.9 591 Q
+(INCLUDE '/usr/include/fortran/DORETYPES')253.9 602 Q(C)221.5 613 Q(REAL)253.9
+624 Q F3(*)A F2 5.4(8C)C(THETA)296.2 624 Q(REAL)253.9 635 Q F3(*)A F2 5.4(8S)C
+(THETA)296.2 635 Q(REAL)253.9 646 Q F3(*)A F2 5.4(8M)C(ATRIX\(4,4\))296.2 646 Q
+(C)221.5 657 Q(CTHETA = COS\(THETA\))253.9 668 Q(STHETA = SIN\(THETA\))253.9
+679 Q(C)221.5 690 Q(MATRIX\(1,1\) = X)253.9 701 Q F3(*)A F2(X+\(1-X)A F3(*)A F2
+(X\))A F3(*)A F2(CTHETA)A(MATRIX\(2,1\) = X)253.9 712 Q F3(*)A F2(Y)A F3(*)A F2
+(\(1-CTHETA\)-Z)A F3(*)A F2(STHETA)A 1.44 LW 90 756 72 756 DL 99 756 81 756 DL
+117 756 99 756 DL 135 756 117 756 DL 153 756 135 756 DL 171 756 153 756 DL 189
+756 171 756 DL 207 756 189 756 DL 239.4 756 221.4 756 DL 257.4 756 239.4 756 DL
+275.4 756 257.4 756 DL 293.4 756 275.4 756 DL 311.4 756 293.4 756 DL 329.4 756
+311.4 756 DL 347.4 756 329.4 756 DL 365.4 756 347.4 756 DL 383.4 756 365.4 756
+DL 401.4 756 383.4 756 DL 419.4 756 401.4 756 DL 437.4 756 419.4 756 DL 455.4
+756 437.4 756 DL 473.4 756 455.4 756 DL 491.4 756 473.4 756 DL 509.4 756 491.4
+756 DL 527.4 756 509.4 756 DL 545.4 756 527.4 756 DL/F5 9/Helvetica-Bold@0 SF
+(6-454)72 768.96 Q/F6 9/Helvetica@0 SF(Dore)6.504 E 3.506<b452>117.019 768.96 S
+(ef)130.02 768.96 Q(erence Man)-.27 E(ual)-.09 E(Dore)221.4 768.96 Q 3.506
+<b454>236.902 768.96 S -.09(ra)247.824 768.96 S(nsf).09 E -2.277(or mation)-.27
+F -2.367(Matr ices)2.502 F EP
+%%Page: 455 11
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 99 46.8 63 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 243 46.8 207 46.8 DL 279 46.8 243 46.8 DL 315 46.8 279 46.8 DL 351
+46.8 315 46.8 DL 387 46.8 351 46.8 DL 437.4 46.8 401.4 46.8 DL 464.4 46.8 428.4
+46.8 DL 500.4 46.8 464.4 46.8 DL 536.4 46.8 500.4 46.8 DL/F0 10
+/Helvetica-BoldOblique@0 SF(Pr)446.01 57.6 Q(ogram Examples)-.2 E/F1 10
+/Helvetica@0 SF(\(contin)486.48 68.4 Q(ued\))-.1 E/F2 9/Courier@0 SF
+(MATRIX\(3,1\) = X)95.4 107 Q/F3 9/Symbol SF(*)A F2(Z)A F3(*)A F2
+(\(1-CTHETA\)+Y)A F3(*)A F2(STHETA)A(MATRIX\(4,1\) = 0.0)95.4 118 Q(C)63 151 Q
+(MATRIX\(1,2\) = X)95.4 162 Q F3(*)A F2(Y)A F3(*)A F2(\(1-CTHETA\)+Z)A F3(*)A
+F2(STHETA)A(MATRIX\(2,2\) = Y)95.4 173 Q F3(*)A F2(Y+\(1-Y)A F3(*)A F2(Y\))A F3
+(*)A F2(CTHETA)A(MATRIX\(3,2\) = Y)95.4 184 Q F3(*)A F2(Z)A F3(*)A F2
+(\(1-CTHETA\)-X)A F3(*)A F2(STHETA)A(MATRIX\(4,2\) = 0.0)95.4 195 Q(C)63 206 Q
+(MATRIX\(1,3\) = X)95.4 217 Q F3(*)A F2(Z)A F3(*)A F2(\(1-CTHETA\)-Y)A F3(*)A
+F2(STHETA)A(MATRIX\(2,3\) = Y)95.4 228 Q F3(*)A F2(Z)A F3(*)A F2
+(\(1-CTHETA\)+X)A F3(*)A F2(STHETA)A(MATRIX\(3,3\) = Z)95.4 239 Q F3(*)A F2
+(Z+\(1-Z)A F3(*)A F2(Z\))A F3(*)A F2(CTHETA)A(MATRIX\(4,3\) = 0.0)95.4 250 Q(C)
+63 261 Q(MATRIX\(1,4\) = 0.0)95.4 272 Q(MATRIX\(2,4\) = 0.0)95.4 283 Q
+(MATRIX\(3,4\) = 0.0)95.4 294 Q(MATRIX\(4,4\) = 1.0)95.4 305 Q(C)63 316 Q
+(ROTAX = DOTMX \(MATRIX, DCPREC\))95.4 327 Q(C)63 338 Q(RETURN)95.4 349 Q(END)
+95.4 360 Q .16 LW 65 386 63 386 DL 67 386 65 386 DL 69 386 67 386 DL 71 386 69
+386 DL 73 386 71 386 DL 75 386 73 386 DL 77 386 75 386 DL 79 386 77 386 DL 81
+386 79 386 DL 83 386 81 386 DL 85 386 83 386 DL 87 386 85 386 DL 89 386 87 386
+DL 91 386 89 386 DL 93 386 91 386 DL 95 386 93 386 DL 97 386 95 386 DL 99 386
+97 386 DL 101 386 99 386 DL 103 386 101 386 DL 105 386 103 386 DL 107 386 105
+386 DL 109 386 107 386 DL 111 386 109 386 DL 113 386 111 386 DL 115 386 113 386
+DL 117 386 115 386 DL 119 386 117 386 DL 121 386 119 386 DL 123 386 121 386 DL
+125 386 123 386 DL 127 386 125 386 DL 129 386 127 386 DL 131 386 129 386 DL 133
+386 131 386 DL 135 386 133 386 DL 137 386 135 386 DL 139 386 137 386 DL 141 386
+139 386 DL 143 386 141 386 DL 145 386 143 386 DL 147 386 145 386 DL 149 386 147
+386 DL 151 386 149 386 DL 153 386 151 386 DL 155 386 153 386 DL 157 386 155 386
+DL 159 386 157 386 DL 161 386 159 386 DL 163 386 161 386 DL 165 386 163 386 DL
+167 386 165 386 DL 169 386 167 386 DL 171 386 169 386 DL 173 386 171 386 DL 175
+386 173 386 DL 177 386 175 386 DL 179 386 177 386 DL 181 386 179 386 DL 183 386
+181 386 DL 185 386 183 386 DL 187 386 185 386 DL 189 386 187 386 DL 191 386 189
+386 DL 193 386 191 386 DL 195 386 193 386 DL 197 386 195 386 DL 199 386 197 386
+DL 201 386 199 386 DL 203 386 201 386 DL 205 386 203 386 DL 207 386 205 386 DL
+209 386 207 386 DL 211 386 209 386 DL 213 386 211 386 DL 215 386 213 386 DL 217
+386 215 386 DL 219 386 217 386 DL 221 386 219 386 DL 223 386 221 386 DL 225 386
+223 386 DL 227 386 225 386 DL 229 386 227 386 DL 231 386 229 386 DL 233 386 231
+386 DL 235 386 233 386 DL 237 386 235 386 DL 239 386 237 386 DL 241 386 239 386
+DL 243 386 241 386 DL 245 386 243 386 DL 247 386 245 386 DL 249 386 247 386 DL
+251 386 249 386 DL 253 386 251 386 DL 255 386 253 386 DL 257 386 255 386 DL 259
+386 257 386 DL 261 386 259 386 DL 263 386 261 386 DL 265 386 263 386 DL 267 386
+265 386 DL 269 386 267 386 DL 271 386 269 386 DL 273 386 271 386 DL 275 386 273
+386 DL 277 386 275 386 DL 279 386 277 386 DL 281 386 279 386 DL 283 386 281 386
+DL 285 386 283 386 DL 287 386 285 386 DL 289 386 287 386 DL 291 386 289 386 DL
+293 386 291 386 DL 295 386 293 386 DL 297 386 295 386 DL 299 386 297 386 DL 301
+386 299 386 DL 303 386 301 386 DL 305 386 303 386 DL 307 386 305 386 DL 309 386
+307 386 DL 311 386 309 386 DL 313 386 311 386 DL 315 386 313 386 DL 317 386 315
+386 DL 319 386 317 386 DL 321 386 319 386 DL 323 386 321 386 DL 325 386 323 386
+DL 327 386 325 386 DL 329 386 327 386 DL 331 386 329 386 DL 333 386 331 386 DL
+335 386 333 386 DL 337 386 335 386 DL 339 386 337 386 DL 341 386 339 386 DL 343
+386 341 386 DL 345 386 343 386 DL 347 386 345 386 DL 349 386 347 386 DL 351 386
+349 386 DL 353 386 351 386 DL 355 386 353 386 DL 357 386 355 386 DL 359 386 357
+386 DL 361 386 359 386 DL 363 386 361 386 DL 365 386 363 386 DL 367 386 365 386
+DL 369 386 367 386 DL 371 386 369 386 DL 373 386 371 386 DL 375 386 373 386 DL
+377 386 375 386 DL 379 386 377 386 DL 381 386 379 386 DL 383 386 381 386 DL 385
+386 383 386 DL 387 386 385 386 DL 1.44 LW 419.4 386.5 401.4 386.5 DL 428.4
+386.5 410.4 386.5 DL 446.4 386.5 428.4 386.5 DL 464.4 386.5 446.4 386.5 DL
+482.4 386.5 464.4 386.5 DL 500.4 386.5 482.4 386.5 DL 518.4 386.5 500.4 386.5
+DL 536.4 386.5 518.4 386.5 DL/F4 12/Helvetica-Oblique@0 SF(Example)489.72 400.5
+Q(2:)526.392 414.5 Q(RotateCenter)465.036 428.5 Q/F5 11/Palatino-Roman@0 SF
+3.257(The second example shows how Dore)63 414.6 R 6.81<b474>258.794 414.6 S
+3.256(ransformations can be)272.853 414.6 R .845
+(combined to allow an object center)63 427.8 R .845(ed at c)-.198 F/F6 11
+/Symbol SF(=)3.08 E F5(\(c)3.08 E/F7 8/Palatino-Roman@0 SF(x,)2.2 I F5(c).55
+-2.2 M F7 -.888(y,)2.2 K F5(c)1.438 -2.2 M F7(z)2.2 I F5 3.595(\)t).55 -2.2 O
+3.596(ob)327.635 427.8 S 3.596(er)343.32 427.8 S(otated)356.332 427.8 Q .406
+(about the x, y)63 441 R 3.156(,a)-1.221 G .406
+(nd z axes in the same way it would be r)140.26 441 R .406(otated if it)-.198 F
+(wer)63 454.2 Q 4.4(ec)-.198 G(enter)96.143 454.2 Q 1.65(ed at the origin.)
+-.198 F 1.651(This transformation is generated in)7.151 F(Dore)63 467.4 Q 3.553
+<b462>82.668 467.4 S 2.75(yt)95.967 467.4 S(he following sequence in C:)108.419
+467.4 Q F2(DgAddObj \(DoTranslate \()63 490.4 Q/F8 9/Palatino-Roman@0 SF(c)A/F9
+6/Palatino-Roman@0 SF(x)1.8 I F8(,).45 -1.8 M F2(c)2.52 E/F10 6/Courier@0 SF(y)
+1.8 I F2(,).186 -1.8 M F8(c)2.52 E F9(z)1.8 I F2(\)\);).45 -1.8 M
+(DgAddObj \(DoRotate \(DcZAxis,)63 501.748 Q F8(r)5.4 E F9(z)1.8 I F2(\)\);).45
+-1.8 M(DgAddObj \(DoRotate \(DcYAxis,)63 512.748 Q F8(r)5.4 E F9(y)1.8 I F2
+(\)\);).45 -1.8 M(DgAddObj \(DoRotate \(DcXAxis,)63 524.096 Q F8(r)5.4 E F9(x)
+1.8 I F2(\)\);).45 -1.8 M(DgAddObj \(DoTranslate \()63 535.096 Q F3(-)A F2(c)A
+F10(x)1.8 I F2(,)-.054 -1.8 M F3(-)2.52 E F2(c)1.98 E F10(y)1.8 I F2(,).186
+-1.8 M F3(-)2.52 E F2(c)1.98 E F10(z)1.8 I F2(\)\);)-.15 -1.8 M F5(The corr)63
+560.644 Q(esponding)-.198 E/F11 10/Palatino-Roman@0 SF(FOR)2.75 E(TRAN)-.37 E
+F5(sequence is:)2.75 E F2(CALL DGAO \(DOXLT \(CX, CY, CZ\)\))90 583.644 Q
+(CALL DGAO \(DOROT \(DCZAX, RZ\)\))90 594.644 Q
+(CALL DGAO \(DOROT \(DCYAX, RY\)\))90 605.644 Q
+(CALL DGAO \(DOROT \(DCXAX, RX\)\))90 616.644 Q
+(CALL DGAO \(DOXLT \(-CX, -CY, -CZ\)\))90 627.644 Q 81 756 63 756 DL 99 756 81
+756 DL 117 756 99 756 DL 135 756 117 756 DL 153 756 135 756 DL 171 756 153 756
+DL 189 756 171 756 DL 207 756 189 756 DL 225 756 207 756 DL 243 756 225 756 DL
+261 756 243 756 DL 279 756 261 756 DL 297 756 279 756 DL 315 756 297 756 DL 333
+756 315 756 DL 351 756 333 756 DL 369 756 351 756 DL 387 756 369 756 DL 419.4
+756 401.4 756 DL 428.4 756 410.4 756 DL 446.4 756 428.4 756 DL 464.4 756 446.4
+756 DL 482.4 756 464.4 756 DL 500.4 756 482.4 756 DL 518.4 756 500.4 756 DL
+536.4 756 518.4 756 DL/F12 9/Helvetica@0 SF(Dore)269.055 768.96 Q 3.506<b454>
+284.557 768.96 S -.09(ra)295.479 768.96 S(nsf).09 E -2.277(or mation)-.27 F
+-2.367(Matr ices)2.502 F(Dore)414.21 768.96 Q 3.506<b452>429.712 768.96 S(ef)
+442.713 768.96 Q(erence Man)-.27 E(ual)-.09 E/F13 9/Helvetica-Bold@0 SF(6-455)
+4.002 E EP
+%%Page: 456 12
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 108 46.8 72 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 257.4 46.8 221.4 46.8 DL 293.4 46.8 257.4 46.8 DL 329.4 46.8 293.4
+46.8 DL 365.4 46.8 329.4 46.8 DL 401.4 46.8 365.4 46.8 DL 437.4 46.8 401.4 46.8
+DL 473.4 46.8 437.4 46.8 DL 509.4 46.8 473.4 46.8 DL 545.4 46.8 509.4 46.8 DL
+/F0 10/Helvetica@0 SF(\(contin)72 68.4 Q(ued\))-.1 E .16 LW 223.4 110 221.4 110
+DL 225.4 110 223.4 110 DL 227.4 110 225.4 110 DL 229.4 110 227.4 110 DL 231.4
+110 229.4 110 DL 233.4 110 231.4 110 DL 235.4 110 233.4 110 DL 237.4 110 235.4
+110 DL 239.4 110 237.4 110 DL 241.4 110 239.4 110 DL 243.4 110 241.4 110 DL
+245.4 110 243.4 110 DL 247.4 110 245.4 110 DL 249.4 110 247.4 110 DL 251.4 110
+249.4 110 DL 253.4 110 251.4 110 DL 255.4 110 253.4 110 DL 257.4 110 255.4 110
+DL 259.4 110 257.4 110 DL 261.4 110 259.4 110 DL 263.4 110 261.4 110 DL 265.4
+110 263.4 110 DL 267.4 110 265.4 110 DL 269.4 110 267.4 110 DL 271.4 110 269.4
+110 DL 273.4 110 271.4 110 DL 275.4 110 273.4 110 DL 277.4 110 275.4 110 DL
+279.4 110 277.4 110 DL 281.4 110 279.4 110 DL 283.4 110 281.4 110 DL 285.4 110
+283.4 110 DL 287.4 110 285.4 110 DL 289.4 110 287.4 110 DL 291.4 110 289.4 110
+DL 293.4 110 291.4 110 DL 295.4 110 293.4 110 DL 297.4 110 295.4 110 DL 299.4
+110 297.4 110 DL 301.4 110 299.4 110 DL 303.4 110 301.4 110 DL 305.4 110 303.4
+110 DL 307.4 110 305.4 110 DL 309.4 110 307.4 110 DL 311.4 110 309.4 110 DL
+313.4 110 311.4 110 DL 315.4 110 313.4 110 DL 317.4 110 315.4 110 DL 319.4 110
+317.4 110 DL 321.4 110 319.4 110 DL 323.4 110 321.4 110 DL 325.4 110 323.4 110
+DL 327.4 110 325.4 110 DL 329.4 110 327.4 110 DL 331.4 110 329.4 110 DL 333.4
+110 331.4 110 DL 335.4 110 333.4 110 DL 337.4 110 335.4 110 DL 339.4 110 337.4
+110 DL 341.4 110 339.4 110 DL 343.4 110 341.4 110 DL 345.4 110 343.4 110 DL
+347.4 110 345.4 110 DL 349.4 110 347.4 110 DL 351.4 110 349.4 110 DL 353.4 110
+351.4 110 DL 355.4 110 353.4 110 DL 357.4 110 355.4 110 DL 359.4 110 357.4 110
+DL 361.4 110 359.4 110 DL 363.4 110 361.4 110 DL 365.4 110 363.4 110 DL 367.4
+110 365.4 110 DL 369.4 110 367.4 110 DL 371.4 110 369.4 110 DL 373.4 110 371.4
+110 DL 375.4 110 373.4 110 DL 377.4 110 375.4 110 DL 379.4 110 377.4 110 DL
+381.4 110 379.4 110 DL 383.4 110 381.4 110 DL 385.4 110 383.4 110 DL 387.4 110
+385.4 110 DL 389.4 110 387.4 110 DL 391.4 110 389.4 110 DL 393.4 110 391.4 110
+DL 395.4 110 393.4 110 DL 397.4 110 395.4 110 DL 399.4 110 397.4 110 DL 401.4
+110 399.4 110 DL 403.4 110 401.4 110 DL 405.4 110 403.4 110 DL 407.4 110 405.4
+110 DL 409.4 110 407.4 110 DL 411.4 110 409.4 110 DL 413.4 110 411.4 110 DL
+415.4 110 413.4 110 DL 417.4 110 415.4 110 DL 419.4 110 417.4 110 DL 421.4 110
+419.4 110 DL 423.4 110 421.4 110 DL 425.4 110 423.4 110 DL 427.4 110 425.4 110
+DL 429.4 110 427.4 110 DL 431.4 110 429.4 110 DL 433.4 110 431.4 110 DL 435.4
+110 433.4 110 DL 437.4 110 435.4 110 DL 439.4 110 437.4 110 DL 441.4 110 439.4
+110 DL 443.4 110 441.4 110 DL 445.4 110 443.4 110 DL 447.4 110 445.4 110 DL
+449.4 110 447.4 110 DL 451.4 110 449.4 110 DL 453.4 110 451.4 110 DL 455.4 110
+453.4 110 DL 457.4 110 455.4 110 DL 459.4 110 457.4 110 DL 461.4 110 459.4 110
+DL 463.4 110 461.4 110 DL 465.4 110 463.4 110 DL 467.4 110 465.4 110 DL 469.4
+110 467.4 110 DL 471.4 110 469.4 110 DL 473.4 110 471.4 110 DL 475.4 110 473.4
+110 DL 477.4 110 475.4 110 DL 479.4 110 477.4 110 DL 481.4 110 479.4 110 DL
+483.4 110 481.4 110 DL 485.4 110 483.4 110 DL 487.4 110 485.4 110 DL 489.4 110
+487.4 110 DL 491.4 110 489.4 110 DL 493.4 110 491.4 110 DL 495.4 110 493.4 110
+DL 497.4 110 495.4 110 DL 499.4 110 497.4 110 DL 501.4 110 499.4 110 DL 503.4
+110 501.4 110 DL 505.4 110 503.4 110 DL 507.4 110 505.4 110 DL 509.4 110 507.4
+110 DL 511.4 110 509.4 110 DL 513.4 110 511.4 110 DL 515.4 110 513.4 110 DL
+517.4 110 515.4 110 DL 519.4 110 517.4 110 DL 521.4 110 519.4 110 DL 523.4 110
+521.4 110 DL 525.4 110 523.4 110 DL 527.4 110 525.4 110 DL 529.4 110 527.4 110
+DL 531.4 110 529.4 110 DL 533.4 110 531.4 110 DL 535.4 110 533.4 110 DL 537.4
+110 535.4 110 DL 539.4 110 537.4 110 DL 541.4 110 539.4 110 DL 543.4 110 541.4
+110 DL 545.4 110 543.4 110 DL 1.44 LW 90 110.5 72 110.5 DL 99 110.5 81 110.5 DL
+117 110.5 99 110.5 DL 135 110.5 117 110.5 DL 153 110.5 135 110.5 DL 171 110.5
+153 110.5 DL 189 110.5 171 110.5 DL 207 110.5 189 110.5 DL/F1 12
+/Helvetica-BoldOblique@0 SF -2.076 -.72(Te x)72 124.5 T(ture Coor).72 E(dinate)
+-.24 E -.96(Tr)72 138.5 S(ansf).96 E(ormation)-.24 E(Matrices)72 152.5 Q/F2 11
+/Palatino-Roman@0 SF 5.95(The textur)221.5 138.6 R 8.7(em)-.198 G 5.95
+(atrices transform a primitive object's textur)301.193 138.6 R(e)-.198 E(coor)
+221.5 151.8 Q 1.748(dinates befor)-.198 F 4.498(et)-.198 G 1.748(hey ar)320.905
+151.8 R 4.498(eu)-.198 G 1.747(sed to access a textur)369.237 151.8 R 4.497
+(e. Unlike)-.198 F(the)4.497 E 1.923
+(general transformation attributes inherited by the primitive and)221.5 165 R
+1.555(studio objects \()221.5 178.2 R/F3 11/Palatino-Italic@0 SF(DoT)A 1.555
+(ranslate <DOXL)-1.221 F(T>)-.814 E F2 4.305(,e)C 1.555(tc.\), the textur)
+419.076 178.2 R 4.305(ea)-.198 G(ttributes)504.547 178.2 Q 3.069
+(for transforming textur)221.5 191.4 R 5.82(ec)-.198 G(oor)355.966 191.4 Q 3.07
+(dinates ar)-.198 F 5.82(en)-.198 G 3.07(ot cumulative.)440.426 191.4 R(Each)
+8.57 E(textur)221.5 204.6 Q 3.549(em)-.198 G .799
+(ap object inherits the textur)268.928 204.6 R 3.549(em)-.198 G .798
+(atrix bound most closely)423.392 204.6 R 1.254(to it.)221.5 217.8 R -1.012(Te)
+6.754 G(xtur)1.012 E 4.004(em)-.198 G 1.255(atrices ar)301.415 217.8 R 4.005
+(eo)-.198 G 1.255(utside of the transformation pipeline)361.796 217.8 R(and ar)
+221.5 231 Q 2.75(ei)-.198 G(nstead passed dir)263.74 231 Q(ectly to the r)-.198
+E(ender)-.198 E(er)-.198 E(.)-.814 E/F4 11/Helvetica-BoldOblique@0 SF(DoT)221.5
+268.2 Q -.165(ex)-.66 G(tureMatrixUV <DO).165 E(TMUV>)-.44 E F3(DoT)221.5
+294.148 Q(extur)-1.221 E(eMatrixUV)-.198 E .44 LW 352.101 284.71 326.139 284.71
+DL F2(\()322.476 294.148 Q F3(TM)-.033 E/F5 8/Palatino-Italic@0 SF(2).315 2.2 M
+/F6 8/Palatino-Roman@0 SF(d)A F3(\)).886 -2.2 M F2(cr)8.598 E 3.098
+(eates an object that establishes a)-.198 F 3.527(2-dimensional textur)221.5
+307.348 R 6.277(em)-.198 G 9.027(atrix. The)347.376 307.348 R 3.528
+(matrix is an arbitrary 3x3)6.278 F(matrix with the general format:)221.5
+320.548 Q 247.27 355.896 221.5 355.896 DL/F7 11/Helvetica@0 SF(TM)221.5 365.334
+Q/F8 8/Helvetica@0 SF(2)2.2 I F6(d)A/F9 11/Symbol SF(=)3.63 -2.2 M<e6>259.469
+353.784 Q<e7>259.469 367.127 Q<e8>259.469 378.127 Q F7(m)268.819 349.934 Q F8
+(0)2.2 I F6(0)A F7(m)268.819 365.334 Q F8(1)2.2 I F6(0)A F7(m)268.819 380.734 Q
+F8(2)2.2 I F6(0)A F7(m)297.98 349.934 Q F8(0)2.2 I F6(1)A F7(m)297.98 365.334 Q
+F8(1)2.2 I F6(1)A F7(m)297.98 380.734 Q F8(2)2.2 I F6(1)A F7(m)327.141 349.934
+Q F8(0)2.2 I F6(2)A F7(m)327.141 365.334 Q F8(1)2.2 I F6(2)A F7(m)327.141
+380.734 Q F8(2)2.2 I F6(2)A F9<f6>350.252 353.784 Q<f7>350.252 367.127 Q<f8>
+350.252 378.127 Q F2 2.634(The transformation values of the textur)221.5
+411.644 R 5.383(em)-.198 G 2.633(atrix ar)445.421 411.644 R 5.383(ea)-.198 G
+2.633(pplied to)498.911 411.644 R 1.861(subsequent primitive object's \()221.5
+424.844 R F3(u,v)A(,w)-.605 E F2 4.611(\)c)C(oor)413.436 424.844 Q 1.862
+(dinates befor)-.198 F 4.612(et)-.198 G 1.862(hey ar)508.185 424.844 R(e)-.198
+E 4.642(used to access a 2-dimensional textur)221.5 438.044 R 7.391
+(e. Subsequent)-.198 F 4.641(calls to)7.391 F F3(DoT)221.5 451.244 Q(extur)
+-1.221 E 2.454(eScaleUV <DOTSUV>)-.198 F F2 2.454(alter positions)5.204 F F3(m)
+5.49 E F5(0).244 2.2 M F6(0).24 E F2(and)5.755 -2.2 M F3(m)5.491 E F5(1).1 2.2
+M F6(1)A F2 5.205(;a).55 -2.2 O(nd)532.377 451.244 Q F3(DoT)221.5 464.444 Q
+(extur)-1.221 E(eT)-.198 E 2.527(ranslateUV <DOTTUV)-1.221 F F2 5.276(>a)C
+2.526(lters positions)402.245 464.444 R F3(m)5.562 E F5(0).244 2.2 M F6(2).24 E
+F2(and)5.826 -2.2 M F3(m)5.562 E F5(1).1 2.2 M F6(2)A F2(.).55 -2.2 M(However)
+221.5 477.644 Q 8.725(,b)-.814 G(ecause)283.674 477.644 Q F3(DoT)8.726 E(extur)
+-1.221 E(eScaleUV)-.198 E F2 5.976(can alter any r)8.726 F(otations)-.198 E(pr)
+221.5 490.844 Q .114(eviously stor)-.198 F .113(ed in the textur)-.198 F 2.863
+(em)-.198 G .113(atrix by)387.011 490.844 R F3(DoT)2.863 E(extur)-1.221 E
+(eMatrixUV)-.198 E F2 2.863(,i)C 2.863(ti)531.186 490.844 S(s)540.836 490.844 Q
+-.198(re)221.5 504.044 S 1.019(commended that you use either).198 F F3(DoT)3.77
+E(extur)-1.221 E(eMatrixUV)-.198 E F2 1.02(by itself or)3.77 F F3(DoT)221.5
+517.244 Q(extur)-1.221 E(eScaleUV)-.198 E F2(with)2.75 E F3(DoT)2.75 E(extur)
+-1.221 E(eT)-.198 E(ranslateUV)-1.221 E F2(.)A F4(DoT)221.5 554.444 Q -.165(ex)
+-.66 G(tureMatrixUVW <DO).165 E(TMW>)-.44 E F3(DoT)221.5 580.392 Q(extur)-1.221
+E(eMatrixUVW)-.198 E 361.127 570.954 335.477 570.954 DL F2(\()331.814 580.392 Q
+F3(TM)-.033 E F5(3).235 2.2 M F6(d)A F3(\)).654 -2.2 M F2(cr)4.802 E 2.052
+(eates an object that establishes a)-.198 F 3.871(3-dimensional textur)221.5
+593.592 R 6.621(em)-.198 G 6.621(atrix. The)348.064 593.592 R 3.872
+(matrix is an arbitrary 4x4)6.621 F(matrix with the general format:)221.5
+606.792 Q 248.087 653.426 221.5 653.426 DL(TM)221.5 662.578 Q F6(3d)2.2 I F9(=)
+3.63 -2.2 M<e6>260.286 640.028 Q<e7>260.286 653.371 Q<e7>260.286 664.371 Q<e7>
+260.286 675.371 Q<e8>260.286 686.371 Q F2(m)269.636 639.478 Q F6(00)2.2 I F2(m)
+269.636 654.878 Q F6(10)2.2 I F2(m)269.636 670.278 Q F6(20)2.2 I F2(m)269.636
+685.678 Q F6(30)2.2 I F2(m)298.899 639.478 Q F6(01)2.2 I F2(m)298.899 654.878 Q
+F6(11)2.2 I F2(m)298.899 670.278 Q F6(21)2.2 I F2(m)298.899 685.678 Q F6(31)2.2
+I F2(m)328.162 639.478 Q F6(02)2.2 I F2(m)328.162 654.878 Q F6(12)2.2 I F2(m)
+328.162 670.278 Q F6(22)2.2 I F2(m)328.162 685.678 Q F6(32)2.2 I F2(m)357.425
+639.478 Q F6(03)2.2 I F2(m)357.425 654.878 Q F6(13)2.2 I F2(m)357.425 670.278 Q
+F6(23)2.2 I F2(m)357.425 685.678 Q F6(33)2.2 I F9<f6>380.638 640.028 Q<f7>
+380.638 653.371 Q<f7>380.638 664.371 Q<f7>380.638 675.371 Q<f8>380.638 686.371
+Q 1.44 LW 90 756 72 756 DL 99 756 81 756 DL 117 756 99 756 DL 135 756 117 756
+DL 153 756 135 756 DL 171 756 153 756 DL 189 756 171 756 DL 207 756 189 756 DL
+239.4 756 221.4 756 DL 257.4 756 239.4 756 DL 275.4 756 257.4 756 DL 293.4 756
+275.4 756 DL 311.4 756 293.4 756 DL 329.4 756 311.4 756 DL 347.4 756 329.4 756
+DL 365.4 756 347.4 756 DL 383.4 756 365.4 756 DL 401.4 756 383.4 756 DL 419.4
+756 401.4 756 DL 437.4 756 419.4 756 DL 455.4 756 437.4 756 DL 473.4 756 455.4
+756 DL 491.4 756 473.4 756 DL 509.4 756 491.4 756 DL 527.4 756 509.4 756 DL
+545.4 756 527.4 756 DL/F10 9/Helvetica-Bold@0 SF(6-456)72 768.96 Q/F11 9
+/Helvetica@0 SF(Dore)6.504 E 3.506<b452>117.019 768.96 S(ef)130.02 768.96 Q
+(erence Man)-.27 E(ual)-.09 E(Dore)221.4 768.96 Q 3.506<b454>236.902 768.96 S
+-.09(ra)247.824 768.96 S(nsf).09 E -2.277(or mation)-.27 F -2.367(Matr ices)
+2.502 F EP
+%%Page: 457 13
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 99 46.8 63 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 243 46.8 207 46.8 DL 279 46.8 243 46.8 DL 315 46.8 279 46.8 DL 351
+46.8 315 46.8 DL 387 46.8 351 46.8 DL 437.4 46.8 401.4 46.8 DL 464.4 46.8 428.4
+46.8 DL 500.4 46.8 464.4 46.8 DL 536.4 46.8 500.4 46.8 DL/F0 10
+/Helvetica-BoldOblique@0 SF -1.73 -.6(Te x)445.67 57.6 T(ture Coor).6 E(dinate)
+-.2 E -.8(Tr)420.71 68.4 S(ansf).8 E(ormation Matrices)-.2 E/F1 10/Helvetica@0
+SF(\(contin)486.48 79.2 Q(ued\))-.1 E/F2 11/Palatino-Roman@0 SF .57
+(The transformation values of the textur)63 109.2 R 3.319(em)-.198 G .569
+(atrix ar)274.537 109.2 R 3.319(ea)-.198 G .569(pplied to the)323.899 109.2 R
+1.861(subsequent primitive object's)63 122.4 R/F3 11/Palatino-Italic@0 SF
+(\(u,v)4.611 E(,w\))-.605 E F2(coor)4.611 E 1.862(dinates befor)-.198 F 4.612
+(et)-.198 G 1.862(hey ar)349.685 122.4 R(e)-.198 E 4.642
+(used to access a 3-dimensional textur)63 135.6 R 7.391(e. Subsequent)-.198 F
+4.641(calls to)7.391 F F3(DoT)63 148.8 Q(extur)-1.221 E 1.172
+(eScaleUVW <DOTSW>)-.198 F F2 1.172(alter positions)3.922 F F3(m)4.208 E/F4 8
+/Palatino-Italic@0 SF(0).244 2.2 M/F5 8/Palatino-Roman@0 SF(0).24 E F2(,).55
+-2.2 M F3(m)4.208 E F4(1).1 2.2 M F5(1)A F2 3.923(,a).55 -2.2 O(nd)349.374
+148.8 Q F3(m)4.209 E F4(2).436 2.2 M F5(2)A F2(;).55 -2.2 M(and)63 162 Q F3
+(DoT)4.107 E(extur)-1.221 E(eT)-.198 E 1.357(ranslateUVW <DOTTW)-1.221 F F2
+4.107(>a)C 1.356(lters positions)268.404 162 R F3(m)4.392 E F4(0).244 2.2 M F5
+(3).24 E F2(,).55 -2.2 M F3(m)4.392 E F4(1).1 2.2 M F5(3)A F2(,).55 -2.2 M(and)
+63 175.2 Q F3(m)5.796 E F4(2).436 2.2 M F5(3)A F2 8.26(.H).55 -2.2 O(owever)
+125.125 175.2 Q 5.51(,b)-.814 G(ecause)174.932 175.2 Q F3(DoT)5.51 E(extur)
+-1.221 E(eScaleUVW)-.198 E F2 2.761(may alter any)5.511 F -.198(ro)63 188.4 S
+10.85(tations pr).198 F 10.85(eviously stor)-.198 F 10.85(ed in the textur)
+-.198 F 13.6(em)-.198 G 10.85(atrix by)338.893 188.4 R F3(DoT)63 201.6 Q(extur)
+-1.221 E(eMatrixUVW)-.198 E F2 6.929(,i)C 6.929(ti)181.392 201.6 S 6.929(sr)
+195.108 201.6 S 4.179(ecommended that you use either)210.848 201.6 R F3(DoT)63
+214.8 Q(extur)-1.221 E(eMatrixUVW)-.198 E F2 7.937(by itself or)179.199 214.8 R
+F3(DoT)257.393 214.8 Q(extur)-1.221 E(eScaleUVW)-.198 E F2(with)364.637 214.8 Q
+F3(DoT)63 228 Q(extur)-1.221 E(eT)-.198 E(ranslateUVW)-1.221 E F2(.)A 1.44 LW
+81 756 63 756 DL 99 756 81 756 DL 117 756 99 756 DL 135 756 117 756 DL 153 756
+135 756 DL 171 756 153 756 DL 189 756 171 756 DL 207 756 189 756 DL 225 756 207
+756 DL 243 756 225 756 DL 261 756 243 756 DL 279 756 261 756 DL 297 756 279 756
+DL 315 756 297 756 DL 333 756 315 756 DL 351 756 333 756 DL 369 756 351 756 DL
+387 756 369 756 DL 419.4 756 401.4 756 DL 428.4 756 410.4 756 DL 446.4 756
+428.4 756 DL 464.4 756 446.4 756 DL 482.4 756 464.4 756 DL 500.4 756 482.4 756
+DL 518.4 756 500.4 756 DL 536.4 756 518.4 756 DL/F6 9/Helvetica@0 SF(Dore)
+269.055 768.96 Q 3.506<b454>284.557 768.96 S -.09(ra)295.479 768.96 S(nsf).09 E
+-2.277(or mation)-.27 F -2.367(Matr ices)2.502 F(Dore)414.21 768.96 Q 3.506
+<b452>429.712 768.96 S(ef)442.713 768.96 Q(erence Man)-.27 E(ual)-.09 E/F7 9
+/Helvetica-Bold@0 SF(6-457)4.002 E EP
+%%Trailer
+end
+%%EOF

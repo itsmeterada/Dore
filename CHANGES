@@ -1,0 +1,11 @@
+Major changes:
+
+- Include files are now put into their own separate hierarchry under
+  <dore>. This should not be a problem for older code - just compile
+  with `-I/usr/include/dore' or whatever. It simplifies building
+  tremendously.
+- We no longer have the DORE_ERRDATA and DORE_FONTDATA environmental
+  variables. They are now DORE_ERRMSGFILE, which specifies the full
+  pathname of the Dore' error-message file, and DORE_FONTDIR, which
+  specifies the full pathname to the directory containing the Dore'
+  fonts.

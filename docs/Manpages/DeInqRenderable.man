@@ -1,0 +1,51 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DeInqRenderable 3D "Dore"
+.SH NAME
+DeInqRenderable \- Return whether a class is renderable
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+DtFlag DeInqRenderable(class_id)
+DtInt class_id;
+.sp
+.in -.5i
+FORTRAN:
+.in +.5i
+INTEGER*4 DEQR(CLSID)
+INTEGER*4 CLSID
+.fi 
+.SH DESCRIPTION
+.IX DEQR
+.IX DeInqRenderable
+.LP
+\f2DeInqRenderable\fP returns \f2DcTrue\fP <\f2DCTRUE\fP> if objects of 
+type \f2class_id\fP are 
+currently executable and not invisible.  Otherwise \f2DcFalse\fP <\f2DCFALS\fP> 
+is returned.
+For user-defined primitives, \f2class_id\fP is the unique class identifier 
+returned by \f2DeAddClass\fP <\f2DEAC\fP>.
+\f2DeInqRenderable\fP is used by the render methods of user-defined classes.
+.SH ERRORS
+.I DeInqRenderable
+will fail if the class identifier is invalid.
+.TP 15
+[WARNING - invalid class handle]
+.SH SEE ALSO
+DeAddClass(3D)

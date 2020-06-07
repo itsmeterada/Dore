@@ -1,0 +1,111 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DdSetShadeRanges 3D  "Dore"
+.SH NAME
+DdSetShadeRanges \- Set one or more shade range table entries of a device
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+void DdSetShadeRanges(device, start, count, entries)
+DtObject device;
+DtInt start;
+DtInt count;
+DtInt entries[\|];
+.sp
+.in -.5i
+FORTRAN:
+.in +.5i
+CALL DDSSR(DEVICE, START, COUNT, ENTRYS)
+INTEGER*4 DEVICE
+INTEGER*4 START
+INTEGER*4 COUNT
+INTEGER*4 ENTRYS(COUNT*2)
+.in -.5i
+.fi
+.SH DESCRIPTION
+.IX DDSSR
+.IX DdSetShadeRanges
+.I DdSetShadeRanges
+sets one or more shade range table entries on the device, \f2device\fP.
+The shade range table is used when a device is in pseudocolor mode
+and the shademode is set to \f2DcRange\fP <\f2DCRNG\fP>.
+Each entry in the shade range table consists of a pair of values defining
+a shade range that specifies a range in the color table entries into which 
+computed intensities map.
+Intensities between 0.0 and 1.0 are used to linearly interpolate 
+between the two specified limits in the color lookup table.
+This interpolated color table index is then sent to the
+device's frame buffer.
+.PP
+The parameter \f2start\fP specifies the first entry to be set.
+The parameter \f2count\fP specifies the number of entries to be written.
+The parameter \f2entries\fP is an array containing the new range boundaries.
+.PP
+To use this mode, the application should subdivide the color map into a
+set of shade ranges.  Each color table entry within the range has the
+same base color (hue) but has steadily increasing intensity as the
+index goes from the first entry in the range to the last.
+.PP
+For example, consider an image of a mechanical part consisting
+of three colors: bronze, silver and grey.  Instead of having unused colors in
+the color map, the application can use shade ranges to partition
+the color map into the necessary shades of bronze, silver and grey.
+When a shade is computed by the renderer, it is
+converted to an intensity between 0.0 and 1.0 that
+interpolates between the entries of the current shade range (set by
+\f2DoShadeIndex\fP <\f2DOSI\fP>).  The application program then uses
+\f2DdSetShadeRanges\fP <\f2DDSSR\fP> to define 
+three shade ranges:
+.IP
+Shade range 1 specifying the minimum and maximum entries for bronze.
+.IP
+Shade range 2 specifying the minimum and maximum entries for silver.
+.IP
+Shade range 3 specifying the minimum and maximum entries for grey.
+.PP
+The shade index primitive attribute is used to select a particular shade range;
+see \f2DoShadeIndex\fP.
+.PP
+Because the actual size of each color table is specified for each device,
+an application can adapt the color table to eliminate unneeded entries.
+The number of entries used by each shade
+range can be based on the importance of the shade to the image and the
+size of the device color lookup table.
+If the image is being displayed on several devices, each with color lookup 
+tables of different sizes, the number of elements in each shade range can be
+adjusted appropriately.
+.SH ERRORS
+.I DdSetShadeRanges
+will fail if the device handle is invalid.
+.TP 15
+[WARNING - invalid device handle]
+.PP
+\f2DdSetShadeRanges\fP will fail if the \f2start\fP or \f2count\fP parameters
+refer to entries outside the shade range table boundaries.
+.TP 15
+[WARNING - bad start and/or count values]
+.SH "SEE ALSO"
+.na
+.nh
+DdInqColorEntries(3D), DdInqColorTableSize(3D),
+DdInqShadeMode(3D), DdInqShadeRanges(3D), 
+DdInqVisualType(3D), DdSetColorEntries(3D),
+DdSetShadeMode(3D), DoShadeIndex(3D)
+.hy
+.ad

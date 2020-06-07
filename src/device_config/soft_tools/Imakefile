@@ -1,0 +1,7 @@
+#include <Dore.tmpl>
+#define	IHaveSubdirs
+
+SUBDIRS = softpipe zbuffer
+
+MakeSubdirs($(SUBDIRS))
+DependSubdirs($(SUBDIRS))

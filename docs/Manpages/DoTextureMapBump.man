@@ -1,0 +1,133 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DoTextureMapBump 3D "Dore"
+.SH NAME
+DoTextureMapBump \- Create a bump map primitive attribute object
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+DtObject DoTextureMapBump(operator, mapping, raster)
+DtMapOperator operator;
+DtObject mapping;
+DtObject raster;
+.sp
+.in  -.5i
+FORTRAN:
+.in  +.5i
+INTEGER*4 DOTMB(OPRATR, MAPPNG, RASTER)
+INTEGER*4 OPRATR
+INTEGER*4 MAPPNG
+INTEGER*4 RASTER
+.in  -.5i
+.fi 
+.IX "DoTextureMapBump"
+.IX "DOTMB"
+.SH DESCRIPTION
+.LP
+\f2DoTextureMapBump\fP creates a primitive attribute object that
+specifies a bump map, i.e. a texture map for perturbing shading normals.
+.LP
+A bump-mapped primitive object can be affected by more than one
+\f2DoTextureMapBump\fP attribute.
+The parameter \f2operator\fP specifies whether subsequent primitive
+objects will be affected by this bump map only, or 
+also by other bump maps higher up in the scene hierarchy.
+The possible values for \f2operator\fP are:
+.IX "DcMapReplace"
+.IX "DCMR"
+.IP "\f2DcMapReplace\fP <\f2DCMR\fP>"
+Any bump maps already defined will be ignored by
+subsequent primitive objects.
+.IX "DcMapAdd"
+.IX "DCMADD"
+.IP "\f2DcMapAdd\fP <\f2DCMADD\fP>"
+Use this map in addition to the bump maps higher up in the hierarchy.
+In case of overlapping textures, the one that is defined closer
+to the primitive object affected by the textures will be evaluated
+first.  
+Note that a primitive object can only be affected by textures above
+it in the hierarchy.
+.LP
+The parameter \f2mapping\fP specifies which mapping procedure to use.
+Possible values for \f2mapping\fP are:
+.IX "DcStdBumpMap"
+.IX "DCSBM"
+.IP "\f2DcStdBumpMap\fP <\f2DCSBM\fP>"
+Use the default bump mapping method the renderer provides.
+.IP "Renderer-specific mappings"
+Use any renderer-specific mappings documented in your
+\f2Dore System Guide\fP. 
+.LP
+The parameter \f2raster\fP is the actual bump map data to be used by the 
+texturing procedure.
+\f2raster\fP is a handle to an object 
+created with either \f2DoRaster\fP <\f2DORS\fP>
+or \f2DoFileRaster\fP <\f2DOFRS\fP>.
+One channel of data is typically needed for bump maps.
+If the raster data is in the standard Dore format, the following
+convention is used.  For rasters of type \f2DcRasterZ\fP
+<\f2DCRZ\fP>, \f2DcRasterRGBZ\fP <\f2DCRRZ\fP> and \f2DcRasterRGBAZ\fP
+<\f2DCRRAZ\fP> the Z channel is used.
+For rasters of type \f2DcRasterA\fP <\f2DCRA\fP> the alpha channel is used.
+For rasters of type \f2DcRasterRGB\fP <\f2DCRRGB\fP> and \f2DcRasterRGBA\fP
+<\f2DCRRA\fP> a single intensity value is calculated from RGB data for
+every pixel.  This intensity value is then used as bump map data.
+Note that some renderers may not adhere to this convention.
+.LP
+\f2DoTextureMapBump\fP is a primitive attribute and is
+inherited by subsequent primitive objects, as are all primitive 
+attributes. 
+Unlike most other primitive attributes though, \f2DoTextureMapBump\fP
+also inherits a set of attributes, i.e. the texture attributes.
+The texture attributes specify things such as which set of primitive
+\f2uv\fP coordinates to use, how to extend a texture when the primitive
+\f2uv\fP coordinates extend beyond the limits of the texture, 
+how to transform the primitive \f2uv\fP
+coordinates before applying the texture, etc.
+The current values of the texture attributes are bound to the 
+\f2DoTextureMapBump\fP 
+object when it is executed during traversal.
+Thus the texture attributes are only indirectly bound to the
+primitive objects.
+.SH ERRORS
+\f2DoTextureMapBump\fP will fail if \f2raster\fP is not a
+\f2DoRaster\fP object or a \f2DoFileRaster\fP object.
+.TP 15
+[WARNING - invalid or deleted object]
+.SH SEE ALSO
+.na
+.nh
+DoFileRaster(3D),
+DoRaster(3D),
+DoTextureMapBumpSwitch(3D),
+DoTextureUVIndex(3D), 
+DoTextureUVWIndex(3D), 
+DoTextureMatrixUV(3D), 
+DoTextureMatrixUVW(3D), 
+DoTextureScaleUV(3D), 
+DoTextureScaleUVW(3D), 
+DoTextureTranslateUV(3D),
+DoTextureTranslateUVW(3D),
+DoTextureExtendUV(3D), 
+DoTextureExtendUVW(3D), 
+DoTextureOp(3D), 
+DoTextureAntiAlias(3D)
+.ad
+.hy
+\&

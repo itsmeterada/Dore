@@ -1,0 +1,490 @@
+.\"#ident "%W%" %G%
+.\"
+.\" Copyright (C) 1988, 1989, 1990, 1991 by Kubota Pacific Computer Inc.
+.\"         All Rights Reserved
+.\" This program is a trade secret of Kubota Pacific Computer Inc. and
+.\" it is not to be reproduced, published, disclosed to others, copied,
+.\" adapted, distributed, or displayed without the prior authorization
+.\" of Kubota Pacific Computer Inc.  Licensee agrees to attach or embed
+.\" this Notice on all copies of the program, including partial copies
+.\" or modified versions thereof.
+.\"
+.ds BT "\\*(Dd Programmer's Guide
+.ds CT Contents
+.so ../macros/local.me
+.PN 3 i
+.L1 C ONTENTS
+.CH
+.rs
+.C0 "Preface" 
+.C0 "Overview" 1-1
+.C1 "Graphics Tools" 1-1
+.C1 "Ease of Use" 1-2
+.C1 "Interactivity" 1-2
+.C1 "Multiple Output Devices and Renderers" 1-2
+.C1 "Device Independence" 1-3
+.C1 "Use of Underlying Hardware and Software" 1-3
+.C1 "Extendability" 1-3
+.C0 "Writing a Dor\o.e\(aa. Program" 2
+.C1 "The Dor\o.e\(aa. Process" 2-5
+.C1 "Objects and Methods" 2-6
+.C1 "Basic Steps in Programming with the Dor\o.e\(aa. library" 2-6
+.C1 "Step 1:  Primitives" 2-7
+.C1 "Step 2:  Attributes" 2-7
+.C2 "Color Model" 2-8
+.C2 "How an Object Responds to Light" 2-8
+.C2 "Default Values for Attributes" 2-9
+.C2 "Colored Vertices" 2-9
+.C1 "Step 3:  Positioning and Sizing Scene Objects" 2-9
+.C2 "Objects and Groups:  DgAddObj()" 2-10
+.C1 "Step 4:  Choosing Lights" 2-12
+.C1 "Step 5:  Selecting a Lens and Camera Position" 2-14
+.bp
+.C2 "Views, Frames, and Devices" 2-15
+.C3 "Views" 2-15
+.C3 "Frames" 2-16
+.C3 "Devices" 2-16
+.C1 "Step 6:  Rendering the Scene" 2-17
+.C1 "Immediate Mode Execution" 2-17
+.C1 "Naming Conventions" 2-18
+.C1 "Include Files" 2-19
+.C1 "Single\(hy and Double\(hyPrecision Application Interfaces" 2-19
+.C2 "Portability" 2-19
+.C3 "C Code" 2-20
+.C3 "\s-1FORTRAN\s+1 Code" 2-20
+.C2 "Compiling and Linking" 2-20
+.C1 "Complete Sample Program" 2-21
+.C0 "Objects and Groups" 3
+.C1 "What Is an Object?" 3-27
+.C2 "Object Creation Functions" 3-27
+.C2 "Object Handles" 3-28
+.C2 "Example of an Object" 3-28
+.C2 "Object Diagrams" 3-29
+.C2 "Holding and Releasing Objects" 3-29
+.C1 "What is a Group?" 3-30
+.C2 "Example of a Group" 3-30
+.C2 "The Currently Open Group" 3-32
+.C2 "Groups Within Groups" 3-34
+.C2 "Nesting Open Groups" 3-36
+.C2 "Local Effects of Attributes" 3-38
+.C2 "Editing a Group" 3-39
+.C2 "Element Pointers" 3-40
+.C2 "Labels" 3-40
+.C2 "In\(hyline Groups" 3-41
+.C1 "Examples" 3-41
+.C2 "Basic Wheel Group" 3-41
+.C2 "Left and Right Wheel Groups" 3-42
+.C2 "Example 1:  Creating Objects and Groups" 3-43
+.C2 "Example 2:  Using An In\(hyline Group and Element Pointer" 3-44
+.C2 "Example 3:  Using Labels and Holding Objects" 3-49
+.C2 "Example 4: Using an Empty In\(hyLine Group" 3-53
+.C1 "Chapter Summary" 3-54
+.bp
+.rs
+.sp 1v
+.C0 "Primitive Objects" 4
+.C1 "Primitive Objects" 4-57
+.C1 "DoPrimSurf" 4-57
+.C1 "DoTorus" 4-58
+.C1 "DoSphereList" 4-59
+.C2 "Color Model" 4-59
+.C2 "Sphere List Example" 4-59
+.C1 "DoLineList" 4-61
+.C2 "Vertex Type" 4-61
+.C3 "Texture Coordinates" 4-62
+.C2 "Vertices" 4-62
+.C3 "Vertex Locations" 4-62
+.C3 "Vertex Normals" 4-63
+.C3 "Vertex Colors" 4-64
+.C3 "Vertex Normals and Colors" 4-65
+.C3 "Texture Coordinates" 4-65
+.C1 "DoPolyline" 4-66
+.C2 "Polyline Example" 4-67
+.C1 "DoTriangleList" 4-68
+.C2 "Geometric Normals and the Right-hand Rule" 4-68
+.C2 "Triangle List Examples" 4-69
+.C1 "DoTriangleStrip" 4-70
+.C2 "Vertices and Handedness Rules" 4-71
+.C2 "Triangle Strip Example" 4-71
+.C1 "DoSimplePolygon" 4-72
+.C2 "Vertices and the Right-hand Rule" 4-74
+.C2 "Simple Polygon Example" 4-74
+.C1 "DoPolygon" 4-75
+.C2 "Vertices and the Right-hand Rule" 4-75
+.C2 "Polygon Example" 4-76
+.C2 "Inside/Out Rule" 4-78
+.C1 "Mesh Objects" 4-78
+.C1 "DoTriangleMesh" 4-79
+.C2 "Triangle Mesh Examples" 4-80
+.C1 "DoSimplePolygonMesh" 4-83
+.C2 "Simple Polygon Mesh Example" 4-84
+.C1 "Variable Data Primitives" 4-85
+.C2 "Advantages of Using Variable Data Primitives" 4-87
+.C2 "Variable Data Primitive Example" 4-87
+.C1 "Chapter Summary" 4-91
+.bp
+.C0 "Primitive Attributes" 5-5
+.C1 "Primitive Attributes" 5-93
+.C1 "Rendering" 5-93
+.C1 "Attribute Stacking" 5-94
+.C2 "Modifying the Top of Stack" 5-95
+.C1 "DoPushAtts and DoPopAtts" 5-98
+.C1 "Affecting an Object's Display Representation" 5-98
+.C2 "Representation Type" 5-98
+.C2 "Subdivision Specification" 5-99
+.C2 "Backface Culling" 5-102
+.C2 "Local Antialiasing" 5-102
+.C1 "Object Material Properties" 5-103
+.C2 "Ambient Component" 5-104
+.C2 "Diffuse  Component" 5-104
+.C2 "Specular Component" 5-105
+.C2 "Transparent Component" 5-105
+.C2 "Reflection Component" 5-107
+.C2 "Using the Component Attributes" 5-108
+.C1 "Shading" 5-108
+.C1 "Example" 5-109
+.C1 "Chapter Summary" 5-114
+.C0 "Geometric Transformations" 6
+.C1 "Geometric Transformations" 6-117
+.C1 "Right-Handed Coordinate System" 6-117
+.C1 "Modeling Coordinates" 6-118
+.C1 "Current Transformation Matrix (CTM)" 6-119
+.C2 "CTM Stack" 6-119
+.C2 "Preconcatenation of Transformations" 6-119
+.C1 "Relative Coordinate System" 6-120
+.C1 "Example" 6-121
+.C1 "Ordering Transformations" 6-124
+.C1 "Pushing and Popping the CTM" 6-125
+.C1 "DoLookAtFrom" 6-127
+.C1 "Absolute vs Relative Group Definition" 6-128
+.C2 "Absolute Group Definition" 6-129
+.C2 "Relative Group Definition" 6-130
+.C2 "Pros and Cons" 6-131
+.C1 "Chapter Summary" 6-131
+.C0 "Text" 7
+.C1 "Text Primitives" 7-133
+.C2 "DoText" 7-133
+.C2 "DoAnnoText" 7-134
+.C1 "Text Primitive Attributes" 7-135
+.C2 "Positioning Text" 7-135
+.C3 "DoTextPath" 7-136
+.C3 "DoTextAlign" 7-137
+.C2 "Affecting the Text's Look" 7-142
+.C3 "DoTextHeight, DoTextExpFactor" 7-143
+.C3 "DoTextSpace" 7-143
+.C3 "DoTextUpVector" 7-143
+.C1 "Examples" 7-145
+.C1 "Chapter Summary" 7-152
+.C0 "Cameras and Lights" 8
+.C1 "Studio Objects" 8-153
+.C2 "Studio Objects and Their Attribute Objects" 8-154
+.C2 "Studio Objects and Geometric Transformations" 8-154
+.C1 "Cameras and Their Attributes" 8-154
+.C2 "Clipping at View Boundaries" 8-155
+.C2 "Nonsquare Views      " 8-156
+.C2 "Camera Projection Matrix" 8-157
+.C1 "Example" 8-157
+.C2 "DoPushMatrix and DoPopMatrix" 8-161
+.C1 "The Active Camera" 8-162
+.C1 "Coordinate Systems" 8-162
+.C1 "DoStereo and DoStereoSwitch" 8-163
+.C1 "Global Rendering Attributes" 8-163
+.C1 "Sampling and Antialiasing" 8-164
+.C1 "Lights and Their Attributes" 8-166
+.C2 "Ambient Light" 8-167
+.C2 "Light Source at Infinity" 8-167
+.C2 "Point Lights" 8-168
+.C3 "Attenuated Point Lights" 8-169
+.C2 "Spot Lights" 8-169
+.C3 "Spread Angle" 8-170
+.C3 "Spread Exponents" 8-171
+.C3 "Attenuated Spot Lights" 8-171
+.C1 "Light Switch" 8-173
+.C1 "Shadows" 8-173
+.C1 "Chapter Summary" 8-173
+.C0 "Views, Frames, and Devices" 9
+.C1 "Organizational Objects" 9-175
+.C1 "Overview of Creating Views, Frames, and Devices" 9-176
+.C1 "Adding Objects to Views" 9-177
+.C1 "Important View Features" 9-178
+.C1 "Important Frame Features" 9-179
+.C1 "Adding Views to Frames" 9-179
+.C1 "Creating a Device" 9-179
+.C1 "Example 1: Creating a Device, Frame and View" 9-181
+.C1 "Transformations between Views, Frames, and Devices" 9-182
+.C1 "Updating Views, Frames, and Devices" 9-183
+.C1 "Example 2:  Adding an Object to Four Different Views" 9-184
+.C1 "Example 3: Views using Relative Frame Coordinates" 9-189
+.C1 "Example 4:  Combining Definition and Display Groups" 9-191
+.C1 "Pseudocolor" 9-197
+.C2 "Bit Compression" 9-198
+.C2 "Range Intensity Mapping" 9-201
+.C2 "Pros and Cons" 9-203
+.C1 "Chapter Summary" 9-204
+.C0 "Methods" 10
+.C1 "Methods" 10-205
+.C1 "Rendering" 10-206
+.C2 "Update Functions" 10-206
+.C2 "Choosing a Renderer" 10-206
+.C2 "Rendering Efficiency Measures" 10-208
+.C3 "Backface Culling" 10-209
+.C3 "Hidden Surfaces" 10-209
+.C1 "Computing Bounding Volumes" 10-209
+.C1 "Picking" 10-211
+.C2 "Pick ID Attribute" 10-211
+.C2 "Pick Path" 10-211
+.C3 "Pick Path Elements" 10-212
+.C3 "Hit List and Index" 10-213
+.C3 "Optional Pick Information" 10-215
+.C2 "Picking Example" 10-215
+.C2 "Pick Path Order" 10-220
+.C2 "Pick Callbacks" 10-221
+.C2 "User-Written Pick Callbacks" 10-222
+.C1 "Chapter Summary" 10-223
+.C0 "Conditionals" 11
+.C1 "Callbacks" 11-225
+.C2 "Creation vs Execution Time" 11-225
+.C2 "Immediate Execution Mode" 11-226
+.C2 "Other Functions Affecting Execution" 11-227
+.C2 "Example" 11-227
+.C1 "Executability Set" 11-231
+.C2 "Switch Attributes vs. the Executability Set" 11-232
+.C1 "Name Sets and Filters" 11-232
+.C2 "Name Sets" 11-233
+.C2 "Filters" 11-233
+.C2 "Example:  Invisibility Filter" 11-234
+.C1 "Bounding Volumes as Conditionals" 11-238
+.C1 "Chapter Summary" 11-240
+.C0 "System Functions" 12
+.C1 "Naming Objects" 12-241
+.C1 "Error Handling" 12-242
+.C1 "Dor\o.e\(aa. Input" 12-247
+.C2 "Input Slots and Valuators" 12-249
+.C3 "Creating Input Slots" 12-249
+.C3 "Attaching Valuators to an Input Slot" 12-249
+.C3 "Using Input Slots and Valuators" 12-249
+.C2 "Simple Example" 12-250
+.C1 "Other System Functions" 12-251
+.C1 "Chapter Summary" 12-252
+.C0 "User-defined Primitives  " 13
+.C1 "Why Define Your Own Primitives?" 13-253
+.C1 "Base Primitives and Alternate Representations" 13-254
+.C1 "Components of a Dor\o.e\(aa. Primitive Class" 13-255
+.C2 "Private Data" 13-255
+.C2 "Class Name and Identifier" 13-256
+.C2 "Initialization Routine" 13-256
+.C2 "Creation Routine" 13-256
+.C2 "Methods" 13-256
+.C1 "A Simple Example:  The L\(hybracket Primitive" 13-257
+.C2 "Step 1:  Define the Private Data Structure" 13-258
+.C2 "Step 2: Initialize the Primitive Class" 13-259
+.C3 "Naming Conventions" 13-261
+.C2 "Step 3:  Create an Object of the New Primitive Class" 13-261
+.C2 "Step 4:  Implement the Methods Routines" 13-263
+.C3 "DcMethodPrint <DCMPRT>" 13-263
+.C3 "DcMethodDestroy <DCMDST>" 13-264
+.C3 "DcMethodCmpBndVolume <DCMCBV>" 13-265
+.C3 "DcMethodPick <DCMPCK>" 13-266
+.C3 "DcMethodUpdStdAltObj <DCMSAO> " 13-267
+.C3 "DcMethodStdRenderDisplay <DCMSRD>" 13-269
+.C3 "DcMethodDynRender <DCMDR> and 
+.C3 "  DcMethodGlbrndIniObjs <DCMGIO>" 13-270
+.C2 "Step 5:  Install the New Primitive Class" 13-271
+.C1 "Using a New Primitive" 13-271
+.C1 "Chapter Summary" 13-272
+.C0 "Raster Objects" 14
+.C1 "Raster Objects" 14-275
+.C1 "Creating Raster Objects" 14-276
+.C2 "DoFileRaster" 14-276
+.C2 "DoRaster" 14-277
+.C1 "Updating Raster Data" 14-278
+.C1 "Raster Representations" 14-278
+.C2 "Creating Raster Data" 14-278
+.C2 "Writing Raster Files" 14-281
+.C1 "Using Raster Objects" 14-282
+.C3 "Texture Maps" 14-282
+.C3 "View Backgrounds" 14-282
+.C1 "Chapter Summary" 14-284
+.C0 "Texture Mapping" 15
+.C1 "What is Texture Mapping?" 15-285
+.C1 "Texture Mapping in Dor\o.e\(aa." 15-286
+.C1 "Enabling Texture Mapping" 15-287
+.C1 "Specifying Texture Maps" 15-287
+.C1 "Texture Attributes" 15-290
+.C1 "Positioning a Texture on an Object" 15-291
+.C2 "Assigning Texture Coordinates to Vertices " 15-292
+.C3 "Variable Data Primitives" 15-294
+.C3 "Selecting a Set of Texture Coordinates" 15-294
+.C2 "Transforming Texture Coordinates" 15-295
+.C2 "Texture Coordinates Outside the Texture Range" 15-296
+.C2 "Nonvertex Primitives" 15-300
+.C2 "Two-part Mapping" 15-305
+.C1 "Using the Texture Element" 15-308
+.C1 "Texture Antialiasing" 15-308
+.C1 "Chapter Summary" 15-310
+.C0 "Dor\o.e\(aa. Functional Groups" A
+.C1 "Functional Groups" A-311
+.C1 "Function List" A-312
+.C2 "Primitives" A-312
+.C2 "Primitive Attributes" A-313
+.C3 "Text Attributes" A-314
+.C2 "Studio Objects" A-315
+.C2 "Studio Object Attributes" A-315
+.C3 "Light Attributes" A-315
+.C3 "Camera Attributes" A-315
+.C2 "Geometric Transformation Attributes" A-316
+.C2 "Texture Attributes" A-316
+.C2 "Organizational Objects" A-317
+.C2 "Miscellaneous Objects" A-317
+.C1 "Variable Primitive Update Functions" A-317
+.C1 "Group Functions" A-318
+.C1 "View Functions" A-318
+.C1 "Frame Functions" A-319
+.C1 "Device Functions" A-319
+.C1 "System Functions" A-320
+.C1 "Dor\o.e\(aa. Extension Functions" A-321
+.C0 "List of Figures"
+.LF "Figure 2-1. post Group" 2-11
+.LF "Figure 2-2. base Group" 2-12
+.LF "Figure 2-3. Light and Camera Attributes" 2-13
+.sp 1v
+.LF "Figure 3-1. Sample Object" 3-29 
+.LF "Figure 3-2. Sphere Group" 3-30 
+.LF "Figure 3-3. Adding the post Group" 3-34 
+.LF "Figure 3-4. Adding the base Group" 3-36 
+.LF "Figure 3-5. Numbering Element Pointer Spaces Groups 
+.LF "                        and Elements" 3-40
+.LF "Figure 3-6. Basic Wheel Group" 3-41 
+.LF "Figure 3-7. Left and Right Wheel Group" 3-42 
+.LF "Figure 3-8. Using an In-line Group for the Scale and
+.LF "                        Rotation Objects" 3-45 
+.LF "Figure 3-9. Wireframe Wheels and Axle" 3-46 
+.sp 1v
+.LF "Figure 4-1. Torus" 4-59
+.LF "Figure 4-2. Polyline Pentagon" 4-67
+.LF "Figure 4-3. Using the Right-hand Rule to Specify 
+.LF "                        the Geometric Normal" 4-69
+.LF "Figure 4-4. Triangle Strip" 4-72
+.LF "Figure 4-5. Polygon Shapes" 4-73
+.LF "Figure 4-6. Simple Polygon Pentagon" 4-74
+.LF "Figure 4-7. Complex Polygon" 4-77
+.LF "Figure 4-8. Triangle Mesh Pentagon" 4-81
+.LF "Figure 4-9. Example of a Simple Polygon Mesh" 4-85
+.LF "Figure 4-10. Changing Vertex Locations in a
+.LF "                         Variable Data Primitive" 4-91
+.sp 1v
+.LF "Figure 5-1. Pushing Attribute Values When a Group
+.LF "                         is Entered" 5-94
+.LF "Figure 5-2. The Groups obj_group and post" 5-96
+.LF "Figure 5-3. Modifying Primitive Attribute Values" 5-96
+.LF "Figure 5-4. Entering the post Group" 5-97
+.LF "Figure 5-5. Replacing Attribute Values with the post Group" 5-97
+.LF "Figure 5-6. Popping Attribute Values When post is Exited" 5-97
+.LF "Figure 5-7. Popping Attribute Values When obj_group 
+.LF "                         is Exited" 5-98
+.LF "Figure 5-8. Representation Types" 5-99
+.LF "Figure 5-9. Fixed Subdivision Level" 5-100
+.LF "Figure 5-10. Absolute Subdivision Level" 5-101
+.LF "Figure 5-11. Relative Subdivision Level" 5-101
+.LF "Figure 5-12. Backface Culling" 5-102
+.LF "Figure 5-13. Transparent (Filter) Color" 5-106
+.sp 1v
+.LF "Figure 6-1. Right-Handed Coordinate System" 6-118
+.LF "Figure 6-2. Translating a Primitive Object" 6-120
+.LF "Figure 6-3. Translating and Rotating a Primitive Object" 6-121
+.LF "Figure 6-4. Entering the Cone Group" 6-122
+.LF "Figure 6-5. Preconcatenating the Translation Transformation" 6-123
+.LF "Figure 6-6. Preconcatenating the Scale Transformation" 6-123
+.LF "Figure 6-7. Preconcatenating the Rotation Transformation" 6-123
+.LF "Figure 6-8. Exiting the Group and Popping the Stack" 6-124
+.LF "Figure 6-9. Rotating then Scaling the Cone" 6-124
+.LF "Figure 6-10. Scaling then Rotating the Cone" 6-125
+.LF "Figure 6-11. Entering the Wheel Group and Pushing 
+.LF "                         the Matrix" 6-126
+.LF "Figure 6-12. Preconcatenating the Rotation Transformation" 6-126
+.LF "Figure 6-13. Popping the Matrix" 6-127
+.LF "Figure 6-14. Preconcatenating the Scale and Translation 
+.LF "                         Transformations" 6-127
+.LF "Figure 6-15. Exiting the Group and Popping the Matrix" 6-127
+.LF "Figure 6-16. Bolt Object" 6-128
+.LF "Figure 6-17. Polygons and Cylinder Forming the Bolt" 6-129
+.LF "Figure 6-18. Absolute Definition of the Bolt Group" 6-129
+.LF "Figure 6-19. Relative Definition of the Bolt Group" 6-130
+.sp 1v
+.LF "Figure 7-1. DoText Parameters" 7-134
+.LF "Figure 7-2. Text Rectangle and Alignment References" 7-136
+.LF "Figure 7-3. Text Path" 7-137
+.LF "Figure 7-4. Horizontal Text Alignment" 7-139
+.LF "Figure 7-5. Vertical Text Alignment" 7-142
+.LF "Figure 7-6. Text Size, Spacing, and Orientation" 7-142
+.LF "Figure 7-7. Character Orientation using the Text Up Vector" 7-145
+.LF "Figure 7-8. Text Example 1" 7-147
+.LF "Figure 7-9. Text Example 2" 7-148
+.LF "Figure 7-10. Text Example 3" 7-148
+.LF "Figure 7-11. Text Example 4" 7-149
+.LF "Figure 7-12. Text Example 5" 7-151
+.LF "Figure 7-13. Text Example 6" 7-151
+.LF "Figure 7-14. Text Example 7" 7-151
+.sp 1v
+.LF "Figure 8-1. Parallel Projection" 8-156
+.LF "Figure 8-2. Perspective Projection" 8-156
+.LF "Figure 8-3. Examples of Perspective and Parallel Camera
+.LF "                         Projections" 8-157
+.LF "Figure 8-4. Sampling Methods" 8-164
+.LF "Figure 8-5. Ambient Light Source" 8-167
+.LF "Figure 8-6. Light Source at Infinity" 8-168
+.LF "Figure 8-7. Point Light Source" 8-168
+.LF "Figure 8-8. Spot Light Source" 8-170
+.LF "Figure 8-9. Parameters for Light Spread Angles" 8-171
+.LF "Figure 8-10. Effect of Different Light Spread Exponents" 8-172
+.sp 1v
+.LF "Figure 9-1. Views, Frames, and Devices" 9-176
+.LF "Figure 9-2. Clipping a View to the Frame Boundary" 9-183
+.LF "Figure 9-3. Adding Four Views to a Frame" 9-185
+.LF "Figure 9-4. Sample Output for Example 2" 9-185
+.LF "Figure 9-5. Spaceship and Observer Camera Groups" 9-192
+.LF "Figure 9-6. Using Bit Compression for Pseudocolot" 9-198
+.LF "Figure 9-7. Color Table Using RGB Bit Compression" 9-199
+.LF "Figure 9-8. Color Cube Usisng 3-3-2 Bit Compression" 9-199
+.LF "Figure 9-9. Color Table Using Shade Ranges" 9-199
+.sp 1v
+.LF "Figure 10-1. Display Tree for a Sphere Object" 10-212
+.LF "Figure 10-2. Pick Path for the Sphere Object" 10-213
+.LF "Figure 10-3. Example of a Successful Pick Using \f2DdPickObjs\f1" 10-214
+.sp 1v
+.LF "Figure 11-1. Sailboat Display Tree" 11-235
+.sp 1v
+.LF "Figure 12-1. Basic Interactive Computer Graphics Model" 12-248
+.LF "Figure 12-2. Using Valuators to Modify the \*(Dd Database" 12-248
+.sp 1v
+.LF "Figure 13-1. L-bracket Parameters" 13-258
+.sp 1v
+.LF "Figure 14-1. Raster Representations" 14-279
+.sp 1v
+.LF "Figure 15-1. Texture Coordinate Space" 15-291
+.LF "Figure 15-2. Assigning Texture Coordinates 
+.LF "                         to Primitive Vertices" 15-294
+.LF "Figure 15-3. Texture Coordinates Outside 
+.LF "                         the Texture Range" 15-297
+.LF "Figure 15-4. DcExtendNone <DCXNON> " 15-298
+.LF "Figure 15-5. DcExtendBlack <DCXBLK>" 15-299
+.LF "Figure 15-6. DcExtendClamp <DCXCLP>" 15-299
+.LF "Figure 15-7. DcExtendRepeat <DCXRP>" 15-299
+.LF "Figure 15-8. Default Parameterization for a Sphere" 15-301
+.LF "Figure 15-9. Default Parameterization for a Cylinder" 15-301
+.LF "Figure 15-10. Default Parameterization for a Box" 15-302
+.LF "Figure 15-11. Default Parameterization for a Cone" 15-303
+.LF "Figure 15-12. Default Parameterization for a Torus" 15-304
+.LF "Figure 15-13. Two-part Mapping" 15-306
+.LF "Figure 15-14. DcCentroid <DCCTR>" 15-306
+.LF "Figure 15-15. DcISN <DCISN>" 15-307
+.C0 "List of Tables"
+.LT "Table 3-1. Object Categories" 3-28
+.sp 1v
+.LT "Table 4-1. Mesh Object Functions" 4-78
+.LT "Table 4-2. Variable Data Primitives and their 
+.LT "                        Update Functions" 4-86
+.LT "Table 4-2. Variable Data Primitives and their 
+.LT "                        Update Functions (continued)" 4-86
+.sp 1v
+.LT "Table 11-1. Example Name Set Member Assignment" 11-233

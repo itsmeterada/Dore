@@ -1,0 +1,68 @@
+.\"#ident "%W%" %G%
+.\"
+.\" #
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  
+.\" # 
+.\" # KUBOTA GRAPHICS Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\" #
+.\"
+.sc
+.ds BT "\\*(Dd Developer's Guide
+.ds CT "Device Drivers Section Introduction
+.ds h1 8
+.so ../macros/local.me
+.PN 79
+.L1 D EVICE " D" RIVERS
+.L2 S ECTION
+.L3 I NTRODUCTION
+.CH EIGHT
+.\" .ds hH
+.rs
+A renderer does not access a display medium directly.
+Instead, it interacts with a device driver which then controls the
+output from the renderer.
+Every type of device such as a file, a buffer, or 3D graphics display
+hardware, must have a device driver associated with it. 
+In addition to the device drivers already available with your \*(Dd
+system, \*(Dd allows you to implement new device drivers and add them
+to your system. 
+.lp
+This section is about device drivers and the way they interact with
+the rest of \*(Dd.
+The purpose of the following chapters is to show how to write a new
+device driver and add it to the \*(Dd system.
+It is not necessary to have \*(Dd source code to implement new \*(Dd
+device drivers.
+.lp
+A device driver includes a control module in addition to one or more
+output modules.
+Each type of output module handles a different type of renderer
+output.
+Some output modules are very simple as most of the rendering
+computation is performed by the renderer.
+Other output modules need to be more sophisticated as they are
+expected to do most of the rendering work. 
+A device driver implementation must provide \*(Dd with a set of
+pointers to routines.
+When an image is generated, the \*(Dd kernel and the renderers access
+the device driver only through these routine pointers.
+.lp
+Chapter 9, \f2Device Driver Modules and Interfaces\fP,
+discusses the device driver modules and
+the corresponding interfaces.
+Chapter 10, \f2Implementing a Device Driver\fP,
+presents a step-by-step approach to implementing and
+testing a device driver.
+Chapter 11, \f2Sample Device Driver\fP,
+describes the implementation of a sample device driver
+using the approach suggested in the previous chapter.

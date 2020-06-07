@@ -1,0 +1,9 @@
+#include <Dore.tmpl>
+
+    SRCS = calerr.c iniclsid.c
+    OBJS = calerr.o iniclsid.o
+
+LibraryObjectRule()
+SubdirLibraryRule($(OBJS))
+
+DependTarget()

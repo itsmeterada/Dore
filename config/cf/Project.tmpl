@@ -1,0 +1,230 @@
+XCOMM ----------------------------------------------------------------------
+XCOMM Dore' Build Parameters and Rules
+XCOMM Based on
+XCOMM XConsortium: Project.tmpl,v 1.248 95/01/06 19:12:51 gildea Exp
+XCOMM XFree86: xc/config/cf/Project.tmpl,v 3.12 1995/01/25 10:42:48 dawes Exp
+
+/***************************************************************************
+ *                                                                         *
+ *                            DEFAULT DEFINITONS                           *
+ *                                                                         *
+ * The following section contains defaults for things that can             *
+ * overridden in the various *.cf and site.def files.  DO NOT EDIT!        *
+ *                                                                         *
+ **************************************************************************/
+
+/* The following project-specific rules are defined at the end of this file:
+ *
+ * InstallFontObjs		(objs,dest)
+ * InstallFonts			(dest)
+ * InstallFontAliases		(dest)
+ * FontSrc			(basename)
+ * FontBaseObj			(basename)
+ * FontTarget			(basename)
+ * FontObj			(basename)
+ * CopyObjs			(list,dest)
+ */
+
+#ifndef BuildFonts
+#define BuildFonts		YES
+#endif
+#ifndef InstallLibManPages
+#define InstallLibManPages	YES
+#endif
+#ifndef ShmDefines
+#if HasShm
+#define ShmDefines -DMITSHM
+#else
+#define ShmDefines /**/
+#endif
+#endif
+#ifndef BinDir
+#ifdef ProjectRoot
+#define BinDir Concat(ProjectRoot,/bin)
+#else
+#define BinDir /usr/local/bin
+#endif
+#endif
+#ifndef BuildIncRoot
+#define BuildIncRoot $(TOP)
+#endif
+#ifndef BuildIncDir
+#define BuildIncDir $(BUILDINCROOT)/dore
+#endif
+#ifndef BuildIncTop
+#define BuildIncTop ..		/* relative to BuildIncDir */
+#endif
+#ifndef BuildLibDir
+#define BuildLibDir $(TOP)/lib
+#endif
+#ifndef BuildLibTop
+#define BuildLibTop ..		/* relative to BuildLibDir */
+#endif
+#ifndef LibDir
+#define LibDir $(USRLIBDIR)
+#endif
+#ifndef FontDir
+#define FontDir $(LIBDIR)/fonts
+#endif
+#ifndef ErrMsgDir
+#define ErrMsgDir $(LIBDIR)
+#endif
+#ifndef ErrMsgFile
+#define ErrMsgFile errmsgfile
+#endif
+
+#ifndef ForceNormalLib
+#define ForceNormalLib (HasGcc && !HasGcc2)
+#endif
+
+XCOMM -----------------------------------------------------------------------
+XCOMM X Window System make variables; these need to be coordinated with rules
+
+/*
+ * This list must be reflected in the DIRS_TO_BUILD list in the top-level
+ * Makefile.
+ */
+           BINDIR = BinDir		/* programs */
+     BUILDINCROOT = BuildIncRoot	/* base of build loc */
+      BUILDINCDIR = BuildIncDir		/* built headers */
+      BUILDINCTOP = BuildIncTop		/* top relative to BUILDINCDIR */
+      BUILDLIBDIR = BuildLibDir		/* built libraries */
+      BUILDLIBTOP = BuildLibTop		/* top relative to BUILDLIBDIR */
+           INCDIR = $(INCROOT)/dore	/* header files */
+           LIBDIR = LibDir		/* rgb, XErrorDB, etc. */
+
+          FONTDIR = FontDir		/* font directories */
+        ERRMSGDIR = ErrMsgDir           /* error-message directory */
+       ERRMSGFILE = ErrMsgFile          /* error-message file */
+
+#ifdef UseInstalled
+            FONTC = dfc		/* assume BINDIR in path */
+#else
+            FONTC = $(FONTCSRC)/dfc
+#endif
+
+       DOCUTILSRC = $(TOP)/docs/util
+       PROGRAMSRC = $(TOP)/examples
+           LIBSRC = $(TOP)/src
+          FONTSRC = $(TOP)/src/data/fonts
+       INCLUDESRC = $(TOP)/dore
+           DOCSRC = $(TOP)/docs
+         FONTCSRC = $(FONTSRC)
+
+#ifndef ShLibIncludeFile
+/* need this to make ANSI-style preprocessors happy */
+#define ShLibIncludeFile <noop.rules>
+#endif
+
+#include ShLibIncludeFile
+
+#ifndef SharedLibDore
+#define SharedLibDore HasSharedLibraries
+#endif
+#ifndef NormalLibDore
+#define NormalLibDore (!SharedLibDore | ForceNormalLib)
+#endif
+#ifndef DebugLibDore
+#define DebugLibDore		NO	/* debugged Dore library */
+#endif
+#ifndef ProfileLibDore
+#define ProfileLibDore		NO	/* profiled Dore library */
+#endif
+          DORELIBSRC = $(LIBSRC)
+#if SharedLibDore
+#ifndef SharedDoreRev
+#define SharedDoreRev 6.1
+#endif
+SharedLibReferences(DORE,$(DORE_NAME),$(DORELIBSRC),SODOREREV,SharedDoreRev)
+#else
+UnsharedLibReferences(DORE,$(DORE_NAME),$(DORELIBSRC))
+#endif
+      DORELIBONLY = $(DORELIB)
+
+#ifndef NeedDefaultDepLibs
+#define NeedDefaultDepLibs YES
+#endif
+
+#if NeedDefaultDepLibs
+/*
+ * Individual libraries should override this
+ */
+#if HasSharedLibraries || defined(UseInstalled)
+          DEPLIBS = $(DEPDORELIB)
+#else
+          DEPLIBS = $(LOCAL_LIBRARIES)
+#endif
+         DEPLIBS1 = $(DEPLIBS)
+         DEPLIBS2 = $(DEPLIBS)
+         DEPLIBS3 = $(DEPLIBS)
+#endif /* NeedDefaultDepLibs */
+
+/*
+ * InstallFontObjs - generate rules to install font files
+ */
+#ifndef InstallFontObjs
+#define InstallFontObjs(objs,dest)					@@\
+InstallMultipleFlags(objs,dest,$(INSTDATFLAGS))
+#endif /* InstallFontObjs */
+
+
+/*
+ * InstallFonts - generate rules to install font files
+ */
+#ifndef InstallFonts
+#define InstallFonts(dest)						@@\
+InstallFontObjs($(OBJS),dest)
+#endif /* InstallFonts */
+
+#ifndef FontSrc
+#define FontSrc(basename) basename.fs
+#endif
+
+#ifndef FontBaseObj
+#define FontBaseObj(basename)basename.df
+#endif
+
+#ifndef MakeSimpleDoc
+#define MakeSimpleDoc(file,srcs)					@@\
+all:: file.PS								@@\
+									@@\
+file.PS:								@@\
+	$(TROFF) $(MSMACROS) $(XDOCMACROS) srcs 2> index.raw > file.nPS \@@\
+	&& $(MV) file.nPS $@						@@\
+									@@\
+file.txt:								@@\
+	nroff $(MSMACROS) $(XDOCMACROS) srcs 2> index.raw > $@		@@\
+									@@\
+clean::									@@\
+	$(RM) index.raw file.nPS file.PS file.txt
+#endif
+
+#ifndef MakeTblDoc
+#define MakeTblDoc(file,srcs)						@@\
+all:: file.PS								@@\
+									@@\
+file.PS:								@@\
+	$(TBL) $(XDOCMACROS) srcs | $(TROFF) $(MSMACROS) 2> index.raw > file.nPS \@@\
+	&& $(MV) file.nPS $@						@@\
+									@@\
+file.txt:								@@\
+	$(TBL) $(XDOCMACROS) srcs | nroff $(MSMACROS) 2> index.raw | col > $@	@@\
+									@@\
+clean::									@@\
+	$(RM) index.raw file.nPS file.PS file.txt
+#endif
+
+#ifndef MakeEqnDoc
+#define MakeEqnDoc(file,srcs)						@@\
+all:: file.PS								@@\
+									@@\
+file.PS:								@@\
+	$(TBL) $(XDOCMACROS) srcs | $(EQN) | $(TROFF) $(MSMACROS) 2> index.raw > file.nPS \@@\
+	&& $(MV) file.nPS $@						@@\
+									@@\
+file.txt:								@@\
+	$(TBL) $(XDOCMACROS) srcs | neqn | nroff $(MSMACROS) 2> index.raw | col > $@ @@\
+									@@\
+clean::									@@\
+	$(RM) index.raw file.nPS file.PS file.txt
+#endif

@@ -1,0 +1,133 @@
+%!PS-Adobe-2.0
+%%Title: 5-10.pict
+%%Creator: PrintMonitor
+%%CreationDate: Wednesday, November 29, 1989
+%%Pages: (atend)
+%%BoundingBox: ? ? ? ?
+%%PageBoundingBox: 30 31 582 761
+%%For: Aaron Black
+%%IncludeProcSet: "(AppleDict md)" 66
+%%EndComments
+%%EndProlog
+%%BeginDocumentSetup
+md begin
+
+T T -31 -30 761 582 100 72 72 1 F F F F T T psu
+(Aaron Black; document: 5-10.pict)jn
+0 mf
+od
+%%EndDocumentSetup
+%%Page: ? 1
+op
+0 0 730 552 fr
+0 0 xl
+1 1 pen
+0 0 gm
+(nc 0 0 0 0 6 rc)kp
+(nc 0 0 720 540 6 rc)kp
+205 138 225 158 66 114 1 ar
+265 147 gm
+223 147 lin
+468 389 488 409 246 294 1 ar
+432 398 gm
+470 398 lin
+489 55 gm
+489 229 lin
+162 157 gm
+162 335 lin
+96 259 gm
+bu fc
+1 setTxMode
+0 fs
+12 fz
+bu fc
+2 F /|______Helvetica fnt
+bn
+0.78018 0. 32 0.07801 0.(vertex 0)awidthshow
+166 97 gm
+0 gr
+0.78018 0. 32 0.07801 0.(vertex 1)awidthshow
+165 352 gm
+0.78018 0. 32 0.07801 0.(vertex 2)awidthshow
+47 330 gm
+0.78018 0. 32 0.07801 0.(vertex 3)awidthshow
+46 125 gm
+0.78018 0. 32 0.07801 0.(vertex 4)awidthshow
+264 159 gm
+0.78018 0. 32 0.07801 0.(vertex 0)awidthshow
+441 343 gm
+0.78018 0. 32 0.07801 0.(vertex 0)awidthshow
+39 179 50 189 4 rc
+39.5 179.5 49.5 188.5 0 rc
+156 332 167 342 4 rc
+156.5 332.5 166.5 341.5 0 rc
+90 242 101 252 4 rc
+90.5 242.5 100.5 251.5 0 rc
+156 153 167 163 4 rc
+156.5 153.5 166.5 162.5 0 rc
+360 303 371 313 4 rc
+360.5 303.5 370.5 312.5 0 rc
+246 459 257 469 4 rc
+246.5 459.5 256.5 468.5 0 rc
+246 328 257 338 4 rc
+246.5 328.5 256.5 337.5 0 rc
+483 226 494 236 4 rc
+483.5 226.5 493.5 235.5 0 rc
+483 51 494 61 4 rc
+483.5 51.5 493.5 60.5 0 rc
+350 208 361 218 4 rc
+350.5 208.5 360.5 217.5 0 rc
+349 74 360 84 4 rc
+349.5 74.5 359.5 83.5 0 rc
+263 143 274 153 4 rc
+263.5 143.5 273.5 152.5 0 rc
+425 394 436 404 4 rc
+425.5 394.5 435.5 403.5 0 rc
+360 480 371 490 4 rc
+360.5 480.5 370.5 489.5 0 rc
+39 309 50 319 4 rc
+39.5 309.5 49.5 318.5 0 rc
+45 184 gm
+45 315 lin
+251 333 gm
+251 463 lin
+364 309 gm
+364 486 lin
+46 184 gm
+161 158 lin
+44 314 gm
+160 338 lin
+48 184 gm
+165 341 lin
+44 313 gm
+161 157 lin
+268 146 gm
+488 56 lin
+267 148 gm
+488 229 lin
+268 147 gm
+353 79 lin
+269 148 gm
+355 213 lin
+354 78 gm
+487 54 lin
+355 214 gm
+488 232 lin
+251 333 gm
+366 308 lin
+250 463 gm
+365 486 lin
+367 307 gm
+428 397 lin
+365 486 gm
+430 397 lin
+251 333 gm
+364 375 lin
+251 463 gm
+364 418 lin
+F T cp
+%%Trailer
+cd
+end
+%%Pages: 1 0
+%%EOF

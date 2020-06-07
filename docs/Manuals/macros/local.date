@@ -1,0 +1,20 @@
+'\"	use \*(Dt for month day, year
+'\"	use \*(dT for month, year
+'\"	use \*(Nd for mm/dd/yy
+.if \n(mo-0 .ds Mo January
+.if \n(mo-1 .ds Mo February
+.if \n(mo-2 .ds Mo March
+.if \n(mo-3 .ds Mo April
+.if \n(mo-4 .ds Mo May
+.if \n(mo-5 .ds Mo June
+.if \n(mo-6 .ds Mo July
+.if \n(mo-7 .ds Mo August
+.if \n(mo-8 .ds Mo September
+.if \n(mo-9 .ds Mo October
+.if \n(mo-10 .ds Mo November
+.if \n(mo-11 .ds Mo December
+.ds Yr 19\n(yr
+.ds Dt \*(Mo\0\n(dy,\ \*(Yr
+.ds dT \*(Mo,\ \*(Yr
+.ds Nd \n(mo/\n(dy/\n(yr
+.ds Nm \n(mo/\n(yr

@@ -1,0 +1,92 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DoCallback 3D  "Dore"
+.SH NAME
+DoCallback \- Create a callback object
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+DtObject DoCallback(function,dataobject)
+DtPtr function;
+DtObject dataobject;
+.sp
+.in -.5i
+FORTRAN:
+.in +.5i
+INTEGER*4 DOCB(SUBPGM,DATOBJ)
+EXTERNAL SUBPGM
+INTEGER*4 DATOBJ
+.in -.5i
+.fi
+.SH DESCRIPTION
+.IX DOCB
+.IX DoCallback
+\f2DoCallback\fP creates a callback object.
+The \f2function\fP
+parameter is a pointer to a user-defined function.
+The \f2dataobject\fP parameter is the handle of an object 
+containing the associated run-time data for the
+user-defined function.  This parameter is created with either \f2DoDataPtr\fP
+<\f2DODP\fP> or \f2DoDataVal\fP <\f2DODV\fP>. 
+\f2DoCallback\fP calls \f2function\fP with the run-time
+data of \f2dataobject\fP.
+Set \f2dataobject\fP to \f2DcNullObject\fP <\f2DCNULL\fP>
+when the user-defined function requires no data.
+.PP
+The format for the user-defined function in C is:
+.nf
+
+	user_fcn(data)
+	DtPtr data;           /* if \f2DoDataPtr\fP was used */
+	Dt32Bits data;        /* if \f2DoDataVal\fP was used */
+	
+.fi
+FORTRAN, the user-defined function can be either a subroutine
+or a function. The format is either:
+.nf
+
+	SUBROUTINE SUBPGM(DATA)
+	INTEGER*4 DATA
+
+.fi
+or 
+.nf
+
+	FUNCTION SUBPGM(DATA)
+	INTEGER*4 DATA
+
+.fi
+.PP
+Note that sometimes rendering methods involve
+multiple traversals of the Dore database,
+which means an update will cause callback objects and their
+user-written functions to be executed multiple times.
+.SH ERRORS
+\f2DoCallback\fP will fail if \f2dataobject\fP is neither an object created with
+\f2DoDataVal <DODV>\f1 or \f2DoDataPtr <DODP>\f1 nor
+\f2DcNullObject\fP <\f2DCNULL\fP>.
+.TP 15
+[WARNING - invalid dataobject handle]
+.SH "SEE ALSO"
+.na
+.nh
+DdInqPickCallback(3D), DdSetPickCallback(3D), DoDataPtr(3D),
+DoDataVal(3D), DsExecuteObj(3D), DsExecutionAbort(3D), DsExecutionReturn(3D)
+.ad
+.hy

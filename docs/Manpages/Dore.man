@@ -1,0 +1,113 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH Dore 3D  "Dore"
+.SH NAME
+Dore \- \f3D\f1ynamic \f3O\f1bject \f3R\f1endering \f3E\f1nvironment
+.SH DESCRIPTION
+Dore is a powerful three-dimensional graphics library that can
+FORTRAN programs.  Dore offers a wide 
+variety of users a complete solution for their needs with features 
+that include:
+.PD .5
+.ta \w'xxxx'u
+.PP
+.in  +\w'xxxx'u
+.ti -\w'xxxx'u
+\-	choice of rendering styles, from dynamic to photorealistic 
+.PP
+.in  +\w'xxxx'u
+.ti -\w'xxxx'u
+\-	advanced graphics features including shadows, transparency, and reflections
+.PP
+.in  +\w'xxxx'u
+.ti -\w'xxxx'u
+\-	ease of use
+.PP
+.in  +\w'xxxx'u
+.ti -\w'xxxx'u
+\-	extendability
+.PP
+.in  +\w'xxxx'u
+.ti -\w'xxxx'u
+\-	portability, platform independence
+.PP
+.in  +\w'xxxx'u
+.ti -\w'xxxx'u
+\-	X11 Window support
+.in  -\w'xxxx'u
+.PD
+.DT
+.PP
+Each Dore function has an on-line manual page,
+also known as a manpage.
+You can reference the manual pages by
+using the Dore C function names.
+The Dore
+manual pages contain conventional 
+manual page information:  \f2Name\fP, 
+FORTRAN), \f2Description\fP, and where applicable, 
+\f2Errors\fP, \f2Defaults\fP, and \f2See Also\fP.
+Some of the Dore functions have different calling sequences when used
+FORTRAN application programs.  
+These functions' manual pages
+contain extra information detailing the proper 
+FORTRAN calling procedure.
+.PP
+An additional Dore manual page, accessed by typing
+.RS
+.PP
+.ft 5
+man VertexTypes
+.ft 1
+.PP
+.RE
+explains the Dore vertex types used by primitive objects.
+.SH NAMING CONVENTIONS
+All Dore constants and functions start with a \f3D\f1 
+followed by a single lowercase letter.  The rest of a Dore name 
+is a mnemonic, using concatenated words or abbreviations with 
+FORTRAN, 
+FORTRAN functions and constants are stated 
+in angle brackets after their C equivalents (for example,
+\f2DcWireframe <DCWIRE>\f1).  
+.IP "\f3Dc\fPXXXXX  <\f3DC\f1XXXX>"
+a Dore \f2constant\fP value, used as a parameter
+.IP "\f3Dd\fPXXXXX  <\f3DD\f1XXXX>"
+a Dore \f2device\fP function
+.IP "\f3De\fPXXXXX  <\f3DE\f1XXXX>"
+a Dore user \f2extension\fP function used when adding user-defined 
+extensions to Dore; not typically used by application programs
+.IP "\f3Df\fPXXXXX  <\f3DF\f1XXXX>"
+a Dore \f2frame\fP function
+.IP "\f3Dg\fPXXXXX  <\f3DG\f1XXXX>"
+a Dore \f2group\fP function
+.IP "\f3Do\fPXXXXX  <\f3DO\f1XXXX>"
+a Dore \f2object creation\fP function
+.IP "\f3Dp\fPXXXXX  <\f3DP\f1XXXX>"
+a Dore \f2primitive\fP function
+.IP "\f3Ds\fPXXXXX  <\f3DS\f1XXXX>"
+a Dore \f2system\fP, or object manipulation function
+.IP "\f3Dt\fPXXXXX"
+a Dore \f2type\fP declaration, used for passing parameters
+.IP "\f3Dv\fPXXXXX  <\f3DV\f1XXXX>"
+a Dore \f2view\fP function
+.IP "\f3DUo\fPXXXX  <\f3DUO\f1XXX>"
+a User-defined Dore \f2primitive creation\fP function
+.SH SEE ALSO
+For examples of programming involving Dore, see the 
+\f2Dore Programmer's Guide\fP and, where available, the 
+on-line Dore example programs and demo suite.

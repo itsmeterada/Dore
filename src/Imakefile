@@ -1,0 +1,10 @@
+#include <Dore.tmpl>
+#define	IHaveSubdirs
+
+ SUBDIRS = C_interface device_config doresys_config fortran_config \
+           objs os_config radiosity render_config subsys util data includes
+
+MakeSubdirs($(SUBDIRS))
+DependSubdirs($(SUBDIRS))
+
+SubdirLibraryRule()

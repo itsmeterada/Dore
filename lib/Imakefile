@@ -1,0 +1,31 @@
+XCOMM Most of this is a hack. It should be changed.
+#define LibName $(DORE_NAME)
+#define SoRev SODOREREV
+#define LibHeaders 0
+
+#undef LinkBuildLibrary(lib)
+#define LinkBuildLibrary(lib) $(_NULLCMD_)
+#undef _LinkBuildLibrary(lib)
+#define _LinkBuildLibrary(lib) $(_NULLCMD_)
+
+AllTarget(DONE)
+
+#include <Dore.tmpl>
+
+#ifndef Win32Architecture
+     OBJS = `lorder *.o | tsort`
+#else
+     OBJS = *.o
+#endif
+
+XCOMM This is an attempt to automatically rebuild the libraries.
+XCOMM It only works because `make clean' won't remove the object files.
+all::
+	touch DONE
+	
+clean::
+	RemoveFile(DONE)
+
+DONE: $(TOP)/src/DONE
+	@echo "Libraries out of date"
+	RemoveFiles(DONE *.a *.so* *.sa*)

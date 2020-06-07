@@ -1,0 +1,514 @@
+!md begin
+!/note {} def
+!/legal {} def
+!md /lnop known not { /lnop [ {} ] cvx def } if
+!/bigs [lnop lnop lnop lnop lnop lnop lnop lnop] def
+!/smalls [lnop lnop lnop lnop lnop lnop lnop lnop] def
+!/cp {pm restore pop pop} def
+!
+!T T -46 -44 1136 869 67 72 72 1 F F F F T T psu
+!(TechPubs#1; document: 11-2sailing.tree)jn
+!0 mf
+!od
+!op
+!0 0 xl
+!1 72 mul -1 72 mul translate
+!1 1 scale
+!1 1 pen
+!0 0 gm
+!(nc 0 0 1090 825 6 rc)kp
+!64 gr
+!132 94 160 145 4 rc
+!0 gr
+!132.5 94.5 159.5 144.5 0 rc
+!0 0 pen
+!0 0 lin
+!nc ct 39 0 put
+!1 1 pen
+!144 168 gm
+!pr
+!144 168 pl
+!147 159 pl
+!141 159 pl
+!144 168 pl
+!1 ep
+!pr
+!144 168 pl
+!147 159 pl
+!141 159 pl
+!144 168 pl
+!0 ep
+!144 118 gm
+!pt
+!144 160 pl
+!ef
+!eu
+!(nc 0 0 1090 825 6 rc)kp
+!0 0 pen
+!144 160 lin
+!1 1 pen
+!141 116 148 123 4 ov
+!141.5 116.5 147.5 122.5 0 ov
+!150 180 gm
+!(nc 138 178 157 257 6 rc)kp
+!bu fc
+!{}mark T /Helvetica /Helvetica 0 rf
+!bn
+!1 setTxMode
+!0 fs
+!12.47991 fz
+!bu fc
+!2 F /Helvetica fnt
+!bn
+!4.38522 0. 32 0.43852 0.(Filter  0000)awidthshow
+!169 218 gm
+!(nc 0 0 1090 825 6 rc)kp
+!0 gr
+!134.5 170.5 156.5 265.5 22.5 22.5 0 rr
+!64 gr
+!159 94 187 145 4 rc
+!0 gr
+!159.5 94.5 186.5 144.5 0 rc
+!0 0 pen
+!169 218 lin
+!nc ct 39 0 put
+!1 1 pen
+!172 168 gm
+!pr
+!172 168 pl
+!175 159 pl
+!169 159 pl
+!172 168 pl
+!1 ep
+!pr
+!172 168 pl
+!175 159 pl
+!169 159 pl
+!172 168 pl
+!0 ep
+!172 119 gm
+!pt
+!172 160 pl
+!ef
+!eu
+!(nc 0 0 1090 825 6 rc)kp
+!0 0 pen
+!172 160 lin
+!1 1 pen
+!169 115 176 122 4 ov
+!169.5 115.5 175.5 121.5 0 ov
+!175 192 gm
+!(nc 163 190 182 245 6 rc)kp
+!1 setTxMode
+!0.98838 0.(Sailboat)ashow
+!194 218 gm
+!(nc 0 0 1090 825 6 rc)kp
+!0 gr
+!161.5 170.5 183.5 265.5 22.5 22.5 0 rr
+!64 gr
+!63 105 82 134 2 rc
+!75 107 gm
+!(nc 63 105 82 134 6 rc)kp
+!1 setTxMode
+!1.50146 0.(root)ashow
+!0 0 pen
+!94 120 gm
+!(nc 0 0 1090 825 6 rc)kp
+!0 gr
+!94 120 lin
+!nc ct 39 0 put
+!1 1 pen
+!115 118 gm
+!pr
+!115 118 pl
+!106 115 pl
+!106 121 pl
+!115 118 pl
+!1 ep
+!pr
+!115 118 pl
+!106 115 pl
+!106 121 pl
+!115 118 pl
+!0 ep
+!86 118 gm
+!pt
+!107 118 pl
+!rh
+!ef
+!eu
+!(nc 0 0 1090 825 6 rc)kp
+!0 0 pen
+!107 118 lin
+!1 1 pen
+!78.5 94.5 94.5 144.5 0 rc
+!83 115 90 122 4 ov
+!83.5 115.5 89.5 121.5 0 ov
+!117.5 86.5 198.5 153.5 33.5 33.5 0 rr
+!137.5 221.5 152.5 257.5 0 rc
+!229.5 51.5 252.5 145.5 22.5 22.5 0 rr
+!229.5 185.5 252.5 279.5 22.5 22.5 0 rr
+!229.5 370.5 252.5 464.5 22.5 22.5 0 rr
+!0 0 pen
+!107 118 lin
+!nc ct 39 0 put
+!1 1 pen
+!183 216 gm
+!pt
+!229 112 pl
+!ef
+!eu
+!(nc 0 0 1090 825 6 rc)kp
+!0 0 pen
+!229 112 lin
+!229 112 lin
+!nc ct 39 0 put
+!1 1 pen
+!183 215 gm
+!pt
+!229 225 pl
+!ef
+!eu
+!(nc 0 0 1090 825 6 rc)kp
+!0 0 pen
+!229 225 lin
+!229 225 lin
+!nc ct 39 0 put
+!1 1 pen
+!183 215 gm
+!pt
+!228 422 pl
+!ef
+!eu
+!(nc 0 0 1090 825 6 rc)kp
+!0 0 pen
+!228 422 lin
+!228 422 lin
+!nc ct 39 0 put
+!1 1 pen
+!252 97 gm
+!pt
+!274 65 pl
+!ef
+!eu
+!(nc 0 0 1090 825 6 rc)kp
+!0 0 pen
+!274 65 lin
+!274 65 lin
+!nc ct 39 0 put
+!1 1 pen
+!252 98 gm
+!pt
+!273 98 pl
+!ef
+!eu
+!(nc 0 0 1090 825 6 rc)kp
+!0 0 pen
+!273 98 lin
+!273 98 lin
+!nc ct 39 0 put
+!1 1 pen
+!252 99 gm
+!pt
+!273 138 pl
+!ef
+!eu
+!(nc 0 0 1090 825 6 rc)kp
+!0 0 pen
+!273 138 lin
+!273 138 lin
+!nc ct 39 0 put
+!1 1 pen
+!252 228 gm
+!pt
+!274 206 pl
+!ef
+!eu
+!(nc 0 0 1090 825 6 rc)kp
+!0 0 pen
+!274 206 lin
+!274 206 lin
+!nc ct 39 0 put
+!1 1 pen
+!251 228 gm
+!pt
+!274 251 pl
+!ef
+!eu
+!(nc 0 0 1090 825 6 rc)kp
+!0 0 pen
+!274 251 lin
+!274 251 lin
+!nc ct 39 0 put
+!1 1 pen
+!252 379 gm
+!pt
+!274 338 pl
+!ef
+!eu
+!(nc 0 0 1090 825 6 rc)kp
+!0 0 pen
+!274 338 lin
+!274 338 lin
+!nc ct 39 0 put
+!1 1 pen
+!252 427 gm
+!pt
+!276 427 pl
+!ef
+!eu
+!(nc 0 0 1090 825 6 rc)kp
+!0 0 pen
+!276 427 lin
+!276 427 lin
+!nc ct 39 0 put
+!1 1 pen
+!252 459 gm
+!pt
+!276 506 pl
+!ef
+!eu
+!(nc 0 0 1090 825 6 rc)kp
+!0 0 pen
+!276 506 lin
+!1 1 pen
+!288 309 gm
+!(nc 278 308 291 357 6 rc)kp
+!1 setTxMode
+!10.39993 fz
+!bu fc
+!2 F /Helvetica fnt
+!bn
+!0.27671 0.(Hardware)ashow
+!246 84 gm
+!(nc 234 82 253 110 6 rc)kp
+!0 gr
+!12.47991 fz
+!bu fc
+!2 F /Helvetica fnt
+!bn
+!1.17121 0.(Hull)ashow
+!246 202 gm
+!(nc 234 200 253 267 6 rc)kp
+!0.54467 0.(Equipment)ashow
+!246 396 gm
+!(nc 234 394 253 443 6 rc)kp
+!0.61671 0.(Rigging)ashow
+!265 419 gm
+!(nc 0 0 1090 825 6 rc)kp
+!64 gr
+!281 413 294 449 2 rc
+!291 416 gm
+!(nc 281 413 294 449 6 rc)kp
+!0 gr
+!10.39993 fz
+!bu fc
+!2 F /Helvetica fnt
+!bn
+!-0.27403 0.(Sheets)ashow
+!306 431 gm
+!(nc 0 0 1090 825 6 rc)kp
+!64 gr
+!280 504 293 532 2 rc
+!290 506 gm
+!(nc 280 504 293 532 6 rc)kp
+!0 gr
+!0.36653 0.(Sails)ashow
+!305 518 gm
+!(nc 0 0 1090 825 6 rc)kp
+!64 gr
+!276 186 300 227 2 rc
+!286 197 gm
+!(nc 276 186 300 227 6 rc)kp
+!0 gr
+!0.74659 0.(Life)ashow
+!299 189 gm
+!0.12461 0.(Jackets)ashow
+!314 207 gm
+!(nc 0 0 1090 825 6 rc)kp
+!64 gr
+!279 242 292 278 2 rc
+!289 243 gm
+!(nc 279 242 292 278 6 rc)kp
+!0 gr
+!0.21171 0.(Anchor)ashow
+!304 260 gm
+!(nc 0 0 1090 825 6 rc)kp
+!64 gr
+!279 37 292 62 2 rc
+!289 38 gm
+!(nc 279 37 292 62 6 rc)kp
+!0 gr
+!-0.22976 0.(Deck)ashow
+!304 50 gm
+!(nc 0 0 1090 825 6 rc)kp
+!64 gr
+!279 91 292 114 2 rc
+!289 92 gm
+!(nc 279 91 292 114 6 rc)kp
+!0 gr
+!0.06413 0.(Keel)ashow
+!304 103 gm
+!(nc 0 0 1090 825 6 rc)kp
+!64 gr
+!279 137 292 173 2 rc
+!289 138 gm
+!(nc 279 137 292 173 6 rc)kp
+!0 gr
+!-0.01882 0.(Rudder)ashow
+!304 155 gm
+!(nc 0 0 1090 825 6 rc)kp
+!64 gr
+!336 382 349 406 2 rc
+!346 383 gm
+!(nc 336 382 349 406 6 rc)kp
+!0 gr
+!-0.37521 0.(Long)ashow
+!361 394 gm
+!(nc 0 0 1090 825 6 rc)kp
+!64 gr
+!336 430 349 459 2 rc
+!346 431 gm
+!(nc 336 430 349 459 6 rc)kp
+!0 gr
+!0.53758 0.(Short)ashow
+!361 445 gm
+!(nc 0 0 1090 825 6 rc)kp
+!64 gr
+!336 484 349 508 2 rc
+!346 484 gm
+!(nc 336 484 349 508 6 rc)kp
+!0 gr
+!0.48945 0.(Main)ashow
+!361 496 gm
+!(nc 0 0 1090 825 6 rc)kp
+!64 gr
+!336 538 349 555 2 rc
+!346 539 gm
+!(nc 336 538 349 555 6 rc)kp
+!0 gr
+!1.35528 0.(Jib)ashow
+!361 547 gm
+!(nc 0 0 1090 825 6 rc)kp
+!64 gr
+!336 222 349 257 2 rc
+!346 224 gm
+!(nc 336 222 349 257 6 rc)kp
+!0 gr
+!-0.27206 0.(Cables)ashow
+!361 240 gm
+!(nc 0 0 1090 825 6 rc)kp
+!64 gr
+!336 273 349 312 2 rc
+!346 274 gm
+!(nc 336 273 349 312 6 rc)kp
+!0 gr
+!0.58078 0.(Pulleys)ashow
+!361 293 gm
+!(nc 0 0 1090 825 6 rc)kp
+!64 gr
+!336 325 349 359 2 rc
+!346 328 gm
+!(nc 336 325 349 359 6 rc)kp
+!0 gr
+!-0.09361 0.(Cleats)ashow
+!361 342 gm
+!(nc 0 0 1090 825 6 rc)kp
+!330.5 473.5 349.5 517.5 18.5 18.5 0 rr
+!330.5 524.5 349.5 568.5 18.5 18.5 0 rr
+!330.5 370.5 349.5 415.5 18.5 18.5 0 rr
+!330.5 422.5 349.5 466.5 18.5 18.5 0 rr
+!330.5 268.5 349.5 313.5 18.5 18.5 0 rr
+!330.5 319.5 349.5 364.5 18.5 18.5 0 rr
+!274.5 26.5 293.5 71.5 18.5 18.5 0 rr
+!274.5 80.5 293.5 125.5 18.5 18.5 0 rr
+!274.5 132.5 293.5 176.5 18.5 18.5 0 rr
+!274.5 184.5 301.5 229.5 19.5 19.5 0 rr
+!274.5 236.5 293.5 280.5 18.5 18.5 0 rr
+!274.5 306.5 293.5 358.5 17.5 17.5 0 rr
+!276.5 407.5 295.5 451.5 17.5 17.5 0 rr
+!276.5 495.5 295.5 539.5 17.5 17.5 0 rr
+!0 0 pen
+!361 342 lin
+!nc ct 39 0 put
+!1 1 pen
+!295 516 gm
+!pt
+!331 496 pl
+!ef
+!eu
+!(nc 0 0 1090 825 6 rc)kp
+!0 0 pen
+!331 496 lin
+!331 496 lin
+!nc ct 39 0 put
+!1 1 pen
+!295 516 gm
+!pt
+!328 544 pl
+!ef
+!eu
+!(nc 0 0 1090 825 6 rc)kp
+!0 0 pen
+!328 544 lin
+!1 1 pen
+!330.5 216.5 349.5 261.5 18.5 18.5 0 rr
+!0 0 pen
+!328 544 lin
+!nc ct 39 0 put
+!1 1 pen
+!295 427 gm
+!pt
+!330 445 pl
+!ef
+!eu
+!(nc 0 0 1090 825 6 rc)kp
+!0 0 pen
+!330 445 lin
+!330 445 lin
+!nc ct 39 0 put
+!1 1 pen
+!295 427 gm
+!pt
+!330 395 pl
+!ef
+!eu
+!(nc 0 0 1090 825 6 rc)kp
+!0 0 pen
+!330 395 lin
+!330 395 lin
+!nc ct 39 0 put
+!1 1 pen
+!293 332 gm
+!pt
+!330 348 pl
+!ef
+!eu
+!(nc 0 0 1090 825 6 rc)kp
+!0 0 pen
+!330 348 lin
+!330 348 lin
+!nc ct 39 0 put
+!1 1 pen
+!294 332 gm
+!pt
+!330 296 pl
+!ef
+!eu
+!(nc 0 0 1090 825 6 rc)kp
+!0 0 pen
+!330 296 lin
+!330 296 lin
+!nc ct 39 0 put
+!1 1 pen
+!293 331 gm
+!pt
+!330 242 pl
+!ef
+!eu
+!(nc 0 0 1090 825 6 rc)kp
+!0 0 pen
+!330 242 lin
+!F T cp
+!cd
+!end

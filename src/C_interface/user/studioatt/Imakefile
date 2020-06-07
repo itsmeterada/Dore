@@ -1,0 +1,17 @@
+#include <Dore.tmpl>
+
+    SRCS = ccammat.c cglbmaxobj.c cglbmaxsub.c cglbraylvl.c cintdsp.c \
+           clgtatn.c clgtclr.c clgtint.c clgtspdang.c clgtspdexp.c \
+	   clgttyp.c cpar.c cper.c cprj.c csmpadpt.c csmpadptsw.c \
+	   csmpfilter.c csmpjitt.c csmpjittsw.c csmpsup.c csmpsupsw.c \
+	   cstereo.c csteswi.c
+    OBJS = ccammat.o cglbmaxobj.o cglbmaxsub.o cglbraylvl.o cintdsp.o \
+           clgtatn.o clgtclr.o clgtint.o clgtspdang.o clgtspdexp.o \
+	   clgttyp.o cpar.o cper.o cprj.o csmpadpt.o csmpadptsw.o \
+	   csmpfilter.o csmpjitt.o csmpjittsw.o csmpsup.o csmpsupsw.o \
+	   cstereo.o csteswi.o
+
+LibraryObjectRule()
+SubdirLibraryRule($(OBJS))
+
+DependTarget()

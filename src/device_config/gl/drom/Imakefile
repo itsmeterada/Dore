@@ -1,0 +1,15 @@
+#include <Dore.tmpl>
+
+    SRCS = cylinder.c gl_appatt.c gl_camera.c gl_data.c gl_drom.c \
+           gl_filerstr.c gl_geoatt.c gl_light.c gl_map.c gl_modclip.c \
+	   gl_rstr.c gl_update.c gl_util.c gldr_output.c primsurf.c \
+	   spherelist.c
+    OBJS = cylinder.o gl_appatt.o gl_camera.o gl_data.o gl_drom.o \
+           gl_filerstr.o gl_geoatt.o gl_light.o gl_map.o gl_modclip.o \
+	   gl_rstr.o gl_update.o gl_util.o gldr_output.o primsurf.o \
+	   spherelist.o
+
+LibraryObjectRule()
+SubdirLibraryRule($(OBJS))
+
+DependTarget()

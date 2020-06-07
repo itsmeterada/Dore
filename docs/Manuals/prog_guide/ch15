@@ -1,0 +1,1163 @@
+.\"#ident "%W%" %G%
+.\"
+.\" Copyright (C) 1988, 1989, 1990, 1991 by Kubota Pacific Computer Inc.
+.\"         All Rights Reserved
+.\" This program is a trade secret of Kubota Pacific Computer Inc. and
+.\" it is not to be reproduced, published, disclosed to others, copied,
+.\" adapted, distributed, or displayed without the prior authorization
+.\" of Kubota Pacific Computer Inc.  Licensee agrees to attach or embed
+.\" this Notice on all copies of the program, including partial copies
+.\" or modified versions thereof.
+.\"
+.ds CT Texture Mapping
+.so ../macros/local.me
+.ds BT \*(Dd Programmer's Guide
+.ds h1 15
+.PN 285
+.L1 T EXTURE 
+.L2 M APPING
+.CH FIFTEEN
+.EQ
+delim $$
+.EN
+.rs
+.sp -1.5v
+This chapter describes texture mapping in \*(Dd,
+including how to enable texture mapping, 
+how to specify texture maps and how to position them
+on target objects.
+Concepts and terms introduced in this chapter
+include texture mapping, tabular and procedural texture maps,
+diffuse color mapping, transparency mapping, environment mapping,
+bump mapping, texture attributes, texture space, texture coordinates,
+parameterization of primitives, two-part texture mapping,
+and texture antialiasing.
+.sp -.5v
+.H1 "What is Texture Mapping?
+.rs
+.sp -.25v
+Texture mapping is a set of techniques for increasing
+visual detail in computed images.
+These techniques allow you to add the appearance of surface
+detail to geometric objects, without
+explicitly modeling those details using additional geometry.
+The increase in detail is achieved by
+mapping an image onto the object surface.
+For example, an image of woodgrain could be mapped onto a polygon
+to simulate a hardwood floor. 
+The image is referred to as the texture map.
+The texture map can be a two-
+or three-dimensional table of sampled data.
+This tabular texture map resides in its own (u,v) or (u,v,w) 
+texture coordinate space.
+Textures can also be defined procedurally.
+.sp -.25v
+.lp
+At each rendered pixel, selected elements from the texture are
+used to either replace, or in some way alter, the
+material properties of the primitive object.
+For example, the color of each pixel covered by the object
+could be replaced with colors from a texture map.
+The surface normal used for shading purposes
+could also be perturbed by some value specified in the texture map,
+giving the appearance of a rough looking surface on the object.
+.sp -.25v
+.lp
+The texture mapping process involves the following steps:
+.sp -.25v
+.ip "Step 1)" 7 
+A texture \f2synthesis\fP step produces the texture map
+data.
+This can be done prior to or during rendering.
+.ip "Step 2)" 7
+A \f2parameterization\fP of a point on the primitive object
+provides the corresponding location in texture space.
+.sp -.25v
+.ip "Step 3)" 7 
+The texture is accessed at that location and the returned
+texture element is used to
+\f2alter\fP the selected property of the object.
+.sp -.25v
+.ip "Step 4)" 7 
+The texture mapping process involves applying discrete
+texture maps to objects at discrete pixel locations, but there
+may not necessarily be a one-to-one correspondence between pixels
+covered by the object and texture elements.
+A pixel may actually correspond
+to a \f2set\fP of locations in texture space, or several pixels
+may correspond to the same texture location.
+Because of this, a \f2filtering\fP step is necessary to reduce
+aliasing effects in the resulting image.
+.H1 "Texture Mapping in \*(Dd
+This section briefly describes how in \*(Dd you
+specify the texture mapping process described above.
+.sp -.25v
+.ip "Step 1)" 7
+\*(Dd does not provide any explicit tools for texture synthesis,
+although any \*(Dd image can be used as a two-dimensional map.
+Tabular texture maps are passed to \*(Dd in the form 
+of raster objects.
+Procedural textures are callback objects.
+.sp -.25v
+.ip "Step 2)" 7
+The parameterization of \*(Dd primitives is usually done 
+by assigning texture coordinate values to primitive vertices.
+However, some primitives can generate texture coordinates 
+automatically.
+In some instances, a callback function defines a method for
+computing the texture coordinate values.
+\*(Dd also provides
+several texture attributes to transform the
+texture coordinate values before they are used to access the
+texture map.
+.sp -.25v
+.ip "Step 3)" 7
+A texture map can be used to alter one of several properties
+of a primitive object. 
+Diffuse color mapping alters the value of the 
+\f2DoDiffuseColor <DODIFC>\fP attribute.
+Transparency mapping alters the value of the 
+\f2DoTranspIntens <DOTI>\fP attribute.
+Environment mapping simulates environmental reflection by
+replacing the color of the pixels with the elements from
+a texture map that is an image of the environment surrounding
+the object.
+Bump mapping perturbs the shading normal during rendering.
+Four primitive attributes, along with corresponding switches,
+specify which properties to alter via texture mapping.
+One of the texture attributes specifies exactly how 
+the texture element
+alters the selected property of the primitive.
+.sp -.25v
+.ip "Step 4)" 7
+One of the texture attributes specifies the type of antialiasing
+to be used for the texture mapping process.
+.sp -.25v
+.lp
+The remainder of this chapter provides a more complete
+description of \*(Dd texture mapping, including how to
+enable texture mapping, how to specify texture maps, and
+how to position them on objects. 
+.sp -.25v
+.lp
+The features described in this manual are the features
+supported by the \*(Dd interface.
+However, they may not all be supported by all the underlying renderers.
+This is especially true for texture mapping.
+Not all renderers support texture mapping,
+and most renderers that
+support texture mapping support only a subset of the
+features provided by \*(Dd. 
+For example, \*(Dd places no restrictions on two-dimensional
+vs. three-dimensional texture mapping or on tabular vs.
+procedural mapping.
+In reality most renderers do not provide all combinations 
+of these possibilities.
+Refer to your \f2\*(Dd System Guide\fP to see which 
+texture mapping features are supported by the renderers on your system.
+.sp -.50v
+.H1 "Enabling Texture Mapping
+Texture mapping is enabled using primitive attribute switches.
+There is one switch for each type of property you can
+alter via texture mapping.
+By default, all the texture map switches are off:
+.ip "\f3DoTextureMapDiffuseColorSwitch <DOTMDS>\fP"
+for diffuse color mapping
+.ip "\f3DoTextureMapTranspIntensSwitch <DOTMTS>\fP"
+for transparency mapping
+.ip "\f3DoTextureMapBumpSwitch <DOTMBS>\fP"
+for bump mapping
+.ip "\f3DoTextureMapEnvironSwitch <DOTMES>\fP"
+for environment mapping
+.sp -.5v
+.H1 "Specifying Texture Maps
+Texture maps to be applied to primitive objects are
+specified by the texture map primitive attributes:
+.(l
+\f2DoTextureMapDiffuseColor <DOTMDC>\fP 
+\f2DoTextureMapTranspIntens <DOTMTI>\fP
+\f2DoTextureMapBump <DOTMB>\fP 
+\f2DoTextureMapEnviron <DOTME>\fP 
+.)l
+A different attribute is used depending on the type of
+property you want to alter via texture mapping.
+.lp
+Like all primitive attributes these are inherited by 
+subsequent primitive objects in the \*(Dd database.
+Unlike most other primitive attributes, 
+there can be more than one \f2current\fP value for each of these.
+For example, there can be several diffuse color texture
+map attributes active and inherited by a primitive object.
+This allows multiple diffuse color maps to be applied 
+to a single primitive.
+The same goes for all four types of texture map attributes.
+This is unlike other primitive attributes, 
+such as \f2DoDiffuseColor <DODIFC>\fP 
+or \f2DoDepthCue <DODC>\fP,
+where only one value is active at any given time.
+.lp
+All texture map primitive attributes have the same calling sequence:
+.rs
+.sp -.5v
+.(m
+     DoTextureMapDiffuseColor(op, mapping, raster)
+     DoTextureMapTranspIntens(op, mapping, raster)
+     DoTextureMapBump(op, mapping, raster)
+     DoTextureMapEnviron(op, mapping, raster)
+.)m
+.sp .5v
+.H3 op
+The \f2op\fP parameter allows more than one 
+texture map attribute of the same type to be active. 
+It specifies whether this map
+should be applied to subsequent primitives 
+in addition to, or instead of,
+any texture maps of the same type that have already been specified.
+Possible values are 
+.ip "\f3DcMapReplace <DCMR>\fP
+means that this texture map object replaces any other objects
+of this type that may be currently active.
+.ip "\f3DcMapAdd <DCMADD>\fP 
+means that this texture map object should be added to the list
+of active texture map objects of this type.
+.lp
+The following sample code fragment applies two diffuse color 
+maps and one bump map to a triangle list object.
+.bp
+.(m
+C code:
+
+DgAddObj(DoTextureMapDiffuseColorSwitch(DcOn));
+DgAddObj(DoTextureMapBumpSwitch(DcOn));
+DgAddObj(DoTextureMapDiffuseColor(DcMapReplace, m1, r1)); 
+DgAddObj(DoTextureMapDiffuseColor(DcMapAdd, m2, r2));	 
+DgAddObj(DoTextureMapBump(DcMapReplace, m3, r3));
+DgAddObj(DoTriangleList(...));
+
+\*(Fo code:
+
+     CALL DGAO(DOTMDS(DCON))
+     CALL DGAO(DOTMBS(DCON))
+     CALL DGAO(DOTMDC(DCMR, M1, R1))
+     CALL DGAO(DOTMDC(DCMADD, M2, R2))
+     CALL DGAO(DOTMB(DCMR, M3, R3))
+     CALL DGAO(DOTRIL(...))
+.)m
+If we change the \f2DcMapAdd <DCMADD>\fP to 
+\f2DcMapReplace <DCMR>\fP in the second 
+\f2DoTextureMapDiffuseColor <DOTMDC>\fP call,
+then the first diffuse color map will not  
+be applied to the triangle list object.
+.lp
+Note that this parameter does not specify how texture maps
+are combined when multiple texture maps are applied to
+a single object.
+It merely controls how many maps are applied to the object.
+Combining multiple texture maps is discussed later
+in this chapter.
+.H3 mapping
+The \f2mapping\fP parameter is for selecting a
+texture mapping method.
+The set of methods you can choose from depends
+both on the underlying renderer and on the
+particular texture map primitive attribute being used.
+Commonly supported mappings are:
+.ip "\f3DcStdTableLookup <DCSTLU>\fP"
+two-dimensional tabular mapping.
+.ip "\f3DcStd3dTableLookup <DCS3TL>\fP"
+three-dimensional tabular mapping.
+.ip "\f3Dc2PartMap <DC2PM>\fP"
+a two-part mapping method, where a two-dimensional tabular
+texture is mapped onto a relatively simple
+three-dimensional intermediate
+surface before being projected onto the target primitive object.
+Two-part texture mapping is described in more detail
+later in this chapter.
+.ip "\f3DcStdBumpMap <DCSBM>\fP"
+bump mapping.
+.ip "\f3DcStdSphereEnvironMap <DCSSEM>\fP"
+a spherical environment mapping method, where the environment
+map represents a sphere surrounding the target primitive object.
+.ip "\f3DcStdCubeEnvironMap <DCSCEM>\fP"
+a cubic environment mapping method, where the environment
+map represents a cube surrounding the target primitive object.
+.ip "a \f3DoCallback <DOCB>\fP object handle"
+a procedural mapping using the function defined by the
+specified callback object.
+.lp
+Note that a renderer may provide more than one of each of the
+tabular and bump mapping methods. 
+\f2DcStdTableLookup <DCSTLU>, 
+DcStd3dTableLookup <DCS3TL>\fP
+and \f2DcStdBumpMap <DCSBM>\fP mean use the default method.
+Other methods would be specified using names defined by
+the renderer.
+These are documented for each renderer in your \f2\*(Dd System Guide\fP. 
+.H3 raster
+The \f2raster\fP parameter specifies the tabular texture map,
+if required by the mapping method.
+It must be either a \f2DoFileRaster <DOFRS>\fP object
+or a \f2DoRaster <DORS>\fP object.
+In either case, the data may be in one of the standard formats 
+defined by \*(Dd or in a special format understood by the renderer.
+See Chapter 14 for more information on raster objects.
+If the \f2mapping\fP parameter is a procedural callback, the
+value for \f2raster\fP should be \f2DcNullObject <DCNULL>\fP.
+It is possible that a renderer may support a hybrid method,
+where a procedural mapping function
+also accesses a tabular texture map.
+.H1 "Texture Attributes
+A unique feature of the texture map primitive attributes
+is that they also inherit a set of attributes of their own.
+These are the \f2texture attributes\fP and they
+specify in more detail how
+the texture is to be applied to the primitive object.
+The texture attributes are:
+.(l
+\f2
+DoTextureAntiAlias <DOTAA>
+DoTextureExtendUV <DOTXUV>
+DoTextureExtendUVW <DOTXW>
+DoTextureIntermediateSurf <DOTIMS>
+DoTextureMatrixUV <DOTMUV>
+DoTextureMatrixUVW <DOTMW>
+DoTextureOp <DOTOP>
+DoTextureScaleUV <DOTSUV>
+DoTextureScaleUVW <DOTSW>
+DoTextureTranslateUV <DOTTUV>
+DoTextureTranslateUVW <DOTTW>
+DoTextureUVIndex <DOTUVI>
+DoTextureUVWIndex <DOTWI>
+\fP
+.)l
+Most of the texture attributes are used to affect the parameterization
+of the primitives before the texture map is accessed.
+Others are for specifying how the returned texture elements
+are used to alter the primitive properties and for specifying
+a method for texture antialiasing.
+The texture attributes are discussed in more detail in the
+following sections.
+.H1 "Positioning a Texture on an Object
+A texture map resides in its own (u,v) or (u,v,w) texture
+coordinate space.
+The upper left corner of the texture map is at 
+the origin of the space.
+The lower right corner of a 2D texture is at (1,1)
+and the lower right back corner of a 3D texture is at (1,1,1).
+See \*(FT.
+.(F
+.\" ./PS/15.1ps 1.5i 0
+.sp 1.5i
+.)F "Texture Coordinate Space"
+When a texture is applied to a surface, a parameterization
+of each point on the surface specifies how to 
+access the texture map.
+This parameterization defines a mapping between the texture
+coordinate space of the texture map and the local coordinate
+space in which the primitive is modeled.
+Effectively this mapping positions the texture on the target surface.
+.lp
+In most cases, the application is responsible for 
+defining this mapping.
+In some cases the renderer defines the mapping for a type of
+primitive and does not give any control to the user.
+For example, a renderer may always use a particular mapping for
+spheres.
+For environment mapping, the texture map is \f2always\fP accessed
+using the direction in which the eye vector is reflected
+off the object at the point being rendered.
+The following discussions on how to position textures on objects
+do not apply to environment maps.
+.lp
+The subsections that follow describe the different ways in which
+you can control the placement of a texture on a 
+primitive object.
+Usually you assign texture coordinate values to
+the vertices of the primitive when the object is created.
+With the variable data primitives, texture coordinates
+can be assigned to vertices at any time, not just when the object is 
+created.
+Some primitives do not have vertex data (e.g.
+\f2DoPrimSurf <DOPMS>\fP objects) and they are treated
+differently.
+With two-part texture mapping the mapping between the
+texture and the target surface is defined in two steps:
+from the texture to a three-dimensional intermediate surface
+and from there to the target object.
+In all these cases the parameterization can be modified
+using the texture attributes.
+.H2 "Assigning Texture Coordinates to Vertices 
+Most \*(Dd primitives require the specification of vertices
+when objects are created.
+For these primitives, you can also include texture coordinates
+in the vertex data.
+The texture coordinates can be either two dimensional (u,v) or
+three dimensional (u,v,w).
+Since each object can be affected by more than one texture,
+\*(Dd allows multiple texture coordinates per vertex.
+Currently the number is limited to seven (u,v) coordinates and
+seven (u,v,w) coordinates.
+.lp
+When an object is created,
+the vertex type indicates what information is included in
+the vertex data.
+The vertex type must specify the number of sets of (u,v) and
+(u,v,w) coordinates included in each vertex.
+This is done by \f2or\fP'ing the values returned from
+the system functions \f2DsTextureUVCount <DSTUVC>\fP and 
+\f2DsTextureUVWCount <DSTWC>\fP with the base vertex type 
+of the object.
+The base vertex type for the object can be one of \f2DcLoc <DCL>\fP,
+\f2DcLocNrm <DCLN>\fP, \f2DcLocClr <DCLC>\fP, 
+and \f2DcLocNrmClr <DCLNC>\fP. 
+.lp
+For example, if the vertex type is:
+.(m
+DcLocNrm | DsTextureUVCount(2)  <IOR(DCLN,DSTUVC(2))>
+.)m
+the corresponding vertex array would contain locations,
+normals, and two sets of (u,v) coordinates for each vertex.
+When both (u,v) and (u,v,w) coordinates are included,
+the associated vertex arrays must list all the (u,v) data for
+a vertex before the (u,v,w) data.
+.lp
+If the four corners of a square polygon are assigned the 
+(u,v) values (0,0), (0,1), (1,1), (1,0) an entire texture
+would completely fill the polygon.
+When the polygon is nonuniformly scaled,
+the texture is distorted to always completely cover the polygon.
+By assigning other texture values to the polygon you can 
+effectively stretch and move a texture on the polygon.
+For example, the following code fragment would let you 
+place a texture on a
+square polygon as illustrated in \*(FT.
+.(m
+
+C code:
+
+DtObject mytexture;
+static DtReal verts[] = {
+	0.,0.,0., .2,1.,	/* vtx 0  x,y,z, u,v */
+	5.,0.,0., .7,1.,	/* vtx 1 */
+	5.,5.,0., .7,0.,	/* vtx 2 */
+	0.,5.,0., .2,0.  };	/* vtx 3 */
+
+DgAddObj(DoTextureMapDiffuseColorSwitch(DcOn));
+DgAddObj(DoTextureUVIndex(0));
+DgAddObj(DoTextureMapDiffuseColor(
+		DcMapReplace, DcStdTableLookup, mytexture));
+DgAddObj(DoSimplePolygon(DcRGB, DcLoc | DsTextureUVCount(1), 
+		4, verts, DcConvex));
+
+
+\*(Fo code:
+
+      INTEGER*4 MYTXTR
+      REAL*8 VERTS(20)
+      DATA VERTS / 0.0D0, 0.0D0, 0.0D0,   0.2D0, 1.0D0,
+     1  	   5.0D0, 0.0D0, 0.0D0,   0.7D0, 1.0D0,
+     2  	   5.0D0, 5.0D0, 0.0D0,   0.7D0, 0.0D0,
+     3  	   0.0D0, 5.0D0, 0.0D0,   0.2D0, 0.0D0 /
+C
+      CALL DGAO(DOTMDS(DCON))
+      CALL DGAO(DOTUVI(0))
+      CALL DGAO(DOTMDC(DCMR, DCSTLU, MYTXTR))
+      CALL DGAO(DOSPGN(DCRGB, IOR(DCL,DSTUVC(1)), 
+     1         4, VERTS, DCCNVX))
+.)m
+.bp
+.(F
+.\" ./PS/15.2ps 2i 0
+.sp 2i
+.)F "Assigning Texture Coordinates to Primitive Vertices"
+.rs
+.sp -.5v
+.H3 "Variable Data Primitives
+With the variable data primitives, all vertex data is passed
+in as separate arrays. 
+Arrays for locations, normals, and colors are passed in
+at object creation time, and can later be modified
+using the appropriate update call (e.g. \f2DpUpdVarTriangleMesh
+<DPUVTM>\fP).
+Texture coordinate values are not specified at object creation
+time, but can be added at any time with a call to one of:
+.rs
+.sp -.5v
+.(l
+\f2
+DpUpdVarSimplePolygonMeshUV <DPUSMV>
+DpUpdVarSimplePolygonMeshUVW <DPUSMW>
+DpUpdVarTriangleMeshUV <DPUTMV>
+DpUpdVarTriangleMeshUVW <DPUTMW>
+DpUpdVarTriangleStripUV <DPUTSV>
+DpUpdVarTriangleStripUVW <DPUTSW>
+\fP
+.)l
+.rs
+.sp -.5v
+Note that these functions can also be used to modify
+the texture coordinate values at any time.
+This provides a way of animating a
+texture across an object's surface.
+.H3 "Selecting a Set of Texture Coordinates"
+Since an object can have more than one set of texture coordinates
+the renderer needs to know which set to use when applying
+a particular texture map to the object.
+The texture attribute \f2DoTextureUVIndex <DOTUVI>\fP
+specifies which set of (u,v) coordinates to use for subsequent
+texture map objects.
+The sets of (u,v) coordinates for each vertex are numbered
+from zero.
+\f2DoTextureUVIndex(1) <DOTUVI(1)>\fP means use the second
+set of (u,v) coordinates.
+.lp
+\f2DoTextureUVWIndex <DOTWI>\fP specifies which
+(u,v,w) coordinates to use.
+.sp -.5v
+.H2 "Transforming Texture Coordinates
+.rs
+.sp -.25v
+The texture coordinates assigned to primitive vertices can
+be transformed before they are used to access a texture map.
+This can be useful if the desired effect is to animate a texture
+across the object surface in successive image updates, without
+modifying the assigned texture coordinates.
+Another case where this is useful is when several textures use
+the same object texture coordinates.
+For large objects, adding separate texture coordinates for every
+texture to be applied may require a lot of space, so one set only
+would be preferred.
+You may not want the exact same mapping for all the textures, so
+you can use the transformation to affect the mapping for
+each texture.
+.sp -.25v
+.lp
+The texture attributes \f2DoTextureScaleUV <DOTSUV>\fP and 
+\f2DoTextureScaleUVW <DOTSW>\fP
+are used to specify a scaling factor for texture coordinates.
+\f2DoTextureTranslateUV <DOTTUV>\fP and 
+\f2DoTextureTranslateUVW <DOTTW>\fP 
+specify translation values. 
+Unlike the general transformation attributes
+inherited by the primitive and studio objects 
+(\f2DoTranslate <DOXLT>\fP, etc.), the texture attributes for
+transforming texture coordinates are not cumulative.
+Each texture map object inherits one scaling texture attribute
+and one translation texture attribute.
+If one \f2DoTextureTranslateUV <DOTTUV>\fP follows
+another, only the one closest to the texture map object
+is inherited.
+The scaling attribute is always applied before the translation,
+regardless of the order of the attributes in a group.
+.sp -.25v
+.lp
+Note that the texture attributes scale and transform the texture 
+coordinate values assigned to the primitive vertices.
+The texture map itself is not transformed.
+.sp -.25v
+.lp
+The following example
+uses the texture attributes to scale and translate vertex (u,v) 
+coordinates.
+The assigned texture coordinates are (0,1), (1,1), (1,0) and (0,0).
+The transformed texture coordinates are (.2,1), (.7,1), (.7,0) and
+(.2,0), resulting in the same image as
+shown in Figure 15-2.
+.(m
+C code:
+
+DtObject mytexture;
+static DtReal verts[] = {
+	0.,0.,0., 0.,1.,	/* vtx 0 x,y,z, u,v*/
+	5.,0.,0., 1.,1.,	/* vtx 1 */
+	5.,5.,0., 1.,0.,	/* vtx 2 */
+	0.,5.,0., 0.,0.  };	/* vtx 3 */
+
+DgAddObj(DoTextureMapDiffuseColorSwitch(DcOn));
+DgAddObj(DoTextureTranslateUV(.2,0.));
+DgAddObj(DoTextureScaleUV(.5,1.));
+DgAddObj(DoTextureMapDiffuseColor(
+		DcMapReplace, DcStdTableLookup, mytexture));
+DgAddObj(DoSimplePolygon(DcRGB, DcLoc | DsTextureUVCount(1), 
+		4, verts, DcConvex)
+
+\*(Fo code:
+
+      INTEGER*4 MYTXTR
+      REAL*8 VERTS(20)
+      DATA VERTS / 0.0D0, 0.0D0, 0.0D0,   0.0D0, 1.0D0,
+     1  	   5.0D0, 0.0D0, 0.0D0,   1.0D0, 1.0D0,
+     2  	   5.0D0, 5.0D0, 0.0D0,   1.0D0, 0.0D0,
+     3  	   0.0D0, 5.0D0, 0.0D0,   0.0D0, 0.0D0 /
+C
+      CALL DGAO(DOTMDS(DCON))
+      CALL DGAO(DOTTUV(0.2D0, 0.0D0))
+      CALL DGAO(DOTSUV(0.5D0, 1.0D0))
+      CALL DGAO(DOTMDC(DCMR, DCSTLU, MYTXTR))
+      CALL DGAO(DOSPGN(DCRGB, IOR(DCL,DSTUVC(1)), 
+     1         4, VERTS, DCCNVX))
+.)m
+.rs
+.sp -.25v
+Some renderers also support the more general transformation
+texture attributes \f2DoTextureMatrixUV <DOTMUV>\fP and 
+\f2DoTextureMatrixUVW <DOTMW>\fP, which specify 
+arbitrary 3x3 and 4x4 transformation matrices.
+A texture matrix will override any previously defined scale 
+and translate values.
+Texture scale and translate values will replace the corresponding 
+elements in a previously defined matrix.
+It is recommended that you use either the scale and translate attributes
+or the matrix attribute.
+.sp -.25v
+.H2 "Texture Coordinates Outside the Texture Range"
+Sometimes the (u,v)/(u,v,w) values used to access a 
+texture may extend past 
+the [0..1] range in which the texture is defined.
+For example if the translate value in the above code fragment were
+changed to \f2DoTextureTranslateUV(.2,.4) <DOTTUV(0.2D0, 0.4D0)>\fP, 
+the transformed texture coordinates would be
+(.2,1.4), (.7,1.4), (.7,.4) and (.2,.4).
+Effectively, the texture is moved up on the  polygon.
+See \*(FT.
+.sp -.25v
+.lp
+What should the diffuse color be for the region of the polygon
+which is outsides of the [0..1] \f2uv\f1 range of the texture?
+The texture attributes \f2DoTextureExtendUV <DOTXUV>\fP and 
+\f2DoTextureExtendUVW <DOTXW>\fP specify extend modes
+that define the behavior outside the texture range.
+A different extend mode can be specified for each of \f2u, v\fP, and 
+\f2w\fP directions,
+as can be seen in the following code fragment.
+
+.bp
+\ 
+.(F
+.\" ./PS/15.3ps 2.25i 0
+.sp 2.25i
+.)F "Texture Coordinates Outside the Texture Range"
+.(m
+C code:
+
+DtExtendMode umode, vmode;
+DtObject mytexture;
+static DtReal verts[] = {
+        0.,0.,0., 0.,1.,
+        5.,0.,0., 1.,1.,
+        5.,5.,0., 1.,0.,
+        0.,5.,0., 0.,0.  };
+
+DgAddObj(DoTextureMapDiffuseColorSwitch(DcOn));
+DgAddObj(DoTextureTranslateUV(.2,.4));
+DgAddObj(DoTextureScaleUV(.5,1.));
+DgAddObj(DoTextureExtendUV(umode,vmode));
+DgAddObj(DoTextureMapDiffuseColor(
+                DcMapReplace, DcStdTableLookup, mytexture));
+DgAddObj(DoSimplePolygon(DcRGB, DcLoc | DsTextureUVCount(1),
+                4, verts, DcConvex)
+
+
+\*(Fo code:
+
+      INTEGER*4 UMODE, VMODE
+      INTEGER*4 MYTXTR
+      REAL*8 VERTS(20)
+      DATA VERTS / 0.0D0, 0.0D0, 0.0D0,   0.0D0, 1.0D0,
+     1  	   5.0D0, 0.0D0, 0.0D0,   1.0D0, 1.0D0,
+     2  	   5.0D0, 5.0D0, 0.0D0,   1.0D0, 0.0D0,
+     3  	   0.0D0, 5.0D0, 0.0D0,   0.0D0, 0.0D0 /
+C
+      CALL DGAO(DOTMDS(DCON))
+      CALL DGAO(DOTTUV(0.2D0, 0.4D0))
+      CALL DGAO(DOTSUV(0.5D0, 1.0D0))
+      CALL DGAO(DOTXUV(UMODE, VMODE))
+      CALL DGAO(DOTMDC(DCMR, DCSTLU, MYTXTR))
+      CALL DGAO(DOSPGN(DCRGB, IOR(DCL,DSTUVC(1)), 
+     1         4, VERTS, DCCNVX))
+.)m
+.rs
+.sp -.25v
+In this example, the value of \f2umode\fP is not relevant
+since all \f2u\fP coordinates are in the [0..1] range.
+Possible values for the extend modes are:
+.ip "\f3DcExtendNone <DCXNON>\fP"
+If the texture coordinate value is outside the [0..1] range
+then it is as if no texture map had been specified for those parts
+of the object.
+In the case of diffuse color mapping the object 
+will take on the color specified by \f2DoDiffuseColor <DODIFC>\fP.
+\*(FT illustrates the effect of using \f2DcExtendNone <DCXNON>\fP 
+for \f2vmode\fP in the above code example. 
+.(F
+.\" ./PS/15.4ps 1.45i 0
+.sp 1.5i
+.)F "DcExtendNone <DCXNON> "
+.rs
+.sp -.5v
+.ip "\f3DcExtendBlack <DCXBLK>\fP"
+If the texture coordinate value is outside the [0..1] range
+then it is as if the element returned by texture map 
+has a value of zero.
+In the case of diffuse color mapping that means the color black.
+\*(FT illustrates the effect of using \f2DcExtendBlack <DCXBLK>\fP 
+as the extend mode in the above code example. 
+This extend mode is useful when multiple texture maps are applied
+to the same object.
+.sp -.25v
+.ip "\f3DcExtendClamp <DCXCLP>\fP"
+If the texture coordinate value is outside the [0..1] range then 
+it is clamped to 1 (if > 1) or 0 (if < 0) before it
+is used to access the texture.
+Effectively the edge values of the texture map
+are extended.
+\*(FT illustrates the effect of using \f2DcExtendClamp <DCXCLP>\fP 
+as the extend mode in the above code example. 
+.bp
+\ 
+.(F
+.\" ./PS/15.5ps 1.45i 0
+.sp 1i
+.)F "DcExtendBlack <DCXBLK>"
+.(F
+.\" ./PS/15.6ps 1.25i 0
+.sp 1.65i
+.)F "DcExtendClamp <DCXCLP>"
+.ip "\f3DcExtendRepeat <DCXRP>\fP"
+If the texture coordinate value is outside the [0..1] range then 
+the value used to access the texture is 
+\f2(value - floor(value))\fP.
+Effectively the texture is repeated across the object surface.
+\*(FT illustrates the effect of using \f2DcExtendRepeat <DCXRP>\fP as 
+the extend mode in the above code example. 
+.(F
+.\" ./PS/15.7ps 1.45i 0
+.sp 1.65i
+.)F "DcExtendRepeat <DCXRP>"
+.H2 "Nonvertex Primitives
+Some \*(Dd primitives are specified without using vertex data.
+For example, the \f2DoPrimSurf <DOPMS>\fP objects are just 
+specified as
+\f2DcSphere <DCSPHR>\fP, \f2DcCylinder <DCCYL>\fP, 
+\f2DcBox <DCBOX>\fP, or \f2DcCone <DCCONE>\fP,
+and the appropriate object is created in a standard location, 
+using a standard size.
+The \f2DoTorus <DOTOR>\fP object is created 
+with specified dimensions, in a standard location.
+.lp
+Since these objects do not include vertex data, you cannot
+control their parameterization through the assignment of texture
+coordinates.
+The level of user-control over the parameterization of the nonvertex
+objects depends on the underlying renderer.
+.lp
+Some renderers cannot draw the nonvertex objects directly, so
+a tessellated alternate object approximating the original
+object is created.
+The alternate object is then rendered.
+You can request that texture coordinates be generated for the
+vertices of tessellated alternate objects, using 
+\f2DoCompTextureUVSwitch <DOCTVS>\fP.
+By default the switch is off.
+.lp
+\f2DoCompTextureUVCallback <DOCTVC>\fP controls which texture
+coordinates are assigned to the vertices when 
+\f2DoCompTextureUVSwitch <DOCTVS>\fP is enabled.
+The default value for this attribute is \f2DcStdUVCallback <DCSUVC>\fP.
+The parameterization \*(Dd then uses for the four
+\f2DoPrimSurf <DOPMS>\fP objects and the torus is as follows:
+.ip "\f3Sphere\fP"
+The texture map is wrapped around the sphere using a 
+spherical mapping. 
+The \f2u\fP values go from 0 to 1 around the circumference of
+the sphere in the xy plane.
+The \f2v\fP values go from 0 to 1 and back to 0 again around the
+circumference in the yz plane.
+The left and right edges of the texture map 
+join and form a seam on the sphere at x<0 and y=0.
+See \*(FT.
+.ip "\f3Cylinder\fP"
+The texture map is wrapped around the cylinder such that 
+the whole map completely covers the cylindrical part.
+The edge values are then extended to the center of the
+end caps.
+The \f2u\fP values go from 0 to 1 around the circumference
+of the cylinder.
+The \f2v\fP values go from 0 at z=1 to 1 at z=0.
+The left and right edges of the texture map
+join and form a seam on the cylinder at x=1 and y=0.
+See \*(FT. 
+.bp
+.(F
+.\" ./PS/15.8ps 3.3i 0
+.sp 3.3i
+.)F "Default Parameterization for a Sphere"
+.lp
+.(F
+.\" ./PS/15.9ps 2.75i 0
+.sp 2.75i
+.)F "Default Parameterization for a Cylinder"
+
+.ip "\f3Box    \fP"
+The whole texture is mapped onto every face of the box.
+The \f2v\fP values for all four faces in the xz and yz planes
+are 0 for z=1 and 1 for z=0.  
+The \f2v\fP values for the two faces in the xy plane
+are 0 for y=1 and 1 for y=0.
+The \f2u\fP values go from 0 to 1 on each face, 
+increasing in value to the right as you look at the front of the face.
+\*(FT shows how an image of an arrow pointing upwards is mapped
+onto the box.
+.(F
+.\" ./PS/15.10ps 2.25i 0
+.sp 2.5i
+.)F "Default Parameterization for a Box"
+.ip "\f3Cone    \fP"
+The texture is mapped onto the cone as if
+a circular cutout from the texture map were draped
+over the apex of the cone.
+The edge values are extended to the center of the
+bottom cap.
+See \*(FT.
+.ip "\f3Torus\fP"
+The texture is wrapped around the torus using a spherical mapping.
+The \f2u\fP values go from 0 to 1 around the circumference of the
+whole torus in the xz plane.
+The \f2v\fP values go from 0 to 1 and back to 0 again around the
+circumference of the ring of the torus. 
+The left and right edges of the texture map 
+join and form a seam on the torus at x=0 and z<0.
+See \*(FT.
+.lp
+You can use the texture attributes to transform the
+texture coordinates generated by \*(Dd for alternate objects.
+You can also completely override the default parameterization 
+by passing your own \f2DoCallback <DOCB>\fP object to
+\f2DoCompTextureUVCallback <DOCTVC>\fP.
+The callback function is called for every vertex.
+The information passed to the user-written callback consists
+of some user data (included in all callback functions, see Chapter 11), 
+the coordinates of the vertex (in local
+space, not world space), and the vertex normal.
+The function computes and passes back a \f2u\fP value 
+and a \f2v\fP value.
+The following example shows a simple user-written callback,
+\f2my_uv_callback <MYUVCB>\fP, which returns the \f2x\fP and \f2y\fP
+locations of the vertex as \f2u\fP and \f2v\fP, ignoring the
+\f2z\fP coordinate in the mapping.
+The \*(Fo callback function can be either a subroutine or a function.
+.(F
+.\" ./PS 15.11ps 3i 0
+.sp 3.25i 
+.)F "Default Parameterization for a Cone"
+.(m
+C code:
+
+#include <dore.h>
+
+my_uv_callback(data, x,y,z, nx,ny,nz, u,v)
+DtPtr data;
+DtReal x,y,z;
+DtReal nx,ny,nz;
+DtReal *u,*v;	/*returned*/
+{
+	*u = x;
+	*v = y;
+}
+
+
+\*(Fo code:
+
+      SUBROUTINE MYUVCB(DATA, X,Y,Z, NX,NY,NZ, U,V)
+      INTEGER*4 DATA
+      REAL*8 X,Y,Z
+      REAL*8 NX,NY,NZ
+      REAL*8 U,V
+C
+      INCLUDE '/usr/include/fortran/DORE'
+      U = X
+      V = Y
+C
+      RETURN
+      END
+.)m
+.(F
+.\" ./PS/15.12ps 2.65i 0
+.sp 2.85i
+.)F "Default Parameterization for a Torus"
+
+Some renderers draw the nonvertex primitives directly. 
+If the renderer supports texture mapping it might
+use the callback function defined by \f2DoCompTextureUVCallback 
+<DOCTVC>\fP to parameterize every point on the object surface.
+More likely it will use its own parameterization for the
+nonvertex primitives and not provide any user control.
+See your \f2\*(Dd System Guide\fP
+for information on how the renderers on your system handle
+the nonvertex primitives.
+.bp
+.H2 "Two-part Mapping"
+Some renderers support a type of texture mapping where a two-dimensional
+tabular texture is mapped onto a target object in two steps.
+The texture is first mapped onto a relatively simple
+three-dimensional surface.
+This intermediate surface is sized and positioned relative
+to the target object and the
+texture is projected from there onto the target object.
+(See \*(FT.)
+For every pixel on the target object a projection mapping defines a
+point on the intermediate surface.
+The color of the texture mapped intermediate surface at 
+that point is then used to alter the value of the 
+selected property of the target object.
+Texture coordinates are not used for this projection.
+Instead, the final placement of the texture map on 
+the target object is determined by the following factors:
+.BU hs
+the shape of the intermediate surface,
+.BU hs
+the placement of the map on the intermediate surface,
+.BU hs
+the location of the intermediate surface relative to
+the target object,
+.BU hs
+the type of projection from the intermediate surface to
+the target object, and
+.BU hs
+the shape of the target object.
+.lp
+Two-part mapping is especially useful in cases where it
+is difficult or impossible to assign texture coordinates
+to the vertices of the target object. 
+For example, if the object is composed of many smaller
+objects, it may be tedious to determine which (u,v) value
+should be assigned to each vertex.
+Or you may want to texture map an object that you did not
+create yourself, and you don't have access to the
+object's vertices.
+.(F
+.\" ./PS/15.13ps 1.25i 0
+.sp 2i
+.)F "Two-part Mapping"
+An intermediate surface for two-part mapping is specified
+with the \f2DoTextureIntermediateSurf <DOTIMS>\fP texture
+attribute.
+The calling sequence is
+.(m
+DoTextureIntermediateSurf (object, projtype)
+.)m
+The object is the intermediate surface. It can be a \f2DoPrimSurf <DOPMS>\fP
+object or a \f2DoSimplePolygon <DOSPGN>\fP.
+The projection type can be one of:
+.ip "\f3DcObjCentroid <DCOCTR>\fP"
+the point on the intermediate surface which is projected onto
+a particular target point is determined by
+following a line from the target object's centroid,
+through the point being rendered, until it reaches
+the intermediate surface.
+(See \*(FT.)
+Do not use this mapping when the intermediate surface is
+a simple polygon.
+.(F
+.\" ./PS/15.14ps 1.5i 0
+.sp 1.5i
+.)F "DcCentroid <DCCTR>"
+.ip "\f3DcISN <DCISN>\fP"
+a point on the intermediate surface is projected onto all 
+points on the target object that fall on a line from
+that intermediate surface point in the direction of
+its surface normal.
+See \*(FT.
+In the case where multiple intermediate surface points
+project onto the same target point, only one is used.
+Usually, depending on the renderer, it is the intermediate
+surface point closest to the target point, in the direction
+of the target point's normal.
+.lp
+While texture coordinates are not used for the target object,
+they are used for mapping the two-dimensional
+texture onto the intermediate surface.
+Also the texture attributes for specifying the (u,v) index,
+the texture coordinate transformations, and the extend modes are
+used in mapping to the intermediate surface.
+The \f2DoCompTextureUVCallback <DOCTVC>\fP attribute is
+used to determine the parameterization of the intermediate surface
+if it is a \f2DoPrimSurf <DOPMS>\fP object.
+The intermediate surface is sized and positioned relative
+to the target object using the standard transformation 
+attributes (\f2DoTranslate <DOXLT>\fP, etc.).
+.(F
+.\" ./PS/15.15ps 1.5i 0
+.sp 1.5i
+.)F "DcISN <DCISN>"
+The following code fragment shows an example of 
+two-part diffuse color mapping.
+The texture map \f2mytexture\fP is mapped onto a cylindrical
+intermediate surface, and then projected onto a vase-shaped object.
+The vase is centered at the origin 
+and can be enveloped by a cylinder with a length of three units
+and a radius of two. 
+For simplicity, the details of the vase object are not
+shown here. 
+The transformations applied to the intermediate surface will
+make it surround the target vase object.
+The \f2DoTextureScaleUV <DOTSUV>\fP in the example will affect
+the first step of the two-part mapping, i.e. from the texture
+to the intermediate surface.
+.(m
+C code:
+
+DtObject mytexture;
+DtObject vase;
+
+DgAddObj(DoTextureMapDiffuseColorSwitch(DcON));
+DgAddObj(DoPushMatrix());
+	DgAddObj(DoCompTextureUVSwitch(DcOn));
+	DgAddObj(DoTranslate(0.,0.,1.5));
+	DgAddObj(DoScale(2.,2.,3.));
+	DgAddObj(DoTextureIntermediateSurf(
+			DoPrimSurf(DcCylinder), DcISN));
+DgAddObj(DoPopMatrix());
+DgAddObj(DoTextureScaleUV(.25,.5));
+DgAddObj(DoTextureMapDiffuseColor(
+		DcMapReplace, Dc2PartMap, mytexture))
+DgAddObj(vase);
+
+\*(Fo code:
+
+      INTEGER*4 MYTXTR
+      INTEGER*4 VASE
+C
+      CALL DGAO(DOTMDS(DCON))
+      CALL DGAO(DOPUMX())
+	  CALL DGAO(DOCTVS(DCON))
+	  CALL DGAO(DOXLT(3.0D0, 0.0D0, 0.0D0))
+	  CALL DGAO(DOSC(2.0D0, 2.0D0, 3.0D0))
+	  CALL DGAO(DOTIMS(DOPMS(DCCYL, DCISN))
+      CALL DGAO(DOPPMX())
+      CALL DGAO(DOTSUV(0.25D0, 0.5D0))
+      CALL DGAO(DOTMDC(DCMR, DC2PM, MYTXTR))
+      CALL DGAO(VASE)
+.)m
+.rs
+.sp -1v
+.H1 "Using the Texture Element
+The third step of the texture mapping process, as described
+at the beginning of this chapter, involves
+using the texture element returned from the texture map to replace
+or modify the selected property of the primitive object.
+The texture attribute \f2DoTextureOp <DOTOP>\fP specifies how 
+the texture elements should be used to alter the current
+value of the selected property.
+The values are diffuse color values or transparent intensity, for example,
+depending on the type of texture mapping.
+.lp
+Possible texture operators are:
+.sp -.25v
+.ip "\f3DcTextureReplace <DCTREP>\fP"
+the texture element replaces the current value 
+.sp -.25v
+.ip "\f3DcTextureMultiply <DCTMUL>\fP"
+the texture element scales the current value
+.sp -.25v
+.ip "\f3DcTextureBlend <DCTBLD>\fP"
+(valid if the texture also includes an alpha channel)
+.br
+the texture element is combined with the current value
+as follows:
+.sp -.5v
+.lp
+.(m
+new_value = current_value*(1-alpha) + texture_element*alpha
+.)m
+.br
+.sp -.25v
+.ip "\f3DcTextureAdd <DCTADD>\fP"
+the texture element is added to the current value
+.sp -.25v
+.lp
+In all cases, the current value may already
+have been affected by a previously applied texture.
+This texture attribute should not be confused with
+the \f2op\fP parameter of the texture map attributes, 
+which is used to control how many texture maps are
+applied to subsequent primitives.
+.sp -.25v
+.lp
+The default texture operator is \f2DcTextureReplace <DCTREP>\fP.
+.H1 "Texture Antialiasing
+Texture mapping involves the mapping of discrete texture samples
+onto a surface at discrete pixel locations.
+Depending on the size and shape of the texture, and on the
+size and shape of the object on the screen, there probably is not
+a one-to-one correspondence between pixels covered by the object and
+locations in texture space.
+Several pixels may correspond to the same texture location,
+or a pixel may correspond to a set of locations defining an area 
+in texture space. 
+However, only one value can be returned from the texture.
+This discrete process
+causes aliasing effects in the resulting image.
+.lp
+The texture attribute \f2DoTextureAntiAlias <DOTAA>\fP specifies what 
+method to use to reduce the aliasing effects for
+subsequent texture mapped objects.
+The possible modes are:
+.ip "\f3DcTextureAntiAliasNone <DCTAAN>\fP"
+simple point sampling is used, i.e. the value returned is
+from one selected texture location (usually the one closest to 
+the center of the pixel).
+In other words, no antialiasing of the texture map is performed.
+.ip "\f3DcTextureAntiAliasBilinear <DCTAAB>\fP"
+the value returned by the texture is a weighted average of the
+four corner elements of the area in texture space.
+.ip "\f3DcTextureAntiAliasMIP <DCTAAM>\fP"
+MIP mapping is used to antialias the texture.
+The texture map must be in MIP map format if the renderer 
+cannot generate a MIP map from the original map data.
+A MIP map contains several pre-filtered versions of the texture map.
+The actual format is renderer dependent and is documented in
+your \f2\*(Dd System Guide\fP.
+MIP mapping was described by Williams in 1983 (Williams, 
+\f2Pyramidal Parametrics\fP, SIGGRAPH 1983 Proceedings, Vol. 17, #3,
+July 1983), and has since then become a popular method of 
+texture antialiasing.
+.ip "\f3DcTextureAntiAliasSumArea <DCTAAS>\fP"
+antialiasing is done using a summed area table 
+(Crow, \f2Summed-Area Tables for Texture Mapping\fP, 
+SIGGRAPH 1984 Proceedings, Vol. 18, #3, July 1984).
+.ip "\f3DcTextureAntiAliasAdaptive <DCTAAA>\fP"
+adaptive techniques are used to antialias the texture.
+The actual techniques used depend on the renderer.
+.lp
+The default antialias mode for texture mapping is 
+\f2DcTextureAntiAliasNone <DCTAAN>\fP.
+.H1 "Chapter Summary
+Chapter 15 describes \f2texture mapping\fP, which can be used
+to add visual detail to primitive objects.
+.lp
+\*(Dd provides primitive attributes for enabling and
+specifying diffuse color mapping, transparency mapping,
+bump mapping, and environment mapping.
+The \f2texture attributes\fP specify in more detail how a texture
+is applied to a primitive object.
+.lp
+A texture map is usually positioned on a primitive object
+by assigning texture coordinates to the primitive vertices.
+The texture coordinates can be transformed
+before they are used to access a texture map.
+The parameterization of nonvertex primitives is controlled
+using \f2DoCompTextureUVSwitch <DOCTVS>\fP
+and \f2DoCompTextureUVCallback <DOCTVC>\fP.
+Two-part mapping provides a way of positioning a texture map
+on a primitive object without assigning texture coordinates
+to the primitive vertices.
+.lp
+The texture attribute \f2DoTextureOp <DOTOP>\fP specifies
+how the texture elements are used to alter the
+current value of the selected property of the primitive
+being texture mapped.
+.lp
+The texture attribute \f2DoTextureAntiAlias <DOTAA>\fP
+specifies a method for reducing aliasing effects
+for texture mapped objects.

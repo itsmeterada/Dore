@@ -1,0 +1,72 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DgDelEleBetweenLabels 3D  "Dore"
+.SH NAME
+DgDelEleBetweenLabels \- Remove all elements between labels from the currently open group
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+DtFlag DgDelEleBetweenLabels(label1, label2)
+DtInt label1;
+DtInt label2;
+.sp
+.in -.5i
+FORTRAN:
+.in +.5i
+INTEGER*4 DGDEL(LABEL1, LABEL2)
+INTEGER*4 LABEL1
+INTEGER*4 LABEL2
+.in -.5i
+.fi
+.SH DESCRIPTION
+.IX DGDEL
+.IX DgDelEleBetweenLabels
+.I DgDelEleBetweenLabels
+deletes all of the elements between two labels,
+\f2label1\fP and \f2label2\fP, from the currently open
+group.  Labels are elements that can be placed anywhere within a group to
+mark a special location.  There may be more than one label with the
+same value.
+.PP
+\f2DgDelEleBetweenLabels\fP searches forward 
+from the current position
+for the first occurrence of \f2label1\fP. If found, a search is 
+then made from that point for the first occurrence of \f2label2\fP.
+If both labels are found, then \f2DgDelEleBetweenLabels\fP deletes all
+the elements between the labels but not the labels themselves.  After the
+deletion, the element pointer will end up pointing to
+the second label and \f2DcTrue\fP <\f2DCTRUE\fP> will be
+returned.  If only one or none of the labels is found,
+\f2DcFalse\fP <\f2DCFALS\fP> will be returned, and the
+element pointer is not moved.
+.SH ERRORS
+.I DgDelEleBetweenLabels
+will fail if no group is currently open.
+\f2DcFalse\fP <\f2DCFALS\fP> will be returned.
+.TP 15
+[WARNING - a group is not currently open]
+.PP
+.I DgDelEleBetweenLabels
+will fail if passed an invalid label.
+.TP 15
+[WARNING - can't find first label]
+.TP 15
+[WARNING - can't find second label]
+.SH "SEE ALSO"
+DgDelEle(3D), DgDelEleRange(3D), DgEmpty(3D), DoLabel(3D)

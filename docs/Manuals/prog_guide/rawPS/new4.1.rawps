@@ -1,0 +1,80 @@
+%!PS-Adobe-2.0
+%%Title: 4-1.pict
+%%Creator: MacDraw
+%%CreationDate: Friday, August 11, 1989
+%%Pages: (atend)
+%%BoundingBox: ? ? ? ?
+%%PageBoundingBox: 30 31 582 761
+%%For: aaron                         
+%%IncludeProcSet: "(AppleDict md)" 66
+%%EndComments
+%%EndProlog
+%%BeginDocumentSetup
+md begin
+
+T T -31 -30 761 582 100 72 72 1 F F F F T T psu
+(aaron                         ; document: 4-1.pict)jn
+0 mf
+od
+%%EndDocumentSetup
+%%Page: ? 1
+op
+0 0 xl
+1 1 pen
+0 0 gm
+(nc 0 0 720 540 6 rc)kp
+64 gr
+278 153 549 395 4 rc
+0 gr
+278.5 153.5 548.5 394.5 0 rc
+350 153 gm
+350 394 lin
+319 253 gm
+bu fc
+{}mark T /Helvetica-Bold /|______Helvetica-Bold 0 rf
+bn
+1 setTxMode
+1 fs
+18.71987 fz
+bu fc
+2 F /|______Helvetica-Bold fnt
+bn
+1.43907 0.(Type)ashow
+389 166 gm
+0 gr
+1.06355 0.(Reference)ashow
+412 166 gm
+0.23793 0.(Count)ashow
+431 153 gm
+431 394 lin
+468 247 gm
+0.34400 0.(Name)ashow
+485 153 gm
+485 394 lin
+527 251 gm
+1.14775 0.(Data)ashow
+350 276 gm
+430 276 lin
+391 307 gm
+0.13833 0.(Hold)ashow
+414 307 gm
+0.50765 0.(Flag)ashow
+0 0 gm
+224.5 108.5 378.5 256.5 180 270 0 ar
+224.5 289.5 378.5 437.5 270 360 0 ar
+447.5 289.5 601.5 437.5 0 90 0 ar
+447.5 108.5 601.5 256.5 90 180 0 ar
+301 108 gm
+523 108 lin
+601 180 gm
+601 362 lin
+301 437 gm
+523 437 lin
+224 180 gm
+224 363 lin
+F T cp
+%%Trailer
+cd
+end
+%%Pages: 1 0
+%%EOF

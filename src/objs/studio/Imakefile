@@ -1,0 +1,9 @@
+#include <Dore.tmpl>
+
+    SRCS = ost_camera.c ostd_light.c
+    OBJS = ost_camera.o ostd_light.o
+
+LibraryObjectRule()
+SubdirLibraryRule($(OBJS))
+
+DependTarget()

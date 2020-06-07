@@ -1,0 +1,95 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DoDepthCue 3D  "Dore"
+.SH NAME
+DoDepthCue \- Create a primitive attribute object defining depth cueing
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+DtObject DoDepthCue(zfront, zback, sfront, sback, 
+		colormodel, color)
+DtReal zfront, zback, sfront, sback;
+DtColorModel colormodel;
+DtReal color[\|];
+.sp
+.in -.5i
+FORTRAN:
+.in +.5i
+INTEGER*4 DODC(ZFRONT, ZBACK, SFRONT, 
+		SBACK, COLMOD, COLOR)
+REAL*8 ZFRONT, ZBACK, SFRONT, SBACK
+INTEGER*4 COLMOD
+REAL*8 COLOR(*)
+.in -.5i
+.fi
+.SH DESCRIPTION
+.IX DODC
+.IX DoDepthCue
+.I DoDepthCue
+creates a depth cue primitive attribute object.
+The object is used to
+specify how primitive objects will be depth cued when the depth cue
+switch primitive
+attribute (set by \f2DoDepthCueSwitch\fP <\f2DODCS\fP>) is enabled.  Note that
+depth cueing is on an object-by-object basis.
+.PP
+When the depth cue switch is enabled, a
+user-provided color is combined with that of a primitive object
+proportional to each part's distance from the viewer (i.e., Z-values
+in frame coordinates).  If the depth cue switch 
+is disabled, then the primitive object's color is unaffected.
+.PP
+The \f2zfront\fP and \f2zback\fP values define the Z-values in
+frame coordinates of two planes parallel to the XY plane.  The
+\f2sfront\fP and \f2sback\fP values are numbers between 0 and 1
+specifying the portion between the primitive's color and user-supplied
+depth cue color \f2color\fP to be used at each plane.  The values for
+Z-values between \f2sfront\fP and \f2sback\fP are linearly interpolated.
+Note that the required
+parameter \f2colormodel\fP establishes the color model of the
+\f2color\fP parameter.
+.PP
+The displayed color DC at some depth Z in frame coordinates is
+related to the primitive's color C, the depthcue color \f2color\fP,
+the front and back Z-planes \f2zfront\fP and \f2zback\fP (with their
+associated values \f2sfront\fP and \f2sback\fP) as follows:
+.IP
+If Z is in front of \f2zfront\fP, then
+.nf
+	DC = \f2sfront\fP*C+(1-\f2sfront\fP)*\f2color\fP
+.fi
+.IP
+If Z is behind \f2zback\fP, then
+.nf
+	DC = \f2sback\fP*C+(1-\f2sback\fP)*\f2color\fP
+.fi
+.IP
+If Z is between \f2zfront\fP and \f2zback\fP and if
+.nf
+	r = \f2sback\fP+(((Z-\f2zback\fP)*(\f2sfront\fP-\f2sback\fP))/(\f2zfront\fP-\f2zback\fP))
+.fi
+then
+.nf
+	DC = r*C+(1-r)*\f2color\fP.
+.fi
+.SH DEFAULTS
+The default settings of \f2DoDepthCue\fP are (1.0, 0.0, 1.0,
+0.0, \f2DcRGB\fP, (0.0, 0.0, 0.0)).
+.SH "SEE ALSO"
+DoDepthCueSwitch(3D)

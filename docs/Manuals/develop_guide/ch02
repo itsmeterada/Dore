@@ -1,0 +1,351 @@
+.\"#ident "%W%" %G%
+.\"
+.\" #
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  
+.\" # 
+.\" # KUBOTA GRAPHICS Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\" #
+.\"
+.sc
+.ds BT "\\*(Dd Developer's Guide
+.ds CT \\*(Dd Functional Structure
+.ds h1 2
+.so ../macros/local.me
+.PN 5
+.L1 D OR\h'5p'\v'-8p'\(aa\v'8p'\h'-5p' "" "\h'-\w'\(aa'u'E
+.L2 F UNCTIONAL
+.L3 S TRUCTURE
+.CH TWO
+.\"
+This chapter provides a broad overview of the 
+functional structure of \*(Dd.
+The major \*(Dd components and the interfaces between them
+are described here.
+Understanding the overall functional structure of the \*(Dd
+implementation and how the individual components relate to each
+other is an important first step for writing new \*(Dd renderers
+and device drivers, and for porting \*(Dd to new platforms.
+.H1 "\*(Dd Modules
+From a functional point of view,
+the \*(Dd implementation can be viewed as consisting
+of several major modules in four categories.
+Each \*(Dd implementation on various platforms may be configured 
+with more or fewer modules, but
+each \*(Dd configuration includes at least one module from 
+each category.
+.BU
+The \*(Dd \f2language interface modules\fP implement a thin layer 
+of routines
+that pass the user parameters to corresponding routines in 
+the \*(Dd kernel.
+Each module provides a binding for a particular language.
+\*(Dd configurations usually include C and \*(Fo interface modules.
+.rs
+.sp -.05v
+.BU
+The \f2central modules\fP of the \*(Dd system include the \*(Dd kernel,
+a system module and a utility module, all of which are contained
+in every \*(Dd configuration.
+From an application user's point of view, libraries of user-defined
+primitives would also appear to fall into this category.
+.rs
+.sp -.2v
+.BU
+The \*(Dd \f2renderer modules\fP take the description of the
+scene created by the application program
+and generate display output through the
+device drivers.
+All \*(Dd configurations include at least one renderer, and typically
+two.
+.BU
+The \*(Dd \f2device driver modules\fP control the output from the renderers
+and route it to the actual output devices.
+All \*(Dd configurations include at least one device driver.
+.\" .(F
+.\" .sp 35 
+.\" .)F "\*(Dd Modules" figref
+The following sections describe the individual modules in more detail.
+.H2 "The C Interface Module"
+Because the \*(Dd kernel is implemented in C,
+the C interface module is very
+simple and is the same for \*(Dd on all platforms.
+.H2 "The \*(Fo Interface Module "
+The \*(Fo interface module is the link between \*(Fo applications
+and the internal C functions of the \*(Dd kernel.
+Compilers on different platforms do not all use the same calling
+convention between \*(Fo and C, so this module is not the same
+for all \*(Dd configurations.
+.H2 "The \*(Dd Kernel
+.rs
+.sp -.25v
+The \*(Dd kernel is the heart of the \*(Dd system, providing
+overall control and basic objects.
+The kernel provides the object control system, which 
+keeps track of all object classes and created objects. 
+It also provides the class implementations for groups, devices,
+frames, views, attributes, and the basic geometric 
+primitives (i.e. not the user-defined primitives).
+When a method is executed on a group in the \*(Dd graphical
+database, the kernel controls the traversal.
+During these traversals the kernel also keeps track of the current
+values of all attributes through a efficient attribute stacking scheme.
+Picking is currently done all in software, and the kernel provides
+the picking mechanism.
+.H2 "The System Module"
+.rs
+.sp -.25v
+The system module consists of a small set of routines
+that install the renderers and device drivers to be
+included in the \*(Dd configuration.
+They also control system specific initialization and exit functions.
+.H2 "The Utility Module"
+.rs
+.sp -.25v
+The utility module
+holds a collection of generic utilities that implement functions
+that depend on the underlying operating system. 
+They include utilities for file I/O, printing and memory management.
+.H2 "The Renderers"
+.rs
+.sp -.25v
+\*(Dd supports multiple renderers, ranging from dynamic renderers
+for interactive graphics, to photo-realistic renderers for
+high-quality still images.
+All renderers operate from the same graphical database
+created through \*(Dd subroutine calls from the application.
+.lp
+Typically a \*(Dd configuration
+will include at least the dynamic renderer and the standard 
+production renderer.
+The dynamic renderer is intended to take advantage of as much
+graphics display hardware as possible on the host platform.
+On appropriate platforms,
+it can therefore provide interactive response and
+smooth dynamic motion of graphical objects.
+The standard production renderer is intended to 
+provide a higher quality output image than
+is usually attainable with the dynamic renderer,
+usually at the cost of taking a much longer time to produce the image.
+Shadows, reflections, and other effects are possible with the 
+standard production renderer, regardless of the platform
+on which it is used.
+It is implemented as a spatial subdivision raytracer.
+.lp
+Some configurations also include third party renderers, such
+as the Media Logic Renderer (available on Stardent
+platforms).
+Users can also add their own renderers to a \*(Dd configuration.
+.H2 "The Device Drivers 
+\*(Dd supports multiple output devices, ranging from simple file
+output to sophisticated graphics hardware devices.
+The device drivers control the actual output of data to the physical
+and virtual devices.
+They provide a link between the \*(Dd renderers and the actual output
+devices.
+.lp
+Typically a configuration will include a file output device driver
+and one or more drivers for dynamic graphics output.
+Users can also add their own device drivers to a \*(Dd configuration.
+.H1 "\*(Dd Interfaces
+\*(Dd has more than just a single interface for
+application programmers.
+It has several other well-defined interfaces, which allow users
+and third party vendors to replace, add, and enhance 
+\*(Dd modules and their functionality.
+.\" \*(FT shows a simplified diagram of how the \*(Dd interfaces
+.\" interact with the \*(Dd modules.
+.\" The white boxes represent the four categories of \*(Dd modules.
+.\" The arrows indicate the direction of the calls through the interfaces.
+.\" These interfaces are accessible without the need for 
+.\" \*(Dd source code.
+.lp
+The application programmer's interface is the one described in 
+the \f2\*(Dd
+Programmer's Guide\fP and the \f2\*(Dd Reference Manual\fP.
+Refer to these manuals
+for more information on writing \*(Dd application programs.
+The application programmer's interface is not discussed further
+in this manual.
+.\" .(F
+.\" .sp 5.5i
+.\" ./"8.1i -1.1
+.\" .)F "\*(Dd Interfaces" figref
+.lp
+The developer's interface consists of routines provided by
+\*(Dd to allow renderer modules and device driver modules 
+access to \*(Dd kernel functionality.
+The renderer interface and the device driver
+interface provide access to internal functions of the renderers
+and the device drivers, respectively.
+Together, the renderer interface and the developer's interface
+allow developers to adapt their own renderers to \*(Dd.  
+.lp
+The device driver interface and the developer's interface
+allow developers 
+to implement drivers for different output devices.
+Once user-defined renderers and devices have been installed into 
+the \*(Dd system, they are an integral part of the system and 
+are accessed the same way as standard \*(Dd renderers and devices.
+.lp
+For developers with Portable \*(Dd, the source code form of \*(Dd, 
+the interfaces also
+provide easier porting to different platforms.
+.lp
+.\" Figure 2-2, earlier, shows a simplified version of the interfaces.
+.\" \*(FT takes a closer look at the access paths between the 
+.\" \*(Dd kernel, the renderers and the device drivers. 
+.\" The arrows indicate the direction of the calls through the interfaces
+.\" from one module to another.
+.\" .(F 
+.\" ./"8.1i -1.1
+.\" .sp 3.25i
+.\" .)F "Renderer and Device Driver Access Paths" figref
+.\" .lp
+A renderer is accessed by the \*(Dd kernel through 
+methods created and installed by the renderer and through the
+renderer interface.
+The renderer communicates with the \*(Dd kernel through
+calls to the routines provided by \*(Dd
+in the developer's interface.
+.lp
+A device driver is accessed by the renderers and the \*(Dd kernel
+through the device driver interface.
+The device driver communicates with the \*(Dd kernel
+through calls to routines in the developer's interface. 
+.H2 "The \*(Dd Developer's Interface\fP
+Device drivers and renderers make 
+calls to the \*(Dd kernel through the developer's interface.
+The developer's interface routines are provided by \*(Dd, and 
+they are included in the same \*(Dd library that contains the 
+application interface routines.
+However, since they
+are never used by \*(Dd applications, they 
+are not documented in the \f2\*(Dd Programmer's Guide\fP or
+the \f2\*(Dd Reference Manual\fP.
+They are introduced in this manual as needed in Sections II and III,
+\f2Renderers\fP and \f2Device Drivers\fP, respectively.
+.\" Section VI contains the manual or \f2man\fP pages describing all the
+.\" developer's interface routines.
+.lp
+All developer's interface routine names start with \f2DD\fP
+(for \f2\*(Dd Developer\fP).
+You will notice that, unlike the \*(Dd application programmer's
+interface routines, the developer's interface routines have C 
+bindings only.
+To use them you will have to include the file 
+\f2dore_develop/develop.h\fP in addition to the regular \f2dore.h\fP
+include file.
+.H2 "The \*(Dd Renderer Interface
+The \*(Dd renderer interface is quite simple.
+It is defined by \*(Dd to be a small set
+of function pointers that call into a renderer implementation.
+The routines referred to by the pointers are provided by each
+renderer.
+They are called indirectly through the function pointers by the
+\*(Dd kernel.
+The routines are assumed to be implemented in C.
+Section II, \f2Renderers\fP, describes how you implement the required renderer routines
+and pass the function pointers to \*(Dd.
+.H2 "The \*(Dd Device Driver Interface
+The \*(Dd device driver interface is defined by \*(Dd to be a set 
+of structures containing function pointers.
+A device driver implementation must provide the routines referred to
+by these pointers. 
+The device driver routines are called indirectly through the 
+pointers of the interface structures by the \*(Dd kernel and by 
+the renderers.
+The routines are assumed to be implemented in C.
+The device driver interface is discussed in Section III, \f2Device
+Drivers\fP. 
+.H1 "Replacing and Adding \*(Dd Modules"
+As described above, not all \*(Dd configurations contain the same
+set of modules.  
+A \*(Dd configuration includes:
+.BU hs
+the C interface module,
+.BU hs 
+optionally a \*(Fo interface module,
+.BU hs
+the \*(Dd kernel,
+.BU hs 
+a system module, 
+.BU hs 
+a utility module, 
+.BU hs
+one or more renderer modules, and
+.BU hs
+one or more device driver modules.
+.lp
+The \*(Dd kernel and the C interface module are the same for
+all configurations that correspond to a particular version
+of \*(Dd (e.g., \*(Dd 5.0).
+The combination of other modules included in a \*(Dd configuration
+is initially determined by the top-level makefile that builds the
+\*(Dd library
+and by the contents of the system module.
+A \*(Dd configuration can later be altered by individual application
+programs.
+The modified configuration is then only in effect for the duration
+of the execution of the program.
+.lp
+The \*(Dd build procedure selects a system module, a utility
+module, and possibly a \*(Fo module.
+Once the library is built, these modules cannot be replaced.
+The system module determines which renderers and device drivers
+are \f2initially\fP installed into the \*(Dd system.
+.lp
+The way you add or replace renderer and device driver modules depends on
+whether you have access to the \*(Dd source code or not.
+If you do have access to the source code and you want your 
+modifications to the \*(Dd configuration to be permanent,
+you would modify the system module and rebuild the \*(Dd library.
+Application programs then automatically have access to any
+new modules when they are linked to the modified library.
+See the Section IV, \f2Porting\fP, for more details.
+Alternatively, your application can directly call the installation
+routines of the new renderers and device drivers after
+the \*(Dd system has been initialized with \f2DsInitialize\fP.
+The implementor of a new module provides the installation routine
+and must document its name and
+calling sequence.
+.lp
+Most renderer installation routines take one parameter, which is
+the rendering style to be assigned to the new renderer.
+The rendering style is then used in the application to select 
+the renderer with \f2DvSetRendStyle\fP.
+The rendering style for a new renderer may be the same as for an
+existing one.
+In that case, the old renderer will no longer be accessible from 
+the application. 
+For example, the following code fragment would replace the 
+\f2DcProductionTime\fP renderer with the sample renderer from Section II.
+.(m
+DsInitialize(0);
+drr_samplernd_install_renderer(DcProductionTime);
+	.
+	.
+DvSetRendStyle(view, DcProductionTime);
+.)m
+.lp
+Similarly, most device driver installation routines take one 
+parameter, which is the name to be used when
+creating a device object of that type with \f2DoDevice\fP.
+For example, the following code fragment installs the sample
+device driver from Section III.
+.(m
+DsInitialize(0);
+ddr_sampledev_install_driver("sample");
+ 	.
+	.
+device = DoDevice("sample", argstring);
+.)m

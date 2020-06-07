@@ -1,0 +1,13 @@
+#include <Dore.tmpl>
+
+    SRCS = smp_appatt.c smp_camera.c smp_drom.c smp_geoatt.c smp_light.c \
+           smp_map.c smp_modclip.c smp_print.c smp_update.c smpdr_data.c \
+	   smpdr_output.c
+    OBJS = smp_appatt.o smp_camera.o smp_drom.o smp_geoatt.o smp_light.o \
+           smp_map.o smp_modclip.o smp_print.o smp_update.o smpdr_data.o \
+	   smpdr_output.o
+
+LibraryObjectRule()
+SubdirLibraryRule($(OBJS))
+
+DependTarget()

@@ -1,0 +1,10 @@
+#include <Dore.tmpl>
+
+INCLUDES = -I../h
+    SRCS = MATH_mtrx.c
+    OBJS = MATH_mtrx.o
+
+LibraryObjectRule()
+SubdirLibraryRule($(OBJS))
+
+DependTarget()

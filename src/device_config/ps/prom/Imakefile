@@ -1,0 +1,9 @@
+#include <Dore.tmpl>
+
+    SRCS = ps_prom.c
+    OBJS = ps_prom.o
+
+LibraryObjectRule()
+SubdirLibraryRule($(OBJS))
+
+DependTarget()

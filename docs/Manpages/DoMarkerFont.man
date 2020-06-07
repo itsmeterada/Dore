@@ -1,0 +1,90 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DoMarkerFont 3D  "Dore"
+.SH NAME
+DoMarkerFont \- Create a marker font primitive attribute object
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+DtObject DoMarkerFont(font)
+DtFont font ;
+.sp
+.in -.5i
+FORTRAN:
+.in +.5i
+INTEGER*4 DOMF(FONT)
+INTEGER*4 FONT 
+.in -.5i
+.fi
+.SH DESCRIPTION
+.IX DOMF
+.IX DoMarkerFont
+.I DoMarkerFont
+creates a marker font primitive attribute object. 
+The parameter \f2font\fP 
+determines the font used for subsequent polymarker 
+primitive objects.
+The Dore fonts are:
+.PP
+.nh
+.na
+.nf
+.ta 2.5i 1.5i
+FORTRAN Font Name
+.sp
+DcAstrology     		<DCFAST>
+DcComplexCyrillic       	<DCFCC>
+DcComplexGreek  		<DCFCG>
+DcComplexSmallGreek     	<DCFCSG>
+DcComplexSmallItalic    	<DCFCSI>
+DcComplexSmallRoman     	<DCFCSR>
+DcComplexItalic 		<DCFCI>
+DcComplexRoman  		<DCFCR>
+DcComplexScript 		<DCFCS>
+DcDuplexRoman   		<DCFDR>
+DcLowerCaseMathematics  	<DCFLCM>
+DcGothicGerman  		<DCFGG>
+DcGothicEnglish 		<DCFGE>
+DcGothicItalian 		<DCFGI>
+DcHelvetica (polygonal font)    	<DCFHLV>
+DcMusic 			<DCFMUS>
+DcMeteorology   		<DCFMUS>
+DcPlainGreek    		<DCFPG>
+DcPlainRoman    		<DCFPR>
+DcSimplexRoman  		<DCFSR>
+DcSimplexGreek  		<DCFSG>
+DcSimplexScript 		<DCFSS>
+DcSymbols       		<DCFSYM>
+DcTriplexItalic 		<DCFTI>
+DcTriplexRoman  		<DCFTR>
+DcUpperCaseMathematics  	<DCFUCM>
+.re
+.ad
+.hy
+.fi
+.SH DEFAULTS
+The default \f2DoMarkerFont\fP is \f2DcSymbols\fP <\f2DCFSYM\fP>.
+.SH "SEE ALSO"
+.na
+.nh
+DoMarkerGlyph(3D),
+DoMarkerScale(3D),
+DoPolymarker(3D)
+.ad
+.hy

@@ -1,0 +1,350 @@
+!md begin
+!/note {} def
+!/legal {} def
+!md /lnop known not { /lnop [ {} ] cvx def } if
+!/bigs [lnop lnop lnop lnop lnop lnop lnop lnop] def
+!/smalls [lnop lnop lnop lnop lnop lnop lnop lnop] def
+!/cp {pm restore pop pop} def
+!
+!T T -46 -44 1136 869 67 72 72 1 F F F F T T psu
+!(Aaron Black; document: 2-3MCDRAFT)jn
+!0 mf
+!od
+!op
+!0 0 xl
+!0 72 mul -0.5 72 mul translate
+!1 1 scale
+!1 1 pen
+!0 0 gm
+!(nc 0 0 1090 825 6 rc)kp
+!64 gr
+!170 22 193 104 2 rc
+!184 24 gm
+!(nc 170 22 193 104 6 rc)kp
+!bu fc
+!
+!{}mark T /Helvetica-Oblique /Helvetica-Oblique 0 rf
+!bn
+!1 setTxMode
+!2 fs
+!14.55990 fz
+!bu fc
+!2 F /Helvetica-Oblique fnt
+!bn
+!1.83499 0.(Attributes)ashow
+!124 112 gm
+!(nc 88 102 150 132 6 rc)kp
+!0 gr
+!bu fc
+!
+!
+!{}mark T /Helvetica /Helvetica 0 rf
+!bn
+!0 fs
+!37.43975 fz
+!bu fc
+!2 F /Helvetica fnt
+!bn
+!({)show
+!248 117 gm
+!(nc 212 107 274 137 6 rc)kp
+!({)show
+!294 125 gm
+!(nc 0 0 1090 825 6 rc)kp
+!64 gr
+!166 145 194 196 4 rc
+!0 gr
+!166.5 145.5 193.5 195.5 0 rc
+!0 0 pen
+!294 125 lin
+!nc ct 39 0 put
+!1 1 pen
+!178 219 gm
+!pr
+!178 219 pl
+!181 210 pl
+!175 210 pl
+!178 219 pl
+!1 ep
+!pr
+!178 219 pl
+!181 210 pl
+!175 210 pl
+!178 219 pl
+!0 ep
+!178 170 gm
+!pt
+!178 211 pl
+!ef
+!eu
+!(nc 0 0 1090 825 6 rc)kp
+!0 0 pen
+!178 211 lin
+!1 1 pen
+!176 167 183 174 4 ov
+!176.5 167.5 182.5 173.5 0 ov
+!185 237 gm
+!(nc 173 238 190 315 6 rc)kp
+!12.47991 fz
+!bu fc
+!2 F /Helvetica fnt
+!bn
+!1.71310 0. 32 0.17131 0.(Camera Type)awidthshow
+!201 277 gm
+!(nc 0 0 1090 825 6 rc)kp
+!64 gr
+!193 145 221 196 4 rc
+!0 gr
+!193.5 145.5 220.5 195.5 0 rc
+!0 0 pen
+!201 277 lin
+!nc ct 39 0 put
+!1 1 pen
+!206 220 gm
+!pr
+!206 220 pl
+!209 211 pl
+!203 211 pl
+!206 220 pl
+!1 ep
+!pr
+!206 220 pl
+!209 211 pl
+!203 211 pl
+!206 220 pl
+!0 ep
+!206 170 gm
+!pt
+!206 212 pl
+!ef
+!eu
+!(nc 0 0 1090 825 6 rc)kp
+!0 0 pen
+!206 212 lin
+!1 1 pen
+!203 166 210 173 4 ov
+!203.5 166.5 209.5 172.5 0 ov
+!211 247 gm
+!(nc 199 245 218 300 6 rc)kp
+!1.08802 0.(Position)ashow
+!227 273 gm
+!(nc 0 0 1090 825 6 rc)kp
+!64 gr
+!220 145 248 196 4 rc
+!0 gr
+!220.5 145.5 247.5 195.5 0 rc
+!0 0 pen
+!227 273 lin
+!nc ct 39 0 put
+!1 1 pen
+!233 220 gm
+!pr
+!233 220 pl
+!236 211 pl
+!230 211 pl
+!233 220 pl
+!1 ep
+!pr
+!233 220 pl
+!236 211 pl
+!230 211 pl
+!233 220 pl
+!0 ep
+!233 170 gm
+!pt
+!233 212 pl
+!ef
+!eu
+!(nc 0 0 1090 825 6 rc)kp
+!0 0 pen
+!233 212 lin
+!1 1 pen
+!230 166 237 173 4 ov
+!230.5 166.5 236.5 172.5 0 ov
+!239 249 gm
+!(nc 227 248 244 295 6 rc)kp
+!0.32632 0.(Camera)ashow
+!255 272 gm
+!(nc 0 0 1090 825 6 rc)kp
+!222.5 221.5 245.5 331.5 22.5 22.5 0 rr
+!150.5 138.5 260.5 201.5 44.5 44.5 0 rr
+!204 106 gm
+!(nc 138 76 258 136 6 rc)kp
+!74.87951 fz
+!bu fc
+!2 F /Helvetica fnt
+!bn
+!({)show
+!291 121 gm
+!(nc 0 0 1090 825 6 rc)kp
+!195.5 221.5 218.5 331.5 22.5 22.5 0 rr
+!168.5 221.5 191.5 331.5 22.5 22.5 0 rr
+!64 gr
+!39 144 67 195 4 rc
+!0 gr
+!39.5 144.5 66.5 194.5 0 rc
+!0 0 pen
+!291 121 lin
+!nc ct 39 0 put
+!1 1 pen
+!52 218 gm
+!pr
+!52 218 pl
+!55 209 pl
+!49 209 pl
+!52 218 pl
+!1 ep
+!pr
+!52 218 pl
+!55 209 pl
+!49 209 pl
+!52 218 pl
+!0 ep
+!52 169 gm
+!pt
+!52 210 pl
+!ef
+!eu
+!(nc 0 0 1090 825 6 rc)kp
+!0 0 pen
+!52 210 lin
+!1 1 pen
+!49 166 56 173 4 ov
+!49.5 166.5 55.5 172.5 0 ov
+!58 251 gm
+!(nc 46 249 65 304 6 rc)kp
+!12.47991 fz
+!bu fc
+!2 F /Helvetica fnt
+!bn
+!1.08802 0.(Position)ashow
+!74 277 gm
+!(nc 0 0 1090 825 6 rc)kp
+!64 gr
+!66 144 94 195 4 rc
+!0 gr
+!66.5 144.5 93.5 194.5 0 rc
+!0 0 pen
+!74 277 lin
+!nc ct 39 0 put
+!1 1 pen
+!80 219 gm
+!pr
+!80 219 pl
+!83 210 pl
+!77 210 pl
+!80 219 pl
+!1 ep
+!pr
+!80 219 pl
+!83 210 pl
+!77 210 pl
+!80 219 pl
+!0 ep
+!80 169 gm
+!pt
+!80 211 pl
+!ef
+!eu
+!(nc 0 0 1090 825 6 rc)kp
+!0 0 pen
+!80 211 lin
+!1 1 pen
+!76 165 83 172 4 ov
+!76.5 165.5 82.5 171.5 0 ov
+!83 249 gm
+!(nc 71 247 90 307 6 rc)kp
+!bu fc
+!2 F /Helvetica fnt
+!bn
+!1.31695 0.(Intensity)ashow
+!99 277 gm
+!(nc 0 0 1090 825 6 rc)kp
+!64 gr
+!93 144 121 195 4 rc
+!0 gr
+!93.5 144.5 120.5 194.5 0 rc
+!0 0 pen
+!99 277 lin
+!nc ct 39 0 put
+!1 1 pen
+!107 219 gm
+!pr
+!107 219 pl
+!110 210 pl
+!104 210 pl
+!107 219 pl
+!1 ep
+!pr
+!107 219 pl
+!110 210 pl
+!104 210 pl
+!107 219 pl
+!0 ep
+!107 169 gm
+!pt
+!107 211 pl
+!ef
+!eu
+!(nc 0 0 1090 825 6 rc)kp
+!0 0 pen
+!107 211 lin
+!1 1 pen
+!103 165 110 172 4 ov
+!103.5 165.5 109.5 171.5 0 ov
+!110 260 gm
+!(nc 98 261 115 291 6 rc)kp
+!1.23753 0.(Light)ashow
+!126 276 gm
+!(nc 0 0 1090 825 6 rc)kp
+!95.5 220.5 118.5 330.5 22.5 22.5 0 rr
+!68.5 220.5 91.5 330.5 22.5 22.5 0 rr
+!41.5 220.5 64.5 330.5 22.5 22.5 0 rr
+!23.5 137.5 133.5 200.5 44.5 44.5 0 rr
+!64 gr
+!213 52 255 104 2 rc
+!227 55 gm
+!(nc 213 52 255 104 6 rc)kp
+!0 gr
+!2 fs
+!14.55990 fz
+!bu fc
+!2 F /Helvetica-Oblique fnt
+!bn
+!1.14610 0.(Studio)ashow
+!246 54 gm
+!1.18615 0.(Object)ashow
+!80 103 gm
+!(nc 14 73 134 133 6 rc)kp
+!0 fs
+!74.87951 fz
+!bu fc
+!2 F /Helvetica fnt
+!bn
+!({)show
+!167 118 gm
+!(nc 0 0 1090 825 6 rc)kp
+!64 gr
+!92 50 134 102 2 rc
+!106 53 gm
+!(nc 92 50 134 102 6 rc)kp
+!0 gr
+!2 fs
+!14.55990 fz
+!bu fc
+!2 F /Helvetica-Oblique fnt
+!bn
+!1.14610 0.(Studio)ashow
+!125 52 gm
+!1.18615 0.(Object)ashow
+!144 76 gm
+!(nc 0 0 1090 825 6 rc)kp
+!64 gr
+!49 21 72 103 2 rc
+!63 23 gm
+!(nc 49 21 72 103 6 rc)kp
+!0 gr
+!1.83499 0.(Attributes)ashow
+!F T cp
+!cd
+!end

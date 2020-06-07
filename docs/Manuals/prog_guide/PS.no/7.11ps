@@ -1,0 +1,70 @@
+!/Dore 20 dict def
+!Dore begin
+!/Vrgb { moveto -1 -1 rmoveto 2 0 rlineto
+!        0 2 rlineto -2 0 rlineto
+!        closepath setrgbcolor fill } def
+!/Lrgb { moveto lineto setrgbcolor stroke } def
+!/Trgb { moveto lineto lineto closepath
+!        setrgbcolor fill } def
+!/BGrgb { dup 3 -1 roll dup 5 -1 roll dup
+!         7 -1 roll dup 3 -1 roll moveto
+!         6 -1 roll lineto exch 4 -1 roll
+!         lineto lineto closepath setrgbcolor
+!         fill } def
+!/Vgray { moveto -1 -1 rmoveto 2 0 rlineto
+!         0 2 rlineto -2 0 rlineto
+!         closepath setgray fill } def
+!/Lgray { moveto lineto setgray stroke } def
+!/Tgray { moveto lineto lineto closepath
+!         setgray fill } def
+!/BGgray { dup 3 -1 roll dup 5 -1 roll dup
+!          7 -1 roll dup 3 -1 roll moveto
+!          6 -1 roll lineto exch 4 -1 roll
+!          lineto lineto closepath setgray
+!          fill } def
+!gsave
+!-2 72 mul 3.5 72 mul translate
+!0 805 translate
+!1 -1 scale
+!0 441 285 456 320 Lgray
+!0 441 285 425 320 Lgray
+!0 448 308 433 308 Lgray
+!0 353 289 361 285 Lgray
+!0 361 285 368 285 Lgray
+!0 368 285 376 289 Lgray
+!0 376 289 376 293 Lgray
+!0 376 293 372 297 Lgray
+!0 372 297 357 305 Lgray
+!0 357 305 353 308 Lgray
+!0 353 308 353 316 Lgray
+!0 353 316 361 320 Lgray
+!0 361 320 368 320 Lgray
+!0 368 320 376 316 Lgray
+!0 323 285 323 320 Lgray
+!0 338 285 307 285 Lgray
+!0 292 285 292 320 Lgray
+!0 292 285 277 285 Lgray
+!0 277 285 269 289 Lgray
+!0 269 289 269 301 Lgray
+!0 269 301 277 305 Lgray
+!0 277 305 292 305 Lgray
+!0 281 305 269 320 Lgray
+!0 250 285 250 320 Lgray
+!0 231 285 231 320 Lgray
+!0 231 285 208 320 Lgray
+!0 208 285 208 320 Lgray
+!0 163 289 170 285 Lgray
+!0 170 285 178 285 Lgray
+!0 178 285 186 289 Lgray
+!0 186 289 189 297 Lgray
+!0 189 297 189 308 Lgray
+!0 189 308 186 316 Lgray
+!0 186 316 178 320 Lgray
+!0 178 320 170 320 Lgray
+!0 170 320 163 316 Lgray
+!0 163 316 163 305 Lgray
+!0 174 305 163 305 Lgray
+!0 304 306 307 303 Lgray
+!0 304 303 307 306 Lgray
+!grestore
+!end

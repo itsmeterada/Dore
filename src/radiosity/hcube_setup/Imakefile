@@ -1,0 +1,19 @@
+#include <Dore.tmpl>
+
+    SRCS = emiclr.c emifct.c emiswi.c hcs_ply.c hcs_plymsh.c hcs_prisrf.c \
+           hcs_quadgrid.c hcs_quadlst.c hcs_quadmsh.c hcs_radswi.c \
+	   hcs_reptyp.c hcs_sphlst.c hcst_method.c hct_geoatt.c hct_lcswcs.c \
+	   hct_simply.c hct_simplymsh.c hct_torus.c hct_trilst.c \
+	   hct_trimsh.c hct_tristrip.c hct_varquadgrd.c hct_varquadmsh.c \
+	   hct_varsplymsh.c hct_vartrimsh.c hct_vartristrp.c rad_difclr.c
+    OBJS = emiclr.o emifct.o emiswi.o hcs_ply.o hcs_plymsh.o hcs_prisrf.o \
+           hcs_quadgrid.o hcs_quadlst.o hcs_quadmsh.o hcs_radswi.o \
+	   hcs_reptyp.o hcs_sphlst.o hcst_method.o hct_geoatt.o hct_lcswcs.o \
+	   hct_simply.o hct_simplymsh.o hct_torus.o hct_trilst.o \
+	   hct_trimsh.o hct_tristrip.o hct_varquadgrd.o hct_varquadmsh.o \
+	   hct_varsplymsh.o hct_vartrimsh.o hct_vartristrp.o rad_difclr.o
+
+LibraryObjectRule()
+SubdirLibraryRule($(OBJS))
+
+DependTarget()

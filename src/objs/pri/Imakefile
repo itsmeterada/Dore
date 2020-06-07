@@ -1,0 +1,23 @@
+#include <Dore.tmpl>
+
+    SRCS = anntxt.c nurbsurf.c opri_linlst.c opri_ply.c opri_plylin.c \
+           opri_plymsh.c opri_pntlst.c opri_prisrf.c opri_quadgrid.c \
+	   opri_quadlst.c opri_quadmsh.c opri_rayintmtr.c opri_rayintsph.c \
+	   opri_rayinttri.c opri_simply.c opri_simplymsh.c opri_sphlst.c \
+	   opri_text.c opri_torus.c opri_trilst.c opri_trimsh.c opri_tristrip.c \
+	   opri_varlinlst.c opri_varpntlst.c opri_varquadgrd.c opri_varquadmsh.c \
+	   opri_varsplymsh.c opri_vartrilst.c opri_vartrimsh.c opri_vartristrp.c \
+	   patch.c patchmatrx.c plymkr.c userdef.c utilpri.c
+    OBJS = anntxt.o nurbsurf.o opri_linlst.o opri_ply.o opri_plylin.o \
+           opri_plymsh.o opri_pntlst.o opri_prisrf.o opri_quadgrid.o \
+	   opri_quadlst.o opri_quadmsh.o opri_rayintmtr.o opri_rayintsph.o \
+	   opri_rayinttri.o opri_simply.o opri_simplymsh.o opri_sphlst.o \
+	   opri_text.o opri_torus.o opri_trilst.o opri_trimsh.o opri_tristrip.o \
+	   opri_varlinlst.o opri_varpntlst.o opri_varquadgrd.o opri_varquadmsh.o \
+	   opri_varsplymsh.o opri_vartrilst.o opri_vartrimsh.o opri_vartristrp.o \
+	   patch.o patchmatrx.o plymkr.o userdef.o utilpri.o
+
+LibraryObjectRule()
+SubdirLibraryRule($(OBJS))
+
+DependTarget()

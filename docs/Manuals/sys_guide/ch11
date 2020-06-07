@@ -1,0 +1,454 @@
+.\"#ident "%W%" %G%
+.\"
+.\" #
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  
+.\" # 
+.\" # KUBOTA GRAPHICS Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\" #
+.\"
+.so ../macros/local.me
+.ds BT "\\*(Dd System Guide
+.ds CT "Generic SunView Driver
+.ds h1 11
+.L1 G ENERIC
+.L2 S UN V IEW
+.L3 D RIVER
+.CH ELEVEN
+.rs
+.sp -1v
+The Generic SunView device driver provides access to the
+2\-D graphics on the Sun Microsystems Sun/3 or Sun/4 workstations.
+The Sun/3 or Sun/4 is any color or black and white Sun workstation 
+running the SunView windowing system.
+The Generic SunView device driver uses the SunView Graphics Interface
+and the software pipeline DROM.  It also has access to a software Z-buffer
+implementation.
+.H1 "Using the Driver
+.H3 "Initialization Options
+The initialization options for the Generic SunView device driver are:
+.ip "\-noautosize"
+requests that the device viewport not be automatically set to the
+device extent when the device extent changes.  By default, autosizing is on.
+.ip "-visualtype \f2vtype\fP"
+requests a window with the given visual type.
+The possible values for \f2vtype\fP are \f2DcPseudoColor\fP for an
+8\-bit pseudocolor window or \f2DcStaticGrey\fP for a greyscale window.
+The default visual type is \f2DcPseudoColor\fP.
+.ip "-singlebuffered"
+requests a single buffered window.
+The default is a double buffered window.
+.ip "-width \f2size\fP"
+requests a width of \f2size\fP pixels for the window.
+The default width is 512.
+.ip "-height \f2size\fP"
+requests the height of \f2size\fP pixels for the window.
+The default height is 512.
+.ip "-canvas \f2canvasid\fP"
+requests that the SunView canvas \f2canvasid\f1 opened by the application 
+be used for drawing.
+The \f2\-width\fP and \f2\-height\fP
+options are ignored when a canvas is specified.
+.ip "-zbuffer"
+requests that the device driver use a software Z-buffer.
+The \f2-zbuffer\f1 option must be specified for \f2DoHiddenSurfSwitch\fP to
+effectively control its use.
+Hidden surface removal significantly reduces rendering speed.
+The \f2-zbuffer\f1 device option will cause some overhead regardless of
+whether hidden surface removal is enabled or disabled with
+\f2DoHiddenSurfSwitch\fP.
+.ip "-dither
+requests that dithering be enabled when using the Z-buffer.
+.H3 "Modifying the Optional Values
+The Generic SunView device driver allows modification of driver
+specific values through the \f2DdSetOptions\fP call.
+The following options can be changed via this call:
+.ip "-dither
+requests that dithering be enabled when using the Z-buffer.
+.ip "-nodither
+requests that dithering be disabled.
+.ip "-singlebuffered"
+requests that the window be single buffered.
+.ip "-doublebuffered
+requests that the window be double buffered.
+.ip "-zbuffer
+requests that the software Z-buffer be enabled.
+.ip "-nozbuffer
+requests that the software Z-buffer be disabled.
+.H1 "Output Modules
+The Generic SunView device driver supports both the 
+production renderer output module (PROM) interface and 
+the dynamic renderer output module (DROM) interface.
+.lp
+The Generic Sunview device driver uses a software pipeline implementation of
+the DROM.
+.H1 "PROM Dependent Functions
+The interface to the PROM is a very simple one, intended for renderers
+that generate pixel data, such as the standard production renderer.
+The Generic SunView PROM implements all functions of the PROM interface.  
+As a result, any renderer that uses the PROM interface will be fully supported 
+by the Generic SunView device driver.
+.H1 "DROM Dependent Functions
+When using the dynamic renderer, a function is supported only if 
+the DROM of the device driver being used also supports it.
+The following is a list of all \*(Dd functions.  Those functions
+marked with an "X" are supported by the software pipeline DROM used 
+by the \*(CT.
+.rs
+.sp -.25v
+.(l 
+DdInqColorEntries	X
+DdInqColorTableSize	X
+DdInqExtent		X
+DdInqFonts		X
+DdInqFrame		X
+DdInqNumFonts		X
+DdInqPickAperture	X
+DdInqPickCallback	X
+DdInqPickPathOrder	X
+DdInqPixelData		X(1)
+DdInqResolution		X
+DdInqShadeMode		X
+DdInqShadeRanges	X
+DdInqViewport		X
+DdInqVisualType		X
+DdPick			X
+DdPickObjs		X
+DdSetColorEntries	X
+DdSetFrame		X
+DdSetOptions		X
+DdSetPickAperture	X
+DdSetPickCallback	X
+DdSetPickPathOrder	X
+DdSetShadeMode		X
+DdSetShadeRanges	X
+DdSetViewport		X
+DdUpdate		X
+DeAddClass		X
+DeCreateObject		X
+DeDeleteObject		X
+DeExecuteAlternate	X
+DeInitializeObjPick	X
+DeInqPickable		X
+DeInqRenderable		X
+DfInqBoundary		X
+DfInqJust		X
+DfInqViewGroup		X
+DfSetBoundary		X
+DfSetJust		X
+DfUpdate		X
+DgAddObj		X
+DgAddObjToGroup		X
+DgCheck			X
+DgClose			X
+DgDelEle		X
+DgDelEleBetweenLabels	X
+DgDelEleRange		X
+DgEmpty			X
+DgInqElePtr		X
+DgInqObjAtPos		X
+DgInqOpen		X
+DgInqSize		X
+DgOpen			X
+DgReplaceObj		X
+DgReplaceObjInGroup	X
+DgSetElePtr		X
+DgSetElePtrRelLabel	X
+DoAmbientIntens		X
+DoAmbientSwitch		X
+DoAnnoText
+DoBackfaceCullSwitch	X
+DoBackfaceCullable	X
+DoBoundingVol		X
+DoBoundingVolSwitch	X
+DoCallback		X
+DoCamera		X
+DoCameraMatrix		X
+DoClipSwitch
+DoClipVol
+DoCompTextureUVCallback
+DoCompTextureUVSwitch
+DoCompTextureUVWCallback
+DoCompTextureUVWSwitch
+DoDataPtr		X
+DoDataVal		X
+DoDepthCue
+DoDepthCueSwitch
+DoDevice		X
+DoDiffuseColor		X
+DoDiffuseIntens		X
+DoDiffuseSwitch		X
+DoExecSet		X
+DoFileRaster		X
+DoFilter		X
+DoFrame			X
+DoGlbRendMaxObjs
+DoGlbRendMaxSub
+DoGlbRendRayLevel
+DoGroup			X
+DoHiddenSurfSwitch	X
+DoInLineGroup		X
+DoInputSlot		X
+DoInterpType
+    DcConstantShade	X
+    DcVertexShade	X
+    DcSurfaceShade
+DoInvisSwitch		X
+DoLabel			X
+DoLight			X
+DoLightAttenuation
+DoLightColor		X
+DoLightIntens		X
+DoLightSpreadAngles
+DoLightSpreadExp
+DoLightSwitch		X
+DoLightType		X
+DoLineList		X
+DoLineType		?
+DoLineWidth		?
+DoLocalAntiAliasStyle
+DoLocalAntiAliasSwitch
+DoLookAtFrom		X
+DoMarkerFont		X
+DoMarkerGlyph		X
+DoMarkerScale		X
+DoMatrix		X
+DoMinBoundingVolExt	X
+DoNURBSurf		X
+DoNameSet		X
+DoParallel		X
+DoPatch			X
+DoPerspective		X
+DoPickID		X
+DoPickSwitch		X
+DoPointList		X
+DoPolygon		X
+DoPolygonMesh		X
+DoPolyline		X
+DoPolymarker		X
+DoPopAtts		X
+DoPopMatrix		X
+DoPrimSurf
+    DcSphere		X
+    DcCylinder		X
+    DcBox		X
+    DcCone		X
+DoProjection		X
+DoPushAtts		X
+DoPushMatrix		X
+DoQuadList		X
+DoQuadMesh		X
+DoRaster		X
+DoReflectionSwitch
+DoRefractionIndex
+DoRefractionSwitch
+DoRepType
+    DcPoints		X
+    DcWireframe		X
+    DcSurface		X
+    DcOutlines
+    DcSurfaceWireframeEdges
+    DcSurfaceOutlineEdges
+DoRotate		X
+DoSampleAdaptive
+DoSampleAdaptiveSwitch
+DoSampleFilter
+DoSampleJitter
+DoSampleJitterSwitch
+DoSampleSuper
+DoSampleSuperSwitch
+DoScale			X
+DoShadeIndex		X
+DoShadowSwitch
+DoShear			X
+DoSimplePolygon		X
+DoSimplePolygonMesh	X
+DoSpecularColor		X
+DoSpecularFactor	X
+DoSpecularIntens	X
+DoSpecularSwitch	X
+DoSphereList		X
+DoStereo
+DoStereoSwitch
+DoSubDivSpec		X
+DoSurfaceEdgeColor
+DoSurfaceShade
+    DcShaderConstant	X
+    DcShaderLightSource	X
+    DoCallback		X
+DoText			X
+DoTextAlign		X
+DoTextExpFactor		X
+DoTextFont		X
+DoTextHeight		X
+DoTextPath		X
+DoTextPrecision		X
+DoTextSpace		X
+DoTextUpVector		X
+DoTextureAntiAlias
+DoTextureExtendUV
+DoTextureExtendUVW
+DoTextureIntermediateSurf
+DoTextureMapBump
+DoTextureMapBumpSwitch
+DoTextureMapDiffuseColor
+DoTextureMapDiffuseColorSwitch
+DoTextureMapEnviron
+DoTextureMapEnvironSwitch
+DoTextureMapTranspIntens
+DoTextureMapTranspIntensSwitch
+DoTextureMatrixUV
+DoTextureMatrixUVW
+DoTextureOp
+DoTextureScaleUV
+DoTextureScaleUVW
+DoTextureTranslateUV
+DoTextureTranslateUVW
+DoTextureUVIndex
+DoTextureUVWIndex
+DoTorus			X
+DoTransformMatrix	X
+DoTranslate		X
+DoTranspColor
+DoTranspIntens
+DoTranspOrientColor
+DoTranspOrientExp
+DoTranspOrientIntens
+DoTranspOrientSwitch
+DoTranspSwitch
+DoTriangleList		X
+DoTriangleMesh		X
+DoTriangleStrip		X
+DoVarLineList		X
+DoVarPointList		X
+DoVarSimplePolygonMesh	X
+DoVarTriangleMesh	X
+DoVarTriangleStrip	X
+DoView			X
+DpUpdVarLineList		X
+DpUpdVarPointList		X
+DpUpdVarSimplePolygonMesh	X
+DpUpdVarSimplePolygonMeshUV	X(2)
+DpUpdVarSimplePolygonMeshUVW	X(2)
+DpUpdVarTriangleMesh		X
+DpUpdVarTriangleMeshUV		X(2)
+DpUpdVarTriangleMeshUVW		X(2)
+DpUpdVarTriangleStrip		X
+DpUpdVarTriangleStripUV		X(2)
+DpUpdVarTriangleStripUVW	X(2)
+DsCompBoundingVol	X
+DsExecuteObj		X
+DsExecutionAbort	X
+DsExecutionReturn	X
+DsFileRasterRead	X
+DsHoldObj		X
+DsInitialize		X
+DsInitializeSystem	X
+DsInputValue		X
+DsInqAngleUnits		X
+DsInqClassId		X
+DsInqCurrentMethod	X
+DsInqDriverInfo		X
+DsInqErrorMessage	X
+DsInqErrorVars		X
+DsInqExeDepthLimit	X
+DsInqHoldObj		X
+DsInqMethodId		X
+DsInqNumDrivers		X
+DsInqNumRenderers	X
+DsInqObj		X
+DsInqObjClassId		X
+DsInqObjName		X
+DsInqObjStatus		X
+DsInqObjType		X
+DsInqRaster		X
+DsInqRendererId		X
+DsInqRendererNames	X
+DsInqSafeFlag		X
+DsInqValuatorGroup	X
+DsInqVersion		X
+DsPrintObj		X
+DsRasterUpdate		X
+DsRasterWrite		X
+DsReleaseObj		X
+DsSetAngleUnits		X
+DsSetErrorVars		X
+DsSetExeDepthLimit	X
+DsSetObjName		X
+DsSetSafeFlag		X
+DsTerminate		X
+DsTerminateSystem	X
+DsTextureUVCount	X
+DsTextureUVWCount	X
+DsUpdateAllViews	X
+DsValuatorSwitch	X
+DvInqActiveCamera	X
+DvInqBackgroundColor
+DvInqBackgroundJust
+DvInqBackgroundRaster
+DvInqBoundary		X
+DvInqClearFlag		X
+DvInqDefinitionGroup	X
+DvInqDisplayGroup	X
+DvInqRendStyle		X
+DvInqShadeIndex		X
+DvInqUpdateType		X
+DvSetActiveCamera	X
+DvSetBackgroundColor	X
+DvSetBackgroundJust
+DvSetBackgroundRaster
+DvSetBoundary		X
+DvSetClearFlag		X
+DvSetRendStyle		X
+DvSetShadeIndex		X
+DvSetUpdateType		X
+DvUpdate		X
+.)l
+.H3 "Notes
+.np
+Check the \f2Limitations\f1 section to ensure that this 
+function is supported.
+.np
+Since texture mapping is not supported, the \f2Dp-\f1 functions that 
+affect texture mapped primitives are effectively ignored.
+.lp
+Regarding primitives, the software pipeline DROM directly supports five primitives.
+These are point lists, line lists, connected line lists,
+triangle lists, and triangle meshes.  All other primitives will
+be converted into one of these five primitive types.
+See  \f2Device Drivers and Renderers\f1,
+in the \f2\*(Dd Reference Manual\f1 for a complete list of \*(Dd primitives and
+their standard alternate representations.
+.H1 "Limitations
+.sp -.5v
+The Generic SunView DROM has the following limitations.
+.BU hs
+\f2DoHiddenSurfSwitch\fP only works when the device driver has the
+Z-buffer enabled via the \f2\-zbuffer\fP option.
+.BU hs
+It supports only ambient and infinite light types.
+All other types will be approximated by one of these two types.
+.BU hs
+It does not support the interpolation type \f2DcSurfaceShade\fP for
+\f2DoInterpType\fP.
+.BU hs
+Color interpolation between vertices will only be performed when the
+Z-buffer is enabled, otherwise each facet is drawn with the average
+of the colors at the vertices.
+.H1 "Requirements
+.sp -.5v
+Applications built with a \*(Dd library that includes the Generic SunView
+driver will require that the SunView libraries be linked into the
+applications by using:
+.(m
+    -lsuntool -lsunwindow -lpixrect
+.)m

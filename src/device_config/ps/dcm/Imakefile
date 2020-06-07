@@ -1,0 +1,9 @@
+#include <Dore.tmpl>
+
+    SRCS = ps_dcm.c ps_inq.c ps_output.c ps_set.c
+    OBJS = ps_dcm.o ps_inq.o ps_output.o ps_set.o
+
+LibraryObjectRule()
+SubdirLibraryRule($(OBJS))
+
+DependTarget()

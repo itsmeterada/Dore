@@ -1,0 +1,21 @@
+#include <Dore.tmpl>
+
+    SRCS = g4vll_appatt.c g4vll_bndvol.c g4vll_camera.c g4vll_data.c \
+           g4vll_drom.c g4vll_filerstr.c g4vll_geoatt.c g4vll_light.c \
+	   g4vll_map.c g4vll_modclip.c g4vll_prisrf.c g4vll_quadgrid.c \
+	   g4vll_quadlst.c g4vll_quadmsh.c g4vll_rstr.c g4vll_sphlst.c \
+	   g4vll_trilst.c g4vll_trimsh.c g4vll_tristrip.c g4vll_update.c \
+	   g4vll_vartrilst.c g4vll_vartrimsh.c g4vll_vartristr.c \
+	   g4vlldr_output.c g4vll_gridmesh.c
+    OBJS = g4vll_appatt.o g4vll_bndvol.o g4vll_camera.o g4vll_data.o \
+           g4vll_drom.o g4vll_filerstr.o g4vll_geoatt.o g4vll_light.o \
+	   g4vll_map.o g4vll_modclip.o g4vll_prisrf.o g4vll_quadgrid.o \
+	   g4vll_quadlst.o g4vll_quadmsh.o g4vll_rstr.o g4vll_sphlst.o \
+	   g4vll_trilst.o g4vll_trimsh.o g4vll_tristrip.o g4vll_update.o \
+	   g4vll_vartrilst.o g4vll_vartrimsh.o g4vll_vartristr.o \
+	   g4vlldr_output.o g4vll_gridmesh.o
+
+LibraryObjectRule()
+SubdirLibraryRule($(OBJS))
+
+DependTarget()

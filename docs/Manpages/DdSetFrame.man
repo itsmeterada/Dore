@@ -1,0 +1,78 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DdSetFrame 3D  "Dore"
+.SH NAME
+DdSetFrame \- Attach a frame to a device
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+void DdSetFrame(device, frame)
+DtObject device;
+DtObject frame;
+.sp
+.in -.5i
+FORTRAN:
+.in +.5i
+CALL DDSF(DEVICE, FRAME)
+INTEGER*4 DEVICE
+INTEGER*4 FRAME
+.in -.5i
+.fi
+.SH DESCRIPTION
+.IX DDSF
+.IX DdSetFrame
+.I DdSetFrame
+sets the frame, \f2frame\fP, for a device, \f2device\fP.
+Only one frame at a time is allowed per device.
+A frame is an organizational object used to describe an image composed
+from one or more views.  A frame can be displayed on one or more
+devices.
+.PP
+If a frame is already attached to a particular device when this routine is
+called, the old frame is detached and
+the new frame is attached in its place.
+To detach a frame from a given device,
+pass a \f2DcNullObject\fP <\f2DCNULL\fP> for the frame parameter.
+.PP
+The frame defines a device independent 3-D local coordinate system
+within which one or more views can be placed.  By default
+the frame extends from (0.0, 0.0, 0.0) to (1.0, 1.0, 1.0).
+The frame boundary can be queried using \f2DfInqBoundary\fP
+<\f2DFQB\fP>.
+.PP
+When the frame is displayed on a device the frame boundary is mapped onto 
+the largest right rectangular volume that can fit within the device viewport 
+such that aspect ratio in X and Y is preserved and the Z extent of the frame is
+mapped to the entire Z extent of the device.
+When this mapping is performed, there may be extra "white space"
+inside the device viewport.  The function \f2DfSetJust\fP
+<\f2DFSJ\fP> can be used to 
+control where this white space is positioned.
+.SH ERRORS
+.I DdSetFrame
+will fail if the device handle is invalid.
+.TP 15
+[WARNING - invalid device handle]
+.PP
+.I DdSetFrame
+will fail if the frame handle is invalid.
+.TP 15
+[WARNING - invalid frame handle]
+.SH "SEE ALSO"
+DdInqFrame(3D), DoFrame(3D)

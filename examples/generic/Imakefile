@@ -1,0 +1,6 @@
+#include <Dore.tmpl>
+
+    SRCS = render.c run.c
+    OBJS = render.o run.o
+
+NormalLibraryTarget(generic,$(OBJS))

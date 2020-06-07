@@ -1,0 +1,140 @@
+.so ../macros/local.strings
+.so ../macros/local.date
+.de DT
+.ie \\n(.$ \{\
+.if \\n(.$-0 .ds Nd \\$1
+.if \\n(.$-1 .ds dT "\\$1, \\$2
+.if \\n(.$-2 .ds Dt "\\$1 \\$2, \\$3
+.\}
+.el .ab Date String in DT is wrong -- Please Fix.
+..
+.fp 1 PA
+.fp 2 PI
+.fp 3 PB
+.fp 4 PX
+.fp 5 H
+.fp 6 HI
+.fp 7 HB
+.fp 8 HX
+.ll 4.5i
+.ps 10
+.vs 12
+.pl 11i
+.po 1i
+.nr CP 42
+.nr Cp 36
+.nr TL 72
+.nr ML 36
+.nr Hs 3v
+.ds DR \\*(Dr
+.wh 0 NP
+.de NP
+'ll 4.5i
+'sp |\n(Hsu
+'ps \\n(TL
+'nf
+'ta 4.7i
+\l'4.5i'	\l'1.875i'
+'sp 4v
+..
+.de L1
+.di LN
+.ev 1
+.ll 4.5i
+.ad r
+.ft 1
+.ps \\n(CP
+\\$1\s\\n(Cp\\$2\s0\\$3\s\\n(Cp\\$4\s0
+.br
+.ev
+.di
+..
+.de L2
+.da LN
+.ev 1
+.sp 36p
+\\$1\s\\n(Cp\\$2\s0\\$3\s\\n(Cp\\$4\s0
+.br
+.ev
+.da
+..
+.de L3
+.da LN
+.ev 1
+.sp 36p
+\\$1\s\\n(Cp\\$2\s0\\$3\s\\n(Cp\\$4\s0
+.br
+.ev
+.da
+..
+.de TI
+.br
+.ta 4.5iR +0.2i
+.ie \nQ \
+\t\s(54DOR\h'7p'\v'-10p'\(aa\v'10p'\h'-7p'\h'-\w'\(aa'u'E\s0
+.el .ie \nW \
+\t\s(54TIT\h'-5p'A\h'2p'N\s0
+.el \
+\t\s(48\f5K\h'-5p'u\h'-4p'b\h'-2p'o\h'-3p't\h'-1p'a P\h'-5p'a\h'-4p'cifi\h'-3p'c\fP\|\s0
+.sp 2.5i
+.ev 1
+.nf
+.LN
+.ev
+.rm LN
+.ta 4.5iR
+\t\s36\l'3i'
+.sp
+.if \w'\*(Dt' .D
+.if \w'\*(RN' .P
+.sp |9.5i
+.if \nL .DS
+.sp |10.3i
+'ps \\n(ML
+'ta 4.7i
+\l'4.5i'\t\l'1.875i'
+.br
+.if \w'\*(PN' \{\
+.	ta 4.5iR 6.575iR
+.	ft 5
+.	ps 9
+\tKubota Pacific Computer Inc.\tPart Number: \*(PN
+.br
+.\"	\t\tOrder Number: \*(ON
+.\}
+..
+.de D
+.ft 7
+.ps 9
+.ta 4.5iR
+\t\\*(Dr
+.ft 5
+.ps 9
+\t\\*(Dt
+.ft
+..
+.de P
+.ft 7
+.ps 9
+.ta 4.5iR
+\tRelease \*(RN
+.ft
+..
+.de DS
+.ev 2
+.ll 4.5i
+.ps 8
+.vs 8
+.ft 5
+.ad r
+.fi
+.in 2.5i
+The material in this draft is confidential.
+It is a preliminary draft written primarily
+for review and comments.  It may contain
+errors and omissions which will be corrected
+in a future revision.
+.br
+.ft 1
+.ev
+..

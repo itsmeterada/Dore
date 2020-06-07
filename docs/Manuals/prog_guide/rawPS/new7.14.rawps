@@ -1,0 +1,104 @@
+%!PS-Adobe-2.0
+%%Title: 6-14.pict
+%%Creator: MacDraw
+%%CreationDate: Friday, August 11, 1989
+%%Pages: (atend)
+%%BoundingBox: ? ? ? ?
+%%PageBoundingBox: 30 31 582 761
+%%For: aaron                         
+%%IncludeProcSet: "(AppleDict md)" 66
+%%EndComments
+%%EndProlog
+%%BeginDocumentSetup
+md begin
+
+T T -31 -30 761 582 100 72 72 1 F F F F T T psu
+(aaron                         ; document: 6-14.pict)jn
+0 mf
+userdict /#copies 2 put
+od
+%%EndDocumentSetup
+%%Page: ? 1
+op
+0 0 xl
+1 1 pen
+0 0 gm
+(nc 0 0 720 540 6 rc)kp
+223.5 74.5 268.5 146.5 0 rc
+223.5 182.5 268.5 254.5 0 rc
+223.5 290.5 268.5 362.5 0 rc
+223.5 398.5 268.5 470.5 0 rc
+371 51 gm
+bu fc
+{}mark T /Helvetica /|______Helvetica 0 rf
+bn
+1 setTxMode
+0 fs
+10.39993 fz
+bu fc
+2 F /|______Helvetica fnt
+bn
+0.16062 0.(DoAmbientIntens)ashow
+384 51 gm
+0 gr
+0.34890 0.(\(usesDoDiffuseColor\))ashow
+397 51 gm
+0.21060 0.(DoAmbientSwitch)ashow
+374 182 gm
+0.21638 0.(DoDiffuseIntens)ashow
+387 182 gm
+0.19334 0.(DoDiffuseColor)ashow
+400 182 gm
+0.26643 0.(DoDiffuseSwitch)ashow
+370 289 gm
+0.15711 0.(DoSpecularIntens)ashow
+383 289 gm
+0.13139 0.(DoSpecularColor)ashow
+396 289 gm
+0.20375 0.(DoSpecularSwitch)ashow
+409 289 gm
+0.14761 0.(DoSpecularFactor)ashow
+369 398 gm
+0.15618 0.(DoTranspIntens)ashow
+382 398 gm
+0.12611 0.(DoTranspColor)ashow
+395 398 gm
+0.20993 0.(DoTranspSwitch)ashow
+443 182 gm
+3.11035 0. 32 0.31103 0.(Related Primitive Attributes)awidthshow
+462 195 gm
+0.22694 0.(DoReflectionSwitch)ashow
+475 195 gm
+-0.11410 0.(DoShadowSwitch)ashow
+248 88 gm
+0.31018 0.(Ambient)ashow
+250 199 gm
+0.44041 0.(Diffuse)ashow
+248 303 gm
+0.28129 0.(Specular)ashow
+247 402 gm
+0.39480 0.(Transparent)ashow
+0 0 gm
+437 175 442 180 4 ov
+437.5 175.5 441.5 179.5 0 ov
+349 76 369 96 260 308 1 ar
+268 108 gm
+351 87 lin
+0 0 gm
+350 207 370 227 246 294 1 ar
+268 216 gm
+352 216 lin
+0 0 gm
+348 315 368 335 246 294 1 ar
+268 324 gm
+350 324 lin
+0 0 gm
+348 440 368 460 235 283 1 ar
+269 432 gm
+350 447 lin
+F T cp
+%%Trailer
+cd
+end
+%%Pages: 1 0
+%%EOF

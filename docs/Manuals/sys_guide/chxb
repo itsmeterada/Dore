@@ -1,0 +1,208 @@
+.\"#ident "%W%" %G%
+.\"
+.\" #
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  
+.\" # 
+.\" # KUBOTA GRAPHICS Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\" #
+.\"
+.so ../macros/local.me
+.ds BT "\\*(Dd System Guide
+.ds CT "Template Renderer
+.ds h1 B
+.L1 T EMPLATE
+.L2 R ENDERER
+.CH app
+.H1 Overview
+.lp
+This section lists all the renderer dependent features of \*(Dd
+supported by the Template Renderer.
+Any unsupported attribute included in a \*(Dd scene description
+will be ignored by the renderer.
+See the \f2Device Drivers and Renderers\fP in the \f2\*(Dd Reference Manual\fP
+for a complete list of renderer dependent features of \*(Dd.
+.H1 "Device Driver Support
+The Template Renderer requires the only the Production Renderer
+Output Module (PROM) Interface, in addition to the Device Control
+Module (DCM) Interface. 
+See Section 1 of this document for more information on device drivers.
+.H1 "Renderer Dependent Functions
+The following subsections list the renderer dependent functions of
+\*(Dd that are used by the Template Renderer.
+.H2 "Studio Attributes
+The studio attributes are attributes that will be executed during a
+studio traversal.
+Studio attributes include camera attributes, light attributes and
+rendering control attributes.
+.H3 "Camera Attributes
+The camera attributes include camera projections, sampling 
+attributes for image antialiasing, and stereo control.
+They are:
+.(l I
+DoCameraMatrix <DOCM>
+DoParallel <DOPAR>
+DoPerspective <DOPER>
+DoProjection <DOPRJ>
+DoSampleAdaptive <DOSADP>
+DoSampleAdaptiveSwitch <DOSASW>
+DoSampleFilter <DOSFLT>
+DoSampleJitter <DOSJIT>
+DoSampleJitterSwitch <DOSJSW>
+DoSampleSuper <DOSSPR>
+DoSampleSuperSwitch <DOSSSW>
+DoStereo <DOSTER>
+DoStereoSwitch <DOSTES>
+.)l
+.H3 "Lighting Attributes
+The light attributes define the characteristics of the lights
+used in a scene.
+They are:
+.(l I
+DoLightAttenuation <DOLTA>
+DoLightColor <DOLC>
+DoLightIntens <DOLI>
+DoLightSpreadAngles <DOLTSA>
+DoLightSpreadExp <DOLTSE>
+DoLightType <DOLTT>
+.)l
+.H3 "Rendering Control
+The rendering control attributes are:
+.(l I
+DoGlbRendMaxObjs <DOGRMO>
+DoGlbRendMaxSub <DOGRMS>
+DoGlbRendRayLevel <DOGRRL>
+.)l 
+.H2 "Primitives
+The Template Renderer has a limited set of \f2base\fP primitives.
+These are primitives that the Template Renderer can render directly,
+all other primitive classes will be rendered by using their alternate
+representations.
+The \f2base\fP primitives for the Template Renderer are:
+.(l I
+DoLineList <DOLINL>
+DoAnnoText <DOANNT>
+DoNURBSurf <DONRBS>
+DoPatch <DOPAT>
+DoPointList <DOPNTL>
+DoPolygon <DOPGN>
+DoPolygonMesh <DOPGNM>
+DoPolyline <DOPL>
+DoPolymarker <DOPM>
+DoPrimSurf <DOPMS>
+DoSphereList <DOSPHL>
+DoSimplePolygon <DOSPGN>
+DoSimplePolygonMesh <DOSPM>
+DoText <DOTXT>
+DoTorus <DOTOR>
+DoTriangleList <DOTRIL>
+DoTriangleMesh <DOTRIM>
+DoTriangleStrip <DOTRIS>
+DoVarLineList <DOVLNL>
+DoVarPointList <DOVPTL>
+DoVarSimplePolygonMesh <DOVSPM>
+DoVarTriangleMesh <DOVTRM>
+DoVarTriangleStrip <DOVTRS>
+.)l
+.H2 "Primitive Attributes
+The primitive attribute classes fall into several categories, they
+include shading, texture mapping and miscellaneous.
+.H3 "Shading Attributes
+The shading attributes supported by the Template Renderer are:
+.(l I
+DoAmbientIntens <DOAMBI>
+DoAmbientSwitch <DOAMBS>
+DoDepthCue <DODC>
+DoDepthCueSwitch <DODCS>
+DoDiffuseColor <DODIFC>
+DoDiffuseIntens <DODIFI>
+DoDiffuseSwitch <DODIFS>
+DoInterpType <DOIT>
+DoLightSwitch <DOLTS>
+DoReflectionSwitch <DOREFS>
+DoRefractionIndex <DORFRI>
+DoRefractionSwitch <DORFRS>
+DoShadeIndex <DOSI>
+DoShadowSwitch <DOSHAS>
+DoSpecularColor <DOSPCC>
+DoSpecularFactor <DOSPCF>
+DoSpecularIntens <DOSPCI>
+DoSpecularSwitch <DOSPCS>
+DoSurfaceEdgeColor <DOSEGC>
+DoSurfaceShade <DOSRFS>
+DoTranspColor <DOTC>
+DoTranspIntens <DOTI>
+DoTranspSwitch <DOTS>
+DoTranspOrientColor <DOTOC>
+DoTranspOrientExp <DOTOE>
+DoTranspOrientIntens <DOTOI>
+DoTranspOrientSwitch <DOTOW>
+.)l
+.H3 "Texture Maps
+The texture map attributes supported by the Template Renderer are:
+.(l I
+DoTextureMapBump <DOTMB>
+DoTextureMapBumpSwitch <DOTMBS>
+DoTextureMapDiffuseColor <DOTMDC>
+DoTextureMapDiffuseColorSwitch <DOTMDS>
+DoTextureMapEnviron <DOTME>
+DoTextureMapEnvironSwitch <DOTMES>
+DoTextureMapTranspIntens <DOTMTI>
+DoTextureMapTranspIntensSwitch <DOTMTS>
+.)l
+.H3 "Miscellaneous
+Other renderer dependent primitive attributes used by the Template
+Renderer are:
+.(l I
+DoBackfaceCullSwitch <DOBFCS>
+DoBackfaceCullable <DOBFC>
+DoClipSwitch <DOCS>
+DoClipVol <DOCV>
+DoHiddenSurfSwitch <DOHSS>
+DoInvisSwitch <DOINVS>
+DoLineType <DOLNT>
+DoLineWidth <DOLW>
+DoLocalAntiAliasStyle <DOLAST>
+DoLocalAntiAliasSwitch <DOLASW>
+DoRepType <DOREPT>
+.)l
+.H2 "Texture Attributes
+The texture attributes affect how a given texture map is applied to a
+primitive object.
+These attributes are bound to the texture map object during traversal.
+The texture objects are attributes that are in turn applied to the
+primitive objects.
+The texture attributes supported by the Template Renderer are:
+.(l I
+DoTextureAntiAlias <DOTAA>
+DoTextureExtendUV <DOTXUV>
+DoTextureExtendUVW <DOTXW>
+DoTextureOp <DOTOP>
+DoTextureMatrixUV <DOTMUV>
+DoTextureMatrixUVW <DOTMW>
+DoTextureScaleUV <DOTSUV>
+DoTextureScaleUVW <DOTSW>
+DoTextureTranslateUV <DOTTUV>
+DoTextureTranslateUVW <DOTTW>
+DoTextureUVIndex <DOTUVI>
+DoTextureUVWIndex <DOTWI>
+.)l
+.H2 "View Functions
+Several of the view functions are dependent on the renderer.
+The Template Renderer uses the following renderer dependent view
+functions:
+.(l I
+DvSetBackgroundColor <DVSBC>
+DvSetBackgroundJust <DVSBJ>
+DvSetBackgroundRaster <DVSBR>
+.)l

@@ -1,0 +1,9 @@
+#include <Dore.tmpl>
+
+    SRCS = xdgl_dcm.c xdgl_inq.c xdgl_output.c xdgl_set.c
+    OBJS = xdgl_dcm.o xdgl_inq.o xdgl_output.o xdgl_set.o
+
+LibraryObjectRule()
+SubdirLibraryRule($(OBJS))
+
+DependTarget()

@@ -1,0 +1,180 @@
+#ident	"%W%"	%G%
+
+==========================================================================
+
+		     Dore' Device Driver Summary
+		     ====  ====== ====== =======
+==========================================================================
+
+Device Driver Default Name:	sunviewGP
+Hardware supported:		Sun workstations with Graphics accelerators
+				that use the GPSI interface.
+Library Dependencies:		-lsuntool -lsunwindow -lpixrect
+
+Supported Module Interfaces
+	DCM:			yes
+	PROM:			yes
+	DROM:			yes
+	DROMMethods:		no
+
+Originator
+	Company/Institution:	Kubota Pacific Computer Inc.
+	Name:			Advanced Graphics Software Group
+	Phone:			(408) 727-8100
+	Email:			
+	Address:		2630 Walsh Avenue
+				Santa Clara, CA 95051-0905
+	Date Completed:		??
+
+Maintainer (most recent first)
+	Company/Institution:	Kubota Pacific Computer Inc.
+	Name:			Advanced Graphics Software Group
+	Phone:			(408) 727-8100
+	Email:			
+	Address:		2630 Walsh Avenue
+				Santa Clara, CA 95051-0905
+	Date Completed:		??
+
+==========================================================================
+
+			 DCM Characteristics
+
+==========================================================================
+
+	Version Number:			1
+	Stereo:				no
+	Double Buffered:		yes
+	VisualTypes:			DcPseudoColor
+	ColorMaps:			yes
+	Return Pixel Data:		no
+	Clipping list handling:		via window system
+	Operation while obscured:	yes
+	geometry update handling
+	    size:			yes
+	    overlap change:		yes
+
+
+==========================================================================
+
+			 PROM Characteristics
+
+==========================================================================
+
+	Version Number:			1
+
+==========================================================================
+
+			 DROM Characteristics
+
+==========================================================================
+
+	Version Number:			2
+
+	Cameras
+	    DoCameraMatrix:		yes
+	    DoParallel:			yes
+	    DoPerspective:		yes
+	    DoProjection:		yes
+	    DoStereo:			no
+	    DoStereoSwitch:		no
+
+	Lights
+	    DoLightColor:		yes
+	    DoLightIntens:		yes
+	    DoLightSpreadAngles:	no
+	    DoLightSpreadExp:		no
+	    DoLightType:		yes
+
+	Geometry
+	    DoPointList:		yes
+	    DoLineList:			yes
+	    DoPolyline:			yes
+	    DoTriangleList:		yes
+	    DoTriangleMesh:		yes
+	    Frame coordinates:		yes
+
+	Shading Attributes
+	    DoAmbientIntens:		yes
+	    DoAmbientSwitch:		yes
+	    DoDepthCue:			yes
+	    DoDepthCueSwitch:		yes
+	    DoDiffuseColor:		yes
+	    DoDiffuseIntens:		yes
+	    DoDiffuseSwitch:		yes
+	    DoInterpType:		yes
+	    DoLightSwitch:		yes
+	    DoReflectionSwitch:		no
+	    DoShadowSwitch:		no
+	    DoShadeIndex:		yes
+	    DoSpecularColor:		yes
+	    DoSpecularFactor:		yes
+	    DoSpecularIntens:		yes
+	    DoSpecularSwitch:		yes
+	    DoSurfaceEdgeColor:		no
+	    DoSurfaceShade:		yes
+	    DoTranspColor:		no
+	    DoTranspIntens:		no
+	    DoTranspSwitch:		no
+
+	Miscellaneous
+	    DoBackfaceCullSwitch:	yes
+	    DoBackfaceCullable:		yes
+	    DoClipVol:			no
+	    DoHiddenSurfSwitch:		yes
+	    DoInvisSwitch:		yes
+	    DoLineType:			no
+	    DoLineWidth:		no
+	    DoRepType:			yes
+	    DoLocalAntiAliasSwitch:	no
+	    DoLocalAntiAliasStyle:	no
+
+	Texture Maps
+	    DoTextureMapBump:			no
+	    DoTextureMapBumpSwitch:		no
+	    DoTextureMapDiffuseColor:		no
+	    DoTextureMapDiffuseColorSwitch:	no
+	    DoTextureMapEnviron:		no
+	    DoTextureMapEnvironSwitch:		no
+	    DoTextureMapTranspIntens:		no
+	    DoTextureMapTranspIntensSwitch:	no
+
+
+	Geometric Transformations
+	    DoLookAtFrom:		yes
+	    DoPushMatrix:		yes
+	    DoPopMatrix:		yes
+	    DoRotate:			yes
+	    DoScale:			yes
+	    DoTranslate:		yes
+	    DoTransformMatrix:		yes
+
+
+	Texture Attributes
+	    DoTextureAntiAlias:		no
+	    DoTextureExtendUV:		no
+	    DoTextureExtendUVW:		no
+	    DoTextureMatrixUV:		no
+	    DoTextureMatrixUVW:		no
+	    DoTextureOp:		no
+	    DoTextureScaleUV:		no
+	    DoTextureScaleUVW:		no
+	    DoTextureTranslateUV:	no
+	    DoTextureTranslateUVW:	no
+	    DoTextureUVIndex:		no
+	    DoTextureUVWIndex:		no
+
+	View Attributes
+	    DvSetBackgroundColor:	yes
+	    DvSetBackgroundJust:	no
+	    DvSetBackgroundRaster:	no
+
+==========================================================================
+
+			     Limitations
+
+==========================================================================
+Supports only ambient and infinite light types.  All other types will be
+approximated by one of these two types.
+
+Does not support the interpolation type DcSurfaceShade for DoInterpType.
+

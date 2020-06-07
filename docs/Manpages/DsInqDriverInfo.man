@@ -1,0 +1,75 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DsInqDriverInfo 3D "Dore"
+.SH NAME
+DsInqDriverInfo \- Return the names and descriptions of the installed device drivers
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+void DsInqDriverInfo(count, name, description)
+DtInt count;
+DtPtr name[\|];
+DtPtr description[\|];
+.sp
+.in  -.5i
+FORTRAN:
+.in  +.5i
+DSQDI(COUNT, NAME, NAMLEN, DESC, DESLEN)
+INTEGER*4 COUNT
+CHARACTER NAME(COUNT)*NAMLEN
+CHARACTER DESC(COUNT)*DESLEN
+INTEGER*4 NAMLEN, DESLEN
+.in  -.5i
+.fi 
+.IX "DsInqDriverInfo"
+.IX "DSQDI"
+.SH DESCRIPTION
+.LP
+\f2DsInqDriverInfo\fP returns the names and descriptions of
+the available device drivers, in the arrays \f2name\fP and \f2description\fP.
+If there are more than \f2count\fP device drivers installed in the
+Dore system then only the first \f2count\fP will be returned.
+\f2DsInqNumDrivers <DSQND>\fP can be used to determine the number of
+installed device drivers.
+For example, in C you can use that information to allocate the right amount
+of space for the arrays:
+.nf
+.sp
+.in  +.5i
+DtPtr *names;
+DtPtr *descriptions;
+DtInt cnt;
+
+
+cnt = DsInqNumDrivers();
+names = (DtPtr *)malloc(cnt*sizeof(DtPtr));
+descriptions = (DtPtr *)malloc(cnt*sizeof(DtPtr));
+DsInqDriverInfo(cnt, names, descriptions);
+.in  -.5i
+.fi
+.SH FORTRAN SPECIFIC
+The parameters \f2NAMLEN\fP and \f2DESLEN\fP specify the length of
+each of the character arrays passed to \f2DSQDI\fP.
+Driver names that are longer than \f2NAMLEN\fP will be truncated to
+fit in the specified size, and driver descriptions that are longer
+than \f2DESLEN\fP will be truncated to the specified size.
+.SH SEE ALSO
+.na
+DsInqNumDrivers(3D)
+.ad

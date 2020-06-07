@@ -1,0 +1,59 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DoInLineGroup 3D  "Dore"
+.SH NAME
+DoInLineGroup \- Create an inline group object
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+DtObject DoInLineGroup(open)
+DtFlag open;
+.sp
+.in -.5i
+FORTRAN:
+.in +.5i
+INTEGER*4 DOILG(OPEN)
+INTEGER*4 OPEN
+.in -.5i
+.fi
+.SH DESCRIPTION
+.IX DOILG
+.IX DoInLineGroup
+.I DoInLineGroup
+creates an inline group organizational object.
+A group is an organizational object that contains other objects called the
+elements of the group.  A group can be thought of as a simple list.
+The parameter \f2open\fP determines whether the group is created open, i.e.,
+whether the group is immediately available for object additions.  
+If \f2DcTrue\fP <\f2DCTRUE\fP> is specified, the group becomes active 
+and available for additions.
+.PP
+There are two kinds of groups, regular groups
+and inline groups.  They differ only in the way they inherit attributes.
+In a regular group, a copy of all attributes is saved upon entering the group
+and restored when execution of the group terminates.
+Inline groups, on the other hand,
+do not push and pop the current attributes upon their entry and exit.
+Changes made to attributes by an 
+inline group have the same effect as if they had been placed directly in 
+the calling group.  The inline group thus provides a mechanism for
+defining a commonly used set of attributes once and then using that set
+multiple times.
+.SH "SEE ALSO"
+DgOpen(3D), DoGroup(3D)

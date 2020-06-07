@@ -1,0 +1,60 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DoPopMatrix 3D  "Dore"
+.SH NAME
+DoPopMatrix \- Create an organizational object that pops a matrix 
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+DtObject DoPopMatrix()
+.sp
+.in -.5i
+FORTRAN:
+.in +.5i
+INTEGER*4 DOPPMX()
+.in -.5i
+.fi
+.SH DESCRIPTION
+.IX DOPPMX
+.IX DoPopMatrix
+.I DoPopMatrix
+creates an organizational object that pops 
+the current transformation matrix stack.  
+This object
+restores a local environment of geometric transformations saved
+with \f2DoPushMatrix\fP <\f2DOPUMX\fP>.
+See \f2DoPushMatrix\fP for details on using these functions.
+.SH ERRORS
+\f2DoPopMatrix\fP will generate a warning if it is invoked in a group without a
+corresponding \f2DoPushMatrix\fP <\f2DOPUMX\fP>.
+.PP.PP
+This warning is generated during traversal of the database, not during
+creation of the object. 
+The warning will not occur when the initial code that creates
+the object is executed; rather the warning will occur 
+when a display update or other traversal occurs.
+.TP 15
+[WARNING - cannot pop matrix]
+.SH "SEE ALSO"
+.na
+.nh
+DoGroup(3D), DoInLineGroup(3D), DoPopAtts(3D), DoPushAtts(3D),
+DoPushMatrix(3D)
+.ad
+.hy

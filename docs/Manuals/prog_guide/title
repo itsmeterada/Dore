@@ -1,0 +1,44 @@
+.\"#ident "%W%" %G%
+.\"
+.\" #
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  
+.\" # 
+.\" # KUBOTA GRAPHICS Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\" #
+.\"
+.so ../macros/local.title
+.ds RN "5.0
+.L1 D OR\h'5p'\v'-8p'\(aa\v'8p'\h'-5p' "" "\h'-\w'\(aa'u'E
+.L2 P ROGRAMMER'S
+.L3 G UIDE
+.TI
+.bp
+.PN 2 i
+.CH
+.rs
+.sp 1.5v
+.lp
+Permission to use, copy, modify, and distribute this material for
+any purpose and without fee is hereby granted, provided that the
+above copyright notice and this permission notice appear in all
+copies, and that the name of Kubota Graphics not be used in
+advertising or publicity pertaining to this material.
+ 
+KUBOTA GRAPHICS CORPORATION MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+"AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+EXPRESS OR IMPLIED.
+ 
+

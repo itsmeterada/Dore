@@ -1,0 +1,1681 @@
+!md begin
+!/note {} def
+!/legal {} def
+!md /lnop known not { /lnop [ {} ] cvx def } if
+!/bigs [lnop lnop lnop lnop lnop lnop lnop lnop] def
+!/smalls [lnop lnop lnop lnop lnop lnop lnop lnop] def
+!/cp {pm restore pop pop} def
+!
+!T T -44 -42 1087 832 70 72 72 1 F F F F T T psu
+!(TechPubs#1; document: 9-5AmbientLightSource)jn
+!0 mf
+!od
+!op
+!0 0 xl
+!-0.25 72 mul -0.75 72 mul translate
+!0.6 0.6 scale
+!1 1 pen
+!0 0 gm
+!(nc 0 0 1043 790 6 rc)kp
+!64 gr
+!195 198 214 242 2 rc
+!207 199 gm
+!(nc 195 198 214 242 6 rc)kp
+!bu fc
+!{}mark T /Helvetica /Helvetica 0 rf
+!bn
+!1 setTxMode
+!0 fs
+!12.47991 fz
+!bu fc
+!2 F /Helvetica fnt
+!bn
+!0.98809 0.(Object)ashow
+!226 199 gm
+!(nc 0 0 1043 790 6 rc)kp
+!0 gr
+!172.5 188.5 233.5 249.5 0 ov
+!0 0 pen
+!226 199 lin
+!nc ct 39 0 put
+!1 1 pen
+!248 122 gm
+!pr
+!248 122 pl
+!239 119 pl
+!239 125 pl
+!248 122 pl
+!1 ep
+!pr
+!248 122 pl
+!239 119 pl
+!239 125 pl
+!248 122 pl
+!0 ep
+!221 122 gm
+!pt
+!240 122 pl
+!rh
+!ef
+!eu
+!(nc 0 0 1043 790 6 rc)kp
+!0 0 pen
+!240 122 lin
+!240 122 lin
+!nc ct 39 0 put
+!1 1 pen
+!279 176 gm
+!pr
+!279 176 pl
+!288 179 pl
+!288 173 pl
+!279 176 pl
+!1 ep
+!pr
+!279 176 pl
+!288 179 pl
+!288 173 pl
+!279 176 pl
+!0 ep
+!306 176 gm
+!pt
+!287 176 pl
+!rh
+!ef
+!eu
+!(nc 0 0 1043 790 6 rc)kp
+!0 0 pen
+!287 176 lin
+!287 176 lin
+!nc ct 39 0 put
+!1 1 pen
+!297 104 gm
+!pr
+!297 104 pl
+!300 95 pl
+!294 95 pl
+!297 104 pl
+!1 ep
+!pr
+!297 104 pl
+!300 95 pl
+!294 95 pl
+!297 104 pl
+!0 ep
+!297 77 gm
+!pt
+!297 96 pl
+!ef
+!eu
+!(nc 0 0 1043 790 6 rc)kp
+!0 0 pen
+!297 96 lin
+!297 96 lin
+!nc ct 39 0 put
+!1 1 pen
+!261 212 gm
+!pr
+!261 212 pl
+!260 203 pl
+!255 205 pl
+!261 212 pl
+!1 ep
+!pr
+!261 212 pl
+!260 203 pl
+!255 205 pl
+!261 212 pl
+!0 ep
+!248 185 gm
+!pt
+!258 205 pl
+!ef
+!eu
+!(nc 0 0 1043 790 6 rc)kp
+!0 0 pen
+!258 205 lin
+!258 205 lin
+!nc ct 39 0 put
+!1 1 pen
+!288 153 gm
+!pr
+!288 153 pl
+!283 145 pl
+!280 150 pl
+!288 153 pl
+!1 ep
+!pr
+!288 153 pl
+!283 145 pl
+!280 150 pl
+!288 153 pl
+!0 ep
+!266 135 gm
+!pt
+!282 148 pl
+!ef
+!eu
+!(nc 0 0 1043 790 6 rc)kp
+!0 0 pen
+!282 148 lin
+!282 148 lin
+!nc ct 39 0 put
+!1 1 pen
+!257 158 gm
+!pr
+!257 158 pl
+!248 159 pl
+!251 165 pl
+!257 158 pl
+!1 ep
+!pr
+!257 158 pl
+!248 159 pl
+!251 165 pl
+!257 158 pl
+!0 ep
+!234 171 gm
+!pt
+!250 162 pl
+!ef
+!eu
+!(nc 0 0 1043 790 6 rc)kp
+!0 0 pen
+!250 162 lin
+!250 162 lin
+!nc ct 39 0 put
+!1 1 pen
+!324 99 gm
+!pr
+!324 99 pl
+!317 104 pl
+!321 107 pl
+!324 99 pl
+!1 ep
+!pr
+!324 99 pl
+!317 104 pl
+!321 107 pl
+!324 99 pl
+!0 ep
+!306 122 gm
+!pt
+!320 105 pl
+!ef
+!eu
+!(nc 0 0 1043 790 6 rc)kp
+!0 0 pen
+!320 105 lin
+!320 105 lin
+!nc ct 39 0 put
+!1 1 pen
+!324 180 gm
+!pr
+!324 180 pl
+!319 187 pl
+!324 189 pl
+!324 180 pl
+!1 ep
+!pr
+!324 180 pl
+!319 187 pl
+!324 189 pl
+!324 180 pl
+!0 ep
+!315 207 gm
+!pt
+!322 187 pl
+!ef
+!eu
+!(nc 0 0 1043 790 6 rc)kp
+!0 0 pen
+!322 187 lin
+!322 187 lin
+!nc ct 39 0 put
+!1 1 pen
+!221 144 gm
+!pr
+!221 144 pl
+!218 153 pl
+!224 153 pl
+!221 144 pl
+!1 ep
+!pr
+!221 144 pl
+!218 153 pl
+!224 153 pl
+!221 144 pl
+!0 ep
+!221 176 gm
+!pt
+!221 152 pl
+!ef
+!eu
+!(nc 0 0 1043 790 6 rc)kp
+!0 0 pen
+!221 152 lin
+!221 152 lin
+!nc ct 39 0 put
+!1 1 pen
+!311 135 gm
+!pr
+!311 135 pl
+!311 144 pl
+!316 142 pl
+!311 135 pl
+!1 ep
+!pr
+!311 135 pl
+!311 144 pl
+!316 142 pl
+!311 135 pl
+!0 ep
+!320 162 gm
+!pt
+!313 142 pl
+!ef
+!eu
+!(nc 0 0 1043 790 6 rc)kp
+!0 0 pen
+!313 142 lin
+!313 142 lin
+!nc ct 39 0 put
+!1 1 pen
+!338 153 gm
+!pr
+!338 153 pl
+!341 161 pl
+!345 158 pl
+!338 153 pl
+!1 ep
+!pr
+!338 153 pl
+!341 161 pl
+!345 158 pl
+!338 153 pl
+!0 ep
+!356 176 gm
+!pt
+!342 159 pl
+!ef
+!eu
+!(nc 0 0 1043 790 6 rc)kp
+!0 0 pen
+!342 159 lin
+!342 159 lin
+!nc ct 39 0 put
+!1 1 pen
+!257 99 gm
+!pr
+!257 99 pl
+!263 105 pl
+!266 100 pl
+!257 99 pl
+!1 ep
+!pr
+!257 99 pl
+!263 105 pl
+!266 100 pl
+!257 99 pl
+!0 ep
+!284 113 gm
+!pt
+!264 102 pl
+!ef
+!eu
+!(nc 0 0 1043 790 6 rc)kp
+!0 0 pen
+!264 102 lin
+!264 102 lin
+!nc ct 39 0 put
+!1 1 pen
+!329 126 gm
+!pr
+!329 126 pl
+!338 126 pl
+!336 121 pl
+!329 126 pl
+!1 ep
+!pr
+!329 126 pl
+!338 126 pl
+!336 121 pl
+!329 126 pl
+!0 ep
+!356 117 gm
+!pt
+!336 124 pl
+!ef
+!eu
+!(nc 0 0 1043 790 6 rc)kp
+!0 0 pen
+!336 124 lin
+!336 124 lin
+!nc ct 39 0 put
+!1 1 pen
+!275 203 gm
+!pr
+!275 203 pl
+!284 201 pl
+!280 196 pl
+!275 203 pl
+!1 ep
+!pr
+!275 203 pl
+!284 201 pl
+!280 196 pl
+!275 203 pl
+!0 ep
+!297 189 gm
+!pt
+!281 199 pl
+!ef
+!eu
+!(nc 0 0 1043 790 6 rc)kp
+!0 0 pen
+!281 199 lin
+!281 199 lin
+!nc ct 39 0 put
+!1 1 pen
+!239 99 gm
+!pr
+!239 99 pl
+!247 94 pl
+!242 91 pl
+!239 99 pl
+!1 ep
+!pr
+!239 99 pl
+!247 94 pl
+!242 91 pl
+!239 99 pl
+!0 ep
+!257 77 gm
+!pt
+!244 93 pl
+!ef
+!eu
+!(nc 0 0 1043 790 6 rc)kp
+!0 0 pen
+!244 93 lin
+!244 93 lin
+!nc ct 39 0 put
+!1 1 pen
+!248 270 gm
+!pr
+!248 270 pl
+!239 267 pl
+!239 273 pl
+!248 270 pl
+!1 ep
+!pr
+!248 270 pl
+!239 267 pl
+!239 273 pl
+!248 270 pl
+!0 ep
+!221 270 gm
+!pt
+!240 270 pl
+!rh
+!ef
+!eu
+!(nc 0 0 1043 790 6 rc)kp
+!0 0 pen
+!240 270 lin
+!240 270 lin
+!nc ct 39 0 put
+!1 1 pen
+!279 324 gm
+!pr
+!279 324 pl
+!288 327 pl
+!288 321 pl
+!279 324 pl
+!1 ep
+!pr
+!279 324 pl
+!288 327 pl
+!288 321 pl
+!279 324 pl
+!0 ep
+!306 324 gm
+!pt
+!287 324 pl
+!rh
+!ef
+!eu
+!(nc 0 0 1043 790 6 rc)kp
+!0 0 pen
+!287 324 lin
+!287 324 lin
+!nc ct 39 0 put
+!1 1 pen
+!297 252 gm
+!pr
+!297 252 pl
+!300 243 pl
+!294 243 pl
+!297 252 pl
+!1 ep
+!pr
+!297 252 pl
+!300 243 pl
+!294 243 pl
+!297 252 pl
+!0 ep
+!297 225 gm
+!pt
+!297 244 pl
+!ef
+!eu
+!(nc 0 0 1043 790 6 rc)kp
+!0 0 pen
+!297 244 lin
+!297 244 lin
+!nc ct 39 0 put
+!1 1 pen
+!261 360 gm
+!pr
+!261 360 pl
+!260 351 pl
+!255 353 pl
+!261 360 pl
+!1 ep
+!pr
+!261 360 pl
+!260 351 pl
+!255 353 pl
+!261 360 pl
+!0 ep
+!248 333 gm
+!pt
+!258 353 pl
+!ef
+!eu
+!(nc 0 0 1043 790 6 rc)kp
+!0 0 pen
+!258 353 lin
+!258 353 lin
+!nc ct 39 0 put
+!1 1 pen
+!288 302 gm
+!pr
+!288 302 pl
+!283 294 pl
+!280 299 pl
+!288 302 pl
+!1 ep
+!pr
+!288 302 pl
+!283 294 pl
+!280 299 pl
+!288 302 pl
+!0 ep
+!266 284 gm
+!pt
+!282 297 pl
+!ef
+!eu
+!(nc 0 0 1043 790 6 rc)kp
+!0 0 pen
+!282 297 lin
+!282 297 lin
+!nc ct 39 0 put
+!1 1 pen
+!257 306 gm
+!pr
+!257 306 pl
+!248 308 pl
+!251 313 pl
+!257 306 pl
+!1 ep
+!pr
+!257 306 pl
+!248 308 pl
+!251 313 pl
+!257 306 pl
+!0 ep
+!234 320 gm
+!pt
+!250 310 pl
+!ef
+!eu
+!(nc 0 0 1043 790 6 rc)kp
+!0 0 pen
+!250 310 lin
+!250 310 lin
+!nc ct 39 0 put
+!1 1 pen
+!324 248 gm
+!pr
+!324 248 pl
+!316 253 pl
+!321 256 pl
+!324 248 pl
+!1 ep
+!pr
+!324 248 pl
+!316 253 pl
+!321 256 pl
+!324 248 pl
+!0 ep
+!306 270 gm
+!pt
+!319 254 pl
+!ef
+!eu
+!(nc 0 0 1043 790 6 rc)kp
+!0 0 pen
+!319 254 lin
+!319 254 lin
+!nc ct 39 0 put
+!1 1 pen
+!324 329 gm
+!pr
+!324 329 pl
+!319 336 pl
+!324 338 pl
+!324 329 pl
+!1 ep
+!pr
+!324 329 pl
+!319 336 pl
+!324 338 pl
+!324 329 pl
+!0 ep
+!315 356 gm
+!pt
+!322 336 pl
+!ef
+!eu
+!(nc 0 0 1043 790 6 rc)kp
+!0 0 pen
+!322 336 lin
+!322 336 lin
+!nc ct 39 0 put
+!1 1 pen
+!221 293 gm
+!pr
+!221 293 pl
+!218 302 pl
+!224 302 pl
+!221 293 pl
+!1 ep
+!pr
+!221 293 pl
+!218 302 pl
+!224 302 pl
+!221 293 pl
+!0 ep
+!221 324 gm
+!pt
+!221 301 pl
+!ef
+!eu
+!(nc 0 0 1043 790 6 rc)kp
+!0 0 pen
+!221 301 lin
+!221 301 lin
+!nc ct 39 0 put
+!1 1 pen
+!311 284 gm
+!pr
+!311 284 pl
+!311 293 pl
+!316 291 pl
+!311 284 pl
+!1 ep
+!pr
+!311 284 pl
+!311 293 pl
+!316 291 pl
+!311 284 pl
+!0 ep
+!320 311 gm
+!pt
+!313 291 pl
+!ef
+!eu
+!(nc 0 0 1043 790 6 rc)kp
+!0 0 pen
+!313 291 lin
+!313 291 lin
+!nc ct 39 0 put
+!1 1 pen
+!338 302 gm
+!pr
+!338 302 pl
+!341 310 pl
+!346 307 pl
+!338 302 pl
+!1 ep
+!pr
+!338 302 pl
+!341 310 pl
+!346 307 pl
+!338 302 pl
+!0 ep
+!356 324 gm
+!pt
+!343 308 pl
+!ef
+!eu
+!(nc 0 0 1043 790 6 rc)kp
+!0 0 pen
+!343 308 lin
+!343 308 lin
+!nc ct 39 0 put
+!1 1 pen
+!257 248 gm
+!pr
+!257 248 pl
+!264 254 pl
+!266 249 pl
+!257 248 pl
+!1 ep
+!pr
+!257 248 pl
+!264 254 pl
+!266 249 pl
+!257 248 pl
+!0 ep
+!284 261 gm
+!pt
+!264 251 pl
+!ef
+!eu
+!(nc 0 0 1043 790 6 rc)kp
+!0 0 pen
+!264 251 lin
+!264 251 lin
+!nc ct 39 0 put
+!1 1 pen
+!329 275 gm
+!pr
+!329 275 pl
+!338 275 pl
+!336 270 pl
+!329 275 pl
+!1 ep
+!pr
+!329 275 pl
+!338 275 pl
+!336 270 pl
+!329 275 pl
+!0 ep
+!356 266 gm
+!pt
+!336 273 pl
+!ef
+!eu
+!(nc 0 0 1043 790 6 rc)kp
+!0 0 pen
+!336 273 lin
+!336 273 lin
+!nc ct 39 0 put
+!1 1 pen
+!275 351 gm
+!pr
+!275 351 pl
+!284 349 pl
+!281 344 pl
+!275 351 pl
+!1 ep
+!pr
+!275 351 pl
+!284 349 pl
+!281 344 pl
+!275 351 pl
+!0 ep
+!297 338 gm
+!pt
+!282 347 pl
+!ef
+!eu
+!(nc 0 0 1043 790 6 rc)kp
+!0 0 pen
+!282 347 lin
+!282 347 lin
+!nc ct 39 0 put
+!1 1 pen
+!239 248 gm
+!pr
+!239 248 pl
+!246 243 pl
+!242 240 pl
+!239 248 pl
+!1 ep
+!pr
+!239 248 pl
+!246 243 pl
+!242 240 pl
+!239 248 pl
+!0 ep
+!257 225 gm
+!pt
+!243 242 pl
+!ef
+!eu
+!(nc 0 0 1043 790 6 rc)kp
+!0 0 pen
+!243 242 lin
+!243 242 lin
+!nc ct 39 0 put
+!1 1 pen
+!99 117 gm
+!pr
+!99 117 pl
+!90 114 pl
+!90 120 pl
+!99 117 pl
+!1 ep
+!pr
+!99 117 pl
+!90 114 pl
+!90 120 pl
+!99 117 pl
+!0 ep
+!72 117 gm
+!pt
+!91 117 pl
+!rh
+!ef
+!eu
+!(nc 0 0 1043 790 6 rc)kp
+!0 0 pen
+!91 117 lin
+!91 117 lin
+!nc ct 39 0 put
+!1 1 pen
+!131 171 gm
+!pr
+!131 171 pl
+!140 174 pl
+!140 168 pl
+!131 171 pl
+!1 ep
+!pr
+!131 171 pl
+!140 174 pl
+!140 168 pl
+!131 171 pl
+!0 ep
+!158 171 gm
+!pt
+!139 171 pl
+!rh
+!ef
+!eu
+!(nc 0 0 1043 790 6 rc)kp
+!0 0 pen
+!139 171 lin
+!139 171 lin
+!nc ct 39 0 put
+!1 1 pen
+!149 99 gm
+!pr
+!149 99 pl
+!152 90 pl
+!146 90 pl
+!149 99 pl
+!1 ep
+!pr
+!149 99 pl
+!152 90 pl
+!146 90 pl
+!149 99 pl
+!0 ep
+!149 72 gm
+!pt
+!149 91 pl
+!ef
+!eu
+!(nc 0 0 1043 790 6 rc)kp
+!0 0 pen
+!149 91 lin
+!149 91 lin
+!nc ct 39 0 put
+!1 1 pen
+!113 207 gm
+!pr
+!113 207 pl
+!112 198 pl
+!107 201 pl
+!113 207 pl
+!1 ep
+!pr
+!113 207 pl
+!112 198 pl
+!107 201 pl
+!113 207 pl
+!0 ep
+!99 180 gm
+!pt
+!110 200 pl
+!ef
+!eu
+!(nc 0 0 1043 790 6 rc)kp
+!0 0 pen
+!110 200 lin
+!110 200 lin
+!nc ct 39 0 put
+!1 1 pen
+!140 149 gm
+!pr
+!140 149 pl
+!135 142 pl
+!132 146 pl
+!140 149 pl
+!1 ep
+!pr
+!140 149 pl
+!135 142 pl
+!132 146 pl
+!140 149 pl
+!0 ep
+!117 131 gm
+!pt
+!134 145 pl
+!ef
+!eu
+!(nc 0 0 1043 790 6 rc)kp
+!0 0 pen
+!134 145 lin
+!134 145 lin
+!nc ct 39 0 put
+!1 1 pen
+!108 153 gm
+!pr
+!108 153 pl
+!99 155 pl
+!103 160 pl
+!108 153 pl
+!1 ep
+!pr
+!108 153 pl
+!99 155 pl
+!103 160 pl
+!108 153 pl
+!0 ep
+!86 167 gm
+!pt
+!102 157 pl
+!ef
+!eu
+!(nc 0 0 1043 790 6 rc)kp
+!0 0 pen
+!102 157 lin
+!102 157 lin
+!nc ct 39 0 put
+!1 1 pen
+!176 95 gm
+!pr
+!176 95 pl
+!168 100 pl
+!173 103 pl
+!176 95 pl
+!1 ep
+!pr
+!176 95 pl
+!168 100 pl
+!173 103 pl
+!176 95 pl
+!0 ep
+!158 117 gm
+!pt
+!171 101 pl
+!ef
+!eu
+!(nc 0 0 1043 790 6 rc)kp
+!0 0 pen
+!171 101 lin
+!171 101 lin
+!nc ct 39 0 put
+!1 1 pen
+!176 176 gm
+!pr
+!176 176 pl
+!171 183 pl
+!176 185 pl
+!176 176 pl
+!1 ep
+!pr
+!176 176 pl
+!171 183 pl
+!176 185 pl
+!176 176 pl
+!0 ep
+!167 203 gm
+!pt
+!174 183 pl
+!ef
+!eu
+!(nc 0 0 1043 790 6 rc)kp
+!0 0 pen
+!174 183 lin
+!174 183 lin
+!nc ct 39 0 put
+!1 1 pen
+!72 140 gm
+!pr
+!72 140 pl
+!69 149 pl
+!75 149 pl
+!72 140 pl
+!1 ep
+!pr
+!72 140 pl
+!69 149 pl
+!75 149 pl
+!72 140 pl
+!0 ep
+!72 171 gm
+!pt
+!72 148 pl
+!ef
+!eu
+!(nc 0 0 1043 790 6 rc)kp
+!0 0 pen
+!72 148 lin
+!72 148 lin
+!nc ct 39 0 put
+!1 1 pen
+!162 131 gm
+!pr
+!162 131 pl
+!162 140 pl
+!167 138 pl
+!162 131 pl
+!1 ep
+!pr
+!162 131 pl
+!162 140 pl
+!167 138 pl
+!162 131 pl
+!0 ep
+!171 158 gm
+!pt
+!164 138 pl
+!ef
+!eu
+!(nc 0 0 1043 790 6 rc)kp
+!0 0 pen
+!164 138 lin
+!164 138 lin
+!nc ct 39 0 put
+!1 1 pen
+!189 149 gm
+!pr
+!189 149 pl
+!192 157 pl
+!197 154 pl
+!189 149 pl
+!1 ep
+!pr
+!189 149 pl
+!192 157 pl
+!197 154 pl
+!189 149 pl
+!0 ep
+!207 171 gm
+!pt
+!194 155 pl
+!ef
+!eu
+!(nc 0 0 1043 790 6 rc)kp
+!0 0 pen
+!194 155 lin
+!194 155 lin
+!nc ct 39 0 put
+!1 1 pen
+!108 95 gm
+!pr
+!108 95 pl
+!115 101 pl
+!117 96 pl
+!108 95 pl
+!1 ep
+!pr
+!108 95 pl
+!115 101 pl
+!117 96 pl
+!108 95 pl
+!0 ep
+!135 108 gm
+!pt
+!115 98 pl
+!ef
+!eu
+!(nc 0 0 1043 790 6 rc)kp
+!0 0 pen
+!115 98 lin
+!115 98 lin
+!nc ct 39 0 put
+!1 1 pen
+!180 122 gm
+!pr
+!180 122 pl
+!189 122 pl
+!187 117 pl
+!180 122 pl
+!1 ep
+!pr
+!180 122 pl
+!189 122 pl
+!187 117 pl
+!180 122 pl
+!0 ep
+!207 113 gm
+!pt
+!187 120 pl
+!ef
+!eu
+!(nc 0 0 1043 790 6 rc)kp
+!0 0 pen
+!187 120 lin
+!187 120 lin
+!nc ct 39 0 put
+!1 1 pen
+!126 198 gm
+!pr
+!126 198 pl
+!135 197 pl
+!132 191 pl
+!126 198 pl
+!1 ep
+!pr
+!126 198 pl
+!135 197 pl
+!132 191 pl
+!126 198 pl
+!0 ep
+!149 185 gm
+!pt
+!133 194 pl
+!ef
+!eu
+!(nc 0 0 1043 790 6 rc)kp
+!0 0 pen
+!133 194 lin
+!133 194 lin
+!nc ct 39 0 put
+!1 1 pen
+!90 95 gm
+!pr
+!90 95 pl
+!97 90 pl
+!93 87 pl
+!90 95 pl
+!1 ep
+!pr
+!90 95 pl
+!97 90 pl
+!93 87 pl
+!90 95 pl
+!0 ep
+!108 72 gm
+!pt
+!94 89 pl
+!ef
+!eu
+!(nc 0 0 1043 790 6 rc)kp
+!0 0 pen
+!94 89 lin
+!94 89 lin
+!nc ct 39 0 put
+!1 1 pen
+!99 266 gm
+!pr
+!99 266 pl
+!90 263 pl
+!90 269 pl
+!99 266 pl
+!1 ep
+!pr
+!99 266 pl
+!90 263 pl
+!90 269 pl
+!99 266 pl
+!0 ep
+!72 266 gm
+!pt
+!91 266 pl
+!rh
+!ef
+!eu
+!(nc 0 0 1043 790 6 rc)kp
+!0 0 pen
+!91 266 lin
+!91 266 lin
+!nc ct 39 0 put
+!1 1 pen
+!131 320 gm
+!pr
+!131 320 pl
+!140 323 pl
+!140 317 pl
+!131 320 pl
+!1 ep
+!pr
+!131 320 pl
+!140 323 pl
+!140 317 pl
+!131 320 pl
+!0 ep
+!158 320 gm
+!pt
+!139 320 pl
+!rh
+!ef
+!eu
+!(nc 0 0 1043 790 6 rc)kp
+!0 0 pen
+!139 320 lin
+!139 320 lin
+!nc ct 39 0 put
+!1 1 pen
+!149 248 gm
+!pr
+!149 248 pl
+!152 239 pl
+!146 239 pl
+!149 248 pl
+!1 ep
+!pr
+!149 248 pl
+!152 239 pl
+!146 239 pl
+!149 248 pl
+!0 ep
+!149 221 gm
+!pt
+!149 240 pl
+!ef
+!eu
+!(nc 0 0 1043 790 6 rc)kp
+!0 0 pen
+!149 240 lin
+!149 240 lin
+!nc ct 39 0 put
+!1 1 pen
+!113 356 gm
+!pr
+!113 356 pl
+!112 347 pl
+!107 350 pl
+!113 356 pl
+!1 ep
+!pr
+!113 356 pl
+!112 347 pl
+!107 350 pl
+!113 356 pl
+!0 ep
+!99 329 gm
+!pt
+!110 349 pl
+!ef
+!eu
+!(nc 0 0 1043 790 6 rc)kp
+!0 0 pen
+!110 349 lin
+!110 349 lin
+!nc ct 39 0 put
+!1 1 pen
+!140 297 gm
+!pr
+!140 297 pl
+!135 290 pl
+!132 294 pl
+!140 297 pl
+!1 ep
+!pr
+!140 297 pl
+!135 290 pl
+!132 294 pl
+!140 297 pl
+!0 ep
+!117 279 gm
+!pt
+!134 293 pl
+!ef
+!eu
+!(nc 0 0 1043 790 6 rc)kp
+!0 0 pen
+!134 293 lin
+!134 293 lin
+!nc ct 39 0 put
+!1 1 pen
+!108 302 gm
+!pr
+!108 302 pl
+!99 304 pl
+!102 309 pl
+!108 302 pl
+!1 ep
+!pr
+!108 302 pl
+!99 304 pl
+!102 309 pl
+!108 302 pl
+!0 ep
+!86 315 gm
+!pt
+!101 306 pl
+!ef
+!eu
+!(nc 0 0 1043 790 6 rc)kp
+!0 0 pen
+!101 306 lin
+!101 306 lin
+!nc ct 39 0 put
+!1 1 pen
+!176 243 gm
+!pr
+!176 243 pl
+!169 248 pl
+!173 251 pl
+!176 243 pl
+!1 ep
+!pr
+!176 243 pl
+!169 248 pl
+!173 251 pl
+!176 243 pl
+!0 ep
+!158 266 gm
+!pt
+!172 249 pl
+!ef
+!eu
+!(nc 0 0 1043 790 6 rc)kp
+!0 0 pen
+!172 249 lin
+!172 249 lin
+!nc ct 39 0 put
+!1 1 pen
+!176 324 gm
+!pr
+!176 324 pl
+!171 331 pl
+!176 333 pl
+!176 324 pl
+!1 ep
+!pr
+!176 324 pl
+!171 331 pl
+!176 333 pl
+!176 324 pl
+!0 ep
+!167 351 gm
+!pt
+!174 331 pl
+!ef
+!eu
+!(nc 0 0 1043 790 6 rc)kp
+!0 0 pen
+!174 331 lin
+!174 331 lin
+!nc ct 39 0 put
+!1 1 pen
+!72 288 gm
+!pr
+!72 288 pl
+!69 297 pl
+!75 297 pl
+!72 288 pl
+!1 ep
+!pr
+!72 288 pl
+!69 297 pl
+!75 297 pl
+!72 288 pl
+!0 ep
+!72 320 gm
+!pt
+!72 296 pl
+!ef
+!eu
+!(nc 0 0 1043 790 6 rc)kp
+!0 0 pen
+!72 296 lin
+!72 296 lin
+!nc ct 39 0 put
+!1 1 pen
+!162 279 gm
+!pr
+!162 279 pl
+!162 288 pl
+!167 286 pl
+!162 279 pl
+!1 ep
+!pr
+!162 279 pl
+!162 288 pl
+!167 286 pl
+!162 279 pl
+!0 ep
+!171 306 gm
+!pt
+!164 286 pl
+!ef
+!eu
+!(nc 0 0 1043 790 6 rc)kp
+!0 0 pen
+!164 286 lin
+!164 286 lin
+!nc ct 39 0 put
+!1 1 pen
+!189 297 gm
+!pr
+!189 297 pl
+!192 305 pl
+!196 302 pl
+!189 297 pl
+!1 ep
+!pr
+!189 297 pl
+!192 305 pl
+!196 302 pl
+!189 297 pl
+!0 ep
+!207 320 gm
+!pt
+!193 303 pl
+!ef
+!eu
+!(nc 0 0 1043 790 6 rc)kp
+!0 0 pen
+!193 303 lin
+!193 303 lin
+!nc ct 39 0 put
+!1 1 pen
+!108 243 gm
+!pr
+!108 243 pl
+!114 249 pl
+!117 244 pl
+!108 243 pl
+!1 ep
+!pr
+!108 243 pl
+!114 249 pl
+!117 244 pl
+!108 243 pl
+!0 ep
+!135 257 gm
+!pt
+!115 246 pl
+!ef
+!eu
+!(nc 0 0 1043 790 6 rc)kp
+!0 0 pen
+!115 246 lin
+!115 246 lin
+!nc ct 39 0 put
+!1 1 pen
+!180 270 gm
+!pr
+!180 270 pl
+!189 270 pl
+!187 265 pl
+!180 270 pl
+!1 ep
+!pr
+!180 270 pl
+!189 270 pl
+!187 265 pl
+!180 270 pl
+!0 ep
+!207 261 gm
+!pt
+!187 268 pl
+!ef
+!eu
+!(nc 0 0 1043 790 6 rc)kp
+!0 0 pen
+!187 268 lin
+!187 268 lin
+!nc ct 39 0 put
+!1 1 pen
+!126 347 gm
+!pr
+!126 347 pl
+!135 345 pl
+!132 340 pl
+!126 347 pl
+!1 ep
+!pr
+!126 347 pl
+!135 345 pl
+!132 340 pl
+!126 347 pl
+!0 ep
+!149 333 gm
+!pt
+!133 343 pl
+!ef
+!eu
+!(nc 0 0 1043 790 6 rc)kp
+!0 0 pen
+!133 343 lin
+!133 343 lin
+!nc ct 39 0 put
+!1 1 pen
+!90 243 gm
+!pr
+!90 243 pl
+!98 238 pl
+!93 235 pl
+!90 243 pl
+!1 ep
+!pr
+!90 243 pl
+!98 238 pl
+!93 235 pl
+!90 243 pl
+!0 ep
+!108 221 gm
+!pt
+!95 237 pl
+!ef
+!eu
+!(nc 0 0 1043 790 6 rc)kp
+!0 0 pen
+!95 237 lin
+!95 237 lin
+!nc ct 39 0 put
+!1 1 pen
+!203 333 gm
+!pr
+!203 333 pl
+!196 338 pl
+!200 341 pl
+!203 333 pl
+!1 ep
+!pr
+!203 333 pl
+!196 338 pl
+!200 341 pl
+!203 333 pl
+!0 ep
+!185 356 gm
+!pt
+!199 339 pl
+!ef
+!eu
+!(nc 0 0 1043 790 6 rc)kp
+!0 0 pen
+!199 339 lin
+!199 339 lin
+!nc ct 39 0 put
+!1 1 pen
+!221 342 gm
+!pr
+!221 342 pl
+!224 350 pl
+!228 347 pl
+!221 342 pl
+!1 ep
+!pr
+!221 342 pl
+!224 350 pl
+!228 347 pl
+!221 342 pl
+!0 ep
+!239 365 gm
+!pt
+!225 348 pl
+!ef
+!eu
+!(nc 0 0 1043 790 6 rc)kp
+!0 0 pen
+!225 348 lin
+!225 348 lin
+!nc ct 39 0 put
+!1 1 pen
+!194 99 gm
+!pr
+!194 99 pl
+!193 90 pl
+!188 93 pl
+!194 99 pl
+!1 ep
+!pr
+!194 99 pl
+!193 90 pl
+!188 93 pl
+!194 99 pl
+!0 ep
+!180 72 gm
+!pt
+!191 92 pl
+!ef
+!eu
+!(nc 0 0 1043 790 6 rc)kp
+!0 0 pen
+!191 92 lin
+!191 92 lin
+!nc ct 39 0 put
+!1 1 pen
+!207 90 gm
+!pr
+!207 90 pl
+!216 89 pl
+!213 83 pl
+!207 90 pl
+!1 ep
+!pr
+!207 90 pl
+!216 89 pl
+!213 83 pl
+!207 90 pl
+!0 ep
+!230 77 gm
+!pt
+!214 86 pl
+!ef
+!eu
+!(nc 0 0 1043 790 6 rc)kp
+!0 0 pen
+!214 86 lin
+!214 86 lin
+!nc ct 39 0 put
+!1 1 pen
+!347 198 gm
+!pr
+!347 198 pl
+!347 207 pl
+!352 205 pl
+!347 198 pl
+!1 ep
+!pr
+!347 198 pl
+!347 207 pl
+!352 205 pl
+!347 198 pl
+!0 ep
+!356 225 gm
+!pt
+!349 205 pl
+!ef
+!eu
+!(nc 0 0 1043 790 6 rc)kp
+!0 0 pen
+!349 205 lin
+!349 205 lin
+!nc ct 39 0 put
+!1 1 pen
+!315 234 gm
+!pr
+!315 234 pl
+!324 233 pl
+!321 227 pl
+!315 234 pl
+!1 ep
+!pr
+!315 234 pl
+!324 233 pl
+!321 227 pl
+!315 234 pl
+!0 ep
+!338 221 gm
+!pt
+!322 230 pl
+!ef
+!eu
+!(nc 0 0 1043 790 6 rc)kp
+!0 0 pen
+!322 230 lin
+!322 230 lin
+!nc ct 39 0 put
+!1 1 pen
+!324 77 gm
+!pr
+!324 77 pl
+!327 85 pl
+!332 82 pl
+!324 77 pl
+!1 ep
+!pr
+!324 77 pl
+!327 85 pl
+!332 82 pl
+!324 77 pl
+!0 ep
+!342 99 gm
+!pt
+!329 83 pl
+!ef
+!eu
+!(nc 0 0 1043 790 6 rc)kp
+!0 0 pen
+!329 83 lin
+!329 83 lin
+!nc ct 39 0 put
+!1 1 pen
+!72 221 gm
+!pr
+!72 221 pl
+!81 221 pl
+!79 216 pl
+!72 221 pl
+!1 ep
+!pr
+!72 221 pl
+!81 221 pl
+!79 216 pl
+!72 221 pl
+!0 ep
+!99 212 gm
+!pt
+!79 219 pl
+!ef
+!eu
+!(nc 0 0 1043 790 6 rc)kp
+!0 0 pen
+!79 219 lin
+!F T cp
+!cd
+!end

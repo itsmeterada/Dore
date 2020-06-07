@@ -1,0 +1,13 @@
+#include <Dore.tmpl>
+
+    SRCS = tpl_appatt.c tpl_camera.c tpl_data.c tpl_drom.c tpl_geoatt.c \
+           tpl_light.c tpl_map.c tpl_modclip.c tpl_print.c tpl_update.c \
+	   tpldr_output.c
+    OBJS = tpl_appatt.o tpl_camera.o tpl_data.o tpl_drom.o tpl_geoatt.o \
+           tpl_light.o tpl_map.o tpl_modclip.o tpl_print.o tpl_update.o \
+	   tpldr_output.o
+
+LibraryObjectRule()
+SubdirLibraryRule($(OBJS))
+
+DependTarget()

@@ -1,0 +1,134 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DoTextureMapEnviron 3D "Dore"
+.SH NAME
+DoTextureMapEnviron \- Create an environment map primitive attribute object
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+DtObject DoTextureMapEnviron(operator, mapping, raster)
+DtMapOperator operator;
+DtObject mapping;
+DtObject raster;
+.sp
+.in  -.5i
+FORTRAN:
+.in  +.5i
+INTEGER*4 DOTME(OPRATR, MAPPNG, RASTER)
+INTEGER*4 OPRATR
+INTEGER*4 MAPPNG
+INTEGER*4 RASTER
+.in  -.5i
+.fi 
+.IX "DoTextureMapEnviron"
+.IX "DOTME"
+.SH DESCRIPTION
+.LP
+\f2DoTextureMapEnviron\fP creates a primitive attribute object that
+specifies an environment map.
+.LP
+A primitive object can be affected by more than one
+.nh
+\f2DoTextureMapEnviron\fP 
+.hy
+attribute.
+The parameter \f2operator\fP specifies whether subsequent primitive
+objects will be affected by this environment map only, or 
+also by other environment maps higher up in the scene hierarchy.
+The possible values for \f2operator\fP are:
+.IX "DcMapReplace"
+.IX "DCMR"
+.IP "\f2DcMapReplace\fP <\f2DCMR\fP>"
+Any environment maps already defined will be ignored by
+subsequent primitive objects.
+.IX "DcMapAdd"
+.IX "DCMADD"
+.IP "\f2DcMapAdd\fP <\f2DCMADD\fP>"
+Use this map in addition to the environment maps higher up in the hierarchy.
+The map that is defined closest
+to the primitive object will be evaluated first.  
+Note that a primitive object can only be affected by textures above it
+in the hierarchy.
+.LP
+The parameter \f2mapping\fP specifies which mapping procedure to use.
+Possible values for \f2mapping\fP are:
+.IX "DcStdSphereEnvironMap"
+.IX "DCSSEM"
+.IX "DcStdCubeEnvironMap"
+.IX "DCSCEM"
+.IP "\f2DcStdSphereEnvironMap\fP <\f2DCSSEM\fP>"
+Use the default spherical environment mapping method the renderer provides.
+.IP "\f2DcStdCubeEnvironMap\fP <\f2DCSCEM\fP>"
+Use the default cubic environment mapping method the renderer provides.
+.IP "Renderer-specific mappings"
+Use any renderer-specific mappings 
+documented in your \f2Dore System Guide\fP.
+.PP
+The parameter \f2raster\fP contains the actual environment map data to
+be used by the texturing procedure.
+\f2raster\fP is a handle to an object created with \f2DoRaster\fP
+<\f2DORS\fP> or \f2DoFileRaster\fP <\f2DOFRS\fP>.
+The number of channels of data used for the environment mapping
+depends on the colormodel.  Three channels are required if the RGB
+colormodel is used.
+If the raster data is in the standard Dore format, the following
+convention is used.  For rasters of type \f2DcRasterRGB\fP <\f2DCRRGB\fP>,
+\f2DcRasterRGBA\fP <\f2DCRRA\fP>, \f2DcRasterRGBZ\fP <\f2DCRRZ\fP>
+and \f2DcRasterRGBAZ\fP <\f2DCRRAZ\fP> the RGB channels are used.
+Rasters of type \f2DcRasterA\fP <\f2DCRA\fP> and \f2DcRasterZ\fP
+<\f2DCRZ\fP> cannot be used as environment maps in conjunction
+with the RGB colormodel.
+.LP
+\f2DoTextureMapEnviron\fP is a primitive attribute and is
+inherited by subsequent primitive objects, as are all primitive 
+attributes. 
+Unlike most other primitive attributes though, \f2DoTextureMapEnviron\fP
+also inherits a set of attributes, i.e. the texture attributes.
+.PP
+The texture attributes specify things such as which set of primitive
+\f2uv\fP coordinates to use, how to extend a texture when the primitive
+\f2uv\fP coordinates extend beyond the limits of the texture, 
+how to transform the primitive \f2uv\fP
+coordinates before applying the texture, etc.
+The current values of the texture attributes are bound to the 
+\f2DoTextureMapEnviron\fP 
+object when it is executed during traversal.
+Thus the texture attributes are only indirectly bound to the
+primitive objects.
+.SH SEE ALSO
+.na
+.nh
+DoDiffuseColor(3D), 
+DoFileRaster(3D),
+DoRaster(3D),
+DoTextureAntiAlias(3D),
+DoTextureExtendUV(3D),
+DoTextureExtendUVW(3D),
+DoTextureMapEnvironSwitch(3D),
+DoTextureMatrixUV(3D), 
+DoTextureMatrixUVW(3D), 
+DoTextureScaleUV(3D), 
+DoTextureScaleUVW(3D), 
+DoTextureTranslateUV(3D),
+DoTextureTranslateUVW(3D),
+DoTextureUVIndex(3D),
+DoTextureUVWIndex(3D)
+.ad
+.hy
+\&

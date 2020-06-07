@@ -1,0 +1,9 @@
+#include <Dore.tmpl>
+
+    SRCS = oview_inq.c oview_obj.c oview_set.c upd.c
+    OBJS = oview_inq.o oview_obj.o oview_set.o upd.o
+
+LibraryObjectRule()
+SubdirLibraryRule($(OBJS))
+
+DependTarget()

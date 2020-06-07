@@ -1,0 +1,60 @@
+#include <Dore.tmpl>
+
+    SRCS = bfcullble.c bfculswi.c grndmaxobj.c grndmaxsub.c grndraylvl.c \
+           lcstowcsmt.c mapdcolswi.c maptrnswi.c oglb_ambint.c oglb_ambswi.c \
+	   oglb_bndvolswi.c oglb_cammat.c oglb_clpswi.c oglb_clpvol.c \
+	   oglb_cmptuvcbk.c oglb_cmptuvswi.c oglb_cmptuvwcbk.c \
+	   oglb_cmptuvwswi.c oglb_depcue.c oglb_depcueswi.c oglb_difclr.c \
+	   oglb_difint.c oglb_difswi.c oglb_emisclr.c oglb_emisfct.c \
+	   oglb_emisswi.c \
+	   oglb_exeset.c oglb_fil.c oglb_gas.c oglb_hidsrfswi.c oglb_intdsp.c \
+	   oglb_inttyp.c oglb_invswi.c oglb_lgtatn.c oglb_lgtclr.c \
+	   oglb_lgtint.c oglb_lgtspdang.c oglb_lgtspdexp.c oglb_lgtswi.c \
+	   oglb_lgttyp.c oglb_lintyp.c oglb_linwid.c oglb_localaasty.c \
+	   oglb_localaaswi.c oglb_mapbmp.c oglb_mapbmpswi.c oglb_mapdifclr.c \
+	   oglb_mapenv.c oglb_mapenvswi.c oglb_maptrnint.c oglb_minbndext.c \
+	   oglb_mkrfnt.c oglb_mkrgly.c oglb_mkrscl.c oglb_namset.c \
+	   oglb_pckid.c oglb_pckswi.c oglb_radambswi.c oglb_radswi.c \
+	   oglb_reflecswi.c oglb_refractidx.c oglb_refractswi.c oglb_reptyp.c \
+	   oglb_shadowswi.c oglb_shdidx.c oglb_smpadapt.c oglb_smpfilter.c \
+	   oglb_smpjitter.c oglb_smpsuper.c oglb_spcclr.c oglb_spcfct.c \
+	   oglb_spcint.c oglb_spcswi.c oglb_srfedgclr.c oglb_srfshd.c \
+	   oglb_stereo.c oglb_stereoswi.c oglb_subdivspc.c oglb_texaa.c \
+	   oglb_texextuv.c oglb_texextuvw.c oglb_texintsrf.c oglb_texmatuv.c \
+	   oglb_texmatuvw.c oglb_texop.c oglb_texuvidx.c oglb_texuvwidx.c \
+	   oglb_transpclr.c oglb_transpint.c oglb_transpswi.c oglb_txtaln.c \
+	   oglb_txtexp.c oglb_txtfnt.c oglb_txthgt.c oglb_txtpat.c \
+	   oglb_txtprc.c oglb_txtspc.c oglb_txtupvec.c smpadptswi.c \
+	   smpjitswi.c smpsupswi.c trnsporcol.c trnsporexp.c trnsporint.c \
+	   trnsporswi.c
+    OBJS = bfcullble.o bfculswi.o grndmaxobj.o grndmaxsub.o grndraylvl.o \
+           lcstowcsmt.o mapdcolswi.o maptrnswi.o oglb_ambint.o oglb_ambswi.o \
+	   oglb_bndvolswi.o oglb_cammat.o oglb_clpswi.o oglb_clpvol.o \
+	   oglb_cmptuvcbk.o oglb_cmptuvswi.o oglb_cmptuvwcbk.o oglb_cmptuvwswi.o \
+	   oglb_depcue.o oglb_depcueswi.o oglb_difclr.o oglb_difint.o \
+	   oglb_difswi.o oglb_emisclr.o oglb_emisfct.o oglb_emisswi.o \
+	   oglb_exeset.o oglb_fil.o oglb_gas.o oglb_hidsrfswi.o oglb_intdsp.o \
+	   oglb_inttyp.o oglb_invswi.o oglb_lgtatn.o oglb_lgtclr.o \
+	   oglb_lgtint.o oglb_lgtspdang.o oglb_lgtspdexp.o oglb_lgtswi.o \
+	   oglb_lgttyp.o oglb_lintyp.o oglb_linwid.o oglb_localaasty.o \
+	   oglb_localaaswi.o oglb_mapbmp.o oglb_mapbmpswi.o oglb_mapdifclr.o \
+	   oglb_mapenv.o oglb_mapenvswi.o oglb_maptrnint.o oglb_minbndext.o \
+	   oglb_mkrfnt.o oglb_mkrgly.o oglb_mkrscl.o oglb_namset.o \
+	   oglb_pckid.o oglb_pckswi.o oglb_radambswi.o oglb_radswi.o \
+	   oglb_reflecswi.o oglb_refractidx.o oglb_refractswi.o oglb_reptyp.o \
+	   oglb_shadowswi.o oglb_shdidx.o oglb_smpadapt.o oglb_smpfilter.o \
+	   oglb_smpjitter.o oglb_smpsuper.o oglb_spcclr.o oglb_spcfct.o \
+	   oglb_spcint.o oglb_spcswi.o oglb_srfedgclr.o oglb_srfshd.o \
+	   oglb_stereo.o oglb_stereoswi.o oglb_subdivspc.o oglb_texaa.o \
+	   oglb_texextuv.o oglb_texextuvw.o oglb_texintsrf.o oglb_texmatuv.o \
+	   oglb_texmatuvw.o oglb_texop.o oglb_texuvidx.o oglb_texuvwidx.o \
+	   oglb_transpclr.o oglb_transpint.o oglb_transpswi.o oglb_txtaln.o \
+	   oglb_txtexp.o oglb_txtfnt.o oglb_txthgt.o oglb_txtpat.o \
+	   oglb_txtprc.o oglb_txtspc.o oglb_txtupvec.o smpadptswi.o \
+	   smpjitswi.o smpsupswi.o trnsporcol.o trnsporexp.o trnsporint.o \
+	   trnsporswi.o
+
+LibraryObjectRule()
+SubdirLibraryRule($(OBJS))
+
+DependTarget()

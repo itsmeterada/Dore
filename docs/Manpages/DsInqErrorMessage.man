@@ -1,0 +1,73 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DsInqErrorMessage 3D  "Dore"
+.SH NAME
+DsInqErrorMessage \- Return an error message
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+DtReadStatus DsInqErrorMessage(errornumber, bufbytes, 
+		buf, severity)
+DtInt errornumber, bufbytes;
+char buf[\|];
+DtErrorStatus *severity;
+.sp
+.in -.5i
+FORTRAN:
+.in +.5i
+INTEGER*4 DSQEM(ERRNUM, BUFSIZ, BUF, SEVERT)
+INTEGER*4 ERRNUM, BUFSIZ
+CHARACTER*BUFSIZ BUF
+INTEGER*4 SEVERT 
+.in -.5i
+.fi
+.SH DESCRIPTION
+.IX DSQEM
+.IX DsInqErrorMessage
+.I DsInqErrorMessage
+copies an error message into user-supplied space.  The parameter
+\f2errornumber\fP specifies the error message.  The parameter \f2bufbytes\fP
+specifies the size of the user-supplied space.  The parameter \f2buf\fP
+specifies the address of that space.
+.PP
+The parameter \f2severity\fP is a returned error status specifying
+the severity associated with the error.
+The severity describes the type of error and is one of the following
+values:
+.IP "\f2DcErrorMinor\fP <\f2DCEMNR\fP>"
+Program will proceed with only minor effects likely.
+.IP "\f2DcErrorSevere\fP <\f2DCESEV\fP>"
+Program can proceed but results are unpredictable.
+.IP "\f2DcErrorFatal\fP <\f2DCEFAT\fP>"
+Program cannot proceed.
+If the default error handler is being used, it will exit the program.
+If a user-specified error handler is being used,
+it should try to exit gracefully.
+.PP
+\f2DsInqErrorMessage\fP is intended for use by user-supplied
+error handling routines installed with \f2DsSetErrorVars\fP <\f2DSSEV\fP>.
+Possible return values are:
+.IP "\f2DcReadOk\fP <\f2DCROK\fP>"
+The error message was successfully read and written into the user's space.
+.IP "\f2DcReadTrunc\fP <\f2DCRTRN\fP>"
+The error message was too large to fit in the given space and was truncated.
+.IP "\f2DcReadUnsuc\fP <\f2DCRFAL\fP>"
+The given error was not found.
+.SH "SEE ALSO"
+DsSetErrorVars(3D), DsInqErrorVars(3D)

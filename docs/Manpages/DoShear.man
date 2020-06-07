@@ -1,0 +1,65 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DoShear 3D  "Dore"
+.SH NAME
+DoShear \- Create a shear geometric transformation object
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+DtObject DoShear(plane, firstdirectionshearvalue,
+	seconddirectionshearvalue)
+DtMajorPlane plane;
+DtReal firstdirectionshearvalue, seconddirectionshearvalue;
+.sp
+.in -.5i
+FORTRAN:
+.in +.5i
+INTEGER*4 DOSHR(PLANE, D1SHRV, D2SHRV)
+INTEGER*4 PLANE
+REAL*8 D1SHRV, D2SHRV
+.in -.5i
+.fi
+.SH DESCRIPTION
+.IX DOSHR
+.IX DoShear
+\f2DoShear\fP creates a shear geometric transformation object that
+modifies the current transformation matrix.
+It results in a directional shear about a major plane specified by the
+parameter \f2plane\fP.  Possible values for \f2plane\fP are:
+.PP
+.IP "\f2DcXY\fP <\f2DCXY\fP>"
+Z = 0.0
+.IP "\f2DcYZ\fP <\f2DCYZ\fP>"
+X = 0.0
+.IP "\f2DcXZ\fP <\f2DCXZ\fP>"
+Y = 0.0
+.PP
+The parameter \f2firstdirectionshearvalue\fP specifies the shearing in the
+first direction of \f2plane\fP, and the parameter
+\f2seconddirectionshearvalue\fP specifies the shearing the second directions
+of \f2plane\fP.  For example, let \f2plane\fP be \f2DcXY\fP <\f2DCXY\fP>.
+Then \f2firstdirectionshearvalue\fP is the X-direction and
+\f2seconddirectionshearvalue\fP is the Y-direction.
+.SH "SEE ALSO"
+.na
+.nh
+DoLookAtFrom(3D), DoScale(3D), DoRotate(3D), DoTransformMatrix(3D),
+DoTranslate(3D)
+.ad
+.hy

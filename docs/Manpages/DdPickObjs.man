@@ -1,0 +1,186 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DdPickObjs 3D  "Dore"
+.SH NAME
+DdPickObjs \- Initiate a pick on a device
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+void DdPickObjs(device, pick_point, hit_count,
+                index_size, index, list_size, hit_list, 
+			z_values, wcs_values, lcs_values, 
+				views, error_word)
+DtObject device;
+DtPoint3 pick_point;
+DtInt *hit_count;
+DtInt index_size;
+DtInt index[\|];
+DtInt list_size;
+long  hit_list[\|];
+DtReal z_values[\|];
+DtReal wcs_values[\|];
+DtReal lcs_values[\|];
+DtObject views[\|];
+DtInt *error_word;
+.sp
+.in -.5i
+FORTRAN:
+.in +.5i
+CALL DDPO(DEVICE, PICKPT, HITCNT, IDXSIZ,
+		INDEX, LSTSIZ, HITLST, ZVALUS,  
+			WCSVAL, LCSVAL, VIEWS, 
+				ERRWRD)
+INTEGER*4 DEVICE
+REAL*8(3) PICKPT
+INTEGER*4 HITCNT       
+INTEGER*4 IDXSIZ
+INTEGER*4 INDEX(*)
+INTEGER*4 LSTSIZ
+INTEGER*4 HITLST(*)
+REAL*8 ZVALUS(*)
+REAL*8 WCSVAL(*)
+REAL*8 LCSVAL(*)
+INTEGER*4 VIEWS(*)
+INTEGER*4 ERRWRD      
+.in -.5i
+.fi
+.SH DESCRIPTION
+.IX DDPO
+.IX DdPickObjs
+.I DdPickObjs
+initiates a pick on a device.
+Picking is a method of identifying the drawable objects that fall within
+a specified volume known as a pick aperture (see \f2DdSetPickAperture\fP).
+These objects are known as "hits" and are uniquely identified by a pick
+path (see \f2DdSetPickCallback\fP for the definition of a pick path).
+Picking is usually initiated via an input device 
+by a user who wants to 
+address a particular object on the screen.
+.PP
+.IP "\f2pick_point\fP"
+A coordinate triple that specifies a point in device coordinates
+around which to search for hits. 
+.IP "\f2hit_count\fP"
+The integer count of the number of hits found within the pick aperture 
+whose paths are being returned.
+.IP "\f2index_size\fP"
+The size of the array \f2index\fP.
+.IP "\f2index\fP"
+A user-supplied array large enough for
+\f2index_size\fP number of 32-bit integers.
+Returned in the array \f2index\fP are the indices
+into the \f2hit_list\fP array of the beginnings of 
+the pick paths being returned.
+The last element in the path beginning at 
+\f2hit_list\fP[\f2index\fP[i]]
+is always one element before \f2hit_list\fP[\f2index\fP[i+1]].
+This is true for the last path as well,
+which means that if the application expects to find
+\f2n\fP hits, it must provide an index array with
+a size of at least \f2n\fP + 1.
+.IP "\f2list_size\fP"
+The size of the array \f2hit_list\f2.
+.IP "\f2hit_list\fP"
+A user-supplied array large
+enough for \f2list_size\fP/3 number of pick path
+elements, where each pick path element is three
+\f2long\fP large.    
+For a definition of pick path elements, see
+\f2DdSetPickCallback\fP.)
+\f2hit_count\fP pick paths are returned in 
+this array, where each pick path may have a
+different number of pick path elements in it.
+.IP "\f2z_values\fP"
+An optional user-supplied array large enough for
+\f2index_size\fP - 1 \f2DtReal\fPs.  
+Returned here are the depth values in device coordinate units of the
+closest point within the pick aperture of the corresponding hits
+whose paths are referred to in \f2index\fP.  
+The value \f2DcNullPtr\fP <\f2DCNULL\fP> may be given if the user is
+not concerned with the depth values. 
+.IP "\f2wcs_values\fP"
+An optional user-supplied array large enough for
+3*(\f2index_size\fP - 1) \f2DtReal\fPs.  
+Returned here are the world coordinate values of the 
+closest point within the pick aperture of the corresponding hits
+whose paths are referred to in \f2index\fP.  
+The world coordinate of hit \f2n\fP is \f2wcs_values[n*3]\fP,
+\f2wcs_values[n*3+1]\fP, \f2wcs_values[n*3+2]\fP.
+The value \f2DcNullPtr\fP <\f2DCNULL\fP> may be given if the user is
+not concerned with the world coordinate values. 
+.IP "\f2lcs_values\fP"
+An optional user-supplied array large enough for
+3*(\f2index_size\fP - 1) \f2DtReal\fPs.  
+Returned here are the local coordinate values of the 
+closest point within the pick aperture of the corresponding hits
+whose paths are referred to in \f2index\fP.  
+The local coordinates are the coordinates in which the object's 
+geometry was defined.
+The local coordinate of hit \f2n\fP is \f2lcs_values[n*3]\fP,
+\f2lcs_values[n*3+1]\fP, \f2lcs_values[n*3+2]\fP.
+The value \f2DcNullPtr\fP <\f2DCNULL\fP> may be given if the user is
+not concerned with the local coordinate values. 
+.IP "\f2views\fP"
+An optional user-supplied array large enough for
+(\f2index_size\fP - 1) \f2DtObject\fPs.
+Returned here is an array of view objects that corresponds to the
+views in which the hits were found.
+The value \f2DcNullPtr\fP <\f2DCNULL\fP> may be given if the
+user is not concerned with views.
+.IP "\f2error_word\fP"
+A returned error word. 
+.PP
+The value of the error word returned is a bit field that is the
+logical \f2or\fP of zero or more of the following constants:
+.PP
+.IX DcPickBadStatus
+.IX DCPBAD
+.IX DcPickListOverflow
+.IX DCPLOV
+.IX DcPickIndexOverflow
+.IX DCPIOV
+.IP "\f2DcPickBadStatus\fP <\f2DCPBAD\fP>"
+A bad status error results from an illegal \f2pick control status\fP
+returned by a pick callback (see \f2DdSetPickCallback\fP).
+.IP "\f2DcPickListOverflow\fP <\f2DCPLOV\fP>"
+A list overflow occurs when the array \f2hit_list\fP is too small
+to accommodate another hit.
+.IP "\f2DcPickIndexOverflow\fP <\f2DCPIOV\fP>"
+An index overflow occurs when the array \f2index\fP is too small to
+accommodate another hit.
+.PP
+In all these cases, the user is still returned
+data from the previous hits that were
+recorded.  Application programs may still wish to use this data or, if
+the errors result from lack of space, they may decide either to 
+allocate more space or to use a smaller pick aperture and then try the
+same pick again.
+.SH ERRORS
+.I DdPickObjs
+will fail if passed an invalid device handle.
+.TP 15
+[WARNING - invalid device handle]
+.SH "SEE ALSO"
+.na
+.nh
+DdInqPickAperture(3D), DdInqPickCallback(3D), DdInqPickPathOrder(3D),
+DdSetPickAperture(3D), DdSetPickCallback(3D), DdSetPickPathOrder(3D),
+DoFilter(3D), DoPickID(3D), DoPickSwitch(3D)
+.ad
+.hy

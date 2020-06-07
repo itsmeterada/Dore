@@ -1,0 +1,234 @@
+.\"#ident "%W%" %G%
+.\"
+.\" #
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  
+.\" # 
+.\" # KUBOTA GRAPHICS Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\" #
+.\"
+.ds CT "\\*(Dd Overview
+.so ../macros/local.me
+.ds BT \*(Dd Developer's Guide
+.ds h1 1
+.L1 D OR\h'5p'\v'-8p'\(aa\v'8p'\h'-5p' "" "\h'-\w'\(aa'u'E
+.L2 O VERVIEW
+.CH ONE
+.rs
+.sp -1.5v
+This overview is useful to all \*(Dd developers.
+It discusses \*(Dd from two different points of view.
+Application programmers use \*(Dd as a graphics application environment.
+Graphics developers, including software and hardware vendors, are
+interested in the architecture and implementation of \*(Dd.
+The following sections discuss the unique features of \*(Dd from
+each vantage point.
+.sp -.25v
+.H1 "\*(Dd as a Graphics Application Environment
+.rs
+.sp -.25v
+\*(Dd is a powerful 3D graphics subroutine
+library that enables you to produce
+images ranging from dynamic sequences to near-photographic
+quality stills. 
+With the \*(Do, you can also combine full-color,
+high-resolution, 3D graphics with computationally
+intensive applications.  
+\*(Dd is designed to interface easily with existing
+software applications and \*(Dd applications are device independent.
+.sp -.25v
+.lp
+\*(Dd, which stands for \f3D\f1ynamic
+\f3O\f1bject \f3R\f1endering \f3E\f1nvironment, is uniquely
+suited to address the needs of a variety of users. 
+Because of its ease of use, its portability and extendability,
+and its powerful graphics features, \*(Dd offers users a
+complete solution for their 3D graphics needs.
+\*(Dd handles a wide range of applications\|\(em\|from the very 
+simple to the more complex and compute intensive applications,
+such as molecular modeling,
+fluid dynamics, and structural analysis.
+.sp -.25v
+.lp
+\*(Dd provides a comprehensive set of tools for creating
+graphics applications.
+It also has several significant features not found in
+other graphics packages.
+.H3 "\*(Dd is easy to use"
+.rs
+.sp -.25v
+The \*(Do was designed for ease of use.  Although some
+familiarity with basic graphics programming concepts is assumed,
+you don't have to be a graphics expert to use the \*(Do.
+The \*(Dd programmer needs to supply only one basic description
+of an object's geometry and its attributes. 
+Then \*(Dd, not the programmer, takes care
+of displaying the object in a variety of styles.  
+On the other hand, experienced graphics users will find
+\*(Dd flexible and unrestrictive.
+It also takes less time and effort to convert old applications
+and write new applications that use \*(Dd for graphics
+functionality.
+.rs
+.sp .25v
+.H3 "\*(Dd supports multiple output devices and renderers"
+.rs
+.sp -.25v
+\*(Dd supports both multiple output devices and multiple renderers.
+The devices range from simple
+file output to sophisticated graphics hardware devices.
+The renderers range from dynamic
+renderers for interactive graphics to photo-realistic
+renderers for high-quality still images.
+\*(Dd fully supports the more advanced renderers
+by including advanced graphics features such as
+shadows, refraction, and texture mapping.
+A unique \*(Dd feature is that it uses the same
+graphical database for generating images with different
+renderers.
+You don't need additional coding to create a variety
+of image representations of the same scene.
+Renderers are selected at image-generation time,
+allowing you to move back and forth between
+rendering styles.
+You could even display the same scene simultaneously in 
+multiple views on a device, using a different rendering 
+style in each view.
+.rs
+.sp .25v
+.H3 "\*(Dd makes use of underlying hardware and software"
+.rs
+.sp -.25v
+Whenever possible \*(Dd takes full advantage of advanced
+features provided by underlying renderers and
+graphics hardware devices.
+Therefore, \*(Dd does not dictate how particular features
+in the interface are implemented at the lowest level. 
+The different renderers may use
+shading models of varying complexity.
+One graphics device may support
+true transparency, while another may
+simply approximate a transparent effect.
+If a renderer or device does not support 
+a particular feature it should do the best that it can. 
+For example, if smooth shading is not supported
+you may see only flat-shaded objects.
+If vertex colors are not supported they will be ignored.
+When writing \*(Dd applications it will never hurt to 
+include attributes that are not supported by 
+the selected renderer.
+You can, for example, use a simple, real-time
+renderer to preview a scene that includes 
+advanced graphics attributes
+before generating an
+image with a high-quality renderer. 
+.rs
+.sp .25v
+.H3 "\*(Dd is user extendable
+.rs
+.sp -.25v
+The \*(Dd graphics application interface is 
+user extendable.
+You can add your own primitives to the set provided by \*(Dd.
+The \*(Do includes documented functions for doing this.
+Once a user-defined primitive has been implemented, it
+is used exactly the same way as the standard \*(Dd primitives.
+\*(Dd system configurations are also user extendable.
+You can plug in new renderers and device drivers, making
+them an integral part of the system.
+.rs
+.sp .25v
+.H3 "\*(Dd applications are device independent"
+.rs
+.sp -.25v
+\*(Dd is easily portable and is available on several
+different platforms.
+From an application programmer's point of view \*(Dd is 
+device independent. 
+You do not need to 
+modify your \*(Dd application code every time a piece of graphics
+hardware changes.
+You have the flexibility of being able to
+run your software on a wide range of platforms,
+including conventional supercomputers and 
+workstations. 
+That way a large number of users can easily
+share a common graphics interface on a wide variety of platforms.
+.H1 "\*(Dd as a Graphics Architecture"
+\*(Dd provides more than a good graphics environment for application
+programmers.
+The \*(Dd architecture and implementation are extremely flexible.
+Consequently \*(Dd has several unique features that make 
+it attractive to all
+3D graphics developers, including software and hardware vendors.
+.rs
+.sp .25v
+.H3 "\*(Dd is implemented in an object-oriented fashion"
+.rs
+.sp -.25v
+All of the \*(Dd geometric primitives, cameras, lights, and 
+attributes are treated as objects by the \*(Dd system.
+This provides better encapsulation of object properties and
+is a primary contributor to the high level nature of \*(Dd primitives
+and to the simplicity of adding new renderers.
+.rs
+.sp .25v
+.H3 "\*(Dd is extendable"
+.rs
+.sp -.25v
+The \*(Dd graphics application interface is continually being
+expanded to include new graphics capabilities.
+As new graphics features from the research community become more
+widely accepted, they are incorporated into \*(Dd.
+Users can implement their own primitives, and also plug in new
+renderers and device drivers.
+Developers can implement new device drivers and adapt their own
+renderers to \*(Dd, using well-documented interfaces that are 
+included in the \*(Dd library.
+Access to \*(Dd source code is not necessary. 
+.rs
+.sp .25v
+.H3 "\*(Dd does not dictate the characteristics of a new renderer or device"
+.rs
+.sp -.25v
+\*(Dd includes a wide variety of features found in graphics.
+Yet it does not mandate a specific look.
+Certain attributes are supported as chosen by the renderer
+or the device, while others can easily be ignored.
+This allows developers and vendors to provide their own unique
+solutions according to their needs.
+.rs
+.sp .25v
+.H3 "\*(Dd is portable"
+.rs
+.sp -.25v
+\*(Dd is easily portable and is now available on several 
+different platforms.
+Kubota Pacific Computer makes the \*(Dd source code available
+in the form of the Portable \*(Dd product.
+This way \*(Dd offers more than interface specifications.
+Since the source code is easily available \*(Dd can be ported
+by individual developers or by hardware and software vendors.
+.rs
+.sp .25v
+.H3 "\*(Dd provides an open graphics software framework"
+.rs
+.sp -.25v
+\*(Dd provides a complete and flexible 3D graphics software
+framework, where
+components can be replaced or added as alternatives.
+The semantics of this framework are well defined, and the interfaces
+between components are well documented.
+Developers can therefore add to and extend \*(Dd, creating their
+own \*(Dd configurations.
+This way \*(Dd provides value-added product opportunities for graphics
+software vendors and hardware graphics systems vendors.

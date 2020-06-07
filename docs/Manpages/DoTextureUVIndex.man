@@ -1,0 +1,63 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DoTextureUVIndex 3D "Dore"
+.SH NAME
+DoTextureUVIndex \- Create a texture attribute object that specifies 
+which \f2uv\fP coordinates of a primitive object to use
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+DtObject DoTextureUVIndex(index)
+DtInt index;
+.sp
+.in  -.5i
+FORTRAN:
+.in  +.5i
+INTEGER*4 DOTUVI(INDEX)
+INTEGER*4 INDEX
+.in  -.5i
+.fi 
+.IX "DoTextureUVIndex"
+.IX "DOTUVI"
+.SH DESCRIPTION
+.LP
+\f2DoTextureUVIndex\fP creates a texture attribute object that
+specifies which set of \f2uv\fP coordinates in a primitive object to use
+when doing 2-dimensional texture mapping.
+Each primitive object can have more than one \f2uv\fP coordinate per vertex.
+The \f2uv\fP coordinates for each vertex are numbered from zero, in
+the same order as they were specified when the object was created.
+The parameter \f2index\fP specifies which one to use.
+.SH ERRORS
+\f2DoTextureUVIndex\fP will fail if \f2index\fP is less than zero.
+.TP 15
+[WARNING - value out of range]
+.SH DEFAULTS
+The default value for \f2DoTextureUVIndex\fP is 0.
+.SH SEE ALSO
+.nh
+.na
+DoTextureMapDiffuseColor(3D),
+DoTextureMapEnviron(3D),
+DoTextureMapBump(3D),
+DoTextureMapTranspIntens(3D),
+DoTextureUVWIndex(3D)
+.hy
+.ad
+\&

@@ -1,0 +1,831 @@
+.\"#ident "%W%" %G%
+.\"
+.\" #
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  
+.\" # 
+.\" # KUBOTA GRAPHICS Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\" #
+.\"
+.so ../macros/local.me
+.ds BT "\\*(Dd System Guide
+\.".so .chno
+.PN 61
+.ds CT "Supported Functions
+.ds h1 A
+.L1 S UPPORTED
+.L2 F UNCTIONS
+.CH app
+\*(TT is a list of all \*(Dd functions in alphabetical order. 
+Those functions supported by a particular renderer or device 
+driver are marked with an "X".
+.lp
+Any special notes for a function are footnoted at the end of the table.
+.sp
+.(T "\*(Dd Functions"
+.TS
+tab (:) box;
+cp8 | cp8 | cp8   sp8   sp8   sp8
+cp8 | cp8 | cp8   sp8   sp8   sp8
+cp8 | cp8 | cp8 | cp8 | cp8 | cp8
+cp8 | cp8 | cp8 | cp8 | cp8 | cp8
+cp8 | cp8 | cp8 | cp8 | cp8 | cp8
+lp8 | cp8 | cp8 | cp8 | cp8 | cp8.
+::\f3Dynamic Renderer through Device
+::_
+\*(Dd:Standard:Post-:Standard:Titan:Titan
+Function:Production:Script:X11:3000:3000V
+Name:Renderer:Driver:Driver:Driver:Driver\fP
+=
+DdInqColorEntries:X(1):X:X:X:X
+_
+DdInqColorTableSize:X:X:X:X:X
+_
+DdInqExtent:X(1):X:X:X:X
+_
+DdInqFonts:X:X:X:X:X
+_
+DdInqFrame:X:X:X:X:X
+_
+DdInqNumFonts:X:X:X:X:X
+_
+DdInqPickAperture:X:X:X:X:X
+_
+DdInqPickCallback:X:X:X:X:X
+_
+DdInqPickPathOrder:X:X:X:X:X
+_
+DdInqPixelData:X(1)::X:X:X
+_
+DdInqResolution:X(1):X:X:X:X
+.TE
+.)T
+.bp
+.(T
+.TS
+tab (:) box;
+cp8 | cp8 | cp8   sp8   sp8   sp8
+cp8 | cp8 | cp8   sp8   sp8   sp8
+cp8 | cp8 | cp8 | cp8 | cp8 | cp8
+cp8 | cp8 | cp8 | cp8 | cp8 | cp8
+cp8 | cp8 | cp8 | cp8 | cp8 | cp8
+lp8 | cp8 | cp8 | cp8 | cp8 | cp8.
+::\f3Dynamic Renderer through Device
+::_
+\*(Dd:Standard:Post-:Standard:Titan:Titan
+Function:Production:Script:X11:3000:3000V
+Name:Renderer:Driver:Driver:Driver:Driver\fP
+=
+DdInqShadeMode:X:X:X:X:X
+_
+DdInqShadeRanges:X:X:X:X:X
+_
+DdInqViewport:X:X:X:X:X
+_
+DdInqVisualType:X(1):X:X:X:X
+_
+DdPickObjs:X:X:X:X:X
+_
+DdSetColorEntries:X(1):X:X:X:X
+_
+DdSetFrame:X:X:X:X:X
+_
+DdSetOptions:X(2):X:X:X:X
+_
+DdSetPickAperture:X:X:X:X:X
+_
+DdSetPickCallback:X:X:X:X:X
+_
+DdSetPickPathOrder:X:X:X:X:X
+_
+DdSetShadeMode:X:X:X:X:X
+_
+DdSetShadeRanges:X:X:X:X:X
+_
+DdSetViewport:X:X:X:X:X
+_
+DdUpdate:X:X:X:X:X
+_
+DeAddClass:X:X:X:X:X
+_
+DeCreateObject:X:X:X:X:X
+_
+DeDeleteObject:X:X:X:X:X
+_
+DeExecuteAlternate:X:X:X:X:X
+_
+DeInitializeObjPick:X:X:X:X:X
+_
+DeInqPickable:X:X:X:X:X
+_
+DeInqRenderable:X:X:X:X:X
+_
+DfInqBoundary:X:X:X:X:X
+_
+DfInqJust:X:X:X:X:X
+_
+DfInqViewGroup:X:X:X:X:X
+_
+DfSetBoundary:X:X:X:X:X
+_
+DfSetJust:X:X:X:X:X
+_
+DfUpdate:X:X:X:X:X
+_
+DgAddObj:X:X:X:X:X
+_
+DgAddObjToGroup:X:X:X:X:X
+.TE
+.)T
+.bp
+.(T
+.TS
+tab (:) box;
+cp8 | cp8 | cp8   sp8   sp8   sp8
+cp8 | cp8 | cp8   sp8   sp8   sp8
+cp8 | cp8 | cp8 | cp8 | cp8 | cp8
+cp8 | cp8 | cp8 | cp8 | cp8 | cp8
+cp8 | cp8 | cp8 | cp8 | cp8 | cp8
+lp8 | cp8 | cp8 | cp8 | cp8 | cp8.
+::\f3Dynamic Renderer through Device
+::_
+\*(Dd:Standard:Post-:Standard:Titan:Titan
+Function:Production:Script:X11:3000:3000V
+Name:Renderer:Driver:Driver:Driver:Driver\fP
+=
+DgCheck:X:X:X:X:X
+_
+DgClose:X:X:X:X:X
+_
+DgDelEle:X:X:X:X:X
+_
+DgDelEleBetweenLabels:X:X:X:X:X
+_
+DgDelEleRange:X:X:X:X:X
+_
+DgEmpty:X:X:X:X:X
+_
+DgInqElePtr:X:X:X:X:X
+_
+DgInqObjAtPos:X:X:X:X:X
+_
+DgInqOpen:X:X:X:X:X
+_
+DgInqSize:X:X:X:X:X
+_
+DgOpen:X:X:X:X:X
+_
+DgReplaceObj:X:X:X:X:X
+_
+DgReplaceObjInGroup:X:X:X:X:X
+_
+DgSetElePtr:X:X:X:X:X
+_
+DgSetElePtrRelLabel:X:X:X:X:X
+_
+DoAmbientIntens:X:X:X:X:X
+_
+DoAmbientSwitch:X:X:X:X:X
+_
+DoAnnoText::::X:X
+_
+DoBackfaceCullSwitch:X:X:X:X:X
+_
+DoBackfaceCullable:X:X:X:X:X
+_
+DoBoundingVol:X:X:X:X:X
+_
+DoBoundingVolSwitch:X:X:X:X:X
+_
+DoCallback:X:X:X:X:X
+_
+DoCamera:X:X:X:X:X
+_
+DoCameraMatrix::X:X:X:X
+_
+DoClipSwitch::::X:X
+_
+DoClipVol::::X:X
+_
+DoCompTextureUVCallback:::::X
+_
+DoCompTextureUVSwitch:::::X
+_
+DoCompTextureUVWCallback:::::X
+.TE
+.)T
+.bp
+.(T
+.TS
+tab (:) box;
+cp8 | cp8 | cp8   sp8   sp8   sp8
+cp8 | cp8 | cp8   sp8   sp8   sp8
+cp8 | cp8 | cp8 | cp8 | cp8 | cp8
+cp8 | cp8 | cp8 | cp8 | cp8 | cp8
+cp8 | cp8 | cp8 | cp8 | cp8 | cp8
+lp8 | cp8 | cp8 | cp8 | cp8 | cp8.
+::\f3Dynamic Renderer through Device
+::_
+\*(Dd:Standard:Post-:Standard:Titan:Titan
+Function:Production:Script:X11:3000:3000V
+Name:Renderer:Driver:Driver:Driver:Driver\fP
+=
+DoCompTextureUVWSwitch:::::X
+_
+DoDataPtr:X:X:X:X:X
+_
+DoDataVal:X:X:X:X:X
+_
+DoDepthCue::::X:X
+_
+DoDepthCueSwitch::::X:X
+_
+DoDevice:X:X:X:X:X
+_
+DoDiffuseColor:X:X:X:X:X
+_
+DoDiffuseIntens:X:X:X:X:X
+_
+DoDiffuseSwitch:X:X:X:X:X
+_
+DoExecSet:X:X:X:X:X
+_
+DoFileRaster:X:X:X:X:X
+_
+DoFilter:X:X:X:X:X
+_
+DoFrame:X:X:X:X:X
+_
+DoGlbRendMaxObjs:X::::
+_
+DoGlbRendMaxSub:X::::
+_
+DoGlbRendRayLevel:X::::
+_
+DoGroup:X:X:X:X:X
+_
+DoHiddenSurfSwitch:::X:X:X
+_
+DoInLineGroup:X:X:X:X:X
+_
+DoInputSlot:X:X:X:X:X
+_
+DoInterpType::::
+    DcConstantShade::X:X:X:X
+    DcVertexShade::X:X:X:X
+    DcSurfaceShade:X::::
+_
+DoInvisSwitch:X:X:X:X:X
+_
+DoLabel:X:X:X:X:X
+_
+DoLight:X:X:X:X:X
+_
+DoLightAttenuation::::X:X
+_
+DoLightColor:X:X:X:X:X
+_
+DoLightIntens:X:X:X:X:X
+.TE
+.)T
+.bp
+.(T
+.TS
+tab (:) box;
+cp8 | cp8 | cp8   sp8   sp8   sp8
+cp8 | cp8 | cp8   sp8   sp8   sp8
+cp8 | cp8 | cp8 | cp8 | cp8 | cp8
+cp8 | cp8 | cp8 | cp8 | cp8 | cp8
+cp8 | cp8 | cp8 | cp8 | cp8 | cp8
+lp8 | cp8 | cp8 | cp8 | cp8 | cp8.
+::\f3Dynamic Renderer through Device
+::_
+\*(Dd:Standard:Post-:Standard:Titan:Titan
+Function:Production:Script:X11:3000:3000V
+Name:Renderer:Driver:Driver:Driver:Driver\fP
+=
+DoLightSpreadAngles::::X:X
+_
+DoLightSpreadExp::::X:X
+_
+DoLightSwitch::X:X:X:X
+_
+DoLightType::X:X:X:X
+    DcLightAmbient:X:X:X:X:X
+    DcLightInfinite:X:X:X:X:X
+    DcLightPoint::::X:X
+    DcLightPointAttn::::X:X
+    DcLightSpot::::X:X
+    DcLightSpotAttn::::X:X
+_
+DoLineList::X:X:X:X
+_
+DoLineType:::::
+_
+DoLineWidth:::::X
+_
+DoLocalAntiAliasStyle:::::X
+_
+DoLocalAntiAliasSwitch:::::X
+_
+DoLookAtFrom:X:X:X:X:X
+_
+DoMarkerFont::X:X:X:X
+_
+DoMarkerGlyph::X:X:X:X
+_
+DoMarkerScale::X:X:X:X
+_
+DoMatrix:X:X:X:X:X
+_
+DoMinBoundingVolExt:X:X:X:X:X
+_
+DoNURBSurf:X:X:X:X:X
+_
+DoNameSet:X:X:X:X:X
+_
+DoParallel:X:X:X:X:X
+_
+DoPatch:X:X:X:X:X
+_
+DoPerspective:X:X:X:X:X
+_
+DoPickID:X:X:X:X:X
+_
+DoPickSwitch:X:X:X:X:X
+_
+DoPointList::X:X:X:X
+_
+DoPolygon:X:X:X:X:X
+.TE
+.)T
+.bp
+.(T
+.TS
+tab (:) box;
+cp8 | cp8 | cp8   sp8   sp8   sp8
+cp8 | cp8 | cp8   sp8   sp8   sp8
+cp8 | cp8 | cp8 | cp8 | cp8 | cp8
+cp8 | cp8 | cp8 | cp8 | cp8 | cp8
+cp8 | cp8 | cp8 | cp8 | cp8 | cp8
+lp8 | cp8 | cp8 | cp8 | cp8 | cp8.
+::\f3Dynamic Renderer through Device
+::_
+\*(Dd:Standard:Post-:Standard:Titan:Titan
+Function:Production:Script:X11:3000:3000V
+Name:Renderer:Driver:Driver:Driver:Driver\fP
+=
+DoPolygonMesh:X:X:X:X:X
+_
+DoPolyline::X:X:X:X
+_
+DoPolymarker::X:X:X:X
+_
+DoPopAtts:X:X:X:X:X
+_
+DoPopMatrix:X:X:X:X:X
+_
+DoPrimSurf:::::
+    DcSphere:X:X:X:X:X
+    DcCylinder:X:X:X:X:X
+    DcBox:X:X:X:X:X
+    DcCone:X:X:X:X:X
+_
+DoProjection::X:X:X:X
+_
+DoPushAtts:X:X:X:X:X
+_
+DoPushMatrix:X:X:X:X:X
+_
+DoQuadList:X:X:X:X:X
+_
+DoQuadMesh:X:X:X:X:X
+_
+DoRaster:X:X:X:X:X
+_
+DoReflectionSwitch:X::::
+_
+DoRefractionIndex:::::
+_
+DoRefractionSwitch:::::
+_
+DoRepType:::::
+    DcPoints::X:X:X:X
+    DcWireframe::X:X:X:X
+    DcSurface:X:X:X:X:X
+    DcOutlines:::::X
+    DcSurfaceWireframeEdges:::::X
+    DcSurfaceOutlineEdges:::::X
+_
+DoRotate:X:X:X:X:X
+_
+DoSampleAdaptive:::::
+_
+DoSampleAdaptiveSwitch:::::
+_
+DoSampleFilter:::::X
+_
+DoSampleJitter:::::
+.TE
+.)T
+.bp
+.(T
+.TS
+tab (:) box;
+cp8 | cp8 | cp8   sp8   sp8   sp8
+cp8 | cp8 | cp8   sp8   sp8   sp8
+cp8 | cp8 | cp8 | cp8 | cp8 | cp8
+cp8 | cp8 | cp8 | cp8 | cp8 | cp8
+cp8 | cp8 | cp8 | cp8 | cp8 | cp8
+lp8 | cp8 | cp8 | cp8 | cp8 | cp8.
+::\f3Dynamic Renderer through Device
+::_
+\*(Dd:Standard:Post-:Standard:Titan:Titan
+Function:Production:Script:X11:3000:3000V
+Name:Renderer:Driver:Driver:Driver:Driver\fP
+=
+DoSampleJitterSwitch:::::
+_
+DoSampleSuper:::::X
+_
+DoSampleSuperSwitch:::::X
+_
+DoScale:X:X:X:X:X
+_
+DoShadeIndex::X:X:X:X
+_
+DoShadowSwitch:X::::X(3)
+_
+DoShear:X:X:X:X:X
+_
+DoSimplePolygon:X:X:X:X:X
+_
+DoSimplePolygonMesh:X:X:X:X:X
+_
+DoSpecularColor:X:X:X:X:X
+_
+DoSpecularFactor::X:X:X:X
+_
+DoSpecularIntens:X:X:X:X:X
+_
+DoSpecularSwitch:X:X:X:X:X
+_
+DoSphereList:X:X:X:X:X
+_
+DoStereo::::X:
+_
+DoStereoSwitch::::X:
+_
+DoSubDivSpec::X:X:X:X
+_
+DoSurfaceEdgeColor:::::X
+_
+DoSurfaceShade:::::
+    DcShaderConstant::X:X:X:X
+    DcShaderLightSource::X:X:X:X:X
+    DoCallback::X:X:X:X
+_
+DoText:X(4):X:X:X:X
+_
+DoTextAlign:X:X:X:X:X
+_
+DoTextExpFactor:X:X:X:X:X
+_
+DoTextFont:X:X:X:X:X
+_
+DoTextHeight:X:X:X:X:X
+_
+DoTextPath:X:X:X:X:X
+_
+DoTextPrecision:X:X:X:X:X
+_
+DoTextSpace:X:X:X:X:X
+.TE
+.)T
+.bp
+.(T
+.TS
+tab (:) box;
+cp8 | cp8 | cp8   sp8   sp8   sp8
+cp8 | cp8 | cp8   sp8   sp8   sp8
+cp8 | cp8 | cp8 | cp8 | cp8 | cp8
+cp8 | cp8 | cp8 | cp8 | cp8 | cp8
+cp8 | cp8 | cp8 | cp8 | cp8 | cp8
+lp8 | cp8 | cp8 | cp8 | cp8 | cp8.
+::\f3Dynamic Renderer through Device
+::_
+\*(Dd:Standard:Post-:Standard:Titan:Titan
+Function:Production:Script:X11:3000:3000V
+Name:Renderer:Driver:Driver:Driver:Driver\fP
+=
+DoTextUpVector:X:X:X:X:X
+_
+DoTextureAntiAlias:::::X
+_
+DoTextureExtendUV:::::X
+_
+DoTextureExtendUVW:::::X
+_
+DoTextureIntermediateSurf:::::
+_
+DoTextureMapBump:::::
+_
+DoTextureMapBumpSwitch:::::
+_
+DoTextureMapDiffuseColor:::::X
+_
+DoTextureMapDiffuseColorSwitch:::::X
+_
+DoTextureMapEnviron:::::X
+_
+DoTextureMapEnvironSwitch:::::X
+_
+DoTextureMapTranspIntens:::::
+_
+DoTextureMapTranspIntensSwitch:::::
+_
+DoTextureMatrixUV:::::X
+_
+DoTextureMatrixUVW:::::X
+_
+DoTextureOp:::::X
+_
+DoTextureScaleUV:::::X
+_
+DoTextureScaleUVW:::::X
+_
+DoTextureTranslateUV:::::X
+_
+DoTextureTranslateUVW:::::X
+_
+DoTextureUVIndex:::::X
+_
+DoTextureUVWIndex:::::X
+_
+DoTorus:X:X:X:X:X
+_
+DoTransformMatrix:X:X:X:X:X
+_
+DoTranslate:X:X:X:X:X
+_
+DoTranspColor:X::::
+_
+DoTranspIntens:X:::X:X
+_
+DoTranspOrientColor:::::
+_
+DoTranspOrientExp:::::
+_
+DoTranspOrientIntens:::::
+.TE
+.)T
+.bp
+.(T
+.TS
+tab (:) box;
+cp8 | cp8 | cp8   sp8   sp8   sp8
+cp8 | cp8 | cp8   sp8   sp8   sp8
+cp8 | cp8 | cp8 | cp8 | cp8 | cp8
+cp8 | cp8 | cp8 | cp8 | cp8 | cp8
+cp8 | cp8 | cp8 | cp8 | cp8 | cp8
+lp8 | cp8 | cp8 | cp8 | cp8 | cp8.
+::\f3Dynamic Renderer through Device
+::_
+\*(Dd:Standard:Post-:Standard:Titan:Titan
+Function:Production:Script:X11:3000:3000V
+Name:Renderer:Driver:Driver:Driver:Driver\fP
+=
+DoTranspOrientSwitch:::::
+_
+DoTranspSwitch:X:::X:X
+_
+DoTriangleList:X:X:X:X:X
+_
+DoTriangleMesh:X:X:X:X:X
+_
+DoTriangleStrip:X:X:X:X:X
+_
+DoVarLineList::X:X:X:X
+_
+DoVarPointList::X:X:X:X
+_
+DoVarSimplePolygonMesh:X:X:X:X:X
+_
+DoVarTriangleMesh:X:X:X:X:X
+_
+DoVarTriangleStrip:X:X:X:X:X
+_
+DoView:X:X:X:X:X
+_
+DpUpdVarLineList::X:X:X:X
+_
+DpUpdVarPointList::X:X:X:X
+_
+DpUpdVarSimplePolygonMesh:X:X:X:X:X
+_
+DpUpdVarSimplePolygonMeshUV:::::X
+_
+DpUpdVarSimplePolygonMeshUVW:::::X
+_
+DpUpdVarTriangleMesh:X:X:X:X:X
+_
+DpUpdVarTriangleMeshUV:::::X
+_
+DpUpdVarTriangleMeshUVW:::::X
+_
+DpUpdVarTriangleStrip:X:X:X:X:X
+_
+DpUpdVarTriangleStripUV:::::X
+_
+DpUpdVarTriangleStripUVW:::::X
+_
+DsCompBoundingVol:X:X:X:X:X
+_
+DsExecuteObj:X:X:X:X:X
+_
+DsExecutionAbort:X:X:X:X:X
+_
+DsExecutionReturn:X:X:X:X:X
+_
+DsFileRasterRead:X:X:X:X:X
+_
+DsHoldObj:X:X:X:X:X
+_
+DsInitialize:X:X:X:X:X
+_
+DsInputValue:X:X:X:X:X
+.TE
+.)T
+.bp
+.(T
+.TS
+tab (:) box;
+cp8 | cp8 | cp8   sp8   sp8   sp8
+cp8 | cp8 | cp8   sp8   sp8   sp8
+cp8 | cp8 | cp8 | cp8 | cp8 | cp8
+cp8 | cp8 | cp8 | cp8 | cp8 | cp8
+cp8 | cp8 | cp8 | cp8 | cp8 | cp8
+lp8 | cp8 | cp8 | cp8 | cp8 | cp8.
+::\f3Dynamic Renderer through Device
+::_
+\*(Dd:Standard:Post-:Standard:Titan:Titan
+Function:Production:Script:X11:3000:3000V
+Name:Renderer:Driver:Driver:Driver:Driver\fP
+=
+DsInqAngleUnits:X:X:X:X:X
+_
+DsInqClassId:X:X:X:X:X
+_
+DsInqCurrentMethod:X:X:X:X:X
+_
+DsInqDriverInfo:X:X:X:X:X
+_
+DsInqErrorMessage:X:X:X:X:X
+_
+DsInqErrorVars:X:X:X:X:X
+_
+DsInqExeDepthLimit:X:X:X:X:X
+_
+DsInqHoldObj:X:X:X:X:X
+_
+DsInqMethodId:X:X:X:X:X
+_
+DsInqNumDrivers:X:X:X:X:X
+_
+DsInqNumRenderers:X:X:X:X:X
+_
+DsInqObj:X:X:X:X:X
+_
+DsInqObjClassId:X:X:X:X:X
+_
+DsInqObjName:X:X:X:X:X
+_
+DsInqObjStatus:X:X:X:X:X
+_
+DsInqRaster:X:X:X:X:X
+_
+DsInqRendererId:X:X:X:X:X
+_
+DsInqRendererNames:X:X:X:X:X
+_
+DsInqSafeFlag:X:X:X:X:X
+_
+DsInqValuatorGroup:X:X:X:X:X
+_
+DsInqVersion:X:X:X:X:X
+_
+DsPrintObj:X:X:X:X:X
+_
+DsRasterUpdate:X:X:X:X:X
+_
+DsRasterWrite:X:X:X:X:X
+_
+DsReleaseObj:X:X:X:X:X
+_
+DsSetAngleUnits:X:X:X:X:X
+_
+DsSetErrorVars:X:X:X:X:X
+_
+DsSetExeDepthLimit:X:X:X:X:X
+_
+DsSetObjName:X:X:X:X:X
+_
+DsSetSafeFlag:X:X:X:X:X
+.TE
+.)T
+.bp
+.(T
+.TS
+tab (:) box;
+cp8 | cp8 | cp8   sp8   sp8   sp8
+cp8 | cp8 | cp8   sp8   sp8   sp8
+cp8 | cp8 | cp8 | cp8 | cp8 | cp8
+cp8 | cp8 | cp8 | cp8 | cp8 | cp8
+cp8 | cp8 | cp8 | cp8 | cp8 | cp8
+lp8 | cp8 | cp8 | cp8 | cp8 | cp8.
+::\f3Dynamic Renderer through Device
+::_
+\*(Dd:Standard:Post-:Standard:Titan:Titan
+Function:Production:Script:X11:3000:3000V
+Name:Renderer:Driver:Driver:Driver:Driver\fP
+=
+DsTerminate:X:X:X:X:X
+_
+DsTextureUVCount:X:X:X:X:X
+_
+DsTextureUVWCount:X:X:X:X:X
+_
+DsUpdateAllViews:X:X:X:X:X
+_
+DsValuatorSwitch:X:X:X:X:X
+_
+DvInqActiveCamera:X:X:X:X:X
+_
+DvInqBackgroundColor:::::X
+_
+DvInqBackgroundJust:::::X
+_
+DvInqBackgroundRaster:::::X
+_
+DvInqBoundary:X:X:X:X:X
+_
+DvInqClearFlag:X:X:X:X:X
+_
+DvInqDefinitionGroup:X:X:X:X:X
+_
+DvInqDisplayGroup:X:X:X:X:X
+_
+DvInqRendStyle:X:X:X:X:X
+_
+DvInqShadeIndex:X:X:X:X:X
+_
+DvInqUpdateType:X:X:X:X:X
+_
+DvSetActiveCamera:X:X:X:X:X
+_
+DvSetBackgroundColor:X:X:X:X:X
+_
+DvSetBackgroundJust:::::X
+_
+DvSetBackgroundRaster:::::X
+_
+DvSetBoundary:X:X:X:X:X
+_
+DvSetClearFlag:X:X:X:X:X
+_
+DvSetRendStyle:X:X:X:X:X
+_
+DvSetShadeIndex:X:X:X:X:X
+_
+DvSetUpdateType:X:X:X:X:X
+_
+DvUpdate:X:X:X:X:X
+.TE
+.)T
+.ps 11
+.H3 "Notes
+.np
+These device functions are device-dependent.  As such, the device
+being used in conjunction with the standard production renderer
+ultimately dictates whether this function is supported.
+.np
+The options that can be set or modified through \f2DdSetOptions\f1
+vary from device to device.
+.np
+Normally the \f2DoShadowSwitch\fP attribute specifies whether or not
+subsequent primitives should be rendered with shadows.
+The Titan 3000V driver uses the attribute differently and
+interprets \f2DoShadowSwitch(DcOn)\fP to mean that
+subsequent primitives can \f2cast\fP shadows.
+.np
+Only polygonal fonts like \f2DcHelvetica\f1 are supported.

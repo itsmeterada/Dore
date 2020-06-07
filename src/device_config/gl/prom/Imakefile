@@ -1,0 +1,9 @@
+#include <Dore.tmpl>
+
+    SRCS = gl_prom.c
+    OBJS = gl_prom.o
+
+LibraryObjectRule()
+SubdirLibraryRule($(OBJS))
+
+DependTarget()

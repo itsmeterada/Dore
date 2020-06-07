@@ -1,0 +1,2174 @@
+.\"#ident "%W%" %G%
+.\"
+.\" Copyright (C) 1988, 1989, 1990, 1991 by Kubota Pacific Computer Inc.
+.\"         All Rights Reserved
+.\" This program is a trade secret of Kubota Pacific Computer Inc. and
+.\" it is not to be reproduced, published, disclosed to others, copied,
+.\" adapted, distributed, or displayed without the prior authorization
+.\" of Kubota Pacific Computer Inc.  Licensee agrees to attach or embed
+.\" this Notice on all copies of the program, including partial copies
+.\" or modified versions thereof.
+.\"
+.ds BT "\\*(Dd Programmer's Guide
+.ds CT "Index
+.so ../macros/local.me
+.L1 I NDEX
+.PN 323
+.CH
+.rs
+.sp -3v
+.IH A
+.I1 absolute group definition
+\%\f36:\f1128, 131-132
+.I1 active camera
+\%\f38:\f1162; \%\f39:\f1204
+.I1 adaptive sampling
+\%\f38:\f1165
+.I1 alpha
+\%\f314:\f1275
+.I1 alternate representation objects
+\%\f310:\f1211; \%\f311:\f1225, 238; \%\f313:\f1253-257, 263, 265-267, 269 273; \%\f315:\f1300
+.I1 ambient
+\%\f31:\f11; \%\f32:\f18; \%\f35:\f193, 104-105, 108, 115; \%\f38:\f1166-167, 174
+.I2 color
+\%\f32:\f18
+.I2 intensity
+\%\f35:\f1108
+.I2 light
+\%\f35:\f1104-105, 115; \%\f38:\f1166-167, 174
+.I1 angle
+\%\f32:\f110
+.I1 antialiasing
+\%\f35:\f193, 98, 102-103, 115; \%\f38:\f1153, 164, 166, 174; \%\f315:\f1285, 287, 291, 309
+.I2 local 
+\%\f35:\f193, 98, 102-103, 115; \%\f38:\f1166
+.I1 aperture, pick
+\%\f310:\f1205, 211, 215
+.I1 aspect ratio
+\%\f37:\f1143; \%\f38:\f1156; \%\f39:\f1179, 183
+.I1 attributes
+.I2 default values
+\%\f32:\f19
+.I2 global rendering
+\%\f38:\f1153, 163, 173
+.I2 primitive 
+\%\f32:\f112; \%\f33:\f138; \%\f34:\f157; \%\f35:\f194, 98, 103-106, 114; \%\f37:\f1134-135, 152; \%\f38:\f1153-154, 166, 173; \%\f315:\f1286, 288, 290, 310
+.I2 stacking
+\%\f33:\f139, 41; \%\f35:\f193; \%\f37:\f1133; \%\f38:\f1173
+.I1 autosizing
+\%\f39:\f1183
+.IH B
+.I1 backface culling
+\%\f35:\f198, 102, 115; \%\f310:\f1208-209, 224
+.I1 background color
+\%\f39:\f1176, 178, 204
+.I1 base primitives
+\%\f310:\f1211; \%\f313:\f1253-254, 269, 272-273
+.I1 bit compression
+\%\f39:\f1198-199, 203-204
+.I1 boundary, view
+\%\f39:\f1176, 178, 181, 183, 204
+.I1 bounding volume
+\%\f310:\f1205-206, 209-211, 223-224; \%\f311:\f1225, 238; \%\f313:\f1257, 266
+.IH C
+.I1 C constants
+.I2 DcBeginning
+\%\f33:\f146, 50; \%\f39:\f1192
+.I2 DcBottomFirst
+\%\f310:\f1216, 220-221
+.I2 DcBox
+\%\f32:\f17, 12, 21; \%\f33:\f134, 37; \%\f34:\f158; \%\f35:\f1109; \%\f36:\f1120-121; \%\f310:\f1216; \%\f311:\f1227, 239; \%\f315:\f1300
+.I2 DcComplex
+\%\f34:\f173, 76
+.I2 DcComponent
+\%\f39:\f1198-199
+.I2 DcConcave
+\%\f34:\f173
+.I2 DcCone
+\%\f34:\f158; \%\f35:\f195; \%\f36:\f1121; \%\f39:\f1192; \%\f315:\f1300
+.I2 DcConstantShade
+\%\f34:\f164; \%\f35:\f1108
+.I2 DcConvex
+\%\f34:\f173-74, 84; \%\f313:\f1268; \%\f315:\f1293, 295, 297
+.I2 DcCylinder
+\%\f32:\f17, 11, 21; \%\f33:\f134, 37, 43, 46; \%\f34:\f158; \%\f35:\f195; \%\f36:\f1125; \%\f39:\f1192; \%\f310:\f1216; \%\f315:\f1300, 307
+.I2 DcDeleteData
+\%\f314:\f1278-280
+.I2 DcErrorFatal
+\%\f312:\f1243
+.I2 DcErrorMinor
+\%\f312:\f1243
+.I2 DcErrorSevere
+\%\f312:\f1243
+.I2 DcExtendBlack
+\%\f315:\f1298-299
+.I2 DcExtendClamp
+\%\f315:\f1298-299
+.I2 DcExtendNone
+\%\f315:\f1298
+.I2 DcExtendRepeat
+\%\f315:\f1299-300
+.I2 DcFalse
+\%\f33:\f140, 50, 53; \%\f34:\f179-81, 83-84; \%\f310:\f1216; \%\f312:\f1241, 243; \%\f313:\f1262, 268; \%\f314:\f1280
+.I2 DcGothicItalian
+\%\f37:\f1149-150
+.I2 DcHitAccept
+\%\f310:\f1221-222
+.I2 DcHitOverwrite
+\%\f310:\f1221
+.I2 DcHitReject
+\%\f310:\f1221-222
+.I2 DcInvisibilityInclusion
+\%\f311:\f1235
+.I2 DcLightSpotAttn
+\%\f38:\f1169
+.I2 DcLoc
+\%\f34:\f161-63, 67, 69, 71, 74, 76, 80-81, 84; \%\f35:\f1103; \%\f313:\f1268; \%\f315:\f1292-293, 295, 297
+.I2 DcLocalAntiAliasBest
+\%\f35:\f1103
+.I2 DcLocalAntiAliasFast
+\%\f35:\f1103
+.I2 DcLocalAntiAliasIntermediate
+\%\f35:\f1103
+.I2 DcLocClr
+\%\f34:\f162, 64-65; \%\f315:\f1292
+.I2 DcLocNrm
+\%\f34:\f161-293, 63, 70; \%\f315:\f1292
+.I2 DcLocNrmClr
+\%\f34:\f162, 64-65; \%\f315:\f1292
+.I2 DcMapAdd
+\%\f315:\f1288-289
+.I2 DcMapReplace
+\%\f314:\f1282; \%\f315:\f1288-289, 293, 295, 297, 307
+.I2 DcMethodCmpBndVolume
+\%\f313:\f1257, 259, 266
+.I2 DcMethodDestroy
+\%\f313:\f1257, 259, 264
+.I2 DcMethodDynRender
+\%\f313:\f1257, 259, 269-270
+.I2 DcMethodGlbrndIniObjs
+\%\f313:\f1257, 269-270
+.I2 DcMethodPick
+\%\f313:\f1257, 259, 266
+.I2 DcMethodPrint
+\%\f313:\f1257, 259, 263
+.I2 DcMethodStdRenderDisplay
+\%\f313:\f1257, 259, 269-270
+.I2 DcMethodUpdStdAltObj
+\%\f313:\f1257, 259, 267, 269-270
+.I2 DcNameString
+\%\f312:\f1241
+.I2 DcNullObject
+\%\f38:\f1162-270; \%\f311:\f1227, 230; \%\f312:\f1250; \%\f313:\f1268; \%\f314:\f1280; \%\f315:\f1290
+.I2 DcNullPtr
+\%\f34:\f188-89; \%\f310:\f1215-216, 222; \%\f312:\f1243, 250; \%\f313:\f1259, 262; \%\f314:\f1276, 279-280, 283
+.I2 DcOff
+\%\f38:\f1166, 173; \%\f39:\f1192
+.I2 DcOn
+\%\f35:\f1103, 109; \%\f38:\f1173; \%\f310:\f1211, 216; \%\f315:\f1289, 293, 295, 297, 307
+.I2 DcOutlines
+\%\f35:\f199
+.I2 DcPickClosest
+\%\f310:\f1221
+.I2 DcPickFirst
+\%\f310:\f1221
+.I2 DcPlainRoman
+\%\f37:\f1145
+.I2 DcPoints
+\%\f35:\f198
+.I2 DcProductionTime
+\%\f32:\f117; \%\f310:\f1207
+.I2 DcPseudoColor
+\%\f39:\f1198-199, 202
+.I2 DcRange
+\%\f39:\f1198, 202
+.I2 DcRasterRGB
+\%\f314:\f1277, 280
+.I2 DcRasterRGBA
+\%\f314:\f1278
+.I2 DcRasterSpecial
+\%\f314:\f1277
+.I2 DcReadTrunc
+\%\f312:\f1243
+.I2 DcReadUnsuc
+\%\f312:\f1243
+.I2 DcRealTime
+\%\f32:\f117; \%\f39:\f1178, 181; \%\f310:\f1207, 216
+.I2 DcRGB
+\%\f32:\f18, 11, 21; \%\f33:\f131-34, 37, 43, 46; \%\f34:\f159-60, 63-65, 67, 69-71, 74, 76, 80-81, 84, 89; \%\f35:\f195, 103, 106, 109; \%\f36:\f1125; \%\f39:\f1192, 199, 202; \%\f311:\f1227; \%\f313:\f1268; \%\f315:\f1293, 295, 297
+.I2 DcRotZSlot
+\%\f312:\f1249
+.I2 DcScaleXSlot
+\%\f312:\f1249
+.I2 DcScaleZSlot
+\%\f312:\f1249
+.I2 DcSetAdd
+\%\f311:\f1235
+.I2 DcSetDelete
+\%\f311:\f1231
+.I2 DcSphere
+\%\f32:\f17, 21; \%\f33:\f131-34, 37; \%\f34:\f158; \%\f35:\f195; \%\f39:\f1192; \%\f310:\f1216; \%\f311:\f1227; \%\f313:\f1271; \%\f315:\f1300
+.I2 DcStd3dTableLookup
+\%\f315:\f1289-290
+.I2 DcStdCubeEnvironMap
+\%\f315:\f1290
+.I2 DcSubDivAbsolute
+\%\f35:\f1100
+.I2 DcSubDivFixed
+\%\f35:\f1100
+.I2 DcSubDivRelative
+\%\f33:\f134, 46; \%\f35:\f195, 101, 109
+.I2 DcSubDivSegments
+\%\f32:\f121; \%\f35:\f1100
+.I2 DcSurface
+\%\f33:\f131-34, 37; \%\f34:\f189; \%\f35:\f195, 99, 109; \%\f39:\f1192; \%\f311:\f1227
+.I2 DcSurfaceOutlineEdges
+\%\f35:\f199
+.I2 DcSurfaceShade
+\%\f34:\f163; \%\f35:\f1108-109
+.I2 DcSurfaceWireframeEdges
+\%\f35:\f199
+.I2 DcTextHAlignCenter
+\%\f37:\f1138, 146, 148, 150
+.I2 DcTextHAlignLeft
+\%\f37:\f1138, 140, 146
+.I2 DcTextHAlignNormal
+\%\f37:\f1138
+.I2 DcTextHAlignRight
+\%\f37:\f1138-139
+.I2 DcTextPathDown
+\%\f37:\f1136, 146, 148
+.I2 DcTextPathLeft
+\%\f37:\f1136
+.I2 DcTextPathRight
+\%\f37:\f1136, 146
+.I2 DcTextPathUp
+\%\f37:\f1136
+.I2 DcTextureAdd
+\%\f315:\f1308
+.I2 DcTextureBlend
+\%\f315:\f1308
+.I2 DcTextureMultiply
+\%\f315:\f1308
+.I2 DcTextureReplace
+\%\f315:\f1308-309
+.I2 DcTextVAlignBase
+\%\f37:\f1140
+.I2 DcTextVAlignBottom
+\%\f37:\f1140, 142, 146
+.I2 DcTextVAlignCap
+\%\f37:\f1140, 146, 148
+.I2 DcTextVAlignHalf
+\%\f37:\f1138, 140, 146, 150
+.I2 DcTextVAlignNormal
+\%\f37:\f1140
+.I2 DcTextVAlignTop
+\%\f37:\f1140
+.I2 DcTopFirst
+\%\f310:\f1220
+.I2 DcTransXSlot
+\%\f312:\f1249
+.I2 DcTransZSlot
+\%\f312:\f1249
+.I2 DcTrue
+\%\f32:\f111-14, 21; \%\f33:\f131-34, 37-38, 40, 43, 46, 50; \%\f34:\f179, 83, 89; \%\f35:\f195, 109; \%\f36:\f1121, 125; \%\f37:\f1146, 150; \%\f38:\f1159, 161; \%\f39:\f1181, 186, 192; \%\f310:\f1209, 216; \%\f311:\f1227, 235, 238; \%\f312:\f1243; \%\f313:\f1262
+.I2 DcTrueColor
+\%\f32:\f117, 21
+.I2 DcTypeAny
+\%\f312:\f1242
+.I2 DcUpdateAll
+\%\f39:\f1184; \%\f310:\f1206
+.I2 DcUpdateDisplay
+\%\f33:\f146; \%\f39:\f1184; \%\f310:\f1206, 208
+.I2 DcVertexShade
+\%\f34:\f163; \%\f35:\f1108
+.I2 DcWireframe
+\%\f32:\f121; \%\f33:\f134, 37, 46; \%\f35:\f195, 98
+.I2 DcXAxis
+\%\f32:\f110-11, 21; \%\f33:\f134, 37, 43, 46; \%\f34:\f189; \%\f36:\f1121, 125; \%\f39:\f1192
+.I2 DcYAxis
+\%\f33:\f143, 46, 53; \%\f35:\f1109; \%\f36:\f1121
+.I1 C device functions
+.I2 DdInqExtent
+\%\f39:\f1181; \%\f310:\f1216
+.I2 DdInqPixelData
+\%\f314:\f1280, 284
+.I2 DdInqViewport
+\%\f39:\f1189
+.I2 DdPickObjs
+\%\f310:\f1211, 213-216, 223-224
+.I2 DdSetColorEntries
+\%\f39:\f1198-199, 202
+.I2 DdSetFrame
+\%\f32:\f117, 21; \%\f39:\f1177, 181, 186, 189, 192; \%\f310:\f1216
+.I2 DdSetPickAperture
+\%\f310:\f1211
+.I2 DdSetPickCallback
+\%\f310:\f1216, 221-222
+.I2 DdSetPickPathOrder
+\%\f310:\f1216, 220-221, 223
+.I2 DdSetShadeMode
+\%\f39:\f1198-199, 202
+.I2 DdSetShadeRanges
+\%\f39:\f1202
+.I2 DdSetViewport
+\%\f39:\f1177, 183
+.I2 DdUpdate
+\%\f32:\f117, 21; \%\f33:\f132, 53; \%\f34:\f189; \%\f35:\f194; \%\f39:\f1177, 181, 184, 192; \%\f310:\f1206, 216, 223; \%\f311:\f1227
+.I1 C extension functions
+.I2 DeAddClass
+\%\f313:\f1259, 261
+.I2 DeCreateObject
+\%\f313:\f1256, 261-262
+.I2 DeDeleteObject
+\%\f313:\f1264-265
+.I2 DeExecuteAlternate
+\%\f313:\f1257, 266-267, 269-270
+.I2 DeInitializeObjPick
+\%\f313:\f1266-267
+.I2 DeInqPickable
+\%\f313:\f1267
+.I2 DeInqRenderable
+\%\f313:\f1269-270
+.I1 C frame functions
+.I2 DfInqViewGroup
+\%\f32:\f116, 21; \%\f39:\f1176, 179, 181, 186, 189, 192; \%\f310:\f1216
+.I2 DfSetBoundary
+\%\f39:\f1179, 181, 183, 189, 192; \%\f310:\f1216
+.I2 DfSetJust
+\%\f39:\f1179, 183
+.I2 DfUpdate
+\%\f33:\f132, 54; \%\f35:\f194; \%\f39:\f1184; \%\f310:\f1206, 223
+.I1 C group functions
+.I2 DgAddObj
+\%\f32:\f110-14, 21; \%\f33:\f131-34, 37-40, 43, 46, 50, 53; \%\f34:\f189; \%\f35:\f195, 103, 109; \%\f36:\f1121, 125; \%\f37:\f1146, 150; \%\f38:\f1159, 161; \%\f39:\f1186, 192, 202; \%\f310:\f1209, 216; \%\f311:\f1227, 230, 235, 238; \%\f313:\f1271; \%\f314:\f1282; \%\f315:\f1289-239, 293, 295, 297, 307
+.I2 DgAddObjToGroup
+\%\f32:\f115-16, 21; \%\f33:\f128, 32, 39; \%\f34:\f189; \%\f39:\f1176-177, 179, 181, 186, 189, 192; \%\f310:\f1216; \%\f312:\f1250
+.I2 DgCheck
+\%\f33:\f140
+.I2 DgClose
+\%\f32:\f111-14, 21; \%\f33:\f131-34, 37, 39, 43, 46, 50; \%\f34:\f189; \%\f35:\f195, 109; \%\f36:\f1121, 125; \%\f37:\f1146, 150; \%\f38:\f1159, 161; \%\f39:\f1186, 192; \%\f310:\f1209, 216; \%\f311:\f1227, 235, 238
+.I2 DgDelEle
+\%\f33:\f132, 39
+.I2 DgDelEleBetweenLabels
+\%\f33:\f139
+.I2 DgDelEleRange
+\%\f33:\f139
+.I2 DgEmpty
+\%\f33:\f139
+.I2 DgInqElePtr
+\%\f33:\f140
+.I2 DgInqObjAtPos
+\%\f33:\f140
+.I2 DgInqOpen
+\%\f33:\f132, 40
+.I2 DgInqSize
+\%\f33:\f140
+.I2 DgOpen
+\%\f33:\f132, 39-40, 50
+.I2 DgReplaceObj
+\%\f33:\f132, 39, 50
+.I2 DgReplaceObjInGroup
+\%\f33:\f128, 39, 46, 53; \%\f39:\f1192; \%\f312:\f1250
+.I2 DgSetElePtr
+\%\f33:\f139-40, 46, 50; \%\f39:\f1192
+.I2 DgSetElePtrRelLabel
+\%\f33:\f139-40, 50; \%\f39:\f1192
+.I1 C object creation functions
+.I2 DoAmbientIntens
+\%\f35:\f1104
+.I2 DoAmbientSwitch
+\%\f35:\f1104, 109; \%\f39:\f1192
+.I2 DoAnnoText
+\%\f37:\f1133-134, 136
+.I2 DoBackfaceCullable
+\%\f35:\f1102, 109; \%\f39:\f1192; \%\f310:\f1209
+.I2 DoBackfaceCullSwitch
+\%\f35:\f1102, 109; \%\f310:\f1209
+.I2 DoBoundingVol
+\%\f311:\f1225, 238-239
+.I2 DoBoundingVolSwitch
+\%\f310:\f1211; \%\f311:\f1238
+.I2 DoCallback
+\%\f310:\f1222; \%\f311:\f1225-227, 230, 240; \%\f312:\f1250; \%\f315:\f1290, 302
+.I2 DoCamera
+\%\f32:\f114, 21; \%\f38:\f1154, 159, 161; \%\f39:\f1186, 192; \%\f310:\f1216
+.I2 DoCameraMatrix
+\%\f38:\f1155, 174
+.I2 DoCompTextureUVCallback
+\%\f315:\f1300, 303-304, 306, 310
+.I2 DoDataPtr
+\%\f311:\f1230
+.I2 DoDataVal
+\%\f311:\f1230
+.I2 DoDepthCue
+\%\f315:\f1288
+.I2 DoDevice
+\%\f310:\f1216; \%\f32:\f117, 21; \%\f39:\f1177, 179, 181, 183, 186, 189, 192, 198-199, 202
+.I2 DoDiffuseColor
+\%\f32:\f18, 11, 21; \%\f33:\f131-34, 37, 43, 46; \%\f34:\f165; \%\f35:\f193, 95, 104, 109; \%\f36:\f1125; \%\f39:\f1192; \%\f311:\f1227; \%\f315:\f1286, 288, 298
+.I2 DoDiffuseIntens
+\%\f32:\f120; \%\f35:\f1104, 109
+.I2 DoDiffuseSwitch
+\%\f35:\f1104, 109
+.I2 DoExecSet
+\%\f311:\f1231; \%\f312:\f1252; \%\f313:\f1256-232
+.I2 DoFileRaster
+\%\f314:\f1275-276, 283; \%\f315:\f1290
+.I2 DoFilter
+\%\f311:\f1233, 235; \%\f312:\f1252; \%\f313:\f1256
+.I2 DoFrame
+\%\f32:\f116, 21; \%\f39:\f1176, 179, 181, 186, 189, 192; \%\f310:\f1216
+.I2 DoGlbRendMaxObjs
+\%\f38:\f1164
+.I2 DoGlbRendMaxSub
+\%\f38:\f1163
+.I2 DoGlbRendRayLevel
+\%\f38:\f1164
+.I2 DoGroup
+\%\f32:\f111-14, 21; \%\f33:\f131-34, 37-38, 43, 46, 50; \%\f34:\f189; \%\f35:\f195, 109; \%\f36:\f1121, 125; \%\f37:\f1146, 150; \%\f38:\f1159, 161; \%\f39:\f1186, 192; \%\f310:\f1209, 216; \%\f311:\f1227, 235, 238
+.I2 DoHiddenSurfSwitch
+\%\f310:\f1209
+.I2 DoInLineGroup
+\%\f33:\f146, 53
+.I2 DoInputSlot
+\%\f312:\f1249-250, 252
+.I2 DoInterpType
+\%\f34:\f163; \%\f35:\f1108-109
+.I2 DoInvisSwitch
+\%\f311:\f1232
+.I2 DoLabel
+\%\f33:\f140, 50; \%\f39:\f1192
+.I2 DoLight
+\%\f32:\f113, 21; \%\f38:\f1159, 166, 174; \%\f39:\f1186, 192; \%\f310:\f1216
+.I2 DoLightAttenuation
+\%\f38:\f1169, 171
+.I2 DoLightColor
+\%\f38:\f1166
+.I2 DoLightIntens
+\%\f32:\f113, 21; \%\f38:\f1159, 166-167, 169; \%\f39:\f1192; \%\f310:\f1216
+.I2 DoLightSpreadAngles
+\%\f38:\f1170
+.I2 DoLightSpreadExp
+\%\f38:\f1171
+.I2 DoLightSwitch
+\%\f38:\f1153, 173
+.I2 DoLightType
+\%\f38:\f1166
+.I2 DoLineList
+\%\f34:\f161, 63; \%\f35:\f1103
+.I2 DoLocalAntiAliasStyle
+\%\f35:\f1103; \%\f38:\f1166
+.I2 DoLocalAntiAliasSwitch
+\%\f35:\f1103
+.I2 DoLookAtFrom
+\%\f32:\f113-14, 21; \%\f36:\f1127; \%\f38:\f1154, 157, 159, 161; \%\f39:\f1186, 192; \%\f310:\f1216
+.I2 DoMinBoundingVolExt
+\%\f311:\f1238-239
+.I2 DoNameSet
+\%\f311:\f1233, 235; \%\f312:\f1252; \%\f313:\f1256
+.I2 DoParallel
+\%\f32:\f114, 21; \%\f38:\f1154-155, 159, 161; \%\f39:\f1186; \%\f310:\f1216
+.I2 DoPerspective
+\%\f38:\f1155, 159, 161; \%\f39:\f1186, 192
+.I2 DoPickID
+\%\f310:\f1211, 216
+.I2 DoPickSwitch
+\%\f310:\f1216; \%\f311:\f1232
+.I2 DoPolygon
+\%\f34:\f161, 75-76, 92; \%\f35:\f194
+.I2 DoPolygonMesh
+\%\f34:\f192
+.I2 DoPolyline
+\%\f34:\f166-67
+.I2 DoPopAtts
+\%\f35:\f198, 115
+.I2 DoPopMatrix
+\%\f32:\f113-14, 21; \%\f33:\f143, 46, 53; \%\f36:\f1117, 125-126, 132; \%\f38:\f1161; \%\f39:\f1192; \%\f310:\f1216; \%\f311:\f1227; \%\f315:\f1307
+.I2 DoPrimSurf
+\%\f32:\f17, 9, 11-12, 21; \%\f33:\f131-34, 37, 43, 46; \%\f34:\f157; \%\f35:\f195, 109; \%\f36:\f1120-121, 125; \%\f39:\f1192; \%\f310:\f1216; \%\f311:\f1227, 239; \%\f313:\f1271; \%\f315:\f1292, 300, 306
+.I2 DoProjection
+\%\f38:\f1155, 174
+.I2 DoPushAtts
+\%\f35:\f198, 115
+.I2 DoPushMatrix
+\%\f32:\f113-14, 21; \%\f33:\f143, 46, 53; \%\f36:\f1117, 125-126, 132; \%\f38:\f1161; \%\f39:\f1192; \%\f310:\f1216; \%\f311:\f1227; \%\f315:\f1307
+.I2 DoRaster
+\%\f314:\f1275, 277, 279; \%\f315:\f1290
+.I2 DoReflectionSwitch
+\%\f35:\f1107, 109
+.I2 DoRefractionIndex
+\%\f35:\f1106
+.I2 DoRefractionSwitch
+\%\f35:\f1106
+.I2 DoRepType
+\%\f32:\f121; \%\f33:\f131-34, 37, 46; \%\f34:\f189; \%\f35:\f193, 95, 98, 109; \%\f39:\f1192; \%\f311:\f1227, 232
+.I2 DoRotate
+\%\f32:\f19-11, 21; \%\f33:\f134, 37, 43, 46, 53; \%\f34:\f189; \%\f35:\f1109; \%\f36:\f1117, 121, 125; \%\f39:\f1192
+.I2 DoSampleAdaptive
+\%\f38:\f1165
+.I2 DoSampleAdaptiveSwitch
+\%\f38:\f1165
+.I2 DoSampleFilter
+\%\f38:\f1165
+.I2 DoSampleJitter
+\%\f38:\f1165
+.I2 DoSampleJitterSwitch
+\%\f38:\f1166
+.I2 DoSampleSuper
+\%\f38:\f1165
+.I2 DoSampleSuperSwitch
+\%\f38:\f1165
+.I2 DoScale
+\%\f32:\f19-12, 21; \%\f33:\f134, 37, 43, 46; \%\f35:\f1109; \%\f36:\f1117, 121, 125; \%\f39:\f1192; \%\f310:\f1209; \%\f311:\f1227, 239; \%\f312:\f1250; \%\f315:\f1307
+.I2 DoShadeIndex
+\%\f39:\f1201-202
+.I2 DoShadowSwitch
+\%\f35:\f1109; \%\f38:\f1153, 173
+.I2 DoShear
+\%\f36:\f1117
+.I2 DoSimplePolygon
+\%\f34:\f161, 72-75, 92; \%\f315:\f1293, 295, 297, 306
+.I2 DoSimplePolygonMesh
+\%\f34:\f183-84, 92; \%\f313:\f1268
+.I2 DoSpecularColor
+\%\f35:\f1105, 109
+.I2 DoSpecularFactor
+\%\f35:\f1105
+.I2 DoSpecularIntens
+\%\f35:\f193, 105, 109
+.I2 DoSpecularSwitch
+\%\f35:\f1105, 109
+.I2 DoSphereList
+\%\f34:\f159-60
+.I2 DoStereo
+\%\f38:\f1163
+.I2 DoStereoSwitch
+\%\f38:\f1163
+.I2 DoSubDivSpec
+\%\f32:\f121; \%\f33:\f134, 46; \%\f35:\f193, 95, 99-100, 109
+.I2 DoSurfaceShade
+\%\f33:\f134, 37; \%\f35:\f195
+.I2 DoText
+\%\f35:\f194; \%\f37:\f1133-134, 136, 138, 140, 143, 146-147, 149-150
+.I2 DoTextAlign
+\%\f37:\f1135, 137-138, 140, 146-147, 150, 152
+.I2 DoTextExpFactor
+\%\f37:\f1135, 143, 150
+.I2 DoTextFont
+\%\f37:\f1135, 150
+.I2 DoTextHeight
+\%\f37:\f1135-136, 143, 146
+.I2 DoTextPath
+\%\f37:\f1135-136, 138, 140, 146, 152
+.I2 DoTextPrecision
+\%\f37:\f1135
+.I2 DoTextSpace
+\%\f37:\f1135, 143, 150
+.I2 DoTextUpVector
+\%\f37:\f1135, 143, 146
+.I2 DoTextureAntiAlias
+\%\f315:\f1291, 309-310
+.I2 DoTextureExtendUV
+\%\f315:\f1291, 296-297
+.I2 DoTextureExtendUVW
+\%\f315:\f1291, 296
+.I2 DoTextureIntermediateSurf
+\%\f315:\f1291, 306-307
+.I2 DoTextureMapBump
+\%\f315:\f1288-289
+.I2 DoTextureMapBumpSwitch
+\%\f315:\f1287, 289
+.I2 DoTextureMapDiffuseColor
+\%\f311:\f1231; \%\f314:\f1282; \%\f315:\f1288-289, 293, 295, 297, 307
+.I2 DoTextureMapDiffuseColorSwitch
+\%\f315:\f1287, 289, 293, 295, 297, 307
+.I2 DoTextureMapEnviron
+\%\f315:\f1288
+.I2 DoTextureMapEnvironSwitch
+\%\f315:\f1287
+.I2 DoTextureMapTranspIntens
+\%\f315:\f1288
+.I2 DoTextureMapTranspIntensSwitch
+\%\f315:\f1287
+.I2 DoTextureMatrixUV
+\%\f315:\f1291, 296
+.I2 DoTextureMatrixUVW
+\%\f315:\f1291, 296
+.I2 DoTextureOp
+\%\f315:\f1291, 308, 310
+.I2 DoTextureScaleUV
+\%\f315:\f1291, 295, 297, 307
+.I2 DoTextureScaleUVW
+\%\f315:\f1291, 295
+.I2 DoTextureTranslateUV
+\%\f315:\f1291, 295-297
+.I2 DoTextureTranslateUVW
+\%\f315:\f1291, 295
+.I2 DoTextureUVIndex
+\%\f315:\f1291, 293-294
+.I2 DoTextureUVWIndex
+\%\f315:\f1291, 295
+.I2 DoTorus
+\%\f33:\f143, 46; \%\f34:\f158; \%\f36:\f1125; \%\f315:\f1300
+.I2 DoTransformMatrix
+\%\f36:\f1119
+.I2 DoTranslate
+\%\f32:\f19, 11-12, 21; \%\f33:\f134, 37, 43, 46; \%\f35:\f1109; \%\f36:\f1117, 120-121, 125; \%\f39:\f1192; \%\f310:\f1209, 216; \%\f311:\f1227, 230; \%\f315:\f1295, 307
+.I2 DoTranspColor
+\%\f35:\f1106-107, 109
+.I2 DoTranspIntens
+\%\f35:\f1106-107, 109; \%\f315:\f1286
+.I2 DoTranspOrientColor
+\%\f35:\f1107
+.I2 DoTranspOrientExp
+\%\f35:\f1107
+.I2 DoTranspOrientIntens
+\%\f35:\f1107
+.I2 DoTranspOrientSwitch
+\%\f35:\f1107
+.I2 DoTranspSwitch
+\%\f35:\f1105, 109
+.I2 DoTriangleList
+\%\f34:\f161, 68-70; \%\f315:\f1289
+.I2 DoTriangleMesh
+\%\f33:\f128; \%\f34:\f163, 79-81, 92; \%\f312:\f1241-242, 251
+.I2 DoTriangleStrip
+\%\f34:\f168, 70-71, 92
+.I2 DoVarLineList
+\%\f34:\f186
+.I2 DoVarPointList
+\%\f34:\f186
+.I2 DoVarSimplePolygonMesh
+\%\f34:\f187
+.I2 DoVarTriangleMesh
+\%\f34:\f187, 89
+.I2 DoView
+\%\f32:\f115-16, 21; \%\f39:\f1176-177, 181, 186, 189, 192; \%\f310:\f1216; \%\f314:\f1283
+.I1 C variable primitive update functions
+.I2 DpUpdVarSimplePolygonMeshUV
+\%\f315:\f1294
+.I2 DpUpdVarSimplePolygonMeshUVW
+\%\f315:\f1294
+.I2 DpUpdVarTriangleMesh
+\%\f34:\f188-89; \%\f315:\f1294
+.I2 DpUpdVarTriangleMeshUV
+\%\f315:\f1294
+.I2 DpUpdVarTriangleMeshUVW
+\%\f315:\f1294
+.I2 DpUpdVarTriangleStripUV
+\%\f315:\f1294
+.I2 DpUpdVarTriangleStripUVW
+\%\f315:\f1294
+.I1 C system functions
+.I2 DsCompBoundingVol
+\%\f310:\f1209, 224; \%\f313:\f1257
+.I2 DsExecuteObj
+\%\f311:\f1225-227, 231, 240
+.I2 DsExecutionAbort
+\%\f310:\f1221; \%\f311:\f1225, 227, 240
+.I2 DsExecutionReturn
+\%\f311:\f1225, 227, 240
+.I2 DsFileRasterRead
+\%\f314:\f1279, 284
+.I2 DsHoldObj
+\%\f33:\f129, 50; \%\f34:\f189; \%\f312:\f1241
+.I2 DsInitialize
+\%\f32:\f121; \%\f39:\f1192; \%\f310:\f1216; \%\f312:\f1251; \%\f313:\f1271
+.I2 DsInputValue
+\%\f312:\f1249-250, 252
+.I2 DsInqClassId
+\%\f311:\f1231; \%\f312:\f1241, 252; \%\f313:\f1256
+.I2 DsInqDriverInfo
+\%\f39:\f1180
+.I2 DsInqErrorMessage
+\%\f312:\f1242-243, 252
+.I2 DsInqErrorVars
+\%\f312:\f1242
+.I2 DsInqNumDrivers
+\%\f39:\f1180
+.I2 DsInqNumRenderers
+\%\f310:\f1207
+.I2 DsInqObj
+\%\f312:\f1241-242, 252
+.I2 DsInqObjName
+\%\f312:\f1241
+.I2 DsInqRendererId
+\%\f310:\f1207
+.I2 DsInqRendererNames
+\%\f310:\f1207
+.I2 DsInqValuatorGroup
+\%\f312:\f1249-250
+.I2 DsPrintObj
+\%\f312:\f1251; \%\f313:\f1257, 263
+.I2 DsRasterUpdate
+\%\f314:\f1278
+.I2 DsRasterWrite
+\%\f314:\f1281
+.I2 DsReleaseObj
+\%\f32:\f121; \%\f33:\f130; \%\f39:\f1192; \%\f310:\f1216
+.I2 DsSetErrorVars
+\%\f312:\f1242, 252
+.I2 DsSetObjName
+\%\f312:\f1241, 252
+.I2 DsTerminate
+\%\f32:\f121; \%\f39:\f1192; \%\f310:\f1216; \%\f312:\f1251
+.I2 DsTextureUVCount
+\%\f34:\f162, 65; \%\f315:\f1292-293, 295, 297
+
+.I2 DsTextureUVWCount
+\%\f34:\f162, 65; \%\f315:\f1292
+.I2 DsValuatorSwitch
+\%\f312:\f1250
+.I1 C types
+.I2 DtColorModel
+\%\f34:\f159
+.I1 C view functions
+.I2 DvInqActiveCamera
+\%\f38:\f1162
+.I2 DvInqDefinitionGroup
+\%\f32:\f116, 21; \%\f39:\f1176, 178, 186, 189, 192; \%\f310:\f1216
+.I2 DvInqDisplayGroup
+\%\f32:\f115, 21; \%\f34:\f189; \%\f39:\f1176-177, 186, 189, 192; \%\f310:\f1216
+.I2 DvInqUpdateType
+\%\f39:\f1184
+.I2 DvSetActiveCamera
+\%\f38:\f1162; \%\f39:\f1192
+.I2 DvSetBackgroundColor
+\%\f32:\f121; \%\f39:\f1178
+.I2 DvSetBackgroundJust
+\%\f39:\f1178; \%\f314:\f1283
+.I2 DvSetBackgroundRaster
+\%\f39:\f1178; \%\f314:\f1283
+.I2 DvSetBoundary
+\%\f39:\f1178, 181, 183, 186, 189, 192; \%\f310:\f1216
+.I2 DvSetClearFlag
+\%\f39:\f1178, 181
+.I2 DvSetRendStyle
+\%\f32:\f117; \%\f39:\f1178, 181; \%\f310:\f1207-208, 216
+.I2 DvSetUpdateType
+\%\f33:\f146; \%\f39:\f1184; \%\f310:\f1206
+.I2 DvUpdate
+\%\f33:\f132, 46, 54; \%\f35:\f194; \%\f39:\f1184; \%\f310:\f1206, 224
+.I1 callback
+\%\f310:\f1205, 221; \%\f311:\f1225; \%\f312:\f1250-227
+.I2 function example
+\%\f311:\f1227
+.I2 objects
+\%\f310:\f1221; \%\f311:\f1225; \%\f312:\f1249, 252; \%\f315:\f1286
+.I2 pick 
+\%\f310:\f1205, 221; \%\f311:\f1227
+.I1 camera
+\%\f31:\f12; \%\f32:\f15, 12, 15; \%\f36:\f1117, 128, 131; \%\f37:\f1145; \%\f38:\f1153-154, 157-162, 165-166, 173; \%\f39:\f1175-174, 177, 184, 204
+.I2 active
+\%\f38:\f1162; \%\f39:\f1204
+.I2 attribute objects
+\%\f38:\f1154, 164
+.I2 coordinates
+\%\f38:\f1153
+.I2 position
+\%\f38:\f1156, 163
+.I2 projection coordinates
+\%\f38:\f1155, 163
+.I2 projection matrix
+\%\f38:\f1153, 155, 157, 174
+.I2 type
+\%\f32:\f114
+.I1 class identifiers
+\%\f312:\f1251; \%\f313:\f1253
+.I1 clear flag
+\%\f39:\f1176, 178, 181, 204
+.I1 clipping
+\%\f38:\f1153, 155, 174; \%\f314:\f1276
+.I2 planes
+\%\f38:\f1153, 155, 174
+.I1 color
+.I2 ambient
+\%\f32:\f18
+.I2 background 
+\%\f39:\f1176, 178, 204
+.I2 diffuse 
+\%\f32:\f18-9, 11; \%\f33:\f138-39, 42; \%\f35:\f196-98, 108; \%\f314:\f1282; \%\f315:\f1285, 287-289, 296, 298, 307-308, 310
+.I2 filter 
+\%\f35:\f1107
+.I2 light 
+\%\f38:\f1153
+.I2 model
+\%\f32:\f17; \%\f34:\f157-9, 64; \%\f35:\f1106-65
+.I2 RGB color
+\%\f32:\f18; \%\f34:\f164-65
+.I2 specular 
+\%\f32:\f19; \%\f35:\f1108
+.I2 transparent 
+\%\f32:\f19; \%\f35:\f1106
+.I2 vertex
+\%\f31:\f13; \%\f32:\f19; \%\f34:\f161-62, 64-65, 70; \%\f35:\f1108
+.I1 compression, bit
+\%\f39:\f1198-199, 203-204
+.I1 concave polygon
+\%\f34:\f173
+.I1 constant shading
+\%\f33:\f134; \%\f39:\f1204
+.I1 constants
+\%\f32:\f117
+.I1 conventions, naming
+\%\f32:\f118; \%\f313:\f1253
+.I1 convex polygon
+\%\f34:\f172-73
+.I1 coordinates
+.I2 camera projection
+\%\f38:\f1153, 155, 163
+.I2 device 
+\%\f39:\f1175-283; \%\f310:\f1215; \%\f311:\f1238; \%\f314:\f1282
+.I2 frame
+\%\f37:\f1143; \%\f39:\f1175, 179, 183-184, 204; \%\f314:\f1282
+.I2 local 
+\%\f310:\f1215; \%\f36:\f1118, 132; \%\f38:\f1162
+.I2 modeling 
+\%\f34:\f163; \%\f36:\f1117-118, 132
+.I2 relative
+\%\f36:\f1120, 132; \%\f39:\f1189
+.I2 texture 
+\%\f34:\f162, 66; \%\f315:\f1285-286, 292, 294-296, 300, 302, 305-306, 310
+.I2 world 
+\%\f38:\f1153-154, 162-163; \%\f36:\f1132; \%\f310:\f1215
+.I1 creating objects and groups
+\%\f33:\f143
+.I1 creation routine
+\%\f33:\f150; \%\f313:\f1255-256, 259, 261, 264, 271, 273
+.I1 current 
+.I2 editing position
+\%\f33:\f140, 55
+.I2 current open group
+\%\f33:\f132, 36-37, 40
+.I2 transformation matrix (CTM)
+\%\f36:\f1117, 119, 123, 125-126, 132; \%\f37:\f1143
+.IH D
+.I1 data, private
+\%\f34:\f185; \%\f313:\f1255-258, 261-267, 273
+.I1 default value
+\%\f32:\f19; \%\f35:\f194; \%\f38:\f1166; \%\f315:\f1300
+.I2 for attributes
+\%\f32:\f19
+.I1 definition
+.I2 absolute group
+\%\f36:\f1128, 131-132
+.I2 group
+\%\f32:\f116, 21; \%\f39:\f1175, 177-178, 191, 204; \%\f310:\f1223; \%\f312:\f1251 
+.I2 objects
+\%\f36:\f1132; \%\f39:\f1175-178, 184; \%\f310:\f120
+.I2 relative group
+\%\f36:\f1128, 132
+.I1 depth values
+\%\f310:\f1215
+.I1 diffuse color
+\%\f32:\f18-9, 11; \%\f33:\f138-39, 42; \%\f35:\f196-98, 108; \%\f314:\f1282; \%\f315:\f1285, 287-289, 296, 298, 307-308, 310
+.I1 display 
+.I2 group
+\%\f32:\f115; \%\f39:\f1175, 177, 192, 204; \%\f310:\f1205, 223; \%\f311:\f1226, 232
+.I2 objects
+\%\f33:\f127; \%\f38:\f1155; \%\f39:\f1175-177, 184, 202; \%\f310:\f1206, 216
+.I2 representation
+\%\f35:\f193, 98, 114-115
+.I1 dynamic renderer
+\%\f310:\f1207; \%\f313:\f1254-255, 269-270
+.IH E
+.I1 editing group
+\%\f33:\f127, 32, 40, 50, 55
+.I1 efficiency
+\%\f35:\f1102, 115; \%\f39:\f1184; \%\f310:\f1206, 208; \%\f313:\f1269
+.I1 element 
+.I2 pointer
+\%\f33:\f139-41, 46, 49-50, 54-55
+.I2 pick path
+\%\f310:\f1212, 214, 221
+.I1 environmental reflection
+\%\f31:\f11; \%\f315:\f1286
+.I1 executability set
+\%\f311:\f1225, 231-232, 240
+.I1 execution, immediate mode
+\%\f32:\f117; \%\f311:\f1225
+.IH F
+.I1 features, view
+\%\f39:\f1176, 178
+.I1 field of view
+\%\f38:\f1155-158
+.I1 filter
+\%\f311:\f1225, 232-234, 240
+.I2 color
+\%\f35:\f1107
+.I2 for supersampling
+\%\f38:\f1165
+.I2 invisibility
+\%\f311:\f1234
+.I2 pickability
+\%\f311:\f1234
+.I1 flat shading
+\%\f35:\f1108
+.I1 focal distance
+\%\f38:\f1163
+.I1 foreshortening
+\%\f38:\f1155
+.I1 \*(Fo constants
+.I2 DCBEG
+\%\f33:\f146, 50; \%\f39:\f1192
+.I2 DCBOTF
+\%\f310:\f1216, 220-221
+.I2 DCBOX
+\%\f32:\f17, 12, 21; \%\f33:\f134, 37; \%\f34:\f158; \%\f35:\f1109; \%\f36:\f1120-121; \%\f310:\f1216; \%\f311:\f1227, 239; \%\f315:\f1300
+.I2 DCCNCV
+\%\f34:\f173
+.I2 DCCNSH
+\%\f34:\f164; \%\f35:\f1108
+.I2 DCCNVX
+\%\f34:\f173-74, 85; \%\f313:\f1269; \%\f315:\f1294, 296, 298
+.I2 DCCOMP
+\%\f39:\f1198, 200
+.I2 DCCONE
+\%\f34:\f158; \%\f35:\f196; \%\f36:\f1122; \%\f39:\f1192; \%\f315:\f1300
+.I2 DCCPLX
+\%\f34:\f173, 77
+.I2 DCCTR
+\%\f315:\f1306
+.I2 DCCYL
+\%\f32:\f17, 12, 21; \%\f33:\f134, 37, 43, 46; \%\f34:\f158; \%\f35:\f195; \%\f36:\f1126; \%\f39:\f1192; \%\f310:\f1216; \%\f315:\f1300, 308
+.I2 DCDELD
+\%\f314:\f1278-280
+.I2 DCEFAT
+\%\f312:\f1243
+.I2 DCEMNR
+\%\f312:\f1243
+.I2 DCESEV
+\%\f312:\f1243
+.I2 DCFALS
+\%\f33:\f131, 50, 53; \%\f34:\f179, 81, 83, 85; \%\f310:\f1216; \%\f313:\f1262, 269; \%\f314:\f1280
+.I2 DCFGI
+\%\f37:\f1149-151
+.I2 DCFPR
+\%\f37:\f1145
+.I2 DCHACC
+\%\f310:\f1221-222
+.I2 DCHOVW
+\%\f310:\f1221
+.I2 DCHREJ
+\%\f310:\f1221-222
+.I2 DCINVI
+\%\f311:\f1237
+.I2 DCISRX
+\%\f312:\f1249
+.I2 DCISRY
+\%\f312:\f1249
+.I2 DCISRZ
+\%\f312:\f1249
+.I2 DCISSX
+\%\f312:\f1249
+.I2 DCISSY
+\%\f312:\f1249
+.I2 DCISSZ
+\%\f312:\f1249
+.I2 DCISTX
+\%\f312:\f1249
+.I2 DCISTY
+\%\f312:\f1249
+.I2 DCISTZ
+\%\f312:\f1249
+.I2 DCL
+\%\f34:\f161-63, 67, 69-70, 72, 74, 77, 81, 83, 85; \%\f35:\f1103; \%\f313:\f1269; \%\f315:\f1292, 294, 296, 298
+.I2 DCLAAB
+\%\f35:\f1103
+.I2 DCLAAF
+\%\f35:\f1103
+.I2 DCLAAI
+\%\f35:\f1103
+.I2 DCLC
+\%\f34:\f162, 64, 66; \%\f315:\f1292
+.I2 DCLN
+\%\f34:\f161-293, 63, 70; \%\f315:\f1292
+.I2 DCLNC
+\%\f34:\f162, 64-65; \%\f315:\f1292
+.I2 DCLTAM
+\%\f38:\f1167
+.I2 DCLTIN
+\%\f32:\f113; \%\f38:\f1167
+.I2 DCLTPA
+\%\f38:\f1168
+.I2 DCLTPT
+\%\f38:\f1168
+.I2 DCLTSA
+\%\f38:\f1169
+.I2 DCLTSP
+\%\f38:\f1169
+.I2 DCMADD
+\%\f315:\f1288-289
+.I2 DCMCBV
+\%\f313:\f1257, 260, 266
+.I2 DCMDR
+\%\f313:\f1257, 260, 269-270
+.I2 DCMDST
+\%\f313:\f1257, 260, 264
+.I2 DCMGIO
+\%\f313:\f1257, 269-270
+.I2 DCMPCK
+\%\f313:\f1257, 260, 266
+.I2 DCMPRT
+\%\f313:\f1257, 260, 263
+.I2 DCMR
+\%\f315:\f1288-289, 294, 296, 298, 308
+.I2 DCMSAO
+\%\f313:\f1257, 260, 267, 269-270
+.I2 DCMSRD
+\%\f313:\f1257, 260, 269-270
+.I2 DCOFF
+\%\f38:\f1166, 173; \%\f39:\f1192
+.I2 DCON
+\%\f35:\f1103, 109, 115; \%\f38:\f1173; \%\f310:\f1211, 216; \%\f315:\f1289, 294, 296, 298, 308
+.I2 DCOUTL
+\%\f35:\f199
+.I2 DCPKAL
+\%\f310:\f1216, 221
+.I2 DCPKCL
+\%\f310:\f1221
+.I2 DCPKFR
+\%\f310:\f1221
+.I2 DCPNTS
+\%\f35:\f198
+.I2 DCPRTM
+\%\f32:\f117; \%\f310:\f1207
+.I2 DCRFAL
+\%\f312:\f1243
+.I2 DCRGB
+\%\f32:\f18, 12, 21; \%\f33:\f131-32, 34, 36-37, 43; \%\f34:\f159-60, 63-64, 66-67, 70, 72, 74, 77, 81, 83, 85, 89; \%\f35:\f195-96, 103, 109; \%\f39:\f1192, 200, 202; \%\f311:\f1227; \%\f313:\f1269; \%\f315:\f1294, 296, 298
+.I2 DCRLTM
+\%\f32:\f117; \%\f39:\f1178, 181; \%\f310:\f1207, 216
+.I2 DCRNG
+\%\f39:\f1198, 202
+.I2 DCRRA
+\%\f314:\f1278
+.I2 DCRRGB
+\%\f314:\f1277, 280
+.I2 DCRSPC
+\%\f314:\f1277
+.I2 DCRTRN
+\%\f312:\f1243
+.I2 DCS3TL
+\%\f315:\f1289-290
+.I2 DCSADD
+\%\f311:\f1235, 237
+.I2 DCSBM
+\%\f315:\f1290
+.I2 DCSCEM
+\%\f315:\f1290
+.I2 DCSDAB
+\%\f35:\f1100
+.I2 DCSDEL
+\%\f311:\f1231
+.I2 DCSDFX
+\%\f35:\f1100
+.I2 DCSDRL
+\%\f33:\f136, 46; \%\f35:\f196, 101, 115
+.I2 DCSDSG
+\%\f32:\f121
+.I2 DCSFSH
+\%\f34:\f163; \%\f35:\f1108
+.I2 DCSHCN
+\%\f33:\f134, 37; \%\f35:\f195
+.I2 DCSOEG
+\%\f35:\f199
+.I2 DCSPHR
+\%\f32:\f17, 21; \%\f33:\f131-32, 34, 36, 38; \%\f34:\f158; \%\f35:\f196; \%\f39:\f1192; \%\f310:\f1216; \%\f311:\f1227; \%\f315:\f1300
+.I2 DCSSEM
+\%\f315:\f1290
+.I2 DCSTLU
+\%\f314:\f1282; \%\f315:\f1289-290, 294, 296, 298
+.I2 DCSURF
+\%\f32:\f121; \%\f33:\f131-32, 34, 36; \%\f34:\f189; \%\f35:\f196-37, 99, 115; \%\f39:\f1192; \%\f311:\f1227
+.I2 DCSWEG
+\%\f35:\f199
+.I2 DCTADD
+\%\f315:\f1308
+.I2 DCTANY
+\%\f312:\f1242
+.I2 DCTBLD
+\%\f315:\f1308
+.I2 DCTHAC
+\%\f37:\f1138, 146-148, 150-151
+.I2 DCTHAL
+\%\f37:\f1138, 140, 146, 150
+.I2 DCTHAN
+\%\f37:\f1138
+.I2 DCTHAR
+\%\f37:\f1138
+.I2 DCTMUL
+\%\f315:\f1308
+.I2 DCTOPF
+\%\f310:\f1220
+.I2 DCTPD
+\%\f37:\f1136-137, 146, 148
+.I2 DCTPL
+\%\f37:\f1136-137
+.I2 DCTPR
+\%\f37:\f1136-137, 146-147
+.I2 DCTPU
+\%\f37:\f1136-137
+.I2 DCTREP
+\%\f315:\f1308-309
+.I2 DCTRUE
+\%\f32:\f112-240, 14-15, 21; \%\f33:\f132, 34, 36-38, 43-44, 46, 50; \%\f34:\f179, 83, 89; \%\f35:\f195-96, 109, 115; \%\f36:\f1122, 126; \%\f37:\f1146-147, 150; \%\f38:\f1159; \%\f39:\f1181, 186, 192; \%\f310:\f1209, 216; \%\f311:\f1227, 235, 237; \%\f313:\f1262; \%\f314:\f1280
+.I2 DCTVAB
+\%\f37:\f1140
+.I2 DCTVAC
+\%\f37:\f1140, 146, 148
+.I2 DCTVAN
+\%\f37:\f1140
+.I2 DCTVAT
+\%\f37:\f1140
+.I2 DCUALL
+\%\f39:\f1184; \%\f310:\f1206
+.I2 DCUDIS
+\%\f33:\f146; \%\f39:\f1184; \%\f310:\f1206, 208
+.I2 DCVXSH
+\%\f34:\f163; \%\f35:\f1108
+.I2 DCWIRE
+\%\f32:\f121; \%\f33:\f134, 37, 46; \%\f35:\f195, 98
+.I2 DCXAX
+\%\f32:\f110, 12, 21; \%\f33:\f134, 37, 43, 46; \%\f34:\f189; \%\f36:\f1122, 126; \%\f39:\f1192
+.I2 DCXBLK
+\%\f315:\f1298-299
+.I2 DCXCLP
+\%\f315:\f1298-299
+.I2 DCXNON
+\%\f315:\f1298
+.I2 DCXRP
+\%\f315:\f1299-300
+.I2 DCYAX
+\%\f33:\f143, 46, 53; \%\f35:\f1115; \%\f36:\f1121
+.I1 \*(Fo device functions
+.I2 DDPO
+\%\f310:\f1211, 213-216, 223-224
+.I2 DDQE
+\%\f39:\f1181; \%\f310:\f1216
+.I2 DDQPXD
+\%\f314:\f1280, 284
+.I2 DDQV
+\%\f39:\f1189
+.I2 DDSCE
+\%\f39:\f1198, 200, 202
+.I2 DDSDV
+\%\f39:\f1177, 183
+.I2 DDSF
+\%\f32:\f117, 21; \%\f39:\f1177, 181, 186, 189, 192; \%\f310:\f1216
+.I2 DDSPA
+\%\f310:\f1211
+.I2 DDSPCB
+\%\f310:\f1216, 221, 223
+.I2 DDSPPO
+\%\f310:\f1216, 220-221, 223
+.I2 DDSSM
+\%\f39:\f1198, 200, 202
+.I2 DDSSR
+\%\f39:\f1202
+.I2 DDU
+\%\f32:\f117, 21; \%\f33:\f132, 53; \%\f34:\f189; \%\f35:\f194; \%\f39:\f1177, 182, 184, 192; \%\f310:\f1206, 216, 223; \%\f311:\f1227
+.I1 \*(Fo extension functions
+.I2 DEAC
+\%\f313:\f1259-261
+.I2 DEAMTH
+\%\f313:\f1260
+.I2 DECO
+\%\f313:\f1256, 261-262
+.I2 DEDO
+\%\f313:\f1264-265
+.I2 DEDOD
+\%\f313:\f1262, 265
+.I2 DEEA
+\%\f313:\f1257, 266-267, 269-270
+.I2 DEIOP
+\%\f313:\f1266-267
+.I2 DEQP
+\%\f313:\f1267
+.I2 DEQR
+\%\f313:\f1269-270
+.I2 DEROD
+\%\f313:\f1262, 264-268
+.I2 DEWOD
+\%\f313:\f1262, 269
+.I1 \*(Fo frame functions
+.I2 DFQVG
+\%\f32:\f116, 21; \%\f39:\f1176, 179, 181, 186, 189, 192; \%\f310:\f1216
+.I2 DFSB
+\%\f39:\f1179, 181, 183, 189, 192; \%\f310:\f1216
+.I2 DFSJ
+\%\f39:\f1179, 183
+.I2 DFU
+\%\f33:\f132, 54; \%\f35:\f194; \%\f39:\f1184; \%\f310:\f1206, 223
+.I1 \*(Fo group functions
+.I2 DGAO
+\%\f32:\f110, 12, 14-15, 21; \%\f33:\f132, 34, 36-40, 43-44, 46, 50, 53; \%\f34:\f189; \%\f35:\f195-96, 103, 109, 115; \%\f36:\f1122, 126; \%\f37:\f1146-147, 150; \%\f38:\f1159; \%\f39:\f1186-162, 192, 202; \%\f310:\f1209, 216; \%\f311:\f1227, 235, 237; \%\f313:\f1272; \%\f314:\f1282; \%\f315:\f1289, 294, 296, 298, 308
+.I2 DGAOG
+\%\f32:\f116, 21; \%\f33:\f128, 31-32, 39; \%\f39:\f1176, 178-179, 181, 186, 189, 192; \%\f310:\f1216; \%\f312:\f1251
+.I2 DGCK
+\%\f33:\f140
+.I2 DGCS
+\%\f32:\f112-240, 14-15, 21; \%\f33:\f132-34, 36-39, 43-44, 46, 50; \%\f34:\f189; \%\f35:\f195-96, 109, 115; \%\f36:\f1122, 126; \%\f37:\f1146-147, 150; \%\f38:\f1159-160, 162; \%\f39:\f1186, 192; \%\f310:\f1210, 216; \%\f311:\f1227, 235, 237
+.I2 DGDE
+\%\f33:\f132, 39
+.I2 DGDEL
+\%\f33:\f139
+.I2 DGDER
+\%\f33:\f139
+.I2 DGE
+\%\f33:\f139
+.I2 DGO
+\%\f33:\f132, 39-40, 50
+.I2 DGQEP
+\%\f33:\f140
+.I2 DGQOP
+\%\f33:\f140
+.I2 DGQS
+\%\f33:\f140
+.I2 DGRO
+\%\f33:\f132, 39, 50
+.I2 DGROG
+\%\f33:\f128, 39, 46, 53; \%\f39:\f1192; \%\f312:\f1250
+.I2 DGSEP
+\%\f33:\f139-40, 46, 50; \%\f39:\f1192
+.I2 DGSEPL
+\%\f33:\f139-40, 50; \%\f39:\f1192
+.I1 \*(Fo object creation functions
+.I2 DOAMBI
+\%\f35:\f1104
+.I2 DOAMBS
+\%\f35:\f1104, 115; \%\f39:\f1192
+.I2 DOANNT
+\%\f37:\f1133-134, 136-137
+.I2 DOBFC
+\%\f35:\f1102, 109; \%\f39:\f1192; \%\f310:\f1209
+.I2 DOBFCS
+\%\f35:\f1102, 115; \%\f310:\f1209
+.I2 DOBV
+\%\f311:\f1225, 238-240
+.I2 DOBVS
+\%\f310:\f1211; \%\f311:\f1238
+.I2 DOCB
+\%\f310:\f1223; \%\f311:\f1225-227, 240; \%\f312:\f1251; \%\f315:\f1290, 302
+.I2 DOCM
+\%\f32:\f115, 21; \%\f33:\f128; \%\f38:\f1154, 159, 161; \%\f39:\f1186-162, 192; \%\f310:\f1216
+.I2 DOCMX
+\%\f38:\f1155, 174
+.I2 DOCTVC
+\%\f315:\f1300, 303-304, 306, 310
+.I2 DOCTVS
+\%\f315:\f1300, 308, 310
+.I2 DOD
+\%\f32:\f117, 21; \%\f39:\f1177, 179, 181, 183, 186, 189, 192, 198-199, 202; \%\f310:\f1216
+.I2 DODC
+\%\f315:\f1288
+.I2 DODIFC
+\%\f32:\f18, 12, 21; \%\f33:\f128, 31-32, 34, 36-37, 43-44, 46; \%\f34:\f165; \%\f35:\f193, 95-96, 109; \%\f36:\f1126; \%\f39:\f1192; \%\f311:\f1227; \%\f315:\f1286, 288, 298
+.I2 DODIFI
+\%\f35:\f1104, 109
+.I2 DODIFS
+\%\f35:\f1104, 115
+.I2 DODP
+\%\f311:\f1230
+.I2 DODV
+\%\f311:\f1230
+.I2 DOES
+\%\f311:\f1231; \%\f312:\f1252-232
+.I2 DOFL
+\%\f311:\f1233, 237; \%\f312:\f1252; \%\f313:\f1256
+.I2 DOFR
+\%\f32:\f116, 21; \%\f39:\f1176, 179, 181, 186, 189, 192; \%\f310:\f1216
+.I2 DOFRS
+\%\f314:\f1275-276, 284; \%\f315:\f1290
+.I2 DOGRMO
+\%\f38:\f1164
+.I2 DOGRMS
+\%\f38:\f1163
+.I2 DOGRRL
+\%\f38:\f1164
+.I2 DOHSS
+\%\f310:\f1209
+.I2 DOILG
+\%\f33:\f146, 53
+.I2 DOINVS
+\%\f311:\f1232
+.I2 DOIS
+\%\f312:\f1249, 251-252
+.I2 DOIT
+\%\f34:\f163; \%\f35:\f1108, 115
+.I2 DOLAF
+\%\f32:\f113-15, 21; \%\f36:\f1127; \%\f38:\f1154, 157, 159; \%\f39:\f1186, 192; \%\f310:\f1216
+.I2 DOLAST
+\%\f35:\f1103; \%\f38:\f1166
+.I2 DOLASW
+\%\f35:\f1103
+.I2 DOLC
+\%\f38:\f1166
+.I2 DOLI
+\%\f32:\f114, 21; \%\f38:\f1160, 166; \%\f39:\f1192; \%\f310:\f1216
+.I2 DOLINL
+\%\f33:\f128; \%\f34:\f161, 63-66, 86; \%\f35:\f1103
+.I2 DOLL
+\%\f33:\f140, 50; \%\f39:\f1192
+.I2 DOLT
+\%\f32:\f114, 21; \%\f38:\f1160, 166, 174; \%\f39:\f1186, 192; \%\f310:\f1216
+.I2 DOLTA
+\%\f38:\f1169, 171
+.I2 DOLTS
+\%\f38:\f1153, 173
+.I2 DOLTSA
+\%\f38:\f1170
+.I2 DOLTSE
+\%\f38:\f1171
+.I2 DOLTT
+\%\f38:\f1166
+.I2 DOMBVE
+\%\f311:\f1238-240
+.I2 DONS
+\%\f311:\f1233, 235; \%\f312:\f1252; \%\f313:\f1256
+.I2 DOPAR
+\%\f32:\f115, 21; \%\f33:\f128; \%\f38:\f1154-155, 159, 162; \%\f39:\f1186; \%\f310:\f1216
+.I2 DOPER
+\%\f38:\f1155, 159, 161; \%\f39:\f1186, 192
+.I2 DOPGN
+\%\f34:\f161, 75, 77-78, 92; \%\f35:\f194
+.I2 DOPGNM
+\%\f34:\f178, 92
+.I2 DOPID
+\%\f310:\f1211
+.I2 DOPL
+\%\f34:\f166-67
+.I2 DOPMS
+\%\f32:\f17, 9, 12, 21; \%\f33:\f131-32, 34, 36-38, 43, 46; \%\f34:\f157; \%\f35:\f195-96, 109; \%\f36:\f1120-122, 126; \%\f39:\f1192; \%\f310:\f1216; \%\f311:\f1227, 239; \%\f313:\f1272; \%\f315:\f1292, 300, 306
+.I2 DOPNTL
+\%\f34:\f185
+.I2 DOPPA
+\%\f35:\f198, 115
+.I2 DOPPMX
+\%\f32:\f114-15, 21; \%\f33:\f143, 46, 53; \%\f36:\f1117, 125-126, 132; \%\f38:\f1161; \%\f39:\f1192; \%\f310:\f1216; \%\f311:\f1227; \%\f315:\f1308
+.I2 DOPRJ
+\%\f38:\f1155, 174
+.I2 DOPS
+\%\f310:\f1216; \%\f311:\f1232
+.I2 DOPUA
+\%\f35:\f198, 115
+.I2 DOPUMX
+\%\f32:\f114-15, 21; \%\f33:\f143, 46, 53; \%\f36:\f1117, 125-126, 132; \%\f38:\f1161; \%\f39:\f1192; \%\f310:\f1216; \%\f311:\f1227; \%\f315:\f1308
+.I2 DOREFS
+\%\f35:\f1107, 109
+.I2 DOREPT
+\%\f32:\f121; \%\f33:\f131-32, 34, 36-37, 46; \%\f34:\f189; \%\f35:\f193, 95-96, 98, 115; \%\f39:\f1192; \%\f311:\f1227, 232
+.I2 DORFRI
+\%\f35:\f1106
+.I2 DORFRS
+\%\f35:\f1106
+.I2 DOROT
+\%\f32:\f19-10, 12, 21; \%\f33:\f128, 34, 37, 43, 46, 53; \%\f34:\f189; \%\f35:\f1115; \%\f36:\f1117, 121-122, 126; \%\f39:\f1192
+.I2 DORS
+\%\f314:\f1275, 277, 279; \%\f315:\f1290
+.I2 DOSADP
+\%\f38:\f1165
+.I2 DOSASW
+\%\f38:\f1165
+.I2 DOSC
+\%\f32:\f19-10, 12, 21; \%\f33:\f134, 37, 43, 46; \%\f35:\f1109; \%\f36:\f1117, 122, 126; \%\f39:\f1192; \%\f310:\f1209; \%\f311:\f1227, 239; \%\f312:\f1250; \%\f315:\f1308
+.I2 DOSDS
+\%\f32:\f121; \%\f33:\f136, 46; \%\f35:\f193, 96, 99, 115
+.I2 DOSFLT
+\%\f38:\f1165
+.I2 DOSHAS
+\%\f35:\f1115; \%\f38:\f1153, 173
+.I2 DOSHR
+\%\f36:\f1117
+.I2 DOSI
+\%\f39:\f1201-202
+.I2 DOSJIT
+\%\f38:\f1165
+.I2 DOSJSW
+\%\f38:\f1166
+.I2 DOSPCC
+\%\f35:\f1105, 109
+.I2 DOSPCI
+\%\f35:\f193, 105, 109
+.I2 DOSPCS
+\%\f35:\f1105, 115
+.I2 DOSPGN
+\%\f34:\f161, 72-75, 78, 92; \%\f315:\f1294, 296, 298, 306
+.I2 DOSPHL
+\%\f34:\f159-60
+.I2 DOSPM
+\%\f34:\f178, 83, 85-86, 92; \%\f313:\f1269
+.I2 DOSRFS
+\%\f33:\f134, 37; \%\f35:\f195
+.I2 DOSSPR
+\%\f38:\f1165
+.I2 DOSSSW
+\%\f38:\f1165
+.I2 DOSTER
+\%\f38:\f1163
+.I2 DOSTES
+\%\f38:\f1163
+.I2 DOTA
+\%\f37:\f1135, 137-138, 140, 146-147, 150-152
+.I2 DOTAA
+\%\f315:\f1291, 309-310
+.I2 DOTC
+\%\f35:\f1106-107, 109
+.I2 DOTEF
+\%\f37:\f1135, 143, 150-151
+.I2 DOTF
+\%\f37:\f1135, 150-151
+.I2 DOTH
+\%\f37:\f1135, 137, 143, 146-147
+.I2 DOTI
+\%\f35:\f1106-107, 109; \%\f315:\f1286
+.I2 DOTIMS
+\%\f315:\f1291, 306, 308
+.I2 DOTMB
+\%\f315:\f1288-289
+.I2 DOTMBS
+\%\f315:\f1287, 289
+.I2 DOTMDC
+\%\f314:\f1282; \%\f315:\f1288-289, 294, 296, 298, 308
+.I2 DOTMDS
+\%\f315:\f1287, 289, 294, 296, 298, 308
+.I2 DOTME
+\%\f315:\f1288
+.I2 DOTMES
+\%\f315:\f1287
+.I2 DOTMTI
+\%\f315:\f1288
+.I2 DOTMTS
+\%\f315:\f1287
+.I2 DOTMUV
+\%\f315:\f1291, 296
+.I2 DOTMW
+\%\f315:\f1291, 296
+.I2 DOTMX
+\%\f36:\f1119
+.I2 DOTOC
+\%\f35:\f1107
+.I2 DOTOE
+\%\f35:\f1107
+.I2 DOTOI
+\%\f35:\f1107
+.I2 DOTOP
+\%\f315:\f1291, 308, 310
+.I2 DOTOR
+\%\f33:\f143, 46; \%\f34:\f158; \%\f36:\f1126; \%\f315:\f1300
+.I2 DOTOS
+\%\f35:\f1107
+.I2 DOTPA
+\%\f37:\f1135-138, 140, 146-147, 152
+.I2 DOTPR
+\%\f37:\f1135
+.I2 DOTRIL
+\%\f34:\f161, 68, 70, 78; \%\f315:\f1289
+.I2 DOTRIM
+\%\f33:\f129; \%\f34:\f163, 78-79, 81, 83, 86, 92; \%\f312:\f1241, 251
+.I2 DOTRIS
+\%\f34:\f168, 70, 72, 86, 92
+.I2 DOTS
+\%\f35:\f1105, 109
+.I2 DOTSP
+\%\f37:\f1135, 143, 150-151
+.I2 DOTSUV
+\%\f315:\f1291, 295-296, 298, 307-308
+.I2 DOTSW
+\%\f315:\f1291, 295
+.I2 DOTTUV
+\%\f315:\f1291, 295-296, 298
+.I2 DOTTW
+\%\f315:\f1291, 295
+.I2 DOTUV
+\%\f37:\f1135, 143, 145-147
+.I2 DOTWI
+\%\f315:\f1291, 295
+.I2 DOTXT
+\%\f35:\f194; \%\f37:\f1133, 136, 138-140, 142-143, 145-147, 149-151
+.I2 DOTXUV
+\%\f315:\f1291, 296, 298
+.I2 DOTXW
+\%\f315:\f1291, 296
+.I2 DOVLNL
+\%\f34:\f186
+.I2 DOVPTL
+\%\f34:\f185-86
+.I2 DOVSPM
+\%\f34:\f186-87
+.I2 DOVTRM
+\%\f34:\f186-87
+.I2 DOVTRS
+\%\f34:\f186-87
+.I2 DOVW
+\%\f32:\f116, 21; \%\f33:\f128; \%\f39:\f1176-177, 181, 186, 189, 192; \%\f310:\f1216; \%\f314:\f1284
+.I2 DOXLT
+\%\f32:\f19-308, 12, 21; \%\f33:\f134, 37, 43-44, 46; \%\f35:\f1109; \%\f36:\f1117, 120-122, 126; \%\f39:\f1192; \%\f310:\f1209, 216; \%\f311:\f1227; \%\f315:\f1295, 307
+.I1 \*(Fo variable primitive functions
+.I2 DPUSMV
+\%\f34:\f186; \%\f315:\f1294
+.I2 DPUSMW
+\%\f34:\f186; \%\f315:\f1294
+.I2 DPUTMV
+\%\f34:\f186; \%\f315:\f1294
+.I2 DPUTMW
+\%\f34:\f186; \%\f315:\f1294
+.I2 DPUTSV
+\%\f34:\f186; \%\f315:\f1294
+.I2 DPUTSW
+\%\f34:\f186; \%\f315:\f1294
+.I2 DPUVLL
+\%\f34:\f186
+.I2 DPUVPL
+\%\f34:\f185
+.I2 DPUVSM
+\%\f34:\f186
+.I2 DPUVTM
+\%\f34:\f186, 88-89; \%\f315:\f1294
+.I2 DPUVTS
+\%\f34:\f186
+.I1 \*(Fo system functions
+.I2 DSCBV
+\%\f310:\f1209, 224; \%\f313:\f1257
+.I2 DSEA
+\%\f310:\f1221; \%\f311:\f1225, 227, 240
+.I2 DSEO
+\%\f311:\f1225-227, 231, 240
+.I2 DSER
+\%\f311:\f1225, 227, 240
+.I2 DSFRSR
+\%\f314:\f1279, 284
+.I2 DSHO
+\%\f312:\f1241; \%\f33:\f129, 50; \%\f34:\f189
+.I2 DSINIT
+\%\f32:\f121; \%\f34:\f189; \%\f39:\f1192; \%\f310:\f1216; \%\f312:\f1251; \%\f313:\f1272
+.I2 DSIV
+\%\f312:\f1249-252
+.I2 DSPO
+\%\f312:\f1251; \%\f313:\f1257, 263
+.I2 DSQCI
+\%\f311:\f1231; \%\f312:\f1242, 252; \%\f313:\f1256
+.I2 DSQDI
+\%\f39:\f1180
+.I2 DSQEM
+\%\f312:\f1242-243, 252
+.I2 DSQEV
+\%\f312:\f1242
+.I2 DSQND
+\%\f39:\f1180
+.I2 DSQNR
+\%\f310:\f1207
+.I2 DSQOI
+\%\f312:\f1241-242, 252
+.I2 DSQONI
+\%\f312:\f1241
+.I2 DSQONS
+\%\f312:\f1241
+.I2 DSQONT
+\%\f312:\f1241
+.I2 DSQOS
+\%\f312:\f1241-242, 252
+.I2 DSQRI
+\%\f310:\f1207
+.I2 DSQRNS
+\%\f310:\f1207
+.I2 DSQVG
+\%\f312:\f1249, 251
+.I2 DSRSU
+\%\f314:\f1278
+.I2 DSRSW
+\%\f314:\f1281
+.I2 DSSAU
+\%\f32:\f110-11, 21; \%\f33:\f134, 46; \%\f34:\f189; \%\f35:\f1109; \%\f36:\f1117, 121, 126; \%\f38:\f1155, 159, 161, 170; \%\f39:\f1192
+.I2 DSSEV
+\%\f312:\f1242, 252
+.I2 DSSOND
+\%\f312:\f1241, 252
+.I2 DSSONI
+\%\f312:\f1241, 252
+.I2 DSSONS
+\%\f312:\f1241, 252
+.I2 DSTERM
+\%\f32:\f121; \%\f34:\f191; \%\f39:\f1192; \%\f310:\f1216; \%\f312:\f1251
+.I2 DSTUVC
+\%\f34:\f162, 65-66; \%\f315:\f1292-294, 296, 298
+.I2 DSTWC
+\%\f34:\f162, 65; \%\f315:\f1292
+.I2 DSVS
+\%\f312:\f1250
+.I1 \*(Fo view functions
+.I2 DVQAC
+\%\f38:\f1162
+.I2 DVQDG
+\%\f32:\f116, 21; \%\f39:\f1176, 178, 186, 189, 192; \%\f310:\f1216
+.I2 DVQIG
+\%\f32:\f116, 21; \%\f34:\f189; \%\f39:\f1176-178, 186, 189, 192; \%\f310:\f1216
+.I2 DVQUT
+\%\f39:\f1184
+.I2 DVSAC
+\%\f38:\f1162; \%\f39:\f1192
+.I2 DVSB
+\%\f39:\f1178, 181, 186, 189, 192; \%\f310:\f1216
+.I2 DVSBC
+\%\f32:\f121; \%\f39:\f1178
+.I2 DVSBJ
+\%\f39:\f1178; \%\f314:\f1284
+.I2 DVSBR
+\%\f39:\f1178; \%\f314:\f1284
+.I2 DVSCF
+\%\f39:\f1178, 181
+.I2 DVSRS
+\%\f32:\f117; \%\f39:\f1178, 181; \%\f310:\f1207-208, 216
+.I2 DVSUT
+\%\f310:\f1206; \%\f33:\f146; \%\f39:\f1184; \%\f310:\f1206
+.I2 DVU
+\%\f33:\f146, 54; \%\f35:\f194; \%\f39:\f1182, 184; \%\f310:\f1206, 224
+.I1 frames
+\%\f32:\f115; \%\f33:\f139, 55; \%\f38:\f1163; \%\f39:\f1175-176, 181, 183-184, 204; \%\f311:\f1227
+.I1 functions, object creation
+\%\f312:\f1252
+.I2 update 
+\%\f33:\f132, 54; \%\f34:\f185; \%\f35:\f194; \%\f39:\f1184; \%\f310:\f1206, 223
+.IH G
+.I1 geometric 
+.I2 normal
+\%\f34:\f157, 68-69, 71, 74, 79-80; \%\f35:\f1102; \%\f37:\f1149
+.I2 transformation
+\%\f32:\f19, 13; \%\f34:\f157; \%\f36:\f1117, 119-120, 131-132; \%\f38:\f1157; \%\f39:\f1177, 191-192; \%\f310:\f1211
+.I1 global 
+.I2 antialiasing
+\%\f38:\f1166
+.I2 rendering attributes
+\%\f38:\f1153, 163, 173
+.I1 Gouraud shading
+\%\f35:\f1108
+.I1 grey scale
+\%\f39:\f1200, 204
+.I1 group
+\%\f33:\f127, 29-31, 34, 36-43, 45-46, 50, 55; \%\f35:\f194; \%\f36:\f1118; \%\f37:\f1133; \%\f38:\f1153, 161; \%\f39:\f1175, 177, 184, 189; \%\f310:\f1206, 209, 212; \%\f311:\f1234; \%\f312:\f1251
+.I2 creating objects
+\%\f33:\f143
+.I2 currently open
+\%\f33:\f132, 36-37, 40
+.I2 definition 
+\%\f32:\f116, 21; \%\f39:\f1175, 177-178, 191, 204; \%\f310:\f1223; \%\f312:\f1251
+.I2 display 
+\%\f32:\f115; \%\f39:\f1175, 177, 192, 204; \%\f310:\f1205, 223; \%\f311:\f1226, 232
+.I2 editing
+\%\f33:\f127, 32, 40, 50, 55
+.I2 hierarchies
+\%\f33:\f127
+.I2 in-line 
+\%\f33:\f127, 30, 41
+.I2 open 
+\%\f33:\f132, 36-37, 40
+.I2 nested
+\%\f33:\f136
+.I2 valuator 
+\%\f312:\f1249, 252
+.IH H
+.I1 handles, object
+\%\f32:\f118; \%\f33:\f127-28, 30, 37
+.I1 hierarchies, group
+\%\f33:\f127
+.I1 highlights
+\%\f32:\f19; \%\f35:\f1104-105, 115; \%\f310:\f1211
+.I1 hit list, pick
+\%\f310:\f1205, 213, 215, 221-224
+.I1 holding objects
+\%\f33:\f129
+.IH I
+.I1 identifier
+.I2 pick
+\%\f310:\f1211-213
+.I2 class
+\%\f313:\f1253
+.I1 immediate mode execution
+\%\f32:\f117; \%\f311:\f1225
+.I1 index of refraction
+\%\f35:\f1106-107
+.I1 infinity, light source at
+\%\f38:\f1166-167, 174
+.I1 inheritance
+\%\f33:\f143
+.I1 initialization
+.I2 rendering
+\%\f39:\f1177; \%\f310:\f1205, 223
+.I2 unser-defined routine
+\%\f313:\f1255-256, 258-259, 261, 263, 273
+.I1 in-line groups
+\%\f33:\f127, 30, 41
+.I1 input slots
+\%\f312:\f1241, 249, 252
+.I1 inside/out rule
+\%\f34:\f157, 78
+.I1 intensity, ambient
+\%\f35:\f1108
+.I2 light 
+\%\f38:\f1153
+.I1 interpolation type
+\%\f35:\f193, 108, 115; \%\f39:\f1204
+.I1 invisibility filter
+\%\f311:\f1225, 232-234, 240; \%\f313:\f1269
+.IH J
+.I1 jitter sampling
+\%\f38:\f1165-166
+.I1 justifying 
+.I2 frames in viewports
+\%\f39:\f1183
+.I2 rasters on devices
+\%\f314:\f1283
+.IH L
+.I1 labels
+\%\f33:\f127, 41, 49; \%\f37:\f1135
+.I1 L-bracket primitive
+\%\f313:\f1255, 258, 270
+.I1 left-hand rule
+\%\f34:\f171
+.I1 light
+\%\f31:\f11; \%\f32:\f16, 12-13, 15; \%\f36:\f1117, 128, 131; \%\f38:\f1153-154, 158, 162, 166; \%\f39:\f1175, 177, 184, 204
+.I2 ambient
+\%\f35:\f1104-105, 115; \%\f38:\f1166-167, 174
+.I2 color
+\%\f38:\f1153
+.I2 intensity
+\%\f38:\f1153
+.I2 object's response
+\%\f32:\f18
+.I2 point 
+\%\f38:\f1168-169, 171-172, 174
+.I2 source at infinity
+\%\f38:\f1166-167, 174
+.I2 spot 
+\%\f38:\f1169-171, 174
+.I2 type
+\%\f38:\f1153
+.I1 list, hit
+\%\f310:\f1215, 221, 224
+.I1 local 
+.I2 antialiasing
+\%\f35:\f193, 98, 102-103, 115; \%\f38:\f1166
+.I2 coordinates
+\%\f36:\f1118, 132; \%\f38:\f1162 \%\f310:\f1215
+.I1 locations, vertex
+\%\f34:\f162-63; \%\f313:\f1268
+.IH M
+.I1 malloc
+\%\f39:\f1180; \%\f310:\f1207; \%\f313:\f1262, 265
+.I1 mapping
+.I2 range intensity
+\%\f39:\f1198, 201-204
+.I2 texture 
+\%\f31:\f12; \%\f34:\f161; \%\f35:\f193; \%\f314:\f1276, 282, 284; \%\f315:\f1285-289, 292, 304-305, 308, 310
+.I1 markers
+\%\f33:\f140, 55
+.I1 matrix
+.I2 camera projection
+\%\f38:\f1153, 155, 157, 174
+.I2 current transformation
+\%\f36:\f1117, 119, 123, 126, 132; \%\f37:\f1143
+.I1 mesh objects
+\%\f34:\f157, 78
+.I1 methods
+\%\f32:\f16; \%\f33:\f127, 54; \%\f34:\f157; \%\f38:\f1164, 166; \%\f39:\f1198, 204; \%\f310:\f1205, 223; \%\f311:\f1226; \%\f313:\f1255-257, 259-261, 263, 269; \%\f315:\f1289
+.I1 modeling 
+.I2 coordinates
+\%\f34:\f163; \%\f36:\f1117-118, 132
+.I2 space
+\%\f36:\f1118; \%\f38:\f1153
+.IH N
+.I1 name sets
+\%\f311:\f1225, 232
+.I1 naming conventions
+\%\f313:\f1253; \%\f32:\f118
+.I1 normal, geometric
+\%\f34:\f168-69, 71, 74; \%\f35:\f1102; \%\f37:\f1149
+.I2 vertex 
+\%\f34:\f157, 61-63, 68, 79; \%\f35:\f1102
+.IH O
+.I1 object
+.I2 alternate
+\%\f311:\f1225, 238; \%\f313:\f1257, 263, 265-267, 269; \%\f315:\f1300
+.I2 callback 
+\%\f310:\f1221; \%\f311:\f1225; \%\f312:\f1249, 252; \%\f315:\f1286
+.I2 camera attribute
+\%\f38:\f1154, 164
+.I2 creation functions
+\%\f312:\f1252
+.I2 definition 
+\%\f36:\f1132; \%\f39:\f1175-178, 184; \%\f310:\f1206
+.I2 diagram
+\%\f33:\f129, 42, 45; \%\f35:\f195
+.I2 display 
+\%\f33:\f127; \%\f38:\f1155; \%\f39:\f1175-177, 184, 202; \%\f310:\f1206, 216
+.I2 geometric transformation
+\%\f310:\f1211
+.I2 handles
+\%\f32:\f118; \%\f33:\f127-28, 30, 37
+.I2 holding 
+\%\f33:\f129
+.I2 mesh 
+\%\f34:\f157, 78
+.I2 organizational
+\%\f33:\f129
+.I2 primitive 
+\%\f32:\f17, 9-10, 12, 15; \%\f33:\f127, 30-31, 43; \%\f34:\f157; \%\f35:\f194, 98-99, 102-104, 107-108, 114; \%\f36:\f1117, 119, 128, 131; \%\f38:\f1153-155, 173; \%\f39:\f1175, 177, 191, 204; \%\f310:\f1206, 209, 211, 216, 223; \%\f311:\f1226, 232; \%\f313:\f1255, 258; \%\f314:\f1282; \%\f315:\f1287-288, 310
+.I2 primitive attribute
+\%\f33:\f127; \%\f35:\f193, 95, 115; \%\f38:\f1153; \%\f39:\f1191
+.I2 response to light
+\%\f32:\f18
+.I2 studio
+\%\f32:\f112, 15; \%\f36:\f1131; \%\f38:\f1153-154, 173; \%\f39:\f1192, 204; \%\f310:\f1206, 216, 223; \%\f315:\f1295
+.I1 open group
+\%\f33:\f132, 36-37, 40
+.I1 organizational object
+\%\f33:\f129
+.I1 order, pick path
+\%\f310:\f1220
+.I1 ordering geometric transformations
+\%\f36:\f111, 124
+.I1 output device
+\%\f31:\f12; \%\f32:\f116
+.IH P
+.I1 parallel 
+.I2 camera
+\%\f32:\f114, 21; \%\f38:\f1153-159, 167, 174; \%\f310:\f1215
+.I2 projection
+\%\f38:\f1154, 156
+.I1 path, pick
+\%\f32:\f114, 21; \%\f35:\f1107; \%\f37:\f1134, 143, 145; \%\f38:\f1153-159, 167, 174; \%\f310:\f1205, 211-214, 220-222
+.I1 perspective 
+.I2 camera
+\%\f32:\f114; \%\f38:\f1153, 155-157, 159, 174
+.I2 projection
+\%\f38:\f1155-156
+.I1 pick 
+.I2 aperture
+\%\f310:\f1205, 211, 215
+.I2 callbacks
+\%\f310:\f1205, 221; \%\f311:\f1227
+.I2 identifier
+\%\f310:\f1211-213
+.I2 path
+\%\f310:\f1205, 211-214, 220-222
+.I2 path elements
+\%\f310:\f1212, 214, 221
+.I2 path order
+\%\f310:\f1220
+.I1 pickability
+.I2 filter
+\%\f311:\f1225, 232-234, 240
+.I2 switch
+\%\f310:\f1211
+.I1 picking
+\%\f31:\f12; \%\f32:\f16; \%\f34:\f157; \%\f310:\f1205-206, 211, 213, 215-216, 221, 223; \%\f311:\f1227; \%\f313:\f1266
+.I1 pixel
+\%\f314:\f1275, 280
+.I1 planes, clipping
+\%\f38:\f1153, 155, 174
+.I1 point lights
+\%\f38:\f1168-169, 171-172, 174
+.I1 pointer, element
+\%\f33:\f139-41, 46, 49-50, 54-55
+
+.I1 polygon
+.I2 concave
+\%\f34:\f173
+.I2 convex
+\%\f34:\f172-73
+.I2 self-intersecting
+\%\f34:\f172-73, 75
+.I2 simple 
+\%\f34:\f172-73, 83; \%\f35:\f199-85; \%\f313:\f1255, 266, 269; \%\f315:\f1306
+.I1 polyline
+\%\f34:\f166
+.I1 portability
+\%\f32:\f119-20
+.I1 position, camera
+\%\f38:\f1156, 163
+.I2 current editing
+\%\f33:\f140, 55
+.I1 precision
+\%\f32:\f119
+.I1 preconcatenation
+\%\f36:\f1117, 119
+.I1 primitive 
+\%\f31:\f11, 4; \%\f32:\f16-7, 9, 13, 18; \%\f33:\f131-19, 42; \%\f34:\f157, 59, 78, 85; \%\f35:\f1102-105, 108; \%\f37:\f1133-134, 136-137, 143, 152; \%\f310:\f1211; \%\f311:\f1226; \%\f313:\f1253-255, 259, 269; \%\f315:\f1285-286, 288, 291-292, 294, 300, 304-305, 308, 310
+.I2 attribute
+\%\f32:\f12, 16; \%\f33:\f127, 38; \%\f34:\f157; \%\f35:\f193-96, 98, 103-106, 114; \%\f37:\f1135, 152; \%\f38:\f1153-154, 166, 173; \%\f39:\f1191, 201; \%\f310:\f1211, 223; \%\f315:\f1286-90, 310
+.I2 attribute, L-bracket 
+\%\f313:\f1255, 258, 270
+.I2 base 
+\%\f310:\f1211; \%\f313:\f1253-254, 269, 272-273
+.I2 objects
+\%\f32:\f17, 9-10, 12, 15; \%\f33:\f127, 30-31, 43; \%\f34:\f157; \%\f35:\f194, 98-99, 102-104, 107-108, 114; \%\f36:\f1117, 119, 128, 131; \%\f38:\f1153-155, 173; \%\f39:\f1175, 177, 191, 204; \%\f310:\f1206, 209, 211, 216, 223; \%\f311:\f1226, 232; \%\f313:\f1255, 258; \%\f314:\f1282; \%\f315:\f1287-288, 310
+.I2 objects, user-defined 
+\%\f32:\f118; \%\f33:\f132; \%\f31:\f14; \%\f313:\f1253, 257-258, 261, 273
+.I2 text 
+\%\f37:\f1133-134, 136-137, 143, 152
+.I2 variable data
+\%\f315:\f1292, 294; \%\f34:\f185
+.I1 printing
+\%\f32:\f16; \%\f310:\f1205; \%\f312:\f1251; \%\f313:\f1263
+.I1 priorities of views
+\%\f39:\f1182
+.I1 private data
+\%\f34:\f185; \%\f313:\f1255-258, 261-267, 273
+.I1 production renderer
+\%\f313:\f1254-255, 269-270
+.I1 projection matrix
+\%\f38:\f1157-161
+.I1 properties, surface
+\%\f31:\f11; \%\f35:\f193, 114
+.I1 pseudocolor
+\%\f39:\f1175, 197-198, 203-204
+.IH R
+.I1 range intensity mapping
+\%\f39:\f1198, 201-204
+.I1 raster object
+\%\f314:\f1275
+.I1 ratio, aspect
+\%\f37:\f1143; \%\f38:\f1156; \%\f39:\f1179, 183
+.I1 ray tracing
+\%\f38:\f1164, 173
+.I1 reference count
+\%\f33:\f129, 50
+.I1 reflection
+\%\f31:\f11; \%\f32:\f18; \%\f35:\f193, 104, 108, 115; \%\f315:\f1286
+.I2 environmental 
+\%\f31:\f11; \%\f315:\f1286
+.I1 refraction
+\%\f31:\f12; \%\f35:\f1106-107
+.I2 index
+\%\f35:\f1107
+
+.I1 relative 
+.I2 coordinate systems
+\%\f36:\f1117
+.I2 group definition
+\%\f36:\f1128, 132
+.I1 renderer, dynamic
+\%\f310:\f1207; \%\f313:\f1254-255, 269-270
+.I2 production 
+\%\f313:\f1254-255, 269-270
+.I1 rendering
+\%\f31:\f12; \%\f32:\f16-270, 17; \%\f33:\f146; \%\f34:\f157, 73; \%\f35:\f194, 105, 108; \%\f38:\f1153, 163, 173; \%\f39:\f1176-178, 204; \%\f310:\f1205, 223; \%\f311:\f1226, 238, 240; \%\f312:\f1251; \%\f313:\f1254, 257, 269; \%\f314:\f1276; \%\f315:\f1286
+.I2 initialization
+\%\f39:\f1177; \%\f310:\f1205, 223
+.I2 style
+\%\f39:\f1176, 178, 204
+.I1 representation
+.I2 alternate
+\%\f310:\f1211; \%\f313:\f1253-254, 273
+.I2 display
+\%\f35:\f193, 98, 114-115
+.I2 type
+\%\f32:\f110; \%\f33:\f130, 34; \%\f35:\f193, 96-98, 115; \%\f311:\f1232
+.I1 RGB color model
+\%\f32:\f18; \%\f34:\f164-65
+.I1 right-hand
+.I2 rule
+\%\f34:\f157, 68-69, 71, 80; \%\f37:\f1149
+.I2 coordinate systems
+\%\f36:\f1117
+.I1 rotating
+\%\f36:\f1117, 124, 131
+.I1 routine, creation
+\%\f33:\f150; \%\f313:\f1255-256, 259, 261, 264, 271, 273
+.I2 initialization 
+\%\f313:\f1255-256, 258-259, 261, 263, 273
+.I1 rule, inside/out
+\%\f34:\f157, 78
+.I2 left-hand 
+\%\f34:\f171
+.I2 right-hand 
+\%\f34:\f157, 68-69, 71, 80; \%\f37:\f1149
+.IH S
+.I1 sampling
+\%\f35:\f102; \%\f38:\f1153-154, 164-166, 173; \%\f39:\f1203; \%\f315:\f1309
+.I2 adaptive
+\%\f38:\f1165
+.I2 jitter
+\%\f38:\f1165-166
+.I2 super
+\%\f38:\f1165
+.I2 super with filter
+\%\f38:\f1165
+.I1 scale, grey
+\%\f39:\f1200, 204
+.I1 scaling
+\%\f32:\f110; \%\f33:\f146; \%\f36:\f1117, 119, 124, 128, 131; \%\f312:\f1250; \%\f315:\f1295
+.I1 self-intersecting polygon
+\%\f34:\f172-73, 75
+.I1 set
+.I2 executability
+\%\f311:\f1225, 231-232, 240
+.I2 name
+\%\f311:\f1225, 232
+.I1 shading
+\%\f31:\f12; \%\f32:\f19; \%\f33:\f134; \%\f34:\f163, 68, 79; \%\f35:\f1108; \%\f39:\f1204; \%\f310:\f1209; \%\f315:\f1285
+.I2 constant 
+\%\f33:\f134; \%\f39:\f1204
+.I2 flat 
+\%\f35:\f1108
+.I2 Gouraud 
+\%\f35:\f1108
+.I2 Phong
+\%\f35:\f1108
+.I2 smooth 
+\%\f31:\f13
+.I1 shadows
+\%\f31:\f11; \%\f32:\f15; \%\f33:\f127; \%\f38:\f1153, 173; \%\f310:\f1211
+.I1 shearing
+\%\f36:\f1117, 131
+.I1 simple polygon
+\%\f34:\f172-73, 83; \%\f35:\f199; \%\f313:\f1255, 266, 269; \%\f315:\f1306
+.I1 slots, input
+\%\f312:\f1241, 249, 252
+.I1 smooth shading
+\%\f31:\f13
+.I1 smoothflag
+\%\f34:\f163, 79, 83-84
+.I1 space, modeling
+\%\f36:\f1118; \%\f38:\f1153
+.I2 world 
+\%\f38:\f1153, 166; \%\f315:\f1303
+.I1 specular
+\%\f31:\f11; \%\f32:\f18; \%\f35:\f193, 104-105, 108, 115
+.I2 color
+\%\f32:\f19; \%\f35:\f1108
+.I2 factor
+\%\f35:\f1105
+.I1 spot lights
+\%\f38:\f1169-171, 174
+.I1 stacking, attribute
+\%\f33:\f139, 41; \%\f35:\f193; \%\f37:\f1133; \%\f38:\f1173
+.I1 stereo
+\%\f38:\f1163
+.I1 studio 
+.I2 attribute objects
+\%\f38:\f1173; \%\f39:\f1191-192
+.I2 objects
+\%\f32:\f112, 15; \%\f36:\f1131; \%\f38:\f1153-154, 173; \%\f39:\f1192, 204; \%\f310:\f1206, 216, 223; \%\f315:\f1295
+.I1 style, rendering
+\%\f39:\f1176, 178, 204
+.I1 subdivision
+\%\f35:\f193-94, 96, 98, 100-101, 115; \%\f38:\f1164
+.I2 level
+\%\f35:\f193-94, 100-101
+.I1 supersampling
+\%\f38:\f1165
+.I1 surface properties
+\%\f31:\f11; \%\f35:\f193, 114
+.I1 switch, pickability
+\%\f310:\f1211
+.I1 system
+.I2 world coordinate
+\%\f36:\f1119
+.I2 relative coordinate
+\%\f36:\f1117
+.I2 right-handed coordinate
+\%\f36:\f1117
+.IH T
+.I1 text primitives
+\%\f37:\f1133-134, 136-137, 143, 152
+.I1 texture
+.I2 coordinates
+\%\f34:\f162, 66; \%\f315:\f1285-286, 292, 294-296, 300, 302, 305-306, 310
+.I2 mapping
+\%\f31:\f12; \%\f34:\f161; \%\f35:\f193; \%\f314:\f1276, 282, 284; \%\f315:\f1285-289, 292, 304-305, 308, 310
+.I1 torus
+\%\f34:\f158
+.I1 tracing, ray
+\%\f38:\f1164, 173
+.I1 transformation
+\%\f32:\f19, 13; \%\f34:\f157; \%\f36:\f1117-14, 119-120, 131-132; \%\f310:\f1211 
+.I2 geometric 
+\%\f32:\f19; \%\f34:\f158; \%\f36:\f1117-121, 132; \%\f37:\f1135; \%\f38:\f1157; \%\f39:\f1177, 191-192
+.I2 ordering 
+\%\f36:\f1119, 124
+.I1 translating
+\%\f36:\f1117, 124, 131
+.I1 transparency
+\%\f31:\f11, 3; \%\f35:\f1105-107, 109, 115; \%\f314:\f1276; \%\f315:\f1285, 287, 310
+
+
+.I1 transparent
+\%\f31:\f13; \%\f32:\f18; \%\f35:\f193-9, 104-107, 115; \%\f314:\f1276; \%\f315:\f1308
+.I2 color
+\%\f32:\f19; \%\f35:\f1106
+.I2 orientation dependency
+\%\f35:\f1107
+.I1 triangle
+.I2 list
+\%\f34:\f168
+.I2 mesh 
+\%\f34:\f179, 87
+.I2 strip
+\%\f34:\f170, 87
+.I1 type, camera
+\%\f32:\f114
+.I2 interpolation 
+\%\f35:\f193, 108, 115; \%\f39:\f1204
+.I2 light 
+\%\f38:\f1153
+.I2 representation 
+\%\f32:\f110; \%\f33:\f130, 34; \%\f35:\f193, 96-98, 115; \%\f311:\f1232
+.I2 vertex 
+\%\f34:\f162, 65-66; \%\f315:\f1292
+.IH U
+.I1 update functions
+\%\f33:\f132, 54; \%\f34:\f185; \%\f35:\f194; \%\f39:\f1184; \%\f310:\f1206, 223
+.I1 updating
+\%\f39:\f1175
+.I1 user-defined primitive
+\%\f31:\f14; \%\f32:\f118; \%\f33:\f132; \%\f313:\f1253, 257-258, 261, 273
+.I1 uv/uvw
+\%\f34:\f162, 65; \%\f37:\f1149-166; \%\f313:\f1258
+.IH V
+.I1 valuator group
+\%\f312:\f1249, 252
+.I1 valuators
+\%\f312:\f1241, 249, 252
+.I1 value, default
+\%\f32:\f19; \%\f35:\f194; \%\f38:\f1166; \%\f315:\f1300
+.I1 variable data primitives
+\%\f34:\f185; \%\f315:\f1292, 294
+.I1 vertex 
+.I2 colors
+\%\f31:\f13; \%\f34:\f161-62, 64-65, 70; \%\f35:\f1108
+.I2 colored
+\%\f32:\f19
+.I2 locations
+\%\f34:\f162-63; \%\f313:\f1268
+.I2 normal
+\%\f34:\f157, 61-63,68, 79; \%\f35:\f1102; \%\f315:\f1303
+.I2 type
+\%\f34:\f157, 62-66; \%\f315:\f1292
+.I1 view 
+\%\f32:\f115; \%\f33:\f139-16, 46, 55; \%\f38:\f1157, 161, 163; \%\f39:\f1175-176, 179, 181-185, 189, 204; \%\f310:\f1206, 213, 215; \%\f314:\f1282
+.I2 boundary
+\%\f39:\f1176, 178, 181, 183, 204
+.I2 features
+\%\f39:\f1176, 178
+.I2 field of
+\%\f38:\f1155-158
+.I2 priorities of
+\%\f39:\f1182
+.I1 viewport, device
+\%\f311:\f1238; \%\f39:\f1175, 177, 183, 189, 204
+.I1 viewports, justifying frames in
+\%\f39:\f1183
+.I1 volumes, bounding
+\%\f310:\f1205-206, 209-211, 223-224; \%\f311:\f225, 238; \%\f313:\f1257, 266
+.IH W
+.I1 world 
+.I2 coordinate system
+\%\f36:\f1119
+.I2 coordinates
+\%\f36:\f1132; \%\f38:\f1153-154, 162-163; \%\f310:\f1215
+.I2 space
+\%\f38:\f1153, 166; \%\f315:\f1303
+
+

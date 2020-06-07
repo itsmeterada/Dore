@@ -1,0 +1,1003 @@
+%!PS-Adobe-3.0
+%%Creator: groff version 1.06
+%%DocumentNeededResources: font Palatino-Roman
+%%+ font Helvetica
+%%+ font Palatino-Italic
+%%+ font Helvetica-BoldOblique
+%%+ font Helvetica-Bold
+%%DocumentSuppliedResources: procset grops 1.06 0
+%%Pages: 13
+%%PageOrder: Ascend
+%%Orientation: Portrait
+%%EndComments
+%%BeginProlog
+%%BeginResource: procset grops 1.06 0
+%!PS-Adobe-3.0 Resource-ProcSet
+
+/setpacking where {
+	pop
+	currentpacking
+	true setpacking
+} if
+
+/grops 120 dict dup begin 
+
+% The ASCII code of the space character.
+/SC 32 def
+
+/A /show load def
+/B { 0 SC 3 -1 roll widthshow } bind def
+/C { 0 exch ashow } bind def
+/D { 0 exch 0 SC 5 2 roll awidthshow } bind def
+/E { 0 rmoveto show } bind def
+/F { 0 rmoveto 0 SC 3 -1 roll widthshow } bind def
+/G { 0 rmoveto 0 exch ashow } bind def
+/H { 0 rmoveto 0 exch 0 SC 5 2 roll awidthshow } bind def
+/I { 0 exch rmoveto show } bind def
+/J { 0 exch rmoveto 0 SC 3 -1 roll widthshow } bind def
+/K { 0 exch rmoveto 0 exch ashow } bind def
+/L { 0 exch rmoveto 0 exch 0 SC 5 2 roll awidthshow } bind def
+/M { rmoveto show } bind def
+/N { rmoveto 0 SC 3 -1 roll widthshow } bind def
+/O { rmoveto 0 exch ashow } bind def
+/P { rmoveto 0 exch 0 SC 5 2 roll awidthshow } bind def
+/Q { moveto show } bind def 
+/R { moveto 0 SC 3 -1 roll widthshow } bind def
+/S { moveto 0 exch ashow } bind def
+/T { moveto 0 exch 0 SC 5 2 roll awidthshow } bind def
+
+% name size font SF -
+
+/SF {
+	findfont exch
+	[ exch dup 0 exch 0 exch neg 0 0 ] makefont
+	dup setfont
+	[ exch /setfont cvx ] cvx bind def
+} bind def
+
+% name a c d font MF -
+
+/MF {
+	findfont
+	[ 5 2 roll
+	0 3 1 roll % b
+	neg 0 0 ] makefont
+	dup setfont
+	[ exch /setfont cvx ] cvx bind def
+} bind def
+
+/level0 0 def
+/RES 0 def
+/PL 0 def
+/LS 0 def
+
+% Guess the page length.
+% This assumes that the imageable area is vertically centered on the page.
+% PLG - length
+
+/PLG {
+	gsave newpath clippath pathbbox grestore
+	exch pop add exch pop
+} bind def
+
+% BP -
+
+/BP {
+	/level0 save def
+	1 setlinecap
+	1 setlinejoin
+	72 RES div dup scale
+	LS {
+		90 rotate
+	} {
+		0 PL translate
+	} ifelse
+	1 -1 scale
+} bind def
+
+/EP {
+	level0 restore
+	showpage
+} bind def
+
+
+% centerx centery radius startangle endangle DA -
+
+/DA {
+	newpath arcn stroke
+} bind def
+
+% x y SN - x' y'
+% round a position to nearest (pixel + (.25,.25))
+
+/SN {
+	transform 
+	.25 sub exch .25 sub exch
+	round .25 add exch round .25 add exch
+	itransform
+} bind def
+	
+% endx endy startx starty DL -
+% we round the endpoints of the line, so that parallel horizontal
+% and vertical lines will appear even
+
+/DL {
+	SN
+	moveto
+	SN
+	lineto stroke
+} bind def
+
+% centerx centery radius DC -
+
+/DC {
+	newpath 0 360 arc closepath
+} bind def
+
+
+/TM matrix def
+
+%  width height centerx centery DE -
+
+/DE {
+	TM currentmatrix pop
+	translate scale newpath 0 0 .5 0 360 arc closepath
+	TM setmatrix
+} bind def
+
+% these are for splines
+
+/RC /rcurveto load def
+/RL /rlineto load def
+/ST /stroke load def
+/MT /moveto load def
+/CL /closepath load def
+
+% fill the last path
+
+% amount FL -
+
+/FL {
+	currentgray exch setgray fill setgray
+} bind def
+
+% fill with the ``current color''
+
+/BL /fill load def
+
+/LW /setlinewidth load def
+% new_font_name encoding_vector old_font_name RE -
+
+/RE {
+	findfont
+	dup maxlength dict begin
+	{
+		1 index /FID ne { def } { pop pop } ifelse
+	} forall
+	/Encoding exch def
+	dup /FontName exch def
+	currentdict end definefont pop
+} bind def
+
+/DEFS 0 def
+
+% hpos vpos EBEGIN -
+
+/EBEGIN {
+	moveto
+	DEFS begin
+} bind def
+
+/EEND /end load def
+
+/CNT 0 def
+/level1 0 def
+
+% llx lly newwid wid newht ht newllx newlly PBEGIN -
+
+/PBEGIN {
+	/level1 save def
+	translate
+	div 3 1 roll div exch scale
+	neg exch neg exch translate
+	% set the graphics state to default values
+	0 setgray
+	0 setlinecap
+	1 setlinewidth
+	0 setlinejoin
+	10 setmiterlimit
+	[] 0 setdash
+	/setstrokeadjust where {
+		pop
+		false setstrokeadjust
+	} if
+	/setoverprint where {
+		pop
+		false setoverprint
+	} if
+	newpath
+	/CNT countdictstack def
+	userdict begin
+	/showpage {} def
+} bind def
+
+/PEND {
+	clear
+	countdictstack CNT sub { end } repeat
+	level1 restore
+} bind def
+
+end def
+
+/setpacking where {
+	pop
+	setpacking
+} if
+%%EndResource
+%%EndProlog
+%%BeginSetup
+%%IncludeResource: font Palatino-Roman
+%%IncludeResource: font Helvetica
+%%IncludeResource: font Palatino-Italic
+%%IncludeResource: font Helvetica-BoldOblique
+%%IncludeResource: font Helvetica-Bold
+grops begin/DEFS 1 dict def DEFS begin/u{.001 mul}bind def end/RES 72 def/PL
+792 def/LS false def/ENC0[/asciicircum/asciitilde/Scaron/Zcaron/scaron/zcaron
+/Ydieresis/trademark/quotesingle/.notdef/.notdef/.notdef/.notdef/.notdef
+/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef
+/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/space
+/exclam/quotedbl/numbersign/dollar/percent/ampersand/quoteright/parenleft
+/parenright/asterisk/plus/comma/hyphen/period/slash/zero/one/two/three/four
+/five/six/seven/eight/nine/colon/semicolon/less/equal/greater/question/at/A/B/C
+/D/E/F/G/H/I/J/K/L/M/N/O/P/Q/R/S/T/U/V/W/X/Y/Z/bracketleft/backslash
+/bracketright/circumflex/underscore/quoteleft/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q
+/r/s/t/u/v/w/x/y/z/braceleft/bar/braceright/tilde/.notdef/quotesinglbase
+/guillemotleft/guillemotright/bullet/florin/fraction/perthousand/dagger
+/daggerdbl/endash/emdash/ff/fi/fl/ffi/ffl/dotlessi/dotlessj/grave/hungarumlaut
+/dotaccent/breve/caron/ring/ogonek/quotedblleft/quotedblright/oe/lslash
+/quotedblbase/OE/Lslash/.notdef/exclamdown/cent/sterling/currency/yen/brokenbar
+/section/dieresis/copyright/ordfeminine/guilsinglleft/logicalnot/minus
+/registered/macron/degree/plusminus/twosuperior/threesuperior/acute/mu
+/paragraph/periodcentered/cedilla/onesuperior/ordmasculine/guilsinglright
+/onequarter/onehalf/threequarters/questiondown/Agrave/Aacute/Acircumflex/Atilde
+/Adieresis/Aring/AE/Ccedilla/Egrave/Eacute/Ecircumflex/Edieresis/Igrave/Iacute
+/Icircumflex/Idieresis/Eth/Ntilde/Ograve/Oacute/Ocircumflex/Otilde/Odieresis
+/multiply/Oslash/Ugrave/Uacute/Ucircumflex/Udieresis/Yacute/Thorn/germandbls
+/agrave/aacute/acircumflex/atilde/adieresis/aring/ae/ccedilla/egrave/eacute
+/ecircumflex/edieresis/igrave/iacute/icircumflex/idieresis/eth/ntilde/ograve
+/oacute/ocircumflex/otilde/odieresis/divide/oslash/ugrave/uacute/ucircumflex
+/udieresis/yacute/thorn/ydieresis]def/Helvetica-Bold@0 ENC0/Helvetica-Bold RE
+/Helvetica-BoldOblique@0 ENC0/Helvetica-BoldOblique RE/Palatino-Italic@0 ENC0
+/Palatino-Italic RE/Helvetica@0 ENC0/Helvetica RE/Palatino-Roman@0 ENC0
+/Palatino-Roman RE
+%%EndSetup
+%%Page: 333 1
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 99 46.8 63 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 243 46.8 207 46.8 DL 279 46.8 243 46.8 DL 315 46.8 279 46.8 DL 351
+46.8 315 46.8 DL 387 46.8 351 46.8 DL 437.4 46.8 401.4 46.8 DL 464.4 46.8 428.4
+46.8 DL 500.4 46.8 464.4 46.8 DL 536.4 46.8 500.4 46.8 DL/F0 42
+/Palatino-Roman@0 SF(F)208.596 91 Q/F1 36/Palatino-Roman@0 SF(OR)A(TRAN)-1.332
+E F0(C)267.078 133 Q F1(ROSS)A F0(R)171.456 175 Q F1(EFERENCE)A/F2 12
+/Helvetica@0 SF(CHAPTER ONE)446.388 175 Q 99 186 63 186 DL 135 186 99 186 DL
+171 186 135 186 DL 207 186 171 186 DL 243 186 207 186 DL 279 186 243 186 DL 315
+186 279 186 DL 351 186 315 186 DL 387 186 351 186 DL 437.4 186 401.4 186 DL
+464.4 186 428.4 186 DL 500.4 186 464.4 186 DL 536.4 186 500.4 186 DL/F3 11
+/Palatino-Roman@0 SF .959(This chapter lists the Dore)63 252 R 4.512<b466>
+189.684 252 S .959(unctions and constants alphabetically)201.522 252 R
+(by their)63 265.2 Q/F4 10/Palatino-Roman@0 SF(FOR)2.75 E(TRAN)-.37 E F3
+(names and pr)2.75 E(ovides their C equivalents.)-.198 E .474
+(Chapter 2 lists the Dore)63 290.4 R 4.027<b466>175.149 290.4 S .473
+(unctions alphabetically by their C names)186.502 290.4 R .38(and pr)63 303.6 R
+.38(ovides their)-.198 F F4(FOR)3.13 E(TRAN)-.37 E F3 .381
+(equivalents. Chapter 2 also pr)3.13 F(ovides)-.198 E 1.015
+(the C constants, the)63 316.8 R F4(FOR)3.765 E(TRAN)-.37 E F3 1.015
+(constants, and a synopsis for each)3.765 F 5.395(function. Appendix)63 330 R
+5.395(Ao)5.395 G 5.395(ft)189.075 330 S(he)201.719 330 Q/F5 11
+/Palatino-Italic@0 SF(Dore)5.396 E 5.704<b450>236.815 330 S -.198(ro)252.903
+330 S -2.343(grammer ').198 F 5.396(sG)-.605 G(uide)322.682 330 Q F3 2.646
+(lists the)5.396 F(functions accor)63 343.2 Q(ding to their type.)-.198 E .16
+LW 65 369.2 63 369.2 DL 67 369.2 65 369.2 DL 69 369.2 67 369.2 DL 71 369.2 69
+369.2 DL 73 369.2 71 369.2 DL 75 369.2 73 369.2 DL 77 369.2 75 369.2 DL 79
+369.2 77 369.2 DL 81 369.2 79 369.2 DL 83 369.2 81 369.2 DL 85 369.2 83 369.2
+DL 87 369.2 85 369.2 DL 89 369.2 87 369.2 DL 91 369.2 89 369.2 DL 93 369.2 91
+369.2 DL 95 369.2 93 369.2 DL 97 369.2 95 369.2 DL 99 369.2 97 369.2 DL 101
+369.2 99 369.2 DL 103 369.2 101 369.2 DL 105 369.2 103 369.2 DL 107 369.2 105
+369.2 DL 109 369.2 107 369.2 DL 111 369.2 109 369.2 DL 113 369.2 111 369.2 DL
+115 369.2 113 369.2 DL 117 369.2 115 369.2 DL 119 369.2 117 369.2 DL 121 369.2
+119 369.2 DL 123 369.2 121 369.2 DL 125 369.2 123 369.2 DL 127 369.2 125 369.2
+DL 129 369.2 127 369.2 DL 131 369.2 129 369.2 DL 133 369.2 131 369.2 DL 135
+369.2 133 369.2 DL 137 369.2 135 369.2 DL 139 369.2 137 369.2 DL 141 369.2 139
+369.2 DL 143 369.2 141 369.2 DL 145 369.2 143 369.2 DL 147 369.2 145 369.2 DL
+149 369.2 147 369.2 DL 151 369.2 149 369.2 DL 153 369.2 151 369.2 DL 155 369.2
+153 369.2 DL 157 369.2 155 369.2 DL 159 369.2 157 369.2 DL 161 369.2 159 369.2
+DL 163 369.2 161 369.2 DL 165 369.2 163 369.2 DL 167 369.2 165 369.2 DL 169
+369.2 167 369.2 DL 171 369.2 169 369.2 DL 173 369.2 171 369.2 DL 175 369.2 173
+369.2 DL 177 369.2 175 369.2 DL 179 369.2 177 369.2 DL 181 369.2 179 369.2 DL
+183 369.2 181 369.2 DL 185 369.2 183 369.2 DL 187 369.2 185 369.2 DL 189 369.2
+187 369.2 DL 191 369.2 189 369.2 DL 193 369.2 191 369.2 DL 195 369.2 193 369.2
+DL 197 369.2 195 369.2 DL 199 369.2 197 369.2 DL 201 369.2 199 369.2 DL 203
+369.2 201 369.2 DL 205 369.2 203 369.2 DL 207 369.2 205 369.2 DL 209 369.2 207
+369.2 DL 211 369.2 209 369.2 DL 213 369.2 211 369.2 DL 215 369.2 213 369.2 DL
+217 369.2 215 369.2 DL 219 369.2 217 369.2 DL 221 369.2 219 369.2 DL 223 369.2
+221 369.2 DL 225 369.2 223 369.2 DL 227 369.2 225 369.2 DL 229 369.2 227 369.2
+DL 231 369.2 229 369.2 DL 233 369.2 231 369.2 DL 235 369.2 233 369.2 DL 237
+369.2 235 369.2 DL 239 369.2 237 369.2 DL 241 369.2 239 369.2 DL 243 369.2 241
+369.2 DL 245 369.2 243 369.2 DL 247 369.2 245 369.2 DL 249 369.2 247 369.2 DL
+251 369.2 249 369.2 DL 253 369.2 251 369.2 DL 255 369.2 253 369.2 DL 257 369.2
+255 369.2 DL 259 369.2 257 369.2 DL 261 369.2 259 369.2 DL 263 369.2 261 369.2
+DL 265 369.2 263 369.2 DL 267 369.2 265 369.2 DL 269 369.2 267 369.2 DL 271
+369.2 269 369.2 DL 273 369.2 271 369.2 DL 275 369.2 273 369.2 DL 277 369.2 275
+369.2 DL 279 369.2 277 369.2 DL 281 369.2 279 369.2 DL 283 369.2 281 369.2 DL
+285 369.2 283 369.2 DL 287 369.2 285 369.2 DL 289 369.2 287 369.2 DL 291 369.2
+289 369.2 DL 293 369.2 291 369.2 DL 295 369.2 293 369.2 DL 297 369.2 295 369.2
+DL 299 369.2 297 369.2 DL 301 369.2 299 369.2 DL 303 369.2 301 369.2 DL 305
+369.2 303 369.2 DL 307 369.2 305 369.2 DL 309 369.2 307 369.2 DL 311 369.2 309
+369.2 DL 313 369.2 311 369.2 DL 315 369.2 313 369.2 DL 317 369.2 315 369.2 DL
+319 369.2 317 369.2 DL 321 369.2 319 369.2 DL 323 369.2 321 369.2 DL 325 369.2
+323 369.2 DL 327 369.2 325 369.2 DL 329 369.2 327 369.2 DL 331 369.2 329 369.2
+DL 333 369.2 331 369.2 DL 335 369.2 333 369.2 DL 337 369.2 335 369.2 DL 339
+369.2 337 369.2 DL 341 369.2 339 369.2 DL 343 369.2 341 369.2 DL 345 369.2 343
+369.2 DL 347 369.2 345 369.2 DL 349 369.2 347 369.2 DL 351 369.2 349 369.2 DL
+353 369.2 351 369.2 DL 355 369.2 353 369.2 DL 357 369.2 355 369.2 DL 359 369.2
+357 369.2 DL 361 369.2 359 369.2 DL 363 369.2 361 369.2 DL 365 369.2 363 369.2
+DL 367 369.2 365 369.2 DL 369 369.2 367 369.2 DL 371 369.2 369 369.2 DL 373
+369.2 371 369.2 DL 375 369.2 373 369.2 DL 377 369.2 375 369.2 DL 379 369.2 377
+369.2 DL 381 369.2 379 369.2 DL 383 369.2 381 369.2 DL 385 369.2 383 369.2 DL
+387 369.2 385 369.2 DL 1.44 LW 419.4 369.7 401.4 369.7 DL 428.4 369.7 410.4
+369.7 DL 446.4 369.7 428.4 369.7 DL 464.4 369.7 446.4 369.7 DL 482.4 369.7
+464.4 369.7 DL 500.4 369.7 482.4 369.7 DL 518.4 369.7 500.4 369.7 DL 536.4
+369.7 518.4 369.7 DL/F6 12/Helvetica-BoldOblique@0 SF(Functions)479.064 383.7 Q
+F3 67.1(DDPO DdPickObjs)63 397.8 R 59.224(DDQCE DdInqColorEntries)63 411 R
+53.427(DDQCTS DdInqColorT)63 424.2 R(ableSize)-1.012 E 67.023(DDQE DdInqExtent)
+63 437.4 R 60.28(DDQFR DdInqFrame)63 450.6 R 60.885(DDQFT DdInqFonts)63 463.8 R
+58.487(DDQNF DdInqNumFonts)63 477 R(DDQP)63 490.2 Q 62.304(AD)-1.012 G
+(dInqPickApertur)173.682 490.2 Q(e)-.198 E 59.301(DDQPC DdInqPickCallback)63
+503.4 R 51.81(DDQPPO DdInqPickPathOr)63 516.6 R(der)-.198 E 51.249
+(DDQPXD DdInqPixelData)63 529.8 R 66.396(DDQR DdInqResolution)63 543 R 57.563
+(DDQSM DdInqShadeMode)63 556.2 R 60.621(DDQSR DdInqShadeRanges)63 569.4 R
+65.802(DDQV DdInqV)63 582.6 R(iewport)-.605 E 59.059(DDQVT DdInqV)63 595.8 R
+(isualT)-.605 E(ype)-.99 E 62.095(DDSCE DdSetColorEntries)63 609 R 60.159
+(DDSDV DdSetV)63 622.2 R(iewport)-.605 E 70.499(DDSF DdSetFrame)63 635.4 R
+67.969(DDSO DdSetOptions)63 648.6 R(DDSP)63 661.8 Q 65.175(AD)-1.012 G
+(dSetPickApertur)173.682 661.8 Q(e)-.198 E 55.451(DDSPCB DdSetPickCallback)63
+675 R 54.681(DDSPPO DdSetPickPathOr)63 688.2 R(der)-.198 E 60.434
+(DDSSM DdSetShadeMode)63 701.4 R 81 756 63 756 DL 99 756 81 756 DL 117 756 99
+756 DL 135 756 117 756 DL 153 756 135 756 DL 171 756 153 756 DL 189 756 171 756
+DL 207 756 189 756 DL 225 756 207 756 DL 243 756 225 756 DL 261 756 243 756 DL
+279 756 261 756 DL 297 756 279 756 DL 315 756 297 756 DL 333 756 315 756 DL 351
+756 333 756 DL 369 756 351 756 DL 387 756 369 756 DL 419.4 756 401.4 756 DL
+428.4 756 410.4 756 DL 446.4 756 428.4 756 DL 464.4 756 446.4 756 DL 482.4 756
+464.4 756 DL 500.4 756 482.4 756 DL 518.4 756 500.4 756 DL 536.4 756 518.4 756
+DL/F7 9/Helvetica@0 SF(FOR)274.023 768.96 Q(TRAN Cross Ref)-.27 E(erence)-.27 E
+(Dore)414.21 768.96 Q 3.506<b452>429.712 768.96 S(ef)442.713 768.96 Q
+(erence Man)-.27 E(ual)-.09 E/F8 9/Helvetica-Bold@0 SF(1-333)4.002 E EP
+%%Page: 334 2
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 108 46.8 72 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 257.4 46.8 221.4 46.8 DL 293.4 46.8 257.4 46.8 DL 329.4 46.8 293.4
+46.8 DL 365.4 46.8 329.4 46.8 DL 401.4 46.8 365.4 46.8 DL 437.4 46.8 401.4 46.8
+DL 473.4 46.8 437.4 46.8 DL 509.4 46.8 473.4 46.8 DL 545.4 46.8 509.4 46.8 DL
+/F0 10/Helvetica-BoldOblique@0 SF(Functions)72 57.6 Q/F1 10/Helvetica@0 SF
+(\(contin)72 68.4 Q(ued\))-.1 E/F2 11/Palatino-Roman@0 SF 63.492
+(DDSSR DdSetShadeRanges)221.5 109.2 R 73.832(DDU DdUpdate)221.5 122.4 R 67.826
+(DEAC DeAddClass)221.5 135.6 R 49.324(DEAMTH \()221.5 148.8 R/F3 10
+/Palatino-Roman@0 SF(FOR)A(TRAN)-.37 E F2(Only\))2.75 E 67.738(DECO DeCr)221.5
+162 R(eateObject)-.198 E 67.023(DEDO DeDeleteObject)221.5 175.2 R 58.509
+(DEDOD \()221.5 188.4 R F3(FOR)A(TRAN)-.37 E F2(Only\))2.75 E 68.904
+(DEEA DeExecuteAlternate)221.5 201.6 R 65.186(DEIOP DeInitializeObjPick)221.5
+214.8 R 68.893(DEQP DeInqPickable)221.5 228 R 68.189(DEQR DeInqRenderable)221.5
+241.2 R 59.675(DEROD \()221.5 254.4 R F3(FOR)A(TRAN)-.37 E F2(Only\))2.75 E
+56.023(DEWOD \()221.5 267.6 R F3(FOR)A(TRAN)-.37 E F2(Only\))2.75 E 69.421
+(DFQB DfInqBoundary)221.5 280.8 R 72.479(DFQJ DfInqJust)221.5 294 R 59.807
+(DFQVG DfInqV)221.5 307.2 R(iewGr)-.605 E(oup)-.198 E 72.292
+(DFSB DfSetBoundary)221.5 320.4 R 75.35(DFSJ DfSetJust)221.5 333.6 R 76.23
+(DFU DfUpdate)221.5 346.8 R 65.307(DGAO DgAddObj)221.5 360 R 56.914
+(DGAOG DgAddObjT)221.5 373.2 R(oGr)-1.012 E(oup)-.198 E 66.726(DGCK DgCheck)
+221.5 386.4 R 68.937(DGCS DgClose)221.5 399.6 R 67.276(DGDE DgDelEle)221.5
+412.8 R 60.555(DGDEL DgDelEleBetweenLabels)221.5 426 R 59.928
+(DGDER DgDelEleRange)221.5 439.2 R 75.79(DGE DgEmpty)221.5 452.4 R 73.865
+(DGO DgOpen)221.5 465.6 R 60.5(DGQEP DgInqElePtr)221.5 478.8 R 65.219
+(DGQO DgInqOpen)221.5 492 R 58.575(DGQOP DgInqObjAtPos)221.5 505.2 R 68.09
+(DGQS DgInqSize)221.5 518.4 R 66.517(DGRO DgReplaceObj)221.5 531.6 R 58.124
+(DGROG DgReplaceObjInGr)221.5 544.8 R(oup)-.198 E 63.371(DGSEP DgSetElePtr)
+221.5 558 R 56.65(DGSEPL DgSetElePtrRelLabel)221.5 571.2 R 52.866
+(DOAMBI DoAmbientIntens)221.5 584.4 R 50.798(DOAMBS DoAmbientSwitch)221.5 597.6
+R 48.675(DOANNT DoAnnoT)221.5 610.8 R(ext)-1.012 E 61.622
+(DOBFC DoBackfaceCullable)221.5 624 R 55.847(DOBFCS DoBackfaceCullSwitch)221.5
+637.2 R 67.595(DOBV DoBoundingV)221.5 650.4 R(ol)-1.221 E 61.82
+(DOBVS DoBoundingV)221.5 663.6 R(olSwitch)-1.221 E 67.738(DOCB DoCallback)221.5
+676.8 R 64.053(DOCM DoCamera)221.5 690 R 56.716(DOCMX DoCameraMatrix)221.5
+703.2 R 1.44 LW 90 756 72 756 DL 99 756 81 756 DL 117 756 99 756 DL 135 756 117
+756 DL 153 756 135 756 DL 171 756 153 756 DL 189 756 171 756 DL 207 756 189 756
+DL 239.4 756 221.4 756 DL 257.4 756 239.4 756 DL 275.4 756 257.4 756 DL 293.4
+756 275.4 756 DL 311.4 756 293.4 756 DL 329.4 756 311.4 756 DL 347.4 756 329.4
+756 DL 365.4 756 347.4 756 DL 383.4 756 365.4 756 DL 401.4 756 383.4 756 DL
+419.4 756 401.4 756 DL 437.4 756 419.4 756 DL 455.4 756 437.4 756 DL 473.4 756
+455.4 756 DL 491.4 756 473.4 756 DL 509.4 756 491.4 756 DL 527.4 756 509.4 756
+DL 545.4 756 527.4 756 DL/F4 9/Helvetica-Bold@0 SF(1-334)72 768.96 Q/F5 9
+/Helvetica@0 SF(Dore)6.504 E 3.506<b452>117.019 768.96 S(ef)130.02 768.96 Q
+(erence Man)-.27 E(ual)-.09 E(FOR)221.4 768.96 Q(TRAN Cross Ref)-.27 E(erence)
+-.27 E EP
+%%Page: 335 3
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 99 46.8 63 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 243 46.8 207 46.8 DL 279 46.8 243 46.8 DL 315 46.8 279 46.8 DL 351
+46.8 315 46.8 DL 387 46.8 351 46.8 DL 437.4 46.8 401.4 46.8 DL 464.4 46.8 428.4
+46.8 DL 500.4 46.8 464.4 46.8 DL 536.4 46.8 500.4 46.8 DL/F0 10
+/Helvetica-BoldOblique@0 SF(Functions)488.62 57.6 Q/F1 10/Helvetica@0 SF
+(\(contin)486.48 68.4 Q(ued\))-.1 E/F2 11/Palatino-Roman@0 SF 68.684
+(DOCS DoClipSwitch)63 109.2 R 51.975(DOCTVC DoCompT)63 122.4 R(extur)-1.012 E
+(eUVCallback)-.198 E 53.999(DOCTVS DoCompT)63 135.6 R(extur)-1.012 E(eUVSwitch)
+-.198 E 66.517(DOCV DoClipV)63 148.8 R(ol)-1.221 E 73.744(DOD DoDevice)63 162 R
+65.945(DODC DoDepthCue)63 175.2 R 60.17(DODCS DoDepthCueSwitch)63 188.4 R
+56.122(DODIFC DoDif)63 201.6 R(fuseColor)-.198 E 60.214(DODIFI DoDif)63 214.8 R
+(fuseIntens)-.198 E 58.146(DODIFS DoDif)63 228 R(fuseSwitch)-.198 E 67.1
+(DODP DoDataPtr)63 241.2 R 65.802(DODV DoDataV)63 254.4 R(al)-1.012 E 69.762
+(DOES DoExecSet)63 267.6 R 69.421(DOFL DoFilter)63 280.8 R 68.794(DOFR DoFrame)
+63 294 R 63.019(DOFRS DoFileRaster)63 307.2 R 73.865(DOG DoGr)63 320.4 R(oup)
+-.198 E 47.465(DOGRMO DoGlbRendMaxObjs)63 333.6 R 50.336
+(DOGRMS DoGlbRendMaxSub)63 346.8 R 52.448(DOGRRL DoGlbRendRayLevel)63 360 R
+50.622(DOGTUV DoGenerateT)63 373.2 R(extur)-1.012 E(eUV)-.198 E 61.556
+(DOHSS DoHiddenSurfSwitch)63 386.4 R 63.437(DOILG DoInLineGr)63 399.6 R(oup)
+-.198 E 55.693(DOINVS DoInvisSwitch)63 412.8 R 72.776(DOIS DoInputSlot)63 426 R
+71.808(DOIT DoInterpT)63 439.2 R(ype)-.99 E 60.863(DOLAF DoLookAtFr)63 452.4 R
+(om)-.198 E 54.461(DOLAST DoLocalAntiAliasStyle)63 465.6 R 50.204
+(DOLASW DoLocalAntiAliasSwitch)63 478.8 R 67.738(DOLC DoLightColor)63 492 R
+71.83(DOLI DoLightIntens)63 505.2 R 55.968(DOLINL DoLineList)63 518.4 R 68.816
+(DOLL DoLabel)63 531.6 R 59.653(DOLNT DoLineT)63 544.8 R(ype)-.99 E(DOL)63 558
+Q 72.358(TD)-.814 G(oLight)173.682 558 Q(DOL)63 571.2 Q 63.492 -.814(TA D)-.814
+H(oLightAttenuation).814 E(DOL)63 584.4 Q 63.833(TS DoLightSwitch)-.814 F(DOL)
+63 597.6 Q 55.275(TSA DoLightSpr)-.814 F(eadAngles)-.198 E(DOL)63 610.8 Q
+57.112(TSE DoLightSpr)-.814 F(eadExp)-.198 E(DOL)63 624 Q 62.865(TT DoLightT)
+-.814 F(ype)-.99 E(DOL)63 637.2 Q 68.101(WD)-.814 G(oLineW)173.682 637.2 Q
+(idth)-.605 E 71.852(DOM DoMatrix)63 650.4 R 50.468(DOMBVE DoMinBoundingV)63
+663.6 R(olExt)-1.221 E 65.736(DOMF DoMarkerFont)63 676.8 R 63.459
+(DOMG DoMarkerGlyph)63 690 R 66.077(DOMS DoMarkerScale)63 703.2 R 1.44 LW 81
+756 63 756 DL 99 756 81 756 DL 117 756 99 756 DL 135 756 117 756 DL 153 756 135
+756 DL 171 756 153 756 DL 189 756 171 756 DL 207 756 189 756 DL 225 756 207 756
+DL 243 756 225 756 DL 261 756 243 756 DL 279 756 261 756 DL 297 756 279 756 DL
+315 756 297 756 DL 333 756 315 756 DL 351 756 333 756 DL 369 756 351 756 DL 387
+756 369 756 DL 419.4 756 401.4 756 DL 428.4 756 410.4 756 DL 446.4 756 428.4
+756 DL 464.4 756 446.4 756 DL 482.4 756 464.4 756 DL 500.4 756 482.4 756 DL
+518.4 756 500.4 756 DL 536.4 756 518.4 756 DL/F3 9/Helvetica@0 SF(FOR)274.023
+768.96 Q(TRAN Cross Ref)-.27 E(erence)-.27 E(Dore)414.21 768.96 Q 3.506<b452>
+429.712 768.96 S(ef)442.713 768.96 Q(erence Man)-.27 E(ual)-.09 E/F4 9
+/Helvetica-Bold@0 SF(1-335)4.002 E EP
+%%Page: 336 4
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 108 46.8 72 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 257.4 46.8 221.4 46.8 DL 293.4 46.8 257.4 46.8 DL 329.4 46.8 293.4
+46.8 DL 365.4 46.8 329.4 46.8 DL 401.4 46.8 365.4 46.8 DL 437.4 46.8 401.4 46.8
+DL 473.4 46.8 437.4 46.8 DL 509.4 46.8 473.4 46.8 DL 545.4 46.8 509.4 46.8 DL
+/F0 10/Helvetica-BoldOblique@0 SF(Functions)72 57.6 Q/F1 10/Helvetica@0 SF
+(\(contin)72 68.4 Q(ued\))-.1 E/F2 11/Palatino-Roman@0 SF 53.273
+(DONRBS DoNURBSurf)221.5 109.2 R 67.342(DONS DoNameSet)221.5 122.4 R(DOP)221.5
+135.6 Q 60.72(AR DoParallel)-1.012 F(DOP)221.5 148.8 Q 63.767 -.814(AT D)-1.012
+H(oPatch).814 E 61.545(DOPER DoPerspective)221.5 162 R 58.08(DOPGN DoPolygon)
+221.5 175.2 R 47.674(DOPGNM DoPolygonMesh)221.5 188.4 R 63.393(DOPID DoPickID)
+221.5 201.6 R 68.893(DOPL DoPolyline)221.5 214.8 R 65.208(DOPM DoPolymarker)
+221.5 228 R 59.433(DOPMS DoPrimSurf)221.5 241.2 R 53.009(DOPNTL DoPointList)
+221.5 254.4 R(DOPP)221.5 267.6 Q 64.174(AD)-1.012 G(oPopAtts)332.182 267.6 Q
+51.227(DOPPMX DoPopMatrix)221.5 280.8 R 64.603(DOPRJ DoPr)221.5 294 R(ojection)
+-.198 E 69.839(DOPS DoPickSwitch)221.5 307.2 R 58.498(DOPUA DoPushAtts)221.5
+320.4 R 49.313(DOPUMX DoPushMatrix)221.5 333.6 R 56.298
+(DOREFS DoRe\215ectionSwitch)221.5 346.8 R 54.802(DOREPT DoRepT)221.5 360 R
+(ype)-.99 E 57.739(DORFRI DoRefractionIndex)221.5 373.2 R 55.671
+(DORFRS DoRefractionSwitch)221.5 386.4 R 59.521(DOROT DoRotate)221.5 399.6 R
+69.135(DORS DoRaster)221.5 412.8 R 52.767(DOSADP DoSampleAdaptive)221.5 426 R
+51.15(DOSASW DoSampleAdaptiveSwitch)221.5 439.2 R 68.684(DOSC DoScale)221.5
+452.4 R 62.194(DOSDS DoSubDivSpec)221.5 465.6 R 53.57
+(DOSEGC DoSurfaceEdgeColor)221.5 478.8 R(DOSFL)221.5 492 Q 60.467(TD)-.814 G
+(oSampleFilter)332.182 492 Q 52.998(DOSHAS DoShadowSwitch)221.5 505.2 R 59.983
+(DOSHR DoShear)221.5 518.4 R 72.776(DOSI DoShadeIndex)221.5 531.6 R 62.37
+(DOSJIT DoSampleJitter)221.5 544.8 R 56.045(DOSJSW DoSampleJitterSwitch)221.5
+558 R 54.241(DOSPCC DoSpecularColor)221.5 571.2 R 55.924
+(DOSPCF DoSpecularFactor)221.5 584.4 R 58.333(DOSPCI DoSpecularIntens)221.5
+597.6 R 56.265(DOSPCS DoSpecularSwitch)221.5 610.8 R 52.305
+(DOSPGN DoSimplePolygon)221.5 624 R 53.966(DOSPHL DoSpher)221.5 637.2 R(eList)
+-.198 E 59.433(DOSPM DoSimplePolygonMesh)221.5 650.4 R 57.244
+(DOSRFS DoSurfaceShade)221.5 663.6 R 56.716(DOSSPR DoSampleSuper)221.5 676.8 R
+53.933(DOSSSW DoSampleSuperSwitch)221.5 690 R 55.671(DOSTER DoSter)221.5 703.2
+R(eo)-.198 E 1.44 LW 90 756 72 756 DL 99 756 81 756 DL 117 756 99 756 DL 135
+756 117 756 DL 153 756 135 756 DL 171 756 153 756 DL 189 756 171 756 DL 207 756
+189 756 DL 239.4 756 221.4 756 DL 257.4 756 239.4 756 DL 275.4 756 257.4 756 DL
+293.4 756 275.4 756 DL 311.4 756 293.4 756 DL 329.4 756 311.4 756 DL 347.4 756
+329.4 756 DL 365.4 756 347.4 756 DL 383.4 756 365.4 756 DL 401.4 756 383.4 756
+DL 419.4 756 401.4 756 DL 437.4 756 419.4 756 DL 455.4 756 437.4 756 DL 473.4
+756 455.4 756 DL 491.4 756 473.4 756 DL 509.4 756 491.4 756 DL 527.4 756 509.4
+756 DL 545.4 756 527.4 756 DL/F3 9/Helvetica-Bold@0 SF(1-336)72 768.96 Q/F4 9
+/Helvetica@0 SF(Dore)6.504 E 3.506<b452>117.019 768.96 S(ef)130.02 768.96 Q
+(erence Man)-.27 E(ual)-.09 E(FOR)221.4 768.96 Q(TRAN Cross Ref)-.27 E(erence)
+-.27 E EP
+%%Page: 337 5
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 99 46.8 63 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 243 46.8 207 46.8 DL 279 46.8 243 46.8 DL 315 46.8 279 46.8 DL 351
+46.8 315 46.8 DL 387 46.8 351 46.8 DL 437.4 46.8 401.4 46.8 DL 464.4 46.8 428.4
+46.8 DL 500.4 46.8 464.4 46.8 DL 536.4 46.8 500.4 46.8 DL/F0 10
+/Helvetica-BoldOblique@0 SF(Functions)488.62 57.6 Q/F1 10/Helvetica@0 SF
+(\(contin)486.48 68.4 Q(ued\))-.1 E/F2 11/Palatino-Roman@0 SF 57.244
+(DOSTES DoSter)63 109.2 R(eoSwitch)-.198 E(DOT)63 122.4 Q 70.521(AD)-.814 G(oT)
+173.682 122.4 Q(extAlign)-1.012 E(DOT)63 135.6 Q 59.213(AA DoT)-.814 F(extur)
+-1.012 E(eAntiAlias)-.198 E 67.716(DOTC DoT)63 148.8 R(ranspColor)-.99 E 62.678
+(DOTEF DoT)63 162 R(extExpFactor)-1.012 E 69.399(DOTF DoT)63 175.2 R(extFont)
+-1.012 E 66.363(DOTH DoT)63 188.4 R(extHeight)-1.012 E 71.808(DOTI DoT)63 201.6
+R(ranspIntens)-.99 E 55.627(DOTIMS DoT)63 214.8 R(extur)-1.012 E
+(eIntermediateSurf)-.198 E 58.388(DOTMB DoT)63 228 R(extur)-1.012 E(eMapBump)
+-.198 E 52.613(DOTMBS DoT)63 241.2 R(extur)-1.012 E(eMapBumpSwitch)-.198 E
+48.796(DOTMDC DoT)63 254.4 R(extur)-1.012 E(eMapDif)-.198 E(fuseColor)-.198 E
+50.82(DOTMDS DoT)63 267.6 R(extur)-1.012 E(eMapDif)-.198 E(fuseColorSwitch)
+-.198 E 58.388(DOTME DoT)63 280.8 R(extur)-1.012 E(eMapEnvir)-.198 E(on)-.198 E
+52.613(DOTMES DoT)63 294 R(extur)-1.012 E(eMapEnvir)-.198 E(onSwitch)-.198 E
+54.659(DOTMTI DoT)63 307.2 R(extur)-1.012 E(eMapT)-.198 E(ranspIntens)-.99 E
+52.591(DOTMTS DoT)63 320.4 R(extur)-1.012 E(eMapT)-.198 E(ranspIntensSwitch)
+-.99 E 48.609(DOTMUV DoT)63 333.6 R(extur)-1.012 E(eMatrixUV)-.198 E 54.109
+(DOTMW DoT)63 346.8 R(extur)-1.012 E(eMatrixUVW)-.198 E 57.772(DOTMX DoT)63 360
+R(ransformMatrix)-.99 E(DOT)63 373.2 Q 59.268(OC DoT)-.198 F(ranspOrientColor)
+-.99 E(DOT)63 386.4 Q 60.346(OE DoT)-.198 F(ranspOrientExp)-.99 E(DOT)63 399.6
+Q 63.36(OI DoT)-.198 F(ranspOrientIntens)-.99 E(DOT)63 412.8 Q 60.423(OP DoT)
+-.198 F(extur)-1.012 E(eOp)-.198 E(DOT)63 426 Q 59.719(OR DoT)-.198 F(or)-1.012
+E(us)-.088 E(DOT)63 439.2 Q 61.292(OS DoT)-.198 F(ranspOrientSwitch)-.99 E
+(DOTP)63 452.4 Q 64.075(AD)-1.012 G(oT)173.682 452.4 Q(extPath)-1.012 E 61.523
+(DOTPR DoT)63 465.6 R(extPr)-1.012 E(ecision)-.198 E 57.739(DOTRIL DoT)63 478.8
+R(riangleList)-.99 E 54.054(DOTRIM DoT)63 492 R(riangleMesh)-.99 E 58.685
+(DOTRIS DoT)63 505.2 R(riangleStrip)-.99 E 69.74(DOTS DoT)63 518.4 R
+(ranspSwitch)-.99 E 63.096(DOTSP DoT)63 531.6 R(extSpace)-1.012 E 53.24
+(DOTSUV DoT)63 544.8 R(extur)-1.012 E(eScaleUV)-.198 E 58.74(DOTSW DoT)63 558 R
+(extur)-1.012 E(eScaleUVW)-.198 E 52.272(DOTTUV DoT)63 571.2 R(extur)-1.012 E
+(eT)-.198 E(ranslateUV)-.99 E 57.772(DOTTW DoT)63 584.4 R(extur)-1.012 E(eT)
+-.198 E(ranslateUVW)-.99 E 59.015(DOTUV DoT)63 597.6 R(extUpV)-1.012 E(ector)
+-1.221 E 55.308(DOTUVI DoT)63 610.8 R(extur)-1.012 E(eUVIndex)-.198 E 60.808
+(DOTWI DoT)63 624 R(extur)-1.012 E(eUVWIndex)-.198 E 61.435(DOTXT DoT)63 637.2
+R(ext)-1.012 E 51.678(DOTXUV DoT)63 650.4 R(extur)-1.012 E(eExtendUV)-.198 E
+57.178(DOTXW DoT)63 663.6 R(extur)-1.012 E(eExtendUVW)-.198 E 51.733
+(DOVLNL DoV)63 676.8 R(arLineList)-1.012 E 54.208(DOVPTL DoV)63 690 R
+(arPointList)-1.012 E 51.491(DOVSPM DoV)63 703.2 R(arSimplePolygonMesh)-1.012 E
+1.44 LW 81 756 63 756 DL 99 756 81 756 DL 117 756 99 756 DL 135 756 117 756 DL
+153 756 135 756 DL 171 756 153 756 DL 189 756 171 756 DL 207 756 189 756 DL 225
+756 207 756 DL 243 756 225 756 DL 261 756 243 756 DL 279 756 261 756 DL 297 756
+279 756 DL 315 756 297 756 DL 333 756 315 756 DL 351 756 333 756 DL 369 756 351
+756 DL 387 756 369 756 DL 419.4 756 401.4 756 DL 428.4 756 410.4 756 DL 446.4
+756 428.4 756 DL 464.4 756 446.4 756 DL 482.4 756 464.4 756 DL 500.4 756 482.4
+756 DL 518.4 756 500.4 756 DL 536.4 756 518.4 756 DL/F3 9/Helvetica@0 SF(FOR)
+274.023 768.96 Q(TRAN Cross Ref)-.27 E(erence)-.27 E(Dore)414.21 768.96 Q 3.506
+<b452>429.712 768.96 S(ef)442.713 768.96 Q(erence Man)-.27 E(ual)-.09 E/F4 9
+/Helvetica-Bold@0 SF(1-337)4.002 E EP
+%%Page: 338 6
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 108 46.8 72 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 257.4 46.8 221.4 46.8 DL 293.4 46.8 257.4 46.8 DL 329.4 46.8 293.4
+46.8 DL 365.4 46.8 329.4 46.8 DL 401.4 46.8 365.4 46.8 DL 437.4 46.8 401.4 46.8
+DL 473.4 46.8 437.4 46.8 DL 509.4 46.8 473.4 46.8 DL 545.4 46.8 509.4 46.8 DL
+/F0 10/Helvetica-BoldOblique@0 SF(Functions)72 57.6 Q/F1 10/Helvetica@0 SF
+(\(contin)72 68.4 Q(ued\))-.1 E/F2 11/Palatino-Roman@0 SF 49.819(DOVTRM DoV)
+221.5 109.2 R(arT)-1.012 E(riangleMesh)-.99 E 54.45(DOVTRS DoV)221.5 122.4 R
+(arT)-1.012 E(riangleStrip)-.99 E 63.316(DOVW DoV)221.5 135.6 R(iew)-.605 E
+(DOXL)221.5 148.8 Q 65.021(TD)-.814 G(oT)332.182 148.8 Q(ranslate)-.99 E 51.579
+(DPUSMV DpUpdV)221.5 162 R(arSimplePolygonMeshUV)-1.012 E 48.521(DPUSMW DpUpdV)
+221.5 175.2 R(arSimplePolygonMeshUVW)-1.012 E 50.611(DPUTMV DpUpdV)221.5 188.4
+R(arT)-1.012 E(riangleMeshUV)-.99 E 47.553(DPUTMW DpUpdV)221.5 201.6 R(arT)
+-1.012 E(riangleMeshUVW)-.99 E 55.242(DPUTSV DpUpdV)221.5 214.8 R(arT)-1.012 E
+(riangleStripUV)-.99 E 52.184(DPUTSW DpUpdV)221.5 228 R(arT)-1.012 E
+(riangleStripUVW)-.99 E 54.318(DPUVLL DpUpdV)221.5 241.2 R(arLineList)-1.012 E
+54.395(DPUVPL DpUpdV)221.5 254.4 R(arPointList)-1.012 E 51.579(DPUVSM DpUpdV)
+221.5 267.6 R(arSimplePolygonMesh)-1.012 E 50.611(DPUVTM DpUpdV)221.5 280.8 R
+(arT)-1.012 E(riangleMesh)-.99 E 55.242(DPUVTS DpUpdV)221.5 294 R(arT)-1.012 E
+(riangleStrip)-.99 E 62.667(DSCBV DsCompBoundingV)221.5 307.2 R(ol)-1.221 E
+69.85(DSEA DsExecutionAbort)221.5 320.4 R 69.762(DSEO DsExecuteObj)221.5 333.6
+R 71.06(DSER DsExecutionReturn)221.5 346.8 R 58.542(DSFRSR DsFileRasterRead)
+221.5 360 R 67.331(DSHO DsHoldObj)221.5 373.2 R 61.831(DSINIT DsInitialize)
+221.5 386.4 R 73.48(DSIV DsInputV)221.5 399.6 R(alue)-1.012 E 69.839
+(DSPO DsPrintObj)221.5 412.8 R 59.367(DSQAU DsInqAngleUnits)221.5 426 R 64.977
+(DSQCI DsInqClassId)221.5 439.2 R 58.278(DSQCM DsInqCurr)221.5 452.4 R
+(entMethod)-.198 E 64.262(DSQDI DsInqDriverInfo)221.5 465.6 R 54.527
+(DSQEDL DsInqExeDepthLimit)221.5 478.8 R 59.356(DSQEM DsInqErr)221.5 492 R
+(orMessage)-.198 E 61.82(DSQEV DsInqErr)221.5 505.2 R(orV)-.198 E(ars)-1.012 E
+58.685(DSQHO DsInqHoldObj)221.5 518.4 R 62.37(DSQMI DsInqMethodId)221.5 531.6 R
+58.828(DSQND DsInqNumDrivers)221.5 544.8 R 59.994(DSQNR DsInqNumRender)221.5
+558 R(ers)-.198 E 56.331(DSQOCI DsInqObjClassId)221.5 571.2 R 64.13
+(DSQOI DsInqObj)221.5 584.4 R 54.989(DSQONI DsInqObjName)221.5 597.6 R 52.921
+(DSQONS DsInqObjName)221.5 610.8 R 51.953(DSQONT DsInqObjName)221.5 624 R
+62.062(DSQOS DsInqObj)221.5 637.2 R 69.135(DSQR DsInqRaster)221.5 650.4 R
+65.428(DSQRI DsInqRender)221.5 663.6 R(erId)-.198 E 54.219(DSQRNS DsInqRender)
+221.5 676.8 R(erNames)-.198 E 64.592(DSQSF DsInqSafeFlag)221.5 690 R 54.472
+(DSQVER DsInqV)221.5 703.2 R(ersion)-1.221 E 1.44 LW 90 756 72 756 DL 99 756 81
+756 DL 117 756 99 756 DL 135 756 117 756 DL 153 756 135 756 DL 171 756 153 756
+DL 189 756 171 756 DL 207 756 189 756 DL 239.4 756 221.4 756 DL 257.4 756 239.4
+756 DL 275.4 756 257.4 756 DL 293.4 756 275.4 756 DL 311.4 756 293.4 756 DL
+329.4 756 311.4 756 DL 347.4 756 329.4 756 DL 365.4 756 347.4 756 DL 383.4 756
+365.4 756 DL 401.4 756 383.4 756 DL 419.4 756 401.4 756 DL 437.4 756 419.4 756
+DL 455.4 756 437.4 756 DL 473.4 756 455.4 756 DL 491.4 756 473.4 756 DL 509.4
+756 491.4 756 DL 527.4 756 509.4 756 DL 545.4 756 527.4 756 DL/F3 9
+/Helvetica-Bold@0 SF(1-338)72 768.96 Q/F4 9/Helvetica@0 SF(Dore)6.504 E 3.506
+<b452>117.019 768.96 S(ef)130.02 768.96 Q(erence Man)-.27 E(ual)-.09 E(FOR)
+221.4 768.96 Q(TRAN Cross Ref)-.27 E(erence)-.27 E EP
+%%Page: 339 7
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 99 46.8 63 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 243 46.8 207 46.8 DL 279 46.8 243 46.8 DL 315 46.8 279 46.8 DL 351
+46.8 315 46.8 DL 387 46.8 351 46.8 DL 437.4 46.8 401.4 46.8 DL 464.4 46.8 428.4
+46.8 DL 500.4 46.8 464.4 46.8 DL 536.4 46.8 500.4 46.8 DL/F0 10
+/Helvetica-BoldOblique@0 SF(Functions)488.62 57.6 Q/F1 10/Helvetica@0 SF
+(\(contin)486.48 68.4 Q(ued\))-.1 E/F2 11/Palatino-Roman@0 SF 60.148
+(DSQVG DsInqV)63 109.2 R(aluatorGr)-1.012 E(oup)-.198 E 54.12
+(DSQVOS DsInqObjStatus)63 122.4 R 69.135(DSRO DsReleaseObj)63 135.6 R 63.448
+(DSRSU DsRasterUpdate)63 148.8 R 61.006(DSRSW DsRasterW)63 162 R(rite)-.814 E
+62.238(DSSAU DsSetAngleUnits)63 175.2 R 57.398(DSSEDL DsSetExeDepthLimit)63
+188.4 R 64.691(DSSEV DsSetErr)63 201.6 R(orV)-.198 E(ars)-1.012 E 53.053
+(DSSOND DsSetObjName)63 214.8 R 57.86(DSSONI DsSetObjName)63 228 R 55.792
+(DSSONS DsSetObjName)63 241.2 R 67.463(DSSSF DsSetSafeFlag)63 254.4 R 53.911
+(DSTERM DsT)63 267.6 R(erminate)-1.012 E 54.087(DSTUVC DsT)63 280.8 R(extur)
+-1.012 E(eUVCount)-.198 E 59.587(DSTWC DsT)63 294 R(extur)-1.012 E(eUVWCount)
+-.198 E(DSUA)63 307.2 Q 64.042(VD)-1.221 G(sUpdateAllV)173.682 307.2 Q(iews)
+-.605 E 71.412(DSVS DsV)63 320.4 R(aluatorSwitch)-1.012 E 57.959
+(DVQAC DvInqActiveCamera)63 333.6 R 67.595(DVQB DvInqBoundary)63 346.8 R 59.796
+(DVQBC DvInqBackgr)63 360 R(oundColor)-.198 E 63.932(DVQBJ DvInqBackgr)63 373.2
+R(oundJust)-.198 E 60.247(DVQBR DvInqBackgr)63 386.4 R(oundRaster)-.198 E
+60.401(DVQCF DvInqClearFlag)63 399.6 R 57.409(DVQDG DvInqDe\214nitionGr)63
+412.8 R(oup)-.198 E 62.216(DVQIG DvInqDisplayGr)63 426 R(oup)-.198 E 61.193
+(DVQRS DvInqRendStyle)63 439.2 R 64.834(DVQSI DvInqShadeIndex)63 452.4 R 59.015
+(DVQUT DvInqUpdateT)63 465.6 R(ype)-.99 E 60.83(DVSAC DvSetActiveCamera)63
+478.8 R 70.466(DVSB DvSetBoundary)63 492 R 62.667(DVSBC DvSetBackgr)63 505.2 R
+(oundColor)-.198 E 66.803(DVSBJ DvSetBackgr)63 518.4 R(oundJust)-.198 E 63.118
+(DVSBR DvSetBackgr)63 531.6 R(oundRaster)-.198 E 63.272(DVSCF DvSetClearFlag)63
+544.8 R 64.064(DVSRS DvSetRendStyle)63 558 R 67.705(DVSSI DvSetShadeIndex)63
+571.2 R 61.886(DVSUT DvSetUpdateT)63 584.4 R(ype)-.99 E 74.404(DVU DvUpdate)63
+597.6 R .16 LW 65 623.6 63 623.6 DL 67 623.6 65 623.6 DL 69 623.6 67 623.6 DL
+71 623.6 69 623.6 DL 73 623.6 71 623.6 DL 75 623.6 73 623.6 DL 77 623.6 75
+623.6 DL 79 623.6 77 623.6 DL 81 623.6 79 623.6 DL 83 623.6 81 623.6 DL 85
+623.6 83 623.6 DL 87 623.6 85 623.6 DL 89 623.6 87 623.6 DL 91 623.6 89 623.6
+DL 93 623.6 91 623.6 DL 95 623.6 93 623.6 DL 97 623.6 95 623.6 DL 99 623.6 97
+623.6 DL 101 623.6 99 623.6 DL 103 623.6 101 623.6 DL 105 623.6 103 623.6 DL
+107 623.6 105 623.6 DL 109 623.6 107 623.6 DL 111 623.6 109 623.6 DL 113 623.6
+111 623.6 DL 115 623.6 113 623.6 DL 117 623.6 115 623.6 DL 119 623.6 117 623.6
+DL 121 623.6 119 623.6 DL 123 623.6 121 623.6 DL 125 623.6 123 623.6 DL 127
+623.6 125 623.6 DL 129 623.6 127 623.6 DL 131 623.6 129 623.6 DL 133 623.6 131
+623.6 DL 135 623.6 133 623.6 DL 137 623.6 135 623.6 DL 139 623.6 137 623.6 DL
+141 623.6 139 623.6 DL 143 623.6 141 623.6 DL 145 623.6 143 623.6 DL 147 623.6
+145 623.6 DL 149 623.6 147 623.6 DL 151 623.6 149 623.6 DL 153 623.6 151 623.6
+DL 155 623.6 153 623.6 DL 157 623.6 155 623.6 DL 159 623.6 157 623.6 DL 161
+623.6 159 623.6 DL 163 623.6 161 623.6 DL 165 623.6 163 623.6 DL 167 623.6 165
+623.6 DL 169 623.6 167 623.6 DL 171 623.6 169 623.6 DL 173 623.6 171 623.6 DL
+175 623.6 173 623.6 DL 177 623.6 175 623.6 DL 179 623.6 177 623.6 DL 181 623.6
+179 623.6 DL 183 623.6 181 623.6 DL 185 623.6 183 623.6 DL 187 623.6 185 623.6
+DL 189 623.6 187 623.6 DL 191 623.6 189 623.6 DL 193 623.6 191 623.6 DL 195
+623.6 193 623.6 DL 197 623.6 195 623.6 DL 199 623.6 197 623.6 DL 201 623.6 199
+623.6 DL 203 623.6 201 623.6 DL 205 623.6 203 623.6 DL 207 623.6 205 623.6 DL
+209 623.6 207 623.6 DL 211 623.6 209 623.6 DL 213 623.6 211 623.6 DL 215 623.6
+213 623.6 DL 217 623.6 215 623.6 DL 219 623.6 217 623.6 DL 221 623.6 219 623.6
+DL 223 623.6 221 623.6 DL 225 623.6 223 623.6 DL 227 623.6 225 623.6 DL 229
+623.6 227 623.6 DL 231 623.6 229 623.6 DL 233 623.6 231 623.6 DL 235 623.6 233
+623.6 DL 237 623.6 235 623.6 DL 239 623.6 237 623.6 DL 241 623.6 239 623.6 DL
+243 623.6 241 623.6 DL 245 623.6 243 623.6 DL 247 623.6 245 623.6 DL 249 623.6
+247 623.6 DL 251 623.6 249 623.6 DL 253 623.6 251 623.6 DL 255 623.6 253 623.6
+DL 257 623.6 255 623.6 DL 259 623.6 257 623.6 DL 261 623.6 259 623.6 DL 263
+623.6 261 623.6 DL 265 623.6 263 623.6 DL 267 623.6 265 623.6 DL 269 623.6 267
+623.6 DL 271 623.6 269 623.6 DL 273 623.6 271 623.6 DL 275 623.6 273 623.6 DL
+277 623.6 275 623.6 DL 279 623.6 277 623.6 DL 281 623.6 279 623.6 DL 283 623.6
+281 623.6 DL 285 623.6 283 623.6 DL 287 623.6 285 623.6 DL 289 623.6 287 623.6
+DL 291 623.6 289 623.6 DL 293 623.6 291 623.6 DL 295 623.6 293 623.6 DL 297
+623.6 295 623.6 DL 299 623.6 297 623.6 DL 301 623.6 299 623.6 DL 303 623.6 301
+623.6 DL 305 623.6 303 623.6 DL 307 623.6 305 623.6 DL 309 623.6 307 623.6 DL
+311 623.6 309 623.6 DL 313 623.6 311 623.6 DL 315 623.6 313 623.6 DL 317 623.6
+315 623.6 DL 319 623.6 317 623.6 DL 321 623.6 319 623.6 DL 323 623.6 321 623.6
+DL 325 623.6 323 623.6 DL 327 623.6 325 623.6 DL 329 623.6 327 623.6 DL 331
+623.6 329 623.6 DL 333 623.6 331 623.6 DL 335 623.6 333 623.6 DL 337 623.6 335
+623.6 DL 339 623.6 337 623.6 DL 341 623.6 339 623.6 DL 343 623.6 341 623.6 DL
+345 623.6 343 623.6 DL 347 623.6 345 623.6 DL 349 623.6 347 623.6 DL 351 623.6
+349 623.6 DL 353 623.6 351 623.6 DL 355 623.6 353 623.6 DL 357 623.6 355 623.6
+DL 359 623.6 357 623.6 DL 361 623.6 359 623.6 DL 363 623.6 361 623.6 DL 365
+623.6 363 623.6 DL 367 623.6 365 623.6 DL 369 623.6 367 623.6 DL 371 623.6 369
+623.6 DL 373 623.6 371 623.6 DL 375 623.6 373 623.6 DL 377 623.6 375 623.6 DL
+379 623.6 377 623.6 DL 381 623.6 379 623.6 DL 383 623.6 381 623.6 DL 385 623.6
+383 623.6 DL 387 623.6 385 623.6 DL 1.44 LW 419.4 624.1 401.4 624.1 DL 428.4
+624.1 410.4 624.1 DL 446.4 624.1 428.4 624.1 DL 464.4 624.1 446.4 624.1 DL
+482.4 624.1 464.4 624.1 DL 500.4 624.1 482.4 624.1 DL 518.4 624.1 500.4 624.1
+DL 536.4 624.1 518.4 624.1 DL/F3 12/Helvetica-BoldOblique@0 SF(Constants)
+477.732 638.1 Q F2 67.199(DCAR DcAngleRadians)63 652.2 R 60.126
+(DCAOS DcAngleOldStyle)63 665.4 R 66.033(DCAD DcAngleDegr)63 678.6 R(ees)-.198
+E 61.27(DCBEG DcBeginning)63 691.8 R 54.879(DCBOTF DcBottomFirst)63 705 R 81
+756 63 756 DL 99 756 81 756 DL 117 756 99 756 DL 135 756 117 756 DL 153 756 135
+756 DL 171 756 153 756 DL 189 756 171 756 DL 207 756 189 756 DL 225 756 207 756
+DL 243 756 225 756 DL 261 756 243 756 DL 279 756 261 756 DL 297 756 279 756 DL
+315 756 297 756 DL 333 756 315 756 DL 351 756 333 756 DL 369 756 351 756 DL 387
+756 369 756 DL 419.4 756 401.4 756 DL 428.4 756 410.4 756 DL 446.4 756 428.4
+756 DL 464.4 756 446.4 756 DL 482.4 756 464.4 756 DL 500.4 756 482.4 756 DL
+518.4 756 500.4 756 DL 536.4 756 518.4 756 DL/F4 9/Helvetica@0 SF(FOR)274.023
+768.96 Q(TRAN Cross Ref)-.27 E(erence)-.27 E(Dore)414.21 768.96 Q 3.506<b452>
+429.712 768.96 S(ef)442.713 768.96 Q(erence Man)-.27 E(ual)-.09 E/F5 9
+/Helvetica-Bold@0 SF(1-339)4.002 E EP
+%%Page: 340 8
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 108 46.8 72 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 257.4 46.8 221.4 46.8 DL 293.4 46.8 257.4 46.8 DL 329.4 46.8 293.4
+46.8 DL 365.4 46.8 329.4 46.8 DL 401.4 46.8 365.4 46.8 DL 437.4 46.8 401.4 46.8
+DL 473.4 46.8 437.4 46.8 DL 509.4 46.8 473.4 46.8 DL 545.4 46.8 509.4 46.8 DL
+/F0 10/Helvetica-BoldOblique@0 SF(Constants)72 57.6 Q/F1 10/Helvetica@0 SF
+(\(contin)72 68.4 Q(ued\))-.1 E/F2 11/Palatino-Roman@0 SF 60.401(DCBOX DcBox)
+221.5 109.2 R 53.9(DCCAIN DcClipAndInverted)221.5 122.4 R 53.306
+(DCCALL DcClipAll)221.5 135.6 R 49.093(DCCAND DcClipAnd)221.5 148.8 R(DCCAR)
+221.5 162 Q 54.813(VD)-.605 G(cClipAndReverse)332.182 162 Q 51.997
+(DCCEQV DcClipEqv)221.5 175.2 R 52.162(DCCHRP DcCharacterPr)221.5 188.4 R
+(ecision)-.198 E 54.516(DCCINV DcClipInvert)221.5 201.6 R 55.715
+(DCCIVV DcClipInvertV)221.5 214.8 R(olume)-1.221 E 48.466(DCCNAN DcClipNAnd)
+221.5 228 R 50.424(DCCNCV DcConcave)221.5 241.2 R 48.378(DCCNON DcClipNone)
+221.5 254.4 R 50.875(DCCNOP DcClipNoOp)221.5 267.6 R 50.171(DCCNOR DcClipNor)
+221.5 280.8 R 51.238(DCCNSH DcConstantShade)221.5 294 R 50.886(DCCNVX DcConvex)
+221.5 307.2 R 49.61(DCCOMP DcComponent)221.5 320.4 R 50.798(DCCONE DcCone)221.5
+333.6 R 59.312(DCCOR DcClipOr)221.5 346.8 R 55.605(DCCORI DcClipOrInverted)
+221.5 360 R 51.964(DCCORR DcClipOrReverse)221.5 373.2 R 54.604
+(DCCPLX DcComplex)221.5 386.4 R 54.593(DCCREP DcClipReplace)221.5 399.6 R
+61.215(DCCTR DcCtr)221.5 412.8 R 53.416(DCCTRC DcCtrClr)221.5 426 R 59.4
+(DCCUR DcCurr)221.5 439.2 R(ent)-.198 E 51.975(DCCXOR DcClipXOr)221.5 452.4 R
+61.248(DCCYL DcCylinder)221.5 465.6 R 52.635(DCDELD DcDeleteData)221.5 478.8 R
+51.645(DCDRCC DcDir)221.5 492 R(ectColor)-.198 E(DCEF)221.5 505.2 Q 58.223
+-.814(AT D)-.814 H(cErr).814 E(orFatal)-.198 E 49.489(DCEMNR DcErr)221.5 518.4
+R(orMinor)-.198 E 58.729(DCEND DcEnd)221.5 531.6 R 55.946(DCESEV DcErr)221.5
+544.8 R(orSever)-.198 E(e)-.198 E(DCF)221.5 558 Q 56.749(ALS DcFalse)-.814 F
+(DCF)221.5 571.2 Q 56.727(AST DcAstr)-.814 F(ology)-.198 E 54.285
+(DCFBOX DcFilterBox)221.5 584.4 R 61.391(DCFCC DcComplexCyrillic)221.5 597.6 R
+60.797(DCFCG DcComplexGr)221.5 610.8 R(eek)-.198 E 65.483
+(DCFCI DcComplexItalic)221.5 624 R 61.842(DCFCR DcComplexRoman)221.5 637.2 R
+63.415(DCFCS DcComplexScript)221.5 650.4 R 55.022(DCFCSG DcComplexSmallGr)221.5
+663.6 R(eek)-.198 E 59.708(DCFCSI DcComplexSmallItalic)221.5 676.8 R 56.067
+(DCFCSR DcComplexSmallRoman)221.5 690 R 61.127(DCFDR DcDuplexRoman)221.5 703.2
+R 1.44 LW 90 756 72 756 DL 99 756 81 756 DL 117 756 99 756 DL 135 756 117 756
+DL 153 756 135 756 DL 171 756 153 756 DL 189 756 171 756 DL 207 756 189 756 DL
+239.4 756 221.4 756 DL 257.4 756 239.4 756 DL 275.4 756 257.4 756 DL 293.4 756
+275.4 756 DL 311.4 756 293.4 756 DL 329.4 756 311.4 756 DL 347.4 756 329.4 756
+DL 365.4 756 347.4 756 DL 383.4 756 365.4 756 DL 401.4 756 383.4 756 DL 419.4
+756 401.4 756 DL 437.4 756 419.4 756 DL 455.4 756 437.4 756 DL 473.4 756 455.4
+756 DL 491.4 756 473.4 756 DL 509.4 756 491.4 756 DL 527.4 756 509.4 756 DL
+545.4 756 527.4 756 DL/F3 9/Helvetica-Bold@0 SF(1-340)72 768.96 Q/F4 9
+/Helvetica@0 SF(Dore)6.504 E 3.506<b452>117.019 768.96 S(ef)130.02 768.96 Q
+(erence Man)-.27 E(ual)-.09 E(FOR)221.4 768.96 Q(TRAN Cross Ref)-.27 E(erence)
+-.27 E EP
+%%Page: 341 9
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 99 46.8 63 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 243 46.8 207 46.8 DL 279 46.8 243 46.8 DL 315 46.8 279 46.8 DL 351
+46.8 315 46.8 DL 387 46.8 351 46.8 DL 437.4 46.8 401.4 46.8 DL 464.4 46.8 428.4
+46.8 DL 500.4 46.8 464.4 46.8 DL 536.4 46.8 500.4 46.8 DL/F0 10
+/Helvetica-BoldOblique@0 SF(Constants)487.51 57.6 Q/F1 10/Helvetica@0 SF
+(\(contin)486.48 68.4 Q(ued\))-.1 E/F2 11/Palatino-Roman@0 SF 61.875
+(DCFGE DcGothicEnglish)63 109.2 R 60.203(DCFGG DcGothicGerman)63 122.4 R 64.889
+(DCFGI DcGothicItalian)63 135.6 R(DCFHL)63 148.8 Q 56.936(VD)-1.012 G
+(cHelvetica)173.682 148.8 Q 52.063(DCFLCM DcLowerCaseMathematics)63 162 R
+53.119(DCFMET DcMeteor)63 175.2 R(ology)-.198 E 52.25(DCFMUS DcMusic)63 188.4 R
+61.952(DCFPG DcPlainGr)63 201.6 R(eek)-.198 E 62.997(DCFPR DcPlainRoman)63
+214.8 R 62.821(DCFSG DcSimplexGr)63 228 R(eek)-.198 E 63.866
+(DCFSR DcSimplexRoman)63 241.2 R 65.439(DCFSS DcSimplexScript)63 254.4 R 53.471
+(DCFSYM DcSymbols)63 267.6 R 66.539(DCFTI DcT)63 280.8 R(riplexItalic)-.99 E
+62.898(DCFTR DcT)63 294 R(riplexRoman)-.99 E 50.226
+(DCFUCM DcUpperCaseMathematics)63 307.2 R 50.919(DCGBAD DcGr)63 320.4 R(oupBad)
+-.198 E 58.08(DCGOK DcGr)63 333.6 R(oupOk)-.198 E(DCGR)63 346.8 Q 54.659
+(YS DcGr)-.407 F(eyScale)-.198 E 49.797(DCHACC DcHitAccept)63 360 R 46.365
+(DCHOVW DcHitOverwrite)63 373.2 R 56.221(DCHREJ DcHitReject)63 386.4 R 55.594
+(DCINVE DcInvisibilityExclusion)63 399.6 R 58.608
+(DCINVI DcInvisibilityInclusion)63 412.8 R 58.938(DCISRX DcRotXSlot)63 426 R
+(DCISR)63 439.2 Q 62.095(YD)-.407 G(cRotYSlot)173.682 439.2 Q 58.938
+(DCISRZ DcRotZSlot)63 452.4 R 60.511(DCISSX DcScaleXSlot)63 465.6 R 60.511
+(DCISSY DcScaleYSlot)63 478.8 R 60.511(DCISSZ DcScaleZSlot)63 492 R 59.543
+(DCISTX DcT)63 505.2 R(ransXSlot)-.99 E 59.543(DCISTY DcT)63 518.4 R(ransYSlot)
+-.99 E 59.543(DCISTZ DcT)63 531.6 R(ransZSlot)-.99 E 56.551(DCISUD DcUndoSlot)
+63 544.8 R 58.421(DCISUP DcUpdateSlot)63 558 R 76.384(DCL DcLoc)63 571.2 R
+52.547(DCLAAB DcLocalAntiAliasBest)63 584.4 R 53.152
+(DCLAAF DcLocalAntiAliasFast)63 597.6 R 55.561
+(DCLAAI DcLocalAntiAliasIntermediate)63 610.8 R 68.585(DCLC DcLocClr)63 624 R
+67.243(DCLN DcLocNrm)63 637.2 R 59.444(DCLNC DcLocNrmClr)63 650.4 R(DCL)63
+663.6 Q -.814(TA)-.814 G 55.055(MD).814 G(cLightAmbient)173.682 663.6 Q(DCL)63
+676.8 Q 53.427(TDD DcLineT)-.814 F(ypeDotDash)-.99 E(DCL)63 690 Q 56.166
+(TDS DcLineT)-.814 F(ypeDash)-.99 E(DCL)63 703.2 Q 55.198(TDT DcLineT)-.814 F
+(ypeDot)-.99 E 1.44 LW 81 756 63 756 DL 99 756 81 756 DL 117 756 99 756 DL 135
+756 117 756 DL 153 756 135 756 DL 171 756 153 756 DL 189 756 171 756 DL 207 756
+189 756 DL 225 756 207 756 DL 243 756 225 756 DL 261 756 243 756 DL 279 756 261
+756 DL 297 756 279 756 DL 315 756 297 756 DL 333 756 315 756 DL 351 756 333 756
+DL 369 756 351 756 DL 387 756 369 756 DL 419.4 756 401.4 756 DL 428.4 756 410.4
+756 DL 446.4 756 428.4 756 DL 464.4 756 446.4 756 DL 482.4 756 464.4 756 DL
+500.4 756 482.4 756 DL 518.4 756 500.4 756 DL 536.4 756 518.4 756 DL/F3 9
+/Helvetica@0 SF(FOR)274.023 768.96 Q(TRAN Cross Ref)-.27 E(erence)-.27 E(Dore)
+414.21 768.96 Q 3.506<b452>429.712 768.96 S(ef)442.713 768.96 Q(erence Man)-.27
+E(ual)-.09 E/F4 9/Helvetica-Bold@0 SF(1-341)4.002 E EP
+%%Page: 342 10
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 108 46.8 72 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 257.4 46.8 221.4 46.8 DL 293.4 46.8 257.4 46.8 DL 329.4 46.8 293.4
+46.8 DL 365.4 46.8 329.4 46.8 DL 401.4 46.8 365.4 46.8 DL 437.4 46.8 401.4 46.8
+DL 473.4 46.8 437.4 46.8 DL 509.4 46.8 473.4 46.8 DL 545.4 46.8 509.4 46.8 DL
+/F0 10/Helvetica-BoldOblique@0 SF(Constants)72 57.6 Q/F1 10/Helvetica@0 SF
+(\(contin)72 68.4 Q(ued\))-.1 E/F2 11/Palatino-Roman@0 SF(DCL)221.5 109.2 Q
+57.607(TIN DcLightIn\214nite)-.814 F(DCL)221.5 122.4 Q(TP)-.814 E 59.015(AD)
+-1.012 G(cLightPointAttn)332.182 122.4 Q(DCL)221.5 135.6 Q 57.068
+(TPT DcLightPoint)-.814 F(DCL)221.5 148.8 Q 64.68(TS DcLineT)-.814 F(ypeSolid)
+-.99 E(DCL)221.5 162 Q 56.122(TSA DcLightSpotAttn)-.814 F(DCL)221.5 175.2 Q
+58.036(TSP DcLightSpot)-.814 F 47.113(DCMADD DcMapAdd)221.5 188.4 R 48.279
+(DCMADR DcMethodAddRefer)221.5 201.6 R(ence)-.198 E 50.237
+(DCMCBV DcMethodCmpBndV)221.5 214.8 R(olume)-1.221 E 48.521
+(DCMCKG DcMethodCheckGr)221.5 228 R(oup)-.198 E 53.13
+(DCMDIR DcMethodDynIniRender)221.5 241.2 R 56.837(DCMDR DcMethodDynRender)221.5
+254.4 R 51.667(DCMDST DcMethodDestr)221.5 267.6 R(oy)-.198 E 51.953
+(DCMGIO DcMethodGlbrndIniObjs)221.5 280.8 R 53.251
+(DCMGIR DcMethodGlbrndIniRender)221.5 294 R 53.251(DCMGRI DcMethodGlbrndRayint)
+221.5 307.2 R 49.885(DCMGSO DcMethodGlbrndSpcboxOvr)221.5 320.4 R 47.234
+(DCMGUD DcMethodGlbrndUsr)221.5 333.6 R(dat)-.198 E 46.585
+(DCMGWB DcMethodGlbrndWldBnd)221.5 346.8 R 45.507(DCMGWC DcMethodGlbrndWcsloc)
+221.5 360 R 42.9(DCMGWM DcMethodGlbrndWcsnrm)221.5 373.2 R 52.041
+(DCMIGA DcMethodInqGlbAttV)221.5 386.4 R(al)-1.012 E 53.207
+(DCMINP DcMethodIniPick)221.5 399.6 R 47.685(DCMKDD DcMarkerDiamond)221.5 412.8
+R 56.067(DCMKO DcMarkerO)221.5 426 R 51.348(DCMKPL DcMarkerPlus)221.5 439.2 R
+51.326(DCMKPT DcMarkerPoint)221.5 452.4 R 50.292(DCMKSQ DcMarkerSquar)221.5
+465.6 R(e)-.198 E 52.195(DCMKST DcMarkerStar)221.5 478.8 R 50.622
+(DCMKTR DcMarkerT)221.5 492 R(riangle)-.99 E 57.376(DCMKX DcMarkerX)221.5 505.2
+R 48.279(DCMNUL DcMethodNull)221.5 518.4 R 50.27(DCMPCK DcMethodPick)221.5
+531.6 R(DCMPR)221.5 544.8 Q 55.121(TD)-.407 G(cMethodPrint)332.182 544.8 Q
+65.351(DCMR DcMapReplace)221.5 558 R 47.597(DCMRMR DcMethodRemoveRefer)221.5
+571.2 R(ence)-.198 E 49.72(DCMSAO DcMethodUpdStdAltObj)221.5 584.4 R 51.062
+(DCMSRD DcMethodStdRenderDisplay)221.5 597.6 R 53.801
+(DCMSRS DcMethodStdRenderStudio)221.5 610.8 R 53.141(DCMXB4 DcBezier4)221.5 624
+R 52.866(DCMXBS DcBSpline4)221.5 637.2 R 50.71(DCMXH4 DcHermite4)221.5 650.4 R
+54.373(DCNINT DcNameInteger)221.5 663.6 R 47.036(DCNNON DcNameNone)221.5 676.8
+R 54.098(DCNSTR DcNameString)221.5 690 R 51.964(DCNULL DcNullPtr)221.5 703.2 R
+1.44 LW 90 756 72 756 DL 99 756 81 756 DL 117 756 99 756 DL 135 756 117 756 DL
+153 756 135 756 DL 171 756 153 756 DL 189 756 171 756 DL 207 756 189 756 DL
+239.4 756 221.4 756 DL 257.4 756 239.4 756 DL 275.4 756 257.4 756 DL 293.4 756
+275.4 756 DL 311.4 756 293.4 756 DL 329.4 756 311.4 756 DL 347.4 756 329.4 756
+DL 365.4 756 347.4 756 DL 383.4 756 365.4 756 DL 401.4 756 383.4 756 DL 419.4
+756 401.4 756 DL 437.4 756 419.4 756 DL 455.4 756 437.4 756 DL 473.4 756 455.4
+756 DL 491.4 756 473.4 756 DL 509.4 756 491.4 756 DL 527.4 756 509.4 756 DL
+545.4 756 527.4 756 DL/F3 9/Helvetica-Bold@0 SF(1-342)72 768.96 Q/F4 9
+/Helvetica@0 SF(Dore)6.504 E 3.506<b452>117.019 768.96 S(ef)130.02 768.96 Q
+(erence Man)-.27 E(ual)-.09 E(FOR)221.4 768.96 Q(TRAN Cross Ref)-.27 E(erence)
+-.27 E EP
+%%Page: 343 11
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 99 46.8 63 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 243 46.8 207 46.8 DL 279 46.8 243 46.8 DL 315 46.8 279 46.8 DL 351
+46.8 315 46.8 DL 387 46.8 351 46.8 DL 437.4 46.8 401.4 46.8 DL 464.4 46.8 428.4
+46.8 DL 500.4 46.8 464.4 46.8 DL 536.4 46.8 500.4 46.8 DL/F0 10
+/Helvetica-BoldOblique@0 SF(Constants)487.51 57.6 Q/F1 10/Helvetica@0 SF
+(\(contin)486.48 68.4 Q(ued\))-.1 E/F2 11/Palatino-Roman@0 SF 51.964
+(DCNULL DcNullObject)63 109.2 R 52.503(DCODEL DcObjectDeleted)63 122.4 R 62.227
+(DCOFF DcOf)63 135.6 R(f)-.198 E 53.669(DCOINV DcObjectInvalid)63 148.8 R
+65.318(DCON DcOn)63 162 R 52.437(DCOUTL DcOutlines)63 175.2 R 51.282
+(DCOVLD DcObjectV)63 188.4 R(alid)-1.012 E 52.668(DCPBAD DcPickBadStatus)63
+201.6 R 53.955(DCPCKE DcPickabilityExclusion)63 214.8 R 56.969
+(DCPCKI DcPickabilityInclusion)63 228 R 56.166(DCPIOV DcPickIndexOver\215ow)63
+241.2 R 53.196(DCPKAL DcPickAll)63 254.4 R 53.955(DCPKCL DcPickClosest)63 267.6
+R 55.011(DCPKFR DcPickFirst)63 280.8 R 53.152(DCPLOV DcPickListOver\215ow)63
+294 R 54.802(DCPNTS DcPoints)63 307.2 R 54.593(DCPREC DcPr)63 320.4 R
+(eConcatenate)-.198 E 55.671(DCPRLL DcParallel)63 333.6 R 56.694
+(DCPRSP DcPerspective)63 346.8 R(DCPR)63 360 Q 52.371(TM DcPr)-.407 F
+(oductionT)-.198 E(ime)-.605 E 56.144(DCPSTC DcPostConcatenate)63 373.2 R
+54.329(DCPSUC DcPseudoColor)63 386.4 R 67.199(DCRA DcRasterA)63 399.6 R 59.851
+(DCRAR DcRasterABGR)63 412.8 R 55.671(DCREPL DcReplace)63 426 R(DCRF)63 439.2 Q
+55.176(AL DcReadUnsuc)-.814 F 60.643(DCRGB DcRGB)63 452.4 R(DCRL)63 465.6 Q
+52.701(TM DcRealT)-.814 F(ime)-.605 E 58.223(DCRNG DcRange)63 478.8 R 59.125
+(DCROK DcReadOk)63 492 R 59.851(DCRRA DcRasterRGBA)63 505.2 R 52.514
+(DCRRAZ DcRasterRGBAZ)63 518.4 R 53.295(DCRRGB DcRasterRGB)63 531.6 R 61.072
+(DCRRZ DcRasterRGBZ)63 544.8 R 55.539(DCRSPC DcRasterSpecial)63 558 R(DCR)63
+571.2 Q 52.932(TRN DcReadT)-.407 F -.088(ru)-.99 G(nc).088 E 68.42
+(DCRZ DcRasterZ)63 584.4 R 58.366(DCS3TL DcStd3dT)63 597.6 R(ableLookup)-1.012
+E 51.744(DCSADD DcSetAdd)63 610.8 R 60.203(DCSBM DcStdBumpMap)63 624 R 52.404
+(DCSCEM DcStdCubeEnvir)63 637.2 R(onMap)-.198 E 53.537(DCSDAB DcSubDivAbsolute)
+63 650.4 R 55.374(DCSDEL DcSetDelete)63 663.6 R 55.363(DCSDFX DcSubDivFixed)63
+676.8 R 54.747(DCSDRL DcSubDivRelative)63 690 R 54.648(DCSDSG DcSubDivSegments)
+63 703.2 R 1.44 LW 81 756 63 756 DL 99 756 81 756 DL 117 756 99 756 DL 135 756
+117 756 DL 153 756 135 756 DL 171 756 153 756 DL 189 756 171 756 DL 207 756 189
+756 DL 225 756 207 756 DL 243 756 225 756 DL 261 756 243 756 DL 279 756 261 756
+DL 297 756 279 756 DL 315 756 297 756 DL 333 756 315 756 DL 351 756 333 756 DL
+369 756 351 756 DL 387 756 369 756 DL 419.4 756 401.4 756 DL 428.4 756 410.4
+756 DL 446.4 756 428.4 756 DL 464.4 756 446.4 756 DL 482.4 756 464.4 756 DL
+500.4 756 482.4 756 DL 518.4 756 500.4 756 DL 536.4 756 518.4 756 DL/F3 9
+/Helvetica@0 SF(FOR)274.023 768.96 Q(TRAN Cross Ref)-.27 E(erence)-.27 E(Dore)
+414.21 768.96 Q 3.506<b452>429.712 768.96 S(ef)442.713 768.96 Q(erence Man)-.27
+E(ual)-.09 E/F4 9/Helvetica-Bold@0 SF(1-343)4.002 E EP
+%%Page: 344 12
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 108 46.8 72 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 257.4 46.8 221.4 46.8 DL 293.4 46.8 257.4 46.8 DL 329.4 46.8 293.4
+46.8 DL 365.4 46.8 329.4 46.8 DL 401.4 46.8 365.4 46.8 DL 437.4 46.8 401.4 46.8
+DL 473.4 46.8 437.4 46.8 DL 509.4 46.8 473.4 46.8 DL 545.4 46.8 509.4 46.8 DL
+/F0 10/Helvetica-BoldOblique@0 SF(Constants)72 57.6 Q/F1 10/Helvetica@0 SF
+(\(contin)72 68.4 Q(ued\))-.1 E/F2 11/Palatino-Roman@0 SF 56.287
+(DCSFSH DcSurfaceShade)221.5 109.2 R 51.238(DCSHCN DcShaderConstant)221.5 122.4
+R 55.682(DCSHLS DcShaderLightSour)221.5 135.6 R(ce)-.198 E 56.54
+(DCSINV DcSetInvert)221.5 148.8 R 53.57(DCSOEG DcSurfaceOutlineEdges)221.5 162
+R 54.186(DCSPHR DcSpher)221.5 175.2 R(e)-.198 E 56.617(DCSREP DcSetReplace)
+221.5 188.4 R 54.428(DCSSEM DcStdSpher)221.5 201.6 R(eEnvir)-.198 E(onMap)-.198
+E 54.989(DCSTCC DcStaticColor)221.5 214.8 R 54.395(DCSTCG DcStaticGr)221.5 228
+R(ey)-.198 E 55.957(DCSTKP DcStr)221.5 241.2 R(okePr)-.198 E(ecision)-.198 E
+55.308(DCSTLU DcStdT)221.5 254.4 R(ableLookup)-1.012 E 56.595
+(DCSTRP DcStringPr)221.5 267.6 R(ecision)-.198 E 55.308(DCSURF DcSurface)221.5
+280.8 R 51.216(DCSWEG DcSurfaceW)221.5 294 R(ir)-.605 E(eframeEdges)-.198 E
+(DCT)221.5 307.2 Q 51.59(ADD DcT)-.814 F(extur)-1.012 E(eAdd)-.198 E(DCT)221.5
+320.4 Q 50.919(AAN DcT)-.814 F(extur)-1.012 E(eAntiAliasNone)-.198 E(DCT)221.5
+333.6 Q 49.654(AAM DcT)-.814 F(extur)-1.012 E(eAntiAliasMIP)-.198 E(DCT)221.5
+346.8 Q 51.502(AAA DcT)-.814 F(extur)-1.012 E(eAntiAliasAdaptive)-.198 E(DCT)
+221.5 360 Q 53.339(AAB DcT)-.814 F(extur)-1.012 E(eAntiAliasBilinear)-.198 E
+(DCT)221.5 373.2 Q 54.285(AAS DcT)-.814 F(extur)-1.012 E(eAntiAliasSumAr)-.198
+E(ea)-.198 E(DCT)221.5 386.4 Q 52.14(ANY DcT)-.814 F(ypeAny)-.99 E 54.406
+(DCTBLD DcT)221.5 399.6 R(extur)-1.012 E(eBlend)-.198 E 56.067(DCTCLS DcT)221.5
+412.8 R(ypeClass)-.99 E 54.406(DCTDEL DcT)221.5 426 R(ypeDeleted)-.99 E 50.853
+(DCTHAC DcT)221.5 439.2 R(extHAlignCenter)-1.012 E 51.931(DCTHAL DcT)221.5
+452.4 R(extHAlignLeft)-1.012 E 49.511(DCTHAN DcT)221.5 465.6 R(extHAlignNormal)
+-1.012 E 51.304(DCTHAR DcT)221.5 478.8 R(extHAlignRight)-1.012 E 50.677
+(DCTMUL DcT)221.5 492 R(extur)-1.012 E(eMultiply)-.198 E(DCT)221.5 505.2 Q
+55.154(OPF DcT)-.198 F(opFirst)-1.012 E 61.204(DCTPD DcT)221.5 518.4 R
+(extPathDown)-1.012 E 62.997(DCTPL DcT)221.5 531.6 R(extPathLeft)-1.012 E 62.37
+(DCTPR DcT)221.5 544.8 R(extPathRight)-1.012 E 61.16(DCTPU DcT)221.5 558 R
+(extPathUp)-1.012 E 55.649(DCTREP DcT)221.5 571.2 R(extur)-1.012 E(eReplace)
+-.198 E 52.657(DCTRUC DcT)221.5 584.4 R -.088(ru)-.99 G(eColor).088 E 53.735
+(DCTRUE DcT)221.5 597.6 R -.088(ru)-.99 G(e).088 E(DCTV)221.5 610.8 Q 54.362
+(AB DcT)-1.221 F(extV)-1.012 E(AlignBase)-1.221 E(DCTV)221.5 624 Q 53.284
+(AC DcT)-1.221 F(extV)-1.012 E(AlignCap)-1.221 E(DCTV)221.5 637.2 Q 51.931
+(AH DcT)-1.221 F(extV)-1.012 E(AlignHalf)-1.221 E(DCTV)221.5 650.4 Q 50.677
+(AM DcT)-1.221 F(extV)-1.012 E(AlignBottom)-1.221 E(DCTV)221.5 663.6 Q 51.942
+(AN DcT)-1.221 F(extV)-1.012 E(AlignNormal)-1.221 E(DCTV)221.5 676.8 Q 56.782
+-.814(AT D)-1.221 H(cT).814 E(extV)-1.012 E(AlignT)-1.221 E(op)-1.012 E 52.547
+(DCUALL DcUpdateAll)221.5 690 R 56.551(DCUDIS DcUpdateDisplay)221.5 703.2 R
+1.44 LW 90 756 72 756 DL 99 756 81 756 DL 117 756 99 756 DL 135 756 117 756 DL
+153 756 135 756 DL 171 756 153 756 DL 189 756 171 756 DL 207 756 189 756 DL
+239.4 756 221.4 756 DL 257.4 756 239.4 756 DL 275.4 756 257.4 756 DL 293.4 756
+275.4 756 DL 311.4 756 293.4 756 DL 329.4 756 311.4 756 DL 347.4 756 329.4 756
+DL 365.4 756 347.4 756 DL 383.4 756 365.4 756 DL 401.4 756 383.4 756 DL 419.4
+756 401.4 756 DL 437.4 756 419.4 756 DL 455.4 756 437.4 756 DL 473.4 756 455.4
+756 DL 491.4 756 473.4 756 DL 509.4 756 491.4 756 DL 527.4 756 509.4 756 DL
+545.4 756 527.4 756 DL/F3 9/Helvetica-Bold@0 SF(1-344)72 768.96 Q/F4 9
+/Helvetica@0 SF(Dore)6.504 E 3.506<b452>117.019 768.96 S(ef)130.02 768.96 Q
+(erence Man)-.27 E(ual)-.09 E(FOR)221.4 768.96 Q(TRAN Cross Ref)-.27 E(erence)
+-.27 E EP
+%%Page: 345 13
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 99 46.8 63 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 243 46.8 207 46.8 DL 279 46.8 243 46.8 DL 315 46.8 279 46.8 DL 351
+46.8 315 46.8 DL 387 46.8 351 46.8 DL 437.4 46.8 401.4 46.8 DL 464.4 46.8 428.4
+46.8 DL 500.4 46.8 464.4 46.8 DL 536.4 46.8 500.4 46.8 DL/F0 10
+/Helvetica-BoldOblique@0 SF(Constants)487.51 57.6 Q/F1 10/Helvetica@0 SF
+(\(contin)486.48 68.4 Q(ued\))-.1 E/F2 11/Palatino-Roman@0 SF 52.899
+(DCVXSH DcV)63 109.2 R(ertexShade)-1.221 E 54.329(DCWIRE DcW)63 122.4 R(ir)
+-.605 E(eframe)-.198 E 59.873(DCXAX DcXAxis)63 135.6 R 54.34
+(DCXBLK DcExtendBlack)63 148.8 R 54.604(DCXCLP DcExtendClamp)63 162 R 48.84
+(DCXNON DcExtendNone)63 175.2 R 61.776(DCXRP DcExtendRepeat)63 188.4 R 68.431
+(DCXY DcXY)63 201.6 R 68.431(DCXZ DcXZ)63 214.8 R(DCY)63 228 Q 60.885(AX DcY)
+-1.012 F(Axis)-1.012 E 68.431(DCYZ DcYZ)63 241.2 R 59.873(DCZAX DcZAxis)63
+254.4 R 1.44 LW 81 756 63 756 DL 99 756 81 756 DL 117 756 99 756 DL 135 756 117
+756 DL 153 756 135 756 DL 171 756 153 756 DL 189 756 171 756 DL 207 756 189 756
+DL 225 756 207 756 DL 243 756 225 756 DL 261 756 243 756 DL 279 756 261 756 DL
+297 756 279 756 DL 315 756 297 756 DL 333 756 315 756 DL 351 756 333 756 DL 369
+756 351 756 DL 387 756 369 756 DL 419.4 756 401.4 756 DL 428.4 756 410.4 756 DL
+446.4 756 428.4 756 DL 464.4 756 446.4 756 DL 482.4 756 464.4 756 DL 500.4 756
+482.4 756 DL 518.4 756 500.4 756 DL 536.4 756 518.4 756 DL/F3 9/Helvetica@0 SF
+(FOR)274.023 768.96 Q(TRAN Cross Ref)-.27 E(erence)-.27 E(Dore)414.21 768.96 Q
+3.506<b452>429.712 768.96 S(ef)442.713 768.96 Q(erence Man)-.27 E(ual)-.09 E/F4
+9/Helvetica-Bold@0 SF(1-345)4.002 E EP
+%%Trailer
+end
+%%EOF

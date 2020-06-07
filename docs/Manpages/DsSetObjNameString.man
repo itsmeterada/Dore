@@ -1,0 +1,83 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DsSetObjNameString 3D  "Dore"
+.SH NAME
+DsSetObjNameString  \- Set an object's name to a string value
+
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+void DsSetObjNameString (object, name, replace)
+.in  +.5i
+DtObject object;
+char *name;
+DtFlag replace;
+.sp
+.in  -.5i
+FORTRAN:
+.in  +.5i
+CALL DSSOND(OBJECT)
+INTEGER*4 OBJECT
+.sp
+CALL DSSONS(OBJECT, OBJSTR, N, REPL)
+INTEGER*4 OBJECT
+INTEGER*4 REPL
+INTEGER*4 N
+CHARACTER*N OBJSTR
+.in  -.5i
+
+.fi
+.SH DESCRIPTION
+.IX DsSetObjNameString
+.I DsSetObjNameString
+sets an object's name to the specified character string.  A copy of the
+given string is created for the dictionary.
+.PP
+The parameter \f2object\fP specifies the object to receive the new name.
+.PP
+If the \f2replace\fP flag is false, then this
+function will report an error if another object of the same type already
+has this name.  If \f2replace\fP is true, then the name will be set for
+the object and removed from all other objects that have the same name.
+.PP
+Note that the passing a null pointer as the object's name specifies that
+the existing name is to be removed from the object.
+.SH "FORTRAN SPECIFIC"
+\f2DSSOND\fP sets the name of \f2OBJECT\fP to \f2DCNNON\fP.  
+No name is given;
+the object name will be ignored.
+.PP
+.I DSSONS
+sets the name of \f2OBJECT\fP to the string of \f2N\fP characters in 
+\f2OBJSTR\fP.  This function gives an object a string value name.
+.SH ERRORS
+.I DsSetObjNameString
+will fail if the object is invalid.
+.PP
+.TP 15
+[WARNING - invalid or deleted object]
+.PP
+.I DsSetObjNameString
+will fail if the \f2replace\fP parameter is true and another object has
+the same name.
+.TP 15
+[WARNING - object name already in use]
+.SH "SEE ALSO"
+.nf
+DsSetObjNameInteger(3D), DsInqObjViaString(3D), DsInqObjNameString(3D)

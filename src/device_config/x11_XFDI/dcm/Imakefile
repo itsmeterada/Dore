@@ -1,0 +1,9 @@
+#include <Dore.tmpl>
+
+    SRCS = xfdi_dcm.c xfdi_inq.c xfdi_output.c xfdi_set.c
+    OBJS = xfdi_dcm.o xfdi_inq.o xfdi_output.o xfdi_set.o
+
+LibraryObjectRule()
+SubdirLibraryRule($(OBJS))
+
+DependTarget()

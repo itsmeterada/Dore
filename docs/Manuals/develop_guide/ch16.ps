@@ -1,0 +1,1173 @@
+%!PS-Adobe-3.0
+%%Creator: groff version 1.06
+%%DocumentNeededResources: font Palatino-Roman
+%%+ font Helvetica
+%%+ font Palatino-Italic
+%%+ font Helvetica-BoldOblique
+%%+ font Palatino-Bold
+%%+ font Helvetica-Bold
+%%+ font Helvetica-Oblique
+%%+ font Courier
+%%DocumentSuppliedResources: procset grops 1.06 0
+%%Pages: 8
+%%PageOrder: Ascend
+%%Orientation: Portrait
+%%EndComments
+%%BeginProlog
+%%BeginResource: procset grops 1.06 0
+%!PS-Adobe-3.0 Resource-ProcSet
+
+/setpacking where {
+	pop
+	currentpacking
+	true setpacking
+} if
+
+/grops 120 dict dup begin 
+
+% The ASCII code of the space character.
+/SC 32 def
+
+/A /show load def
+/B { 0 SC 3 -1 roll widthshow } bind def
+/C { 0 exch ashow } bind def
+/D { 0 exch 0 SC 5 2 roll awidthshow } bind def
+/E { 0 rmoveto show } bind def
+/F { 0 rmoveto 0 SC 3 -1 roll widthshow } bind def
+/G { 0 rmoveto 0 exch ashow } bind def
+/H { 0 rmoveto 0 exch 0 SC 5 2 roll awidthshow } bind def
+/I { 0 exch rmoveto show } bind def
+/J { 0 exch rmoveto 0 SC 3 -1 roll widthshow } bind def
+/K { 0 exch rmoveto 0 exch ashow } bind def
+/L { 0 exch rmoveto 0 exch 0 SC 5 2 roll awidthshow } bind def
+/M { rmoveto show } bind def
+/N { rmoveto 0 SC 3 -1 roll widthshow } bind def
+/O { rmoveto 0 exch ashow } bind def
+/P { rmoveto 0 exch 0 SC 5 2 roll awidthshow } bind def
+/Q { moveto show } bind def 
+/R { moveto 0 SC 3 -1 roll widthshow } bind def
+/S { moveto 0 exch ashow } bind def
+/T { moveto 0 exch 0 SC 5 2 roll awidthshow } bind def
+
+% name size font SF -
+
+/SF {
+	findfont exch
+	[ exch dup 0 exch 0 exch neg 0 0 ] makefont
+	dup setfont
+	[ exch /setfont cvx ] cvx bind def
+} bind def
+
+% name a c d font MF -
+
+/MF {
+	findfont
+	[ 5 2 roll
+	0 3 1 roll % b
+	neg 0 0 ] makefont
+	dup setfont
+	[ exch /setfont cvx ] cvx bind def
+} bind def
+
+/level0 0 def
+/RES 0 def
+/PL 0 def
+/LS 0 def
+
+% Guess the page length.
+% This assumes that the imageable area is vertically centered on the page.
+% PLG - length
+
+/PLG {
+	gsave newpath clippath pathbbox grestore
+	exch pop add exch pop
+} bind def
+
+% BP -
+
+/BP {
+	/level0 save def
+	1 setlinecap
+	1 setlinejoin
+	72 RES div dup scale
+	LS {
+		90 rotate
+	} {
+		0 PL translate
+	} ifelse
+	1 -1 scale
+} bind def
+
+/EP {
+	level0 restore
+	showpage
+} bind def
+
+
+% centerx centery radius startangle endangle DA -
+
+/DA {
+	newpath arcn stroke
+} bind def
+
+% x y SN - x' y'
+% round a position to nearest (pixel + (.25,.25))
+
+/SN {
+	transform 
+	.25 sub exch .25 sub exch
+	round .25 add exch round .25 add exch
+	itransform
+} bind def
+	
+% endx endy startx starty DL -
+% we round the endpoints of the line, so that parallel horizontal
+% and vertical lines will appear even
+
+/DL {
+	SN
+	moveto
+	SN
+	lineto stroke
+} bind def
+
+% centerx centery radius DC -
+
+/DC {
+	newpath 0 360 arc closepath
+} bind def
+
+
+/TM matrix def
+
+%  width height centerx centery DE -
+
+/DE {
+	TM currentmatrix pop
+	translate scale newpath 0 0 .5 0 360 arc closepath
+	TM setmatrix
+} bind def
+
+% these are for splines
+
+/RC /rcurveto load def
+/RL /rlineto load def
+/ST /stroke load def
+/MT /moveto load def
+/CL /closepath load def
+
+% fill the last path
+
+% amount FL -
+
+/FL {
+	currentgray exch setgray fill setgray
+} bind def
+
+% fill with the ``current color''
+
+/BL /fill load def
+
+/LW /setlinewidth load def
+% new_font_name encoding_vector old_font_name RE -
+
+/RE {
+	findfont
+	dup maxlength dict begin
+	{
+		1 index /FID ne { def } { pop pop } ifelse
+	} forall
+	/Encoding exch def
+	dup /FontName exch def
+	currentdict end definefont pop
+} bind def
+
+/DEFS 0 def
+
+% hpos vpos EBEGIN -
+
+/EBEGIN {
+	moveto
+	DEFS begin
+} bind def
+
+/EEND /end load def
+
+/CNT 0 def
+/level1 0 def
+
+% llx lly newwid wid newht ht newllx newlly PBEGIN -
+
+/PBEGIN {
+	/level1 save def
+	translate
+	div 3 1 roll div exch scale
+	neg exch neg exch translate
+	% set the graphics state to default values
+	0 setgray
+	0 setlinecap
+	1 setlinewidth
+	0 setlinejoin
+	10 setmiterlimit
+	[] 0 setdash
+	/setstrokeadjust where {
+		pop
+		false setstrokeadjust
+	} if
+	/setoverprint where {
+		pop
+		false setoverprint
+	} if
+	newpath
+	/CNT countdictstack def
+	userdict begin
+	/showpage {} def
+} bind def
+
+/PEND {
+	clear
+	countdictstack CNT sub { end } repeat
+	level1 restore
+} bind def
+
+end def
+
+/setpacking where {
+	pop
+	setpacking
+} if
+%%EndResource
+%%EndProlog
+%%BeginSetup
+%%IncludeResource: font Palatino-Roman
+%%IncludeResource: font Helvetica
+%%IncludeResource: font Palatino-Italic
+%%IncludeResource: font Helvetica-BoldOblique
+%%IncludeResource: font Palatino-Bold
+%%IncludeResource: font Helvetica-Bold
+%%IncludeResource: font Helvetica-Oblique
+%%IncludeResource: font Courier
+grops begin/DEFS 1 dict def DEFS begin/u{.001 mul}bind def end/RES 72 def/PL
+792 def/LS false def/ENC0[/asciicircum/asciitilde/Scaron/Zcaron/scaron/zcaron
+/Ydieresis/trademark/quotesingle/.notdef/.notdef/.notdef/.notdef/.notdef
+/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef
+/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/space
+/exclam/quotedbl/numbersign/dollar/percent/ampersand/quoteright/parenleft
+/parenright/asterisk/plus/comma/hyphen/period/slash/zero/one/two/three/four
+/five/six/seven/eight/nine/colon/semicolon/less/equal/greater/question/at/A/B/C
+/D/E/F/G/H/I/J/K/L/M/N/O/P/Q/R/S/T/U/V/W/X/Y/Z/bracketleft/backslash
+/bracketright/circumflex/underscore/quoteleft/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q
+/r/s/t/u/v/w/x/y/z/braceleft/bar/braceright/tilde/.notdef/quotesinglbase
+/guillemotleft/guillemotright/bullet/florin/fraction/perthousand/dagger
+/daggerdbl/endash/emdash/ff/fi/fl/ffi/ffl/dotlessi/dotlessj/grave/hungarumlaut
+/dotaccent/breve/caron/ring/ogonek/quotedblleft/quotedblright/oe/lslash
+/quotedblbase/OE/Lslash/.notdef/exclamdown/cent/sterling/currency/yen/brokenbar
+/section/dieresis/copyright/ordfeminine/guilsinglleft/logicalnot/minus
+/registered/macron/degree/plusminus/twosuperior/threesuperior/acute/mu
+/paragraph/periodcentered/cedilla/onesuperior/ordmasculine/guilsinglright
+/onequarter/onehalf/threequarters/questiondown/Agrave/Aacute/Acircumflex/Atilde
+/Adieresis/Aring/AE/Ccedilla/Egrave/Eacute/Ecircumflex/Edieresis/Igrave/Iacute
+/Icircumflex/Idieresis/Eth/Ntilde/Ograve/Oacute/Ocircumflex/Otilde/Odieresis
+/multiply/Oslash/Ugrave/Uacute/Ucircumflex/Udieresis/Yacute/Thorn/germandbls
+/agrave/aacute/acircumflex/atilde/adieresis/aring/ae/ccedilla/egrave/eacute
+/ecircumflex/edieresis/igrave/iacute/icircumflex/idieresis/eth/ntilde/ograve
+/oacute/ocircumflex/otilde/odieresis/divide/oslash/ugrave/uacute/ucircumflex
+/udieresis/yacute/thorn/ydieresis]def/Courier@0 ENC0/Courier RE
+/Helvetica-Oblique@0 ENC0/Helvetica-Oblique RE/Helvetica-Bold@0 ENC0
+/Helvetica-Bold RE/Palatino-Bold@0 ENC0/Palatino-Bold RE
+/Helvetica-BoldOblique@0 ENC0/Helvetica-BoldOblique RE/Palatino-Italic@0 ENC0
+/Palatino-Italic RE/Helvetica@0 ENC0/Helvetica RE/Palatino-Roman@0 ENC0
+/Palatino-Roman RE
+%%EndSetup
+%%Page: 227 1
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 99 46.8 63 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 243 46.8 207 46.8 DL 279 46.8 243 46.8 DL 315 46.8 279 46.8 DL 351
+46.8 315 46.8 DL 387 46.8 351 46.8 DL 437.4 46.8 401.4 46.8 DL 464.4 46.8 428.4
+46.8 DL 500.4 46.8 464.4 46.8 DL 536.4 46.8 500.4 46.8 DL/F0 42
+/Palatino-Roman@0 SF(T)228.774 91 Q/F1 36/Palatino-Roman@0 SF(ESTING)A F0(D)
+280.152 133 Q F1(OR)A<b4>370.004 125 Q(E)365.004 133 Q/F2 12/Helvetica@0 SF
+(CHAPTER SIXTEEN)421.044 175 Q 99 186 63 186 DL 135 186 99 186 DL 171 186 135
+186 DL 207 186 171 186 DL 243 186 207 186 DL 279 186 243 186 DL 315 186 279 186
+DL 351 186 315 186 DL 387 186 351 186 DL 437.4 186 401.4 186 DL 464.4 186 428.4
+186 DL 500.4 186 464.4 186 DL 536.4 186 500.4 186 DL/F3 11/Palatino-Roman@0 SF
+2.072(Several test pr)63 232.2 R 2.072(ograms ar)-.198 F 4.822(ep)-.198 G -.198
+(ro)203.596 232.2 S 2.072(vided with Portable Dore).198 F 5.626<b461>339.008
+232.2 S 2.073(nd the)353.797 232.2 R(Dore)63 245.4 Q 4.526<b444>82.668 245.4 S
+-1.936(eveloper 's)99.371 245.4 R -1.012(To)3.723 G 3.723(olkit. Portable)1.012
+F(Dore)3.723 E 4.526<b461>260.91 245.4 S .973(lso comes with several)274.599
+245.4 R .991(platform-speci\214c demonstration pr)63 258.6 R 3.741
+(ograms. These)-.198 F(pr)3.741 E .992(ograms have)-.198 F 2.726
+(many functions:)63 271.8 R 2.725
+(they can be used to verify the installation of)8.226 F 1.985(Portable Dore)63
+285 R 5.538<b46f>128.037 285 S 4.735(nas)143.244 285 S 1.985
+(upported platform, to test a port to a new)169.28 285 R 1.551
+(platform, or to verify the incorporation of any new r)63 298.2 R(ender)-.198 E
+1.55(ers or)-.198 F 2.642(device drivers into Dore)63 311.4 R 6.195<b461>
+184.357 311.4 S 5.392(sd)199.715 311.4 S 2.642(escribed in earlier chapters.)
+216.492 311.4 R(This)8.142 E(chapter describes how to build and use these pr)63
+324.6 Q(ograms.)-.198 E 1.752
+(The \214rst section of this chapter describes the test pr)63 349.8 R 1.751
+(ograms and)-.198 F 1.783(explains how to build and r)63 363 R 1.784(un them.)
+-.088 F 1.784(The last section discusses)7.284 F 2.785(how to build and r)63
+376.2 R 2.785(un the additional Dore)-.088 F 6.338<b464>279.637 376.2 S 2.784
+(emonstration pr)296.359 376.2 R(o-)-.198 E(grams for the)63 389.4 Q/F4 11
+/Palatino-Italic@0 SF(gl)2.75 E F3(and)2.75 E F4(sunview_cxp)2.75 E F3
+(device drivers.)2.75 E .676
+(Additional details can be found in the online test and demonstra-)63 414.6 R
+(tion)63 427.8 Q F4(Readme)2.75 E F3(\214les.)2.75 E .16 LW 65 453.8 63 453.8
+DL 67 453.8 65 453.8 DL 69 453.8 67 453.8 DL 71 453.8 69 453.8 DL 73 453.8 71
+453.8 DL 75 453.8 73 453.8 DL 77 453.8 75 453.8 DL 79 453.8 77 453.8 DL 81
+453.8 79 453.8 DL 83 453.8 81 453.8 DL 85 453.8 83 453.8 DL 87 453.8 85 453.8
+DL 89 453.8 87 453.8 DL 91 453.8 89 453.8 DL 93 453.8 91 453.8 DL 95 453.8 93
+453.8 DL 97 453.8 95 453.8 DL 99 453.8 97 453.8 DL 101 453.8 99 453.8 DL 103
+453.8 101 453.8 DL 105 453.8 103 453.8 DL 107 453.8 105 453.8 DL 109 453.8 107
+453.8 DL 111 453.8 109 453.8 DL 113 453.8 111 453.8 DL 115 453.8 113 453.8 DL
+117 453.8 115 453.8 DL 119 453.8 117 453.8 DL 121 453.8 119 453.8 DL 123 453.8
+121 453.8 DL 125 453.8 123 453.8 DL 127 453.8 125 453.8 DL 129 453.8 127 453.8
+DL 131 453.8 129 453.8 DL 133 453.8 131 453.8 DL 135 453.8 133 453.8 DL 137
+453.8 135 453.8 DL 139 453.8 137 453.8 DL 141 453.8 139 453.8 DL 143 453.8 141
+453.8 DL 145 453.8 143 453.8 DL 147 453.8 145 453.8 DL 149 453.8 147 453.8 DL
+151 453.8 149 453.8 DL 153 453.8 151 453.8 DL 155 453.8 153 453.8 DL 157 453.8
+155 453.8 DL 159 453.8 157 453.8 DL 161 453.8 159 453.8 DL 163 453.8 161 453.8
+DL 165 453.8 163 453.8 DL 167 453.8 165 453.8 DL 169 453.8 167 453.8 DL 171
+453.8 169 453.8 DL 173 453.8 171 453.8 DL 175 453.8 173 453.8 DL 177 453.8 175
+453.8 DL 179 453.8 177 453.8 DL 181 453.8 179 453.8 DL 183 453.8 181 453.8 DL
+185 453.8 183 453.8 DL 187 453.8 185 453.8 DL 189 453.8 187 453.8 DL 191 453.8
+189 453.8 DL 193 453.8 191 453.8 DL 195 453.8 193 453.8 DL 197 453.8 195 453.8
+DL 199 453.8 197 453.8 DL 201 453.8 199 453.8 DL 203 453.8 201 453.8 DL 205
+453.8 203 453.8 DL 207 453.8 205 453.8 DL 209 453.8 207 453.8 DL 211 453.8 209
+453.8 DL 213 453.8 211 453.8 DL 215 453.8 213 453.8 DL 217 453.8 215 453.8 DL
+219 453.8 217 453.8 DL 221 453.8 219 453.8 DL 223 453.8 221 453.8 DL 225 453.8
+223 453.8 DL 227 453.8 225 453.8 DL 229 453.8 227 453.8 DL 231 453.8 229 453.8
+DL 233 453.8 231 453.8 DL 235 453.8 233 453.8 DL 237 453.8 235 453.8 DL 239
+453.8 237 453.8 DL 241 453.8 239 453.8 DL 243 453.8 241 453.8 DL 245 453.8 243
+453.8 DL 247 453.8 245 453.8 DL 249 453.8 247 453.8 DL 251 453.8 249 453.8 DL
+253 453.8 251 453.8 DL 255 453.8 253 453.8 DL 257 453.8 255 453.8 DL 259 453.8
+257 453.8 DL 261 453.8 259 453.8 DL 263 453.8 261 453.8 DL 265 453.8 263 453.8
+DL 267 453.8 265 453.8 DL 269 453.8 267 453.8 DL 271 453.8 269 453.8 DL 273
+453.8 271 453.8 DL 275 453.8 273 453.8 DL 277 453.8 275 453.8 DL 279 453.8 277
+453.8 DL 281 453.8 279 453.8 DL 283 453.8 281 453.8 DL 285 453.8 283 453.8 DL
+287 453.8 285 453.8 DL 289 453.8 287 453.8 DL 291 453.8 289 453.8 DL 293 453.8
+291 453.8 DL 295 453.8 293 453.8 DL 297 453.8 295 453.8 DL 299 453.8 297 453.8
+DL 301 453.8 299 453.8 DL 303 453.8 301 453.8 DL 305 453.8 303 453.8 DL 307
+453.8 305 453.8 DL 309 453.8 307 453.8 DL 311 453.8 309 453.8 DL 313 453.8 311
+453.8 DL 315 453.8 313 453.8 DL 317 453.8 315 453.8 DL 319 453.8 317 453.8 DL
+321 453.8 319 453.8 DL 323 453.8 321 453.8 DL 325 453.8 323 453.8 DL 327 453.8
+325 453.8 DL 329 453.8 327 453.8 DL 331 453.8 329 453.8 DL 333 453.8 331 453.8
+DL 335 453.8 333 453.8 DL 337 453.8 335 453.8 DL 339 453.8 337 453.8 DL 341
+453.8 339 453.8 DL 343 453.8 341 453.8 DL 345 453.8 343 453.8 DL 347 453.8 345
+453.8 DL 349 453.8 347 453.8 DL 351 453.8 349 453.8 DL 353 453.8 351 453.8 DL
+355 453.8 353 453.8 DL 357 453.8 355 453.8 DL 359 453.8 357 453.8 DL 361 453.8
+359 453.8 DL 363 453.8 361 453.8 DL 365 453.8 363 453.8 DL 367 453.8 365 453.8
+DL 369 453.8 367 453.8 DL 371 453.8 369 453.8 DL 373 453.8 371 453.8 DL 375
+453.8 373 453.8 DL 377 453.8 375 453.8 DL 379 453.8 377 453.8 DL 381 453.8 379
+453.8 DL 383 453.8 381 453.8 DL 385 453.8 383 453.8 DL 387 453.8 385 453.8 DL
+1.44 LW 419.4 454.3 401.4 454.3 DL 428.4 454.3 410.4 454.3 DL 446.4 454.3 428.4
+454.3 DL 464.4 454.3 446.4 454.3 DL 482.4 454.3 464.4 454.3 DL 500.4 454.3
+482.4 454.3 DL 518.4 454.3 500.4 454.3 DL 536.4 454.3 518.4 454.3 DL/F5 12
+/Helvetica-BoldOblique@0 SF(The)515.064 468.3 Q -.72(Te)512.448 482.3 S(st).72
+E(Pr)480.624 496.3 Q(ograms)-.24 E F3 1.19(The test pr)63 482.4 R 1.191
+(ograms ar)-.198 F 3.941(el)-.198 G 1.191(ocated in the dir)179.5 482.4 R
+(ectory)-.198 E F4(dor)3.941 E(e/test)-.198 E F3 6.691(.T)C 1.191(he con-)
+350.433 482.4 R 1.011(tents of this dir)63 495.6 R 1.011
+(ectory and the test code sour)-.198 F 1.01(ce \214les ar)-.198 F 3.76(ed)-.198
+G(escribed)346.564 495.6 Q(in some detail below)63 508.8 Q(.)-1.012 E/F6 11
+/Palatino-Bold@0 SF(sample.c)63 534 Q F3(and)2.75 E F6(fsample.f)2.75 E F3 .503
+(These \214les contain C and)88 547.2 R/F7 10/Palatino-Roman@0 SF(FOR)3.254 E
+(TRAN)-.37 E F3(sour)3.254 E .504(ce code for the sam-)-.198 F .793(ple pr)88
+560.4 R .793(ogram pr)-.198 F .793(ovided in Chapter 2 of the)-.198 F F4(Dore)
+3.543 E 3.851<b450>316.324 560.4 S -.198(ro)330.559 560.4 S -2.343(grammer ')
+.198 F(s)-.605 E(Guide)88 573.6 Q F3 5.838(.T)C .338(hey ar)130.226 573.6 R
+3.088(es)-.198 G .338(imple pr)173.769 573.6 R .339(ograms that pr)-.198 F .339
+(ovide a quick test of)-.198 F .443(your Portable Dore)88 586.8 R 3.995<b469>
+177.788 586.8 S .442(nstallation, and they also show the basic)188.647 586.8 R
+-.198(re)88 600 S(quir).198 E 3.372(ements of all Dore)-.198 F 6.925<b470>
+212.065 600 S -.198(ro)229.264 600 S 6.122(grams. The).198 F 3.372
+(generated scene)6.122 F 2.482(contains a blue cylinder)88 613.2 R 5.232(,am)
+-.814 G 2.482(agenta box, and a wir)238.78 613.2 R(eframe)-.198 E
+(magenta spher)88 626.4 Q(e.)-.198 E 81 756 63 756 DL 99 756 81 756 DL 117 756
+99 756 DL 135 756 117 756 DL 153 756 135 756 DL 171 756 153 756 DL 189 756 171
+756 DL 207 756 189 756 DL 225 756 207 756 DL 243 756 225 756 DL 261 756 243 756
+DL 279 756 261 756 DL 297 756 279 756 DL 315 756 297 756 DL 333 756 315 756 DL
+351 756 333 756 DL 369 756 351 756 DL 387 756 369 756 DL 419.4 756 401.4 756 DL
+428.4 756 410.4 756 DL 446.4 756 428.4 756 DL 464.4 756 446.4 756 DL 482.4 756
+464.4 756 DL 500.4 756 482.4 756 DL 518.4 756 500.4 756 DL 536.4 756 518.4 756
+DL/F8 9/Helvetica@0 SF -1.08(Te)336.564 768.96 S(sting Dore)1.08 E<b4>382.999
+768.96 Q(Dore)409.296 768.96 Q 3.506<b444>424.798 768.96 S -2.187 -.27(ev e)
+437.799 768.96 T(loper').27 E 2.502(sG)-.45 G(uide)487.371 768.96 Q/F9 9
+/Helvetica-Bold@0 SF(16-227)4.002 E EP
+%%Page: 228 2
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 108 46.8 72 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 257.4 46.8 221.4 46.8 DL 293.4 46.8 257.4 46.8 DL 329.4 46.8 293.4
+46.8 DL 365.4 46.8 329.4 46.8 DL 401.4 46.8 365.4 46.8 DL 437.4 46.8 401.4 46.8
+DL 473.4 46.8 437.4 46.8 DL 509.4 46.8 473.4 46.8 DL 545.4 46.8 509.4 46.8 DL
+/F0 10/Helvetica-BoldOblique@0 SF(The T)72 57.6 Q(est Pr)-.6 E(ograms)-.2 E/F1
+10/Helvetica@0 SF(\(contin)72 68.4 Q(ued\))-.1 E/F2 11/Palatino-Bold@0 SF
+(dynamic.c)221.5 109.2 Q/F3 11/Palatino-Roman@0 SF(and)2.75 E F2(production.c)
+2.75 E F3 .378(These \214les contain the main pr)246.5 122.4 R .379
+(ograms used to constr)-.198 F .379(uct tests)-.088 F .27(that ar)246.5 135.6 R
+3.02(ei)-.198 G .269(deal for the dynamic r)289.731 135.6 R(ender)-.198 E .269
+(er and the standar)-.198 F 3.019(dp)-.198 G -.198(ro)531.684 135.6 S(-).198 E
+.116(duction r)246.5 148.8 R(ender)-.198 E(er)-.198 E 2.866(,r)-.814 G
+(espectively)337.317 148.8 Q 5.616(.P)-1.221 G .116(latform-speci\214c r)
+405.391 148.8 R .117(outines and)-.198 F .416(interaction r)246.5 162 R .416
+(outines ar)-.198 F 3.166(ea)-.198 G .415(lso found in these \214les.)368.704
+162 R .415(The display)5.915 F 2.823
+(objects and the camera and light objects ar)246.5 175.2 R 5.573(ec)-.198 G
+2.824(ontained in)487.236 175.2 R/F4 11/Palatino-Italic@0 SF(prims.c)246.5
+188.4 Q F3(,)A F4(temple.c)2.75 E F3(,)A F4(test.c)2.75 E F3(,)A F4(textur)2.75
+E(e.c)-.198 E F3 2.75(,a)C(nd)405.384 188.4 Q F4(tr)2.75 E(ee.c)-.198 E F3(.)A
+F2(prims.c)221.5 213.6 Q F3 .591(The display object is a gr)246.5 226.8 R .59
+(oup containing a spher)-.198 F .59(e, a cylinder)-.198 F(,)-.814 E 2.75(ab)
+246.5 240 S(ox, and a tor)260.833 240 Q(us.)-.088 E F2(temple.c)221.5 265.2 Q
+F3 .478(The display object is a scene made out of the dif)246.5 278.4 R(fer)
+-.198 E .478(ent primi-)-.198 F 2.632
+(tive surfaces, including a cylinder with spher)246.5 291.6 R 2.631(es inside.)
+-.198 F(A)8.131 E .242
+(callback is included that will let you make the cylinder trans-)246.5 304.8 R
+(par)246.5 318 Q(ent.)-.198 E F2(texture.c)221.5 343.2 Q F3 1.558
+(The display object is a textur)246.5 356.4 R 1.557(e-mapped triangle mesh.)
+-.198 F(Sev-)7.057 E 2.134(eral callbacks ar)246.5 369.6 R 4.885(ei)-.198 G
+2.135(ncluded that allow you to alter the tex-)341.619 369.6 R(tur)246.5 382.8
+Q .345(e's position on the mesh, how it is combined with the cur)-.198 F(-)
+-.198 E -.198(re)246.5 396 S(nt pr).198 E
+(operties of the mesh, and how it is antialiased.)-.198 E F2(tree.c)221.5 421.2
+Q F3 3.785(The display object is a tr)246.5 434.4 R 3.785
+(ee, composed of cylinders and)-.198 F(spher)246.5 447.6 Q 1.26
+(es, that stands on a \215at box.)-.198 F 1.26(The attributes of the box)6.76 F
+1.777(include a callback that lets you turn on r)246.5 460.8 R 4.528
+(e\215ections. A)-.198 F(call-)4.528 E 2.702
+(back is also included to let you turn on shadows for the)246.5 474 R
+(whole scene.)246.5 487.2 Q F2(test.c)221.5 512.4 Q F3 2.581
+(Depending on the values given to the command line \215ag)246.5 525.6 R F4
+(-testcase)246.5 538.8 Q F3 3.591(,t)C .841
+(he displayed object is a triangle list, triangle mesh,)293.893 538.8 R 1.667
+(triangle strip, line list, connected line list, point list, text or)246.5 552
+R 5.447(annotation text \(see)246.5 565.2 R F4(dor)8.197 E(e/test/Readme)-.198
+E F3 8.196(\). This)B 5.446(is primarily)8.196 F 1.043
+(intended for the individual testing of the dif)246.5 578.4 R(fer)-.198 E 1.044
+(ent primitive)-.198 F(geometry types using the dynamic r)246.5 591.6 Q(ender)
+-.198 E(er)-.198 E(.)-.814 E F2(callback.c)221.5 616.8 Q F3 .754
+(This \214le contains the callback function de\214nitions of the dis-)246.5 630
+R .155(play and studio objects.)246.5 643.2 R .155
+(These callbacks allow user keyboar)5.655 F(d)-.198 E 1.576
+(interaction to alter a r)246.5 656.4 R 1.575(unning pr)-.088 F 1.575
+(ogram's display and studio)-.198 F(objects on the \215y)246.5 669.6 Q(.)-1.221
+E(Ther)221.5 694.8 Q 3.437(ea)-.198 G 1.083 -.198(re s)258.267 694.8 T .688
+(everal command line options that can be passed to the).198 F 2.726
+(dynamic and pr)221.5 708 R 2.726(oduction r)-.198 F(ender)-.198 E 2.726
+(er tests.)-.198 F 2.726(For example, you can)8.226 F 1.44 LW 90 756 72 756 DL
+99 756 81 756 DL 117 756 99 756 DL 135 756 117 756 DL 153 756 135 756 DL 171
+756 153 756 DL 189 756 171 756 DL 207 756 189 756 DL 239.4 756 221.4 756 DL
+257.4 756 239.4 756 DL 275.4 756 257.4 756 DL 293.4 756 275.4 756 DL 311.4 756
+293.4 756 DL 329.4 756 311.4 756 DL 347.4 756 329.4 756 DL 365.4 756 347.4 756
+DL 383.4 756 365.4 756 DL 401.4 756 383.4 756 DL 419.4 756 401.4 756 DL 437.4
+756 419.4 756 DL 455.4 756 437.4 756 DL 473.4 756 455.4 756 DL 491.4 756 473.4
+756 DL 509.4 756 491.4 756 DL 527.4 756 509.4 756 DL 545.4 756 527.4 756 DL/F5
+9/Helvetica-Bold@0 SF(16-228)72 768.96 Q/F6 9/Helvetica@0 SF(Dore)6.504 E 3.506
+<b444>122.023 768.96 S -2.187 -.27(ev e)135.024 768.96 T(loper').27 E 2.502(sG)
+-.45 G(uide)184.596 768.96 Q -1.08(Te)221.4 768.96 S(sting Dore)1.08 E<b4>
+267.835 768.96 Q EP
+%%Page: 229 3
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 99 46.8 63 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 243 46.8 207 46.8 DL 279 46.8 243 46.8 DL 315 46.8 279 46.8 DL 351
+46.8 315 46.8 DL 387 46.8 351 46.8 DL 437.4 46.8 401.4 46.8 DL 464.4 46.8 428.4
+46.8 DL 500.4 46.8 464.4 46.8 DL 536.4 46.8 500.4 46.8 DL/F0 10
+/Helvetica-BoldOblique@0 SF(The T)446.62 57.6 Q(est Pr)-.6 E(ograms)-.2 E/F1 10
+/Helvetica@0 SF(\(contin)486.48 68.4 Q(ued\))-.1 E/F2 11/Palatino-Roman@0 SF
+.29(actually r)63 109.2 R .29(un the dynamic r)-.088 F(ender)-.198 E .29
+(er tests on some devices using the)-.198 F(standar)63 122.4 Q 4.962(dp)-.198 G
+-.198(ro)117.814 122.4 S 2.212(duction r).198 F(ender)-.198 E 2.212
+(er by specifying)-.198 F/F3 11/Palatino-Italic@0 SF(-r)4.962 E 2.212
+(endstyle DcPr)-.198 F(oduc-)-.198 E(tionT)63 135.6 Q(ime)-.605 E F2 .031
+(when invoking a test.)2.781 F .03(These tests also have keyboar)5.53 F 2.78
+(da)-.198 G(nd)373.877 135.6 Q(mouse interaction.)63 148.8 Q -1.012(Yo)63 174 S
+5.311(uc)1.012 G 2.561(an also use the test pr)92.159 174 R 2.562
+(ograms to display your own Dore)-.198 F<b4>382.534 174 Q 1.307
+(databases. \(See)63 187.2 R F3(Cr)4.057 E 1.307(eating Y)-.198 F 1.306
+(our Own T)-1.221 F 1.306(est Objects)-1.221 F F2 4.056(,l)C 1.306
+(ater in this chap-)301.616 187.2 R(ter)63 200.4 Q 4.887(.\) The)-.814 F F3
+(Readme)4.887 E F2 2.137(\214le pr)4.887 F 2.138
+(ovides details on how to build and r)-.198 F(un)-.088 E(these test pr)63 213.6
+Q(ograms, and on how to add your own test modules.)-.198 E 1.581
+(In addition to r)63 238.8 R 1.581(unning the tests in)-.088 F F3(dor)4.331 E
+(e/test)-.198 E F2 1.581(you may want to do)4.331 F 1.623(some mor)63 252 R
+4.373(eg)-.198 G 1.623(eneral testing befor)128.649 252 R 4.373(ei)-.198 G
+1.623(nstalling Dore)238.216 252 R 2.767 .803(\264. I)304.53 252 T 4.373(fy)
+-.803 G 1.623(ou have a)336.728 252 R(Dore)63 265.2 Q 8.013<b461>82.668 265.2 S
+4.459(pplication of your own, try building and r)99.844 265.2 R 4.459
+(unning it.)-.088 F 3.688(Portable Dore)63 278.4 R 7.242<b461>129.74 278.4 S
+3.689(lso pr)146.145 278.4 R 3.689(ovides further tests for the)-.198 F F3(gl)
+6.439 E F2(and)6.439 E F3(sun-)6.439 E(view_cxp)63 291.6 Q F2 .568
+(device drivers. \(See)3.318 F F3(Dore)3.317 E 3.625<b444>225.1 291.6 S .567
+(emonstration Pr)240.946 291.6 R(ograms)-.198 E F2 3.317(,l)C .567(ater in)
+355.38 291.6 R(this chapter)63 304.8 Q(.\))-.814 E .16 LW 65 330.8 63 330.8 DL
+67 330.8 65 330.8 DL 69 330.8 67 330.8 DL 71 330.8 69 330.8 DL 73 330.8 71
+330.8 DL 75 330.8 73 330.8 DL 77 330.8 75 330.8 DL 79 330.8 77 330.8 DL 81
+330.8 79 330.8 DL 83 330.8 81 330.8 DL 85 330.8 83 330.8 DL 87 330.8 85 330.8
+DL 89 330.8 87 330.8 DL 91 330.8 89 330.8 DL 93 330.8 91 330.8 DL 95 330.8 93
+330.8 DL 97 330.8 95 330.8 DL 99 330.8 97 330.8 DL 101 330.8 99 330.8 DL 103
+330.8 101 330.8 DL 105 330.8 103 330.8 DL 107 330.8 105 330.8 DL 109 330.8 107
+330.8 DL 111 330.8 109 330.8 DL 113 330.8 111 330.8 DL 115 330.8 113 330.8 DL
+117 330.8 115 330.8 DL 119 330.8 117 330.8 DL 121 330.8 119 330.8 DL 123 330.8
+121 330.8 DL 125 330.8 123 330.8 DL 127 330.8 125 330.8 DL 129 330.8 127 330.8
+DL 131 330.8 129 330.8 DL 133 330.8 131 330.8 DL 135 330.8 133 330.8 DL 137
+330.8 135 330.8 DL 139 330.8 137 330.8 DL 141 330.8 139 330.8 DL 143 330.8 141
+330.8 DL 145 330.8 143 330.8 DL 147 330.8 145 330.8 DL 149 330.8 147 330.8 DL
+151 330.8 149 330.8 DL 153 330.8 151 330.8 DL 155 330.8 153 330.8 DL 157 330.8
+155 330.8 DL 159 330.8 157 330.8 DL 161 330.8 159 330.8 DL 163 330.8 161 330.8
+DL 165 330.8 163 330.8 DL 167 330.8 165 330.8 DL 169 330.8 167 330.8 DL 171
+330.8 169 330.8 DL 173 330.8 171 330.8 DL 175 330.8 173 330.8 DL 177 330.8 175
+330.8 DL 179 330.8 177 330.8 DL 181 330.8 179 330.8 DL 183 330.8 181 330.8 DL
+185 330.8 183 330.8 DL 187 330.8 185 330.8 DL 189 330.8 187 330.8 DL 191 330.8
+189 330.8 DL 193 330.8 191 330.8 DL 195 330.8 193 330.8 DL 197 330.8 195 330.8
+DL 199 330.8 197 330.8 DL 201 330.8 199 330.8 DL 203 330.8 201 330.8 DL 205
+330.8 203 330.8 DL 207 330.8 205 330.8 DL 209 330.8 207 330.8 DL 211 330.8 209
+330.8 DL 213 330.8 211 330.8 DL 215 330.8 213 330.8 DL 217 330.8 215 330.8 DL
+219 330.8 217 330.8 DL 221 330.8 219 330.8 DL 223 330.8 221 330.8 DL 225 330.8
+223 330.8 DL 227 330.8 225 330.8 DL 229 330.8 227 330.8 DL 231 330.8 229 330.8
+DL 233 330.8 231 330.8 DL 235 330.8 233 330.8 DL 237 330.8 235 330.8 DL 239
+330.8 237 330.8 DL 241 330.8 239 330.8 DL 243 330.8 241 330.8 DL 245 330.8 243
+330.8 DL 247 330.8 245 330.8 DL 249 330.8 247 330.8 DL 251 330.8 249 330.8 DL
+253 330.8 251 330.8 DL 255 330.8 253 330.8 DL 257 330.8 255 330.8 DL 259 330.8
+257 330.8 DL 261 330.8 259 330.8 DL 263 330.8 261 330.8 DL 265 330.8 263 330.8
+DL 267 330.8 265 330.8 DL 269 330.8 267 330.8 DL 271 330.8 269 330.8 DL 273
+330.8 271 330.8 DL 275 330.8 273 330.8 DL 277 330.8 275 330.8 DL 279 330.8 277
+330.8 DL 281 330.8 279 330.8 DL 283 330.8 281 330.8 DL 285 330.8 283 330.8 DL
+287 330.8 285 330.8 DL 289 330.8 287 330.8 DL 291 330.8 289 330.8 DL 293 330.8
+291 330.8 DL 295 330.8 293 330.8 DL 297 330.8 295 330.8 DL 299 330.8 297 330.8
+DL 301 330.8 299 330.8 DL 303 330.8 301 330.8 DL 305 330.8 303 330.8 DL 307
+330.8 305 330.8 DL 309 330.8 307 330.8 DL 311 330.8 309 330.8 DL 313 330.8 311
+330.8 DL 315 330.8 313 330.8 DL 317 330.8 315 330.8 DL 319 330.8 317 330.8 DL
+321 330.8 319 330.8 DL 323 330.8 321 330.8 DL 325 330.8 323 330.8 DL 327 330.8
+325 330.8 DL 329 330.8 327 330.8 DL 331 330.8 329 330.8 DL 333 330.8 331 330.8
+DL 335 330.8 333 330.8 DL 337 330.8 335 330.8 DL 339 330.8 337 330.8 DL 341
+330.8 339 330.8 DL 343 330.8 341 330.8 DL 345 330.8 343 330.8 DL 347 330.8 345
+330.8 DL 349 330.8 347 330.8 DL 351 330.8 349 330.8 DL 353 330.8 351 330.8 DL
+355 330.8 353 330.8 DL 357 330.8 355 330.8 DL 359 330.8 357 330.8 DL 361 330.8
+359 330.8 DL 363 330.8 361 330.8 DL 365 330.8 363 330.8 DL 367 330.8 365 330.8
+DL 369 330.8 367 330.8 DL 371 330.8 369 330.8 DL 373 330.8 371 330.8 DL 375
+330.8 373 330.8 DL 377 330.8 375 330.8 DL 379 330.8 377 330.8 DL 381 330.8 379
+330.8 DL 383 330.8 381 330.8 DL 385 330.8 383 330.8 DL 387 330.8 385 330.8 DL
+1.44 LW 419.4 331.3 401.4 331.3 DL 428.4 331.3 410.4 331.3 DL 446.4 331.3 428.4
+331.3 DL 464.4 331.3 446.4 331.3 DL 482.4 331.3 464.4 331.3 DL 500.4 331.3
+482.4 331.3 DL 518.4 331.3 500.4 331.3 DL 536.4 331.3 518.4 331.3 DL/F4 12
+/Helvetica-Oblique@0 SF(Building)493.716 345.3 Q(the)519.72 359.3 Q -1.44(Te)
+508.5 373.3 S(sts)1.44 E F2 1.379(Platform-speci\214c make\214les in)63 359.4 R
+F3(dor)4.129 E(e/test)-.198 E F2(ar)4.129 E 4.129(es)-.198 G 1.379
+(et up to let you com-)279.588 359.4 R 1.054(pile the sour)63 372.6 R 1.054
+(ce code in this dir)-.198 F(ectory)-.198 E 6.555(.T)-1.221 G 1.055(he pr)
+260.404 372.6 R(ograms)-.198 E F3(sample.c)3.805 E F2(and)3.805 E F3(fsample.f)
+63 385.8 Q F2(ar)4.032 E 4.032(es)-.198 G 1.282(tand-alone pr)130.068 385.8 R
+4.032(ograms. Ther)-.198 F 4.032(ea)-.198 G 1.677 -.198(re t)280.346 385.8 T
+1.281(wo main test pr).198 F(o-)-.198 E(grams,)63 399 Q F3(dynamic.c)3.891 E F2
+(and)3.891 E F3(pr)3.891 E(oduction.c)-.198 E F2 6.641(.T)C 3.891(ob)242.332
+399 S 1.141(uild an executable, one of)258.312 399 R 1.492
+(these two is linked together with)63 412.2 R F3(callback.c)4.242 E F2 1.491
+(and one of the object)4.241 F(cr)63 425.4 Q 1.949(eation r)-.198 F 1.949
+(outines \()-.198 F F3(prims.c)A F2(,)A F3(temple.c)4.699 E F2(,)A F3(textur)
+4.699 E(e.c)-.198 E F2(,)A F3(test.c)4.699 E F2 4.699(,o)C(r)322.15 425.4 Q F3
+(tr)4.699 E(ee.c)-.198 E F2 4.7(\). The)B(executables that can be built ar)63
+438.6 Q(e:)-.198 E/F5 9/Courier@0 SF(pro_prims)106.2 461.6 Q(pro_temple)106.2
+472.6 Q(pro_tree)106.2 483.6 Q(dyn_prims)106.2 494.6 Q(dyn_temple)106.2 505.6 Q
+(dyn_texture)106.2 516.6 Q(dyn_tree)106.2 527.6 Q(dyn_test)106.2 538.6 Q F2
+2.649(The make\214les pr)63 563.8 R 2.649(ovided with Portable Dore)-.198 F
+6.202<b461>282.352 563.8 S -.198(re)297.717 563.8 S F3(mk.iris)5.597 E F2(,)A
+F3(mk.sun)5.399 E F2(,)A(and)63 577 Q F3(mk.stdx)2.818 E F2 5.568(.T)C .069
+(hese make\214les may need to be edited depending on)134.636 577 R 1.346
+(the con\214guration of your machine.)63 590.2 R(Speci\214cally)6.846 E 4.096
+(,t)-1.221 G 1.346(he envir)308.621 590.2 R(onment)-.198 E(variables)63 603.4 Q
+/F6 10/Palatino-Roman@0 SF .866(DORE_LOC, DORE_OBJTYPE)3.365 F F2(,)A F6
+(DORE_LIB_NAME)3.366 E F2 3.366(,a)C(nd)349.671 603.4 Q F6(LIBS)3.366 E F2 .965
+(need to be set appr)63 616.6 R(opriately)-.198 E 6.465(.T)-1.221 G .965
+(he \214rst two ar)217.425 616.6 R 3.715(et)-.198 G .964(he location of the)
+300.474 616.6 R F3(dor)63 629.8 Q(e)-.198 E F2(dir)92.177 629.8 Q 7.684
+(ectory and the machine object type, r)-.198 F(espectively)-.198 E(.)-1.221 E
+F6(DORE_LIB_NAME)63 643 Q F2 .51(should be set to)3.26 F F3(libdor)3.26 E(e.a)
+-.198 E F2 .509(or whatever your Dore)3.26 F<b4>382.534 643 Q 2.497
+(Library's name is.)63 656.2 R 2.498
+(The last one speci\214es which libraries, other)7.997 F 2.582(than the Dore)63
+669.4 R 6.135<b44c>130.479 669.4 S(ibrary)146.998 669.4 Q 5.332(,n)-1.221 G
+2.581(eed to linked to the test pr)189.851 669.4 R 2.581(ogram \(for)-.198 F
+(example,)63 682.6 Q F3(-lm)3.294 E F2(,)A F3(-lgl)3.294 E F2 3.294(,e)C 3.294
+(tc\). The)158.198 682.6 R .544(make\214le assumes that the Dore)3.294 F 4.097
+<b46f>350.838 682.6 S(bject)364.604 682.6 Q F3(libdor)63 695.8 Q(e.a)-.198 E F2
+.572(has not been moved or installed since the Dore)3.322 F 4.124<b462>331.43
+695.8 S .571(uild and)345.3 695.8 R(is still in)63 709 Q F3(dor)2.75 E
+(e/lib/objtype)-.198 E F2(\(for example, in)2.75 E F3(dor)2.75 E(e/lib/iris)
+-.198 E F2(\).)A 81 756 63 756 DL 99 756 81 756 DL 117 756 99 756 DL 135 756
+117 756 DL 153 756 135 756 DL 171 756 153 756 DL 189 756 171 756 DL 207 756 189
+756 DL 225 756 207 756 DL 243 756 225 756 DL 261 756 243 756 DL 279 756 261 756
+DL 297 756 279 756 DL 315 756 297 756 DL 333 756 315 756 DL 351 756 333 756 DL
+369 756 351 756 DL 387 756 369 756 DL 419.4 756 401.4 756 DL 428.4 756 410.4
+756 DL 446.4 756 428.4 756 DL 464.4 756 446.4 756 DL 482.4 756 464.4 756 DL
+500.4 756 482.4 756 DL 518.4 756 500.4 756 DL 536.4 756 518.4 756 DL/F7 9
+/Helvetica@0 SF -1.08(Te)336.564 768.96 S(sting Dore)1.08 E<b4>382.999 768.96 Q
+(Dore)409.296 768.96 Q 3.506<b444>424.798 768.96 S -2.187 -.27(ev e)437.799
+768.96 T(loper').27 E 2.502(sG)-.45 G(uide)487.371 768.96 Q/F8 9
+/Helvetica-Bold@0 SF(16-229)4.002 E EP
+%%Page: 230 4
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 108 46.8 72 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 257.4 46.8 221.4 46.8 DL 293.4 46.8 257.4 46.8 DL 329.4 46.8 293.4
+46.8 DL 365.4 46.8 329.4 46.8 DL 401.4 46.8 365.4 46.8 DL 437.4 46.8 401.4 46.8
+DL 473.4 46.8 437.4 46.8 DL 509.4 46.8 473.4 46.8 DL 545.4 46.8 509.4 46.8 DL
+/F0 10/Helvetica-BoldOblique@0 SF(The T)72 57.6 Q(est Pr)-.6 E(ograms)-.2 E/F1
+10/Helvetica@0 SF(\(contin)72 68.4 Q(ued\))-.1 E/F2 11/Palatino-Roman@0 SF
+1.281(When a test pr)221.5 109.2 R 1.282
+(ogram is built, the object \214les and executable will)-.198 F 1.547
+(be placed in a subdir)221.5 122.4 R 1.546
+(ectory with the same name as the machine)-.198 F 2.376
+(object type speci\214ed by)221.5 135.6 R/F3 10/Palatino-Roman@0 SF
+(DORE_OBJTYPE.)5.126 E F2 2.376(For example, to make)7.876 F 1.433(and r)221.5
+148.8 R 1.433(un the)-.088 F/F4 11/Palatino-Italic@0 SF(dyn_prims)4.183 E F2
+(pr)4.183 E 1.433(ogram on a Silicon Graphics, Inc. \(SGI\))-.198 F 2.75
+(IRIS \(i.e.,)221.5 162 R F3(DORE_OBJTYPE)2.75 E F2 2.75(=i)2.75 G(ris\):)
+361.677 162 Q/F5 9/Courier@0 SF 5.4(%m)221.5 185 S(ake -f mk.iris dyn_prims)
+237.7 185 Q 5.4(%i)221.5 196 S(ris/dyn_prims)237.7 196 Q F2 2.843(If desir)
+221.5 221.2 R 2.843(ed, you can build all the standar)-.198 F 5.594(dp)-.198 G
+-.198(ro)450.751 221.2 S 2.844(duction r).198 F(ender)-.198 E(er)-.198 E
+(tests, and then all the dynamic r)221.5 234.4 Q(ender)-.198 E
+(er tests by doing:)-.198 E F5 5.4(%m)221.5 257.4 S(ake -f mk.iris pro_all)
+237.7 257.4 Q 5.4(%m)221.5 268.4 S(ake -f mk.iris dyn_all)237.7 268.4 Q F2 .293
+(If you r)221.5 293.6 R(equir)-.198 E 3.043(eam)-.198 G .293
+(ake\214le for a dif)309.836 293.6 R(fer)-.198 E .292
+(ent platform, simply copy and)-.198 F .416(edit one of the pr)221.5 306.8 R
+.416(ovided make\214les as described above.)-.198 F .417(Again, the)5.917 F F4
+(Readme)221.5 320 Q F2 3.373(\214le in the dir)6.123 F 3.373
+(ectory includes details of command line)-.198 F(options and r)221.5 333.2 Q
+(un-time keyboar)-.088 E 2.75(dc)-.198 G(ontr)381.165 333.2 Q
+(ols for the test pr)-.198 E(ograms.)-.198 E .085(Note that if you ar)221.5
+358.4 R 2.835(et)-.198 G .085(esting a device driver or r)322.872 358.4 R
+(ender)-.198 E .085(er that has not)-.198 F 1.023(been linked with the Dore)
+221.5 371.6 R 4.576<b44c>347.813 371.6 S(ibrary)362.773 371.6 Q 3.773(,y)-1.221
+G 1.022(ou'll have to modify the test)403.781 371.6 R .777
+(code to install and select your driver/r)221.5 384.8 R(ender)-.198 E(er)-.198
+E(.)-.814 E F4 3.527(AS)6.277 G .777(ample Applica-)477.612 384.8 R 2.208
+(tion Pr)221.5 398 R(ogram)-.198 E F2 2.208
+(at the end of Chapter 7 shows how to install and)4.958 F .944(select a r)221.5
+411.2 R(ender)-.198 E .944(er in a Dore)-.198 F 4.498<b461>348.683 411.2 S .945
+(pplication pr)362.344 411.2 R .945(ogram; and a code frag-)-.198 F 2.445
+(ment of similar purpose for device drivers is shown in)221.5 424.4 R F4 2.444
+(Step 4:)5.194 F .58(Build and T)221.5 437.6 R .581(est #1)-1.221 F F2 .581
+(of Chapter 10.)3.331 F -1.012(Yo)6.081 G .581
+(u'll also need to edit the make-)1.012 F .448
+(\214le to incorporate your driver/r)221.5 450.8 R(ender)-.198 E .447
+(er code into the executables.)-.198 F .16 LW 223.4 476.8 221.4 476.8 DL 225.4
+476.8 223.4 476.8 DL 227.4 476.8 225.4 476.8 DL 229.4 476.8 227.4 476.8 DL
+231.4 476.8 229.4 476.8 DL 233.4 476.8 231.4 476.8 DL 235.4 476.8 233.4 476.8
+DL 237.4 476.8 235.4 476.8 DL 239.4 476.8 237.4 476.8 DL 241.4 476.8 239.4
+476.8 DL 243.4 476.8 241.4 476.8 DL 245.4 476.8 243.4 476.8 DL 247.4 476.8
+245.4 476.8 DL 249.4 476.8 247.4 476.8 DL 251.4 476.8 249.4 476.8 DL 253.4
+476.8 251.4 476.8 DL 255.4 476.8 253.4 476.8 DL 257.4 476.8 255.4 476.8 DL
+259.4 476.8 257.4 476.8 DL 261.4 476.8 259.4 476.8 DL 263.4 476.8 261.4 476.8
+DL 265.4 476.8 263.4 476.8 DL 267.4 476.8 265.4 476.8 DL 269.4 476.8 267.4
+476.8 DL 271.4 476.8 269.4 476.8 DL 273.4 476.8 271.4 476.8 DL 275.4 476.8
+273.4 476.8 DL 277.4 476.8 275.4 476.8 DL 279.4 476.8 277.4 476.8 DL 281.4
+476.8 279.4 476.8 DL 283.4 476.8 281.4 476.8 DL 285.4 476.8 283.4 476.8 DL
+287.4 476.8 285.4 476.8 DL 289.4 476.8 287.4 476.8 DL 291.4 476.8 289.4 476.8
+DL 293.4 476.8 291.4 476.8 DL 295.4 476.8 293.4 476.8 DL 297.4 476.8 295.4
+476.8 DL 299.4 476.8 297.4 476.8 DL 301.4 476.8 299.4 476.8 DL 303.4 476.8
+301.4 476.8 DL 305.4 476.8 303.4 476.8 DL 307.4 476.8 305.4 476.8 DL 309.4
+476.8 307.4 476.8 DL 311.4 476.8 309.4 476.8 DL 313.4 476.8 311.4 476.8 DL
+315.4 476.8 313.4 476.8 DL 317.4 476.8 315.4 476.8 DL 319.4 476.8 317.4 476.8
+DL 321.4 476.8 319.4 476.8 DL 323.4 476.8 321.4 476.8 DL 325.4 476.8 323.4
+476.8 DL 327.4 476.8 325.4 476.8 DL 329.4 476.8 327.4 476.8 DL 331.4 476.8
+329.4 476.8 DL 333.4 476.8 331.4 476.8 DL 335.4 476.8 333.4 476.8 DL 337.4
+476.8 335.4 476.8 DL 339.4 476.8 337.4 476.8 DL 341.4 476.8 339.4 476.8 DL
+343.4 476.8 341.4 476.8 DL 345.4 476.8 343.4 476.8 DL 347.4 476.8 345.4 476.8
+DL 349.4 476.8 347.4 476.8 DL 351.4 476.8 349.4 476.8 DL 353.4 476.8 351.4
+476.8 DL 355.4 476.8 353.4 476.8 DL 357.4 476.8 355.4 476.8 DL 359.4 476.8
+357.4 476.8 DL 361.4 476.8 359.4 476.8 DL 363.4 476.8 361.4 476.8 DL 365.4
+476.8 363.4 476.8 DL 367.4 476.8 365.4 476.8 DL 369.4 476.8 367.4 476.8 DL
+371.4 476.8 369.4 476.8 DL 373.4 476.8 371.4 476.8 DL 375.4 476.8 373.4 476.8
+DL 377.4 476.8 375.4 476.8 DL 379.4 476.8 377.4 476.8 DL 381.4 476.8 379.4
+476.8 DL 383.4 476.8 381.4 476.8 DL 385.4 476.8 383.4 476.8 DL 387.4 476.8
+385.4 476.8 DL 389.4 476.8 387.4 476.8 DL 391.4 476.8 389.4 476.8 DL 393.4
+476.8 391.4 476.8 DL 395.4 476.8 393.4 476.8 DL 397.4 476.8 395.4 476.8 DL
+399.4 476.8 397.4 476.8 DL 401.4 476.8 399.4 476.8 DL 403.4 476.8 401.4 476.8
+DL 405.4 476.8 403.4 476.8 DL 407.4 476.8 405.4 476.8 DL 409.4 476.8 407.4
+476.8 DL 411.4 476.8 409.4 476.8 DL 413.4 476.8 411.4 476.8 DL 415.4 476.8
+413.4 476.8 DL 417.4 476.8 415.4 476.8 DL 419.4 476.8 417.4 476.8 DL 421.4
+476.8 419.4 476.8 DL 423.4 476.8 421.4 476.8 DL 425.4 476.8 423.4 476.8 DL
+427.4 476.8 425.4 476.8 DL 429.4 476.8 427.4 476.8 DL 431.4 476.8 429.4 476.8
+DL 433.4 476.8 431.4 476.8 DL 435.4 476.8 433.4 476.8 DL 437.4 476.8 435.4
+476.8 DL 439.4 476.8 437.4 476.8 DL 441.4 476.8 439.4 476.8 DL 443.4 476.8
+441.4 476.8 DL 445.4 476.8 443.4 476.8 DL 447.4 476.8 445.4 476.8 DL 449.4
+476.8 447.4 476.8 DL 451.4 476.8 449.4 476.8 DL 453.4 476.8 451.4 476.8 DL
+455.4 476.8 453.4 476.8 DL 457.4 476.8 455.4 476.8 DL 459.4 476.8 457.4 476.8
+DL 461.4 476.8 459.4 476.8 DL 463.4 476.8 461.4 476.8 DL 465.4 476.8 463.4
+476.8 DL 467.4 476.8 465.4 476.8 DL 469.4 476.8 467.4 476.8 DL 471.4 476.8
+469.4 476.8 DL 473.4 476.8 471.4 476.8 DL 475.4 476.8 473.4 476.8 DL 477.4
+476.8 475.4 476.8 DL 479.4 476.8 477.4 476.8 DL 481.4 476.8 479.4 476.8 DL
+483.4 476.8 481.4 476.8 DL 485.4 476.8 483.4 476.8 DL 487.4 476.8 485.4 476.8
+DL 489.4 476.8 487.4 476.8 DL 491.4 476.8 489.4 476.8 DL 493.4 476.8 491.4
+476.8 DL 495.4 476.8 493.4 476.8 DL 497.4 476.8 495.4 476.8 DL 499.4 476.8
+497.4 476.8 DL 501.4 476.8 499.4 476.8 DL 503.4 476.8 501.4 476.8 DL 505.4
+476.8 503.4 476.8 DL 507.4 476.8 505.4 476.8 DL 509.4 476.8 507.4 476.8 DL
+511.4 476.8 509.4 476.8 DL 513.4 476.8 511.4 476.8 DL 515.4 476.8 513.4 476.8
+DL 517.4 476.8 515.4 476.8 DL 519.4 476.8 517.4 476.8 DL 521.4 476.8 519.4
+476.8 DL 523.4 476.8 521.4 476.8 DL 525.4 476.8 523.4 476.8 DL 527.4 476.8
+525.4 476.8 DL 529.4 476.8 527.4 476.8 DL 531.4 476.8 529.4 476.8 DL 533.4
+476.8 531.4 476.8 DL 535.4 476.8 533.4 476.8 DL 537.4 476.8 535.4 476.8 DL
+539.4 476.8 537.4 476.8 DL 541.4 476.8 539.4 476.8 DL 543.4 476.8 541.4 476.8
+DL 545.4 476.8 543.4 476.8 DL 1.44 LW 90 477.3 72 477.3 DL 99 477.3 81 477.3 DL
+117 477.3 99 477.3 DL 135 477.3 117 477.3 DL 153 477.3 135 477.3 DL 171 477.3
+153 477.3 DL 189 477.3 171 477.3 DL 207 477.3 189 477.3 DL/F6 12
+/Helvetica-Oblique@0 SF(Displa)72 491.3 Q(ying Production)-.36 E
+(Renderer Raster\214le)72 505.3 Q(Output)72 519.3 Q F2 2.015
+(The default output device for the standar)221.5 502.1 R 4.765(dp)-.198 G -.198
+(ro)451.58 502.1 S 2.015(duction r).198 F(ender)-.198 E(er)-.198 E 1.792
+(test pr)221.5 515.3 R 1.792(ograms is the)-.198 F F4(raster\214le)4.542 E F2
+1.793(device, with the \214le name)4.542 F F4(test.img)4.543 E F2(.)A -1.012
+(To)221.5 528.5 S 1.775(ols ar)1.012 F 4.525(ep)-.198 G -.198(ro)277.685 528.5
+S 1.775(vided to display this r).198 F 1.775(esulting \214le on various plat-)
+-.198 F(forms.)221.5 541.7 Q/F7 11/Helvetica-BoldOblique@0 SF(dor2iris)221.5
+585.5 Q F2 3.147(The pr)221.5 607.4 R(ogram)-.198 E F4(dor2iris)5.897 E F2
+3.148(is a \214lter that converts a Dore)5.897 F 6.701<b472>492.302 607.4 S
+(aster\214le)507.011 607.4 Q .478(image to an SGI IRIS image format.)221.5
+620.6 R .478(Once an image has been con-)5.978 F
+(verted, it can be displayed using the tools pr)221.5 633.8 Q(ovided by SGI.)
+-.198 E 2.024 -1.012(To b)221.5 655.7 T(uild the)1.012 E F4(dor2iris)2.75 E F2
+(\214lter)2.75 E 2.75(,t)-.814 G(ype:)351.498 655.7 Q 90 756 72 756 DL 99 756
+81 756 DL 117 756 99 756 DL 135 756 117 756 DL 153 756 135 756 DL 171 756 153
+756 DL 189 756 171 756 DL 207 756 189 756 DL 239.4 756 221.4 756 DL 257.4 756
+239.4 756 DL 275.4 756 257.4 756 DL 293.4 756 275.4 756 DL 311.4 756 293.4 756
+DL 329.4 756 311.4 756 DL 347.4 756 329.4 756 DL 365.4 756 347.4 756 DL 383.4
+756 365.4 756 DL 401.4 756 383.4 756 DL 419.4 756 401.4 756 DL 437.4 756 419.4
+756 DL 455.4 756 437.4 756 DL 473.4 756 455.4 756 DL 491.4 756 473.4 756 DL
+509.4 756 491.4 756 DL 527.4 756 509.4 756 DL 545.4 756 527.4 756 DL/F8 9
+/Helvetica-Bold@0 SF(16-230)72 768.96 Q/F9 9/Helvetica@0 SF(Dore)6.504 E 3.506
+<b444>122.023 768.96 S -2.187 -.27(ev e)135.024 768.96 T(loper').27 E 2.502(sG)
+-.45 G(uide)184.596 768.96 Q -1.08(Te)221.4 768.96 S(sting Dore)1.08 E<b4>
+267.835 768.96 Q EP
+%%Page: 231 5
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 99 46.8 63 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 243 46.8 207 46.8 DL 279 46.8 243 46.8 DL 315 46.8 279 46.8 DL 351
+46.8 315 46.8 DL 387 46.8 351 46.8 DL 437.4 46.8 401.4 46.8 DL 464.4 46.8 428.4
+46.8 DL 500.4 46.8 464.4 46.8 DL 536.4 46.8 500.4 46.8 DL/F0 10
+/Helvetica-BoldOblique@0 SF(The T)446.62 57.6 Q(est Pr)-.6 E(ograms)-.2 E/F1 10
+/Helvetica@0 SF(\(contin)486.48 68.4 Q(ued\))-.1 E/F2 9/Courier@0 SF 5.4(%m)63
+107 S(ake -f mk.iris dor2iris)79.2 107 Q/F3 11/Palatino-Roman@0 SF .964
+(The executable will be put in a subdir)63 132.2 R .963
+(ectory with the same name)-.198 F(as the machine object type speci\214ed by)63
+145.4 Q/F4 10/Palatino-Roman@0 SF(DORE_OBJTYPE.)2.75 E F3 2.024 -1.012(To c)63
+167.3 T -.198(re)1.012 G(ate an image fr).198 E(om the Dore)-.198 E 3.553<b472>
+220.047 167.3 S(aster\214le)231.608 167.3 Q/F5 11/Palatino-Italic@0 SF
+(test.img)2.75 E F3 2.75(,d)C(o:)320.818 167.3 Q F2 5.4(%d)63 187 S
+(or2iris -if test.img -of iris.img)79.2 187 Q F3 1.161
+(If no input and output \214le names ar)63 208.9 R 3.912(ep)-.198 G -.198(ro)
+260.38 208.9 S 1.162(vided on the command).198 F(line,)63 222.1 Q F5(dor2iris)
+2.75 E F3(uses)2.75 E F5(test.img)2.75 E F3(and)2.75 E F5(iris.img)2.75 E F3
+2.75(,r)C(espectively)252.2 222.1 Q(.)-1.221 E 2.024 -1.012(To d)63 244 T
+(isplay the r)1.012 E(esulting image, do:)-.198 E F2 5.4(%s)63 263.7 S
+(howimg iris.img)79.2 263.7 Q/F6 11/Helvetica-BoldOblique@0 SF(dor2sunras)63
+309.6 Q F3 1.62(The pr)63 331.5 R(ogram)-.198 E F5(dor2sunras)4.37 E F3 1.62
+(is a \214lter that converts a Dore)4.37 F 5.172<b472>335.331 331.5 S
+(aster\214le)348.511 331.5 Q .386(image to the Sun standar)63 344.7 R 3.136(dr)
+-.198 G .387(aster\214le format.)199.724 344.7 R .387(Once you have a Sun)5.887
+F 1.536(raster\214le image, it can be displayed using the tools pr)63 357.9 R
+1.536(ovided by)-.198 F(Sun.)63 371.1 Q 2.024 -1.012(To b)63 393 T(uild the)
+1.012 E F5(dor2sunras)2.75 E F3(\214lter)2.75 E 2.75(,t)-.814 G(ype:)208.277
+393 Q/F7 11/Courier@0 SF 6.6(%m)63 412.8 S(ake -f mk.sun dor2sunras)82.8 412.8
+Q F3 .963(The executable will be put in a subdir)63 438 R .964
+(ectory with the same name)-.198 F(as the machine object type speci\214ed by)63
+451.2 Q F4(DORE_OBJTYPE.)2.75 E F3 .449(The pr)63 476.4 R(ogram)-.198 E F5
+(dor2sunras)3.199 E F3 .449(can be used to cr)3.199 F .448
+(eate an 8-bit color image)-.198 F .128(or a gr)63 489.6 R .128(eyscale image.)
+-.198 F 2.152 -1.012(To c)5.628 H -.198(re)1.012 G .129(ate a gr).198 F .129
+(eyscale image)-.198 F F5(sun.img)2.879 E F3(fr)2.879 E .129(om the)-.198 F
+(Dore)63 502.8 Q 3.553<b48c>82.668 502.8 S(le)96.539 502.8 Q F5(test.img)2.75 E
+F3 2.75(,d)C(o:)155.73 502.8 Q F2 5.4(%d)63 525.8 S
+(or2sunras \255shademode DcRange -if test.img -of sun.img)79.2 525.8 Q F3 2.024
+-1.012(To c)63 551 T -.198(re)1.012 G(ate an 8-bit color image, do:).198 E F2
+5.4(%d)63 574 S(or2sunras \255shademode DcComponent -if test.img -of sun.img)
+79.2 574 Q F3 1.162(If no input and output \214le names ar)63 599.2 R 3.911(ep)
+-.198 G -.198(ro)260.383 599.2 S 1.161(vided on the command).198 F(line,)63
+612.4 Q F5(dor2sunras)2.75 E F3(uses)2.75 E F5(test.img)2.75 E F3(and)2.75 E F5
+(sun.img)2.75 E F3 2.75(,r)C(espectively)269.316 612.4 Q(.)-1.221 E 2.024
+-1.012(To d)63 637.6 T(isplay the r)1.012 E(esulting image on a color Sun, do:)
+-.198 E F2 5.4(%s)63 660.6 S(creenload sun.img)79.2 660.6 Q F3 2.024 -1.012
+(To d)63 685.8 T(isplay the image on a monochr)1.012 E(ome Sun, do:)-.198 E
+1.44 LW 81 756 63 756 DL 99 756 81 756 DL 117 756 99 756 DL 135 756 117 756 DL
+153 756 135 756 DL 171 756 153 756 DL 189 756 171 756 DL 207 756 189 756 DL 225
+756 207 756 DL 243 756 225 756 DL 261 756 243 756 DL 279 756 261 756 DL 297 756
+279 756 DL 315 756 297 756 DL 333 756 315 756 DL 351 756 333 756 DL 369 756 351
+756 DL 387 756 369 756 DL 419.4 756 401.4 756 DL 428.4 756 410.4 756 DL 446.4
+756 428.4 756 DL 464.4 756 446.4 756 DL 482.4 756 464.4 756 DL 500.4 756 482.4
+756 DL 518.4 756 500.4 756 DL 536.4 756 518.4 756 DL/F8 9/Helvetica@0 SF -1.08
+(Te)336.564 768.96 S(sting Dore)1.08 E<b4>382.999 768.96 Q(Dore)409.296 768.96
+Q 3.506<b444>424.798 768.96 S -2.187 -.27(ev e)437.799 768.96 T(loper').27 E
+2.502(sG)-.45 G(uide)487.371 768.96 Q/F9 9/Helvetica-Bold@0 SF(16-231)4.002 E
+EP
+%%Page: 232 6
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 108 46.8 72 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 257.4 46.8 221.4 46.8 DL 293.4 46.8 257.4 46.8 DL 329.4 46.8 293.4
+46.8 DL 365.4 46.8 329.4 46.8 DL 401.4 46.8 365.4 46.8 DL 437.4 46.8 401.4 46.8
+DL 473.4 46.8 437.4 46.8 DL 509.4 46.8 473.4 46.8 DL 545.4 46.8 509.4 46.8 DL
+/F0 10/Helvetica-BoldOblique@0 SF(The T)72 57.6 Q(est Pr)-.6 E(ograms)-.2 E/F1
+10/Helvetica@0 SF(\(contin)72 68.4 Q(ued\))-.1 E/F2 9/Courier@0 SF 5.4(%r)221.5
+107 S(asfilter8to1 \255d < sun.img | screenload)237.7 107 Q/F3 11
+/Helvetica-BoldOblique@0 SF(dor2X11)221.5 162.8 Q/F4 11/Palatino-Roman@0 SF
+2.781(The pr)221.5 188 R(ogram)-.198 E/F5 11/Palatino-Italic@0 SF(dor2X1)5.531
+E(1)-.605 E F4 2.781(is a \214lter that converts a Dore)5.531 F 6.335<b472>
+492.668 188 S(aster\214le)507.011 188 Q .968(image to the X1)221.5 201.2 R(1)
+-.605 E F5(xwud)3.718 E F4 3.718(format. Once)3.718 F .967(you have an)3.718 F
+F5(xwud)3.717 E F4 .967(image, it)3.717 F(can be displayed using the X1)221.5
+214.4 Q 2.75(1t)-.605 G(ools.)377.733 214.4 Q 2.024 -1.012(To b)221.5 239.6 T
+(uild the)1.012 E F5(dor2X1)2.75 E(1)-.605 E F4(\214lter)2.75 E 2.75(,t)-.814 G
+(ype:)355.161 239.6 Q F2 5.4(%m)221.5 262.6 S(ake -f mk.objtype dor2X11)237.7
+262.6 Q F4 .963(The executable will be put in a subdir)221.5 287.8 R .964
+(ectory with the same name)-.198 F(as the machine object type speci\214ed by)
+221.5 301 Q/F6 10/Palatino-Roman@0 SF(DORE_OBJTYPE.)2.75 E F4 2.024 -1.012
+(To c)221.5 326.2 T -.198(re)1.012 G(ate an image, type:).198 E F2 5.4(%d)221.5
+349.2 S(or2X11 -if test.img -of xwud.img)237.7 349.2 Q F4 1.162
+(If no input and output \214le names ar)221.5 374.4 R 3.911(ep)-.198 G -.198
+(ro)418.883 374.4 S 1.161(vided on the command).198 F(line,)221.5 387.6 Q F5
+(dor2X1)2.75 E(1)-.605 E F4(uses)2.75 E F5(test.img)2.75 E F4(and)2.75 E F5
+(xwud.img)2.75 E F4 2.75(,r)C(espectively)424.747 387.6 Q(.)-1.221 E 2.024
+-1.012(To d)221.5 412.8 T(isplay the r)1.012 E
+(esulting image on a 24-bit color workstation, do:)-.198 E F2 5.4(%x)221.5
+435.8 S(wud -in xwud.img)237.7 435.8 Q .16 LW 223.4 461.8 221.4 461.8 DL 225.4
+461.8 223.4 461.8 DL 227.4 461.8 225.4 461.8 DL 229.4 461.8 227.4 461.8 DL
+231.4 461.8 229.4 461.8 DL 233.4 461.8 231.4 461.8 DL 235.4 461.8 233.4 461.8
+DL 237.4 461.8 235.4 461.8 DL 239.4 461.8 237.4 461.8 DL 241.4 461.8 239.4
+461.8 DL 243.4 461.8 241.4 461.8 DL 245.4 461.8 243.4 461.8 DL 247.4 461.8
+245.4 461.8 DL 249.4 461.8 247.4 461.8 DL 251.4 461.8 249.4 461.8 DL 253.4
+461.8 251.4 461.8 DL 255.4 461.8 253.4 461.8 DL 257.4 461.8 255.4 461.8 DL
+259.4 461.8 257.4 461.8 DL 261.4 461.8 259.4 461.8 DL 263.4 461.8 261.4 461.8
+DL 265.4 461.8 263.4 461.8 DL 267.4 461.8 265.4 461.8 DL 269.4 461.8 267.4
+461.8 DL 271.4 461.8 269.4 461.8 DL 273.4 461.8 271.4 461.8 DL 275.4 461.8
+273.4 461.8 DL 277.4 461.8 275.4 461.8 DL 279.4 461.8 277.4 461.8 DL 281.4
+461.8 279.4 461.8 DL 283.4 461.8 281.4 461.8 DL 285.4 461.8 283.4 461.8 DL
+287.4 461.8 285.4 461.8 DL 289.4 461.8 287.4 461.8 DL 291.4 461.8 289.4 461.8
+DL 293.4 461.8 291.4 461.8 DL 295.4 461.8 293.4 461.8 DL 297.4 461.8 295.4
+461.8 DL 299.4 461.8 297.4 461.8 DL 301.4 461.8 299.4 461.8 DL 303.4 461.8
+301.4 461.8 DL 305.4 461.8 303.4 461.8 DL 307.4 461.8 305.4 461.8 DL 309.4
+461.8 307.4 461.8 DL 311.4 461.8 309.4 461.8 DL 313.4 461.8 311.4 461.8 DL
+315.4 461.8 313.4 461.8 DL 317.4 461.8 315.4 461.8 DL 319.4 461.8 317.4 461.8
+DL 321.4 461.8 319.4 461.8 DL 323.4 461.8 321.4 461.8 DL 325.4 461.8 323.4
+461.8 DL 327.4 461.8 325.4 461.8 DL 329.4 461.8 327.4 461.8 DL 331.4 461.8
+329.4 461.8 DL 333.4 461.8 331.4 461.8 DL 335.4 461.8 333.4 461.8 DL 337.4
+461.8 335.4 461.8 DL 339.4 461.8 337.4 461.8 DL 341.4 461.8 339.4 461.8 DL
+343.4 461.8 341.4 461.8 DL 345.4 461.8 343.4 461.8 DL 347.4 461.8 345.4 461.8
+DL 349.4 461.8 347.4 461.8 DL 351.4 461.8 349.4 461.8 DL 353.4 461.8 351.4
+461.8 DL 355.4 461.8 353.4 461.8 DL 357.4 461.8 355.4 461.8 DL 359.4 461.8
+357.4 461.8 DL 361.4 461.8 359.4 461.8 DL 363.4 461.8 361.4 461.8 DL 365.4
+461.8 363.4 461.8 DL 367.4 461.8 365.4 461.8 DL 369.4 461.8 367.4 461.8 DL
+371.4 461.8 369.4 461.8 DL 373.4 461.8 371.4 461.8 DL 375.4 461.8 373.4 461.8
+DL 377.4 461.8 375.4 461.8 DL 379.4 461.8 377.4 461.8 DL 381.4 461.8 379.4
+461.8 DL 383.4 461.8 381.4 461.8 DL 385.4 461.8 383.4 461.8 DL 387.4 461.8
+385.4 461.8 DL 389.4 461.8 387.4 461.8 DL 391.4 461.8 389.4 461.8 DL 393.4
+461.8 391.4 461.8 DL 395.4 461.8 393.4 461.8 DL 397.4 461.8 395.4 461.8 DL
+399.4 461.8 397.4 461.8 DL 401.4 461.8 399.4 461.8 DL 403.4 461.8 401.4 461.8
+DL 405.4 461.8 403.4 461.8 DL 407.4 461.8 405.4 461.8 DL 409.4 461.8 407.4
+461.8 DL 411.4 461.8 409.4 461.8 DL 413.4 461.8 411.4 461.8 DL 415.4 461.8
+413.4 461.8 DL 417.4 461.8 415.4 461.8 DL 419.4 461.8 417.4 461.8 DL 421.4
+461.8 419.4 461.8 DL 423.4 461.8 421.4 461.8 DL 425.4 461.8 423.4 461.8 DL
+427.4 461.8 425.4 461.8 DL 429.4 461.8 427.4 461.8 DL 431.4 461.8 429.4 461.8
+DL 433.4 461.8 431.4 461.8 DL 435.4 461.8 433.4 461.8 DL 437.4 461.8 435.4
+461.8 DL 439.4 461.8 437.4 461.8 DL 441.4 461.8 439.4 461.8 DL 443.4 461.8
+441.4 461.8 DL 445.4 461.8 443.4 461.8 DL 447.4 461.8 445.4 461.8 DL 449.4
+461.8 447.4 461.8 DL 451.4 461.8 449.4 461.8 DL 453.4 461.8 451.4 461.8 DL
+455.4 461.8 453.4 461.8 DL 457.4 461.8 455.4 461.8 DL 459.4 461.8 457.4 461.8
+DL 461.4 461.8 459.4 461.8 DL 463.4 461.8 461.4 461.8 DL 465.4 461.8 463.4
+461.8 DL 467.4 461.8 465.4 461.8 DL 469.4 461.8 467.4 461.8 DL 471.4 461.8
+469.4 461.8 DL 473.4 461.8 471.4 461.8 DL 475.4 461.8 473.4 461.8 DL 477.4
+461.8 475.4 461.8 DL 479.4 461.8 477.4 461.8 DL 481.4 461.8 479.4 461.8 DL
+483.4 461.8 481.4 461.8 DL 485.4 461.8 483.4 461.8 DL 487.4 461.8 485.4 461.8
+DL 489.4 461.8 487.4 461.8 DL 491.4 461.8 489.4 461.8 DL 493.4 461.8 491.4
+461.8 DL 495.4 461.8 493.4 461.8 DL 497.4 461.8 495.4 461.8 DL 499.4 461.8
+497.4 461.8 DL 501.4 461.8 499.4 461.8 DL 503.4 461.8 501.4 461.8 DL 505.4
+461.8 503.4 461.8 DL 507.4 461.8 505.4 461.8 DL 509.4 461.8 507.4 461.8 DL
+511.4 461.8 509.4 461.8 DL 513.4 461.8 511.4 461.8 DL 515.4 461.8 513.4 461.8
+DL 517.4 461.8 515.4 461.8 DL 519.4 461.8 517.4 461.8 DL 521.4 461.8 519.4
+461.8 DL 523.4 461.8 521.4 461.8 DL 525.4 461.8 523.4 461.8 DL 527.4 461.8
+525.4 461.8 DL 529.4 461.8 527.4 461.8 DL 531.4 461.8 529.4 461.8 DL 533.4
+461.8 531.4 461.8 DL 535.4 461.8 533.4 461.8 DL 537.4 461.8 535.4 461.8 DL
+539.4 461.8 537.4 461.8 DL 541.4 461.8 539.4 461.8 DL 543.4 461.8 541.4 461.8
+DL 545.4 461.8 543.4 461.8 DL 1.44 LW 90 462.3 72 462.3 DL 99 462.3 81 462.3 DL
+117 462.3 99 462.3 DL 135 462.3 117 462.3 DL 153 462.3 135 462.3 DL 171 462.3
+153 462.3 DL 189 462.3 171 462.3 DL 207 462.3 189 462.3 DL/F7 12
+/Helvetica-Oblique@0 SF(Creating Y)72 476.3 Q(our Own T)-1.68 E(est)-1.44 E
+(Objects)72 490.3 Q F4 .18(Both the main pr)221.5 490.4 R(ograms)-.198 E F5
+(dynamic.c)2.93 E F4(and)2.93 E F5(pr)2.93 E(oduction.c)-.198 E F4 .181
+(call the)2.931 F F5(makeob-)2.931 E(ject\(\))221.5 503.6 Q F4(and)3.344 E F5
+(makestudio\(\))3.344 E F4 -.198(ro)3.344 G .594(utines to cr).198 F .593
+(eate the display object and the)-.198 F .506(camera and light objects.)221.5
+516.8 R -1.012(Yo)6.006 G 3.257(uc)1.012 G .507
+(an display your own objects using)376.535 516.8 R 1.718(the main test pr)221.5
+530 R 1.718(ograms by pr)-.198 F 1.718(oviding your own)-.198 F F5
+(makeobject\(\))4.468 E F4(and)4.467 E F5(makestudio\(\))221.5 543.2 Q F4 -.198
+(ro)2.75 G 2.75(utines. Both).198 F -.198(ro)2.75 G(utines must r).198 E
+(eturn a)-.198 E F5(DtObject)2.75 E F4(.)A 1.342(The make\214les ar)221.5 568.4
+R 4.092(es)-.198 G 1.342(et up to let you build your own tests.)318.157 568.4 R
+1.343(If you)6.843 F .356(put your r)221.5 581.6 R .355
+(outines in a \214le named)-.198 F F5(myobjects.c)3.105 E F4 3.105(,t)C .355
+(hen you can make a)447.368 581.6 R(pr)221.5 594.8 Q(oduction r)-.198 E(ender)
+-.198 E(er test using those r)-.198 E(outines by doing:)-.198 E F2 5.4(%m)221.5
+617.8 S(ake -f mk.objtype my_pro)237.7 617.8 Q F4(and an equivalent dynamic r)
+221.5 643 Q(ender)-.198 E(er test by doing:)-.198 E F2 5.4(%m)221.5 666 S
+(ake -f mk.objtype my_dyn)237.7 666 Q F4 .964(Examine the \214les)221.5 691.2 R
+F5(prims.c)3.714 E F4(,)A F5(temple.c)3.714 E F4(,)A F5(tr)3.714 E(ee.c)-.198 E
+F4(,)A F5(textur)3.714 E(e.c)-.198 E F4 3.714(,a)C(nd)473.328 691.2 Q F5
+(test.c)3.714 E F4 .965(to see)3.715 F 3.039(how to use the callbacks pr)221.5
+704.4 R 3.039(ovided to dynamically change the)-.198 F 90 756 72 756 DL 99 756
+81 756 DL 117 756 99 756 DL 135 756 117 756 DL 153 756 135 756 DL 171 756 153
+756 DL 189 756 171 756 DL 207 756 189 756 DL 239.4 756 221.4 756 DL 257.4 756
+239.4 756 DL 275.4 756 257.4 756 DL 293.4 756 275.4 756 DL 311.4 756 293.4 756
+DL 329.4 756 311.4 756 DL 347.4 756 329.4 756 DL 365.4 756 347.4 756 DL 383.4
+756 365.4 756 DL 401.4 756 383.4 756 DL 419.4 756 401.4 756 DL 437.4 756 419.4
+756 DL 455.4 756 437.4 756 DL 473.4 756 455.4 756 DL 491.4 756 473.4 756 DL
+509.4 756 491.4 756 DL 527.4 756 509.4 756 DL 545.4 756 527.4 756 DL/F8 9
+/Helvetica-Bold@0 SF(16-232)72 768.96 Q/F9 9/Helvetica@0 SF(Dore)6.504 E 3.506
+<b444>122.023 768.96 S -2.187 -.27(ev e)135.024 768.96 T(loper').27 E 2.502(sG)
+-.45 G(uide)184.596 768.96 Q -1.08(Te)221.4 768.96 S(sting Dore)1.08 E<b4>
+267.835 768.96 Q EP
+%%Page: 233 7
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 99 46.8 63 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 243 46.8 207 46.8 DL 279 46.8 243 46.8 DL 315 46.8 279 46.8 DL 351
+46.8 315 46.8 DL 387 46.8 351 46.8 DL 437.4 46.8 401.4 46.8 DL 464.4 46.8 428.4
+46.8 DL 500.4 46.8 464.4 46.8 DL 536.4 46.8 500.4 46.8 DL/F0 10
+/Helvetica-BoldOblique@0 SF(The T)446.62 57.6 Q(est Pr)-.6 E(ograms)-.2 E/F1 10
+/Helvetica@0 SF(\(contin)486.48 68.4 Q(ued\))-.1 E/F2 11/Palatino-Roman@0 SF
+(values of attributes.)63 109.2 Q .16 LW 65 135.2 63 135.2 DL 67 135.2 65 135.2
+DL 69 135.2 67 135.2 DL 71 135.2 69 135.2 DL 73 135.2 71 135.2 DL 75 135.2 73
+135.2 DL 77 135.2 75 135.2 DL 79 135.2 77 135.2 DL 81 135.2 79 135.2 DL 83
+135.2 81 135.2 DL 85 135.2 83 135.2 DL 87 135.2 85 135.2 DL 89 135.2 87 135.2
+DL 91 135.2 89 135.2 DL 93 135.2 91 135.2 DL 95 135.2 93 135.2 DL 97 135.2 95
+135.2 DL 99 135.2 97 135.2 DL 101 135.2 99 135.2 DL 103 135.2 101 135.2 DL 105
+135.2 103 135.2 DL 107 135.2 105 135.2 DL 109 135.2 107 135.2 DL 111 135.2 109
+135.2 DL 113 135.2 111 135.2 DL 115 135.2 113 135.2 DL 117 135.2 115 135.2 DL
+119 135.2 117 135.2 DL 121 135.2 119 135.2 DL 123 135.2 121 135.2 DL 125 135.2
+123 135.2 DL 127 135.2 125 135.2 DL 129 135.2 127 135.2 DL 131 135.2 129 135.2
+DL 133 135.2 131 135.2 DL 135 135.2 133 135.2 DL 137 135.2 135 135.2 DL 139
+135.2 137 135.2 DL 141 135.2 139 135.2 DL 143 135.2 141 135.2 DL 145 135.2 143
+135.2 DL 147 135.2 145 135.2 DL 149 135.2 147 135.2 DL 151 135.2 149 135.2 DL
+153 135.2 151 135.2 DL 155 135.2 153 135.2 DL 157 135.2 155 135.2 DL 159 135.2
+157 135.2 DL 161 135.2 159 135.2 DL 163 135.2 161 135.2 DL 165 135.2 163 135.2
+DL 167 135.2 165 135.2 DL 169 135.2 167 135.2 DL 171 135.2 169 135.2 DL 173
+135.2 171 135.2 DL 175 135.2 173 135.2 DL 177 135.2 175 135.2 DL 179 135.2 177
+135.2 DL 181 135.2 179 135.2 DL 183 135.2 181 135.2 DL 185 135.2 183 135.2 DL
+187 135.2 185 135.2 DL 189 135.2 187 135.2 DL 191 135.2 189 135.2 DL 193 135.2
+191 135.2 DL 195 135.2 193 135.2 DL 197 135.2 195 135.2 DL 199 135.2 197 135.2
+DL 201 135.2 199 135.2 DL 203 135.2 201 135.2 DL 205 135.2 203 135.2 DL 207
+135.2 205 135.2 DL 209 135.2 207 135.2 DL 211 135.2 209 135.2 DL 213 135.2 211
+135.2 DL 215 135.2 213 135.2 DL 217 135.2 215 135.2 DL 219 135.2 217 135.2 DL
+221 135.2 219 135.2 DL 223 135.2 221 135.2 DL 225 135.2 223 135.2 DL 227 135.2
+225 135.2 DL 229 135.2 227 135.2 DL 231 135.2 229 135.2 DL 233 135.2 231 135.2
+DL 235 135.2 233 135.2 DL 237 135.2 235 135.2 DL 239 135.2 237 135.2 DL 241
+135.2 239 135.2 DL 243 135.2 241 135.2 DL 245 135.2 243 135.2 DL 247 135.2 245
+135.2 DL 249 135.2 247 135.2 DL 251 135.2 249 135.2 DL 253 135.2 251 135.2 DL
+255 135.2 253 135.2 DL 257 135.2 255 135.2 DL 259 135.2 257 135.2 DL 261 135.2
+259 135.2 DL 263 135.2 261 135.2 DL 265 135.2 263 135.2 DL 267 135.2 265 135.2
+DL 269 135.2 267 135.2 DL 271 135.2 269 135.2 DL 273 135.2 271 135.2 DL 275
+135.2 273 135.2 DL 277 135.2 275 135.2 DL 279 135.2 277 135.2 DL 281 135.2 279
+135.2 DL 283 135.2 281 135.2 DL 285 135.2 283 135.2 DL 287 135.2 285 135.2 DL
+289 135.2 287 135.2 DL 291 135.2 289 135.2 DL 293 135.2 291 135.2 DL 295 135.2
+293 135.2 DL 297 135.2 295 135.2 DL 299 135.2 297 135.2 DL 301 135.2 299 135.2
+DL 303 135.2 301 135.2 DL 305 135.2 303 135.2 DL 307 135.2 305 135.2 DL 309
+135.2 307 135.2 DL 311 135.2 309 135.2 DL 313 135.2 311 135.2 DL 315 135.2 313
+135.2 DL 317 135.2 315 135.2 DL 319 135.2 317 135.2 DL 321 135.2 319 135.2 DL
+323 135.2 321 135.2 DL 325 135.2 323 135.2 DL 327 135.2 325 135.2 DL 329 135.2
+327 135.2 DL 331 135.2 329 135.2 DL 333 135.2 331 135.2 DL 335 135.2 333 135.2
+DL 337 135.2 335 135.2 DL 339 135.2 337 135.2 DL 341 135.2 339 135.2 DL 343
+135.2 341 135.2 DL 345 135.2 343 135.2 DL 347 135.2 345 135.2 DL 349 135.2 347
+135.2 DL 351 135.2 349 135.2 DL 353 135.2 351 135.2 DL 355 135.2 353 135.2 DL
+357 135.2 355 135.2 DL 359 135.2 357 135.2 DL 361 135.2 359 135.2 DL 363 135.2
+361 135.2 DL 365 135.2 363 135.2 DL 367 135.2 365 135.2 DL 369 135.2 367 135.2
+DL 371 135.2 369 135.2 DL 373 135.2 371 135.2 DL 375 135.2 373 135.2 DL 377
+135.2 375 135.2 DL 379 135.2 377 135.2 DL 381 135.2 379 135.2 DL 383 135.2 381
+135.2 DL 385 135.2 383 135.2 DL 387 135.2 385 135.2 DL 1.44 LW 419.4 135.7
+401.4 135.7 DL 428.4 135.7 410.4 135.7 DL 446.4 135.7 428.4 135.7 DL 464.4
+135.7 446.4 135.7 DL 482.4 135.7 464.4 135.7 DL 500.4 135.7 482.4 135.7 DL
+518.4 135.7 500.4 135.7 DL 536.4 135.7 518.4 135.7 DL/F3 12
+/Helvetica-BoldOblique@0 SF(Dore)509.064 149.7 Q<b4>531.066 149.7 Q
+(Demonstration)451.728 163.7 Q(Pr)480.624 177.7 Q(ograms)-.24 E F2 -1.012(Va)63
+163.8 S 2.684(rious demonstration pr)1.012 F 2.683(ograms have been constr)
+-.198 F 2.683(ucted to r)-.088 F(un)-.088 E 1.249(with the Portable Dore)63 177
+R<b4>172.92 177 Q/F4 11/Palatino-Italic@0 SF(gl)4.803 E F2(and)4 E F4
+(sunview_cxp)4 E F2 1.25(device drivers.)4 F(These)6.75 E(demonstration pr)63
+190.2 Q(ograms ar)-.198 E 2.75(el)-.198 G(ocated in the dir)207.87 190.2 Q
+(ectory)-.198 E F4(dor)2.75 E(e/demo)-.198 E F2(.)A 1.249
+(Code for the individual demonstration pr)63 215.4 R 1.249
+(ograms is actually con-)-.198 F 2.588(tained in the)63 228.6 R F4(br)5.339 E
+(eath)-.198 E F2(,)A F4(\215ag)5.339 E F2(,)A F4(lwave)5.339 E F2 5.339(,a)C
+(nd)233.864 228.6 Q F4(trunk)5.339 E F2(subdir)5.339 E 2.589(ectories of the)
+-.198 F F4(dor)63 241.8 Q(e/demo)-.198 E F2(dir)4.055 E(ectory)-.198 E 6.805
+(.T)-1.221 G 1.305(he user interface code common to all these)171.628 241.8 R
+2.931(demonstrations is in)63 255 R F4(dor)5.681 E(e/demo/dui)-.198 E F2 8.432
+(.A)C 2.932(ll the demonstration pr)256.467 255 R(o-)-.198 E .046
+(grams link in object \214les fr)63 268.2 R .046(om the appr)-.198 F .046
+(opriate platform's subdir)-.198 F(ec-)-.198 E(tory in)63 281.4 Q F4(dor)2.75 E
+(e/demo/dui)-.198 E F2(.)A 81 756 63 756 DL 99 756 81 756 DL 117 756 99 756 DL
+135 756 117 756 DL 153 756 135 756 DL 171 756 153 756 DL 189 756 171 756 DL 207
+756 189 756 DL 225 756 207 756 DL 243 756 225 756 DL 261 756 243 756 DL 279 756
+261 756 DL 297 756 279 756 DL 315 756 297 756 DL 333 756 315 756 DL 351 756 333
+756 DL 369 756 351 756 DL 387 756 369 756 DL 419.4 756 401.4 756 DL 428.4 756
+410.4 756 DL 446.4 756 428.4 756 DL 464.4 756 446.4 756 DL 482.4 756 464.4 756
+DL 500.4 756 482.4 756 DL 518.4 756 500.4 756 DL 536.4 756 518.4 756 DL/F5 9
+/Helvetica@0 SF -1.08(Te)336.564 768.96 S(sting Dore)1.08 E<b4>382.999 768.96 Q
+(Dore)409.296 768.96 Q 3.506<b444>424.798 768.96 S -2.187 -.27(ev e)437.799
+768.96 T(loper').27 E 2.502(sG)-.45 G(uide)487.371 768.96 Q/F6 9
+/Helvetica-Bold@0 SF(16-233)4.002 E EP
+%%Page: 234 8
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 108 46.8 72 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 257.4 46.8 221.4 46.8 DL 293.4 46.8 257.4 46.8 DL 329.4 46.8 293.4
+46.8 DL 365.4 46.8 329.4 46.8 DL 401.4 46.8 365.4 46.8 DL 437.4 46.8 401.4 46.8
+DL 473.4 46.8 437.4 46.8 DL 509.4 46.8 473.4 46.8 DL 545.4 46.8 509.4 46.8 DL
+/F0 10/Helvetica-BoldOblique@0 SF(Dore)72 57.6 Q 3.895<b444>90.335 57.6 S
+(emonstration)104.78 57.6 Q(Pr)72 68.4 Q(ograms)-.2 E/F1 10/Helvetica@0 SF
+(\(contin)72 79.2 Q(ued\))-.1 E .16 LW 223.4 110 221.4 110 DL 225.4 110 223.4
+110 DL 227.4 110 225.4 110 DL 229.4 110 227.4 110 DL 231.4 110 229.4 110 DL
+233.4 110 231.4 110 DL 235.4 110 233.4 110 DL 237.4 110 235.4 110 DL 239.4 110
+237.4 110 DL 241.4 110 239.4 110 DL 243.4 110 241.4 110 DL 245.4 110 243.4 110
+DL 247.4 110 245.4 110 DL 249.4 110 247.4 110 DL 251.4 110 249.4 110 DL 253.4
+110 251.4 110 DL 255.4 110 253.4 110 DL 257.4 110 255.4 110 DL 259.4 110 257.4
+110 DL 261.4 110 259.4 110 DL 263.4 110 261.4 110 DL 265.4 110 263.4 110 DL
+267.4 110 265.4 110 DL 269.4 110 267.4 110 DL 271.4 110 269.4 110 DL 273.4 110
+271.4 110 DL 275.4 110 273.4 110 DL 277.4 110 275.4 110 DL 279.4 110 277.4 110
+DL 281.4 110 279.4 110 DL 283.4 110 281.4 110 DL 285.4 110 283.4 110 DL 287.4
+110 285.4 110 DL 289.4 110 287.4 110 DL 291.4 110 289.4 110 DL 293.4 110 291.4
+110 DL 295.4 110 293.4 110 DL 297.4 110 295.4 110 DL 299.4 110 297.4 110 DL
+301.4 110 299.4 110 DL 303.4 110 301.4 110 DL 305.4 110 303.4 110 DL 307.4 110
+305.4 110 DL 309.4 110 307.4 110 DL 311.4 110 309.4 110 DL 313.4 110 311.4 110
+DL 315.4 110 313.4 110 DL 317.4 110 315.4 110 DL 319.4 110 317.4 110 DL 321.4
+110 319.4 110 DL 323.4 110 321.4 110 DL 325.4 110 323.4 110 DL 327.4 110 325.4
+110 DL 329.4 110 327.4 110 DL 331.4 110 329.4 110 DL 333.4 110 331.4 110 DL
+335.4 110 333.4 110 DL 337.4 110 335.4 110 DL 339.4 110 337.4 110 DL 341.4 110
+339.4 110 DL 343.4 110 341.4 110 DL 345.4 110 343.4 110 DL 347.4 110 345.4 110
+DL 349.4 110 347.4 110 DL 351.4 110 349.4 110 DL 353.4 110 351.4 110 DL 355.4
+110 353.4 110 DL 357.4 110 355.4 110 DL 359.4 110 357.4 110 DL 361.4 110 359.4
+110 DL 363.4 110 361.4 110 DL 365.4 110 363.4 110 DL 367.4 110 365.4 110 DL
+369.4 110 367.4 110 DL 371.4 110 369.4 110 DL 373.4 110 371.4 110 DL 375.4 110
+373.4 110 DL 377.4 110 375.4 110 DL 379.4 110 377.4 110 DL 381.4 110 379.4 110
+DL 383.4 110 381.4 110 DL 385.4 110 383.4 110 DL 387.4 110 385.4 110 DL 389.4
+110 387.4 110 DL 391.4 110 389.4 110 DL 393.4 110 391.4 110 DL 395.4 110 393.4
+110 DL 397.4 110 395.4 110 DL 399.4 110 397.4 110 DL 401.4 110 399.4 110 DL
+403.4 110 401.4 110 DL 405.4 110 403.4 110 DL 407.4 110 405.4 110 DL 409.4 110
+407.4 110 DL 411.4 110 409.4 110 DL 413.4 110 411.4 110 DL 415.4 110 413.4 110
+DL 417.4 110 415.4 110 DL 419.4 110 417.4 110 DL 421.4 110 419.4 110 DL 423.4
+110 421.4 110 DL 425.4 110 423.4 110 DL 427.4 110 425.4 110 DL 429.4 110 427.4
+110 DL 431.4 110 429.4 110 DL 433.4 110 431.4 110 DL 435.4 110 433.4 110 DL
+437.4 110 435.4 110 DL 439.4 110 437.4 110 DL 441.4 110 439.4 110 DL 443.4 110
+441.4 110 DL 445.4 110 443.4 110 DL 447.4 110 445.4 110 DL 449.4 110 447.4 110
+DL 451.4 110 449.4 110 DL 453.4 110 451.4 110 DL 455.4 110 453.4 110 DL 457.4
+110 455.4 110 DL 459.4 110 457.4 110 DL 461.4 110 459.4 110 DL 463.4 110 461.4
+110 DL 465.4 110 463.4 110 DL 467.4 110 465.4 110 DL 469.4 110 467.4 110 DL
+471.4 110 469.4 110 DL 473.4 110 471.4 110 DL 475.4 110 473.4 110 DL 477.4 110
+475.4 110 DL 479.4 110 477.4 110 DL 481.4 110 479.4 110 DL 483.4 110 481.4 110
+DL 485.4 110 483.4 110 DL 487.4 110 485.4 110 DL 489.4 110 487.4 110 DL 491.4
+110 489.4 110 DL 493.4 110 491.4 110 DL 495.4 110 493.4 110 DL 497.4 110 495.4
+110 DL 499.4 110 497.4 110 DL 501.4 110 499.4 110 DL 503.4 110 501.4 110 DL
+505.4 110 503.4 110 DL 507.4 110 505.4 110 DL 509.4 110 507.4 110 DL 511.4 110
+509.4 110 DL 513.4 110 511.4 110 DL 515.4 110 513.4 110 DL 517.4 110 515.4 110
+DL 519.4 110 517.4 110 DL 521.4 110 519.4 110 DL 523.4 110 521.4 110 DL 525.4
+110 523.4 110 DL 527.4 110 525.4 110 DL 529.4 110 527.4 110 DL 531.4 110 529.4
+110 DL 533.4 110 531.4 110 DL 535.4 110 533.4 110 DL 537.4 110 535.4 110 DL
+539.4 110 537.4 110 DL 541.4 110 539.4 110 DL 543.4 110 541.4 110 DL 545.4 110
+543.4 110 DL 1.44 LW 90 110.5 72 110.5 DL 99 110.5 81 110.5 DL 117 110.5 99
+110.5 DL 135 110.5 117 110.5 DL 153 110.5 135 110.5 DL 171 110.5 153 110.5 DL
+189 110.5 171 110.5 DL 207 110.5 189 110.5 DL/F2 12/Helvetica-Oblique@0 SF
+(Building the)72 124.5 Q(Demonstr)72 138.5 Q(ation Prog)-.12 E -.12(ra)-.12 G
+(ms).12 E/F3 11/Palatino-Roman@0 SF .061(The top-level make\214les,)221.5 138.6
+R/F4 11/Palatino-Italic@0 SF(mk.iris)2.811 E F3(and)2.811 E F4(mk.suncxp)2.811
+E F3 2.812(,a)C .458 -.198(re s)454.858 138.6 T .062(et up to let you).198 F
+.807(compile all demonstration pr)221.5 151.8 R .807(ograms fr)-.198 F .807
+(om the)-.198 F F4(dor)3.557 E(e/demo)-.198 E F3(dir)3.557 E(ectory)-.198 E(.)
+-1.221 E 3.116 -1.012(To b)221.5 165 T 1.093
+(uild the demonstrations, go to this dir)1.012 F 1.093(ectory and ensur)-.198 F
+3.843(et)-.198 G(hat)530.012 165 Q 2.233(the variables)221.5 178.2 R/F5 10
+/Palatino-Roman@0 SF(DORE_LOC)4.983 E F3(,)A F5(DORE_OBJTYPE)4.982 E F3 4.982
+(,a)C(nd)441.755 178.2 Q F5(DORE_LIB_NAME)4.982 E F3(ar)221.5 191.4 Q 3.118(es)
+-.198 G .368(et in the make\214le that you'll be using.)244.198 191.4 R .368
+(The \214rst two variables)5.868 F(ar)221.5 204.6 Q 3.556(et)-.198 G .806
+(he location of the)243.558 204.6 R F4(dor)3.556 E(e)-.198 E F3(dir)3.556 E
+.805(ectory and the machine object type.)-.198 F F5(DORE_LIB_NAME)221.5 217.8 Q
+F3 .103(should be set to)2.852 F F4(libdor)2.853 E(e.a)-.198 E F3 .103
+(\(or whatever your Dore)2.853 F<b4>541.034 217.8 Q .953(Library's name is\).)
+221.5 231 R .953(The top-level make\214les assume that the Dore)6.453 F<b4>
+541.034 231 Q .757(library has not been moved or installed since the Dore)221.5
+244.2 R 4.311<b462>486.806 244.2 S .758(uild, and)500.863 244.2 R .825
+(that it is still in)221.5 257.4 R F4(dor)3.575 E(e/lib/objtype)-.198 E F3 .824
+(\(for example,)3.575 F F4(dor)3.574 E(e/lib/iris)-.198 E F3 3.574(\). If)B
+.824(this is)3.574 F 2.485(not the case, you will need to edit the)221.5 270.6
+R F5(DORLIB)5.235 E F3 2.485(variable in the)5.235 F(appr)221.5 283.8 Q
+(opriate)-.198 E F4(dor)2.75 E(e/demo)-.198 E F3(make\214le.)2.75 E .553
+(These top-level make\214les invoke)221.5 309 R F4(make\214le)3.303 E F3 .553
+(in each of the)3.303 F F4(br)3.302 E(eath)-.198 E F3(,)A F4(dui)3.302 E F3(,)A
+F4(\215ag)221.5 322.2 Q F3(,)A F4(lwave)6.142 E F3 6.142(,a)C(nd)286.826 322.2
+Q F4(trunk)6.142 E F3(dir)6.142 E 3.393
+(ectories, passing in the variables just)-.198 F .267
+(described, to actually build the code.)221.5 335.4 R .266
+(So, for example, to build the)5.767 F(demonstration pr)221.5 348.6 Q
+(ograms on an SGI IRIS, do:)-.198 E/F6 9/Courier@0 SF 5.4(%c)221.5 371.6 S 5.4
+(dd)237.7 371.6 S(ore/demo)253.9 371.6 Q 5.4(%m)221.5 382.6 S
+(ake -f mk.iris all)237.7 382.6 Q F3 1.282(When a demonstration pr)221.5 407.8
+R 1.282(ogram is built, the object \214les and exe-)-.198 F .287
+(cutable will be placed in a subdir)221.5 421 R .286
+(ectory within that demonstration)-.198 F(dir)221.5 434.2 Q(ectory)-.198 E
+4.779(,a)-1.221 G 2.029(nd the subdir)277.583 434.2 R 2.029
+(ectory will have the same name as the)-.198 F 2.333
+(machine object type speci\214ed by)221.5 447.4 R F5(DORE_OBJTYPE)5.082 E F3
+7.832(.F)C 2.332(or example,)486.078 447.4 R 1.659
+(the object \214les and executable for the)221.5 460.6 R F4(br)4.409 E(eath)
+-.198 E F3 1.66(demonstration built)4.41 F(on an SGI IRIS would be located in)
+221.5 473.8 Q F4(dor)2.75 E(e/demo/br)-.198 E(eath/iris)-.198 E F3(.)A 3.886
+-1.012(To r)221.5 499 T 1.862(un the).924 F F4(br)4.612 E(eath)-.198 E F3 1.861
+(demo on an SGI IRIS, change to the dir)4.612 F(ectory)-.198 E(wher)221.5 512.2
+Q 2.75(ei)-.198 G 2.75(ti)257.712 512.2 S 2.75(sl)267.249 512.2 S
+(ocated and type)277.864 512.2 Q F4(runme)2.75 E F3(:)A F6 5.4(%c)221.5 535.2 S
+5.4(dd)237.7 535.2 S(ore/demo/breath/iris)253.9 535.2 Q 5.4(%r)221.5 546.2 S
+(unme)237.7 546.2 Q F3 .157
+(It is possible to build the demonstrations one at a time.)221.5 571.4 R 2.181
+-1.012(To d)5.657 H 2.907(ot)1.012 G(his,)528.483 571.4 Q .314
+(change to the desir)221.5 584.6 R .314(ed demonstration dir)-.198 F .313
+(ectory and ensur)-.198 F 3.063(et)-.198 G .313(hat the)511.692 584.6 R
+(variables)221.5 597.8 Q F5(DORE_LOC)3.315 E F3(,)A F5(DORE_OBJTYPE)3.316 E F3
+(,)A F5(DORE_LIB_NAME)3.316 E F3 3.316(,a)C(nd)508.221 597.8 Q F5(LIBS)3.316 E
+F3(ar)221.5 611 Q 3.894(es)-.198 G 1.144(et in)244.974 611 R F4(make\214le)
+3.894 E F3(befor)3.894 E 3.894(ei)-.198 G 1.144(nvoking it.)348.396 611 R 1.143
+(Then, for example, to build)6.643 F(and r)221.5 624.2 Q(un the)-.088 E F4
+(lwave)2.75 E F3(demonstration on an SGI IRIS, type:)2.75 E F6 5.4(%c)221.5
+647.2 S 5.4(dd)237.7 647.2 S(ore/demo/lwave)253.9 647.2 Q 5.4(%m)221.5 658.2 S
+(ake runme)237.7 658.2 Q 5.4(%i)221.5 669.2 S(ris/runme)237.7 669.2 Q F3 .599
+(For detailed information on the various demonstrations, and how)221.5 694.4 R
+(to interact with them, see the)221.5 707.6 Q F4(Readme)2.75 E F3(\214le in)
+2.75 E F4(dor)2.75 E(e/demo)-.198 E F3(.)A 90 756 72 756 DL 99 756 81 756 DL
+117 756 99 756 DL 135 756 117 756 DL 153 756 135 756 DL 171 756 153 756 DL 189
+756 171 756 DL 207 756 189 756 DL 239.4 756 221.4 756 DL 257.4 756 239.4 756 DL
+275.4 756 257.4 756 DL 293.4 756 275.4 756 DL 311.4 756 293.4 756 DL 329.4 756
+311.4 756 DL 347.4 756 329.4 756 DL 365.4 756 347.4 756 DL 383.4 756 365.4 756
+DL 401.4 756 383.4 756 DL 419.4 756 401.4 756 DL 437.4 756 419.4 756 DL 455.4
+756 437.4 756 DL 473.4 756 455.4 756 DL 491.4 756 473.4 756 DL 509.4 756 491.4
+756 DL 527.4 756 509.4 756 DL 545.4 756 527.4 756 DL/F7 9/Helvetica-Bold@0 SF
+(16-234)72 768.96 Q/F8 9/Helvetica@0 SF(Dore)6.504 E 3.506<b444>122.023 768.96
+S -2.187 -.27(ev e)135.024 768.96 T(loper').27 E 2.502(sG)-.45 G(uide)184.596
+768.96 Q -1.08(Te)221.4 768.96 S(sting Dore)1.08 E<b4>267.835 768.96 Q EP
+%%Trailer
+end
+%%EOF

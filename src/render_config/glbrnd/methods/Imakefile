@@ -1,0 +1,24 @@
+#include <Dore.tmpl>
+#define IHaveSubdirs
+
+ SUBDIRS = prisrf
+    SRCS = glb_cam.c glb_cammat.c glb_lgt.c glb_ply.c glb_plymsh.c \
+	   glb_quadlst.c glb_quadmsh.c glb_rayintmtr.c glb_rayintsph.c \
+	   glb_rayinttri.c glb_simply.c glb_simplymsh.c glb_sphlst.c \
+	   glb_text.c glb_trilst.c glb_trimsh.c glb_tristrip.c \
+	   glb_varsplymsh.c glb_vartrimsh.c glb_vartristrp.c parmat.c \
+	   permat.c prjmat.c
+    OBJS = glb_cam.o glb_cammat.o glb_lgt.o glb_ply.o glb_plymsh.o \
+	   glb_quadlst.o glb_quadmsh.o glb_rayintmtr.o glb_rayintsph.o \
+	   glb_rayinttri.o glb_simply.o glb_simplymsh.o glb_sphlst.o \
+	   glb_text.o glb_trilst.o glb_trimsh.o glb_tristrip.o \
+	   glb_varsplymsh.o glb_vartrimsh.o glb_vartristrp.o parmat.o \
+	   permat.o prjmat.o
+
+LibraryObjectRule()
+SubdirLibraryRule($(OBJS))
+
+MakeSubdirs($(SUBDIRS))
+DependSubdirs($(SUBDIRS))
+
+DependTarget()

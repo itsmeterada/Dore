@@ -1,0 +1,51 @@
+.\"	This file contains standard string definitions
+.\"	for use with local.me
+.ds TT Table \\*(hH\\n+(TT
+.ds FT Figure \\*(hH\\n+(FT
+.ie t \{\
+.	tr *\(**
+.	ds Un \s-1UNIX\s+1
+.	ds Tt Titan 1500/3000
+.	ds s5 ST\|500
+.	ds Da Kubota Pacific Computer Inc.
+.	ds Gs Graphics SuperWorkStation
+.	ds dM Departmental SuperMicro
+.	ds Pt \%\|\(mi\h'-2p'>
+.	ds In \(fm\(fm
+.	ds Do "Dor\o.e\(aa. Library
+.	ds Dd "Dor\o.e\(aa.
+.	ds Dg \s-1DGL\s+1
+.	ds Pg "\s-1PHIGS\s+1
+.	ds P+ "\s-1PHIGS\v'-0.75p'\h'0.75p'\(pl\v'0.75p'\s+1
+.	ds Tm \s-4\uTM\d\s+4
+.	ds Co \(co
+.	ds Rg \s-2\u\(rg\d\s+2
+.       ds xL \f2Xlib \- C Language X Interface\fP
+.       ds xI \f2X Toolkit Intrinsics \- C Language X Interface\fP
+.	ds [ \v'-0.4m'\s-3
+.	ds ] \s+3\v'0.4m'
+.	ds < \v'0.4m'\s-3
+.	ds > \s+3\v'-0.4m'
+.	ds bL \f1\|\v'2p'\s6\(or\s0\h'-5u'\(ul\s6\h'-10u'\(or\s0\v'-2p'\|\fP
+.	ds X+ X\v'-3p'+\v'+3p'
+.\}
+.el \{\
+.	ds Un UNIX
+.	ds Tt Titan 1500/3000
+.	ds s5 ST 500
+.	ds Da Kubota Pacific Computer Inc.
+.	ds Gs Graphics SuperWorkStation
+.	ds dM Departmental SuperMicro
+.	ds In ""
+.	ds Pt ->
+.	ds Dg DGL
+.	ds Do Dore Library
+.	ds Pg PHIGS
+.	ds P+ PHIGS+
+.	ds Dd "Dore
+.	ds Tm (TM)
+.	ds Co (c)
+.	ds Rg (R)
+.	ds bL #
+.	ds X+ X+
+.\}

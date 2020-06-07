@@ -1,0 +1,237 @@
+'\"			macros for floating keeps
+'\"
+'\"	start floating keep - internal
+.de Ks
+.nr bS \\n(bs
+.nr bs 0
+.br
+.if \\n(kk 'bp
+.Pu
+.@C 1
+.in 0
+.nr kk 1
+.di kk
+.nf
+.ll \\n(LLu
+..
+'\"	end floating keep - internal
+.de Ke
+.br
+.if !'\\n(.z'kk' .tm Line \\n(.c -- Close of keep that was never opened.
+.nr kk 0
+.di
+.ce 0
+.ll \\n(LLu
+.if !\\n(?b .nr dn +(\\n(ppu*\\n($ru)/2u+\\n(psu
+.if !\\n(Md .nr dl -\n(.H
+.if \\n(f; .ds ;T .LF "\\*(fT"
+.if \\n(t; .ds ;T .LT "\\*(tT"
+.ie !\\n(Md \{\
+.	ie \\n(.t>\\n(dn \{\
+.		if e .if \\n(dl>\\n(LLu \{\
+.			nr ko \\n(dlu-\\n(LLu
+.			po (\\n(.ou-\\n(kou)\}
+.		if \nZ .if \\n(dl>\\n(LLu \{\
+.			nr ko \\n(dlu-\\n(LLu
+.			po (\\n(.ou-\\n(kou)\}
+.		nf
+.		SP \\n(psu
+.		kk
+.		if \\n(f; \
+\s10\f3\\*(fT\s0\fP
+.		SP \\n(psu
+.		if e .po \\n(epu
+.		if \nZ .po \\n(Opu
+.		if \nC .tm \\*(;T \\*(hH\\n%
+.	\}
+.	el .ie \\n(dn>\\n(]m \{\
+.			ab Reformat Figure/Table page \\*(hH\\n% - EXITING
+.	    \}
+.	    el \{\
+.			nr kk 1
+.			da KK
+.			nf
+\!.			rs
+.			kk
+.		if \\n(f; \
+\s10\f3\\*(fT\s0\fP
+.			da
+.			br
+.			nr Lw \\n(dl
+.			nr fh \\n(dn
+.		\}
+.	\}
+.\}
+.el \{\
+.	ie \\n(.t>(\\n(Md+3.1v) \{\
+.		nf
+.		sp \\n(psu
+.		Mp
+.		sp \\n(psu
+\s10\f3\\*(fT\s0\fP
+.		sp \\n(psu
+.\}
+.	el .nr kk 1
+.\}
+.if !\\n(kk .rr t; f; Md Mi
+.rm kk
+.rr ko
+.nr bs \\n(bSu
+.rr bS
+.ev
+.Po
+.ns
+.lp
+.rs
+..
+'\"	begin table .(T "Title" tag
+.de (T
+.br
+.ie \\n(.$ \{\
+.	nr t[ 0 1
+.	nr tN +1
+.	ds tT "Table \\*(hH\\n(tN. \\$1
+.	if \\n(.$-1 \{\
+.		nr *t 1
+.		nr Tn \\n(tN
+.		TR \\$2
+.		if \nF .tm \\$2	\\$1	Table \\*(hH\\n(Tn
+.	\}
+.\}
+.el \{\
+.	nr t[ +1
+.	if \\n(t[=1 .as tT " (continued)
+.\}
+.nr t; 1
+.nr ?T 0
+.Ks
+\s10\f3\\*(tT\s0\fP
+\!.sp \\n(psu
+..
+'\"	end table
+.de )T
+.br
+.Ke
+.if !\\n(TT>=\\n(tN \{\
+.	nr TT \\n(tN
+.	tm Text reference missing - \\*(tT - Page \\*(hH\\n%
+.\}
+.\"	.SP \\n(psu
+..
+'\"	begin figure: .(F Mac.fig.file fig_depth rel_indent
+.de (F
+.br
+.if \\n(kk 'bp
+.if \\n(.$ \{\
+.	ds MF \\$1
+.	nr Md \\$2
+.	ds Mi \\$3
+.\}
+.nr f; 1
+.nr fN +1
+.rs
+.Ks
+..
+'\"	end figure: .)F "Fig Title" [tag]
+.de )F
+.br
+.ds fT "Figure \\*(hH\\n(fN. \\$1
+.if \\n(.$-1 \{\
+.	nr *f 1
+.	nr Fn \\n(fN
+.	FR \\$2
+.	if \nF .tm \\$2	\\$1	Figure \\*(hH\\n(Fn
+.\}
+.Ke
+.if !\\n(FT>=\\n(fN \{\
+.	nr FT \\n(fN
+.	tm Text reference missing - \\*(fT - Page \\*(hH\\n%
+.\}
+.SP \\n(psu
+..
+'\"	begin floating display
+.de (D
+.br
+.Ks
+..
+'\"	end floating display
+.de )D
+.br
+.Ke
+..
+'\"	sources in Mac files (ditroff only)
+.de Mp
+.br
+.PSPIC \\*(MF
+.rs
+.sp \\n(Mdu
+..
+'\"	print floated keep at top of page - internal
+.de PD
+.br
+.Pu
+.ev 1
+.nf
+.ls 1
+.in 0
+.nr kk 0
+.$H
+.br
+.ie \\n(Lw>\\n(LL .if e \{\
+.	nr ko \\n(Lwu-\\n(LLu
+.	po (\\n(.ou-\\n(kou)\}
+.ie !\\n(Md .\\$1
+.el \{\
+.	Mp \\*(MF \\n(Md \\n(Mi
+.	sp \\n(psu
+\s10\f3\\*(fT\s0\fP
+.\}
+.ec
+.br
+.nr kk 0
+.rm \\$1
+.ev
+.Po
+.if \nC .if \\n(t; .tm .LT "\\*(tT" \\*(hH\\n%
+.if \nC .if \\n(f; .tm .LF "\\*(fT" \\*(hH\\n%
+.if \\n(t; .nr t; 0
+.if \\n(f; .nr f; 0
+.rr fh ko lw Lw Md Mi
+.nr $T 0
+.if \\n(.h>=\\n(tm .sp \\n(psu
+.$H
+..
+'\"	begin a new page
+.de BP
+.br
+.rs
+.bp
+..
+'\"	macro to hold figure/table tag:=# map
+.de *F
+.rm *S
+..
+'\"	prints fig# from *F map
+.de FR
+.*F \\$1
+.if ^\\*(*S^^ \{\
+.	am *F
+.	if ^\\$1^\\\\$1^ .ds *S \\*(hH\\n(Fn
+\\..
+.\}
+.if !\\n(*f Figure \\*(*S\c
+\&\\$2
+.rr *f
+..
+'\"	prints table# from *F map
+.de TR
+.*F \\$1
+.if ^\\*(*S^^ \{\
+.	am *F
+.	if ^\\$1^\\\\$1^ .ds *S \\*(hH\\n(Tn
+\\..
+.\}
+.if !\\n(*t Table \\*(*S\c
+\&\\$2
+.rr *t
+..

@@ -1,0 +1,20 @@
+EXISTING BUGS:
+  + Casting errors, unimplemented routines for NT/kopengl
+  + prototype errors with includes vs code
+  + palette management problems (apparent during the demos)
+  + the test programs dump core in malloc()
+  + the tests and examples programs haven't been converted to
+    Imake yet, so their status is unknown.
+  + some of the examples are hard-coded to specific display types
+  + Imake build doesn't do depending yet
+
+BUGS FIXED:
+  + the make process is pretty horrible
+  + font compiler does not return with valid exit codes
+  + demos only supported poll() -  added support for select()
+  + problems with loading under NT with the WinNT nmake-makefile
+      - hopefully fixed with new Imake configuration
+  + font compiler (dfc) includes <sys/dir.h> unnecessarily
+  + problems compiling demos
+  + changed fonts and errmsgfile problems
+  + hard-coded cc in some makefiles

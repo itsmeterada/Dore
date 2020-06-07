@@ -1,0 +1,44 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DoDataPtr 3D  "Dore"
+.SH NAME
+DoDataPtr \- Create a data pointer object
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+DtObject DoDataPtr(dataptr)
+DtPtr dataptr;
+.sp
+.in -.5i
+FORTRAN:
+.in +.5i
+INTEGER*4 DODP(DATPTR)
+INTEGER*4 DATPTR
+.in -.5i
+.fi
+.SH DESCRIPTION
+.IX DODP
+.IX DoDataPtr
+\f2DoDataPtr\fP creates a data pointer object.  The \f2dataptr\fP
+parameter points to a user-defined data structure that
+is used for passing data to user-defined
+functions (callback objects) when these functions
+are called.
+.SH "SEE ALSO"
+DdSetPickCallback(3D), DoCallback(3D), DoDataVal(3D)

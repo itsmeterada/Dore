@@ -1,0 +1,11 @@
+#include <Dore.tmpl>
+
+    SRCS = xdgl_appatt.c xdgl_camera.c xdgl_data.c xdgl_drom.c xdgl_geoatt.c \
+           xdgl_light.c xdgl_map.c xdgl_modclip.c xdgl_update.c xdgldr_output.c
+    OBJS = xdgl_appatt.o xdgl_camera.o xdgl_data.o xdgl_drom.o xdgl_geoatt.o \
+           xdgl_light.o xdgl_map.o xdgl_modclip.o xdgl_update.o xdgldr_output.o
+
+LibraryObjectRule()
+SubdirLibraryRule($(OBJS))
+
+DependTarget()

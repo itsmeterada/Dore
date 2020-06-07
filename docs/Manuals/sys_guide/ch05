@@ -1,0 +1,41 @@
+.\"#ident "%W%" %G%
+.\"
+.\" #
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  
+.\" # 
+.\" # KUBOTA GRAPHICS Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\" #
+.\"
+.so ../macros/local.me
+.ds BT "\\*(Dd System Guide
+.ds CT "Device Drivers Section Introduction
+.ds h1 5
+.L1 D EVICE " D" RIVERS
+.L2 S ECTION
+.L3 I NTRODUCTION
+.CH FIVE
+A renderer does not access a display medium directly.
+Instead, it interacts with a device driver, which controls the
+output from the renderer to the output device.  Every type of 
+device \*- such as a file or 3D graphics display 
+hardware \*- must have a device driver associated with it.
+.lp
+A \*(Dd device driver consists of several modules:  a required 
+\f2device control module\f1 (DCM) and one or more \f2output modules\f1.  
+Each type of output module handles a different type of renderer output.  
+Some output modules are very simple, because most of the rendering computation 
+is performed by the renderer.  Other output modules need to be more 
+sophisticated, because they are expected to do most of the rendering work.
+.lp
+This section describes the device drivers available with this \*(Dd
+release and the output modules that each of these drivers supports.

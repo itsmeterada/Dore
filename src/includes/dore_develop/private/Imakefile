@@ -1,0 +1,16 @@
+#include <Dore.tmpl>
+
+ HEADERS = anntxt.h cammat.h clpvol.h datptr.h datval.h device.h \
+        filerstr.h frame.h group.h linlst.h lokatfrm.h mapbmp.h mapdifclr.h \
+	mapenv.h maptrnint.h nurbsurf.h parmat.h patch.h patchmat.h \
+	permat.h ply.h plylin.h plymkr.h plymsh.h pntlst.h prisrf.h \
+	prjmat.h quadgrid.h quadlst.h quadmsh.h rayintmtr.h rayintsph.h \
+	rayinttri.h rotate.h rstr.h scale.h shear.h simply.h simplymsh.h \
+	sphlst.h stdtexatt.h text.h tfmmat.h torus.h transl.h trilst.h \
+	trimsh.h tristrip.h varlinlst.h varpntlst.h varquadgrd.h \
+	varquadmsh.h varsplymsh.h vartrilst.h vartrimsh.h vartristrp.h \
+	view.h zbuffer.h
+
+AllTarget()
+BuildIncludes($(HEADERS),dore_develop/private,../..)
+DependTarget()

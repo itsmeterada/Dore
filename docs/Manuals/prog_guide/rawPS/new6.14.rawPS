@@ -1,0 +1,120 @@
+%!PS-Adobe-2.0
+%%Title: 6-14.pict
+%%Creator: MacDraw
+%%CreationDate: Friday, November 17, 1989
+%%Pages: (atend)
+%%BoundingBox: ? ? ? ?
+%%PageBoundingBox: 30 31 582 761
+%%For: Aaron Black
+%%IncludeProcSet: "(AppleDict md)" 66
+%%EndComments
+%%EndProlog
+%%BeginDocumentSetup
+md begin
+
+T T -31 -30 761 582 100 72 72 1 F F F F T T psu
+(Aaron Black; document: 6-14.pict)jn
+0 mf
+od
+%%EndDocumentSetup
+%%Page: ? 1
+op
+0 0 xl
+1 1 pen
+0 0 gm
+(nc 0 0 720 540 6 rc)kp
+0.5 24.5 45.5 96.5 0 rc
+148 2 gm
+bu fc
+
+{}mark T /Helvetica /|______Helvetica 0 rf
+bn
+%%EndFont
+1 setTxMode
+0 fs
+10 fz
+bu fc
+2 F /|______Helvetica fnt
+bn
+0.30824 0.(DoAmbientIntens)ashow
+159 2 gm
+0 gr
+1.89102 0. 32 0.18910 0.(\(uses DoDiffuseColor\))awidthshow
+170 2 gm
+0.36451 0.(DoAmbientSwitch)ashow
+28 40 gm
+0.22131 0.(Ambient)ashow
+211 195 gm
+1.17980 0. 32 0.11798 0.(Related Primitive Attributes:)awidthshow
+225 210 gm
+0.43461 0.(DoShadowSwitch)ashow
+0 0 gm
+205 185 210 190 4 ov
+205.5 185.5 209.5 189.5 0 ov
+126 26 146 46 260 308 1 ar
+45 58 gm
+128 37 lin
+0 0 gm
+0.5 113.5 45.5 185.5 0 rc
+148 114 gm
+0.34814 0.(DoDiffuseIntens)ashow
+159 114 gm
+0.40182 0.(DoDiffuseColor)ashow
+170 114 gm
+0.40444 0.(DoDiffuseSwitch)ashow
+28 132 gm
+0.31443 0.(Diffuse)ashow
+0 0 gm
+127 138 147 158 246 294 1 ar
+45 147 gm
+129 147 lin
+0 0 gm
+0.5 211.5 45.5 283.5 0 rc
+147 209 gm
+0.16894 0.(DoSpecularIntens)ashow
+158 209 gm
+0.20599 0.(DoSpecularColor)ashow
+169 209 gm
+0.22151 0.(DoSpecularSwitch)ashow
+180 209 gm
+0.16242 0.(DoSpecularFactor)ashow
+28 228 gm
+-0.06475 0.(Specular)ashow
+0 0 gm
+125 236 145 256 246 294 1 ar
+45 245 gm
+127 245 lin
+0 0 gm
+0.5 310.5 45.5 382.5 0 rc
+147 314 gm
+0.22114 0.(DoTranspIntens)ashow
+158 314 gm
+0.26870 0.(DoTranspColor)ashow
+169 314 gm
+0.28173 0.(DoTranspSwitch)ashow
+29 318 gm
+0.11036 0.(Transparent)ashow
+0 0 gm
+0.5 406.5 45.5 478.5 0 rc
+147 412 gm
+0.16894 0.(DoSpecularIntens)ashow
+158 412 gm
+0.20599 0.(DoSpecularColor)ashow
+169 412 gm
+0.31321 0.(DoReflectionSwitch)ashow
+28 419 gm
+0.17213 0.(Reflection)ashow
+0 0 gm
+125 448 145 468 235 283 1 ar
+46 440 gm
+127 455 lin
+0 0 gm
+127 339 147 359 246 294 1 ar
+47 348 gm
+129 348 lin
+F T cp
+%%Trailer
+cd
+end
+%%Pages: 1 0
+%%EOF

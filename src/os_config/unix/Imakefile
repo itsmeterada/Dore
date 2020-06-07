@@ -1,0 +1,9 @@
+#include <Dore.tmpl>
+
+    SRCS = io.c misc.c print.c space.c
+    OBJS = io.o misc.o print.o space.o
+
+LibraryObjectRule()
+SubdirLibraryRule($(OBJS))
+
+DependTarget()

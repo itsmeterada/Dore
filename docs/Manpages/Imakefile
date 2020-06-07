@@ -1,0 +1,115 @@
+#include <Dore.tmpl>
+
+PAGES = DEDOD DEROD DEWOD DdInqColorEntries \
+	DdInqColorTableSize DdInqExtent DdInqFonts DdInqFrame \
+	DdInqNumFonts DdInqPickAperture DdInqPickCallback \
+	DdInqPickPathOrder DdInqPixelData DdInqResolution \
+	DdInqShadeMode DdInqShadeRanges DdInqViewport \
+	DdInqVisualType DdPick DdPickObjs DdSetColorEntries \
+	DdSetFrame DdSetOptions DdSetPickAperture \
+	DdSetPickCallback DdSetPickPathOrder DdSetShadeMode \
+	DdSetShadeRanges DdSetViewport DdUpdate DeAddClass \
+	DeCreateObject DeDeleteObject DeExecuteAlternate \
+	DeInitializeObjPick DeInqPickable DeInqRenderable \
+	DfInqBoundary DfInqJust DfInqViewGroup DfSetBoundary \
+	DfSetJust DfUpdate DgAddObj DgAddObjToGroup \
+	DgCheck DgClose DgDelEle DgDelEleBetweenLabels \
+	DgDelEleRange DgEmpty DgInqElePtr DgInqObjAtPos \
+	DgInqOpen DgInqSize DgOpen DgReplaceObj \
+	DgReplaceObjInGroup DgSetElePtr DgSetElePtrRelLabel \
+	DoAmbientIntens DoAmbientSwitch DoAnnoText \
+	DoBackfaceCullSwitch DoBackfaceCullable DoBoundingVol \
+	DoBoundingVolSwitch DoCallback DoCamera \
+	DoCameraMatrix DoClipSwitch DoClipVol \
+	DoCompTextureUVCallback DoCompTextureUVSwitch \
+	DoCompTextureUVWCallback DoCompTextureUVWSwitch \
+	DoDataPtr DoDataVal DoDepthCue DoDepthCueSwitch \
+	DoDevice DoDiffuseColor DoDiffuseIntens \
+	DoDiffuseSwitch DoEmissionColor DoEmissionFactor \
+	DoEmissionSwitch DoExecSet DoFileRaster DoFilter \
+	DoFrame DoGenerateTextureUV DoGlbRendMaxObjs \
+	DoGlbRendMaxSub DoGlbRendRayLevel DoGroup \
+	DoHiddenSurfSwitch DoInLineGroup DoInputSlot \
+	DoIntermediateDispType DoInterpType DoInvisSwitch \
+	DoLabel DoLight DoLightAttenuation DoLightColor \
+	DoLightIntens DoLightSpreadAngles DoLightSpreadExp \
+	DoLightSwitch DoLightType DoLineList DoLineType \
+	DoLineWidth DoLocalAntiAliasStyle DoLocalAntiAliasSwitch \
+	DoLookAtFrom DoMarkerFont DoMarkerGlyph DoMarkerScale \
+	DoMatrix DoMinBoundingVolExt DoNURBSurf DoNameSet \
+	DoParallel DoPatch DoPerspective DoPickID \
+	DoPickSwitch DoPointList DoPolygon DoPolygonMesh \
+	DoPolyline DoPolymarker DoPopAtts DoPopMatrix \
+	DoPrimSurf DoProjection DoPushAtts DoPushMatrix \
+	DoQuadGrid DoQuadList DoQuadMesh \
+	DoRadiosityAmbientSwitch DoRadiositySwitch DoRaster \
+	DoReflectionSwitch DoRefractionIndex DoRefractionSwitch \
+	DoRepType DoRotate DoSampleAdaptive \
+	DoSampleAdaptiveSwitch DoSampleFilter DoSampleJitter \
+	DoSampleJitterSwitch DoSampleSuper DoSampleSuperSwitch \
+	DoScale DoShadeIndex DoShadowSwitch DoShear \
+	DoSimplePolygon DoSimplePolygonMesh DoSpecularColor \
+	DoSpecularFactor DoSpecularIntens DoSpecularSwitch \
+	DoSphereList DoStereo DoStereoSwitch DoSubDivSpec \
+	DoSurfaceEdgeColor DoSurfaceShade DoText DoTextAlign \
+	DoTextExpFactor DoTextFont DoTextHeight DoTextPath \
+	DoTextPrecision DoTextSpace DoTextUpVector \
+	DoTextureAntiAlias DoTextureExtendUV DoTextureExtendUVW \
+	DoTextureIntermediateSurf DoTextureMapBump \
+	DoTextureMapBumpSwitch DoTextureMapDiffuseColor \
+	DoTextureMapDiffuseColorSwitch DoTextureMapEnviron \
+	DoTextureMapEnvironSwitch DoTextureMapTranspIntens \
+	DoTextureMapTranspIntensSwitch DoTextureMatrixUV \
+	DoTextureMatrixUVW DoTextureOp DoTextureScaleUV \
+	DoTextureScaleUVW DoTextureTranslateUV \
+	DoTextureTranslateUVW DoTextureUVIndex DoTextureUVWIndex \
+	DoTorus DoTransformMatrix DoTranslate DoTranspColor \
+	DoTranspIntens DoTranspOrientColor DoTranspOrientExp \
+	DoTranspOrientIntens DoTranspOrientSwitch DoTranspSwitch \
+	DoTriangleList DoTriangleMesh DoTriangleStrip \
+	DoVarLineList DoVarPointList DoVarQuadGrid \
+	DoVarQuadList DoVarQuadMesh DoVarSimplePolygonMesh \
+	DoVarTriangleMesh DoVarTriangleStrip DoView Dore \
+	DpUpdVarLineList DpUpdVarPointList DpUpdVarQuadGrid \
+	DpUpdVarQuadGridUV DpUpdVarQuadGridUVW DpUpdVarQuadList \
+	DpUpdVarQuadListUV DpUpdVarQuadListUVW DpUpdVarQuadMesh \
+	DpUpdVarQuadMeshUV DpUpdVarQuadMeshUVW \
+	DpUpdVarSimplePolygonMesh DpUpdVarSimplePolygonMeshUV \
+	DpUpdVarSimplePolygonMeshUVW DpUpdVarTriangleMesh \
+	DpUpdVarTriangleMeshUV DpUpdVarTriangleMeshUVW \
+	DpUpdVarTriangleStrip DpUpdVarTriangleStripUV \
+	DpUpdVarTriangleStripUVW DsCompBoundingVol DsExecuteObj \
+	DsExecutionAbort DsExecutionReturn DsFileRasterRead \
+	DsHoldObj DsInitialize DsInitializeSystem \
+	DsInputValue DsInqAngleUnits DsInqClassId \
+	DsInqCurrentMethod DsInqDriverInfo DsInqErrorMessage \
+	DsInqErrorVars DsInqExeDepthLimit DsInqHoldObj \
+	DsInqMethodId DsInqNumDrivers DsInqNumRenderers \
+	DsInqObj DsInqObjClassId DsInqObjName \
+	DsInqObjNameInteger DsInqObjNameString DsInqObjNameType \
+	DsInqObjStatus DsInqObjType DsInqObjViaInteger \
+	DsInqObjViaString DsInqRaster DsInqRendererId \
+	DsInqRendererNames DsInqSafeFlag DsInqValuatorGroup \
+	DsInqVersion DsPrintObj DsRadiosityInitialize \
+	DsRasterUpdate DsRasterWrite DsReleaseObj \
+	DsSetAngleUnits DsSetErrorVars DsSetExeDepthLimit \
+	DsSetObjName DsSetObjNameInteger DsSetObjNameString \
+	DsSetSafeFlag DsTerminate DsTerminateSystem \
+	DsTextureUVCount DsTextureUVWCount DsUpdateAllViews \
+	DsValuatorSwitch DvInqActiveCamera DvInqBackgroundColor \
+	DvInqBackgroundJust DvInqBackgroundRaster DvInqBoundary \
+	DvInqClearFlag DvInqDefinitionGroup DvInqDisplayGroup \
+	DvInqFormFactorCompType DvInqRadiosityConvergence \
+	DvInqRadiosityUpdateType DvInqRendStyle DvInqShadeIndex \
+	DvInqUpdateType DvSetActiveCamera DvSetBackgroundColor \
+	DvSetBackgroundJust DvSetBackgroundRaster DvSetBoundary \
+	DvSetClearFlag DvSetFormFactorCompType \
+	DvSetRadiosityConvergence DvSetRadiosityUpdateType \
+	DvSetRendStyle DvSetShadeIndex DvSetUpdateType \
+	DvUpdate Naming_Conventions VertexTypes
+
+AllTarget()
+InstallMultipleMan($(PAGES),$(LIBMANDIR))
+
+../manpages.ps:
+	groff -Tps -man `cat Master.list` > ../manpages.ps

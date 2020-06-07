@@ -1,0 +1,45 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH Naming_Conventions 3D "Dore"
+.SH NAME
+Naming_Conventions \- An explanation of function names used in Dore
+.SH DESCRIPTION
+All Dore functions start with a ``D''
+followed by a single lower case letter specifying the type of
+Dore function.
+FORTRAN the entire function name is in upper case.>
+The rest of the function name is a mnemonic, using
+concatenated words or abbreviations
+with the first character of each word in upper case.
+.PP
+The following table illustrates the second-letter mnemonic variations:
+.sp
+.nf
+.ta .75i
+\f3Dc\fPXXXXX	a Dore \f2constant\fP value, used as a parameter
+\f3Dd\fPXXXXX	a Dore \f2device\fP function
+\f3De\fPXXXXX	a Dore user \f2extension\fP function. Used when
+	adding user-defined extensions to Dore; not typically
+	used by application programs.
+\f3Df\fPXXXXX	a Dore \f2frame\fP function
+\f3Dg\fPXXXXX	a Dore \f2group\fP function
+\f3Do\fPXXXXX	a Dore \f2object creation\fP function
+\f3Dp\fPXXXXX	a Dore \f2primitive\fP function
+\f3Ds\fPXXXXX	a Dore \f2system\fP function, or object manipulation function
+\f3Dt\fPXXXXX	a Dore \f2type\fP declaration, used for passing parameters
+\f3Dv\fPXXXXX	a Dore \f2view\fP function
+.re

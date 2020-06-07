@@ -1,0 +1,99 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DgAddObj 3D  "Dore"
+.SH NAME
+DgAddObj \- Add an object to the currently open group
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+void DgAddObj(object)
+DtObject object;
+.sp
+.in -.5i
+FORTRAN:
+.in +.5i
+CALL DGAO(OBJECT)
+INTEGER*4 OBJECT
+.in -.5i
+.fi
+.SH DESCRIPTION
+.IX DGAO
+.IX DgAddObj
+\f2DgAddObj\fP adds an object, \f2object\fP, to the currently open
+group. The object is inserted into the group at the position indicated
+by the element pointer, 
+and the element pointer is moved so that it points
+to the position directly below the new object.
+If another element was in the insertion position,
+the element and all elements below it are moved
+forward one position. 
+\f2DgReplaceObj\fP <\f2DGRO\fP> is used to replace the object
+specified by the group's element pointer.
+.PP
+The most common way to call the \f2DgAddObj\fP function is:
+.nf
+
+	DgAddObj(DoXXXX());
+
+.fi
+where the \f2DoXXXX()\fP call creates and returns an object of type
+XXXX.  The object is added to the currently open group through the
+\f2DgAddObj\fP call.  One can also create an object through a
+separate call to a \f2DoXXXX\fP routine and then call the
+\f2DgAddObj\fP routine with the object directly:
+.nf
+
+	object = DoXXXX();
+	DsHoldObj(object);
+	DgAddObj(object);
+
+.fi
+One may also call this function in the following manner:
+.nf
+
+	DgAddObj(DsHoldObj(object=DoXXXX()));
+
+.fi
+Here, the \f2object\fP variable gets the value of the
+newly created object and is placed in the currently open 
+group as well.
+.PP
+The call to \f2DsHoldObj\fP <\f2DSHO\fP> is needed only if the
+user also wants to
+use the object created for other purposes.  Note that any object held
+with a \f2DsHoldObj\fP <\f2DSHO\fP> will not be deleted.
+The application program is always responsible for 
+reclaiming storage from held objects that become obsolete.
+.SH ERRORS
+.I DgAddObj
+will fail if \f2object\fP is not a valid object.
+.TP 15
+[WARNING - invalid or deleted object]
+.PP
+.I DgAddObj
+will fail if no group is currently open.
+.TP 15
+[WARNING - a group is not currently open]
+.SH "SEE ALSO"
+.na
+.nh
+DgAddObjToGroup(3D), DgInqOpen(3D), DgOpen(3D), DgReplaceObj(3D),
+DoGroup(3D), DoInLineGroup(3D), DsHoldObj(3D)
+.ad
+.hy

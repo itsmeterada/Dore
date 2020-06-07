@@ -1,0 +1,63 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DgDelEle 3D  "Dore"
+.SH NAME
+DgDelEle \- Remove elements from the currently open group
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+void DgDelEle(count)
+DtInt count;
+.sp
+.in -.5i
+FORTRAN:
+.in +.5i
+CALL DGDE(COUNT)
+INTEGER*4 COUNT
+.in -.5i
+.fi
+.SH DESCRIPTION
+.IX DGDE
+.IX DgDelEle
+.I DgDelEle
+deletes \f2count\fP number of elements from the currently open group.
+The deletion starts at the position of the element pointer
+in the currently open group.  
+If the element pointer position in the group plus
+\f2count\fP is greater than the number
+of elements from it to the bottom of the group, 
+all elements from the element pointer position to
+the end of the group are deleted.  
+If the element pointer position plus
+\f2count\fP is less than the number of elements
+from it to the bottom of the group,
+the element pointer points to the element positioned after the last
+one that was deleted.
+.SH ERRORS
+.I DgDelEle
+will fail if no group is currently open.
+.TP 15
+[WARNING - a group is not currently open]
+.SH "SEE ALSO"
+.na
+.nh
+DgDelEleBetweenLabels(3D), DgDelEleRange(3D), DgEmpty(3D),
+DgInqElePtr(3D), DgSetElePtr(3D)
+.ad
+.hy

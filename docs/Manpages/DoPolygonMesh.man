@@ -1,0 +1,145 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DoPolygonMesh 3D  "Dore"
+.SH NAME
+DoPolygonMesh \- Create a polygon mesh primitive object
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+DtObject DoPolygonMesh(colormodel, vertextype, 
+	vertexcount, vertices, polygoncount, polygons,
+   	contours, vertexlist, shape, smoothflag)
+DtColorModel colormodel;
+DtVertexType vertextype;
+DtInt vertexcount;
+DtReal vertices[\|];
+DtInt polygoncount;
+DtInt polygons[\|];
+DtInt contours[\|];
+DtInt vertexlist[\|];
+DtShapeType shape;
+DtFlag smoothflag;
+.sp
+.in -.5i
+FORTRAN:
+.in +.5i
+INTEGER*4 DOPGNM(COLMOD, VTXTYP, VTXCNT, 
+	VTXS, PLYCNT, PLYGON, CONTURS, 
+	VTXLST, SHAPE, SMOOFL)
+INTEGER*4 COLMOD
+INTEGER*4 VTXTYP
+INTEGER*4 VTXCNT 
+REAL*8 VTXS(*)
+INTEGER*4 PLYCNT
+INTEGER*4 PLYGON(PLYCNT)
+INTEGER*4 CONTURS(*)
+INTEGER*4 VTXLST(*)
+INTEGER*4 SHAPE
+INTEGER*4 SMOOFL
+.in -.5i
+.fi
+.SH DESCRIPTION
+.IX DOPGNM
+.IX DoPolygonMesh
+.I DoPolygonMesh
+creates a primitive object that defines a collection of general
+polygons, normally interconnected.
+Each polygon must be as described in \f2DoPolygon\fP.
+.PP
+Mesh objects allow the user to specify a collection of vertices in
+space and connect the vertices into a collection of other
+geometric entities, usually forming a connected surface.
+Polygon meshes are generally used to approximate a smooth surface.
+.PP
+Geometric normals to the polygons in the mesh are calculated using the
+right-hand rule (the fingers of the right hand point in the order of
+vertices and the thumb points
+in the direction of the normal). 
+These normals are sometimes used for backface
+culling and facet shading.
+.PP
+The parameter \f2colormodel\fP specifies the color model used if the vertices
+contain color information for shading purposes.  The parameter \f2vertextype\fP
+specifies the exact nature of the vertices.  
+for more information, refer to Chapter 6, \f2Dore Vertex Types\fP,
+in the \f2Dore Reference Manual\fP or 
+to the \f2VertexTypes\fP on-line manual page.)
+.PP
+The parameter \f2vertices\fP is an array of vertex data.
+The parameter \f2vertexcount\fP specifies the number of vertices contained
+in the \f2vertices\fP array.
+.PP
+The parameter \f2polygoncount\fP specifies the number of polygons in the
+mesh.  The parameter \f2polygons\fP is an array of \f2polygoncount\fP
+integers, each of which specifies the number of contours in the
+associated polygon.
+The parameter \f2contours\fP is an array of integers, one for each
+of the total number of contours in the mesh.  Each entry in the
+\f2contours\fP array specifies the number of vertices in the
+associated contour.  
+.PP
+The parameter \f2vertexlist\f1 is an array of integers that index the
+\f2vertices\f1 array.  The first polygon in the mesh begins with the
+vertex specified by \f2vertexlist[0]\f1, and continues using the vertices
+specified by the following entries in \f2vertexlist\f1.
+The last vertex of a contour is implicitly connected to its
+first vertex.  The next polygon begins with the vertex specified next 
+in the \f2vertexlist\f1 array.
+.PP
+The parameter \f2shape\fP hints at the geometry of the polygons in the mesh.
+This argument has meaning only for polygons
+that consist of a single contour, 
+that is, for polygons where \f2polygons[i]\fP = 1.
+For these polygons, correctly specifying the shape of the contour
+will result in optimal polygon decomposition when necessary.
+Incorrectly specifying the shape may result in an incorrect or aborted
+decomposition.  The possible values for \f2shape\fP are:
+.IP "\f2DcConvex\fP <\f2DCCNVX\fP>"
+Path is wholly convex.
+.IP "\f2DcConcave\fP <\f2DCCNCV\fP>"
+Path may be concave but not self-intersecting.
+.IP "\f2DcComplex\fP <\f2DCCPLX\fP>"
+Path may be self-intersecting.
+.PP
+The parameter \f2smoothflag\fP specifies that, if vertex normals
+are not provided, the average of the geometric normals from a vertex's
+adjacent surfaces constitute the normal for shading.  (This
+assumes the polygon mesh defines a smooth surface.)
+.SH ERRORS
+\f2DoPolygonMesh\fP must be called with a valid specification for
+\f2shape\fP.
+.TP 15
+[WARNING - invalid parameter]
+.PP
+\f2DoPolygonMesh\fP must be called with at least one contour of three
+vertices.
+.TP 15
+[WARNING - insufficient information]
+.PP
+.I DoPolygonMesh
+will issue a warning if a zero vertex normal is calculated by Dore.
+.PP
+[WARNING - triangle normals sum to 0 at vertex, check for 
+back to back triangles]
+.SH "SEE ALSO"
+.nh
+.na
+DoPolygon(3D), DoSimplePolygon(3D), DoSimplePolygonMesh(3D), VertexTypes(3D)
+.ad
+.hy

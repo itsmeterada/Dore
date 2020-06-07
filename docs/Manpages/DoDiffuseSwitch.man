@@ -1,0 +1,59 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DoDiffuseSwitch 3D  "Dore"
+.SH NAME
+DoDiffuseSwitch \- Create a primitive attribute object for enabling or disabling use of the diffuse component of a surface's response
+to light
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+DtObject DoDiffuseSwitch(switchvalue)
+DtSwitch switchvalue;
+.sp
+.in -.5i
+FORTRAN:
+.in +.5i
+INTEGER*4 DODIFS(SWVAL)
+INTEGER*4 SWVAL
+.in -.5i
+.fi
+.SH DESCRIPTION
+.IX DODIFS
+.IX DoDiffuseSwitch
+\f2DoDiffuseSwitch\fP creates a diffuse switch primitive attribute.
+The \f2switchvalue\fP parameter is used to specify whether or
+not the surfaces of subsequent primitive objects have a diffuse
+component in their responses to light from 
+incident light sources in the
+environment.
+.PP
+The diffuse switch determines whether diffuse attributes will be used.
+If the \f2switchvalue\fP is \f2DcOff\fP <\f2DCOFF\fP>, the primitive object
+will render itself without diffuse shading.
+If the \f2switchvalue\fP is \f2DcOn\fP <\f2DCON\fP>, the primitive object
+will render itself using
+the diffuse attributes whenever possible.
+.PP
+The diffuse switch is one of three aspects of the diffuse component of
+a surface.  The other two components are the \f2DoDiffuseColor\fP
+<\f2DODIFC\fP> and the \f2DoDiffuseIntens\fP <\f2DODIFI\fP>.
+.SH DEFAULTS
+The default for \f2DoDiffuseSwitch\fP is \f2DcOn\fP <\f2DCON\fP>.
+.SH "SEE ALSO"
+DoDiffuseColor(3D), DoDiffuseIntens(3D)

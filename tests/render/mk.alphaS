@@ -1,0 +1,175 @@
+#ident "%W% %G%"
+ 
+# Copyright (C) 1994 Kubota Graphics Corp.
+# 
+# Permission to use, copy, modify, and distribute this material for
+# any purpose and without fee is hereby granted, provided that the
+# above copyright notice and this permission notice appear in all
+# copies, and that the name of Kubota Graphics not be used in
+# advertising or publicity pertaining to this material.  Kubota
+# Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+# OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+# "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+# PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+# EXPRESS OR IMPLIED.
+ 
+SHELL = /bin/sh
+DORE_OBJTYPE = alphaS
+THIS_MAKEFILE = mk.alphaS
+
+###########################################################################
+#
+# This makefile builds the render program using one of three sources
+# of libraries and include files:
+# 
+# render_std:    use standard locations for everything
+#
+# render_devel:  use Dore files from $(DORE_LOC) and VLL files
+#                from standard locations.
+#
+###########################################################################
+
+#
+# for using standard (installed) libraries and include files
+#
+STD_CFLAGS = -I/usr/include -DDORE_REAL_SINGLE -non_shared -tl, -O0
+STD_DORELIB = -ldore
+STD_OTHERLIBS = -lvll -lPEX5 -lXext -lKPCext -lXPeer -lX11 -ldnet_stub -lm
+
+#
+# for using dore development libraries and include files
+#
+DEVEL_CFLAGS = -I$(DORE_LOC)/dore/include -DDORE_REAL_SINGLE -DNEW_DORE \
+               -non_shared  -tl, -O0
+DEVEL_DORELIB = $(DORE_LOC)/dore/lib/$(DORE_OBJTYPE)/libdore.a
+DEVEL_OTHERLIBS = -lvll -lPEX5 -lXext -lKPCext -lXPeer -lX11 -ldnet_stub -lm
+
+LOCALDIR  =  /nfs/teak/u/sb/project/dore
+SCENELIB  = $(LOCALDIR)/lib/$(DORE_OBJTYPE)/libscene.a
+
+###########################################################################
+
+RENDER_DEP=	$(DORE_OBJTYPE)/render.o $(DORE_OBJTYPE)/makeobjs.o \
+		$(DORE_OBJTYPE)/Trnsfrmr.o \
+		$(DORE_OBJTYPE)/g3crtemap.o $(DORE_OBJTYPE)/rstrlib.o \
+		$(DORE_OBJTYPE)/calbak.o $(DORE_OBJTYPE)/x11.o \
+		$(DORE_OBJTYPE)/prsarg.o
+
+FOODPROS_DEP= $(DORE_OBJTYPE)/render.o $(DORE_OBJTYPE)/foodpros.o \
+		$(DORE_OBJTYPE)/Trnsfrmr.o \
+		$(DORE_OBJTYPE)/g3crtemap.o $(DORE_OBJTYPE)/rstrlib.o \
+		$(DORE_OBJTYPE)/calbak.o $(DORE_OBJTYPE)/x11.o \
+		$(DORE_OBJTYPE)/tiles.o $(DORE_OBJTYPE)/stkgrp.o \
+		$(DORE_OBJTYPE)/prsarg.o
+
+###########################################################################
+
+# If this makefile is invoked without an explicit target, print the
+# possible targets that can be specified for a build.
+
+info:
+	@echo " "
+	@echo "Makefile Targets:"
+	@echo " "
+	@echo "render_std"
+	@echo "    Use standard locations for everything."
+	@echo " "
+	@echo "render_devel"
+	@echo "    Use Dore' files from $(DORE_LOC) and VLL file from standard"
+	@echo "    locations.
+	@echo " "
+	@echo "foodpros"
+	@echo "    Food processor program."
+	@echo " "
+	@echo "clean"
+	@echo "    Clean object files & executables."
+
+# recursively call make with the appropriate CFLAG setting
+
+render_std:
+	make -f $(THIS_MAKEFILE) render_std2 "CFLAGS=$(STD_CFLAGS)"
+
+render_devel: check_dore_loc
+	make -f $(THIS_MAKEFILE) render_devel2 "CFLAGS=$(DEVEL_CFLAGS)"
+
+render_std2:  	$(DORE_OBJTYPE) $(DORE_OBJTYPE)/render_std
+render_devel2:  $(DORE_OBJTYPE) $(DORE_OBJTYPE)/render_devel
+
+foodpros:	$(DORE_OBJTYPE) $(DORE_OBJTYPE)/foodpros
+
+clean:		
+	rm -f $(DORE_OBJTYPE)/*.o $(DORE_OBJTYPE)/render \
+	$(DORE_OBJTYPE)/foodpros
+
+###########################################################################
+
+$(DORE_OBJTYPE):
+	@if [ ! -d $(DORE_OBJTYPE) ]; then \
+	   echo "Creating directory $(DORE_OBJTYPE)" ; \
+	   mkdir $(DORE_OBJTYPE) ; \
+	fi
+
+$(DORE_OBJTYPE)/render_std: $(RENDER_DEP) 
+	rm -f $(DORE_OBJTYPE)/render
+	$(CC) $(STD_CFLAGS) $(RENDER_DEP) $(SCENELIB) \
+	    $(STD_DORELIB) $(STD_OTHERLIBS) -o $(DORE_OBJTYPE)/render
+	-@chmod +x $(DORE_OBJTYPE)/render
+
+$(DORE_OBJTYPE)/render_devel: $(RENDER_DEP) 
+	rm -f $(DORE_OBJTYPE)/render
+	$(CC) $(DEVEL_CFLAGS) $(RENDER_DEP) $(SCENELIB) \
+	    $(DEVEL_DORELIB) $(DEVEL_OTHERLIBS) -o $(DORE_OBJTYPE)/render
+	-@chmod +x $(DORE_OBJTYPE)/render
+
+$(DORE_OBJTYPE)/foodpros: $(FOODPROS_DEP) 
+	rm -f $(DORE_OBJTYPE)/foodpros
+	$(CC) $(CFLAGS) $(FOODPROS_DEP) $(SCENELIB) \
+	    $(DORELIB) $(OTHERLIBS) -o $(DORE_OBJTYPE)/foodpros
+	-@chmod +x $(DORE_OBJTYPE)/foodpros
+
+###########################################################################
+
+$(DORE_OBJTYPE)/render.o: src/render.c
+	$(CC) -c $(CFLAGS) src/render.c -o $(DORE_OBJTYPE)/render.o
+
+$(DORE_OBJTYPE)/foodpros.o: src/foodpros.c
+	$(CC) -c $(CFLAGS) src/foodpros.c -o $(DORE_OBJTYPE)/foodpros.o
+
+$(DORE_OBJTYPE)/calbak.o: src/calbak.c
+	$(CC) -c $(CFLAGS) src/calbak.c -o $(DORE_OBJTYPE)/calbak.o
+
+$(DORE_OBJTYPE)/x11.o: src/x11.c
+	$(CC) -c $(CFLAGS) src/x11.c -o $(DORE_OBJTYPE)/x11.o
+
+$(DORE_OBJTYPE)/makeobjs.o: src/makeobjs.c
+	$(CC) -c $(CFLAGS) src/makeobjs.c -o $(DORE_OBJTYPE)/makeobjs.o
+
+$(DORE_OBJTYPE)/Trnsfrmr.o: src/Trnsfrmr.c
+	$(CC) -c $(CFLAGS) src/Trnsfrmr.c -o $(DORE_OBJTYPE)/Trnsfrmr.o
+
+$(DORE_OBJTYPE)/rstrlib.o: src/rstrlib.c 
+	$(CC) -c $(CFLAGS) src/rstrlib.c -o $(DORE_OBJTYPE)/rstrlib.o
+
+$(DORE_OBJTYPE)/g3crtemap.o: src/g3crtemap.c 
+	$(CC) -c $(CFLAGS) src/g3crtemap.c -o $(DORE_OBJTYPE)/g3crtemap.o
+
+$(DORE_OBJTYPE)/tiles.o: src/tiles.c 
+	$(CC) -c $(CFLAGS) src/tiles.c -o $(DORE_OBJTYPE)/tiles.o
+
+$(DORE_OBJTYPE)/stkgrp.o: src/stkgrp.c 
+	$(CC) -c $(CFLAGS) src/stkgrp.c -o $@
+
+$(DORE_OBJTYPE)/prsarg.o: src/prsarg.c
+	$(CC) -c $(CFLAGS) src/prsarg.c -o $@
+
+###########################################################################
+
+check_dore_loc: FORCE_IT
+	-@if [ -z "$(DORE_LOC)" ]; then \
+		echo "Warning:  DORE_LOC is not set!" ; \
+	fi
+
+FORCE_IT:
+
+###########################################################################

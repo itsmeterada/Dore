@@ -1,0 +1,1018 @@
+%!PS-Adobe-3.0
+%%Creator: groff version 1.06
+%%DocumentNeededResources: font Palatino-Roman
+%%+ font Helvetica
+%%+ font Palatino-Italic
+%%+ font Helvetica-BoldOblique
+%%+ font Helvetica-Bold
+%%+ font Courier
+%%+ font Palatino-Bold
+%%+ font Helvetica-Oblique
+%%DocumentSuppliedResources: procset grops 1.06 0
+%%Pages: 7
+%%PageOrder: Ascend
+%%Orientation: Portrait
+%%EndComments
+%%BeginProlog
+%%BeginResource: procset grops 1.06 0
+%!PS-Adobe-3.0 Resource-ProcSet
+
+/setpacking where {
+	pop
+	currentpacking
+	true setpacking
+} if
+
+/grops 120 dict dup begin 
+
+% The ASCII code of the space character.
+/SC 32 def
+
+/A /show load def
+/B { 0 SC 3 -1 roll widthshow } bind def
+/C { 0 exch ashow } bind def
+/D { 0 exch 0 SC 5 2 roll awidthshow } bind def
+/E { 0 rmoveto show } bind def
+/F { 0 rmoveto 0 SC 3 -1 roll widthshow } bind def
+/G { 0 rmoveto 0 exch ashow } bind def
+/H { 0 rmoveto 0 exch 0 SC 5 2 roll awidthshow } bind def
+/I { 0 exch rmoveto show } bind def
+/J { 0 exch rmoveto 0 SC 3 -1 roll widthshow } bind def
+/K { 0 exch rmoveto 0 exch ashow } bind def
+/L { 0 exch rmoveto 0 exch 0 SC 5 2 roll awidthshow } bind def
+/M { rmoveto show } bind def
+/N { rmoveto 0 SC 3 -1 roll widthshow } bind def
+/O { rmoveto 0 exch ashow } bind def
+/P { rmoveto 0 exch 0 SC 5 2 roll awidthshow } bind def
+/Q { moveto show } bind def 
+/R { moveto 0 SC 3 -1 roll widthshow } bind def
+/S { moveto 0 exch ashow } bind def
+/T { moveto 0 exch 0 SC 5 2 roll awidthshow } bind def
+
+% name size font SF -
+
+/SF {
+	findfont exch
+	[ exch dup 0 exch 0 exch neg 0 0 ] makefont
+	dup setfont
+	[ exch /setfont cvx ] cvx bind def
+} bind def
+
+% name a c d font MF -
+
+/MF {
+	findfont
+	[ 5 2 roll
+	0 3 1 roll % b
+	neg 0 0 ] makefont
+	dup setfont
+	[ exch /setfont cvx ] cvx bind def
+} bind def
+
+/level0 0 def
+/RES 0 def
+/PL 0 def
+/LS 0 def
+
+% Guess the page length.
+% This assumes that the imageable area is vertically centered on the page.
+% PLG - length
+
+/PLG {
+	gsave newpath clippath pathbbox grestore
+	exch pop add exch pop
+} bind def
+
+% BP -
+
+/BP {
+	/level0 save def
+	1 setlinecap
+	1 setlinejoin
+	72 RES div dup scale
+	LS {
+		90 rotate
+	} {
+		0 PL translate
+	} ifelse
+	1 -1 scale
+} bind def
+
+/EP {
+	level0 restore
+	showpage
+} bind def
+
+
+% centerx centery radius startangle endangle DA -
+
+/DA {
+	newpath arcn stroke
+} bind def
+
+% x y SN - x' y'
+% round a position to nearest (pixel + (.25,.25))
+
+/SN {
+	transform 
+	.25 sub exch .25 sub exch
+	round .25 add exch round .25 add exch
+	itransform
+} bind def
+	
+% endx endy startx starty DL -
+% we round the endpoints of the line, so that parallel horizontal
+% and vertical lines will appear even
+
+/DL {
+	SN
+	moveto
+	SN
+	lineto stroke
+} bind def
+
+% centerx centery radius DC -
+
+/DC {
+	newpath 0 360 arc closepath
+} bind def
+
+
+/TM matrix def
+
+%  width height centerx centery DE -
+
+/DE {
+	TM currentmatrix pop
+	translate scale newpath 0 0 .5 0 360 arc closepath
+	TM setmatrix
+} bind def
+
+% these are for splines
+
+/RC /rcurveto load def
+/RL /rlineto load def
+/ST /stroke load def
+/MT /moveto load def
+/CL /closepath load def
+
+% fill the last path
+
+% amount FL -
+
+/FL {
+	currentgray exch setgray fill setgray
+} bind def
+
+% fill with the ``current color''
+
+/BL /fill load def
+
+/LW /setlinewidth load def
+% new_font_name encoding_vector old_font_name RE -
+
+/RE {
+	findfont
+	dup maxlength dict begin
+	{
+		1 index /FID ne { def } { pop pop } ifelse
+	} forall
+	/Encoding exch def
+	dup /FontName exch def
+	currentdict end definefont pop
+} bind def
+
+/DEFS 0 def
+
+% hpos vpos EBEGIN -
+
+/EBEGIN {
+	moveto
+	DEFS begin
+} bind def
+
+/EEND /end load def
+
+/CNT 0 def
+/level1 0 def
+
+% llx lly newwid wid newht ht newllx newlly PBEGIN -
+
+/PBEGIN {
+	/level1 save def
+	translate
+	div 3 1 roll div exch scale
+	neg exch neg exch translate
+	% set the graphics state to default values
+	0 setgray
+	0 setlinecap
+	1 setlinewidth
+	0 setlinejoin
+	10 setmiterlimit
+	[] 0 setdash
+	/setstrokeadjust where {
+		pop
+		false setstrokeadjust
+	} if
+	/setoverprint where {
+		pop
+		false setoverprint
+	} if
+	newpath
+	/CNT countdictstack def
+	userdict begin
+	/showpage {} def
+} bind def
+
+/PEND {
+	clear
+	countdictstack CNT sub { end } repeat
+	level1 restore
+} bind def
+
+end def
+
+/setpacking where {
+	pop
+	setpacking
+} if
+%%EndResource
+%%EndProlog
+%%BeginSetup
+%%IncludeResource: font Palatino-Roman
+%%IncludeResource: font Helvetica
+%%IncludeResource: font Palatino-Italic
+%%IncludeResource: font Helvetica-BoldOblique
+%%IncludeResource: font Helvetica-Bold
+%%IncludeResource: font Courier
+%%IncludeResource: font Palatino-Bold
+%%IncludeResource: font Helvetica-Oblique
+grops begin/DEFS 1 dict def DEFS begin/u{.001 mul}bind def end/RES 72 def/PL
+792 def/LS false def/ENC0[/asciicircum/asciitilde/Scaron/Zcaron/scaron/zcaron
+/Ydieresis/trademark/quotesingle/.notdef/.notdef/.notdef/.notdef/.notdef
+/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef
+/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/space
+/exclam/quotedbl/numbersign/dollar/percent/ampersand/quoteright/parenleft
+/parenright/asterisk/plus/comma/hyphen/period/slash/zero/one/two/three/four
+/five/six/seven/eight/nine/colon/semicolon/less/equal/greater/question/at/A/B/C
+/D/E/F/G/H/I/J/K/L/M/N/O/P/Q/R/S/T/U/V/W/X/Y/Z/bracketleft/backslash
+/bracketright/circumflex/underscore/quoteleft/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q
+/r/s/t/u/v/w/x/y/z/braceleft/bar/braceright/tilde/.notdef/quotesinglbase
+/guillemotleft/guillemotright/bullet/florin/fraction/perthousand/dagger
+/daggerdbl/endash/emdash/ff/fi/fl/ffi/ffl/dotlessi/dotlessj/grave/hungarumlaut
+/dotaccent/breve/caron/ring/ogonek/quotedblleft/quotedblright/oe/lslash
+/quotedblbase/OE/Lslash/.notdef/exclamdown/cent/sterling/currency/yen/brokenbar
+/section/dieresis/copyright/ordfeminine/guilsinglleft/logicalnot/minus
+/registered/macron/degree/plusminus/twosuperior/threesuperior/acute/mu
+/paragraph/periodcentered/cedilla/onesuperior/ordmasculine/guilsinglright
+/onequarter/onehalf/threequarters/questiondown/Agrave/Aacute/Acircumflex/Atilde
+/Adieresis/Aring/AE/Ccedilla/Egrave/Eacute/Ecircumflex/Edieresis/Igrave/Iacute
+/Icircumflex/Idieresis/Eth/Ntilde/Ograve/Oacute/Ocircumflex/Otilde/Odieresis
+/multiply/Oslash/Ugrave/Uacute/Ucircumflex/Udieresis/Yacute/Thorn/germandbls
+/agrave/aacute/acircumflex/atilde/adieresis/aring/ae/ccedilla/egrave/eacute
+/ecircumflex/edieresis/igrave/iacute/icircumflex/idieresis/eth/ntilde/ograve
+/oacute/ocircumflex/otilde/odieresis/divide/oslash/ugrave/uacute/ucircumflex
+/udieresis/yacute/thorn/ydieresis]def/Helvetica-Oblique@0 ENC0
+/Helvetica-Oblique RE/Palatino-Bold@0 ENC0/Palatino-Bold RE/Courier@0 ENC0
+/Courier RE/Helvetica-Bold@0 ENC0/Helvetica-Bold RE/Helvetica-BoldOblique@0
+ENC0/Helvetica-BoldOblique RE/Palatino-Italic@0 ENC0/Palatino-Italic RE
+/Helvetica@0 ENC0/Helvetica RE/Palatino-Roman@0 ENC0/Palatino-Roman RE
+%%EndSetup
+%%Page: 459 1
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 99 46.8 63 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 243 46.8 207 46.8 DL 279 46.8 243 46.8 DL 315 46.8 279 46.8 DL 351
+46.8 315 46.8 DL 387 46.8 351 46.8 DL 437.4 46.8 401.4 46.8 DL 464.4 46.8 428.4
+46.8 DL 500.4 46.8 464.4 46.8 DL 536.4 46.8 500.4 46.8 DL/F0 42
+/Palatino-Roman@0 SF(R)153.948 91 Q/F1 36/Palatino-Roman@0 SF(ASTER)A F0(F)
+307.524 91 Q F1(ILE)A(AND)119.904 133 Q F0(M)216.192 133 Q F1(EMOR)A(Y)-1.332 E
+F0(F)210.936 175 Q F1(ORMA)A(TS)346.032 175 Q/F2 12/Helvetica@0 SF
+(CHAPTER SEVEN)431.712 175 Q 99 186 63 186 DL 135 186 99 186 DL 171 186 135 186
+DL 207 186 171 186 DL 243 186 207 186 DL 279 186 243 186 DL 315 186 279 186 DL
+351 186 315 186 DL 387 186 351 186 DL 437.4 186 401.4 186 DL 464.4 186 428.4
+186 DL 500.4 186 464.4 186 DL 536.4 186 500.4 186 DL/F3 11/Palatino-Roman@0 SF
+(Dore)63 252 Q 4.486<b470>82.668 252 S -.198(ro)97.428 252 S .933
+(vides raster objects for the r).198 F(epr)-.198 E .934
+(esentation and storage of)-.198 F .297(two- and thr)63 265.2 R .297
+(ee-dimensional data.)-.198 F .296(Raster objects can be \214le objects)5.797 F
+.143(or memory objects.)63 278.4 R .144
+(This chapter describes the exact \214le and mem-)5.643 F .956
+(ory formats used by Dore)63 291.6 R 4.509<b466>186.922 291.6 S .956
+(or raster data.)198.757 291.6 R .955(Chapter 14 of the)6.456 F/F4 11
+/Palatino-Italic@0 SF(Dore)3.705 E<b4>383.029 291.6 Q(Pr)63 304.8 Q -2.343
+(ogrammer ')-.198 F 4.664(sG)-.605 G(uide)138.768 304.8 Q F3 1.915
+(describes how to cr)4.664 F 1.915(eate and use Dore)-.198 F 5.468<b472>350.16
+304.8 S(aster)363.636 304.8 Q 2.897(objects. It)63 318 R .146
+(also describes the system functions for r)2.896 F .146(eading, writing,)-.198
+F(and maintaining raster data.)63 331.2 Q .16 LW 65 357.2 63 357.2 DL 67 357.2
+65 357.2 DL 69 357.2 67 357.2 DL 71 357.2 69 357.2 DL 73 357.2 71 357.2 DL 75
+357.2 73 357.2 DL 77 357.2 75 357.2 DL 79 357.2 77 357.2 DL 81 357.2 79 357.2
+DL 83 357.2 81 357.2 DL 85 357.2 83 357.2 DL 87 357.2 85 357.2 DL 89 357.2 87
+357.2 DL 91 357.2 89 357.2 DL 93 357.2 91 357.2 DL 95 357.2 93 357.2 DL 97
+357.2 95 357.2 DL 99 357.2 97 357.2 DL 101 357.2 99 357.2 DL 103 357.2 101
+357.2 DL 105 357.2 103 357.2 DL 107 357.2 105 357.2 DL 109 357.2 107 357.2 DL
+111 357.2 109 357.2 DL 113 357.2 111 357.2 DL 115 357.2 113 357.2 DL 117 357.2
+115 357.2 DL 119 357.2 117 357.2 DL 121 357.2 119 357.2 DL 123 357.2 121 357.2
+DL 125 357.2 123 357.2 DL 127 357.2 125 357.2 DL 129 357.2 127 357.2 DL 131
+357.2 129 357.2 DL 133 357.2 131 357.2 DL 135 357.2 133 357.2 DL 137 357.2 135
+357.2 DL 139 357.2 137 357.2 DL 141 357.2 139 357.2 DL 143 357.2 141 357.2 DL
+145 357.2 143 357.2 DL 147 357.2 145 357.2 DL 149 357.2 147 357.2 DL 151 357.2
+149 357.2 DL 153 357.2 151 357.2 DL 155 357.2 153 357.2 DL 157 357.2 155 357.2
+DL 159 357.2 157 357.2 DL 161 357.2 159 357.2 DL 163 357.2 161 357.2 DL 165
+357.2 163 357.2 DL 167 357.2 165 357.2 DL 169 357.2 167 357.2 DL 171 357.2 169
+357.2 DL 173 357.2 171 357.2 DL 175 357.2 173 357.2 DL 177 357.2 175 357.2 DL
+179 357.2 177 357.2 DL 181 357.2 179 357.2 DL 183 357.2 181 357.2 DL 185 357.2
+183 357.2 DL 187 357.2 185 357.2 DL 189 357.2 187 357.2 DL 191 357.2 189 357.2
+DL 193 357.2 191 357.2 DL 195 357.2 193 357.2 DL 197 357.2 195 357.2 DL 199
+357.2 197 357.2 DL 201 357.2 199 357.2 DL 203 357.2 201 357.2 DL 205 357.2 203
+357.2 DL 207 357.2 205 357.2 DL 209 357.2 207 357.2 DL 211 357.2 209 357.2 DL
+213 357.2 211 357.2 DL 215 357.2 213 357.2 DL 217 357.2 215 357.2 DL 219 357.2
+217 357.2 DL 221 357.2 219 357.2 DL 223 357.2 221 357.2 DL 225 357.2 223 357.2
+DL 227 357.2 225 357.2 DL 229 357.2 227 357.2 DL 231 357.2 229 357.2 DL 233
+357.2 231 357.2 DL 235 357.2 233 357.2 DL 237 357.2 235 357.2 DL 239 357.2 237
+357.2 DL 241 357.2 239 357.2 DL 243 357.2 241 357.2 DL 245 357.2 243 357.2 DL
+247 357.2 245 357.2 DL 249 357.2 247 357.2 DL 251 357.2 249 357.2 DL 253 357.2
+251 357.2 DL 255 357.2 253 357.2 DL 257 357.2 255 357.2 DL 259 357.2 257 357.2
+DL 261 357.2 259 357.2 DL 263 357.2 261 357.2 DL 265 357.2 263 357.2 DL 267
+357.2 265 357.2 DL 269 357.2 267 357.2 DL 271 357.2 269 357.2 DL 273 357.2 271
+357.2 DL 275 357.2 273 357.2 DL 277 357.2 275 357.2 DL 279 357.2 277 357.2 DL
+281 357.2 279 357.2 DL 283 357.2 281 357.2 DL 285 357.2 283 357.2 DL 287 357.2
+285 357.2 DL 289 357.2 287 357.2 DL 291 357.2 289 357.2 DL 293 357.2 291 357.2
+DL 295 357.2 293 357.2 DL 297 357.2 295 357.2 DL 299 357.2 297 357.2 DL 301
+357.2 299 357.2 DL 303 357.2 301 357.2 DL 305 357.2 303 357.2 DL 307 357.2 305
+357.2 DL 309 357.2 307 357.2 DL 311 357.2 309 357.2 DL 313 357.2 311 357.2 DL
+315 357.2 313 357.2 DL 317 357.2 315 357.2 DL 319 357.2 317 357.2 DL 321 357.2
+319 357.2 DL 323 357.2 321 357.2 DL 325 357.2 323 357.2 DL 327 357.2 325 357.2
+DL 329 357.2 327 357.2 DL 331 357.2 329 357.2 DL 333 357.2 331 357.2 DL 335
+357.2 333 357.2 DL 337 357.2 335 357.2 DL 339 357.2 337 357.2 DL 341 357.2 339
+357.2 DL 343 357.2 341 357.2 DL 345 357.2 343 357.2 DL 347 357.2 345 357.2 DL
+349 357.2 347 357.2 DL 351 357.2 349 357.2 DL 353 357.2 351 357.2 DL 355 357.2
+353 357.2 DL 357 357.2 355 357.2 DL 359 357.2 357 357.2 DL 361 357.2 359 357.2
+DL 363 357.2 361 357.2 DL 365 357.2 363 357.2 DL 367 357.2 365 357.2 DL 369
+357.2 367 357.2 DL 371 357.2 369 357.2 DL 373 357.2 371 357.2 DL 375 357.2 373
+357.2 DL 377 357.2 375 357.2 DL 379 357.2 377 357.2 DL 381 357.2 379 357.2 DL
+383 357.2 381 357.2 DL 385 357.2 383 357.2 DL 387 357.2 385 357.2 DL 1.44 LW
+419.4 357.7 401.4 357.7 DL 428.4 357.7 410.4 357.7 DL 446.4 357.7 428.4 357.7
+DL 464.4 357.7 446.4 357.7 DL 482.4 357.7 464.4 357.7 DL 500.4 357.7 482.4
+357.7 DL 518.4 357.7 500.4 357.7 DL 536.4 357.7 518.4 357.7 DL/F5 12
+/Helvetica-BoldOblique@0 SF(Raster)499.056 371.7 Q(Pix)501.828 385.7 Q(els)-.12
+E(and)515.064 399.7 Q -1.536 -1.08(Vo x)499.272 413.7 T(els).96 E F3 3.443(Ap)
+63 385.8 S .693(ixel \(pictur)81.612 385.8 R 3.443(ee)-.198 G .692
+(lement\) is the set of information associated with)149.108 385.8 R 3.803(as)63
+399 S 1.053(peci\214c point in a two-dimensional raster image.)76.967 399 R
+3.804(Av)6.554 G 1.054(oxel \(vol-)340.296 399 R 1.969
+(ume element\) is the thr)63 412.2 R 1.968
+(ee-dimensional analog of a pixel, and is)-.198 F .904(used when r)63 425.4 R
+.904(eferring to thr)-.198 F .904(ee-dimensional raster objects.)-.198 F .905
+(In Dore)6.404 F .803<b42c>379.784 425.4 S 5.274(ap)63 438.6 S 2.524
+(ixel or voxel consists of certain combinations of r)80.385 438.6 R 2.524
+(ed, gr)-.198 F(een,)-.198 E .205(blue, alpha, and Z image data.)63 451.8 R
+.205(This section describes the meaning)5.705 F
+(of the values of these pixel and voxel components.)63 465 Q/F6 11
+/Helvetica-BoldOblique@0 SF 3.002(RGB Data.)63 490.2 R F3 3.001
+(RGB color information describes the color of each)4.891 F 2.489
+(pixel/voxel, and is r)63 503.4 R(epr)-.198 E 2.489(esented by thr)-.198 F 2.49
+(ee 8-bit unsigned integer)-.198 F 1.517(byte values.)63 516.6 R 1.517
+(Each value r)7.017 F(epr)-.198 E 1.516(esents the intensity of light for that)
+-.198 F 1.798(color channel.)63 529.8 R 4.548(Av)7.298 G 1.799
+(alue of 0 means no light, and a value of 255)159.419 529.8 R
+(means full intensity light.)63 543 Q F6 .728(Alpha Data.)63 568.2 R F3 .728
+(Alpha information describes the transpar)4.891 F .727(ency of the)-.198 F
+1.058(pixel/voxel, and is r)63 581.4 R(epr)-.198 E 1.058
+(esented as a single 8-bit unsigned integer)-.198 F 1.031(byte value.)63 594.6
+R 3.781(Av)6.531 G 1.031(alue of 0 means the pixel/voxel is opaque, and a)
+142.488 594.6 R 1.631(value of 255 means it is completely transpar)63 607.8 R
+1.631(ent. Alpha informa-)-.198 F(tion is used in image compositing.)63 621 Q
+F6 4.699(ZD)63 646.2 S(ata.)82.362 646.2 Q F3 1.64
+(The Z information describes the r)4.891 F 1.64(elative distance of the)-.198 F
+2.282(pixel/voxel fr)63 659.4 R 2.282(om a point of r)-.198 F(efer)-.198 E
+2.283(ence, and is stor)-.198 F 2.283(ed as a 32-bit)-.198 F .025
+(unsigned integer)63 672.6 R 5.525(.A)-.814 G .024(value of 0 r)164.165 672.6 R
+(epr)-.198 E .024(esents a distance as far away as)-.198 F 1.225
+(possible, and a value of 4,294,967,295 \(or)63 686.75 R F6(2)4.24 E/F7 8
+/Palatino-Roman@0 SF(3)278.775 682.13 Q/F8 8/Helvetica-BoldOblique@0 SF(2).192
+E F3 1.226(-1\) r)288.469 686.75 R(epr)-.198 E 1.226(esents a dis-)-.198 F
+2.304(tance as close as possible.)63 699.95 R 2.303
+(For example, if the image is a two-)7.803 F 2.071(dimensional r)63 713.15 R
+2.071(endering of a thr)-.198 F 2.072(ee-dimensional scene, then the Z)-.198 F
+81 756 63 756 DL 99 756 81 756 DL 117 756 99 756 DL 135 756 117 756 DL 153 756
+135 756 DL 171 756 153 756 DL 189 756 171 756 DL 207 756 189 756 DL 225 756 207
+756 DL 243 756 225 756 DL 261 756 243 756 DL 279 756 261 756 DL 297 756 279 756
+DL 315 756 297 756 DL 333 756 315 756 DL 351 756 333 756 DL 369 756 351 756 DL
+387 756 369 756 DL 419.4 756 401.4 756 DL 428.4 756 410.4 756 DL 446.4 756
+428.4 756 DL 464.4 756 446.4 756 DL 482.4 756 464.4 756 DL 500.4 756 482.4 756
+DL 518.4 756 500.4 756 DL 536.4 756 518.4 756 DL/F9 9/Helvetica@0 SF
+(Raster File and Memor)255.249 768.96 Q 2.502(yF).27 G -2.277(or mats)359.271
+768.96 R(Dore)414.21 768.96 Q 3.506<b452>429.712 768.96 S(ef)442.713 768.96 Q
+(erence Man)-.27 E(ual)-.09 E/F10 9/Helvetica-Bold@0 SF(7-459)4.002 E EP
+%%Page: 460 2
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 108 46.8 72 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 257.4 46.8 221.4 46.8 DL 293.4 46.8 257.4 46.8 DL 329.4 46.8 293.4
+46.8 DL 365.4 46.8 329.4 46.8 DL 401.4 46.8 365.4 46.8 DL 437.4 46.8 401.4 46.8
+DL 473.4 46.8 437.4 46.8 DL 509.4 46.8 473.4 46.8 DL 545.4 46.8 509.4 46.8 DL
+/F0 10/Helvetica-BoldOblique@0 SF(Raster Pix)72 57.6 Q(els and V)-.1 E -2.28
+-.3(ox e)-.9 H(ls).3 E/F1 10/Helvetica@0 SF(\(contin)72 68.4 Q(ued\))-.1 E/F2
+11/Palatino-Roman@0 SF(data could be the distance of the visible surface fr)
+221.5 109.2 Q(om the eye.)-.198 E .16 LW 223.4 135.2 221.4 135.2 DL 225.4 135.2
+223.4 135.2 DL 227.4 135.2 225.4 135.2 DL 229.4 135.2 227.4 135.2 DL 231.4
+135.2 229.4 135.2 DL 233.4 135.2 231.4 135.2 DL 235.4 135.2 233.4 135.2 DL
+237.4 135.2 235.4 135.2 DL 239.4 135.2 237.4 135.2 DL 241.4 135.2 239.4 135.2
+DL 243.4 135.2 241.4 135.2 DL 245.4 135.2 243.4 135.2 DL 247.4 135.2 245.4
+135.2 DL 249.4 135.2 247.4 135.2 DL 251.4 135.2 249.4 135.2 DL 253.4 135.2
+251.4 135.2 DL 255.4 135.2 253.4 135.2 DL 257.4 135.2 255.4 135.2 DL 259.4
+135.2 257.4 135.2 DL 261.4 135.2 259.4 135.2 DL 263.4 135.2 261.4 135.2 DL
+265.4 135.2 263.4 135.2 DL 267.4 135.2 265.4 135.2 DL 269.4 135.2 267.4 135.2
+DL 271.4 135.2 269.4 135.2 DL 273.4 135.2 271.4 135.2 DL 275.4 135.2 273.4
+135.2 DL 277.4 135.2 275.4 135.2 DL 279.4 135.2 277.4 135.2 DL 281.4 135.2
+279.4 135.2 DL 283.4 135.2 281.4 135.2 DL 285.4 135.2 283.4 135.2 DL 287.4
+135.2 285.4 135.2 DL 289.4 135.2 287.4 135.2 DL 291.4 135.2 289.4 135.2 DL
+293.4 135.2 291.4 135.2 DL 295.4 135.2 293.4 135.2 DL 297.4 135.2 295.4 135.2
+DL 299.4 135.2 297.4 135.2 DL 301.4 135.2 299.4 135.2 DL 303.4 135.2 301.4
+135.2 DL 305.4 135.2 303.4 135.2 DL 307.4 135.2 305.4 135.2 DL 309.4 135.2
+307.4 135.2 DL 311.4 135.2 309.4 135.2 DL 313.4 135.2 311.4 135.2 DL 315.4
+135.2 313.4 135.2 DL 317.4 135.2 315.4 135.2 DL 319.4 135.2 317.4 135.2 DL
+321.4 135.2 319.4 135.2 DL 323.4 135.2 321.4 135.2 DL 325.4 135.2 323.4 135.2
+DL 327.4 135.2 325.4 135.2 DL 329.4 135.2 327.4 135.2 DL 331.4 135.2 329.4
+135.2 DL 333.4 135.2 331.4 135.2 DL 335.4 135.2 333.4 135.2 DL 337.4 135.2
+335.4 135.2 DL 339.4 135.2 337.4 135.2 DL 341.4 135.2 339.4 135.2 DL 343.4
+135.2 341.4 135.2 DL 345.4 135.2 343.4 135.2 DL 347.4 135.2 345.4 135.2 DL
+349.4 135.2 347.4 135.2 DL 351.4 135.2 349.4 135.2 DL 353.4 135.2 351.4 135.2
+DL 355.4 135.2 353.4 135.2 DL 357.4 135.2 355.4 135.2 DL 359.4 135.2 357.4
+135.2 DL 361.4 135.2 359.4 135.2 DL 363.4 135.2 361.4 135.2 DL 365.4 135.2
+363.4 135.2 DL 367.4 135.2 365.4 135.2 DL 369.4 135.2 367.4 135.2 DL 371.4
+135.2 369.4 135.2 DL 373.4 135.2 371.4 135.2 DL 375.4 135.2 373.4 135.2 DL
+377.4 135.2 375.4 135.2 DL 379.4 135.2 377.4 135.2 DL 381.4 135.2 379.4 135.2
+DL 383.4 135.2 381.4 135.2 DL 385.4 135.2 383.4 135.2 DL 387.4 135.2 385.4
+135.2 DL 389.4 135.2 387.4 135.2 DL 391.4 135.2 389.4 135.2 DL 393.4 135.2
+391.4 135.2 DL 395.4 135.2 393.4 135.2 DL 397.4 135.2 395.4 135.2 DL 399.4
+135.2 397.4 135.2 DL 401.4 135.2 399.4 135.2 DL 403.4 135.2 401.4 135.2 DL
+405.4 135.2 403.4 135.2 DL 407.4 135.2 405.4 135.2 DL 409.4 135.2 407.4 135.2
+DL 411.4 135.2 409.4 135.2 DL 413.4 135.2 411.4 135.2 DL 415.4 135.2 413.4
+135.2 DL 417.4 135.2 415.4 135.2 DL 419.4 135.2 417.4 135.2 DL 421.4 135.2
+419.4 135.2 DL 423.4 135.2 421.4 135.2 DL 425.4 135.2 423.4 135.2 DL 427.4
+135.2 425.4 135.2 DL 429.4 135.2 427.4 135.2 DL 431.4 135.2 429.4 135.2 DL
+433.4 135.2 431.4 135.2 DL 435.4 135.2 433.4 135.2 DL 437.4 135.2 435.4 135.2
+DL 439.4 135.2 437.4 135.2 DL 441.4 135.2 439.4 135.2 DL 443.4 135.2 441.4
+135.2 DL 445.4 135.2 443.4 135.2 DL 447.4 135.2 445.4 135.2 DL 449.4 135.2
+447.4 135.2 DL 451.4 135.2 449.4 135.2 DL 453.4 135.2 451.4 135.2 DL 455.4
+135.2 453.4 135.2 DL 457.4 135.2 455.4 135.2 DL 459.4 135.2 457.4 135.2 DL
+461.4 135.2 459.4 135.2 DL 463.4 135.2 461.4 135.2 DL 465.4 135.2 463.4 135.2
+DL 467.4 135.2 465.4 135.2 DL 469.4 135.2 467.4 135.2 DL 471.4 135.2 469.4
+135.2 DL 473.4 135.2 471.4 135.2 DL 475.4 135.2 473.4 135.2 DL 477.4 135.2
+475.4 135.2 DL 479.4 135.2 477.4 135.2 DL 481.4 135.2 479.4 135.2 DL 483.4
+135.2 481.4 135.2 DL 485.4 135.2 483.4 135.2 DL 487.4 135.2 485.4 135.2 DL
+489.4 135.2 487.4 135.2 DL 491.4 135.2 489.4 135.2 DL 493.4 135.2 491.4 135.2
+DL 495.4 135.2 493.4 135.2 DL 497.4 135.2 495.4 135.2 DL 499.4 135.2 497.4
+135.2 DL 501.4 135.2 499.4 135.2 DL 503.4 135.2 501.4 135.2 DL 505.4 135.2
+503.4 135.2 DL 507.4 135.2 505.4 135.2 DL 509.4 135.2 507.4 135.2 DL 511.4
+135.2 509.4 135.2 DL 513.4 135.2 511.4 135.2 DL 515.4 135.2 513.4 135.2 DL
+517.4 135.2 515.4 135.2 DL 519.4 135.2 517.4 135.2 DL 521.4 135.2 519.4 135.2
+DL 523.4 135.2 521.4 135.2 DL 525.4 135.2 523.4 135.2 DL 527.4 135.2 525.4
+135.2 DL 529.4 135.2 527.4 135.2 DL 531.4 135.2 529.4 135.2 DL 533.4 135.2
+531.4 135.2 DL 535.4 135.2 533.4 135.2 DL 537.4 135.2 535.4 135.2 DL 539.4
+135.2 537.4 135.2 DL 541.4 135.2 539.4 135.2 DL 543.4 135.2 541.4 135.2 DL
+545.4 135.2 543.4 135.2 DL 1.44 LW 90 135.7 72 135.7 DL 99 135.7 81 135.7 DL
+117 135.7 99 135.7 DL 135 135.7 117 135.7 DL 153 135.7 135 135.7 DL 171 135.7
+153 135.7 DL 189 135.7 171 135.7 DL 207 135.7 189 135.7 DL/F3 12
+/Helvetica-BoldOblique@0 SF(Dore)72 149.7 Q 4.674<b452>94.002 149.7 S
+(aster File)111.336 149.7 Q(Format)72 163.7 Q F2 .243(Raster \214les ar)221.5
+163.8 R 2.993(eu)-.198 G .243(sed to stor)302.529 163.8 R 2.993(eD)-.198 G(ore)
+369.94 163.8 Q 3.795<b469>381.094 163.8 S .242
+(mage data in computer \214le sys-)391.753 163.8 R .918
+(tems and to allow other pr)221.5 177 R .918
+(ograms to communicate image data to)-.198 F(Dore)221.5 190.2 Q .803<b42e>
+241.168 190.2 S 1.448(The Dore)221.5 215.4 R 5.001<b472>263.78 215.4 S 1.448
+(aster \214le format is described her)276.789 215.4 R 4.197(e. Raster)-.198 F
+1.447(\214les of this)4.197 F .653(format can be r)221.5 228.6 R .653
+(ead and written by Dore)-.198 F 4.207<b470>413.964 228.6 S -.198(ro)428.445
+228.6 S .654(grams with the).198 F/F4 11/Palatino-Italic@0 SF(DsFil-)3.404 E
+.236(eRasterRead <DSFRSR>)221.5 241.8 R F2(and)2.986 E F4(DsRasterW)2.986 E
+.236(rite <DSRSW>)-.22 F F2 .235(calls, r)2.985 F(espec-)-.198 E(tively)221.5
+255 Q 5.668(.T)-1.221 G(he)263.028 255 Q F4(raster\214le)2.919 E F2 .169
+(device driver also writes image \214les using this)2.919 F(format.)221.5 268.2
+Q(Dore)221.5 293.4 Q 4.628<b472>241.168 293.4 S 1.075
+(aster \214les consist of an)253.804 293.4 R/F5 10/Palatino-Roman@0 SF(ASCII)
+3.825 E F2 1.074(header section followed by a)3.825 F(binary data section.)
+221.5 306.6 Q .259
+(An example of a raster \214le \(with the binary data shown only as an)221.5
+331.8 R(annotation\) is given below:)221.5 345 Q/F6 9/Courier@0 SF
+(rastertype = image)264.7 368 Q(width = 128)264.7 379 Q(height = 128)264.7 390
+Q(depth = 1)264.7 401 Q(pixel = r8g8b8z32)264.7 412 Q
+(wordbyteorder = big-endian)264.7 423 Q/F7 9/Palatino-Bold@0 SF(<f)221.5 434 Q
+(f><f)-.162 E(f>)-.162 E F6(.)264.7 445 Q(.)264.7 456 Q(\()237.7 467 Q/F8 9
+/Palatino-Italic@0 SF(binary data)A F6(\))A(.)264.7 478 Q(.)264.7 489 Q F7
+(<EOF>)221.5 500 Q F2 .781
+(The sections below describe the formats of the header and binary)221.5 525.2 R
+(data sections of raster \214les in mor)221.5 538.4 Q 2.75(ed)-.198 G(etail.)
+399.359 538.4 Q .16 LW 223.4 564.4 221.4 564.4 DL 225.4 564.4 223.4 564.4 DL
+227.4 564.4 225.4 564.4 DL 229.4 564.4 227.4 564.4 DL 231.4 564.4 229.4 564.4
+DL 233.4 564.4 231.4 564.4 DL 235.4 564.4 233.4 564.4 DL 237.4 564.4 235.4
+564.4 DL 239.4 564.4 237.4 564.4 DL 241.4 564.4 239.4 564.4 DL 243.4 564.4
+241.4 564.4 DL 245.4 564.4 243.4 564.4 DL 247.4 564.4 245.4 564.4 DL 249.4
+564.4 247.4 564.4 DL 251.4 564.4 249.4 564.4 DL 253.4 564.4 251.4 564.4 DL
+255.4 564.4 253.4 564.4 DL 257.4 564.4 255.4 564.4 DL 259.4 564.4 257.4 564.4
+DL 261.4 564.4 259.4 564.4 DL 263.4 564.4 261.4 564.4 DL 265.4 564.4 263.4
+564.4 DL 267.4 564.4 265.4 564.4 DL 269.4 564.4 267.4 564.4 DL 271.4 564.4
+269.4 564.4 DL 273.4 564.4 271.4 564.4 DL 275.4 564.4 273.4 564.4 DL 277.4
+564.4 275.4 564.4 DL 279.4 564.4 277.4 564.4 DL 281.4 564.4 279.4 564.4 DL
+283.4 564.4 281.4 564.4 DL 285.4 564.4 283.4 564.4 DL 287.4 564.4 285.4 564.4
+DL 289.4 564.4 287.4 564.4 DL 291.4 564.4 289.4 564.4 DL 293.4 564.4 291.4
+564.4 DL 295.4 564.4 293.4 564.4 DL 297.4 564.4 295.4 564.4 DL 299.4 564.4
+297.4 564.4 DL 301.4 564.4 299.4 564.4 DL 303.4 564.4 301.4 564.4 DL 305.4
+564.4 303.4 564.4 DL 307.4 564.4 305.4 564.4 DL 309.4 564.4 307.4 564.4 DL
+311.4 564.4 309.4 564.4 DL 313.4 564.4 311.4 564.4 DL 315.4 564.4 313.4 564.4
+DL 317.4 564.4 315.4 564.4 DL 319.4 564.4 317.4 564.4 DL 321.4 564.4 319.4
+564.4 DL 323.4 564.4 321.4 564.4 DL 325.4 564.4 323.4 564.4 DL 327.4 564.4
+325.4 564.4 DL 329.4 564.4 327.4 564.4 DL 331.4 564.4 329.4 564.4 DL 333.4
+564.4 331.4 564.4 DL 335.4 564.4 333.4 564.4 DL 337.4 564.4 335.4 564.4 DL
+339.4 564.4 337.4 564.4 DL 341.4 564.4 339.4 564.4 DL 343.4 564.4 341.4 564.4
+DL 345.4 564.4 343.4 564.4 DL 347.4 564.4 345.4 564.4 DL 349.4 564.4 347.4
+564.4 DL 351.4 564.4 349.4 564.4 DL 353.4 564.4 351.4 564.4 DL 355.4 564.4
+353.4 564.4 DL 357.4 564.4 355.4 564.4 DL 359.4 564.4 357.4 564.4 DL 361.4
+564.4 359.4 564.4 DL 363.4 564.4 361.4 564.4 DL 365.4 564.4 363.4 564.4 DL
+367.4 564.4 365.4 564.4 DL 369.4 564.4 367.4 564.4 DL 371.4 564.4 369.4 564.4
+DL 373.4 564.4 371.4 564.4 DL 375.4 564.4 373.4 564.4 DL 377.4 564.4 375.4
+564.4 DL 379.4 564.4 377.4 564.4 DL 381.4 564.4 379.4 564.4 DL 383.4 564.4
+381.4 564.4 DL 385.4 564.4 383.4 564.4 DL 387.4 564.4 385.4 564.4 DL 389.4
+564.4 387.4 564.4 DL 391.4 564.4 389.4 564.4 DL 393.4 564.4 391.4 564.4 DL
+395.4 564.4 393.4 564.4 DL 397.4 564.4 395.4 564.4 DL 399.4 564.4 397.4 564.4
+DL 401.4 564.4 399.4 564.4 DL 403.4 564.4 401.4 564.4 DL 405.4 564.4 403.4
+564.4 DL 407.4 564.4 405.4 564.4 DL 409.4 564.4 407.4 564.4 DL 411.4 564.4
+409.4 564.4 DL 413.4 564.4 411.4 564.4 DL 415.4 564.4 413.4 564.4 DL 417.4
+564.4 415.4 564.4 DL 419.4 564.4 417.4 564.4 DL 421.4 564.4 419.4 564.4 DL
+423.4 564.4 421.4 564.4 DL 425.4 564.4 423.4 564.4 DL 427.4 564.4 425.4 564.4
+DL 429.4 564.4 427.4 564.4 DL 431.4 564.4 429.4 564.4 DL 433.4 564.4 431.4
+564.4 DL 435.4 564.4 433.4 564.4 DL 437.4 564.4 435.4 564.4 DL 439.4 564.4
+437.4 564.4 DL 441.4 564.4 439.4 564.4 DL 443.4 564.4 441.4 564.4 DL 445.4
+564.4 443.4 564.4 DL 447.4 564.4 445.4 564.4 DL 449.4 564.4 447.4 564.4 DL
+451.4 564.4 449.4 564.4 DL 453.4 564.4 451.4 564.4 DL 455.4 564.4 453.4 564.4
+DL 457.4 564.4 455.4 564.4 DL 459.4 564.4 457.4 564.4 DL 461.4 564.4 459.4
+564.4 DL 463.4 564.4 461.4 564.4 DL 465.4 564.4 463.4 564.4 DL 467.4 564.4
+465.4 564.4 DL 469.4 564.4 467.4 564.4 DL 471.4 564.4 469.4 564.4 DL 473.4
+564.4 471.4 564.4 DL 475.4 564.4 473.4 564.4 DL 477.4 564.4 475.4 564.4 DL
+479.4 564.4 477.4 564.4 DL 481.4 564.4 479.4 564.4 DL 483.4 564.4 481.4 564.4
+DL 485.4 564.4 483.4 564.4 DL 487.4 564.4 485.4 564.4 DL 489.4 564.4 487.4
+564.4 DL 491.4 564.4 489.4 564.4 DL 493.4 564.4 491.4 564.4 DL 495.4 564.4
+493.4 564.4 DL 497.4 564.4 495.4 564.4 DL 499.4 564.4 497.4 564.4 DL 501.4
+564.4 499.4 564.4 DL 503.4 564.4 501.4 564.4 DL 505.4 564.4 503.4 564.4 DL
+507.4 564.4 505.4 564.4 DL 509.4 564.4 507.4 564.4 DL 511.4 564.4 509.4 564.4
+DL 513.4 564.4 511.4 564.4 DL 515.4 564.4 513.4 564.4 DL 517.4 564.4 515.4
+564.4 DL 519.4 564.4 517.4 564.4 DL 521.4 564.4 519.4 564.4 DL 523.4 564.4
+521.4 564.4 DL 525.4 564.4 523.4 564.4 DL 527.4 564.4 525.4 564.4 DL 529.4
+564.4 527.4 564.4 DL 531.4 564.4 529.4 564.4 DL 533.4 564.4 531.4 564.4 DL
+535.4 564.4 533.4 564.4 DL 537.4 564.4 535.4 564.4 DL 539.4 564.4 537.4 564.4
+DL 541.4 564.4 539.4 564.4 DL 543.4 564.4 541.4 564.4 DL 545.4 564.4 543.4
+564.4 DL 1.44 LW 90 564.9 72 564.9 DL 99 564.9 81 564.9 DL 117 564.9 99 564.9
+DL 135 564.9 117 564.9 DL 153 564.9 135 564.9 DL 171 564.9 153 564.9 DL 189
+564.9 171 564.9 DL 207 564.9 189 564.9 DL/F9 12/Helvetica-Oblique@0 SF
+(Raster File Header)72 578.9 Q F2 .227(The ASCII header of a Dore)221.5 593 R
+3.78<b472>352.688 593 S .226(aster \214le consists of several attribute-)
+364.476 593 R(value pairs followed by an end-of-header marker)221.5 606.2 Q(.)
+-.814 E .707(An attribute-value pair is an attribute name followed by an equal)
+221.5 631.4 R .461
+(sign \(=\), followed by a numeric value or an identi\214er name value.)221.5
+644.6 R .527
+(Optional white space characters \(spaces, tabs, newlines/linefeeds,)221.5
+657.8 R(or carriage r)221.5 671 Q(eturns\) may pr)-.198 E
+(ecede or follow the = character)-.198 E(.)-.814 E .006
+(Attribute-value pairs must be separated by white space characters.)221.5 692.9
+R(The convention is to have one attribute-value pair per line.)221.5 706.1 Q 90
+756 72 756 DL 99 756 81 756 DL 117 756 99 756 DL 135 756 117 756 DL 153 756 135
+756 DL 171 756 153 756 DL 189 756 171 756 DL 207 756 189 756 DL 239.4 756 221.4
+756 DL 257.4 756 239.4 756 DL 275.4 756 257.4 756 DL 293.4 756 275.4 756 DL
+311.4 756 293.4 756 DL 329.4 756 311.4 756 DL 347.4 756 329.4 756 DL 365.4 756
+347.4 756 DL 383.4 756 365.4 756 DL 401.4 756 383.4 756 DL 419.4 756 401.4 756
+DL 437.4 756 419.4 756 DL 455.4 756 437.4 756 DL 473.4 756 455.4 756 DL 491.4
+756 473.4 756 DL 509.4 756 491.4 756 DL 527.4 756 509.4 756 DL 545.4 756 527.4
+756 DL/F10 9/Helvetica-Bold@0 SF(7-460)72 768.96 Q/F11 9/Helvetica@0 SF(Dore)
+6.504 E 3.506<b452>117.019 768.96 S(ef)130.02 768.96 Q(erence Man)-.27 E(ual)
+-.09 E(Raster File and Memor)221.4 768.96 Q 2.502(yF).27 G -2.277(or mats)
+325.422 768.96 R EP
+%%Page: 461 3
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 99 46.8 63 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 243 46.8 207 46.8 DL 279 46.8 243 46.8 DL 315 46.8 279 46.8 DL 351
+46.8 315 46.8 DL 387 46.8 351 46.8 DL 437.4 46.8 401.4 46.8 DL 464.4 46.8 428.4
+46.8 DL 500.4 46.8 464.4 46.8 DL 536.4 46.8 500.4 46.8 DL/F0 10
+/Helvetica-BoldOblique@0 SF(Dore)423.04 57.6 Q 3.895<b452>441.375 57.6 S
+(aster File Format)455.82 57.6 Q/F1 10/Helvetica@0 SF(\(contin)486.48 68.4 Q
+(ued\))-.1 E/F2 11/Palatino-Roman@0 SF 3.249(Unknown attribute-value pairs ar)
+63 109.2 R 5.999(ei)-.198 G(gnor)250.764 109.2 Q 5.999(ed. An)-.198 F 3.249
+(attribute may)5.999 F .342
+(have multiple values, separated by commas, even though this fea-)63 122.4 R
+(tur)63 135.6 Q 2.75(ei)-.198 G 2.75(sn)88.586 135.6 S(ot curr)102.402 135.6 Q
+(ently used by Dore)-.198 E .803<b42e>222.731 135.6 S 1.036
+(The end-of-header marker is a formfeed character \(ASCII charac-)63 157.5 R
+.128(ter 0x0c\) followed by 0 \(zer)63 170.7 R .128(o\), or mor)-.198 F 2.878
+(en)-.198 G .129(onformfeed characters fol-)258.273 170.7 R 3.44
+(lowed by a formfeed character)63 183.9 R 8.94(.T)-.814 G 3.439
+(he double formfeed end-of-)242.813 183.9 R .644
+(header marker allows the header section to be expanded to fall at)63 197.1 R
+2.322(the end of a disk block boundary)63 210.3 R 7.821(.T)-1.221 G 2.321
+(his impr)253.141 210.3 R 2.321(oves ef)-.198 F 2.321(\214ciency on)-.198 F
+(some machines.)63 223.5 Q .667
+(Comments consist of the pound sign \(#\) and any number of char)63 245.4 R(-)
+-.198 E(acters to the end of the line.)63 258.6 Q 2.596(The attributes)63 280.5
+R/F3 11/Palatino-Italic@0 SF(rastertype)5.346 E F2(,)A F3(width)5.346 E F2(,)A
+F3(height)5.345 E F2 5.345(,a)C(nd)266.113 280.5 Q F3(pixel)5.345 E F2(ar)5.345
+E 5.345(em)-.198 G(andatory)341.295 280.5 Q(.)-1.221 E(The)63 293.7 Q F3
+(rastertype)4.334 E F2 1.584(attribute is r)4.334 F(equir)-.198 E 1.585
+(ed to be the \214rst attribute in the)-.198 F(header)63 306.9 Q 8.442(.T)-.814
+G 2.942(he or)113.627 306.9 R 2.942(der of all attributes other than)-.198 F F3
+(rastertype)5.692 E F2 2.942(is not)5.692 F -.198(re)63 320.1 S 2.75
+(stricted. Attribute).198 F(names and value strings ar)2.75 E 2.75(ec)-.198 G
+(ase sensitive.)308.036 320.1 Q .325(Mandatory and optional attributes ar)63
+342 R 3.076(el)-.198 G .326(isted below with their per)256.666 342 R(-)-.198 E
+(missible values.)63 355.2 Q/F4 11/Palatino-Bold@0 SF(rastertype)63 377.1 Q F2
+1.448(\(mandatory; must be \214rst attribute)88 390.3 R F4 4.198(\)a)C 1.447
+(character string indi-)-.001 F .267(cating the type of raster)88 403.5 R 5.768
+(.M)-.605 G .268(ust have the value)225.914 403.5 R F3(image)3.018 E F4 .268
+(to indi-)3.018 F(cate that this is a Dore)88 416.7 Q 3.669<b472>194.298 416.7
+S(aster image \214le.)205.909 416.7 Q(width)63 438.6 Q F2(\(mandatory)88 451.8
+Q F4 8.063(\)a)C 8.063(nu)162.778 451.8 S 5.313
+(nsigned integer value indicating the)184.283 451.8 R
+(width of the raster image in pixels \(or voxels\).)88 465 Q(height)63 486.9 Q
+F2(\(mandatory)88 500.1 Q F4 8.062(\)a)C 8.062(nu)162.777 500.1 S 5.313
+(nsigned integer value indicating the)184.281 500.1 R
+(height of the raster image in pixels \(or voxels\).)88 513.3 Q(depth)63 535.2
+Q F2 .859(\(optional - defaults to 1)88 548.4 R F4 3.609(\)a)C 3.609(nu)217.376
+548.4 S .859(nsigned integer value indicat-)234.427 548.4 R 1.269
+(ing the depth of the raster image. For 2-D rasters, the pic-)88 561.6 R 1.286
+(ture elements are pixels and)88 574.8 R F3(depth)4.036 E F2 1.286
+(is 1. For 3-D rasters, the)4.036 F(pictur)88 588 Q 2.75(ee)-.198 G(lements ar)
+130.35 588 Q 2.75(ev)-.198 G(oxels and)195.085 588 Q F3(depth)2.75 E F2(is gr)
+2.75 E(eater than 1.)-.198 E F4(wordbyteorder)63 613.2 Q F2 .699
+(\(optional - defaults to big-endian)88 626.4 R F4 3.45(\)ac)C .7
+(haracter string indicat-)271.97 626.4 R 1.683
+(ing the byte order of large unsigned integer binary num-)88 639.6 R .368
+(bers stored in the \214le \(used for Z values\).)88 652.8 R .368
+(It has one of two)5.868 F(values:)88 666 Q F3(big-endian)88 692.4 Q F4 1.12
+(meaning the machine represents words in the order)121 705.6 R 1.44 LW 81 756
+63 756 DL 99 756 81 756 DL 117 756 99 756 DL 135 756 117 756 DL 153 756 135 756
+DL 171 756 153 756 DL 189 756 171 756 DL 207 756 189 756 DL 225 756 207 756 DL
+243 756 225 756 DL 261 756 243 756 DL 279 756 261 756 DL 297 756 279 756 DL 315
+756 297 756 DL 333 756 315 756 DL 351 756 333 756 DL 369 756 351 756 DL 387 756
+369 756 DL 419.4 756 401.4 756 DL 428.4 756 410.4 756 DL 446.4 756 428.4 756 DL
+464.4 756 446.4 756 DL 482.4 756 464.4 756 DL 500.4 756 482.4 756 DL 518.4 756
+500.4 756 DL 536.4 756 518.4 756 DL/F5 9/Helvetica@0 SF(Raster File and Memor)
+255.249 768.96 Q 2.502(yF).27 G -2.277(or mats)359.271 768.96 R(Dore)414.21
+768.96 Q 3.506<b452>429.712 768.96 S(ef)442.713 768.96 Q(erence Man)-.27 E(ual)
+-.09 E/F6 9/Helvetica-Bold@0 SF(7-461)4.002 E EP
+%%Page: 462 4
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 108 46.8 72 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 257.4 46.8 221.4 46.8 DL 293.4 46.8 257.4 46.8 DL 329.4 46.8 293.4
+46.8 DL 365.4 46.8 329.4 46.8 DL 401.4 46.8 365.4 46.8 DL 437.4 46.8 401.4 46.8
+DL 473.4 46.8 437.4 46.8 DL 509.4 46.8 473.4 46.8 DL 545.4 46.8 509.4 46.8 DL
+/F0 10/Helvetica-BoldOblique@0 SF(Dore)72 57.6 Q 3.895<b452>90.335 57.6 S
+(aster File Format)104.78 57.6 Q/F1 10/Helvetica@0 SF(\(contin)72 68.4 Q(ued\))
+-.1 E/F2 11/Palatino-Bold@0 SF
+(of most signi\214cant byte to least signi\214cant byte.)279.5 109.2 Q/F3 11
+/Palatino-Italic@0 SF(little-endian)246.5 135.6 Q F2 1.12
+(meaning the machine represents words in the order)279.5 148.8 R
+(of least signi\214cant byte to most signi\214cant byte.)279.5 162 Q(pixel)
+221.5 187.2 Q/F4 11/Palatino-Roman@0 SF(\(mandatory)246.5 200.4 Q F2 6.127
+(\)ac)C 3.377(haracter string indicating the content of)330.353 200.4 R 1.046
+(each pixel in the raster image.)246.5 213.6 R 1.046
+(It has one of the following)6.546 F(values:)246.5 226.8 Q F3(r8g8b8)246.5
+253.2 Q F2 3.085(indicates that each pixel in the image consists of)279.5 266.4
+R 1.339(three 8-bit values, representing the RGB color com-)279.5 279.6 R .94
+(ponents of the pixel.)279.5 292.8 R .939(This is equivalent to the Dore)6.44 F
+<b4>540.918 292.8 Q F3(DtRasterT)279.5 306 Q(ype)-1.012 E F2(value)2.75 E F3
+(DcRasterRGB)2.75 E F2(<)2.75 E F3(DCRRGB)A F2(>.)A F3(r8g8b8a8)246.5 332.4 Q
+F2 .06(indicates that each pixel in the image consists of four)279.5 345.6 R
+.187(8-bit values, representing the RGB color components)279.5 358.8 R .193
+(and the alpha component of the pixel.)279.5 372 R .193(This is equiv-)5.693 F
+2.101(alent to the Dore)279.5 385.2 R<b4>365.239 385.2 Q F3(DtRasterT)5.77 E
+(ype)-1.012 E F2(value)4.85 E F3(DcRasterRGBA)4.85 E F2(<)279.5 398.4 Q F3
+(DCRRA)A F2(>.)A F3(a8b8g8r8)246.5 424.8 Q F2 .06
+(indicates that each pixel in the image consists of four)279.5 438 R 1.554
+(8-bit values, the alpha component of the pixel, and)279.5 451.2 R .787
+(the color components in BGR order)279.5 464.4 R 6.288(.T)-.605 G .788
+(his is equiva-)476.725 464.4 R 3.018(lent to the Dore)279.5 477.6 R<b4>362.489
+477.6 Q F3(DtRasterT)6.686 E(ype)-1.012 E F2(value)5.767 E F3(DcRasterABGR)
+5.767 E F2(<)279.5 490.8 Q F3(DCRAR)A F2(>.)A F3(r8g8b8a8z32)246.5 517.2 Q F2
+.06(indicates that each pixel in the image consists of four)279.5 530.4 R 2.212
+(8-bit values and one 32-bit value, representing the)279.5 543.6 R 2.374
+(RGB color components, the alpha component, and)279.5 556.8 R .736
+(the Z depth component of the pixel.)279.5 570 R .735(This is equiva-)6.235 F
+1.794(lent to the Dore)279.5 583.2 R<b4>358.818 583.2 Q F3(DtRasterT)5.464 E
+(ype)-1.012 E F2(value)4.545 E F3(DcRasterRGBAZ)4.545 E F2(<)279.5 596.4 Q F3
+(DCRRAZ)A F2(>.)A F3(r8g8b8z32)246.5 622.8 Q F2 3.085
+(indicates that each pixel in the image consists of)279.5 636 R .815
+(three 8-bit values and one 32-bit value, representing)279.5 649.2 R .749
+(the RGB color components, and the Z depth compo-)279.5 662.4 R 2.908
+(nent of the pixel.)279.5 675.6 R 2.909(This is equivalent to the Dore)8.409 F
+<b4>540.918 675.6 Q F3(DtRasterT)279.5 688.8 Q(ype)-1.012 E F2(value)2.75 E F3
+(DcRasterRGBZ)2.75 E F2(<)2.75 E F3(DCRRZ)A F2(>.)A 1.44 LW 90 756 72 756 DL 99
+756 81 756 DL 117 756 99 756 DL 135 756 117 756 DL 153 756 135 756 DL 171 756
+153 756 DL 189 756 171 756 DL 207 756 189 756 DL 239.4 756 221.4 756 DL 257.4
+756 239.4 756 DL 275.4 756 257.4 756 DL 293.4 756 275.4 756 DL 311.4 756 293.4
+756 DL 329.4 756 311.4 756 DL 347.4 756 329.4 756 DL 365.4 756 347.4 756 DL
+383.4 756 365.4 756 DL 401.4 756 383.4 756 DL 419.4 756 401.4 756 DL 437.4 756
+419.4 756 DL 455.4 756 437.4 756 DL 473.4 756 455.4 756 DL 491.4 756 473.4 756
+DL 509.4 756 491.4 756 DL 527.4 756 509.4 756 DL 545.4 756 527.4 756 DL/F5 9
+/Helvetica-Bold@0 SF(7-462)72 768.96 Q/F6 9/Helvetica@0 SF(Dore)6.504 E 3.506
+<b452>117.019 768.96 S(ef)130.02 768.96 Q(erence Man)-.27 E(ual)-.09 E
+(Raster File and Memor)221.4 768.96 Q 2.502(yF).27 G -2.277(or mats)325.422
+768.96 R EP
+%%Page: 463 5
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 99 46.8 63 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 243 46.8 207 46.8 DL 279 46.8 243 46.8 DL 315 46.8 279 46.8 DL 351
+46.8 315 46.8 DL 387 46.8 351 46.8 DL 437.4 46.8 401.4 46.8 DL 464.4 46.8 428.4
+46.8 DL 500.4 46.8 464.4 46.8 DL 536.4 46.8 500.4 46.8 DL/F0 10
+/Helvetica-BoldOblique@0 SF(Dore)423.04 57.6 Q 3.895<b452>441.375 57.6 S
+(aster File Format)455.82 57.6 Q/F1 10/Helvetica@0 SF(\(contin)486.48 68.4 Q
+(ued\))-.1 E/F2 11/Palatino-Italic@0 SF(a8)88 109.2 Q/F3 11/Palatino-Bold@0 SF
+.399(indicates that each pixel in the image consists of one)121 122.4 R .858
+(8-bit value representing the alpha component of the)121 135.6 R 5.411
+(pixel. This)121 148.8 R 2.662(is equivalent to the Dore)5.411 F<b4>315.076
+148.8 Q F2(DtRasterT)6.331 E(ype)-1.012 E F3(value)121 162 Q F2(DcRasterA)2.75
+E F3(<)2.75 E F2(DCRA)A F3(>.)A F2(z32)88 175.2 Q F3 .399
+(indicates that each pixel in the image consists of one)121 188.4 R 1.119
+(32-bit value representing the Z depth component of)121 201.6 R 2.166
+(the pixel.)121 214.8 R 2.165(This is equivalent to the Dore)7.666 F<b4>332.898
+214.8 Q F2(DtRaster-)5.834 E -1.012(Ty)121 228 S(pe)1.012 E F3(value)2.75 E F2
+(DcRasterZ)2.75 E F3(<)2.75 E F2(DCRZ)A F3(>.)A/F4 11/Palatino-Roman@0 SF 3.478
+(The following example shows sample values for the minimal)63 253.2 R
+(header attributes acceptable.)63 266.4 Q/F5 9/Courier@0 SF 5.4(#m)63 289.4 S
+(ountain background raster - Dore' Rasterfile)79.2 289.4 Q(rastertype = image)
+106.2 300.4 Q(width = 1280)106.2 311.4 Q(height = 1024)106.2 322.4 Q
+(pixel = r8g8b8)106.2 333.4 Q/F6 9/Palatino-Bold@0 SF(<f)63 344.4 Q(f><f)-.162
+E(f>)-.162 E .16 LW 65 369.2 63 369.2 DL 67 369.2 65 369.2 DL 69 369.2 67 369.2
+DL 71 369.2 69 369.2 DL 73 369.2 71 369.2 DL 75 369.2 73 369.2 DL 77 369.2 75
+369.2 DL 79 369.2 77 369.2 DL 81 369.2 79 369.2 DL 83 369.2 81 369.2 DL 85
+369.2 83 369.2 DL 87 369.2 85 369.2 DL 89 369.2 87 369.2 DL 91 369.2 89 369.2
+DL 93 369.2 91 369.2 DL 95 369.2 93 369.2 DL 97 369.2 95 369.2 DL 99 369.2 97
+369.2 DL 101 369.2 99 369.2 DL 103 369.2 101 369.2 DL 105 369.2 103 369.2 DL
+107 369.2 105 369.2 DL 109 369.2 107 369.2 DL 111 369.2 109 369.2 DL 113 369.2
+111 369.2 DL 115 369.2 113 369.2 DL 117 369.2 115 369.2 DL 119 369.2 117 369.2
+DL 121 369.2 119 369.2 DL 123 369.2 121 369.2 DL 125 369.2 123 369.2 DL 127
+369.2 125 369.2 DL 129 369.2 127 369.2 DL 131 369.2 129 369.2 DL 133 369.2 131
+369.2 DL 135 369.2 133 369.2 DL 137 369.2 135 369.2 DL 139 369.2 137 369.2 DL
+141 369.2 139 369.2 DL 143 369.2 141 369.2 DL 145 369.2 143 369.2 DL 147 369.2
+145 369.2 DL 149 369.2 147 369.2 DL 151 369.2 149 369.2 DL 153 369.2 151 369.2
+DL 155 369.2 153 369.2 DL 157 369.2 155 369.2 DL 159 369.2 157 369.2 DL 161
+369.2 159 369.2 DL 163 369.2 161 369.2 DL 165 369.2 163 369.2 DL 167 369.2 165
+369.2 DL 169 369.2 167 369.2 DL 171 369.2 169 369.2 DL 173 369.2 171 369.2 DL
+175 369.2 173 369.2 DL 177 369.2 175 369.2 DL 179 369.2 177 369.2 DL 181 369.2
+179 369.2 DL 183 369.2 181 369.2 DL 185 369.2 183 369.2 DL 187 369.2 185 369.2
+DL 189 369.2 187 369.2 DL 191 369.2 189 369.2 DL 193 369.2 191 369.2 DL 195
+369.2 193 369.2 DL 197 369.2 195 369.2 DL 199 369.2 197 369.2 DL 201 369.2 199
+369.2 DL 203 369.2 201 369.2 DL 205 369.2 203 369.2 DL 207 369.2 205 369.2 DL
+209 369.2 207 369.2 DL 211 369.2 209 369.2 DL 213 369.2 211 369.2 DL 215 369.2
+213 369.2 DL 217 369.2 215 369.2 DL 219 369.2 217 369.2 DL 221 369.2 219 369.2
+DL 223 369.2 221 369.2 DL 225 369.2 223 369.2 DL 227 369.2 225 369.2 DL 229
+369.2 227 369.2 DL 231 369.2 229 369.2 DL 233 369.2 231 369.2 DL 235 369.2 233
+369.2 DL 237 369.2 235 369.2 DL 239 369.2 237 369.2 DL 241 369.2 239 369.2 DL
+243 369.2 241 369.2 DL 245 369.2 243 369.2 DL 247 369.2 245 369.2 DL 249 369.2
+247 369.2 DL 251 369.2 249 369.2 DL 253 369.2 251 369.2 DL 255 369.2 253 369.2
+DL 257 369.2 255 369.2 DL 259 369.2 257 369.2 DL 261 369.2 259 369.2 DL 263
+369.2 261 369.2 DL 265 369.2 263 369.2 DL 267 369.2 265 369.2 DL 269 369.2 267
+369.2 DL 271 369.2 269 369.2 DL 273 369.2 271 369.2 DL 275 369.2 273 369.2 DL
+277 369.2 275 369.2 DL 279 369.2 277 369.2 DL 281 369.2 279 369.2 DL 283 369.2
+281 369.2 DL 285 369.2 283 369.2 DL 287 369.2 285 369.2 DL 289 369.2 287 369.2
+DL 291 369.2 289 369.2 DL 293 369.2 291 369.2 DL 295 369.2 293 369.2 DL 297
+369.2 295 369.2 DL 299 369.2 297 369.2 DL 301 369.2 299 369.2 DL 303 369.2 301
+369.2 DL 305 369.2 303 369.2 DL 307 369.2 305 369.2 DL 309 369.2 307 369.2 DL
+311 369.2 309 369.2 DL 313 369.2 311 369.2 DL 315 369.2 313 369.2 DL 317 369.2
+315 369.2 DL 319 369.2 317 369.2 DL 321 369.2 319 369.2 DL 323 369.2 321 369.2
+DL 325 369.2 323 369.2 DL 327 369.2 325 369.2 DL 329 369.2 327 369.2 DL 331
+369.2 329 369.2 DL 333 369.2 331 369.2 DL 335 369.2 333 369.2 DL 337 369.2 335
+369.2 DL 339 369.2 337 369.2 DL 341 369.2 339 369.2 DL 343 369.2 341 369.2 DL
+345 369.2 343 369.2 DL 347 369.2 345 369.2 DL 349 369.2 347 369.2 DL 351 369.2
+349 369.2 DL 353 369.2 351 369.2 DL 355 369.2 353 369.2 DL 357 369.2 355 369.2
+DL 359 369.2 357 369.2 DL 361 369.2 359 369.2 DL 363 369.2 361 369.2 DL 365
+369.2 363 369.2 DL 367 369.2 365 369.2 DL 369 369.2 367 369.2 DL 371 369.2 369
+369.2 DL 373 369.2 371 369.2 DL 375 369.2 373 369.2 DL 377 369.2 375 369.2 DL
+379 369.2 377 369.2 DL 381 369.2 379 369.2 DL 383 369.2 381 369.2 DL 385 369.2
+383 369.2 DL 387 369.2 385 369.2 DL 1.44 LW 419.4 369.7 401.4 369.7 DL 428.4
+369.7 410.4 369.7 DL 446.4 369.7 428.4 369.7 DL 464.4 369.7 446.4 369.7 DL
+482.4 369.7 464.4 369.7 DL 500.4 369.7 482.4 369.7 DL 518.4 369.7 500.4 369.7
+DL 536.4 369.7 518.4 369.7 DL/F7 12/Helvetica-Oblique@0 SF(Raster)501.06 383.7
+Q(File)517.068 397.7 Q -2.976(Binar y)502.032 411.7 R(Data)511.056 425.7 Q F4
+4.605(Raster image binary data for Dore)63 397.8 R 8.158<b468>246.922 397.8 S
+4.604(as seven basic formats)265.145 397.8 R 8.786(depending on which of the)63
+411 R F2(r8g8b8)240.792 411 Q F4(,)A F2(r8g8b8a8)286.451 411 Q F4(,)A F2
+(a8b8g8r8)342.494 411 Q F4(,)A F2(r8g8b8a8z32)63 424.2 Q F4(,)A F2(r8g8b8z32)
+3.244 E F4(,)A F2(a8)3.244 E F4 3.244(,o)C(r)202.268 424.2 Q F2(z32)3.244 E F4
+.493(types wer)3.243 F 3.243(es)-.198 G .493(peci\214ed for the pix-)290.239
+424.2 R(els or voxels in the raster)63 437.4 Q(.)-.814 E 1.401
+(For \214le based images, the binary data is logically r)63 462.6 R 1.402
+(ead fr)-.198 F 1.402(om and)-.198 F .15
+(written to the \214les in a byte-by-byte fashion.)63 475.8 R .149
+(Since RGB and alpha)5.649 F .227(information is r)63 489 R(epr)-.198 E .228
+(esented as byte values, their r)-.198 F(epr)-.198 E .228(esentation and)-.198
+F(or)63 502.2 Q(der in the \214le is the same for all machines.)-.198 E 5.321
+(Zi)63 527.4 S 2.571(nformation, however)78.859 527.4 R 5.321(,c)-.814 G 2.57
+(onsists of an unsigned 32-bit integer)196.575 527.4 R(.)-.814 E .575
+(While the position of the 32-bit value is the same in the \214le for all)63
+540.6 R 1.612(machines, the or)63 553.8 R 1.611
+(der of the bytes in the value is machine depen-)-.198 F 3.567(dent. If)63 567
+R .817(the wor)3.567 F 3.567(db)-.198 G .817(yte or)159.504 567 R .817
+(der on the machine writing the \214le goes)-.198 F(fr)63 580.2 Q 1.685
+(om the most signi\214cant byte \214rst down to the least signi\214cant)-.198 F
+2.658(byte, the or)63 593.4 R 2.658(der is called)-.198 F F2(big-endian)5.408 E
+F4 8.158(.T)C 2.658(he or)257.148 593.4 R 2.659(dering may then be)-.198 F .173
+(optionally indicated in the \214le header with the)63 606.6 R F2 .173
+(wordbyteorder = big-)2.923 F(endian)63 619.8 Q F4 .468(attribute-value pair)
+3.218 F 5.968(.I)-.814 G 3.218(ft)202.927 619.8 S .468(he wor)213.394 619.8 R
+3.218(db)-.198 G .468(yte or)263.632 619.8 R .468(der on the machine)-.198 F
+1.044(writing the \214le goes fr)63 633 R 1.044
+(om the least signi\214cant byte \214rst up to the)-.198 F .758
+(most signi\214cant byte, the or)63 646.2 R .758(der is called)-.198 F F2
+(little-endian)3.509 E F4 6.259(.I)C 3.509(nt)331.439 646.2 S .759(hat case,)
+344.936 646.2 R .626(the or)63 659.4 R .626
+(dering must be indicated in the \214le header with the)-.198 F F2(wordby-)
+3.375 E 1.725(teorder = little-endian)63 672.6 R F4 1.725(attribute-value pair)
+4.475 F 7.225(.D)-.814 G(ore)282.726 672.6 Q 5.278<b463>293.88 672.6 S 1.725
+(an accept raster)307.705 672.6 R(\214les written in either fashion.)63 685.8 Q
+81 756 63 756 DL 99 756 81 756 DL 117 756 99 756 DL 135 756 117 756 DL 153 756
+135 756 DL 171 756 153 756 DL 189 756 171 756 DL 207 756 189 756 DL 225 756 207
+756 DL 243 756 225 756 DL 261 756 243 756 DL 279 756 261 756 DL 297 756 279 756
+DL 315 756 297 756 DL 333 756 315 756 DL 351 756 333 756 DL 369 756 351 756 DL
+387 756 369 756 DL 419.4 756 401.4 756 DL 428.4 756 410.4 756 DL 446.4 756
+428.4 756 DL 464.4 756 446.4 756 DL 482.4 756 464.4 756 DL 500.4 756 482.4 756
+DL 518.4 756 500.4 756 DL 536.4 756 518.4 756 DL/F8 9/Helvetica@0 SF
+(Raster File and Memor)255.249 768.96 Q 2.502(yF).27 G -2.277(or mats)359.271
+768.96 R(Dore)414.21 768.96 Q 3.506<b452>429.712 768.96 S(ef)442.713 768.96 Q
+(erence Man)-.27 E(ual)-.09 E/F9 9/Helvetica-Bold@0 SF(7-463)4.002 E EP
+%%Page: 464 6
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 108 46.8 72 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 257.4 46.8 221.4 46.8 DL 293.4 46.8 257.4 46.8 DL 329.4 46.8 293.4
+46.8 DL 365.4 46.8 329.4 46.8 DL 401.4 46.8 365.4 46.8 DL 437.4 46.8 401.4 46.8
+DL 473.4 46.8 437.4 46.8 DL 509.4 46.8 473.4 46.8 DL 545.4 46.8 509.4 46.8 DL
+/F0 10/Helvetica-BoldOblique@0 SF(Dore)72 57.6 Q 3.895<b452>90.335 57.6 S
+(aster File Format)104.78 57.6 Q/F1 10/Helvetica@0 SF(\(contin)72 68.4 Q(ued\))
+-.1 E/F2 11/Palatino-Roman@0 SF .749(Binary data in Dore)221.5 109.2 R 4.302
+<b472>314.86 109.2 S .749(aster \214les is stor)327.17 109.2 R .748
+(ed in pixel interleaved fash-)-.198 F .085(ion, meaning that the data is stor)
+221.5 122.4 R .085(ed pixel by pixel \(voxel by voxel\).)-.198 F 2.116
+(All the information r)221.5 135.6 R 2.116(elated to a pixel \(voxel\) is stor)
+-.198 F 2.115(ed consecu-)-.198 F(tively in the \214le.)221.5 148.8 Q .693
+(The or)221.5 174 R .694
+(der of pixels \(voxels\) in the binary data section is in width,)-.198 F .47
+(then height, and then depth or)221.5 187.2 R(der)-.198 E 5.97(.T)-.814 G .469
+(he data starts with the upper)402.993 187.2 R .878(left hand fr)221.5 200.4 R
+.878(ont corner of the image data and scans out in a left to)-.198 F 2.519
+(right, top to bottom, fr)221.5 213.6 R 2.519(ont to back or)-.198 F(der)-.198
+E 8.018(.T)-.814 G 2.518(he index r)447.471 213.6 R 2.518(elated to)-.198 F/F3
+11/Palatino-Italic@0 SF(width)221.5 226.8 Q F2 1.246
+(varies the fastest, the index r)3.996 F 1.247(elated to)-.198 F F3(height)
+3.997 E F2 1.247(varies the sec-)3.997 F(ond fastest, and the index r)221.5 240
+Q(elated to)-.198 E F3(depth)2.75 E F2(varies the slowest.)2.75 E .06
+(The following shows the or)221.5 265.2 R .059
+(der of the data for a single pixel \(voxel\))-.198 F 1.909
+(for each of the seven formats.)221.5 278.4 R 1.91(Each <..> denotes one byte.)
+7.41 F(For)7.41 E 2.35(big-endian, <Z)221.5 291.6 R/F4 8/Palatino-Roman@0 SF(1)
+2.2 I F2 5.1(>i).55 -2.2 O 5.1(st)315.428 291.6 S 2.35
+(he most signi\214cant byte.)328.778 291.6 R 2.349(For little-endian,)7.849 F
+(<Z)221.5 304.8 Q F4(1)2.2 I F2 2.75(>i).55 -2.2 O 2.75(st)252.67 304.8 S
+(he least signi\214cant byte.)263.67 304.8 Q F3(r8g8b8)221.5 330 Q F2(<r)246.5
+343.2 Q(ed><gr)-.198 E(een><blue>)-.198 E F3(r8g8b8a8)221.5 368.4 Q F2(<r)246.5
+381.6 Q(ed><gr)-.198 E(een><blue><alpha>)-.198 E F3(a8b8g8r8)221.5 406.8 Q F2
+(<alpha><blue><gr)246.5 420 Q(een><r)-.198 E(ed>)-.198 E F3(r8g8b8a8z32)221.5
+445.2 Q F2(<r)246.5 458.4 Q(ed><gr)-.198 E(een><blue><alpha><)-.198 E F3(Z).33
+E/F5 8/Palatino-Italic@0 SF(1).188 2.2 M F2(><).55 -2.2 M F3(Z).33 E F5(2).524
+2.2 M F2(><).55 -2.2 M F3(Z).33 E F5(3).444 2.2 M F2(><).55 -2.2 M F3(Z).33 E
+F5(4).5 2.2 M F2(>).774 -2.2 M F3(r8g8b8z32)221.5 483.6 Q F2(<r)246.5 496.8 Q
+(ed><gr)-.198 E(een><blue><)-.198 E F3(Z).33 E F5(1).188 2.2 M F2(><).55 -2.2 M
+F3(Z).33 E F5(2).524 2.2 M F2(><).55 -2.2 M F3(Z).33 E F5(3).444 2.2 M F2(><)
+.55 -2.2 M F3(Z).33 E F5(4).5 2.2 M F2(>).774 -2.2 M F3(a8)221.5 522 Q F2
+(<alpha>)246.5 535.2 Q F3(z32)221.5 560.4 Q F2(<)246.5 573.6 Q F3(Z).33 E F5(1)
+.188 2.2 M F2(><).55 -2.2 M F3(Z).33 E F5(2).524 2.2 M F2(><).55 -2.2 M F3(Z)
+.33 E F5(3).444 2.2 M F2(><).55 -2.2 M F3(Z).33 E F5(4).5 2.2 M F2(>).774 -2.2
+M .16 LW 223.4 599.6 221.4 599.6 DL 225.4 599.6 223.4 599.6 DL 227.4 599.6
+225.4 599.6 DL 229.4 599.6 227.4 599.6 DL 231.4 599.6 229.4 599.6 DL 233.4
+599.6 231.4 599.6 DL 235.4 599.6 233.4 599.6 DL 237.4 599.6 235.4 599.6 DL
+239.4 599.6 237.4 599.6 DL 241.4 599.6 239.4 599.6 DL 243.4 599.6 241.4 599.6
+DL 245.4 599.6 243.4 599.6 DL 247.4 599.6 245.4 599.6 DL 249.4 599.6 247.4
+599.6 DL 251.4 599.6 249.4 599.6 DL 253.4 599.6 251.4 599.6 DL 255.4 599.6
+253.4 599.6 DL 257.4 599.6 255.4 599.6 DL 259.4 599.6 257.4 599.6 DL 261.4
+599.6 259.4 599.6 DL 263.4 599.6 261.4 599.6 DL 265.4 599.6 263.4 599.6 DL
+267.4 599.6 265.4 599.6 DL 269.4 599.6 267.4 599.6 DL 271.4 599.6 269.4 599.6
+DL 273.4 599.6 271.4 599.6 DL 275.4 599.6 273.4 599.6 DL 277.4 599.6 275.4
+599.6 DL 279.4 599.6 277.4 599.6 DL 281.4 599.6 279.4 599.6 DL 283.4 599.6
+281.4 599.6 DL 285.4 599.6 283.4 599.6 DL 287.4 599.6 285.4 599.6 DL 289.4
+599.6 287.4 599.6 DL 291.4 599.6 289.4 599.6 DL 293.4 599.6 291.4 599.6 DL
+295.4 599.6 293.4 599.6 DL 297.4 599.6 295.4 599.6 DL 299.4 599.6 297.4 599.6
+DL 301.4 599.6 299.4 599.6 DL 303.4 599.6 301.4 599.6 DL 305.4 599.6 303.4
+599.6 DL 307.4 599.6 305.4 599.6 DL 309.4 599.6 307.4 599.6 DL 311.4 599.6
+309.4 599.6 DL 313.4 599.6 311.4 599.6 DL 315.4 599.6 313.4 599.6 DL 317.4
+599.6 315.4 599.6 DL 319.4 599.6 317.4 599.6 DL 321.4 599.6 319.4 599.6 DL
+323.4 599.6 321.4 599.6 DL 325.4 599.6 323.4 599.6 DL 327.4 599.6 325.4 599.6
+DL 329.4 599.6 327.4 599.6 DL 331.4 599.6 329.4 599.6 DL 333.4 599.6 331.4
+599.6 DL 335.4 599.6 333.4 599.6 DL 337.4 599.6 335.4 599.6 DL 339.4 599.6
+337.4 599.6 DL 341.4 599.6 339.4 599.6 DL 343.4 599.6 341.4 599.6 DL 345.4
+599.6 343.4 599.6 DL 347.4 599.6 345.4 599.6 DL 349.4 599.6 347.4 599.6 DL
+351.4 599.6 349.4 599.6 DL 353.4 599.6 351.4 599.6 DL 355.4 599.6 353.4 599.6
+DL 357.4 599.6 355.4 599.6 DL 359.4 599.6 357.4 599.6 DL 361.4 599.6 359.4
+599.6 DL 363.4 599.6 361.4 599.6 DL 365.4 599.6 363.4 599.6 DL 367.4 599.6
+365.4 599.6 DL 369.4 599.6 367.4 599.6 DL 371.4 599.6 369.4 599.6 DL 373.4
+599.6 371.4 599.6 DL 375.4 599.6 373.4 599.6 DL 377.4 599.6 375.4 599.6 DL
+379.4 599.6 377.4 599.6 DL 381.4 599.6 379.4 599.6 DL 383.4 599.6 381.4 599.6
+DL 385.4 599.6 383.4 599.6 DL 387.4 599.6 385.4 599.6 DL 389.4 599.6 387.4
+599.6 DL 391.4 599.6 389.4 599.6 DL 393.4 599.6 391.4 599.6 DL 395.4 599.6
+393.4 599.6 DL 397.4 599.6 395.4 599.6 DL 399.4 599.6 397.4 599.6 DL 401.4
+599.6 399.4 599.6 DL 403.4 599.6 401.4 599.6 DL 405.4 599.6 403.4 599.6 DL
+407.4 599.6 405.4 599.6 DL 409.4 599.6 407.4 599.6 DL 411.4 599.6 409.4 599.6
+DL 413.4 599.6 411.4 599.6 DL 415.4 599.6 413.4 599.6 DL 417.4 599.6 415.4
+599.6 DL 419.4 599.6 417.4 599.6 DL 421.4 599.6 419.4 599.6 DL 423.4 599.6
+421.4 599.6 DL 425.4 599.6 423.4 599.6 DL 427.4 599.6 425.4 599.6 DL 429.4
+599.6 427.4 599.6 DL 431.4 599.6 429.4 599.6 DL 433.4 599.6 431.4 599.6 DL
+435.4 599.6 433.4 599.6 DL 437.4 599.6 435.4 599.6 DL 439.4 599.6 437.4 599.6
+DL 441.4 599.6 439.4 599.6 DL 443.4 599.6 441.4 599.6 DL 445.4 599.6 443.4
+599.6 DL 447.4 599.6 445.4 599.6 DL 449.4 599.6 447.4 599.6 DL 451.4 599.6
+449.4 599.6 DL 453.4 599.6 451.4 599.6 DL 455.4 599.6 453.4 599.6 DL 457.4
+599.6 455.4 599.6 DL 459.4 599.6 457.4 599.6 DL 461.4 599.6 459.4 599.6 DL
+463.4 599.6 461.4 599.6 DL 465.4 599.6 463.4 599.6 DL 467.4 599.6 465.4 599.6
+DL 469.4 599.6 467.4 599.6 DL 471.4 599.6 469.4 599.6 DL 473.4 599.6 471.4
+599.6 DL 475.4 599.6 473.4 599.6 DL 477.4 599.6 475.4 599.6 DL 479.4 599.6
+477.4 599.6 DL 481.4 599.6 479.4 599.6 DL 483.4 599.6 481.4 599.6 DL 485.4
+599.6 483.4 599.6 DL 487.4 599.6 485.4 599.6 DL 489.4 599.6 487.4 599.6 DL
+491.4 599.6 489.4 599.6 DL 493.4 599.6 491.4 599.6 DL 495.4 599.6 493.4 599.6
+DL 497.4 599.6 495.4 599.6 DL 499.4 599.6 497.4 599.6 DL 501.4 599.6 499.4
+599.6 DL 503.4 599.6 501.4 599.6 DL 505.4 599.6 503.4 599.6 DL 507.4 599.6
+505.4 599.6 DL 509.4 599.6 507.4 599.6 DL 511.4 599.6 509.4 599.6 DL 513.4
+599.6 511.4 599.6 DL 515.4 599.6 513.4 599.6 DL 517.4 599.6 515.4 599.6 DL
+519.4 599.6 517.4 599.6 DL 521.4 599.6 519.4 599.6 DL 523.4 599.6 521.4 599.6
+DL 525.4 599.6 523.4 599.6 DL 527.4 599.6 525.4 599.6 DL 529.4 599.6 527.4
+599.6 DL 531.4 599.6 529.4 599.6 DL 533.4 599.6 531.4 599.6 DL 535.4 599.6
+533.4 599.6 DL 537.4 599.6 535.4 599.6 DL 539.4 599.6 537.4 599.6 DL 541.4
+599.6 539.4 599.6 DL 543.4 599.6 541.4 599.6 DL 545.4 599.6 543.4 599.6 DL 1.44
+LW 90 600.1 72 600.1 DL 99 600.1 81 600.1 DL 117 600.1 99 600.1 DL 135 600.1
+117 600.1 DL 153 600.1 135 600.1 DL 171 600.1 153 600.1 DL 189 600.1 171 600.1
+DL 207 600.1 189 600.1 DL/F6 12/Helvetica-BoldOblique@0 SF(Raster Memor)72
+614.1 Q 3.336(yF).12 G(ormat)169.476 614.1 Q F2 1.147(Application pr)221.5
+628.2 R 1.146(ograms can also exchange image information with)-.198 F(Dore)
+221.5 641.4 Q 4.644<b474>241.168 641.4 S(hr)253.061 641.4 Q 1.091
+(ough memory rasters.)-.198 F 1.092(The format of the binary data for)6.592 F
+.816(memory rasters is identical to the format for the binary \214le raster)
+221.5 654.6 R 3.782(data. W)221.5 667.8 R(or)-1.012 E 3.782(db)-.198 G 1.032
+(yte or)288.816 667.8 R 1.033(der is not a concern to the pr)-.198 F 1.033
+(ogrammer using)-.198 F 1.934
+(memory rasters since the 32-bit Z value is in whatever or)221.5 681 R 1.933
+(der is)-.198 F(native to the machine.)221.5 694.2 Q 90 756 72 756 DL 99 756 81
+756 DL 117 756 99 756 DL 135 756 117 756 DL 153 756 135 756 DL 171 756 153 756
+DL 189 756 171 756 DL 207 756 189 756 DL 239.4 756 221.4 756 DL 257.4 756 239.4
+756 DL 275.4 756 257.4 756 DL 293.4 756 275.4 756 DL 311.4 756 293.4 756 DL
+329.4 756 311.4 756 DL 347.4 756 329.4 756 DL 365.4 756 347.4 756 DL 383.4 756
+365.4 756 DL 401.4 756 383.4 756 DL 419.4 756 401.4 756 DL 437.4 756 419.4 756
+DL 455.4 756 437.4 756 DL 473.4 756 455.4 756 DL 491.4 756 473.4 756 DL 509.4
+756 491.4 756 DL 527.4 756 509.4 756 DL 545.4 756 527.4 756 DL/F7 9
+/Helvetica-Bold@0 SF(7-464)72 768.96 Q/F8 9/Helvetica@0 SF(Dore)6.504 E 3.506
+<b452>117.019 768.96 S(ef)130.02 768.96 Q(erence Man)-.27 E(ual)-.09 E
+(Raster File and Memor)221.4 768.96 Q 2.502(yF).27 G -2.277(or mats)325.422
+768.96 R EP
+%%Page: 465 7
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 99 46.8 63 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 243 46.8 207 46.8 DL 279 46.8 243 46.8 DL 315 46.8 279 46.8 DL 351
+46.8 315 46.8 DL 387 46.8 351 46.8 DL 437.4 46.8 401.4 46.8 DL 464.4 46.8 428.4
+46.8 DL 500.4 46.8 464.4 46.8 DL 536.4 46.8 500.4 46.8 DL/F0 10
+/Helvetica-BoldOblique@0 SF(Raster Memor)427.39 57.6 Q 2.78(yF).1 G(ormat)
+508.62 57.6 Q/F1 10/Helvetica@0 SF(\(contin)486.48 68.4 Q(ued\))-.1 E/F2 11
+/Palatino-Roman@0 SF 3.669(Raster memory data of this format is r)63 109.2 R
+(equir)-.198 E 3.669(ed when a Dore)-.198 F<b4>382.534 109.2 Q/F3 11
+/Palatino-Italic@0 SF 1.636(DoRaster <DORS>)63 122.4 R F2 1.636(object is cr)
+4.386 F 4.386(eated. Raster)-.198 F 1.636(memory data can be)4.386 F 1.093
+(obtained fr)63 135.6 R 1.093(om \214les in the Dore)-.198 F 4.646<b472>212.829
+135.6 S 1.092(aster \214le format using the)225.483 135.6 R F3(DsFil-)3.842 E
+.446(eRasterRead <DSFRSR>)63 148.8 R F2 .447(call, and fr)3.196 F .447
+(om some Dore)-.198 F 4<b464>299.1 148.8 S .447(evices with the)313.484 148.8 R
+F3 1.972(DdInqPixelData <DDQPXD>)63 162 R F2 4.721(call. A)4.721 F 1.971
+(pointer to the binary raster)4.721 F .545(data is passed to and fr)63 175.2 R
+.546(om these Dore)-.198 F 4.099<b472>245.27 175.2 S .546
+(outines, along with width,)257.179 175.2 R
+(height, depth, and type information \(a)63 188.4 Q F3(DtRasterT)2.75 E(ype)
+-1.012 E F2(value\).)2.75 E 1.44 LW 81 756 63 756 DL 99 756 81 756 DL 117 756
+99 756 DL 135 756 117 756 DL 153 756 135 756 DL 171 756 153 756 DL 189 756 171
+756 DL 207 756 189 756 DL 225 756 207 756 DL 243 756 225 756 DL 261 756 243 756
+DL 279 756 261 756 DL 297 756 279 756 DL 315 756 297 756 DL 333 756 315 756 DL
+351 756 333 756 DL 369 756 351 756 DL 387 756 369 756 DL 419.4 756 401.4 756 DL
+428.4 756 410.4 756 DL 446.4 756 428.4 756 DL 464.4 756 446.4 756 DL 482.4 756
+464.4 756 DL 500.4 756 482.4 756 DL 518.4 756 500.4 756 DL 536.4 756 518.4 756
+DL/F4 9/Helvetica@0 SF(Raster File and Memor)255.249 768.96 Q 2.502(yF).27 G
+-2.277(or mats)359.271 768.96 R(Dore)414.21 768.96 Q 3.506<b452>429.712 768.96
+S(ef)442.713 768.96 Q(erence Man)-.27 E(ual)-.09 E/F5 9/Helvetica-Bold@0 SF
+(7-465)4.002 E EP
+%%Trailer
+end
+%%EOF

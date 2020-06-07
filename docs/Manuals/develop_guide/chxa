@@ -1,0 +1,455 @@
+.\"#ident "%W%" %G%
+.\"
+.\" #
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  
+.\" # 
+.\" # KUBOTA GRAPHICS Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\" #
+.\"
+.sc
+.EQ L
+delim $$
+.EN
+.so ../macros/local.me
+.ds BT "\\*(Dd Developer's Guide
+.ds CT "Glossary
+.ds h1 A
+.PN 355
+.L1 G LOSSARY 
+.CH  app
+.ip "\f3Additional Object Data\fP"
+Renderers and device drivers may require data to be stored with 
+each object of a class.
+A class definition can be
+augmented to include this additional data. 
+Each class can have multiple sets of additional data.
+Only the particular renderer or device driver
+that requested the additional data space
+will know its structure. 
+.ip "\f3Alternate Object\fP"
+If a renderer cannot directly draw objects of a primitive class 
+it may instead draw another \*(Dd object which approximates the
+geometry of the original object.
+For example, the \*(Dd dynamic renderer 
+cannot directly draw spheres.  
+Instead it renders a triangle mesh that approximates a sphere.
+The triangle mesh is an alternate object for the sphere.
+A renderer can use the standard alternate object of an object,
+or it can generate its own from the object data.
+.ip "\f3Alternate Representation\fP"
+See \f2Alternate Object\fP.
+.ip "\f3Attribute Class\fP"
+The set of classes that define the attribute objects 
+affecting the display of primitive and 
+studio objects are collectively called attribute classes.
+.ip "\f3Base Primitive\fP"
+The primitives that can be drawn directly by a renderer
+without using an alternate representation are called the
+base primitives of the renderer. 
+When the renderer draws any other primitive it
+will have to be represented as an alternate object
+composed of base primitives.
+.ip "\f3Class             \fP"
+A class is sometimes called an object type;
+an object is an instance of a particular class.
+A class defines the structure for private data of objects
+of the class and implements
+the method routines to operate on the data.
+Each class is uniquely identified by a character string and an
+integer identifier.
+.ip "\f3Class Identifier\fP"
+A class identifier is an integer number assigned by \*(Dd
+to uniquely identify the class in the system.
+The routine \f2DsInqClassId\fP
+returns the class identifier given a class name.
+.ip "\f3Class Name\fP"
+A class name is a character string name that is unique to the class.
+It is assigned by the class implementation.
+By convention, \*(Dd class names are the same as the name of the
+C \*(Dd routine that creates an object of the class.  
+Global attribute classes are an exception to this rule: 
+the string name of a global attribute class
+can be found by substituting the substring "Att"
+for the substring
+"Do" in the name of the corresponding attribute class.
+.ip "\f3Current Method\fP"
+During the traversal of a group, the current method is the method 
+being executed on each object in the group.
+The current method is only defined when a traversal is in progress.
+.ip "\f3DCM\fP"
+See \f2Device Control Module\f1.
+.ip "\f3Definition Group\fP"
+See \f2Studio Group\fP.
+.ip "\f3Developer's Interface\fP"
+The developer's interface consists of routines provided by
+\*(Dd to allow renderer modules and device driver modules
+access to \*(Dd kernel functionality. 
+The \f2Developer's Interface Functions\f1 manpages
+describe each function included in the interface.
+.ip "\f3Device\fP"
+A device is an output medium for displaying an image.
+Files, frame buffers, windows and plotters are examples
+of devices used for display.
+Output to the device is controlled by a device driver.
+.ip "\f3Device Control Module (DCM)\fP"
+The device control module is a device driver module
+required by all device driver implementations.
+It includes functions that support the \*(Dd kernel.
+These functions handle several kinds of device control
+at a level which is independent of the specific renderer
+being used.
+The \f2Device Driver Interface Functions\f1 manpageS include
+descriptions of the DCM functions.
+.ip "\f3Device Driver\fP"
+A device driver is a functional component that provides a link
+between \*(Dd and an output device. 
+There is a device driver for every device type
+such as a file, a frame buffer 
+or graphic display pipeline device.
+Every device driver consists of a
+device control module and one or more output modules.
+.ip "\f3Device Driver Installation Routine\fP"
+A device driver installation routine is provided by the
+device driver implementation to install itself into
+the \*(Dd system.
+This routine must be called before the device driver can
+be used by \*(Dd applications.
+The installation routines for all device drivers included
+in a \*(Dd configuration are invoked from the system module.
+A \*(Dd application program can also use a device driver
+that is not included in the \*(Dd configuration
+if it calls the device driver's installation routine
+immediately after the \*(Dd system is initialized.
+.ip "\f3Device Driver Interface\fP"
+The device driver
+interface provides access to internal functions of the 
+device drivers. Together,
+the device driver interface and the developer's interface
+allow developers
+to implement drivers for different output devices.
+The \f2Device Driver Interface Functions\f1 manpages include 
+Descriptions of the functions included in the interface,
+in \f2manpage\f1 format.
+.ip "\f3Device Extent\fP"
+The device extent is the rectangular 3D volume
+that defines the position and dimensions of the device object
+in \*(Dd device coordinates.
+The width and height of the volume correspond to the width and height
+of the device object created with \f2DoDevice\f1.
+The depth of the volume is typically the full z range
+of the output device.
+.ip "\f3Device Object\fP"
+A device object is an organizational object of type \f2DoDevice\fP.
+A frame object containing the views to be rendered is 
+assigned to a device object.
+The device object provides pointers to routines 
+to access its device driver.
+.ip "\f3Display Group\fP"
+The display group defines the displayable objects of the scene.
+It includes primitives, primitive 
+attributes and geometric transformation attributes.  
+View objects contain a display group.
+.ip "\f3Display Traversal\fP"
+A display traversal is the sequential execution of a method
+on the display group.
+It generally causes the displayable objects of the
+scene to be rendered, according to the value of the inherited attributes.
+The display traversal normally occurs after the studio traversal.
+.ip "\f3\*(Dd Configuration\fP"
+Since \*(Dd supports multiple renderers and devices and
+runs on a variety of platforms, not all
+\*(Dd libraries of the same version number are identical.
+When a \*(Dd library is built it is configured to include a
+certain set of modules
+including renderers, device drivers, a \*(Fo interface module, and
+platform dependent utilities.
+The configuration of your \*(Dd system is described in your
+\f2\*(Dd System Guide\fP.
+.ip "\f3\*(Dd Device Coordinate System\fP"
+The \*(Dd device coordinate system is a right-handed 
+coordinate system used to address a device.
+In \*(Dd device coordinates, the origin is
+at the lower left corner of the output device, with x to the right,
+y up, and z coming out toward you.
+.ip "\f3\*(Dd Kernel\fP"
+The \*(Dd kernel is the heart of the \*(Dd system, providing
+overall control and basic objects.
+The kernel provides the object control system, 
+traversal control, attribute stacking, picking, and
+class implementations for groups, devices, frames, views, 
+attributes, and primitives.
+.ip "\f3\*(Dd Version\fP"
+\*(Dd libraries have a version number which is returned by the
+function \f2DsInqVersion\fP.
+Libraries with the same version number are built from the same
+\*(Dd source code, but may be configured with a different set
+of renderers, device drivers, platform specific utilities and
+\*(Fo interface module.
+.ip "\f3DROM\fP"
+See \f2Dynamic Renderer Output Module\f1.
+.ip "\f3Dynamic Renderer\fP"
+The dynamic renderer is one of two renderers provided with
+most \*(Dd configurations and Portable \*(Dd.
+The dynamic renderer is designed for interactive graphics
+performance by taking
+advantage of the host system's graphics display
+hardware whenever possible.
+It assumes the underlying graphics hardware (or failing that,
+software) provides facilities for transformation, clipping,
+shading, and hidden surface removal.
+The dynamic renderer does not guarantee a specific 
+\f2look\fP or shading style; it is intended to provide a
+dynamic response or \f2feel\fP.
+.ip "\f3Dynamic Renderer Output Module (DROM)\fP"
+The dynamic renderer output module is a device driver module 
+that handles all output from the dynamic renderer.
+Since the dynamic renderer makes use of the
+host system's graphics display hardware, the
+interface to the DROM is fairly high level.
+The \f2Device Driver Interface Functions\f1 manpages include
+descriptions of the DROM functions.
+.ip "\f3DROM Methods Interface\fP"
+The DROM methods interface is a device driver interface 
+that allows the DROM to function more like a renderer
+by replacing some of the dynamic renderer's method routines.
+This is useful when a device can directly draw
+primitives that are not one of the base primitives of the
+dynamic renderer.
+For example, a device that can draw NURBS directly would 
+replace the method for \f2DoNURBSurf\fP with one that uses
+hardware NURBS rather than the standard alternate object.
+.ip "\f3Frame Coordinate Geometry\fP"
+Frame coordinate geometries
+are rendered in a plane in frame space that is parallel
+to the xy-plane of the device.
+The position of these objects are affected by the geometric
+transformations, but the orientation is always the same.
+These objects are unaffected by
+camera projections, lighting and shading.
+Frame coordinate geometries include annotation text and polymarkers.
+.ip "\f3Frame Object\fP"
+A frame object is used to collect view objects into a virtual image.
+A frame can contain multiple views.
+Before an image can be displayed, the frame must be assigned
+to a device object.
+.ip "\f3Frustum Space\fP"
+Frustum space is the visible, normalized volume of a view, in
+homogeneous coordinates. Frustum space includes any point ($x,~y~,z~,w$) that
+satisfies the conditions
+.nf
+.in +.5i
+$-w~<=~x~<=~w$
+$-w~<=~y~<=~w$
+$-w~<=~z~<=~0$
+.fi
+.in -.5i
+.sp
+The visible volume is the intersection of the view volume with the
+frame volume, where the view volume contains the portion of the 
+scene as
+specified by the position and orientation of the active camera, and
+the camera projection.
+.ip "\f3Global Attribute Stack\fP"
+Each attribute class has associated with it a 
+stack for maintaining the current value of the attribute.
+Global attribute stacks are generally updated whenever 
+the attribute values change or
+when groups are entered and exited.
+.ip "\f3Group\fP"
+A group contains an ordered collection of \*(Dd objects.  
+A group itself is also an object and can be an element of
+another group.
+Groups are used to create hierarchies of objects.
+.ip "\f3Local Space\fP"
+Each primitive object is defined in its own local space,
+where the coordinates are whatever is best suited to the
+particular object.
+For example, a \f2DoPrimSurf\fP sphere object
+is located at the origin of its local space and has a radius of 1.0.
+Local space is also known as modeling space.
+.ip "\f3Method\fP"
+A method is an operation that is defined across all classes.
+Each class has its own
+method routine which is an
+implementation of the method for that specific class of objects.
+Methods provided by \*(Dd include print, pick,
+and render methods.
+The addition of a new renderer
+to \*(Dd involves the addition of new methods,
+including new studio and display traversal methods.
+.ip "\f3Method Identifier\fP"
+A method identifier is an integer number that is assigned
+by \*(Dd to uniquely identify the method in the system.
+The routine \f2DsInqMethodId\fP returns the identifier for a 
+method from its name.
+.ip "\f3Method Name\fP"
+A method name is a character string name that uniquely identifies
+a method.
+Method names are assigned by the modules that create them.
+.ip "\f3Method Routine\fP"
+A method routine is the implementation of a method for
+a particular object class. 
+Each class has several method routines, one for every defined method.
+Executing a method on an object consists of 
+looking up the object's class, determining which method routine
+is installed for that class/method combination, and invoking
+that routine.
+Method routines may be null routines.
+.ip "\f3Object\fP"
+An object is a collection of data, along with a set of functions
+that operate on the data.
+Everything in a \*(Dd scene is an object, including
+cameras, lights, primitives, and all attributes.
+Objects are created by calling  one of the \f2Do-\fP \*(Dd routines, 
+or the object creation routine of a user-defined class. 
+When an object is created, space is allocated for its private
+data and some initialization of the data takes place if necessary.
+A handle to the object is then returned.
+The handle is used as a synonym for the object itself.
+.ip "\f3Object Handle\fP"
+An object handle is a pointer to an object.
+The handle is used as a synonym for the object itself.
+See also \f2Object\f1.
+.ip "\f3Portable \*(Dd\fP"
+Portable \*(Dd is the source code product
+of the \*(Dd graphics library, available
+from Kubota Pacific Computer Inc.
+.ip "\f3Primitive Class\fP"
+The set of classes that define the displayable geometric objects are 
+collectively called primitive classes.
+.ip "\f3Private Object Data\fP"
+Private object data is the internal data of an object.  
+The structure of the data is defined by each class implementation.
+For instance, the private data for \f2DoTriangleMesh\f1 objects
+includes vertex coordinates, colors and texture
+coordinates.
+See Appendix C for a definition of the private data structures
+of the primitive classes.
+.ip "\f3Production Renderer Output Module (PROM)\fP"
+The production renderer output module is a device output module.
+The PROM assumes that the
+renderer performs all rendering functions up to
+and including scan conversion.
+As a result, the PROM interface is a relatively
+concise, low-level interface requiring little or no processing of
+display information by the PROM before
+being sent directly to the display output device.
+The \f2Device Driver Interface Functions\f1 manpages include
+descriptions of the PROM interface functions.
+.ip "\f3PROM\fP"
+See \f2Production Renderer Output Module\f1.
+.ip "\f3Renderer\fP"
+A renderer is a functional component that takes a \*(Dd view
+and converts it to a form that can be displayed by a device driver.
+A renderer typically creates
+both a studio and a display traversal method with
+sets of method routines
+for the studio, primitive and attribute object classes.
+.ip "\f3Renderer Identifier\fP"
+A renderer identifier is an integer used by the 
+\*(Dd system to uniquely identify the renderer in the system. 
+The application program specifies which renderer to use for a 
+view by specifying the renderer identifier (or \f2rendering style\f1) in
+a call to \f2DvSetRendStyle\f1.
+.ip "\f3Renderer Installation Routine\fP"
+A renderer installation routine is provided by the
+renderer implementation to install itself into
+the \*(Dd system.
+This routine must be called before the renderer can
+be used by \*(Dd applications.
+The installation routines for all renderers included
+in a \*(Dd configuration are invoked from the system module.
+A \*(Dd application program can also use a renderer
+that is not included in the \*(Dd configuration if 
+it calls the renderer's installation routine
+immediately after the \*(Dd system is initialized.
+.ip "\f3Renderer Interface\fP"
+The renderer 
+interface provides access to internal functions of the renderers.
+Together, the renderer interface and the developer's interface
+allow developers to adapt their own renderers to \*(Dd.
+.ip "\f3Renderer Name\fP"
+A renderer name is a character string name that uniquely identifies
+a renderer. 
+A renderer name is assigned by the renderer implementation.
+.ip "\f3Standard Alternate Object\fP"
+Most primitive classes provide a way to create an alternate object 
+for objects of the class.  
+These are the standard alternate objects, and they consist
+of primitive objects that can be directly drawn by most renderers.
+Renderers and device drivers may install their own methods 
+for creating
+alternate objects to make best use of the special capabilities of
+the renderer or device.
+.ip "\f3Standard \*(Dd Methods\fP"
+The set of methods that are defined with all \*(Dd configurations
+are collectively called the standard \*(Dd methods.
+Some of them, such as picking, computing bounding volumes and 
+printing,
+are executed when requested by an application
+(\f2DdPickObjs,
+DsCompBoundingVol, DsPrintObj\f1 and related functions).
+Other standard methods, such as those for studio and display traversal,
+are intended to be used by the \*(Dd renderers,
+including user-defined renderers.
+.ip "\f3Standard Production Renderer\fP"
+The standard production renderer is one of two renderers provided
+with most \*(Dd configurations and Portable \*(Dd.
+The standard production renderer is a spatial subdivision ray tracer,
+which performs all rendering calculations using portable machine
+independent software.
+It has the ability to generate images with transparency, reflections,
+and shadows, along with many of the other standard \*(Dd attributes.
+.ip "\f3Studio Class\fP"
+The set of classes that define cameras, lights and their attributes
+are collectively called studio classes.
+.ip "\f3Studio Group\fP"
+The studio group defines the environment in which a scene
+is rendered.  The studio group includes camera and light objects
+and their attributes.
+View objects contain a studio group.
+.ip "\f3Studio Traversal\fP"
+A studio traversal is the sequential execution of a method
+on the studio group.
+This traversal collects information about the cameras and lights 
+of the scene.
+The information will be used later during display traversal.
+.ip "\f3System Module\fP"
+The \*(Dd system module consists of a small set of routines that
+install the renderers and device drivers to be included in
+a \*(Dd configuration.
+They also control system specific initialization and exit functions.
+.ip "\f3Traversal\fP"
+A traversal is the sequential execution of a method 
+on each object of a group. 
+The method being executed is called the current method.
+For each object, the corresponding class method routine 
+is called and passed the object handle as an argument.
+If the object is a group,
+the current method will be executed on each object it contains.
+.ip "\f3Traversal Method\fP"
+A traversal method is a method that is used to traverse the 
+\*(Dd database, in which case objects of a group
+are executed sequentially.  
+Methods for rendering, picking, computing bounding volumes
+and printing are examples of \*(Dd traversal methods.
+Other methods, such as querying global attribute values,
+are for executing a single object at a time.
+.ip "\f3View Object \fP"
+A view object is an organizational object of type \f2DoView\fP.
+It contains a studio group and
+a display group, and various other attributes of a scene.
+.ip "\f3World Space \fP"
+World space is the 3D space in which a scene is defined,
+with all scene elements sized and positioned in relation to each
+other. World space is unbounded in all three dimension.

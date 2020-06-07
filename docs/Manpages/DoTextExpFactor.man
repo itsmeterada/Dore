@@ -1,0 +1,62 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DoTextExpFactor 3D  "Dore"
+.SH NAME
+DoTextExpFactor \- Create a text expansion factor primitive attribute object
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+DtObject DoTextExpFactor(textexp)
+DtReal textexp;
+.sp
+.in -.5i
+FORTRAN:
+.in +.5i
+INTEGER*4 DOTEF(TXEXP)
+REAL*8 TXEXP
+.in -.5i
+.fi
+.SH DESCRIPTION
+.IX DOTEF
+.IX DoTextExpFactor
+.I DoTextExpFactor
+creates a text expansion factor primitive attribute object.  The parameter
+\f2textexp\fP specifies a scale factor for the character width
+such that the character aspect ratio deviates from that indicated by
+the font designer by \f2textexp\fP.  Possible values are:
+.IP "0.0 < \f2textexp\fP < 1.0"
+The character width contracts by the specified amount.
+.IP "\f2textexp\fP >= 1.0"
+The character width expands by the specified amount.
+.SH DEFAULTS
+The default \f2DoTextExpFactor\fP is 1.0.
+.BP
+.SH ERRORS
+The results of the text expansion are undefined when \f2textexp\fP
+is less than or equal to 0.0.
+.PP
+[WARNING - value out of range]
+.SH "SEE ALSO"
+.na
+.nh
+DoAnnoText(3D), DoText(3D), DoTextAlign(3D), DoTextFont(3D),
+DoTextHeight(3D), DoTextPath(3D), DoTextPrecision(3D), DoTextSpace(3D),
+DoTextUpVector(3D)
+.ad
+.hy

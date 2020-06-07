@@ -1,0 +1,209 @@
+.\"#ident "%W%" %G%
+.\"
+.\" #
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  
+.\" # 
+.\" # KUBOTA GRAPHICS Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\" #
+.\"
+.so ../macros/local.me
+.ds CT Preface
+.ds BT \\*(Dd Developer's Guide
+.L1 P REFACE
+.PN 11 i
+.CH 
+.rs
+.sp -1.5v
+This manual is a guide to adding device drivers and renderers 
+to version 
+5.0 of \*(Dd, a three-dimensional computer graphics 
+subroutine library.
+It also provides information to assist system 
+programmers in porting \*(Dd to new computer platforms. 
+.lp
+This manual is intended for Portable \*(Dd users, and users of
+the \*(Dd Developer's Toolkit.
+It is assumed you are already familiar with the concepts and terms 
+of \*(Dd application programming, as
+described in the \f2\*(Dd Programmer's Guide\fP and the
+\f2\*(Dd Reference Manual\fP. 
+.H1 "Chapter Summaries
+The chapters of this manual are grouped in seven main sections:
+.sp
+\f3Section I, Introduction\f1
+.BU hs
+Chapter 1, \f2\*(Dd Overview\f1, discusses the unique 
+features of \*(Dd.
+.BU hs
+Chapter 2, \f2\*(Dd Functional Structure\f1, provides a broad overview
+of the overall functional structure of the implementation of \*(Dd.
+.BU hs
+Chapter 3, \f2Classes and Methods\f1, discusses some basic concepts
+of \*(Dd classes and methods, 
+including information on the stacking mechanism
+used for keeping track of current attribute values.
+.lp
+\f3Section II, Renderers\f1
+.BU hs
+Chapter 4, \f2Renderers Section Introduction\f1, is an 
+overview of the section.
+.BU hs
+Chapter 5, \f2Rendering Process\f1, offers an overview of the concepts
+involved in the
+\*(Dd rendering process: updating the renderer state, performing
+the studio and display traversals of the database, and sending
+output data to a \*(Dd device output module.
+.BU hs
+Chapter 6, \f2Interfacing a Renderer\f1, is a step-by-step description of how
+to adapt and add an existing renderer to the \*(Dd system.
+.BU hs
+Chapter 7, \f2Sample Renderer\f1, shows how a sample renderer can be added
+to \*(Dd, following the steps described in the previous chapter.
+.lp
+\f3Section III, Device Drivers\f1
+.BU hs
+Chapter 8, \f2Device Drivers Section
+Introduction\f1, is an overview of the section.
+.BU hs
+Chapter 9, \f2Device Driver Modules and Interfaces\f1, 
+describes the device driver modules and the
+interfaces that provide access to them.
+.BU hs
+Chapter 10, \f2Implementing a Device Driver\f1, 
+is a step-by-step description
+of how to implement a new device driver. 
+.BU hs
+Chapter 11, \f2Sample Device Driver\f1, describes a sample device driver
+written using the steps described in the previous chapter.
+.lp
+\f3Section IV, Porting\f1
+.BU hs
+Chapter 12, \f2Porting Section Introduction\f1, 
+provides an overview of the section, as
+well as information on the platform requirements for a \*(Dd port.
+.BU hs
+Chapter 13, \f2\*(Dd Implementation Conventions\f1, 
+describes the \*(Dd naming
+conventions and the \*(Dd source code directory structure.
+.BU hs
+Chapter 14, \f2Building the Sample Configurations\f1, 
+explains how to build 
+and install the \*(Dd library. 
+In particular, this chapter describes the steps for building
+the sample configurations provided with Portable \*(Dd.
+.BU hs
+Chapter 15, \f2Porting \*(Dd\f1, describes the porting process, including
+how to control the build process, and how to copy template modules
+for new module implementations. 
+.lp
+\f3Section V, Testing\f1
+.BU hs
+Chapter 16, \f2Testing \*(Dd\f1, shows how to build and use the sample test
+and demonstration programs provided with Portable \*(Dd.
+.lp
+\f3Section VII, Appendices\f1
+.BU hs
+Appendix A, \f2Glossary\f1, contains definitions for some 
+\*(Dd programming terms, as well as terms used in this manual for 
+internal \*(Dd concepts.
+.BU hs
+Appendix B, \f2Global Attribute Access\f1, 
+contains the calling sequences for
+the method routines of the standard method "InqGlobalValue".
+This method is used during traversals
+to query the current value of attributes.
+.BU hs
+Appendix C, \f2Object Data Structures\f1, 
+describes some of the data structures
+used by the \*(Dd system to store information specific to objects.
+.lp
+You will need to read one or more or these sections, depending
+on what you plan to do with \*(Dd as a developer.
+In all cases you should start by reading
+Section I, \f2Introduction\fP,
+before going on to read other sections.
+It includes an overview of the functional structure of \*(Dd.
+Section V, \f2Testing\fP, and
+Section VII, \f2Appendices\fP, 
+are also useful to all \*(Dd developers.
+.lp
+If you want to adapt a renderer to use with \*(Dd, read:
+.BU hs
+Section I, \f2Introduction\fP
+.BU hs
+Section II, \f2Renderers\fP
+.BU hs
+Section V, \f2Testing\fP
+.lp
+You will also need to refer to the \f2Developer's Interface Functions\fP
+manpages.
+.lp
+If you want to implement a \*(Dd device driver to support new 
+types of output devices, read:
+.BU hs
+Section I, \f2Introduction\fP
+.BU hs
+Section III, \f2Device Drivers\fP
+.BU hs
+Section V, \f2Testing\fP
+.lp
+You will also need to refer to the \f2Device Driver Interface Functions\fP
+manpages.
+.lp
+If you are going to port \*(Dd to new platforms, read: 
+.BU hs 
+Section I, \f2Introduction\fP
+.BU hs
+Section IV, \f2Porting\fP
+.BU hs
+Section III, \f2Device Drivers\fP
+.BU hs
+Section V, \f2Testing\fP
+.lp
+Note that it is recommended that you read the 
+\f2Porting\fP section before reading about device drivers.
+The \f2Device Drivers\fP section will also refer you to
+the  \f2Device Driver Interface Functions\fP manpages.
+.H1 "Related Manuals and Texts
+A comprehensive set of documentation is available with \*(Dd.
+The following list provides a brief description of all additional
+\*(Dd documentation.
+.BU
+The \f2\*(Dd Programmer's Guide\fP explains the key terms and concepts
+of programming with the \*(Dd library, with sample code fragments
+in C and \*(Fo.
+.BU hs
+The \f2\*(Dd Reference Manual\fP provides a complete description
+of all \*(Dd functions, as well as information on raster data formats,
+transformation matrices used by \*(Dd, and a discussion on
+renderer-dependent features of \*(Dd.
+.BU hs
+The \f2\*(Dd System Guides\fP provide details that apply to 
+particular releases of \*(Dd, such as how to install
+the product, and which devices and renderers are included in
+the release.
+.lp
+If you are new to graphics programming, one of the following
+texts can provide useful background information:
+.BU
+\f2Principles of Interactive Computer Graphics\f1 by William M.
+Newman and Robert F. Sproull, published by McGraw-Hill.
+.BU
+\f2Computer Graphics, Principles and Practice, 2nd edition\f1
+by James D. Foley, Andries van Dam, Steven K. Feiner, and John F. Hughes,
+published by Addison-Wesley.
+.BU
+\f2Procedural Elements for Computer Graphics\fP by
+David F. Rogers, published by McGraw-Hill.
+
+

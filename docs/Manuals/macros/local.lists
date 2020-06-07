@@ -1,0 +1,105 @@
+.\"	list macros
+.\"	.Ls type [indent] [mark]
+.\"	.Li [no space]
+.\"	.Le [no space]
+.nr 10 0 1
+.nr I0 0
+.nr IR 0
+.nr >I 0
+.de Ls
+.br
+.if !"\\$1"A" .if !"\\$1"B" .if !"\\$1"C" .if !"\\$1"D" .if !"\\$1"N" \
+.	if !"\\$1"R" .if !"\\$1"r" .if !"\\$1"a" .if !"\\$1"" \
+.	tm Ls: needs A a B C D N R r or null as list type (Page \\*(h1-\\n%)
+.nr l\\n+(10 0 1
+.ie "\\$1"" \{\
+.	if "\\n(10"1" .af l\\n(10 1
+. 	if "\\n(10"2" .af l\\n(10 a
+. 	if "\\n(10"3" .af l\\n(10 i
+. 	if "\\n(10"4" .ds l\\n(10 \(bu
+. 	if "\\n(10"5" .ds l\\n(10 \(em
+. 	if \\n(10-5 .ds l\\n(10 \(bu
+. 	if \\n(10-3 .nr l\\n(10 0-1
+.\}
+.el \{\
+.	if "\\$1"A" .af l\\n(10 A
+.	if "\\$1"a" .af l\\n(10 a
+.	if "\\$1"B" \{\
+.		if "\\$3"" .ds l\\n(10 \(bu
+.		if !"\\$3"" .ds l\\n(10 \\$3
+.		nr l\\n(10 0-1 \}
+.	if "\\$1"C" \{\
+.		ds l\\n(10 \s6\(ci\s0
+.		nr l\\n(10 0-1 \}
+.	if "\\$1"D" \{\
+.		ds l\\n(10 \s8\(em\s0
+.		nr l\\n(10 0-1 \}
+.	if "\\$1"R" .af l\\n(10 I
+.	if "\\$1"r" .af l\\n(10 i
+.\}
+.ie !"\\$2"" .nr i\\n(10 \\$2
+.el .nr i\\n(10 5
+.Rs
+..
+.de Li
+.br
+.if "\\$1"ns" .ns
+.ie "\\n(l\\n(10"-1" .>I "\\*(l\\n(10" "\\n(i\\n(10"
+.el \{\
+.	nr l\\n(10 +1
+.	>I "\\n(l\\n(10." "\\n(i\\n(10"
+.\}
+..
+.de Le
+.br
+.rr l\\n(10
+.rr i\\n(10
+.rm l\\n(10
+.nr 10 -1
+.Re
+.ie !\\n(10 \{\
+.	ie "\\$1"ns" .ns
+.	el .lp
+.\}
+.el .if !"\\$1"ns" .sp \\n(psu
+..
+.de Rt
+.ce 0
+.ul 0
+.if !\\n(>I .nr I0 0
+.if \\n(>I \{\
+.	in -\\n(I\\n(IRu
+.       nr >I -1
+.\}
+..
+.de Rs
+.nr >S \\n(>I
+.Rt
+.nr >I \\n(>S
+.if \\n(>I .in +\\n(I\\n(IRu
+.nr IR +1
+.nr I\\n(IR \\n(I0u
+.in +\\n(I\\n(IRu
+..
+.de Re
+.nr >S \\n(>I
+.Rt
+.nr >I \\n(>S
+.if \\n(IR .nr IR -1
+.if \\n(>I<=0 .in -\\n(I\\n(IRu
+..
+.de >I
+.Rt
+.sp \\n(psu
+.ne 1.1v
+.if !\\n(>I .nr >I +1
+.if \\n(.$-1 .nr I\\n(IR \\$2n
+.in +\\n(I\\n(IRu
+.ta \\n(I\\n(IRu
+.if \\n(.$ \{\
+.ds I> \&\\$1
+.ti -\\n(I\\n(IRu
+\\*(I>\t\c
+.if \w'\\*(I>'u>=(\\n(I\\n(IRu) .br
+.\}
+..

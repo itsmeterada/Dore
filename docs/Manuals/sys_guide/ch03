@@ -1,0 +1,74 @@
+.\"#ident "%W%" %G%
+.\"
+.\" #
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  
+.\" # 
+.\" # KUBOTA GRAPHICS Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\" #
+.\"
+.so ../macros/local.me
+.ds BT "\\*(Dd System Guide
+.ds CT "Standard Production Renderer 
+.ds h1 3
+.L1 S TANDARD
+.L2 P RODUCTION
+.L3 R ENDERER
+.CH THREE
+.rs
+.sp -1v
+The \*(Dd standard production renderer is a spatial subdivision raytracer,
+which performs all rendering calculations using portable machine
+independent software.
+It has the ability to generate images with transparency, reflections,
+and shadows, along with many of the other standard \*(Dd attributes.
+.rs
+.sp -.25v
+.lp
+Refer to Appendix A, \f2Supported Functions\fP, for a list of the
+\*(Dd functions supported by the standard production renderer.
+Any unsupported attribute included in a \*(Dd scene description will 
+be ignored by the renderer.
+.rs
+.sp -.5v
+.H1 "Device Driver Support
+.rs
+.sp -.25v
+The standard production renderer requires only the production renderer
+output module (PROM) interface in addition to the device control
+module (DCM) interface.  The standard production renderer will work
+with any device that supports the PROM interface.
+See Section III of this document for more information on device drivers.
+.rs
+.sp -.5v
+.H1 "Limitations
+.rs
+.sp -.25v
+The standard production renderer has the following limitations.
+.BU hs
+It does not support texture mapping.
+.BU hs
+It does not support vertex colors for primitives.
+.BU hs
+It does not render line or point primitives or any frame space
+primitives like annotation text (\f2DoAnnoText\fP) or polymarkers
+(\f2DoPolymarker\fP).
+.BU hs
+It does not support antialiasing.
+.BU hs
+It always performs light source shading (i.e., ignores
+\f2DoSurfaceShade\fP and assumes \f2DcShaderLightSource\fP).
+.BU hs
+It only displays surfaces as surfaces (i.e., ignores \f2DoRepType\fP).
+.BU hs
+It only supports ambient and infinite lights types.

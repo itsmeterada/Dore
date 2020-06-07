@@ -1,0 +1,83 @@
+%!PS-Adobe-1.0
+%%Title: dore.ps
+%%Creator: Dore' Postscript Device Driver
+%%For: loriw
+%%CreationDate: Fri May 10 13:32:52 1991
+%%Pages: (atend)
+%%DocumentFonts: 
+%%Endcomments
+/Dore 20 dict def
+Dore begin
+/Prgb { moveto -1 -1 rmoveto 2 0 rlineto
+        0 2 rlineto -2 0 rlineto
+        closepath setrgbcolor fill } def
+/Lrgb { moveto lineto setrgbcolor stroke } def
+/Trgb { moveto lineto lineto closepath
+        setrgbcolor fill } def
+/BGrgb { dup 3 -1 roll dup 5 -1 roll dup
+         7 -1 roll dup 3 -1 roll moveto
+         6 -1 roll lineto exch 4 -1 roll
+         lineto lineto closepath setrgbcolor
+         fill } def
+/Pgray { moveto -1 -1 rmoveto 2 0 rlineto
+         0 2 rlineto -2 0 rlineto
+         closepath setgray fill } def
+/Lgray { moveto lineto setgray stroke } def
+/Tgray { moveto lineto lineto closepath
+         setgray fill } def
+/BGgray { dup 3 -1 roll dup 5 -1 roll dup
+          7 -1 roll dup 3 -1 roll moveto
+          6 -1 roll lineto exch 4 -1 roll
+          lineto lineto closepath setgray
+          fill } def
+%%EndProlog
+%%Page: ? 1
+gsave
+0 792 translate
+1 -1 scale
+1.000000 0 0 612 612 BGgray
+0.000000 305 303 298 318 Lgray
+0.000000 305 303 311 318 Lgray
+0.000000 301 313 308 313 Lgray
+0.000000 310 373 306 371 Lgray
+0.000000 306 371 303 371 Lgray
+0.000000 303 371 300 373 Lgray
+0.000000 300 373 300 374 Lgray
+0.000000 300 374 301 376 Lgray
+0.000000 301 376 308 379 Lgray
+0.000000 308 379 310 381 Lgray
+0.000000 310 381 310 384 Lgray
+0.000000 310 384 306 386 Lgray
+0.000000 306 386 303 386 Lgray
+0.000000 303 386 300 384 Lgray
+0.000000 305 405 305 420 Lgray
+0.000000 298 405 311 405 Lgray
+0.000000 300 439 300 454 Lgray
+0.000000 300 439 306 439 Lgray
+0.000000 306 439 310 441 Lgray
+0.000000 310 441 310 446 Lgray
+0.000000 310 446 306 447 Lgray
+0.000000 306 447 300 447 Lgray
+0.000000 305 447 310 454 Lgray
+0.000000 305 473 305 488 Lgray
+0.000000 300 507 300 522 Lgray
+0.000000 300 507 310 522 Lgray
+0.000000 310 507 310 522 Lgray
+0.000000 311 543 307 541 Lgray
+0.000000 307 541 304 541 Lgray
+0.000000 304 541 300 543 Lgray
+0.000000 300 543 299 546 Lgray
+0.000000 299 546 299 551 Lgray
+0.000000 299 551 300 554 Lgray
+0.000000 300 554 304 556 Lgray
+0.000000 304 556 307 556 Lgray
+0.000000 307 556 311 554 Lgray
+0.000000 311 554 311 549 Lgray
+0.000000 306 549 311 549 Lgray
+0.000000 303 298 307 304 Lgray
+0.000000 307 298 303 304 Lgray
+grestore
+showpage
+%%Trailer
+%%Pages: 1
+end

@@ -1,0 +1,64 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DoShadeIndex 3D  "Dore"
+.SH NAME
+DoShadeIndex \- Create a shade index primitive attribute object
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+DtObject DoShadeIndex(index)
+DtInt index;
+.sp
+.in -.5i
+FORTRAN:
+.in +.5i
+INTEGER*4 DOSI(INDEX)
+INTEGER*4 INDEX
+.in -.5i
+.fi
+.SH DESCRIPTION
+.IX DOSI
+.IX DoShadeIndex
+.I DoShadeIndex
+creates a shade index primitive attribute object.  The parameter
+\f2index\fP specifies 
+which color shade range should be used to render subsequent primitive
+objects on a pseudocolor device
+with shademode is set to \f2DcRange\fP <\f2DCRNG\fP>. 
+See \f2DdSetShadeMode\fP.
+.PP
+This function accesses the shade range table of a pseudocolor device.
+Each shade range specifies the minimum and maximum entries in the device's
+lookup table defining one series of shades of a particular color.
+The entries in the range increase
+in intensity from the first shade in the range to the last.
+Colors produced by the renderer are converted to an intensity between 0.0
+and 1.0.  This intensity and the current shade index are used to
+interpolate between the values in the corresponding shade range where
+an intensity of 0.0 corresponds to the first entry in the shade
+range and an intensity of 1.0 to the last entry.
+.SH DEFAULTS
+The default value for \f2DoShadeIndex\fP is 0.
+.SH "SEE ALSO"
+.nh
+.na
+DdInqShadeMode(3D), DdInqShadeRanges(3D), DdSetShadeMode(3D),
+DdSetShadeRanges(3D)
+.ad
+.hy

@@ -1,0 +1,386 @@
+%!PS-Adobe-3.0
+%%Creator: groff version 1.06
+%%DocumentNeededResources: font Palatino-Roman
+%%+ font Helvetica
+%%+ font Palatino-Italic
+%%+ font Helvetica-Bold
+%%DocumentSuppliedResources: procset grops 1.06 0
+%%Pages: 2
+%%PageOrder: Ascend
+%%Orientation: Portrait
+%%EndComments
+%%BeginProlog
+%%BeginResource: procset grops 1.06 0
+%!PS-Adobe-3.0 Resource-ProcSet
+
+/setpacking where {
+	pop
+	currentpacking
+	true setpacking
+} if
+
+/grops 120 dict dup begin 
+
+% The ASCII code of the space character.
+/SC 32 def
+
+/A /show load def
+/B { 0 SC 3 -1 roll widthshow } bind def
+/C { 0 exch ashow } bind def
+/D { 0 exch 0 SC 5 2 roll awidthshow } bind def
+/E { 0 rmoveto show } bind def
+/F { 0 rmoveto 0 SC 3 -1 roll widthshow } bind def
+/G { 0 rmoveto 0 exch ashow } bind def
+/H { 0 rmoveto 0 exch 0 SC 5 2 roll awidthshow } bind def
+/I { 0 exch rmoveto show } bind def
+/J { 0 exch rmoveto 0 SC 3 -1 roll widthshow } bind def
+/K { 0 exch rmoveto 0 exch ashow } bind def
+/L { 0 exch rmoveto 0 exch 0 SC 5 2 roll awidthshow } bind def
+/M { rmoveto show } bind def
+/N { rmoveto 0 SC 3 -1 roll widthshow } bind def
+/O { rmoveto 0 exch ashow } bind def
+/P { rmoveto 0 exch 0 SC 5 2 roll awidthshow } bind def
+/Q { moveto show } bind def 
+/R { moveto 0 SC 3 -1 roll widthshow } bind def
+/S { moveto 0 exch ashow } bind def
+/T { moveto 0 exch 0 SC 5 2 roll awidthshow } bind def
+
+% name size font SF -
+
+/SF {
+	findfont exch
+	[ exch dup 0 exch 0 exch neg 0 0 ] makefont
+	dup setfont
+	[ exch /setfont cvx ] cvx bind def
+} bind def
+
+% name a c d font MF -
+
+/MF {
+	findfont
+	[ 5 2 roll
+	0 3 1 roll % b
+	neg 0 0 ] makefont
+	dup setfont
+	[ exch /setfont cvx ] cvx bind def
+} bind def
+
+/level0 0 def
+/RES 0 def
+/PL 0 def
+/LS 0 def
+
+% Guess the page length.
+% This assumes that the imageable area is vertically centered on the page.
+% PLG - length
+
+/PLG {
+	gsave newpath clippath pathbbox grestore
+	exch pop add exch pop
+} bind def
+
+% BP -
+
+/BP {
+	/level0 save def
+	1 setlinecap
+	1 setlinejoin
+	72 RES div dup scale
+	LS {
+		90 rotate
+	} {
+		0 PL translate
+	} ifelse
+	1 -1 scale
+} bind def
+
+/EP {
+	level0 restore
+	showpage
+} bind def
+
+
+% centerx centery radius startangle endangle DA -
+
+/DA {
+	newpath arcn stroke
+} bind def
+
+% x y SN - x' y'
+% round a position to nearest (pixel + (.25,.25))
+
+/SN {
+	transform 
+	.25 sub exch .25 sub exch
+	round .25 add exch round .25 add exch
+	itransform
+} bind def
+	
+% endx endy startx starty DL -
+% we round the endpoints of the line, so that parallel horizontal
+% and vertical lines will appear even
+
+/DL {
+	SN
+	moveto
+	SN
+	lineto stroke
+} bind def
+
+% centerx centery radius DC -
+
+/DC {
+	newpath 0 360 arc closepath
+} bind def
+
+
+/TM matrix def
+
+%  width height centerx centery DE -
+
+/DE {
+	TM currentmatrix pop
+	translate scale newpath 0 0 .5 0 360 arc closepath
+	TM setmatrix
+} bind def
+
+% these are for splines
+
+/RC /rcurveto load def
+/RL /rlineto load def
+/ST /stroke load def
+/MT /moveto load def
+/CL /closepath load def
+
+% fill the last path
+
+% amount FL -
+
+/FL {
+	currentgray exch setgray fill setgray
+} bind def
+
+% fill with the ``current color''
+
+/BL /fill load def
+
+/LW /setlinewidth load def
+% new_font_name encoding_vector old_font_name RE -
+
+/RE {
+	findfont
+	dup maxlength dict begin
+	{
+		1 index /FID ne { def } { pop pop } ifelse
+	} forall
+	/Encoding exch def
+	dup /FontName exch def
+	currentdict end definefont pop
+} bind def
+
+/DEFS 0 def
+
+% hpos vpos EBEGIN -
+
+/EBEGIN {
+	moveto
+	DEFS begin
+} bind def
+
+/EEND /end load def
+
+/CNT 0 def
+/level1 0 def
+
+% llx lly newwid wid newht ht newllx newlly PBEGIN -
+
+/PBEGIN {
+	/level1 save def
+	translate
+	div 3 1 roll div exch scale
+	neg exch neg exch translate
+	% set the graphics state to default values
+	0 setgray
+	0 setlinecap
+	1 setlinewidth
+	0 setlinejoin
+	10 setmiterlimit
+	[] 0 setdash
+	/setstrokeadjust where {
+		pop
+		false setstrokeadjust
+	} if
+	/setoverprint where {
+		pop
+		false setoverprint
+	} if
+	newpath
+	/CNT countdictstack def
+	userdict begin
+	/showpage {} def
+} bind def
+
+/PEND {
+	clear
+	countdictstack CNT sub { end } repeat
+	level1 restore
+} bind def
+
+end def
+
+/setpacking where {
+	pop
+	setpacking
+} if
+%%EndResource
+%%EndProlog
+%%BeginSetup
+%%IncludeResource: font Palatino-Roman
+%%IncludeResource: font Helvetica
+%%IncludeResource: font Palatino-Italic
+%%IncludeResource: font Helvetica-Bold
+grops begin/DEFS 1 dict def DEFS begin/u{.001 mul}bind def end/RES 72 def/PL
+792 def/LS false def/ENC0[/asciicircum/asciitilde/Scaron/Zcaron/scaron/zcaron
+/Ydieresis/trademark/quotesingle/.notdef/.notdef/.notdef/.notdef/.notdef
+/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef
+/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/space
+/exclam/quotedbl/numbersign/dollar/percent/ampersand/quoteright/parenleft
+/parenright/asterisk/plus/comma/hyphen/period/slash/zero/one/two/three/four
+/five/six/seven/eight/nine/colon/semicolon/less/equal/greater/question/at/A/B/C
+/D/E/F/G/H/I/J/K/L/M/N/O/P/Q/R/S/T/U/V/W/X/Y/Z/bracketleft/backslash
+/bracketright/circumflex/underscore/quoteleft/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q
+/r/s/t/u/v/w/x/y/z/braceleft/bar/braceright/tilde/.notdef/quotesinglbase
+/guillemotleft/guillemotright/bullet/florin/fraction/perthousand/dagger
+/daggerdbl/endash/emdash/ff/fi/fl/ffi/ffl/dotlessi/dotlessj/grave/hungarumlaut
+/dotaccent/breve/caron/ring/ogonek/quotedblleft/quotedblright/oe/lslash
+/quotedblbase/OE/Lslash/.notdef/exclamdown/cent/sterling/currency/yen/brokenbar
+/section/dieresis/copyright/ordfeminine/guilsinglleft/logicalnot/minus
+/registered/macron/degree/plusminus/twosuperior/threesuperior/acute/mu
+/paragraph/periodcentered/cedilla/onesuperior/ordmasculine/guilsinglright
+/onequarter/onehalf/threequarters/questiondown/Agrave/Aacute/Acircumflex/Atilde
+/Adieresis/Aring/AE/Ccedilla/Egrave/Eacute/Ecircumflex/Edieresis/Igrave/Iacute
+/Icircumflex/Idieresis/Eth/Ntilde/Ograve/Oacute/Ocircumflex/Otilde/Odieresis
+/multiply/Oslash/Ugrave/Uacute/Ucircumflex/Udieresis/Yacute/Thorn/germandbls
+/agrave/aacute/acircumflex/atilde/adieresis/aring/ae/ccedilla/egrave/eacute
+/ecircumflex/edieresis/igrave/iacute/icircumflex/idieresis/eth/ntilde/ograve
+/oacute/ocircumflex/otilde/odieresis/divide/oslash/ugrave/uacute/ucircumflex
+/udieresis/yacute/thorn/ydieresis]def/Helvetica-Bold@0 ENC0/Helvetica-Bold RE
+/Palatino-Italic@0 ENC0/Palatino-Italic RE/Helvetica@0 ENC0/Helvetica RE
+/Palatino-Roman@0 ENC0/Palatino-Roman RE
+%%EndSetup
+%%Page: 21 1
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 99 46.8 63 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 243 46.8 207 46.8 DL 279 46.8 243 46.8 DL 315 46.8 279 46.8 DL 351
+46.8 315 46.8 DL 387 46.8 351 46.8 DL 437.4 46.8 401.4 46.8 DL 464.4 46.8 428.4
+46.8 DL 500.4 46.8 464.4 46.8 DL 536.4 46.8 500.4 46.8 DL/F0 42
+/Palatino-Roman@0 SF(R)168.18 91 Q/F1 36/Palatino-Roman@0 SF(ENDERERS)A F0(S)
+225.018 133 Q F1(ECTION)A F0(I)94.71 175 Q F1(NTRODUCTION)A/F2 12/Helvetica@0
+SF(CHAPTER 4)465.72 175 Q 99 186 63 186 DL 135 186 99 186 DL 171 186 135 186 DL
+207 186 171 186 DL 243 186 207 186 DL 279 186 243 186 DL 315 186 279 186 DL 351
+186 315 186 DL 387 186 351 186 DL 437.4 186 401.4 186 DL 464.4 186 428.4 186 DL
+500.4 186 464.4 186 DL 536.4 186 500.4 186 DL/F3 11/Palatino-Roman@0 SF 3.388
+(AD)63 252 S(ore)83.46 252 Q 4.191<b472>94.614 252 S(ender)106.615 252 Q .638
+(er is r)-.198 F .639(esponsible for converting the graphical object)-.198 F
+.041(database into an image.)63 265.2 R(Render)5.54 E .04
+(ers vary in the techniques they use)-.198 F .311
+(to draw the geometry of the objects and in the attributes they con-)63 278.4 R
+(sider)63 291.6 Q 2.932(.A)-.814 G 2.932(sar)100.626 291.6 S .181
+(esult, the way an image looks not only depends on the)120.801 291.6 R 2.925
+(speci\214c objects in the database, but also on which r)63 304.8 R(ender)-.198
+E 2.926(er is)-.198 F 3.503(selected. In)63 318 R .752(addition to the r)3.503
+F(ender)-.198 E .752(ers alr)-.198 F .752(eady available with your)-.198 F
+(Dore)63 331.2 Q 4.277<b473>82.668 331.2 S .724(ystem, Dore)95.272 331.2 R
+4.277<b461>150.512 331.2 S .725(llows you to add new r)163.952 331.2 R(ender)
+-.198 E .725(ers to the set.)-.198 F(It)6.225 E 1.941
+(is not necessary to have access to Dore)63 344.4 R 5.494<b473>258.913 344.4 S
+(our)272.734 344.4 Q 1.941(ce code in or)-.198 F 1.941(der to)-.198 F
+(interface your r)63 357.6 Q(ender)-.198 E(er to the Dore)-.198 E 3.553<b473>
+228.055 357.6 S(ystem.)239.935 357.6 Q .512(This section is about r)63 382.8 R
+(ender)-.198 E .512(ers, the way Dore)-.198 F 4.065<b469>281.227 382.8 S .512
+(nteracts with them,)292.156 382.8 R .029
+(and the way they interact with the output devices.)63 396 R .028
+(The purpose of)5.528 F .326
+(the following chapters is not to teach you how to write a r)63 409.2 R(ender)
+-.198 E(er)-.198 E(,)-.814 E .561
+(but rather to show you how to interface an existing r)63 422.4 R(ender)-.198 E
+.56(er with)-.198 F(the Dore)63 435.6 Q 3.553<b473>100.675 435.6 S(ystem.)
+112.555 435.6 Q .961(As described in Chapter 2,)63 460.8 R/F4 11
+/Palatino-Italic@0 SF(Dore)3.711 E 4.019<b446>217.328 460.8 S .962
+(unctional Structur)231.126 460.8 R(e)-.198 E F3 3.712(,t)C .962(he r)330.048
+460.8 R(ender)-.198 E(er)-.198 E 1.621(accesses the Dore)63 474 R 5.174<b46b>
+146.465 474 S 1.621(ernel thr)161.418 474 R 1.621(ough the)-.198 F F4(DD-)4.371
+E F3 -.198(ro)4.371 G 1.621(utines of the devel-).198 F -1.936(oper 's)63 487.2
+R 7(interface. The)7 F 4.25(kernel's only access to the r)7 F(ender)-.198 E
+4.251(er is)-.198 F(thr)63 500.4 Q 4.919(ough the function pointers of the r)
+-.198 F(ender)-.198 E 4.919(er interface and)-.198 F(thr)63 513.6 Q 1.138
+(ough methods cr)-.198 F 1.139(eated and installed by the r)-.198 F(ender)-.198
+E(er)-.198 E 6.639(.T)-.814 G 1.139(he r)351.959 513.6 R(en-)-.198 E(der)63
+526.8 Q .914(er interface functions include functions to invoke the r)-.198 F
+(ender)-.198 E(er)-.198 E 1.872(on a view and to delete the r)63 540 R(ender)
+-.198 E(er)-.198 E 7.373(.T)-.814 G 1.873(he methods include the)267.531 540 R
+.214(display and studio gr)63 553.2 R .213(oup r)-.198 F .213
+(endering methods particular to the r)-.198 F(en-)-.198 E(der)63 566.4 Q(er)
+-.198 E(.)-.814 E 3.245(Ar)63 591.6 S(ender)78.95 591.6 Q .496
+(er does not access a display medium dir)-.198 F(ectly)-.198 E 5.996(.I)-1.221
+G 3.246(ti)338.731 591.6 S(nteracts)348.764 591.6 Q 1.012
+(with a device driver to display the r)63 604.8 R 1.011(endering r)-.198 F
+3.761(esults. W)-.198 F 1.011(ith Dore)-.605 F .803<b42c>379.784 604.8 S .042
+(the application contr)63 618 R .042(ols which device is used.)-.198 F 2.793
+(Ad)5.543 G .043(evice object pr)307.747 618 R(o-)-.198 E 1.287(vides the r)63
+631.2 R(ender)-.198 E 1.286(er with pointers to functions that implement the)
+-.198 F .046(output modules for the corr)63 644.4 R .046
+(esponding device driver)-.198 F 5.546(.T)-.814 G .047(he r)330.963 644.4 R
+(ender)-.198 E(er)-.198 E 3.323(then calls these r)63 657.6 R 3.323
+(outines to access the display device.)-.198 F(Device)8.822 E 3.085
+(drivers and output modules ar)63 670.8 R 5.836(ed)-.198 G 3.086
+(iscussed later in Section III,)242.458 670.8 R F4(Device Drivers)63 684 Q F3
+(.)A 1.44 LW 81 756 63 756 DL 99 756 81 756 DL 117 756 99 756 DL 135 756 117
+756 DL 153 756 135 756 DL 171 756 153 756 DL 189 756 171 756 DL 207 756 189 756
+DL 225 756 207 756 DL 243 756 225 756 DL 261 756 243 756 DL 279 756 261 756 DL
+297 756 279 756 DL 315 756 297 756 DL 333 756 315 756 DL 351 756 333 756 DL 369
+756 351 756 DL 387 756 369 756 DL 419.4 756 401.4 756 DL 428.4 756 410.4 756 DL
+446.4 756 428.4 756 DL 464.4 756 446.4 756 DL 482.4 756 464.4 756 DL 500.4 756
+482.4 756 DL 518.4 756 500.4 756 DL 536.4 756 518.4 756 DL/F5 9/Helvetica@0 SF
+(Renderers Section Introduction")259.749 768.96 Q(Dore)419.304 768.96 Q 3.506
+<b444>434.806 768.96 S -2.187 -.27(ev e)447.807 768.96 T(loper').27 E 2.502(sG)
+-.45 G(uide)497.379 768.96 Q/F6 9/Helvetica-Bold@0 SF(4-21)4.002 E EP
+%%Page: 22 2
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 108 46.8 72 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 257.4 46.8 221.4 46.8 DL 293.4 46.8 257.4 46.8 DL 329.4 46.8 293.4
+46.8 DL 365.4 46.8 329.4 46.8 DL 401.4 46.8 365.4 46.8 DL 437.4 46.8 401.4 46.8
+DL 473.4 46.8 437.4 46.8 DL 509.4 46.8 473.4 46.8 DL 545.4 46.8 509.4 46.8 DL
+/F0 11/Palatino-Roman@0 SF 1.033(Chapter 5,)221.5 109.2 R/F1 11
+/Palatino-Italic@0 SF 1.032(Rendering Pr)3.783 F(ocess)-.198 E F0 3.782(,o)C
+1.032(utlines the major steps involved in)372.612 109.2 R 2.004(the r)221.5
+122.4 R 2.004(endering pr)-.198 F 4.754(ocess. For)-.198 F 2.004
+(instance, it describes what generally)4.754 F .397
+(takes place during studio and display traversals.)221.5 135.6 R .396
+(Chapter 6,)5.896 F F1(Inter-)3.146 E .692(facing a Render)221.5 148.8 R(er)
+-.198 E F0 3.442(,o)C -.198(ff)312.709 148.8 S .693
+(ers a step-by-step description of how to inter).198 F(-)-.198 E .451(face a r)
+221.5 162 R(ender)-.198 E .451(er to Dore)-.198 F 1.595 .803(\264. F)329.949
+162 T(inally)-.803 E 3.201(,i)-1.221 G 3.2(nC)384.784 162 S .45(hapter 7,)
+402.185 162 R F1 .45(Sample Render)3.2 F(er)-.198 E F0 3.2(,t)C(he)533.829 162
+Q .627(techniques suggested in the pr)221.5 175.2 R .628(evious chapter ar)
+-.198 F 3.378(ea)-.198 G .628(pplied to inter)471.27 175.2 R(-)-.198 E
+(face a sample r)221.5 188.4 Q(ender)-.198 E(er to Dore)-.198 E .803<b42e>
+365.853 188.4 S 1.44 LW 90 756 72 756 DL 99 756 81 756 DL 117 756 99 756 DL 135
+756 117 756 DL 153 756 135 756 DL 171 756 153 756 DL 189 756 171 756 DL 207 756
+189 756 DL 239.4 756 221.4 756 DL 257.4 756 239.4 756 DL 275.4 756 257.4 756 DL
+293.4 756 275.4 756 DL 311.4 756 293.4 756 DL 329.4 756 311.4 756 DL 347.4 756
+329.4 756 DL 365.4 756 347.4 756 DL 383.4 756 365.4 756 DL 401.4 756 383.4 756
+DL 419.4 756 401.4 756 DL 437.4 756 419.4 756 DL 455.4 756 437.4 756 DL 473.4
+756 455.4 756 DL 491.4 756 473.4 756 DL 509.4 756 491.4 756 DL 527.4 756 509.4
+756 DL 545.4 756 527.4 756 DL/F2 9/Helvetica-Bold@0 SF(4-22)72 768.96 Q/F3 9
+/Helvetica@0 SF(Dore)6.504 E 3.506<b444>112.015 768.96 S -2.187 -.27(ev e)
+125.016 768.96 T(loper').27 E 2.502(sG)-.45 G(uide)174.588 768.96 Q
+(Renderers Section Introduction")221.4 768.96 Q EP
+%%Trailer
+end
+%%EOF

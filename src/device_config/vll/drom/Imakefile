@@ -1,0 +1,17 @@
+#include <Dore.tmpl>
+
+    SRCS = vll_appatt.c vll_camera.c vll_data.c vll_drom.c vll_filerstr.c \
+           vll_geoatt.c vll_light.c vll_map.c vll_modclip.c vll_prisrf.c \
+	   vll_quadlst.c vll_quadmsh.c vll_rstr.c vll_sphlst.c vll_torus.c \
+	   vll_trilst.c vll_trimsh.c vll_tristrip.c vll_update.c \
+	   vll_vartrimsh.c vll_vartristr.c vlldr_output.c
+    OBJS = vll_appatt.o vll_camera.o vll_data.o vll_drom.o vll_filerstr.o \
+           vll_geoatt.o vll_light.o vll_map.o vll_modclip.o vll_prisrf.o \
+	   vll_quadlst.o vll_quadmsh.o vll_rstr.o vll_sphlst.o vll_torus.o \
+	   vll_trilst.o vll_trimsh.o vll_tristrip.o vll_update.o \
+	   vll_vartrimsh.o vll_vartristr.o vlldr_output.o
+
+LibraryObjectRule()
+SubdirLibraryRule($(OBJS))
+
+DependTarget()

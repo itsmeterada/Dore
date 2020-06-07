@@ -1,0 +1,10 @@
+#include <Dore.tmpl>
+
+INCLUDES = -I../h
+    SRCS = LIT_global.c LIT_init.c LIT_list.c LIT_make.c
+    OBJS = LIT_global.o LIT_init.o LIT_list.o LIT_make.o
+
+LibraryObjectRule()
+SubdirLibraryRule($(OBJS))
+
+DependTarget()

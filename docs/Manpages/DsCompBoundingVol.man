@@ -1,0 +1,66 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DsCompBoundingVol 3D  "Dore"
+.SH NAME
+DsCompBoundingVol \- Compute dimensions of a bounding volume for an object
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+DtVolume *DsCompBoundingVol(volume, object)
+DtVolume *volume;
+DtObject object;
+.sp
+.in -.5i
+FORTRAN:
+.in +.5i
+INTEGER*4 DSCBV(VOLUME, OBJECT)
+INTEGER*4 OBJECT
+REAL*8 VOLUME(6)
+.in -.5i
+.fi
+.SH DESCRIPTION
+.IX DSCBV
+.IX DsCompBoundingVol
+.I DsCompBoundingVol
+computes a bounding volume for an object, usually a primitive object
+or a group.
+The function computes a right rectangular volume that tightly encloses the
+given object and is parallel to the object's modeling coordinate system.
+The computed volume is returned in the parameter \f2volume\fP.
+The parameter \f2object\fP specifies the object whose bounding volume
+is to be computed.
+.PP
+The function returns the same pointer (now pointing to the computed
+volume) that was passed with the function call.
+.SH ERRORS
+.I DsCompBoundingVol
+will fail if the object handle is invalid.
+.TP 15
+[WARNING - invalid or deleted object]
+.PP
+.I DsCompBoundingVol
+will fail if Dore is already performing a traversal of the database.
+.TP 15
+[WARNING - traversal already in progress]
+.SH "SEE ALSO"
+.na
+.nh
+DoBoundingVol(3D), DoBoundingVolSwitch(3D), DoMinBoundingVolExt(3D)
+.ad
+.hy

@@ -1,0 +1,67 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DvSetFormFactorCompType 3D  "Dore"
+.SH NAME
+DvSetFormFactorCompType \- Set the form factor computation type for a view
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+void DvSetFormFactorCompType(view, type, parms)
+DtObject view ;
+DtFormFactorCompType type;
+DtReal parms[];
+.sp
+.in -.5i
+FORTRAN:
+.in +.5i
+CALL DVSFFC(VIEW,TYPE,PARMS)
+INTEGER*4 VIEW
+INTEGER*4 TYPE
+REAL*8 PARMS(*)
+.in -.5i
+.fi
+.SH DESCRIPTION
+.IX DVSFFC
+.IX DvSetFormFactorCompType
+.I DvSetFormFactorCompType
+sets the form factor computation type for a view.
+The form factors are computed when radiosity calculations are enabled.
+The form factor between two surfaces is the fraction of energy
+leaving one surface which lands on the other surface.
+Possible type values are:
+.PP
+.IP "\f2DcFormFactorHemicube\fP <\f2DCFFHC\fP>"
+Use a hemicube with resolution \f2parms[0]\fP x \f2parms[0]\fP.
+The higher the resolution is, the more accurate the results will be,
+but the longer it will take to compute.
+.SH ERRORS
+.I DvSetFormFactorCompType
+will fail if the view handle is invalid.
+.TP 15
+[WARNING - invalid view handle]
+.SH DEFAULTS
+The default \f2type\fP is \f2DcFormFactorHemicube\fP <\f2DCFFHC\fP>
+with \f2parms[0]\fP equals to 128.
+.SH "SEE ALSO"
+.na
+.nh
+DvInqFormFactorCompType(3D),
+DoRadiositySwitch(3D)
+.ad
+.hy

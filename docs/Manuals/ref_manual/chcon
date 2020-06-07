@@ -1,0 +1,104 @@
+.\"#ident "%W%" %G%
+.\"
+.\" #
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  
+.\" # 
+.\" # KUBOTA GRAPHICS Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\" #
+.\"
+.ds BT "\\*(Dd Reference Manual
+.ds CT "Contents
+.so ../macros/local.me
+.L1 C ONTENTS
+.PN 3 i
+.CH
+.ds HH
+.lp
+The page numbers in this table of contents are correct, but because
+the manpages are not included in this version, they start with 333.
+
+.C0 "FORTRAN Cross Reference" 1
+.C1 "Functions" 333
+.C1 "Constants" 340
+.\"
+.C0 "Quick Reference" 2
+.C1 "\f2Dd\f1 Functions" 347
+.C1 "\f2De\f1 Functions" 349
+.C1 "\f2Df\f1 Functions" 350
+.C1 "\f2Dg\f1 Functions" 351
+.C1 "\f2Do\f1 Functions" 352
+.C1 "\f2Dp\f1 Functions" 368
+.C1 "\f2Ds\f1 Functions" 369
+.C1 "\f2Dv\f1 Functions" 373
+.\"
+.C0 "C Include Files" 3
+.C1 "Filename: dore.h"
+.\"
+.C0 "\s-1FORTRAN\s+1 Include Files" 4
+.C1 "Filename: DORE" 408
+.C1 "Filename: DORETEXT" 437
+.C1 "Filename: DOREMETHODS" 441
+.\"
+.C0 "Dor\o.e\(aa. Vertex Types" 5
+.C1 "Base Vertex Type " 443
+.C1 "Vertex Types that Contain Texture Information" 444
+.\"
+.C0 "Dor\o.e\(aa. Matrix Transformations" 6
+.C1 "Matrix Format" 445
+.C1 "Transformation Pipeline" 446
+.C1 "Geometric Transformation Attributes" 446
+.C3 "DoTranslate <DOXLT>" 447
+.C3 "DoScale <DOSC>" 447
+.C3 "DoRotate <DOROT>" 447
+.C3 "DoShear <DOSHR>" 448
+.C3 "DoTransformMatrix <DOTMX>" 449
+.C3 "DoLookAtFrom <DOLAF>" 449
+.C1 "Viewing Transformation" 450
+.C2 "View Aspect Ratio" 450
+.C2 "Projection Types" 451
+.C3 "DoPerspective <DOPER>" 451
+.C3 "DoParallel <DOPAR>" 452
+.C3 "DoProjection <DOPRJ>" 452
+.C3 "DoCameraMatrix <DOCMX>" 454
+.C1 "Program Examples" 454
+.C2 "Example 1: RotateAxis" 454
+.C2 "Example 2: RotateCenter" 456
+.C1 "Texture Coordinate Transformation Matrices" 457
+.C3 "DoTextureMatrixUV <DOTMUV>" 457
+.C3 "DoTextureMatrixUVW <DOTMW>" 457
+.\"
+.C0 "Raster File and Memory Formats" 7
+.C1 "Raster Pixels and Voxels" 459
+.C1 "Dor\o.e\(aa. Raster File Format" 460
+.C2 "Raster File Header" 460
+.C2 "Raster File Binary Data" 463
+.C1 "Raster Memory Format" 464
+.\"
+.C0 "Device Drivers and Renderers" 8
+.C1 "Device Driver Modules" 467
+.C3 "The Production Renderer Output Module Interface" 468
+.C3 "The Dynamic Renderer Output Module Interface" 468
+.C1 "Renderer Output" 468
+.C1 "Renderer Dependent Functions" 468
+.C2 "Studio Attributes " 469
+.C3 "Camera Attributes " 469
+.C3 "Light Attributes " 469
+.C3 "Rendering Control " 470
+.C2 "Primitives" 470
+.C2 "Primitive Attributes " 470
+.C3 "Shading Attributes" 471
+.C3 "Texture Maps" 472
+.C3 "Miscellaneous" 473
+.C2 "Texture Attributes" 473
+.C2 "View Functions" 474
+.\"

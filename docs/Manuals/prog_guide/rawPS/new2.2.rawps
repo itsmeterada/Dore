@@ -1,0 +1,118 @@
+%!PS-Adobe-2.0
+%%Title: 2-2.pict
+%%Creator: MacDraw
+%%CreationDate: Friday, August 11, 1989
+%%Pages: (atend)
+%%BoundingBox: ? ? ? ?
+%%PageBoundingBox: 30 31 582 761
+%%For: aaron                         
+%%IncludeProcSet: "(AppleDict md)" 66
+%%EndComments
+%%EndProlog
+%%BeginDocumentSetup
+md begin
+
+T T -31 -30 761 582 100 72 72 1 F F F F T T psu
+(aaron                         ; document: 2-2.pict)jn
+0 mf
+od
+%%EndDocumentSetup
+%%Page: ? 1
+op
+0 0 xl
+1 1 pen
+0 0 gm
+(nc 0 0 720 540 6 rc)kp
+64 gr
+103 209 131 260 4 rc
+0 gr
+103.5 209.5 130.5 259.5 0 rc
+113 230 120 237 4 ov
+113.5 230.5 119.5 236.5 0 ov
+105.5 288.5 127.5 383.5 26.5 26.5 0 rr
+64 gr
+130 209 158 260 4 rc
+0 gr
+130.5 209.5 157.5 259.5 0 rc
+140 230 147 237 4 ov
+140.5 230.5 146.5 236.5 0 ov
+64 gr
+157 209 185 260 4 rc
+0 gr
+157.5 209.5 184.5 259.5 0 rc
+167 230 174 237 4 ov
+167.5 230.5 173.5 236.5 0 ov
+64 gr
+184 209 212 260 4 rc
+0 gr
+184.5 209.5 211.5 259.5 0 rc
+194 230 201 237 4 ov
+194.5 230.5 200.5 236.5 0 ov
+90.5 196.5 225.5 271.5 44.5 44.5 0 rr
+55.5 209.5 71.5 259.5 0 rc
+60 230 67 237 4 ov
+60.5 230.5 66.5 236.5 0 ov
+81 224 101 244 246 294 1 ar
+63 233 gm
+83 233 lin
+0 0 gm
+133 279 153 299 156 204 1 ar
+143 233 gm
+143 280 lin
+0 0 gm
+160 277 180 297 156 204 1 ar
+170 235 gm
+170 278 lin
+0 0 gm
+187 275 207 295 156 204 1 ar
+197 235 gm
+197 276 lin
+0 0 gm
+106 278 126 298 156 204 1 ar
+116 234 gm
+116 279 lin
+0 0 gm
+132.5 288.5 154.5 383.5 26.5 26.5 0 rr
+160.5 287.5 182.5 382.5 26.5 26.5 0 rr
+188.5 286.5 210.5 381.5 26.5 26.5 0 rr
+49 218 gm
+bu fc
+{}mark T /Helvetica /|______Helvetica 0 rf
+bn
+1 setTxMode
+0 fs
+12.47991 fz
+bu fc
+2 F /|______Helvetica fnt
+bn
+0.31565 0.(base)ashow
+120 296 gm
+0 gr
+5.54916 0. 32 0.55491 0.(Translate #1)awidthshow
+175 294 gm
+5.54916 0. 32 0.55491 0.(Translate #2)awidthshow
+147 315 gm
+0.69776 0.(Scale)ashow
+203 322 gm
+0.24919 0.(Box)ashow
+2 2 pen
+0 0 gm
+108 167 169 211 180 270 0 ar
+121 167 181 211 90 180 0 ar
+132 157 145 167 0 90 0 ar
+145 157 157 167 270 360 0 ar
+181 175 208 203 180 270 0 ar
+186 175 213 203 90 180 0 ar
+192 167 197 175 0 90 0 ar
+197 167 202 175 270 360 0 ar
+1 1 pen
+151 89 gm
+1.47760 0.(Attributes)ashow
+210 103 gm
+1.52203 0.(Primitive)ashow
+F T cp
+%%Trailer
+cd
+end
+%%Pages: 1 0
+%%EOF

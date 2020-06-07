@@ -1,0 +1,9 @@
+#include <Dore.tmpl>
+
+    SRCS = ccam.c clgt.c
+    OBJS = ccam.o clgt.o
+
+LibraryObjectRule()
+SubdirLibraryRule($(OBJS))
+
+DependTarget()

@@ -1,0 +1,1541 @@
+C **************************************************************************
+C Copyright (C) 1994 Kubota Graphics Corp.
+C 
+C Permission to use, copy, modify, and distribute this material for
+C any purpose and without fee is hereby granted, provided that the
+C above copyright notice and this permission notice appear in all
+C copies, and that the name of Kubota Graphics not be used in
+C advertising or publicity pertaining to this material.  Kubota
+C Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+C OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+C "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+C IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+C PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+C EXPRESS OR IMPLIED.
+C **************************************************************************
+C
+C**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~**
+C**                                                                        **
+C**  This file contains all the Dore FORTRAN constant declarations.        **
+C**                                                                        **
+C****************************************************************************
+
+      INTEGER*8 DCNULL
+      COMMON /DCNULL/DCNULL
+
+C DtUpdateType
+C	DcUpdateAll:
+      INTEGER*4 DCUALL
+      PARAMETER (DCUALL =0)
+C	DcUpdateDisplay
+      INTEGER*4 DCUDIS
+      PARAMETER (DCUDIS =1)	
+
+C DtFlag
+C	DcFalse
+      INTEGER*4 DCFALS
+      PARAMETER (DCFALS =0)	
+C	DcTrue
+      INTEGER*4 DCTRUE
+      PARAMETER (DCTRUE =1)	
+
+C DtSwitch
+C	DcOff
+      INTEGER*4 DCOFF
+      PARAMETER (DCOFF =0)	
+C	DcOn
+      INTEGER*4 DCON
+      PARAMETER (DCON =1)	
+
+C DtSurface
+C	DcSphere
+      INTEGER*4 DCSPHR
+      PARAMETER (DCSPHR =0)	
+C	DcCylinder
+      INTEGER*4 DCCYL
+      PARAMETER (DCCYL =1)	
+C	DcBox
+      INTEGER*4 DCBOX
+      PARAMETER (DCBOX =2)	
+C	DcCone
+      INTEGER*4 DCCONE
+      PARAMETER (DCCONE =3)	
+
+C DtRepType
+C	DcPoints
+      INTEGER*4 DCPNTS
+      PARAMETER (DCPNTS =0)	
+C	DcWireframe
+      INTEGER*4 DCWIRE
+      PARAMETER (DCWIRE =1)	
+C	DcSurface
+      INTEGER*4 DCSURF
+      PARAMETER (DCSURF =2)	
+C	DcOutlines
+      INTEGER*4 DCOUTL
+      PARAMETER (DCOUTL =3)
+C	DcSurfaceWireframeEdges
+      INTEGER*4 DCSWEG
+      PARAMETER (DCSWEG =4)	
+C	DcSurfaceOutlineEdges
+      INTEGER*4 DCSOEG
+      PARAMETER (DCSOEG =5)	
+
+C DtInterpType
+C	DcConstantShade
+      INTEGER*4 DCCNSH
+      PARAMETER (DCCNSH =0)	
+C	DcVertexShade
+      INTEGER*4 DCVXSH
+      PARAMETER (DCVXSH =1)	
+C	DcSurfaceShade
+      INTEGER*4 DCSFSH
+      PARAMETER (DCSFSH =2)	
+
+C DtAxis
+C	DcXAxis
+      INTEGER*4 DCXAX
+      PARAMETER (DCXAX =0)	
+C	DcYAxis
+      INTEGER*4 DCYAX
+      PARAMETER (DCYAX =1)	
+C	DcZAxis
+      INTEGER*4 DCZAX
+      PARAMETER (DCZAX =2)	
+
+C DtMajorPlane
+C	DcXY
+      INTEGER*4 DCXY
+      PARAMETER (DCXY =0)	
+C	DcYZ
+      INTEGER*4 DCYZ
+      PARAMETER (DCYZ =1)	
+C	DcXZ
+      INTEGER*4 DCXZ
+      PARAMETER (DCXZ =2)	
+
+C DtColorModel
+C	DcRGB
+      INTEGER*4 DCRGB
+      PARAMETER (DCRGB =0)	
+
+C DtVisualType
+C	DcStaticGrey
+      INTEGER*4 DCSTCG
+      PARAMETER (DCSTCG =0)	
+C	DcGreyScale
+      INTEGER*4 DCGRYS
+      PARAMETER (DCGRYS =1)	
+C	DcStaticColor
+      INTEGER*4 DCSTCC
+      PARAMETER (DCSTCC =2)	
+C	DcPseudoColor
+      INTEGER*4 DCPSUC
+      PARAMETER (DCPSUC =3)	
+C	DcTrueColor
+      INTEGER*4 DCTRUC
+      PARAMETER (DCTRUC =4)	
+C	DcDirectColor
+      INTEGER*4 DCDRCC
+      PARAMETER (DCDRCC =5)	
+
+C DtShadeMode
+C	DcRange
+      INTEGER*4 DCRNG
+      PARAMETER (DCRNG =0)	
+C	DcComponent
+      INTEGER*4 DCCOMP
+      PARAMETER (DCCOMP =1)	
+
+C DtVertexType
+C	DcLoc
+      INTEGER*4 DCL
+      PARAMETER (DCL =0)	
+C	DcLocNrm
+      INTEGER*4 DCLN
+      PARAMETER (DCLN =1)	
+C	DcLocClr
+      INTEGER*4 DCLC
+      PARAMETER (DCLC =2)	
+C	DcLocNrmClr
+      INTEGER*4 DCLNC
+      PARAMETER (DCLNC =3)	
+C	DcLocAlpha
+      INTEGER*4 DCLA
+      PARAMETER (DCLA =4)	
+C	DcLocNrmAlpha
+      INTEGER*4 DCLNA
+      PARAMETER (DCLNA =5)	
+C	DcLocClrAlpha
+      INTEGER*4 DCLCA
+      PARAMETER (DCLCA =6)	
+C	DcLocNrmClrAlpha
+      INTEGER*4 DCLNCA
+      PARAMETER (DCLNCA =7)	
+
+C DtCtrlPointType
+C	DcCtr
+      INTEGER*4 DCCTR
+      PARAMETER (DCCTR =0)	
+C	DcCtrClr
+      INTEGER*4 DCCTRC
+      PARAMETER (DCCTRC =1)	
+
+C DtCompType
+C	DcPreConcatenate
+      INTEGER*4 DCPREC
+      PARAMETER (DCPREC =0)	
+C	DcPostConcatenate
+      INTEGER*4 DCPSTC
+      PARAMETER (DCPSTC =1)	
+C	DcReplace
+      INTEGER*4 DCREPL
+      PARAMETER (DCREPL =2)	
+
+C DtRenderStyle;
+C	DcRendererNewId
+      INTEGER*4 DCRNID
+      PARAMETER (DCRNID = -1)	
+C	DcRealTime
+      INTEGER*4 DCRLTM
+      PARAMETER (DCRLTM =0)	
+C	DcProductionTime
+      INTEGER*4 DCPRTM
+      PARAMETER (DCPRTM =2)	
+
+C DtShapeType;
+C	DcConvex
+      INTEGER*4 DCCNVX
+      PARAMETER (DCCNVX =0)	
+C	DcConcave
+      INTEGER*4 DCCNCV
+      PARAMETER (DCCNCV =1)	
+C	DcComplex
+      INTEGER*4 DCCPLX
+      PARAMETER (DCCPLX =2)	
+
+C DtRelPosition;
+C	DcBeginning
+      INTEGER*4 DCBEG
+      PARAMETER (DCBEG =0)	
+C	DcEnd
+      INTEGER*4 DCEND
+      PARAMETER (DCEND =1)	
+C	DcCurrent
+      INTEGER*4 DCCUR
+      PARAMETER (DCCUR =2)	
+
+C DtProjectionType;
+C	DcParallel
+      INTEGER*4 DCPRLL
+      PARAMETER (DCPRLL =0)	
+C	DcPerspective
+      INTEGER*4 DCPRSP
+      PARAMETER (DCPRSP =1)	
+
+C DtClipOperator;
+C	DcClipAll
+      INTEGER*4 DCCALL
+      PARAMETER (DCCALL =0)	
+C	DcClipAnd
+      INTEGER*4 DCCAND
+      PARAMETER (DCCAND =1)	
+C	DcClipAndReverse
+      INTEGER*4 DCCARV
+      PARAMETER (DCCARV =2)	
+C	DcClipNoOp
+      INTEGER*4 DCCNOP
+      PARAMETER (DCCNOP =3)	
+C	DcClipAndInverted
+      INTEGER*4 DCCAIN
+      PARAMETER (DCCAIN =4)	
+C	DcClipReplace
+      INTEGER*4 DCCREP
+      PARAMETER (DCCREP =5)	
+C	DcClipXOr
+      INTEGER*4 DCCXOR
+      PARAMETER (DCCXOR =6)	
+C	DcClipOr
+      INTEGER*4 DCCOR
+      PARAMETER (DCCOR =7)	
+C	DcClipNor
+      INTEGER*4 DCCNOR
+      PARAMETER (DCCNOR =8)	
+C	DcClipEqv
+      INTEGER*4 DCCEQV
+      PARAMETER (DCCEQV =9)	
+C	DcClipInvertVolume
+      INTEGER*4 DCCIVV
+      PARAMETER (DCCIVV =10)	
+C	DcClipOrReverse
+      INTEGER*4 DCCORR
+      PARAMETER (DCCORR =11)	
+C	DcClipInvert
+      INTEGER*4 DCCINV
+      PARAMETER (DCCINV =12)	
+C	DcClipOrInverted
+      INTEGER*4 DCCORI
+      PARAMETER (DCCORI =13)	
+C	DcClipNAnd
+      INTEGER*4 DCCNAN
+      PARAMETER (DCCNAN =14)	
+C	DcClipNone
+      INTEGER*4 DCCNON
+      PARAMETER (DCCNON =15)	
+
+C DtNameType;
+C	DcNameNone
+      INTEGER*4 DCNNON
+      PARAMETER (DCNNON =0)	
+C	DcNameInteger
+      INTEGER*4 DCNINT
+      PARAMETER (DCNINT =1)	
+C	DcNameString
+      INTEGER*4 DCNSTR
+      PARAMETER (DCNSTR =2)	
+
+C DtPickPathOrder;
+C	DcTopFirst
+      INTEGER*4 DCTOPF
+      PARAMETER (DCTOPF =0)	
+C	DcBottomFirst
+      INTEGER*4 DCBOTF
+      PARAMETER (DCBOTF =1)	
+
+C DtHitStatus;
+C	DcHitAccept
+      INTEGER*4 DCHACC
+      PARAMETER (DCHACC =0)	
+C	DcHitReject
+      INTEGER*4 DCHREJ
+      PARAMETER (DCHREJ =1)	
+C	DcHitOverwrite
+      INTEGER*4 DCHOVW
+      PARAMETER (DCHOVW =2)	
+
+C DtFilter;
+C	DcInvisibilityInclusion
+      INTEGER*4 DCINVI
+      PARAMETER (DCINVI =0)	
+C	DcInvisibilityExclusion
+      INTEGER*4 DCINVE
+      PARAMETER (DCINVE =1)	
+C 	DcPickabilityInclusion
+      INTEGER*4 DCPCKI
+      PARAMETER (DCPCKI =2)	
+C 	DcPickabilityExclusion
+      INTEGER*4 DCPCKE
+      PARAMETER (DCPCKE =3)	
+
+C DtSetOperation;
+C	DcSetAdd
+      INTEGER*4 DCSADD
+      PARAMETER (DCSADD =0)	
+C	DcSetDelete
+      INTEGER*4 DCSDEL
+      PARAMETER (DCSDEL =1)	
+C	DcSetInvert
+      INTEGER*4 DCSINV
+      PARAMETER (DCSINV =2)	
+C	DcSetReplace
+      INTEGER*4 DCSREP
+      PARAMETER (DCSREP =3)	
+
+C DtLineType;
+C	DcLineTypeSolid
+      INTEGER*4 DCLTS
+      PARAMETER (DCLTS =0)	
+C	DcLineTypeDash
+      INTEGER*4 DCLTDS
+      PARAMETER (DCLTDS =1)	
+C	DcLineTypeDot
+      INTEGER*4 DCLTDT
+      PARAMETER (DCLTDT =2)	
+C	DcLineTypeDotDash
+      INTEGER*4 DCLTDD
+      PARAMETER (DCLTDD =3)	
+
+C DtGroupNetworkStatus;
+C	DcGroupOk
+      INTEGER*4 DCGOK
+      PARAMETER (DCGOK =0)	
+C	DcGroupBad
+      INTEGER*4 DCGBAD
+      PARAMETER (DCGBAD =1)	
+
+C DtErrorStatus;
+C 	DcErrorMinor
+      INTEGER*4 DCEMNR
+      PARAMETER (DCEMNR =0)	
+C 	DcErrorSevere
+      INTEGER*4 DCESEV
+      PARAMETER (DCESEV =1)	
+C 	DcErrorFatal
+      INTEGER*4 DCEFAT
+      PARAMETER (DCEFAT =2)	
+
+C DtReadStatus;
+C	DcReadOk
+      INTEGER*4 DCROK
+      PARAMETER (DCROK =0)	
+C	DcReadTrunc
+      INTEGER*4 DCRTRN
+      PARAMETER (DCRTRN =1)	
+C	DcReadUnsuc
+      INTEGER*4 DCRFAL
+      PARAMETER (DCRFAL =2)	
+
+C DtObjectStatus;
+C	DcObjectValid
+      INTEGER*4 DCOVLD
+      PARAMETER (DCOVLD =0)	
+C	DcObjectInvalid
+      INTEGER*4 DCOINV
+      PARAMETER (DCOINV =1)	
+C	DcObjectDeleted
+      INTEGER*4 DCODEL
+      PARAMETER (DCODEL =2)	
+
+C subdivision types
+C	DcSubDivFixed
+      INTEGER*4 DCSDFX
+      PARAMETER (DCSDFX =0)	
+C	DcSubDivAbsolute
+      INTEGER*4 DCSDAB
+      PARAMETER (DCSDAB =1)	
+C	DcSubDivRelative
+      INTEGER*4 DCSDRL
+      PARAMETER (DCSDRL =2)	
+C	DcSubDivSegments
+      INTEGER*4 DCSDSG
+      PARAMETER (DCSDSG =3)	
+
+C pick status
+C	DcPickBadStatus
+      INTEGER*4 DCPBAD
+      PARAMETER (DCPBAD =1)	
+C	DcPickListOverflow
+      INTEGER*4 DCPLOV
+      PARAMETER (DCPLOV =2)	
+C	DcPickIndexOverflow
+      INTEGER*4 DCPIOV
+      PARAMETER (DCPIOV =4)	
+
+C marker types
+C	DcMarkerPoint
+      INTEGER*4 DCMKPT
+      PARAMETER (DCMKPT =-1)	
+C	DcMarkerPlus
+      INTEGER*4 DCMKPL
+      PARAMETER (DCMKPL =1)	
+C	DcMarkerStar
+      INTEGER*4 DCMKST
+      PARAMETER (DCMKST =2)	
+C	DcMarkerO
+      INTEGER*4 DCMKO
+      PARAMETER (DCMKO =3)	
+C	DcMarkerX
+      INTEGER*4 DCMKX
+      PARAMETER (DCMKX =4)	
+C	DcMarkerDiamond
+      INTEGER*4 DCMKDD
+      PARAMETER (DCMKDD =5)	
+C	DcMarkerSquare
+      INTEGER*4 DCMKSQ
+      PARAMETER (DCMKSQ =6)	
+C	DcMarkerTriangle
+      INTEGER*4 DCMKTR
+      PARAMETER (DCMKTR =7)	
+
+C DtRasterType
+C	DcRasterRGB
+      INTEGER*4 DCRRGB
+      PARAMETER (DCRRGB =0)
+C	DcRasterRGBA
+      INTEGER*4 DCRRA
+      PARAMETER (DCRRA  =1)
+C	DcRasterRGBAZ
+      INTEGER*4 DCRRAZ
+      PARAMETER (DCRRAZ =2)
+C	DcRasterRGBZ
+      INTEGER*4 DCRRZ
+      PARAMETER (DCRRZ  =3)
+C	DcRasterA
+      INTEGER*4 DCRA
+      PARAMETER (DCRA   =4)
+C	DcRasterZ
+      INTEGER*4 DCRZ
+      PARAMETER (DCRZ   =5)
+C	DcRasterABGR
+      INTEGER*4 DCRAR
+      PARAMETER (DCRAR  =6)
+C	DcRasterSpecial
+      INTEGER*4 DCRSPC
+      PARAMETER (DCRSPC =99)
+
+C DtLocalAntiAliasStyle
+C	DcLocalAntiAliasFast
+      INTEGER*4 DCLAAF
+      PARAMETER (DCLAAF =0)
+C	DcLocalAntiAliasIntermediate
+      INTEGER*4 DCLAAI
+      PARAMETER (DCLAAI =1)
+C	DcLocalAntiAliasBest
+      INTEGER*4 DCLAAB
+      PARAMETER (DCLAAB =2)
+
+C Dt2PartProjType
+C	DcObjCentroid
+      INTEGER*4 DCOCTR
+      PARAMETER (DCOCTR =0)
+C	DcISN
+      INTEGER*4 DCISN
+      PARAMETER (DCISN =1)
+
+C DtTextureAntiAliasMode
+C       DcTextureAANone
+      INTEGER*4 DCTAAN
+      PARAMETER (DCTAAN =0)
+C       DcTextureAAMIPPoint
+      INTEGER*4 DCTAAM
+      PARAMETER (DCTAAM =1)
+C       DcTextureAAAdaptive
+      INTEGER*4 DCTAAA
+      PARAMETER (DCTAAA =2)
+C       DcTextureAABilinear
+      INTEGER*4 DCTAAB
+      PARAMETER (DCTAAB =3)
+C       DcTextureAASumArea
+      INTEGER*4 DCTAAS
+      PARAMETER (DCTAAS =4)
+C       DcTextureAATrilinear
+      INTEGER*4 DCTAAT
+      PARAMETER (DCTAAT =5)
+C       DcTextureAAMIP2Point
+      INTEGER*4 DCTA2P
+      PARAMETER (DCTA2P =6)
+C       DcTextureAAMIPBilinear
+      INTEGER*4 DCTAMB
+      PARAMETER (DCTAMB =7)
+C       DcTextureAAMIP2Bilinear
+      INTEGER*4 DCTA2B
+      PARAMETER (DCTA2B =8)
+
+C DtExtendMode
+C	DcExtendNone
+      INTEGER*4 DCXNON
+      PARAMETER (DCXNON =0)
+C	DcExtendBlack
+      INTEGER*4 DCXBLK
+      PARAMETER (DCXBLK =1)
+C	DcExtendClamp
+      INTEGER*4 DCXCLP
+      PARAMETER (DCXCLP =2)
+C	DcExtendRepeat
+      INTEGER*4 DCXRP
+      PARAMETER (DCXRP =3)
+
+C DtMapOperator
+C	DcMapReplace
+      INTEGER*4 DCMR
+      PARAMETER (DCMR =0)
+C	DcMapAdd
+      INTEGER*4 DCMADD
+      PARAMETER (DCMADD =1)
+
+C DtTextureOperator
+C	DcTextureReplace
+      INTEGER*4 DCTREP
+      PARAMETER (DCTREP =0)
+C	DcTextureMultiply
+      INTEGER*4 DCTMUL
+      PARAMETER (DCTMUL =1)
+C	DcTextureBlend
+      INTEGER*4 DCTBLD
+      PARAMETER (DCTBLD =2)
+C	DcTextureAdd
+      INTEGER*4 DCTADD
+      PARAMETER (DCTADD =3)
+
+C DtAngleUnits
+C	DcAngleOldStyle
+      INTEGER*4 DCAOS
+      PARAMETER (DCAOS =0)
+C	DcAngleRadians
+      INTEGER*4 DCAR
+      PARAMETER (DCAR  =1)
+C	DcAngleDegrees
+      INTEGER*4 DCAD
+      PARAMETER (DCAD  =2)
+
+C DtIntermediateDispType
+C	DcDispIntermediateAll
+      INTEGER*4 DCDIA
+      PARAMETER (DCDIA =0)
+C	DcDispFinal
+      INTEGER*4 DCDFIN
+      PARAMETER (DCDFIN =1)
+C	DcDispRegularIntervals
+      INTEGER*4 DCDRGI
+      PARAMETER (DCDRGI =2)
+C	DcDispIrregularIntervals
+      INTEGER*4 DCDIGI
+      PARAMETER (DCDIGI =3)
+
+C DtFormFactorCompType
+C	DcFOrmFactorHemicube
+      INTEGER*4 DCFFHC
+      PARAMETER (DCFFHC =0)
+
+C DtRadiosityConvType
+C	DcConvFixedIterations
+      INTEGER*4 DCCVFI
+      PARAMETER (DCCVFI =0)
+C	DcConvGlobalRel
+      INTEGER*4 DCCVGR
+      PARAMETER (DCCVGR =1)
+C	DcConvGlobalAbs
+      INTEGER*4 DCCVGA
+      PARAMETER (DCCVGA =2)
+C	DcConvPatchRel
+      INTEGER*4 DCCVPR
+      PARAMETER (DCCVPR =3)
+C	DcConvPatchAbs
+      INTEGER*4 DCCVPA
+      PARAMETER (DCCVPA =4)
+
+C DtRadiosityUpdateType
+C	DcRadiosityNone
+      INTEGER*4 DCRDNO
+      PARAMETER (DCRDNO =0)
+C	DcRadiosityComputeDisp
+      INTEGER*4 DCRDCD
+      PARAMETER (DCRDCD =1)
+C	DcRadiosityDisp
+      INTEGER*4 DCRDD
+      PARAMETER (DCRDD =2)
+
+
+C Standard matrices for cubic curves and patches
+C	DcBezier4, DcHermite4, DcBSpline4
+      INTEGER*8 DCMXB4, DCMXH4, DCMXBS	
+      COMMON /DCMXS/DCMXB4, DCMXH4, DCMXBS
+
+C Standard light type objects
+C	DcLightAmbient, DcLightInfinite, 
+C	DcLightPoint, DcLightPointAttn, 
+C	DcLightSpot, DcLightSpotAttn
+      INTEGER*8 DCLTAM, DCLTIN, DCLTPT, DCLTPA, DCLTSP, DCLTSA
+      COMMON /DCLTPS/DCLTAM, DCLTIN, DCLTPT, DCLTPA, DCLTSP, DCLTSA
+
+C Standard surface shader objects
+C	DcShaderConstant, DcShaderLightSource
+      INTEGER*8 DCSHCN, DCSHLS		
+      COMMON /DCSHS/DCSHCN, DCSHLS
+
+C Standard pick call-backs
+C	DcPickFirst, DcPickAll, DcPickClosest
+      INTEGER*8 DCPKFR, DCPKAL, DCPKCL	
+      COMMON /DCPKS/DCPKFR, DCPKAL, DCPKCL
+
+C Standard input slots
+C	DcTransXSlot, YSlot, ZSlot
+      INTEGER*8 DCISTX, DCISTY, DCISTZ	
+C	DcScaleXSlot, YSlot, ZSlot
+      INTEGER*8 DCISSX, DCISSY, DCISSZ	
+C	DcRotXSlot, YSlot, ZSlot
+      INTEGER*8 DCISRX, DCISRY, DCISRZ	
+C	DcUndoSlot, DcUpdateSlot
+      INTEGER*8 DCISUD, DCISUP		
+      COMMON /DCISS/DCISTX, DCISTY, DCISTZ, DCISSX, DCISSY, DCISSZ,
+     + DCISRX, DCISRY, DCISRZ, DCISUD, DCISUP
+
+C Super Sample Filters
+C	DcFilterBox
+      INTEGER*8 DCFBOX
+      COMMON /DCSFLT/ DCFBOX
+
+C Standard Texture Mapping Functions
+C	DcStdBumpMap, DcStdTableLookup, DcStd3dTableLookup,
+C	DcStdSphereEnvironMap, DcStdCubeEnvironMap, Dc2PartMap
+      INTEGER*8 DCSBM
+      INTEGER*8 DCSTLU
+      INTEGER*8 DCS3TL
+      INTEGER*8 DCSSEM
+      INTEGER*8 DCSCEM
+      INTEGER*8 DC2PM
+      COMMON /DCSMAP/ DCSBM, DCSTLU, DCS3TL, DCSSEM, DCSCEM, DC2PM
+
+C Standard Texture UV Computation Callbacks
+C	DcStdUVCallback
+      INTEGER*8 DCSUVC
+      COMMON /DCSUVC/ DCSUVC
+C	DcStdUVWCallback
+      INTEGER*8 DCSWC
+      COMMON /DCSWC/ DCSWC
+
+C Standard Raster Callback Delete Data Functions
+C	DcDeleteData
+      INTEGER*8 DCDELD
+      COMMON /DCDELC/ DCDELD
+
+C Routine declarations
+
+C	DdSetOptions		returns void
+      EXTERNAL	DDSO
+C	DdPickObjs             	returns void
+      EXTERNAL  DDPO		
+C	DdPick                	returns void  -- OBSELETE
+      EXTERNAL  DDP		
+C	DdInqColorEntries 	returns void
+      EXTERNAL  DDQCE		
+C	DdInqColorTableSize   	returns DtInt
+      EXTERNAL  DDQCTS		
+      INTEGER*4 DDQCTS
+C	DdInqExtent           	returns void
+      EXTERNAL  DDQE		
+C	DdInqFrame            	returns DtObject
+      EXTERNAL  DDQFR		
+      INTEGER*8 DDQFR
+C	DdInqFonts            	returns void
+      EXTERNAL  DDQFT		
+C	DdInqNumFonts         	returns DtInt
+      EXTERNAL  DDQNF		
+      INTEGER*4 DDQNF
+C	DdInqPickAperture     	returns void
+      EXTERNAL  DDQPA		
+C	DdInqPickCallback     	returns DtObject
+      EXTERNAL  DDQPC		
+      INTEGER*8 DDQPC
+C	DdInqPickPathOrder    	returns DtPickPathOrder
+      EXTERNAL  DDQPPO		
+      INTEGER*4 DDQPPO
+C	DdInqPixelData		returns DtFlag
+      EXTERNAL	 DDQPXD
+      INTEGER*4 DDQPXD
+C	DdInqResolution       	returns void
+      EXTERNAL  DDQR		
+C	DdInqShadeMode        	returns DtShadeMode
+      EXTERNAL  DDQSM		
+      INTEGER*4 DDQSM
+C	DdInqShadeRanges      	returns void
+      EXTERNAL  DDQSR		
+C	DdInqViewport         	returns void
+      EXTERNAL  DDQV		
+C	DdInqVisualType       	returns DtVisualType
+      EXTERNAL  DDQVT		
+      INTEGER*4 DDQVT
+C	DdSetColorEntries     	returns void
+      EXTERNAL  DDSCE		
+C	DdSetViewport         	returns void
+      EXTERNAL  DDSDV		
+C	DdSetFrame            	returns void
+      EXTERNAL  DDSF		
+C	DdSetPickAperture     	returns void
+      EXTERNAL  DDSPA		
+C	DdSetPickCallback     	returns void
+      EXTERNAL  DDSPCB		
+C	DdSetPickPathOrder    	returns void
+      EXTERNAL  DDSPPO		
+C	DdSetShadeMode        	returns void
+      EXTERNAL  DDSSM		
+C	DdSetShadeRanges      	returns void
+      EXTERNAL  DDSSR		
+C	DdUpdate              	returns void
+      EXTERNAL  DDU		
+C	DfInqBoundary         	returns void
+      EXTERNAL  DFQB		
+C	DfInqJust             	returns void
+      EXTERNAL  DFQJ		
+C	DfInqViewGroup        	returns DtObject
+      EXTERNAL  DFQVG		
+      INTEGER*8 DFQVG
+C	DfSetBoundary         	returns void
+      EXTERNAL  DFSB		
+C	DfSetJust             	returns void
+      EXTERNAL  DFSJ		
+C	DfUpdate              	returns void
+      EXTERNAL  DFU		
+C	DgAddObj              	returns void
+      EXTERNAL  DGAO		
+C	DgAddObjToGroup       	returns void
+      EXTERNAL  DGAOG		
+C	DgCheck               	returns DtGroupNetworkStatus
+      EXTERNAL  DGCK		
+      INTEGER*4 DGCK
+C	DgClose               	returns DtObject
+      EXTERNAL  DGCS		
+      INTEGER*8 DGCS
+C	DgDelEle              	returns void
+      EXTERNAL  DGDE		
+C	DgDelEleBetweenLabels 	returns DtFlag
+      EXTERNAL  DGDEL		
+      INTEGER*4 DGDEL
+C	DgDelEleRange         	returns void
+      EXTERNAL  DGDER		
+C	DgEmpty               	returns void
+      EXTERNAL  DGE		
+C	DgOpen                	returns void
+      EXTERNAL  DGO		
+C	DgInqElePtr           	returns DtInt
+      EXTERNAL  DGQEP		
+      INTEGER*4 DGQEP
+C	DgInqOpen             	returns DtObject
+      EXTERNAL  DGQO		
+      INTEGER*8 DGQO
+C	DgInqObjAtPos         	returns DtObject
+      EXTERNAL  DGQOP		
+      INTEGER*8 DGQOP
+C	DgInqSize             	returns DtInt
+      EXTERNAL  DGQS		
+      INTEGER*4 DGQS
+C	DgReplaceObj          	returns void
+      EXTERNAL  DGRO		
+C	DgReplaceObjInGroup   	returns void
+      EXTERNAL  DGROG		
+C	DgSetElePtr           	returns void
+      EXTERNAL  DGSEP		
+C	DgSetElePtrRelLabel   	returns DtFlag
+      EXTERNAL  DGSEPL		
+      INTEGER*4 DGSEPL
+C	DoAmbientIntens       	returns DtObject
+      EXTERNAL  DOAMBI		
+      INTEGER*8 DOAMBI
+C	DoAmbientSwitch       	returns DtObject
+      EXTERNAL  DOAMBS		
+      INTEGER*8 DOAMBS
+C	DoAnnoText            	returns DtObject
+      EXTERNAL  DOANNT		
+      INTEGER*8 DOANNT
+C	DoBackfaceCullable    	returns DtObject
+      EXTERNAL  DOBFC		
+      INTEGER*8 DOBFC
+C	DoBackfaceCullSwitch  	returns DtObject
+      EXTERNAL  DOBFCS		
+      INTEGER*8 DOBFCS
+C	DoBoundingVol         	returns DtObject
+      EXTERNAL  DOBV		
+      INTEGER*8 DOBV
+C	DoBoundingVolSwitch   	returns DtObject
+      EXTERNAL  DOBVS		
+      INTEGER*8 DOBVS
+C	DoCallback            	returns DtObject
+      EXTERNAL  DOCB		
+      INTEGER*8 DOCB
+C	DoCamera              	returns DtObject
+      EXTERNAL  DOCM		
+      INTEGER*8 DOCM
+C	DoCameraMatrix        	returns DtObject
+      EXTERNAL  DOCMX		
+      INTEGER*8 DOCMX
+C	DoClipSwitch          	returns DtObject
+      EXTERNAL  DOCS		
+      INTEGER*8 DOCS
+C	DoClipVol             	returns DtObject
+      EXTERNAL  DOCV		
+      INTEGER*8 DOCV
+C	DoCompTextureUVCallback returns DtObject
+      EXTERNAL  DOCTVC		
+      INTEGER*8 DOCTVC
+C	DoCompTextureUVWCallback returns DtObject
+      EXTERNAL  DOCTWC		
+      INTEGER*8 DOCTWC
+C	DoCompTextureUVSwitch   returns DtObject
+      EXTERNAL  DOCTVS		
+      INTEGER*8 DOCTVS
+C	DoCompTextureUVWSwitch   returns DtObject
+      EXTERNAL  DOCTWS		
+      INTEGER*8 DOCTWS
+C	DoDevice              	returns DtObject
+      EXTERNAL  DOD		
+      INTEGER*8 DOD
+C	DoDepthCue            	returns DtObject
+      EXTERNAL  DODC		
+      INTEGER*8 DODC
+C	DoDepthCueSwitch      	returns DtObject
+      EXTERNAL  DODCS		
+      INTEGER*8 DODCS
+C	DoDiffuseColor        	returns DtObject
+      EXTERNAL  DODIFC		
+      INTEGER*8 DODIFC
+C	DoDiffuseIntens       	returns DtObject
+      EXTERNAL  DODIFI		
+      INTEGER*8 DODIFI
+C	DoDiffuseSwitch       	returns DtObject
+      EXTERNAL  DODIFS		
+      INTEGER*8 DODIFS
+C	DoDataPtr             	returns DtObject
+      EXTERNAL  DODP		
+      INTEGER*8 DODP
+C	DoDataVal             	returns DtObject
+      EXTERNAL  DODV		
+      INTEGER*8 DODV
+C	DoEmissionColor         returns DtObject	
+      EXTERNAL  DOEMIC
+      INTEGER*8 DOEMIC
+C	DoEmissionFactor        returns DtObject	
+      EXTERNAL  DOEMIF
+      INTEGER*8 DOEMIF
+C	DoEmissionSwitch        returns DtObject	
+      EXTERNAL  DOEMIS 
+      INTEGER*8 DOEMIS
+C	DoExecSet             	returns DtObject	
+      EXTERNAL  DOES		
+      INTEGER*8 DOES
+C	DoFileRaster	      	returns DtObject
+      EXTERNAL	DOFRS
+      INTEGER*8 DOFRS
+C	DoFilter              	returns DtObject
+      EXTERNAL  DOFL		
+      INTEGER*8 DOFL
+C	DoFrame               	returns DtObject
+      EXTERNAL  DOFR		
+      INTEGER*8 DOFR
+C	DoGroup               	returns DtObject
+      EXTERNAL  DOG		
+      INTEGER*8 DOG
+C	DoGlbRendMaxObjs      	returns DtObject
+      EXTERNAL  DOGRMO		
+      INTEGER*8 DOGRMO
+C	DoGlbRendMaxSub       	returns DtObject	
+      EXTERNAL  DOGRMS		
+      INTEGER*8 DOGRMS
+C	DoGlbRendRayLevel     	returns DtObject
+      EXTERNAL  DOGRRL		
+      INTEGER*8 DOGRRL
+C	DoHiddenSurfSwitch    	returns DtObject
+      EXTERNAL  DOHSS		
+      INTEGER*8 DOHSS
+C	DoInLineGroup         	returns DtObject
+      EXTERNAL  DOILG		
+      INTEGER*8 DOILG
+C	DoIntermediateDispType  returns DtObject
+      EXTERNAL  DOINDT
+      INTEGER*8 DOINDT
+C	DoInvisSwitch         	returns DtObject
+      EXTERNAL  DOINVS		
+      INTEGER*8 DOINVS
+C	DoInputSlot           	returns DtObject
+      EXTERNAL  DOIS		
+      INTEGER*8 DOIS
+C	DoInterpType          	returns DtObject
+      EXTERNAL  DOIT		
+      INTEGER*8 DOIT
+C	DoLookAtFrom          	returns DtObject
+      EXTERNAL  DOLAF		
+      INTEGER*8 DOLAF
+C	DoLightColor          	returns DtObject
+      EXTERNAL  DOLC		
+      INTEGER*8 DOLC
+C	DoLightIntens         	returns DtObject
+      EXTERNAL  DOLI		
+      INTEGER*8 DOLI
+C	DoLineList            	returns DtObject
+      EXTERNAL  DOLINL		
+      INTEGER*8 DOLINL
+C	DoLabel               	returns DtObject
+      EXTERNAL  DOLL		
+      INTEGER*8 DOLL
+C	DoLineType            	returns DtObject
+      EXTERNAL  DOLNT		
+      INTEGER*8 DOLNT
+C	DoLight               	returns DtObject
+      EXTERNAL  DOLT		
+      INTEGER*8 DOLT
+C	DoLightType           	returns DtObject
+      EXTERNAL  DOLTT		
+      INTEGER*8 DOLTT
+C	DoLightAttenuation    	returns DtObject
+      EXTERNAL  DOLTA		
+      INTEGER*8 DOLTA
+C	DoLightSpreadAngles   	returns DtObject
+      EXTERNAL  DOLTSA		
+      INTEGER*8 DOLTSA
+C	DoLightSpreadExp      	returns DtObject
+      EXTERNAL  DOLTSE		
+      INTEGER*8 DOLTSE
+C	DoLocalAntiAliasStyle  	returns DtObject
+      EXTERNAL  DOLAST		
+      INTEGER*8 DOLAST
+C	DoLocalAntiAliasSwitch  returns DtObject
+      EXTERNAL  DOLASW		
+      INTEGER*8 DOLASW
+C	DoLightSwitch         	returns DtObject
+      EXTERNAL  DOLTS		
+      INTEGER*8 DOLTS
+C	DoLineWidth           	returns DtObject
+      EXTERNAL  DOLW		
+      INTEGER*8 DOLW
+C	DoMatrix              	returns DtObject
+      EXTERNAL  DOM		
+      INTEGER*8 DOM
+C	DoMinBoundingVolExt   	returns DtObject
+      EXTERNAL  DOMBVE		
+      INTEGER*8 DOMBVE
+C	DoMarkerFont          	returns DtObject
+      EXTERNAL  DOMF		
+      INTEGER*8 DOMF
+C	DoMarkerGlyph         	returns DtObject
+      EXTERNAL  DOMG		
+      INTEGER*8 DOMG
+C	DoMarkerScale         	returns DtObject
+      EXTERNAL  DOMS	
+      INTEGER*8 DOMS
+C	DoNURBSurf            	returns DtObject
+      EXTERNAL  DONRBS		
+      INTEGER*8 DONRBS
+C	DoNameSet             	returns DtObject
+      EXTERNAL  DONS		
+      INTEGER*8 DONS
+C	DoParallel            	returns DtObject
+      EXTERNAL  DOPAR		
+      INTEGER*8 DOPAR
+C	DoPatch               	returns DtObject
+      EXTERNAL  DOPAT		
+      INTEGER*8 DOPAT
+C	DoPerspective         	returns DtObject
+      EXTERNAL  DOPER		
+      INTEGER*8 DOPER
+C	DoPolygon             	returns DtObject
+      EXTERNAL  DOPGN		
+      INTEGER*8 DOPGN
+C	DoPolygonMesh         	returns DtObject
+      EXTERNAL  DOPGNM		
+      INTEGER*8 DOPGNM
+C	DoPickID              	returns DtObject	
+      EXTERNAL  DOPID		
+      INTEGER*8 DOPID
+C	DoPolyline            	returns DtObject
+      EXTERNAL  DOPL		
+      INTEGER*8 DOPL
+C	DoPolymarker          	returns DtObject
+      EXTERNAL  DOPM		
+      INTEGER*8 DOPM
+C	DoPrimSurf            	returns DtObject
+      EXTERNAL  DOPMS		
+      INTEGER*8 DOPMS
+C	DoPointList           	returns DtObject
+      EXTERNAL  DOPNTL		
+      INTEGER*8 DOPNTL
+C	DoPopAtts             	returns DtObject
+      EXTERNAL  DOPPA		
+      INTEGER*8 DOPPA
+C	DoPopMatrix           	returns DtObject
+      EXTERNAL  DOPPMX		
+      INTEGER*8 DOPPMX
+C	DoProjection          	returns DtObject
+      EXTERNAL  DOPRJ		
+      INTEGER*8 DOPRJ
+C	DoPickSwitch          	returns DtObject
+      EXTERNAL  DOPS		
+      INTEGER*8 DOPS
+C	DoPushAtts            	returns DtObject
+      EXTERNAL  DOPUA		
+      INTEGER*8 DOPUA
+C	DoPushMatrix          	returns DtObject
+      EXTERNAL  DOPUMX		
+      INTEGER*8 DOPUMX
+C	DoQuadGrid        	returns DtObject
+      EXTERNAL  DOQUDG		
+      INTEGER*8 DOQUDG
+C	DoQuadList        	returns DtObject
+      EXTERNAL  DOQUDL		
+      INTEGER*8 DOQUDL
+C	DoQuadMesh        	returns DtObject
+      EXTERNAL  DOQUDM		
+      INTEGER*8 DOQUDM
+C	DoRadiositySwitch	returns DtObject
+      EXTERNAL  DORADS
+      INTEGER*8 DORADS
+C	DoRadiosityAmbientSwitch	returns DtObject
+      EXTERNAL  DORDAS
+      INTEGER*8 DORDAS
+C	DoRaster	      	returns DtObject
+      EXTERNAL	DORS
+      INTEGER*8 DORS
+C	DoReflectionSwitch    	returns DtObject
+      EXTERNAL  DOREFS		
+      INTEGER*8 DOREFS
+C	DoRefractionSwitch    	returns DtObject
+      EXTERNAL  DORFRS		
+      INTEGER*8 DORFRS
+C	DoRefractionIndex     	returns DtObject
+      EXTERNAL  DORFRI		
+      INTEGER*8 DORFRI
+C	DoRepType             	returns DtObject
+      EXTERNAL  DOREPT		
+      INTEGER*8 DOREPT
+C	DoRotate              	returns DtObject
+      EXTERNAL  DOROT		
+      INTEGER*8 DOROT
+C	DoSampleAdaptive      	returns DtObject
+      EXTERNAL	DOSADP
+      INTEGER*8 DOSADP
+C	DoSampleAdaptiveSwitch	returns DtObject
+      EXTERNAL  DOSASW
+      INTEGER*8 DOSASW
+C	DoSampleFilter		returns DtObject
+      EXTERNAL	DOSFLT
+      INTEGER*8 DOSFLT
+C	DoSampleJitter		returns DtObject
+      EXTERNAL	DOSJIT
+      INTEGER*8 DOSJIT
+C	DoSampleJitterSwitch	returns DtObject
+      EXTERNAL	DOSJSW
+      INTEGER*8 DOSJSW
+C	DoSampleSuper           returns DtObject
+      EXTERNAL	DOSSPR
+      INTEGER*8 DOSSPR
+C	DoSampleSuperSwitch     returns DtObject
+      EXTERNAL	DOSSSW
+      INTEGER*8 DOSSSW
+C	DoScale               	returns DtObject
+      EXTERNAL  DOSC		
+      INTEGER*8 DOSC
+C	DoSubDivSpec          	returns DtObject
+      EXTERNAL  DOSDS		
+      INTEGER*8 DOSDS
+C	DoShadowSwitch        	returns DtObject
+      EXTERNAL  DOSHAS		
+      INTEGER*8 DOSHAS
+C	DoShear               	returns DtObject
+      EXTERNAL  DOSHR		
+      INTEGER*8 DOSHR
+C	DoShadeIndex          	returns DtObject
+      EXTERNAL  DOSI		
+      INTEGER*8 DOSI
+C	DoSpecularColor       	returns DtObject
+      EXTERNAL  DOSPCC		
+      INTEGER*8 DOSPCC
+C	DoSpecularFactor      	returns DtObject
+      EXTERNAL  DOSPCF		
+      INTEGER*8 DOSPCF
+C	DoSpecularIntens      	returns DtObject
+      EXTERNAL  DOSPCI		
+      INTEGER*8 DOSPCI
+C	DoSpecularSwitch      	returns DtObject
+      EXTERNAL  DOSPCS		
+      INTEGER*8 DOSPCS
+C	DoSphereList      	returns DtObject
+      EXTERNAL  DOSPHL		
+      INTEGER*8 DOSPHL
+C	DoSimplePolygon       	returns DtObject
+      EXTERNAL  DOSPGN		
+      INTEGER*8 DOSPGN
+C	DoSimplePolygonMesh   	returns DtObject
+      EXTERNAL  DOSPM		
+      INTEGER*8 DOSPM
+C	DoSurfaceShade        	returns DtObject
+      EXTERNAL  DOSRFS		
+      INTEGER*8 DOSRFS
+C	DoSurfaceEdgeColor    	returns DtObject
+      EXTERNAL  DOSEGC
+      INTEGER*8 DOSEGC
+C	DoStereo              	returns DtObject
+      EXTERNAL  DOSTER		
+      INTEGER*8 DOSTER
+C	DoStereoSwitch        	returns DtObject
+      EXTERNAL  DOSTES		
+      INTEGER*8 DOSTES
+C	DoTextAlign           	returns DtObject
+      EXTERNAL  DOTA		
+      INTEGER*8 DOTA
+C	DoTranspColor         	returns DtObject
+      EXTERNAL  DOTC		
+      INTEGER*8 DOTC
+C	DoTextExpFactor       	returns DtObject
+      EXTERNAL  DOTEF		
+      INTEGER*8 DOTEF
+C	DoTextFont            	returns DtObject
+      EXTERNAL  DOTF		
+      INTEGER*8 DOTF
+C	DoTextHeight          	returns DtObject
+      EXTERNAL  DOTH		
+      INTEGER*8 DOTH
+C	DoTranspIntens        	returns DtObject
+      EXTERNAL  DOTI		
+      INTEGER*8 DOTI
+C	DoTransformMatrix     	returns DtObject
+      EXTERNAL  DOTMX		
+      INTEGER*8 DOTMX
+C	DoTorus               	returns DtObject
+      EXTERNAL  DOTOR		
+      INTEGER*8 DOTOR
+C	DoTextPath            	returns DtObject
+      EXTERNAL  DOTPA		
+      INTEGER*8 DOTPA
+C	DoTextPrecision       	returns DtObject
+      EXTERNAL  DOTPR		
+      INTEGER*8 DOTPR
+C	DoTriangleList        	returns DtObject
+      EXTERNAL  DOTRIL		
+      INTEGER*8 DOTRIL
+C	DoTriangleMesh        	returns DtObject
+      EXTERNAL  DOTRIM		
+      INTEGER*8 DOTRIM
+C	DoTriangleStrip       	returns DtObject
+      EXTERNAL  DOTRIS		
+      INTEGER*8 DOTRIS
+C	DoTranspSwitch        	returns DtObject	
+      EXTERNAL  DOTS		
+      INTEGER*8 DOTS
+C	DoTranspOrientColor   	returns DtObject
+      EXTERNAL  DOTOC		
+      INTEGER*8 DOTOC
+C	DoTranspOrientIntens  	returns DtObject
+      EXTERNAL  DOTOI		
+      INTEGER*8 DOTOI
+C	DoTranspOrientExp     	returns DtObject
+      EXTERNAL  DOTOE		
+      INTEGER*8 DOTOE
+C	DoTranspOrientSwitch  	returns DtObject	
+      EXTERNAL  DOTOS		
+      INTEGER*8 DOTOS
+C	DoTextSpace           	returns DtObject
+      EXTERNAL  DOTSP		
+      INTEGER*8 DOTSP
+C	DoTextUpVector        	returns DtObject
+      EXTERNAL  DOTUV		
+      INTEGER*8 DOTUV
+C	DoText                	returns DtObject
+      EXTERNAL  DOTXT		
+      INTEGER*8 DOTXT
+C	DoTextureAntiAlias      returns DtObject
+      EXTERNAL	DOTAA
+      INTEGER*8 DOTAA
+C	DoTextureExtendUV       returns DtObject
+      EXTERNAL	DOTXUV
+      INTEGER*8 DOTXUV
+C	DoTextureExtendUVW      returns DtObject
+      EXTERNAL	DOTXW
+      INTEGER*8 DOTXW
+C	DoTextureIntermediateSurf returns DtObject
+      EXTERNAL	DOTIMS
+      INTEGER*8 DOTIMS
+C	DoTextureMapBump        returns DtObject
+      EXTERNAL	DOTMB
+      INTEGER*8 DOTMB
+C	DoTextureMapBumpSwitch  returns DtObject
+      EXTERNAL	DOTMBS
+      INTEGER*8 DOTMBS
+C	DoTextureMapDiffuseColor returns DtObject
+      EXTERNAL	DOTMDC
+      INTEGER*8 DOTMDC
+C	DoTextureMapDiffuseColorSwitch returns DtObject
+      EXTERNAL	DOTMDS
+      INTEGER*8 DOTMDS
+C	DoTextureMapEnviron     returns DtObject
+      EXTERNAL	DOTME
+      INTEGER*8 DOTME
+C	DoTextureMapEnvironSwitch returns DtObject
+      EXTERNAL	DOTMES
+      INTEGER*8 DOTMES
+C	DoTextureMapTranspIntens returns DtObject
+      EXTERNAL	DOTMTI
+      INTEGER*8 DOTMTI
+C	DoTextureMapTranspIntensSwitch returns DtObject
+      EXTERNAL	DOTMTS
+      INTEGER*8 DOTMTS
+C	DoTextureMatrixUV 	returns DtObject
+      EXTERNAL	DOTMUV
+      INTEGER*8 DOTMUV
+C	DoTextureMatrixUVW 	returns DtObject
+      EXTERNAL	DOTMW
+      INTEGER*8 DOTMW
+C	DoTextureOp             returns DtObject
+      EXTERNAL	DOTOP
+      INTEGER*8 DOTOP
+C	DoTextureScaleUV        returns DtObject
+      EXTERNAL	DOTSUV
+      INTEGER*8 DOTSUV
+C	DoTextureScaleUVW       returns DtObject
+      EXTERNAL	DOTSW
+      INTEGER*8 DOTSW
+C	DoTextureTranslateUV    returns DtObject
+      EXTERNAL	DOTTUV
+      INTEGER*8 DOTTUV
+C	DoTextureTranslateUVW   returns DtObject
+      EXTERNAL	DOTTW
+      INTEGER*8 DOTTW
+C	DoTextureUVIndex        returns DtObject
+      EXTERNAL	DOTUVI
+      INTEGER*8 DOTUVI
+C	DoTextureUVWIndex       returns DtObject
+      EXTERNAL	DOTWI
+      INTEGER*8 DOTWI
+C	DoVarQuadGrid     	returns DtObject
+      EXTERNAL  DOVQDG		
+      INTEGER*8 DOVQDG
+C	DoVarQuadMesh     	returns DtObject
+      EXTERNAL  DOVQDM		
+      INTEGER*8 DOVQDM
+C	DoVarTriangleMesh     	returns DtObject
+      EXTERNAL  DOVTRM		
+      INTEGER*8 DOVTRM
+C	DoVarSimplePolygonMesh  returns DtObject
+      EXTERNAL  DOVSPM		
+      INTEGER*8 DOVSPM
+C	DoVarTriangleStrip     	returns DtObject
+      EXTERNAL  DOVTRS		
+      INTEGER*8 DOVTRS
+C	DoVarLineList         	returns DtObject
+      EXTERNAL  DOVLNL		
+      INTEGER*8 DOVLNL
+C	DoVarPointList        	returns DtObject
+      EXTERNAL  DOVPTL		
+      INTEGER*8 DOVPTL
+C 	DoView                	returns DtObject
+      EXTERNAL  DOVW		
+      INTEGER*8 DOVW
+C	DoTranslate           	returns DtObject
+      EXTERNAL  DOXLT		
+      INTEGER*8 DOXLT
+C	DpUpdVarQuadGrid	returns void
+      EXTERNAL  DPUVQG
+C	DpUpdVarQuadGridUV	returns void
+      EXTERNAL  DPUQGV
+C	DpUpdVarQuadGridUVW	returns void
+      EXTERNAL  DPUQGW
+C	DpUpdVarQuadMesh	returns void
+      EXTERNAL  DPUVQM
+C	DpUpdVarQuadMeshUV	returns void
+      EXTERNAL  DPUQMV
+C	DpUpdVarQuadMeshUVW	returns void
+      EXTERNAL  DPUQMW
+C	DpUpdVarTriangleMesh	returns void
+      EXTERNAL  DPUVTM
+C	DpUpdVarTriangleMeshUV	returns void
+      EXTERNAL  DPUTMV
+C	DpUpdVarTriangleMeshUVW	returns void
+      EXTERNAL  DPUTMW
+C	DpUpdVarSimplePolygonMesh	returns void
+      EXTERNAL  DPUVSM
+C	DpUpdVarSimplePolygonMeshUV	returns void
+      EXTERNAL  DPUSMV
+C	DpUpdVarSimplePolygonMeshUVW	returns void
+      EXTERNAL  DPUSMW
+C	DpUpdVarTriangleStrip	returns void
+      EXTERNAL  DPUVTS
+C	DpUpdVarTriangleStripUV	returns void
+      EXTERNAL  DPUTSV
+C	DpUpdVarTriangleStripUVW returns void
+      EXTERNAL  DPUTSW
+C	DpUpdVarLineList	returns void
+      EXTERNAL  DPUVLL
+C	DpUpdVarPointList	returns void
+      EXTERNAL  DPUVPL
+C	DsCompBoundingVol     (DtVolume *)
+      EXTERNAL  DSCBV		
+      INTEGER*8 DSCBV
+C	DsExecutionAbort      	returns void
+      EXTERNAL  DSEA		
+C	DsExecuteObj          	returns void		
+      EXTERNAL  DSEO		
+C	DsExecutionReturn     	returns void
+      EXTERNAL  DSER		
+C	DsFileRasterRead        returns DtInt
+      EXTERNAL	DSFRSR
+      INTEGER*4 DSFRSR
+C	DsHoldObj             	returns DtObject
+      EXTERNAL  DSHO		
+      INTEGER*8 DSHO
+C	DsInitialize          	returns void
+      EXTERNAL  DSINIT
+C	DsRadiosityInitialize   returns void
+      EXTERNAL  DSRDIN
+C	DsInputValue          	returns void
+      EXTERNAL  DSIV		
+C	DsPrintObj            	returns void
+      EXTERNAL  DSPO		
+C	DsInqAngleUnits		returns DtAngleUnits
+      EXTERNAL  DSQAU
+      INTEGER*4 DSQAU
+C	DsInqClassId    	returns DtInt
+      EXTERNAL  DSQCI
+      INTEGER*4 DSQCI
+C	DsInqCurrentMethod    	returns DtInt
+      EXTERNAL  DSQCM
+      INTEGER*4 DSQCM
+C	DsInqDriverInfo		returns void
+      EXTERNAL  DSQDI
+C	DsInqExeDepthLimit    	returns DtInt
+      EXTERNAL  DSQEDL		
+      INTEGER*4 DSQEDL
+C	DsInqErrorMessage     	returns DtReadStatus
+      EXTERNAL  DSQEM		
+      INTEGER*4 DSQEM
+C	DsInqErrorVars        	returns void
+      EXTERNAL  DSQEV		
+C	DsInqHoldObj          	returns DtFlag
+      EXTERNAL  DSQHO		
+      INTEGER*4 DSQHO
+C	DsInqMethodId         	return DtInt
+      EXTERNAL  DSQMI
+      INTEGER*4 DSQMI
+C	DsInqNumDrivers		returns DtInt
+      EXTERNAL  DSQND
+      INTEGER*4 DSQND
+C	DsInqNumRenderers     	returns DtInt
+      EXTERNAL	DSQNR
+      INTEGER*4	DSQNR
+C	DsInqObj (DcNameInteger, ...)         returns DtObject
+      EXTERNAL  DSQOI		
+      INTEGER*8 DSQOI
+C	DsInqObjClassId 		      returns DtInt
+      EXTERNAL  DSQOCI		
+      INTEGER*4 DSQOCI
+C	DsInqObjName of type DcNameInteger    returns DtInt
+      EXTERNAL  DSQONI		
+      INTEGER*4 DSQONI
+C	DsInqObjName of type DcNameString     returns void
+      EXTERNAL  DSQONS		
+C	DsInqObjName return name type         returns DtInt
+      EXTERNAL  DSQONT		
+      INTEGER*4 DSQONT
+C	DsInqObj (DcNameString, ...)          returns DtObject
+      EXTERNAL  DSQOS		
+      INTEGER*8 DSQOS
+C	DsInqObjType          	returns DtInt
+      EXTERNAL  DSQOT		
+      INTEGER*4 DSQOT
+C	DsInqRaster       	returns void
+      EXTERNAL  DSQR
+C	DsInqRendererId       	returns DtInt
+      EXTERNAL  DSQRI
+      INTEGER*4 DSQRI
+C	DsInqRendererNames      returns void
+      EXTERNAL  DSQRNS
+C	DsInqSafeFlag         	returns DtFlag
+      EXTERNAL  DSQSF		
+      INTEGER*4 DSQSF
+C	DsInqValuatorGroup    	returns DtObject
+      EXTERNAL  DSQVG		
+      INTEGER*8 DSQVG
+C	DsInqVersion          	returns void
+      EXTERNAL  DSQVER
+C	DsInqObjStatus        	returns DtObjectStatus
+      EXTERNAL  DSQVOS		
+      INTEGER*4 DSQVOS
+C	DsRasterUpdate          returns void
+      EXTERNAL	DSRSU
+C	DsRasterWrite           returns void
+      EXTERNAL	DSRSW
+C	DsReleaseObj          	returns void
+      EXTERNAL  DSRO		
+C	DsSetAngleUnits		returns void
+      EXTERNAL  DSSAU
+C	DsSetExeDepthLimit    	returns void
+      EXTERNAL  DSSEDL		
+C	DsSetErrorVars        	returns void
+      EXTERNAL  DSSEV		
+C	DsSetObjName (..., DcNameNone, ...)           returns void
+      EXTERNAL  DSSOND		
+C	DsSetObjName (..., DcNameInteger, ...)        returns void
+      EXTERNAL  DSSONI		
+C	DsSetObjName (..., DcNameString, ...)         returns void
+      EXTERNAL  DSSONS		
+C	DsSetSafeFlag         	returns void
+      EXTERNAL  DSSSF		
+C	DsTerminate           	returns void
+      EXTERNAL  DSTERM		
+C	DsTextureUVCount        returns DtInt
+      EXTERNAL	DSTUVC
+      INTEGER*4 DSTUVC
+C	DsTextureUVWCount       returns DtInt
+      EXTERNAL	DSTWC
+      INTEGER*4 DSTWC
+C	DsUpdateAllViews      	returns void
+      EXTERNAL  DSUAV		
+C	DsValuatorSwitch      	returns void
+      EXTERNAL  DSVS		
+C	DvInqActiveCamera     	returns DtObject
+      EXTERNAL  DVQAC		
+      INTEGER*8 DVQAC
+C	DvInqBoundary         	returns void
+      EXTERNAL  DVQB		
+C	DvInqBackgroundColor  	returns void
+      EXTERNAL  DVQBC		
+C	DvInqBackgroundJust  	returns void
+      EXTERNAL  DVQBJ		
+C	DvInqBackgroundRaster  	returns void
+      EXTERNAL  DVQBR		
+C	DvInqClearFlag        	returns DtFlag
+      EXTERNAL  DVQCF		
+      INTEGER*4 DVQCF
+C	DvInqDefinitionGroup  	returns DtObject
+      EXTERNAL  DVQDG		
+      INTEGER*8 DVQDG
+C	DvInqDisplayGroup     	returns DtObject
+      EXTERNAL  DVQIG		
+      INTEGER*8 DVQIG
+C	DvInqFormFactorCompType returns void
+      EXTERNAL  DVQFFC 
+      INTEGER*4 DVQFFC 
+C	DvInqRadiosityConvergence returns void
+      EXTERNAL  DVQRDC 
+      INTEGER*4 DVQRDC 
+C	DvInqRadiosityUpdateType returns DtRadiosityUpdateType
+      EXTERNAL  DVQRDU
+      INTEGER*4 DVQRDU
+C	DvInqRendStyle         	returns DtRenderStyle
+      EXTERNAL  DVQRS		
+      INTEGER*4 DVQRS
+C	DvInqShadeIndex       	returns DtInt
+      EXTERNAL	DVQSI		
+      INTEGER*4	DVQSI
+C	DvInqUpdateType       	returns DtUpdateType
+      EXTERNAL  DVQUT		
+      INTEGER*4 DVQUT
+C	DvSetActiveCamera     	returns void
+      EXTERNAL  DVSAC		
+C	DvSetBoundary         	returns void
+      EXTERNAL  DVSB		
+C	DvSetBackgroundColor  	returns void
+      EXTERNAL  DVSBC		
+C	DvSetBackgroundJust  	returns void
+      EXTERNAL  DVSBJ		
+C	DvSetBackgroundRaster  	returns void
+      EXTERNAL  DVSBR		
+C	DvSetClearFlag        	returns void
+      EXTERNAL  DVSCF		
+C	DvSetFormFactorCompType returns void
+      EXTERNAL  DVSFFC
+C	DvSetRadiosityConvergence  returns void
+      EXTERNAL  DVSRDC
+C	DvSetRadiosityUpdateType   returns void
+      EXTERNAL  DVSRDU
+C	DvSetRendStyle        	returns void
+      EXTERNAL  DVSRS		
+C	DvSetShadeIndex       	returns void
+      EXTERNAL	DVSSI		
+C	DvSetUpdateType       	returns void
+      EXTERNAL  DVSUT		
+C	DvUpdate              	returns void
+      EXTERNAL  DVU		
+C	DeAddClass            	returns DtInt
+      EXTERNAL  DEAC		
+      INTEGER*4 DEAC
+C	DeCreateObject        	returns DtObject
+      EXTERNAL  DECO 		
+      INTEGER*8 DECO 
+C	DeDeleteObject        	returns void	
+      EXTERNAL  DEDO		
+C	DeExecuteAlternate    	returns void	
+      EXTERNAL  DEEA		
+C	DeInitializeObjPick   	returns void
+      EXTERNAL  DEIOP		
+C	DeInqPickable         	returns DtFlag
+      EXTERNAL  DEQP		
+      INTEGER*4 DEQP
+C	DeInqRenderable       	returns DtFlag
+      EXTERNAL  DEQR		
+      INTEGER*4 DEQR
+C	Fortran only.   Add method to list     returns void
+      EXTERNAL DEAMTH
+C	Fortran only. 	Destroy object private data     returns void
+      EXTERNAL DEDOD
+C	Fortran only. 	Get object private data     returns void
+      EXTERNAL DEROD
+C	Fortran only. 	Put object private data     returns void
+      EXTERNAL DEWOD
+      

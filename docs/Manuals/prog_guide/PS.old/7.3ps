@@ -1,0 +1,211 @@
+!md begin
+!/note {} def
+!/legal {} def
+!md /lnop known not { /lnop [ {} ] cvx def } if
+!/bigs [lnop lnop lnop lnop lnop lnop lnop lnop] def
+!/smalls [lnop lnop lnop lnop lnop lnop lnop lnop] def
+!/cp {pm restore pop pop} def
+!
+!T T -46 -44 1136 869 67 72 72 1 F F F F T T psu
+!(TechPubs#1; document: 7-3PreconcatScale)jn
+!0 mf
+!od
+!op
+!0 0 xl
+!0 72 mul -1.25 72 mul translate
+!1 1 scale
+!1 1 pen
+!0 0 gm
+!(nc 0 0 1090 825 6 rc)kp
+!64 gr
+!71 424 108 520 4 rc
+!0 gr
+!71.5 424.5 107.5 519.5 0 rc
+!64 gr
+!107 424 144 520 4 rc
+!0 gr
+!107.5 424.5 143.5 519.5 0 rc
+!64 gr
+!82 311 101 393 2 rc
+!94 312 gm
+!(nc 82 311 101 393 6 rc)kp
+!bu fc
+!{}mark T /Helvetica /Helvetica 0 rf
+!bn
+!1 setTxMode
+!0 fs
+!12.47991 fz
+!bu fc
+!2 F /Helvetica fnt
+!bn
+!1.99462 0. 32 0.19946 0.(Top Of Stack)awidthshow
+!113 312 gm
+!(nc 0 0 1090 825 6 rc)kp
+!64 gr
+!79 426 98 516 2 rc
+!91 428 gm
+!(nc 79 426 98 516 6 rc)kp
+!0 gr
+!0.47805 0. 32 0.04780 0.(S  x  T  x  PTM)awidthshow
+!110 471 gm
+!(nc 0 0 1090 825 6 rc)kp
+!64 gr
+!115 457 134 485 2 rc
+!127 459 gm
+!(nc 115 457 134 485 6 rc)kp
+!0 gr
+!-0.66999 0.(PTM)ashow
+!146 471 gm
+!(nc 0 0 1090 825 6 rc)kp
+!64 gr
+!73 71 110 121 4 rc
+!0 gr
+!73.5 71.5 109.5 120.5 0 rc
+!0 0 pen
+!146 471 lin
+!nc ct 39 0 put
+!1 1 pen
+!90 160 gm
+!pr
+!90 160 pl
+!93 151 pl
+!87 151 pl
+!90 160 pl
+!1 ep
+!pr
+!90 160 pl
+!93 151 pl
+!87 151 pl
+!90 160 pl
+!0 ep
+!90 96 gm
+!pt
+!90 152 pl
+!ef
+!eu
+!(nc 0 0 1090 825 6 rc)kp
+!0 0 pen
+!90 152 lin
+!1 1 pen
+!87 92 94 99 4 ov
+!87.5 92.5 93.5 98.5 0 ov
+!64 gr
+!109 71 146 121 4 rc
+!0 gr
+!109.5 71.5 145.5 120.5 0 rc
+!0 0 pen
+!90 152 lin
+!nc ct 39 0 put
+!1 1 pen
+!126 160 gm
+!pr
+!126 160 pl
+!129 151 pl
+!123 151 pl
+!126 160 pl
+!1 ep
+!pr
+!126 160 pl
+!129 151 pl
+!123 151 pl
+!126 160 pl
+!0 ep
+!126 96 gm
+!pt
+!126 152 pl
+!ef
+!eu
+!(nc 0 0 1090 825 6 rc)kp
+!0 0 pen
+!126 152 lin
+!1 1 pen
+!123 92 130 99 4 ov
+!123.5 92.5 129.5 98.5 0 ov
+!93 194 gm
+!(nc 81 192 100 255 6 rc)kp
+!0.99952 0.(Translate)ashow
+!112 224 gm
+!(nc 0 0 1090 825 6 rc)kp
+!76.5 160.5 105.5 286.5 26.5 26.5 0 rr
+!130 207 gm
+!(nc 118 205 137 242 6 rc)kp
+!0.69776 0.(Scale)ashow
+!149 224 gm
+!(nc 0 0 1090 825 6 rc)kp
+!113.5 160.5 142.5 286.5 26.5 26.5 0 rr
+!0 0 pen
+!149 224 lin
+!nc ct 39 0 put
+!1 1 pen
+!91 424 gm
+!pr
+!91 424 pl
+!94 415 pl
+!88 415 pl
+!91 424 pl
+!1 ep
+!pr
+!91 424 pl
+!94 415 pl
+!88 415 pl
+!91 424 pl
+!0 ep
+!91 402 gm
+!pt
+!91 416 pl
+!rh
+!ef
+!eu
+!(nc 0 0 1090 825 6 rc)kp
+!0 0 pen
+!91 416 lin
+!91 416 lin
+!nc ct 39 0 put
+!1 1 pen
+!107 333 gm
+!pt
+!107 528 pl
+!rh
+!ef
+!eu
+!(nc 0 0 1090 825 6 rc)kp
+!0 0 pen
+!107 528 lin
+!1 1 pen
+!64 gr
+!157 395 176 544 2 rc
+!169 397 gm
+!(nc 157 395 176 544 6 rc)kp
+!0 gr
+!bu fc
+!{}mark T /Helvetica-Bold /Helvetica-Bold 0 rf
+!bn
+!1 fs
+!bu fc
+!2 F /Helvetica-Bold fnt
+!bn
+!5.76522 0. 32 0.57652 0.(Resulting CTM Stack)awidthshow
+!188 470 gm
+!(nc 0 0 1090 825 6 rc)kp
+!64 gr
+!157 120 177 232 2 rc
+!169 121 gm
+!(nc 157 120 177 232 6 rc)kp
+!0 gr
+!5.76416 0. 32 0.57641 0.(Group Fragment)awidthshow
+!188 176 gm
+!(nc 0 0 1090 825 6 rc)kp
+!64 gr
+!108 346 122 417 2 rc
+!118 347 gm
+!(nc 108 346 122 417 6 rc)kp
+!0 gr
+!0 fs
+!9.35993 fz
+!bu fc
+!2 F /Helvetica fnt
+!bn
+!1.50314 0. 32 0.15031 0.(group boundary)awidthshow
+!F T cp
+!cd
+!end

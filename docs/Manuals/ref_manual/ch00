@@ -1,0 +1,115 @@
+.\"#ident "%W%" %G%
+.\"
+.\" #
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  
+.\" # 
+.\" # KUBOTA GRAPHICS Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\" #
+.\"
+.ds BT \\*(Dd Reference Manual
+.ds CT Preface
+.so ../macros/local.me
+.PN 7 i
+.L1 P REFACE
+.CH
+.rs
+.sp -1.5v
+This manual is a reference for version 5.0 of \*(Dd, a  
+three-dimensional computer graphics subroutine library.  
+Programmers using this manual should already be
+familiar with \*(Dd fundamentals.
+For detailed examples of \*(Dd application programs, refer to
+the \f2\*(Dd Programmer's Guide\fP.
+.lp
+This manual has the following chapters:
+.BU hs
+Chapter 1,
+\f2\*(Fo Cross Reference\f1,
+is an alphabetic list of the \*(Fo functions,
+constants, and types that \*(Dd uses, with their
+corresponding C names. 
+.BU hs
+Chapter 2,
+\f2Quick Reference\f1,
+lists each \*(Dd function with its arguments
+and a short description.
+.BU hs
+Chapter 3,
+\f2C Include Files\f1,
+lists the data type structures, constants, and function declarations
+used by \*(Dd applications written in C.  Function
+prototypes for \*(Dd are also included in this chapter.
+.BU hs
+Chapter 4,
+\f2\*(Fo Include Files\f1,
+lists the data types, constants, and function declarations used by \*(Dd
+applications written in \*(Fo.
+.BU hs
+Chapter 5,
+\f2\*(Dd Vertex Types\f1,
+describes how to enter vertex information for \*(Dd primitive
+objects.
+.BU hs
+Chapter 6,
+\f2\*(Dd Matrix Transformations\f1,
+explains how \*(Dd manipulates its transformation matrix and shows
+the matrix equations that are used by \*(Dd functions.
+.BU hs
+Chapter 7, 
+\f2Raster File and Memory Formats\f1, 
+describes the file and memory data format for raster data used by \*(Dd.
+.BU hs
+Chapter 8,
+\f2Device Drivers and Renderers\f1,
+contains general information about \*(Dd device drivers and renderers,
+along with a list of the \*(Dd functions that are renderer dependent.
+.sp -.5v
+.H1 "Intended Audience"
+This manual is written for the experienced programmer 
+who is already comfortable writing
+graphics applications.  The manpages provide the calling sequences 
+and return values that apply
+when the \*(Do routines are called from the C and \*(Fo
+programming languages.
+If you are 
+unfamiliar with C or \*(Fo, or with computer graphics programming,
+consult the related readings listed below.
+.sp -.5v
+.H1 "Related Readings"
+Programming guides for experienced programmers who have never programmed
+graphics applications:
+.BU hs
+\f2Computer Graphics, Principles and Practice\f1, second edition,
+by Foley, van Dam, Feiner and Hughes, published by Addison Wesley
+.BU hs
+\f2Principles of Interactive Computer Graphics\f1
+by Newman and Sproull, published by McGraw Hill
+.BU hs
+\f2Procedural Elements for Computer Graphics\f1
+by Rogers, published by McGraw Hill
+.lp
+Programming guide for the \*(Do:
+.BU hs
+.lp
+Programming reference for the C programming language:
+.BU hs
+\f2C:  A Reference Manual\f1
+by Harbison and Steele, published by Prentice Hall 
+.lp
+Programming references for the \*(Fo programming language: 
+.BU hs
+\f2\*(Fo 77 for Engineers\f1, by Bruce J. Torby, published by
+Prentice Hall Inc.
+.BU hs
+\f2A Guidebook to \*(Fo on Supercomputers\fP
+by John M. Levesque and Joel W. Williamson, published by Academic Press

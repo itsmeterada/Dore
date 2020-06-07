@@ -1,0 +1,34 @@
+#ident "%W%" %G%
+ 
+/**************************************************************************
+# Copyright (C) 1994 Kubota Graphics Corp.
+# 
+# Permission to use, copy, modify, and distribute this material for
+# any purpose and without fee is hereby granted, provided that the
+# above copyright notice and this permission notice appear in all
+# copies, and that the name of Kubota Graphics not be used in
+# advertising or publicity pertaining to this material.  Kubota
+# Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+# OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+# "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+# PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+# EXPRESS OR IMPLIED.
+**************************************************************************/
+ 
+                                STEREO
+
+Example program of using the TITAN Stereo Viewer with X+ and Dore'.
+
+The program will at first show a static stereo image in a window on the
+screen. A carriage return will cause the objects to rotate for a while.
+A second carriage return will exit the program.
+
+To run:
+     0: make sure your monitor supports stereo mode, not all monitors do.
+     1: make sure X+ is running in stereo mode. One way of starting 
+        the server in stereo mode is to type:
+        xinit  -- /usr/bin/Xtitan -stereo
+     2: type (<ALT><F2>) then open a window there with the right mouse
+        button.
+     3: type: "render" from that xterm window

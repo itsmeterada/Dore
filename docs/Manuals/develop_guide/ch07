@@ -1,0 +1,1795 @@
+.\"#ident "%W%" %G%
+.\"
+.\" #
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  
+.\" # 
+.\" # KUBOTA GRAPHICS Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\" #
+.\"
+.sc
+.ds BT "\\*(Dd Developer's Guide
+.ds CT "Sample Renderer
+.ds h1 7
+.so ../macros/local.me
+.PN 43
+.L1 S AMPLE
+.L2 R ENDERER
+.CH SEVEN
+.rs
+.sp -1.5v
+This chapter describes how the steps presented in Chapter 6, 
+\f2Interfacing a Renderer\f1, can be applied to interface a sample renderer
+to the \*(Dd system.
+The sample renderer is a simple framework and does not produce
+any useful graphical output. 
+Method routines simply print out
+some information about the objects they execute.
+The source code for the sample renderer can be found in
+\f2dore/src/render_config/samplernd\fP.
+.lp
+A simple application program is given at the end of the chapter
+to illustrate how to install the sample renderer from
+an application before invoking it on a view.
+.rs
+.sp -.5v
+.H1 "Naming Conventions
+\*(Dd uses the function pointers of the rendering interface
+to invoke the renderer routines and never calls them directly.
+This means the names used for the renderer routines can be arbitrary.
+However, it is recommended that you follow a naming
+convention so that the names of functions, variables, constants
+and type definitions are unique. 
+.lp
+By convention, each name uses lower case characters and is of the
+form :
+.(m
+   dr?_name_*
+.)m
+where
+.BU hs
+\f2dr\f1 stands for \*(Dd renderer,
+.BU hs
+\f2?\f1 is either \f2r\f1 (routines), \f2c\f2 (constants), \f2t\f1 (type)
+or \f2e\f1 (external variable),
+.BU hs
+\f2name\fP is the name given to the renderer, and
+.BU hs
+\f2*\fP is the descriptive part of the name.
+.lp
+The sample renderer follows this convention.
+For example, \f2drr_samplernd_install_renderer\fP is the sample renderer
+routine that installs the renderer.
+.lp
+String names, such as the names of new methods created by the renderer,
+should include the name of the renderer.
+For example, the display traversal method created by the sample 
+renderer is named "SamplerndDisplay".
+.rs
+.sp -.5v
+.H1 "Step 1: Determine the Set of Base Primitives
+For the sample renderer, the ten standard \*(Dd base primitives have
+been chosen as the primitives that the renderer draws directly.
+In order to be rendered by the sample renderer, any other primitive
+will need to have an alternate representation using the
+base primitives.
+.rs
+.sp -.5v
+.H1 "Step 2: Determine the Set of Attributes
+For the sample renderer, a few attributes have been chosen
+as examples of how attributes are accessed and used.
+The global attributes explicitly used in the sample
+code are:
+.lp
+Studio attributes :
+.(l
+"AttLightType"
+"AttLightColor"
+"AttLightIntens"
+"AttCameraMatrix"
+"AttLcstowcsmat"
+.)l
+.lp
+Primitive attributes:
+.(l
+"AttDiffuseIntens"
+"AttDiffuseColor"
+"AttDiffuseSwitch"
+"AttRepType"
+"AttLcstowcsmat"
+.)l
+.lp
+This selection implies that only those global attributes are
+explicitly used in the sample renderer code, 
+and therefore we have to decide
+on a style to access their current value.
+The global attribute "AttLcstowcsmat" appears in both lists
+since geometric transformation attributes apply to both studio
+and primitive objects.
+.lp
+.H1 "Step 3: Select a Style for Attribute Value Access
+The sample renderer uses both styles of attribute value access.
+The values of the studio attributes are found by querying the global attributes
+as the values are needed. Therefore, no method routine will
+have to be installed for these global attribute classes.
+.lp
+For the display traversal, method routines are installed
+for primitive global attributes to notify the renderer of changes in the values.
+These routines will be responsible for querying the current values of
+the attributes and storing them in the renderer's private data space.
+.H1 "Step 4: Select a Device Output Interface
+For the sample renderer, the \f2production renderer output module\f1 
+(PROM) interface has been chosen. With the PROM, the renderer performs all
+rendering functions up to and including scan-conversion. The renderer simply
+passes the resulting pixel values to the device output module which takes care
+of displaying the image onto the device.      
+.H1 "Step 5: Implement the Renderer Installation Routine
+The renderer installation routine is the one that will be called
+by the application
+to install the sample renderer into \*(Dd.
+This routine allocates space for a data structure used to store
+the renderer's local state.
+It then copies the standard \*(Dd studio and
+display traversal methods, and then installs method routines for the 
+base primitive object classes, the studio object classes,
+and for the primitive global attribute classes.
+The standard routines will be kept for all attribute 
+classes, which means
+that every attribute will notify its global attribute stack of its new
+value and will call the current method routine for its global attribute.
+.lp
+The renderer installation routine also
+adds additional data to both the device and view
+object classes to maintain state. 
+Finally, it installs the sample renderer into the system by passing \*(Dd the
+pointers it needs to access and maintain the new renderer.
+.lp
+The renderer installation routine makes use of various definition files.
+The standard \*(Dd include files \f2dore.h\fP,
+\f2dore_develop/develop.h\fP, and \f2dore_develop/error.h\fP
+define all the needed \*(Dd specific data
+structures and type definitions. 
+The include file \f2samplernd.h\fP has all the data structures, constants
+and type definitions specific to the new renderer. This file is
+included in most of the sample renderer's modules.
+.(m
+/*
+ *  samplernd.h
+ */
+
+#include "dore.h"
+#include "dore_develop/error.h"
+#include "dore_develop/develop.h"
+
+/* 
+ * Data structures for sample renderer
+ */
+
+/*
+ * Structure to keep correspondence between classes and
+ * method routines for each traversal method
+ */
+
+typedef struct {
+   DtPtr  name;
+   DtPFI  routine;
+} drt_samplernd_methods;
+
+/*
+ * Structure for light list to be kept with view
+ */
+
+typedef struct {
+   DtObject	type;
+   DtColorRGB	color;
+   DtPoint3	pos;
+   DtVector3	dir;
+} drt_samplernd_light_data, *drt_samplernd_light_data_ptr;
+
+/*
+ * Structure for additional data for view object
+ */
+
+typedef struct {
+   DtCameraMatrixType  camera_type;
+   DtMatrix4x4	projmat;
+   DtMatrix4x4	ccstowcsmat; /* camera-to-world matrix */
+   DtMatrix4x4	wcstoccsmat; /* world-to-camera matrix */
+   DtMatrix4x4	wcstofcsmat; /* world-to-frustum matrix */
+   DtInt	max_lights;
+   DtInt	light_cnt;
+   drt_samplernd_light_data_ptr  lights;
+   DtFlag	clear_flag;
+   DtColorModel	background_color_model;
+   DtColorRGB	background_color;
+   DtInt	background_shade_index;
+} drt_samplernd_view_data, *drt_samplernd_view_data_ptr;
+
+/*
+ * Structure for additional data for device object
+ */
+
+typedef struct {
+   DtReal	extent[4];
+   DtReal	scale[3];
+   DtReal	trans[3];
+   DtShadeMode	shade_mode;
+   DtVisualType	visual_type;
+} drt_samplernd_device_data, *drt_samplernd_device_data_ptr;
+
+/*
+ * Structure for sample renderer's private data
+ */
+
+typedef struct {
+   DtInt	studio_traversal;
+   DtInt	display_traversal;
+   DtObject	view_handle;
+   DtObject	device_handle;
+   DtInt	view_index;
+   DtInt	device_index;
+   DtInt	pntlst_index;
+   DDt_PROM	*output;
+   drt_samplernd_view_data_ptr    viwdat;
+   drt_samplernd_device_data_ptr  devdat;
+   DtRepType	reptyp;
+   DtColorRGB	difclr;
+   DtReal	difint;
+   DtSwitch	difswi;
+   DtMatrix4x4	lcstowcsmat;
+} drt_samplernd_render_data, *drt_samplernd_render_data_ptr;
+
+extern drt_samplernd_render_data_ptr
+		dre_samplernd_render_private;
+
+extern drt_samplernd_methods dre_samplernd_studio_method[];
+extern drt_samplernd_methods dre_samplernd_display_method[];
+
+extern DtShort  drr_samplernd_matrix_solve();
+extern DtFlag   drr_samplernd_vector_normalize();
+
+.)m
+.lp
+The renderer installation routine requires 
+an additional file, \f2methods.h\fP, that
+sets up two tables containing the object classes and the
+corresponding routine pointers to be installed for the class.
+.(m
+/*
+ *  methods.h
+ */
+
+extern void drr_samplernd_light_render();
+extern void drr_samplernd_camera_render();
+
+extern void drr_samplernd_pntlst_render();
+extern void drr_samplernd_varpntlst_render();
+extern void drr_samplernd_linlst_render();
+extern void drr_samplernd_varlinlst_render();
+extern void drr_samplernd_plylin_render();
+extern void drr_samplernd_trilst_render();
+extern void drr_samplernd_trimsh_render();
+extern void drr_samplernd_vartrimsh_render();
+extern void drr_samplernd_tristrip_render();
+extern void drr_samplernd_vartristrip_render();
+extern void drr_samplernd_difint_render();
+extern void drr_samplernd_difclr_render();
+extern void drr_samplernd_difswi_render();
+extern void drr_samplernd_reptyp_render();
+extern void drr_samplernd_lcstowcsmat_render();
+
+/*
+ * Method routine pointers for studio traversal method
+ */
+
+drt_samplernd_methods dre_samplernd_studio_method[] = {
+   "DoLight",		drr_samplernd_light_render,
+   "DoCamera", 		drr_samplernd_camera_render,
+    0,			      0
+};
+
+/*
+ * Method routine pointers for display traversal method
+ */
+
+drt_samplernd_methods dre_samplernd_display_method[] = {
+   "DoPointList",       drr_samplernd_pntlst_render,
+   "DoVarPointList",    drr_samplernd_varpntlst_render,
+   "DoLineList",        drr_samplernd_linlst_render,
+   "DoVarLineList",     drr_samplernd_varlinlst_render,
+   "DoPolyline",        drr_samplernd_plylin_render,
+   "DoTriangleList",    drr_samplernd_trilst_render,
+   "DoTriangleMesh",    drr_samplernd_trimsh_render,
+   "DoVarTriangleMesh", drr_samplernd_vartrimsh_render,
+   "DoTriangleStrip",   drr_samplernd_tristrip_render,
+   "DoVarTriangleStrip",drr_samplernd_vartristrip_render,
+   "AttDiffuseIntens",  drr_samplernd_difint_render,
+   "AttDiffuseColor",   drr_samplernd_difclr_render,
+   "AttDiffuseSwitch",  drr_samplernd_difswi_render,
+   "AttRepType",                drr_samplernd_reptyp_render,
+   "AttLcstowcsmat",    drr_samplernd_lcstowcsmat_render,
+    0,			      0
+};
+.)m
+.lp
+The calling sequence for the renderer installation routine
+can be arbitrary. It will usually consist of 
+a single argument that
+is passed on to \f2DDrender_AddRenderer\f1 to indicate whether
+the identifier of an existing renderer should be used or not.
+The code for the rendering installation routine for the sample renderer is:
+.(m
+/* Declare pointer to renderer's private data */
+drt_samplernd_render_data_ptr
+		dre_samplernd_render_private = DcNullPtr;
+
+/*
+ * Define the routine pointers that will be installed
+ */
+
+extern DtPtr  drr_samplernd_view_data_crt();
+extern void   drr_samplernd_view_data_prt();
+extern void   drr_samplernd_view_data_del();
+extern DtPtr  drr_samplernd_device_data_crt();
+extern void   drr_samplernd_device_data_prt();
+extern void   drr_samplernd_device_data_del();
+extern DtPtr  drr_samplernd_pntlst_data_crt();
+extern void   drr_samplernd_pntlst_data_prt();
+extern void   drr_samplernd_pntlst_data_del();
+extern void   drr_samplernd_render_invoke_rtn();
+extern void   drr_samplernd_render_delete();
+extern void   drr_samplernd_render_new_class();
+extern void   drr_samplernd_render_inq_wcstofcs_rtn();
+
+/*
+ * Renderer Installation Routine.
+ * This is the routine that is going to be called at system
+ * initialization time to install the new renderer into Dore.
+ */
+
+DtInt
+drr_samplernd_install_renderer(replace_render_id)
+DtInt replace_render_id;
+
+
+{
+   DtInt i, samplernd_id;
+   DtInt type;
+
+   if (dre_samplernd_render_private != DcNullPtr) {
+	DDerror (ERR_INVALID_OPERATION,
+			 "drr_samplernd_install_renderer",
+			 "renderer already installed");
+      return -1;
+   }
+
+   /*
+    * Allocate local data space for renderer
+    */
+
+   if ((dre_samplernd_render_private =
+   	(drt_samplernd_render_data *) DDspace_Allocate
+   	(sizeof(drt_samplernd_render_data))) == DcNullPtr) {
+   	 DDerror (ERR_CANT_ALLOC_MEM_SIZE,
+		"drr_samplernd_install_renderer",
+		"sizeof (drt_samplernd_render_data)");
+      return -1;
+   }
+   
+   /*
+    * Create new Studio and Display Traversal Methods
+    * Derive them from Dore standard traversal methods
+    * Store method identifiers in renderer's private space
+    */
+
+   dre_samplernd_render_private->studio_traversal = 
+      DDclass_CopyMethod(DsInqMethodId("StdRenderStudio"),
+			       "SamplerndStudio");
+
+   dre_samplernd_render_private->display_traversal = 
+      DDclass_CopyMethod(DsInqMethodId("StdRenderDisplay"),
+			       "SamplerndDisplay");
+
+   /*
+    * Install studio traversal method routines for selected 
+    * classes. A class must have been installed into Dore 
+    * (DsInqClassId returns > -1) for the method routine 
+    * installation to take place. The other method routines
+    * will be installed by the new class notification rou-
+    * tine at the time they are instanced for the first time.
+    */
+
+
+
+
+   for (i=0; dre_samplernd_studio_method[i].name != 0; i++){
+      if ((type = DsInqClassId
+   	   (dre_samplernd_studio_method[i].name)) != -1){
+   	 DDclass_SetMethod(type,
+   	    dre_samplernd_render_private->studio_traversal, 
+	    dre_samplernd_studio_method[i].routine);
+      }
+   }
+   
+   /*
+    * Similarly, install the method routines for the display
+    * traversal method, and inform Dore of the new renderer.
+    */
+
+   for (i=0; dre_samplernd_display_method[i].name!=0; i++){
+      if ((type = DsInqClassId 
+	    (dre_samplernd_display_method[i].name)) != -1){
+   	 DDclass_SetMethod(type,
+   	    dre_samplernd_render_private->display_traversal, 
+   	    dre_samplernd_display_method[i].routine);
+      }
+   }
+
+   /*
+    * Associate data with the device and view classes.
+    * First check if classes have been initialized.
+    */
+
+   if ((DsInqClassId("DoView") == -1) ||
+   	 (DsInqClassId("DoDevice") == -1)) {
+	DDerror (ERR_INVALID_OPERATION,
+		"drr_samplernd_install_renderer",
+		"View or Device class not installed.");
+      return -1;
+   }
+
+  /*
+   * Store additional data indices in renderer's private 
+   * space for easier access.
+   */
+
+   dre_samplernd_render_private->view_index = 
+		DDclass_AddObjectData
+   			(DsInqClassId("DoView"),
+			drr_samplernd_view_data_crt,
+			drr_samplernd_view_data_prt,
+			drr_samplernd_view_data_del);
+
+   
+
+   dre_samplernd_render_private->device_index =
+	 DDclass_AddObjectData
+   			(DsInqClassId("DoDevice"),
+			drr_samplernd_device_data_crt,
+			drr_samplernd_device_data_prt,
+			drr_samplernd_device_data_del);
+
+   /*
+    * Inform Dore of the new renderer
+    */
+
+   samplernd_id =  DDrender_AddRenderer(replace_render_id,
+		"Sample Renderer", 
+		drr_samplernd_render_invoke_rtn,
+		drr_samplernd_render_delete,
+		drr_samplernd_render_new_class,
+		drr_samplernd_render_inq_wcstofcs_rtn);
+
+   /* Return id (render style) given to sample renderer */
+   return samplernd_id;
+}
+.)m
+Before requesting additional data space for the view and device classes,
+the routine first checks to make sure these classes have been
+installed into \*(Dd at this point. Primitive classes are
+generally not installed at the time the renderer is installed,
+but rather when they are instanced for the first time.
+For this reason, the code for requesting additional data
+for the point list class does not appear here but rather in the new class
+notification routine (described later in \f2Step 8: Implement Renderer
+Access Routines\f1).
+.bp
+.H1 "Step 6: Implement Maintenance Routines for Additional Object Data
+The sample renderer adds data to three object classes : the view (\f2DoView\f1)
+device (\f2DoDevice\f1), and point list (\f2DoPointList\f1) classes.
+The view data holds the camera and light information determined
+during the studio traversal. The device data maintains
+information about the device, such as the shade mode and visual type of a
+device object. The point list data maintains an alternate representation
+for the point list object.
+.lp
+Recall from Chapter 6, \f2Interfacing a Renderer\fP, that
+three routines must be implemented for each of the object classes that
+contain additional data. The routines are:
+.(m
+DtPtr create_routine(DtObject object)
+void print_routine(DtObject object, DtPtr data)
+void del_routine(DtObject, DtPtr data)
+.)m
+.H2 "Additional View Data
+The view data creation routine allocates the data space and
+initializes the light list.
+.(m
+/*
+ * Additional data routines for view
+ */
+
+DtPtr
+drr_samplernd_view_data_crt(object)
+DtObject object;
+{
+   drt_samplernd_view_data *data;
+
+   if ((data = (drt_samplernd_view_data *)DDspace_Allocate
+   	(sizeof(drt_samplernd_view_data))) == DcNullPtr) {
+      DDerror (ERR_CANT_ALLOC_MEM_SIZE,
+		  "drr_samplernd_view_data_crt",
+		  "sizeof (drt_samplernd_view_data)");
+      return DcNullPtr;
+   }
+
+   /* Initially make room for 5 lights in the light list */
+
+   data->max_lights = 5;
+   data->light_cnt = 0;
+
+   if (data->lights = (drt_samplernd_light_data *)
+         DDspace_Allocate((data->max_lights)*sizeof
+         (drt_samplernd_light_data)) == DcNullPtr) {
+      DDerror (ERR_CANT_ALLOC_MEM_SIZE,
+                  "drr_samplernd_view_data_crt",
+                  "sizeof (drt_samplernd_light_data)");
+      return DcNullPtr;
+   }
+
+   printf("samplernd: created add. data for view obj.\en");
+   return (DtPtr)data;
+}
+.)m
+.lp
+The view data print routine prints the information that
+was stored in the additional data space allocated for the view.
+The routine uses \f2DDprint_IndentUp, DDprint_IndentDown, DDprint\f1 and
+\f2DDprint_GetLine\f1 in order to follow the indentation method used by
+\f2DsPrintObj\f1 (see Chapter 17, \f2Developer's Interface Functions\fP,
+for more information on
+these functions).
+Due to its simplicity, only fragments of this routine are shown below:
+.(m
+void
+drr_samplernd_view_data_prt(object, data)
+DtObject object;
+drt_samplernd_view_data *data;
+{
+   DtInt i;
+
+   DDprint
+    ("samplernd: printing additional data for view:");
+   DDprint_IndentUp();
+
+   sprintf(DDprint_GetLine(), "Camera type is %d",
+           data->camera_type);
+   DDprint(DDprint_GetLine());
+
+   sprintf(DDprint_GetLine(), "Light count is %d",
+           data->light_cnt);
+   DDprint(DDprint_GetLine());
+
+   DDprint("Light list is:");
+   DDprint_IndentUp();
+   for (i=0; i<data->light_cnt; i++) {
+	sprintf(DDprint_GetLine(), "Light number %d:", i);
+        DDprint(DDprint_GetLine());
+
+        DDprint_IndentUp();
+   	sprintf(DDprint_GetLine(),"Light color: (%g %g %g)", 
+               data->lights[i].color[0],
+               data->lights[i].color[1],
+               data->lights[i].color[2]);
+        DDprint(DDprint_GetLine());
+
+        if (data->lights[i].type == DcLightPoint) {
+   	   sprintf(DDprint_GetLine(),
+                   "Light position: (%g %g %g)",
+                   data->lights[i].pos[0],
+                   data->lights[i].pos[1],
+                   data->lights[i].pos[2]);
+           DDprint(DDprint_GetLine());
+        }
+
+        
+
+           if (data->lights[i].type == DcLightInfinite) {
+   	   sprintf(DDprint_GetLine(),
+                   "Light direction: (%g %g %g)",
+                   data->lights[i].dir[0],
+                   data->lights[i].dir[1],
+                   data->lights[i].dir[2]);
+           DDprint(DDprint_GetLine());
+   	}
+        DDprint_IndentDown();
+   }
+   DDprint_IndentDown();
+   sprintf(DDprint_GetLine(), "Clear flag: %d",
+           data->clear_flag);
+   DDprint(DDprint_GetLine());
+
+   .
+   .
+   .
+
+   DDprint_IndentDown();
+   DDprint("end of additional data for view");
+}
+.)m
+The view data deletion routine frees the allocated space:
+.(m
+void
+drr_samplernd_view_data_del(object, data)
+DtObject object;
+drt_samplernd_view_data *data;
+{
+   if (data->lights != (drt_samplernd_light_data *)0)
+      DDspace_Deallocate(data->lights);
+
+   if (data != (drt_samplernd_view_data *)0)
+      DDspace_Deallocate(data);
+
+   printf("samplernd: deallocating space for additional ");
+   printf("data of view object.\en");
+}
+.)m
+.lp
+.H2 "Additional Device Data
+The device data create, print and delete
+routines allocate and maintain space for a data structure
+to store the state of the device.
+They are similar to the view data routine.
+.H2 "Additional Point List Data
+To illustrate how data space can be added to a primitive object, the
+sample renderer creates and maintains an alternate representation for
+every point list. This alternate representation is a sphere list
+where each point from the point list becomes the center of a sphere in
+the sphere list. During display traversal, if the representation type
+is \f2DcSurface\f1, then the sphere list will be renderer instead
+of the point list. The point list data creation routine is:
+.(m
+#include "samplernd.h"
+#include "dore_develop/private/pntlst.h"
+
+#define RADII_PNTLST_ALT_OBJ 0.5
+     
+/*
+ * Additional data routines for point list primitive
+ */
+
+DtPtr
+drr_samplernd_pntlst_data_crt(object)
+DtObjectStructure  *object;
+{
+
+   struct pntlst *pntlst;
+   DtObject altobj; 
+   DtReal *radii;
+   DtInt i, index;
+
+   /* Get pointer to data private to point list object.
+    * The structure of the data is defined in 
+    * "dore_develop/private/pntlst.h", 
+    *  which is included above 
+    */
+
+   pntlst = (struct pntlst *) object->data;
+
+   /*
+    * Fill radii array with as many values as there are
+    * points in the list 
+    */
+
+   radii = (DtReal *) DDspace_Allocate
+	(pntlst->point_count*sizeof(DtReal));
+   for (i=0; i<pntlst->point_count; i++)
+       radii[i] = RADII_PNTLST_ALT_OBJ;
+
+   /*
+    * Create a sphere list as an alternate representation
+    * for the sphere.
+    * For efficiency, the sphere list could alternatively be
+    * created only when it is needed in the display method
+    * routine for point list.
+    */
+
+   altobj = DoSphereList(DcRGB, pntlst->point_count,
+   			pntlst->vertex_location, radii,
+			 pntlst->vertex_color);
+
+   DDspace_Deallocate(radii);
+
+   printf("samplernd: created add. data for device obj.\en");
+
+   /* return pointer to additional data */
+   return ((DtPtr)altobj);
+}
+.)m
+The print routine for the point list prints the information about the
+alternate representation using the \*(Dd system function \f2DsPrintObj\f1:
+.(m
+void
+drr_samplernd_pntlst_data_prt(object, altobj)
+DtObject object;
+DtObject altobj;
+{
+   DDprint("samplernd: printing add. data for point list:");
+
+   DDprint_IndentUp();
+   DsPrintObj(altobj);
+   DDprint_IndentDown();
+
+   DDprint("samplernd: end of add. data for point list");
+}
+.)m
+.lp
+The parameter \f2altobj\f1 is the pointer that was previously returned by 
+\f2drr_samplernd_pntlst_data_crt\f1
+at the time the additional data was created.
+The point list data deletion routine will deallocate the space
+for the alternate object :
+.(m
+void
+drr_samplernd_pntlst_data_del(object, altobj)
+DtObject object;
+DtObject altobj;
+
+
+
+{
+   DeDeleteObject(altobj);
+   printf("samplernd: deallocating additional data space ");
+   printf("for point list obj.\en");
+}
+.)m
+.H1 "Step 7: Implement Method Routines
+The sample renderer installs its own method routines for a 
+certain number of classes 
+(see \f2Step 5: Implement the Renderer Installation Routine\fP).
+These include the studio object classes, 
+the base primitive object classes,
+and the global studio attribute classes considered for the 
+sample renderer.
+.H2 "Primitive Object Method Routines
+Each primitive class that the renderer draws directly needs to have a
+specific method routine to handle the geometry of
+the object. 
+This requires accessing the private data of each object, and
+putting it into a form the renderer can use, 
+or drawing it using the output module.
+Appendix C, \f2Object Data Structures\fP,
+contains descriptions of the private data structures
+for the \*(Dd primitive classes.
+The purpose of the sample renderer is to show how an existing
+renderer can be plugged into \*(Dd. Therefore, the actual algorithms
+used to render the geometry of an object will not be shown. 
+.lp
+In the sample renderer, the primitive object method routines  
+first check to make sure the object class is renderable, and
+if it is, pass the geometry to a second function to
+perform the actual rendering.
+It is essential for primitive method routines to check on the renderability
+of a class. A class is considered renderable if it is in the executability set,
+it is not invisible, and primitive classes were not disabled (see the
+\f2man\fP page for \f2DDcondex_QueryRender\f1).
+For instance, the method routine for the triangle mesh
+primitive class is :
+.(m
+#include "samplernd.h"
+#include "dore_develop/private/trimsh.h"
+
+/* 
+ * Method routine for DoTriangleMesh object
+ */
+
+
+void
+drr_samplernd_trimsh_render(object)
+DtObjectStructure *object;
+{
+   struct trimsh *trimsh;
+
+   if (!DDcondex_QueryRender
+		(DsInqClassId ("DoTriangleMesh")))
+	 return;
+
+   trimsh = (struct trimsh *)(object->data);
+
+   drr_samplernd_trimsh_generate(trimsh->bounding_box_pts,
+			trimsh->triangle_count,
+			trimsh->element_normal,
+			trimsh->vertex_count,
+			trimsh->vertex_location,
+			trimsh->vertex_normal,
+			trimsh->vertex_color,
+			trimsh->triangle_vertexlist);
+}
+.)m
+.lp
+The routine that performs the actual rendering of the primitive
+is:
+.(m
+/* 
+ * Render geometry of triangle mesh
+ */
+
+void
+drr_samplernd_trimsh_generate(bbox, tricount, elenrms, 
+   	vtxcount, vtxlocs, vtxnrms, vtxclrs, vtxlist)
+
+DtRealTriple bbox[8];
+DtInt tricount;
+DtRealTriple *elenrms;
+DtInt vtxcount;
+DtRealTriple *vtxlocs;
+DtRealTriple *vtxnrms;
+DtRealTriple *vtxclrs;
+DtInt vtxlist[][3];
+{
+   DtInt i;
+
+   /*
+    * Insert code to render triangle mesh here
+    */
+
+   printf("samplernd: Triangle mesh being rendered.\en");
+   printf("\et Triangle count : %d\en", tricount);
+
+   for (i=0; i<tricount * 3; i++) {
+   	printf ("\et Vertex location : (%g,%g,%g) \en",
+  	vtxlocs[i][0], vtxlocs[i][1], vtxlocs[i][2]);
+   }
+}
+.)m
+.lp
+The reason for calling a different function to perform the actual
+rendering is that several related method routines can make
+use of the same function. For instance, the method routines
+for triangle strips, variable triangle 
+meshes and variable triangle strips also make use of the
+function \f2drr_samplernd_trimsh_generate\f1.
+Other primitive method routines are similar, with the exception
+of the routine for point list objects.
+This one looks at
+the current value of the representation type attribute.
+If surface rendering is required, then it renders the alternate
+representation for the point list, which is a sphere list.
+Otherwise, the list is rendered as points.
+The method routine is:
+.(m
+#include "samplernd.h"
+#include "dore_develop/private/pntlst.h"
+
+/* 
+ * Method routine for DoPointList object
+ */
+
+void
+drr_samplernd_pntlst_render(object)
+DtObjectStructure *object;
+{
+   struct pntlst *pntlst;
+   DtObject altobj;
+   DtPFI routine;
+
+   /* Check if class is renderable */
+   if (!DDcondex_QueryRender
+		(DsInqClassId("DoPointList")))
+	 return;
+
+   pntlst = (struct pntlst *)(object->data);
+
+   if (pntlst->point_count == 0)
+	 return;
+
+   /*
+    * If the current reptype is surface, render the alternate
+    * geometry for point list, which is a sphere list;
+    * otherwise render point list
+    */
+
+   
+   if (dre_samplernd_render_private->reptyp == DcSurface) {
+
+        /* Get pointer to the sphere list object  */
+
+  	altobj = (struct DtObjectStructure *)
+   		object->additional_data
+   		[dre_samplernd_render_private->pntlst_index];
+
+        /* Execute the current method on the sphere list */
+
+   	routine = DDobject_InqCurrentMethod(altobj);
+   	(*routine) (altobj);
+
+   } else {
+
+   	/* render point list */
+   	drr_samplernd_pntlst_generate(
+			pntlst->bounding_box_pts,
+			pntlst->point_count,
+			pntlst->vertex_location,
+			pntlst->vertex_normal,
+			pntlst->vertex_color);
+   }
+}
+.)m
+.lp
+If the representation type is \f2DcSurface\f1,
+the routine gets the alternate sphere list object from the 
+additional data array.
+The current method is then executed on the alternate object.
+The alternate sphere list was created by the additional data 
+creation routine in Step 6.
+For improved efficiency, this method routine could instead create the object the
+first time it is drawn.
+In that case, if the representation type is never set to \f2DcSurface\fP
+then the object is not created.
+.H2 "Studio Object Method Routines
+Method routines need to be installed for the camera and light classes.
+The method routine for the camera class is:
+.(m
+ /*
+  * Method routine for DoCamera object
+  */
+
+void
+drr_samplernd_camera_render(object)
+DtObjectStructure *object;
+
+
+
+{
+   DtObject active_camera;
+   DtPFI routine;
+   
+   active_camera = DvInqActiveCamera(
+   	dre_samplernd_render_private->view_handle);
+
+   /*
+    * If there is no active camera explicitly set or if
+    * the camera that is being executed is the active
+    * camera, update the view data with the camera info.
+    */
+
+   if (active_camera == DcNullObject ||
+	 active_camera == object) {
+
+      /* Find current value of camera projection matrix */
+      routine = DDclass_InqMethod
+			(DsInqClassId("AttCameraMatrix"),
+			 DsInqMethodId("InqGlobalValue"));
+      (*routine)
+   	 (&dre_samplernd_render_private->viwdat->camera_type,
+	  dre_samplernd_render_private->viwdat->projmat);
+      
+      /*
+       * Find current value of local-to-world transformation.
+       * It will become the camera-to-world matrix
+       */
+      routine = DDclass_InqMethod
+			(DsInqClassId("AttLcstowcsmat"),
+			 DsInqMethodId("InqGlobalValue"));
+      (*routine)
+   	 (dre_samplernd_render_private->viwdat->ccstowcsmat);
+
+   }
+}
+.)m
+The camera information is stored in 
+the additional data space of the current view object.
+As explained later in Step 8,
+the renderer caches the pointer to the additional view data area 
+in its private data area (\f2dre_samplernd_render_private->viwdat\fP) for easier access.
+.lp
+More than one camera can be specified in a studio group.
+The application may explicitly set the active camera for a view
+with \f2DvSetActiveCamera\fP. 
+In this case, only the attributes of this camera will be stored.
+Otherwise, \f2DvInqActiveCamera\f1 returns \f2DcNullObject\f1,
+and every camera stores its attributes in the view data space,
+overwriting the previously stored values.
+As a result, the last camera specified will be used.
+.lp
+Light objects are handled slightly differently since there can be
+multiple lights defined for a particular view.
+The renderer maintains a list of the lights and the attributes that
+define each light's properties. This list is
+stored with the view and is used during display
+traversal.
+The light method routine queries the light attributes
+for their current value.
+For ambient lights, their contributions are simply added together.
+For point light sources and infinite lights, each one is stored separately.
+For simplicity, the renderer ignores spot lights and attenuated point
+light sources.
+The method routine for light objects is:
+.(m
+/*
+ * Method routine for light object
+ */
+
+void
+drr_samplernd_light_render(object)
+DtObjectStructure *object;
+{
+   DtPFI routine;
+   DtObject lighttype;
+   DtColorModel colormodel;
+   DtColorRGB lightcolor;
+   DtReal lightintens, w;
+   DtMatrix4x4 matrix;
+   DtPoint3 pos, aim_at;
+   DtInt index;
+   drt_samplernd_view_data_ptr viwdat;
+
+
+   /*
+    * Binds type, color, intensity and local-to-world  
+    * transformation matrix with light source
+    */
+
+   routine = DDclass_InqMethod 
+			(DsInqClassId("AttLightType"),
+			 DsInqMethodId("InqGlobalValue"));
+   (*routine)(&lighttype);
+
+   routine = DDclass_InqMethod
+			(DsInqClassId("AttLightColor"),
+			 DsInqMethodId("InqGlobalValue"));
+   (*routine)(&colormodel, lightcolor);
+
+   routine = DDclass_InqMethod
+			(DsInqClassId("AttLightIntens"),
+			 DsInqMethodId("InqGlobalValue"));
+   (*routine)(&lightintens);
+
+   routine = DDclass_InqMethod 
+			(DsInqClassId("AttLcstowcsmat"),
+			 DsInqMethodId("InqGlobalValue"));
+   (*routine)(matrix);
+
+   /*
+    * Maintain a light list and store it with the view.
+    */
+
+   viwdat = dre_samplernd_render_private->viwdat;
+
+   if (lighttype == DcLightAmbient)  {
+      /* Add ambient lights together */
+
+      viwdat->lights[0].color[0] += 
+			lightcolor[0] * lightintens;
+      viwdat->lights[0].color[1] += 
+			lightcolor[1] * lightintens;
+      viwdat->lights[0].color[2] += 
+			lightcolor[2] * lightintens;
+
+   } else {
+
+   /*
+    * A non-ambient light is at (0,0,0) in local
+    * coordinates with the light direction along the -Z axis
+    * (if applicable). The position of the light in world
+    * coordinates is obtained by transforming (0,0,0) by the
+    * current transf matrix. To get the light direction,
+    * (0,0,-1) is transformed.
+    */
+      
+      if (viwdat->light_cnt >= viwdat->max_lights){
+
+     /* Allocate space for 5 more light sources at a time */
+
+	  viwdat->max_lights += 5;
+	  viwdat->lights = (drt_samplernd_light_data_ptr) 
+	      DDspace_Reallocate(viwdat->lights,
+	         viwdat->max_lights*
+	         sizeof(drt_samplernd_light_data));
+      }
+
+      index = viwdat->light_cnt;
+      viwdat->light_cnt++;
+
+      viwdat->lights[index].color[0] =
+				lightcolor[0] * lightintens;
+      viwdat->lights[index].color[1] =
+				lightcolor[1] * lightintens;
+      viwdat->lights[index].color[2] =
+				lightcolor[2] * lightintens;
+
+      drr_samplernd_math_homo_trns(0., 0., 0.,1.,matrix,
+                   &pos[0], &pos[1], &pos[2], &w);
+      if (w != 0.0)
+            pos[0] /= w; pos[1] /= w; pos[2] /= w;
+
+      if (lighttype == DcLightInfinite) {
+         viwdat->lights[index].type = DcLightInfinite;
+
+    	 drr_samplernd_math_homo_trns(0., 0., -1.,1.,matrix,
+                   &aim_at[0], &aim_at[1], &aim_at[2], &w);
+
+    	 if (w != 0.0)
+             aim_at[0] /= w; aim_at[1] /= w; aim_at[2] /= w;
+
+         viwdat->lights[index].dir[0] = aim_at[0] - pos[0];
+         viwdat->lights[index].dir[1] = aim_at[1] - pos[1];
+         viwdat->lights[index].dir[2] = aim_at[2] - pos[2];
+
+         /* compute unit vector */
+         drr_samplernd_vector_normalize
+                              (viwdat->lights[index].dir);
+
+      } else if (lighttype ==  DcLightPoint) {
+
+         viwdat->lights[index].type = DcLightPoint;
+
+         viwdat->lights[index].pos[0] = pos[0];
+         viwdat->lights[index].pos[1] = pos[1];
+         viwdat->lights[index].pos[2] = pos[2];
+
+       } else {
+         printf("samplernd: Light type not supported.\en");
+         return;
+         }
+   }
+
+   printf("samplernd: Light source being added.\en");
+   printf ("\et Light color (%g,%g,%g)\en", 
+		 viwdat->lights[index].color[0],
+		 viwdat->lights[index].color[1],
+		 viwdat->lights[index].color[2]);
+
+   if (lighttype == DcLightInfinite) {
+   printf ("\et Light direction (%g,%g,%g)\en",
+		 viwdat->lights[index].dir[0],
+		 viwdat->lights[index].dir[1],
+		 viwdat->lights[index].dir[2]);
+
+   } else if (lighttype == DcLightPoint) {
+      printf ("\et Light position (%g,%g,%g)\en",
+		 viwdat->lights[index].pos[0],
+		 viwdat->lights[index].pos[1],
+		 viwdat->lights[index].pos[2]);
+   }
+}
+.)m
+.H2 "Global Attribute Method Routines
+Since the studio attributes values are queried whenever
+their values are needed,
+the sample renderer only installs method routines for global 
+attributes in the display traversal method.
+Each of these method routines gets the current value of the attribute
+and stores it in the private space of the renderer.
+The global attribute method routines are all very similar so only 
+the diffuse color ("AttDiffuseColor") global attribute is shown as
+an example.  
+It uses the standard \*(Dd method 
+"InqGlobalValue" to query the value of the 
+attribute, and stores the value with the renderer data.
+.(m
+/* 
+ * Method routine for diffuse color global attribute
+ */
+
+void 
+drr_samplernd_difclr_render ()
+{
+   DtColorModel colormodel;
+   static DtPFI routine = (DtPFI)0 ;
+
+   /* Get pointer to method routine */
+   if (routine == (DtPFI)0) {
+      routine = DDclass_InqMethod
+			(DsInqClassId("AttDiffuseColor"), 
+			 DsInqMethodId("InqGlobalValue"));
+   }
+
+   /* Query and store current value in renderer's space */
+   (*routine) (&colormodel,
+   		 dre_samplernd_render_private->difclr);
+
+   printf ("samplernd: diffuse color is : (%g,%g,%g)\en",
+   		dre_samplernd_render_private->difclr[0],
+   		dre_samplernd_render_private->difclr[1],
+   		dre_samplernd_render_private->difclr[2]);
+}
+.)m
+.H1 "Step 8: Implement the Renderer Access Routines
+In the call to \f2DDrender_AddRenderer\f1 in the render installation routine,
+four routine pointers were provided to the \*(Dd system to access and maintain
+the sample renderer. The first is to invoke the renderer on a view, the
+second is for deleting the renderer, the third is the new class notification
+routine, and the fourth is to return the world-to-frustum transformation matrix.
+.H2 "Rendering Routine
+The rendering routine is the routine that is called
+by \*(Dd to render a view using the new renderer.
+The calling sequence of the routine must be as shown below.
+The routine is responsible for querying the output module
+and initiating the studio and display traversals.
+.(m
+/*
+ * Rendering routine. This is the routine that will be
+ * called by Dore every time a view needs to be rendered
+ * with the sample renderer
+ */
+
+void
+drr_samplernd_render_invoke_rtn(device, view,
+			 view_device_changed, studio_changed)
+DtObjectStructure *device;
+DtObjectStructure *view;
+DtFlag view_device_changed;
+DtFlag studio_changed;
+{
+
+   /*
+    * Get device output module interface routines
+    */
+
+   DDdevice_InqInterfaceRoutines(device, DDc_PROM,
+	(DtPtr *) &(dre_samplernd_render_private->output));
+
+   if (dre_samplernd_render_private->output == DcNullPtr) {
+      DDerror (ERR_NO_OUTPUT_MODULE,
+		 "drr_samplernd_render_invoke_rtn",
+		 "DDc_PROM");
+      return;
+   }
+
+   /*
+    * Store view and device object handles so that they can
+    * be accessed directly by the renderer. This allows any
+    * method routine to query information about the current
+    * view and device.
+    */
+
+   dre_samplernd_render_private->view_handle = view;
+   dre_samplernd_render_private->device_handle = device;
+
+   /*
+    * Get pointers to additional data in the view and
+    * device for easier access.
+    */
+
+   dre_samplernd_render_private->viwdat =
+       (drt_samplernd_view_data_ptr) view->additional_data
+         [dre_samplernd_render_private->view_index];
+
+   dre_samplernd_render_private->devdat =
+       (drt_samplernd_device_data_ptr) device->additional_data
+         [dre_samplernd_render_private->device_index];
+		      
+   /*
+    * Update view and device data 
+    */
+
+   if (view_device_changed) {
+      drr_samplernd_update_device_view(device, view);
+   }
+
+   /*
+    * Perform studio traversal to determine camera 
+    * and lights 
+    */
+
+   if (studio_changed) {
+      drr_samplernd_before_studio_traversal();
+      DDview_TraverseStudio(view,
+   	   dre_samplernd_render_private->studio_traversal);
+      drr_samplernd_after_studio_traversal();
+   }
+
+   /*
+    * Perform display traversal and generate image via 
+    * device output interface
+    */
+
+   
+
+   drr_samplernd_before_display_traversal();
+   DDview_TraverseDisplay (view,
+      dre_samplernd_render_private->display_traversal);
+   drr_samplernd_after_display_traversal();
+}
+.)m
+The \f2view_device_changed\f1 flag
+is set by the \*(Dd system before the renderer is invoked.
+The rendering routine calls \f2drr_samplernd_update_device_view\f1
+to update the view and device data
+whenever the view or device attributes have changed since the last
+time the renderer was called.
+The update function is :
+.(m
+/*
+ * Update the renderer's private data with current 
+ * information about the view and device
+ */
+
+void 
+drr_samplernd_update_device_view(device, view)
+DtObject view;
+DtObject device;
+{
+   DtVolume *actviewport;
+   drt_samplernd_view_data_ptr viwdat;
+   drt_samplernd_device_data_ptr devdat;
+
+   viwdat = dre_samplernd_render_private->viwdat;
+   devdat = dre_samplernd_render_private->devdat;
+
+   /* Store current device extent */
+
+   actviewport = DDdevice_InqActualViewport (device);
+			   
+   devdat->extent[0] = actviewport->bll[0];
+   devdat->extent[1] = actviewport->bll[1];
+   devdat->extent[2] = actviewport->fur[0];
+   devdat->extent[3] = actviewport->fur[1];
+
+
+   DDdevice_InqFrustumScaleTrans(device,
+	 devdat->scale, devdat->trans);
+
+   devdat->shade_mode = DdInqShadeMode (device);
+   devdat->visual_type = DdInqVisualType (device);
+
+   viwdat->clear_flag = DvInqClearFlag(view);
+   DvInqBackgroundColor (view,
+                  &viwdat->background_color_model,
+                  viwdat->background_color);
+
+   if (devdat->visual_type == DcPseudoColor) {
+     viwdat->background_shade_index = DvInqShadeIndex(view);
+   }
+}
+.)m
+.lp
+Each traversal step has been broken into three parts,
+pre-traversal, traversal, and post-traversal.
+This is to allow any initialization that may be required before the
+traversals and any computations that may be required after the traversal.
+For example, before the studio traversal, the ambient light values are
+initialized. 
+.(m
+/*
+ * Initialization before studio traversal takes place
+ */
+
+void
+drr_samplernd_before_studio_traversal()
+{
+   
+   /*
+    * Initialize light list. All ambient lights are
+    * cumulated and stored in the first element of the
+    * linked list
+    */
+
+   dre_samplernd_render_private->viwdat->light_cnt = 1;
+   dre_samplernd_render_private->viwdat->lights[0].type 
+   		= DcLightAmbient;
+   dre_samplernd_render_private->viwdat->lights[0].color[0] 
+   		= 0.0;
+   dre_samplernd_render_private->viwdat->lights[0].color[1]
+   		= 0.0;
+   dre_samplernd_render_private->viwdat->lights[0].color[2] 
+   		= 0.0;
+
+}
+.)m
+After the studio traversal has been completed, the composite
+matrix for converting from world coordinates to frustum coordinates
+is computed. This matrix will be accessed during display traversal.
+.(m
+/* 
+ * Save information collected during studio traversal
+ * in renderer's private space
+ */
+
+void
+drr_samplernd_after_studio_traversal()
+{
+   DtMatrix4x4 tempmat;
+   DtReal xscale, yscale, zscale;
+   DtReal xtrans, ytrans, ztrans;
+   DtVolume viewboundary;
+   DtVolume *clipvolume;
+   DtReal xres, yres;
+   drt_samplernd_view_data_ptr viwdat;
+
+   /*
+    * Compute the world-to-camera transformation matrix
+    */
+   viwdat = dre_samplernd_render_private->viwdat;
+
+   drr_samplernd_matrix_load(viwdat->wcstoccsmat,
+		 viwdat->ccstowcsmat);
+   drr_samplernd_matrix_invert(viwdat->wcstoccsmat);
+
+   drr_samplernd_matrix_load(viwdat->wcstofcsmat,
+		 viwdat->wcstoccsmat);
+
+   /*
+    * Map from the camera coordinates to the projection
+    * volume of  -w < x < w, -w < y < w, -w < z < 0
+    * (frustum space)
+    */
+
+   drr_samplernd_matrix_post_concatenate
+			(viwdat->wcstofcsmat,
+			 viwdat->projmat);
+   /*
+    * Map from normalized space to the volume of the view
+    */
+   if (viwdat->camera_type != DcCameraArbitrary) {
+      DvInqBoundary
+         (dre_samplernd_render_private->view_handle,
+         &viewboundary);
+
+      xscale = (viewboundary.fur[0]-viewboundary.bll[0])/2.;
+      yscale = (viewboundary.fur[1]-viewboundary.bll[1])/2.;
+      zscale = (viewboundary.fur[2]-viewboundary.bll[2]);
+
+      xtrans = (viewboundary.fur[0]+viewboundary.bll[0])/2.;
+      ytrans = (viewboundary.fur[1]+viewboundary.bll[1])/2.;
+      ztrans = viewboundary.fur[2];
+
+      /*
+       * Adjust the x scaling if the pixels of the screen
+       * are non-square
+       */
+
+      DdInqResolution
+         (dre_samplernd_render_private->device_handle,
+   	   &xres ,&yres);
+
+      if (xres != 0.0)
+	 xscale *= (yres / xres);
+
+      drr_samplernd_matrix_scale
+   			(tempmat, xscale, yscale, zscale);
+      drr_samplernd_matrix_post_concatenate
+			(viwdat->wcstofcsmat, tempmat);
+      drr_samplernd_matrix_translate
+			(tempmat, xtrans, ytrans, ztrans);
+      drr_samplernd_matrix_post_concatenate
+			(viwdat->wcstofcsmat, tempmat);
+   }
+
+   /*
+    * Map from the view volume back to a normalized space
+    * ( -w<x<w, -w<y<w, -w<z<0) but this normalized space
+    * is just the visible portion of the volume. The 
+    * clipping volume is in frame coordinates, the same
+    * coordinates as the view volume
+    */
+
+   clipvolume = DDdevice_InqClippingVolume
+	(dre_samplernd_render_private->device_handle);
+
+   xscale = 2./(clipvolume->fur[0]-clipvolume->bll[0]);
+   yscale = 2./(clipvolume->fur[1]-clipvolume->bll[1]);
+   zscale = 1./(clipvolume->fur[2]-clipvolume->bll[2]);
+
+   xtrans = -xscale*clipvolume->bll[0]-1;
+   ytrans = -yscale*clipvolume->bll[1]-1;
+   ztrans = -zscale*clipvolume->fur[2];
+
+   drr_samplernd_matrix_scale(tempmat, xscale,yscale,zscale);
+   drr_samplernd_matrix_post_concatenate
+			(viwdat->wcstofcsmat,tempmat);
+   drr_samplernd_matrix_translate(tempmat,
+			xtrans,ytrans,ztrans);
+
+   /*
+    * Post concatenate the translation to map to frustum 
+    * space of visible region.
+    */
+
+   drr_samplernd_matrix_post_concatenate
+			(viwdat->wcstofcsmat,tempmat);
+}
+.)m
+The function called before the display traversal clears the
+depth buffer if necessary and executes the global attribute
+query method on the primitive attributes in order to store
+the default values in the renderer's private space.
+.(m
+/*
+ * Initialization required before display traversal
+ */
+
+void
+drr_samplernd_before_display_traversal()
+{
+   DtVolume *actviewport;
+   DtColorModel colormodel;
+   DtPFI routine;
+   static DtFlag default_set = DcFalse;
+   
+   /* If clear flag is set, clear the depth buffer */
+   if (dre_samplernd_render_private->viwdat->clear_flag ==
+   	 DcTrue) {
+    	actviewport = DDdevice_InqActualViewport
+	    (dre_samplernd_render_private->device_handle);
+
+   	DDdevice_ClearRectangleDepthColor(
+	    dre_samplernd_render_private->device_handle,
+   	    (DtShort) actviewport->bll[0],
+   	    (DtShort) actviewport->bll[1],
+   	    (DtShort) actviewport->fur[0],
+   	    (DtShort) actviewport->fur[1]);
+   }
+
+   /*
+    * Query the Dore default values for those attributes
+    * that are stored in the renderer's private space.
+    */
+
+   if (default_set)
+     return;
+
+   routine = DDclass_InqMethod
+		 (DsInqClassId("AttDiffuseColor"),
+                  DsInqMethodId("InqGlobalValue"));
+   (*routine) (&colormodel,
+   	 dre_samplernd_render_private->difclr);
+
+   routine = DDclass_InqMethod
+		 (DsInqClassId("AttDiffuseIntens"),
+                  DsInqMethodId("InqGlobalValue"));
+   (*routine) (&dre_samplernd_render_private->difint);
+
+   routine = DDclass_InqMethod
+		 (DsInqClassId("AttDiffuseSwitch"),
+                  DsInqMethodId("InqGlobalValue"));
+   (*routine) (&dre_samplernd_render_private->difswi);
+
+   routine = DDclass_InqMethod
+		 (DsInqClassId("AttRepType"),
+                  DsInqMethodId("InqGlobalValue"));
+  (*routine) (&dre_samplernd_render_private->reptyp);
+
+   routine = DDclass_InqMethod
+		 (DsInqClassId("AttLcstowcsmat"),
+                  DsInqMethodId("InqGlobalValue"));
+   (*routine) (dre_samplernd_render_private->lcstowcsmat); 
+
+   /* Indicate that default values were set */
+   default_set = DcTrue;
+}
+.)m
+The function called after display traversal simply flushes the
+device. 
+.(m
+void
+drr_samplernd_after_display_traversal()
+{
+   /*
+    * Flush device after display traversal is over
+    */
+
+   DDdevice_Flush(dre_samplernd_render_private->device_handle);
+}
+.)m
+With ray-tracers,
+the display traversal may build a secondary database.
+In such a case, the function to be executed after the traversal
+is over will be responsible to do the actual ray 
+intersection calculations.
+.H2 "Renderer Delete Routine
+The renderer delete routine deletes all memory allocated by the
+renderer. 
+For the sample renderer this amounts to deleting one block of memory.
+.(m
+void
+drr_samplernd_render_delete()
+{
+   /*
+    * Free all space allocated for renderer private use
+    */
+
+   if (dre_samplernd_render_private != DcNullPtr) {
+      DDspace_Deallocate (dre_samplernd_render_private);
+   }
+
+   dre_samplernd_render_private = DcNullPtr;
+}
+.)m
+.H2 "New Class Notification Routine
+The new class notification routine is used to install 
+method routines and add data for classes that are used
+by an application but have not been initialized at the time the renderer
+is installed. 
+When a class is instanced for the first time, \*(Dd checks whether
+the class has been initialized or not. If not, then it
+initializes the class and calls the new class notification routine
+of each renderer.
+The routine associates the appropriate 
+method routine with the class,
+and requests additional data space if necessary.
+For instance, the new class notification routine of the sample renderer
+requests additional data space for the point list class in order
+to store the alternate representation of the \f2DoPointList\f1
+objects.
+.(m
+void
+drr_samplernd_render_new_class (class_name, class_id)
+DtPtr class_name;
+DtInt class_id;
+{
+
+   /*
+    * Install method routine for the new class
+    */
+
+   for (i=0; dre_samplernd_studio_method[i].name !=0; i++){
+      if (strcmp(dre_samplernd_studio_method[i].name,
+   	 class_name) == 0) {
+	 DDclass_SetMethod(class_id,
+	    dre_samplernd_render_private->studio_traversal, 
+	    dre_samplernd_studio_method[i].routine);
+	 break;
+      }
+   }
+   
+   for (i=0; dre_samplernd_display_method[i].name !=0; i++){
+      if (strcmp(dre_samplernd_display_method[i].name,
+   	 class_name) == 0) {
+	 DDclass_SetMethod(class_id,
+	    dre_samplernd_render_private->display_traversal, 
+	    dre_samplernd_display_method[i].routine);
+	break;
+      }
+   }
+
+   /*
+    * Associate additional data with point list objects
+    */
+
+   if (strcmp(class_name, "DoPointList") == 0) {
+      dre_samplernd_render_private->pntlst_index =
+   	 DDclass_AddObjectData(class_id,
+                    drr_samplernd_pntlst_data_crt,
+                    drr_samplernd_pntlst_data_prt,
+                    drr_samplernd_pntlst_data_del);
+   }
+}
+.)m
+.H2 "World-to-Frustum Matrix Query Routine
+The last renderer access routine returns to \*(Dd
+the world-to-frustum transformation matrix of the view. 
+This matrix was computed
+after the studio traversal and stored in the private data space
+of the renderer.
+.(m
+/*
+ * Return the world-to-frustum coordinate matrix
+ */
+
+void
+drr_samplernd_render_inq_wcstofcs_rtn(wcstofcsmat)
+DtMatrix4x4 wcstofcsmat;
+{
+   drr_samplernd_matrix_load(wcstofcsmat,
+	dre_samplernd_render_private->viwdat->wcstofcsmat);	
+}
+.)m
+.H1 "A Sample Application Program
+Below is a simple program that illustrates how the sample renderer
+can be installed and selected to render a view.
+If you have access to \*(Dd source code, you will eventually
+update the system module to install the new renderer 
+at \*(Dd system initialization time,
+relieving the application of this responsibility.
+.lp
+The renderer prints out information on the objects as it
+executes the method routines.
+Because boxes are not among the base
+primitives of the sample renderer,
+the alternate representation of the box
+(a triangle list) is rendered instead.
+For the point list, because the surface representation type is \f2DcSurface\f1,
+its alternate representation (a sphere list) is used. Because 
+sphere lists are not among the base primitives, the
+standard triangulated alternate representation of the sphere list is rendered.
+The number of triangles used for the spheres depends
+on the value of the subdivision specification 
+attribute (\f2DoSubDivSpec\f1).
+.(m
+#include "dore.h"
+
+DtReal blue[3] = {0.0, 0.0, 1.0};
+DtReal green[3] = {0.0, 1.0, 0.0};
+
+main() {
+
+   DtObject view, device, frame, pntl;
+   DtObject defgroup, objgroup;
+   static DtPoint3 at_light =   { 0., 0., 0. };
+   static DtPoint3 from_light = { 2., 2., 2. };
+   static DtPoint3 at_cam =   { 10., 0., 0. };
+   static DtPoint3 from_cam = { 10., 3., 10. };
+   static DtVector3 up =      { -1., 1., 0. };
+   static DtReal point_locs[9] = {3., 3., 0., 
+                                 2., 3., 0.,
+                                 2., 2., 0.};
+   DtRenderStyle newid;
+   extern DtInt drr_samplernd_install_renderer();
+
+
+   /* Initialize Dore */
+   DsInitialize(0);
+
+   /* 
+    * Request Dore to install new renderer. We do not
+    * wish to overwrite any renderer, so DcRendererNewId
+    * is passed to the installation routine
+    */
+
+   newid = drr_samplernd_install_renderer(DcRendererNewId);
+
+   /*
+    * Create device - the sample renderer will not produce
+    * an image but will simply print information during
+    * execution
+    */
+
+   device = DoDevice("rasterfile", "-filename foo.img");
+
+   /* Create frame and view */ 
+   frame = DoFrame();
+   DdSetFrame(device, frame);
+   view = DoView();
+   DgAddObjToGroup(DfInqViewGroup(frame), view);
+
+   /* Select the sample renderer to render the view */
+   DvSetRendStyle(view, newid);
+
+   /* Create studio group */
+   defgroup = DoGroup(DcTrue);
+      DgAddObj(DoParallel(25.0,-.1, -20.0 ));
+      DgAddObj(DoPushMatrix());
+   	 DgAddObj(DoLookAtFrom(at_cam, from_cam, up));
+   	 DgAddObj(DoCamera());
+      DgAddObj(DoPopMatrix());
+      DgAddObj(DoPushMatrix());
+   	 DgAddObj(DoLookAtFrom(at_light, from_light, up));
+   	 DgAddObj(DoLight());
+      DgAddObj(DoPopMatrix());
+   DgClose();
+   
+   /* create display group */
+   objgroup = DoGroup(DcTrue);
+      DgAddObj(DoRepType(DcSurface));
+      DgAddObj(DoDiffuseColor(DcRGB, blue));
+      DgAddObj(DoPushMatrix());
+  	 DgAddObj(DoTranslate(0.0, -2.0, -1.0));
+	 DgAddObj(DoScale(20.0, 1.0, 2.0));
+	 DgAddObj(DoPrimSurf(DcBox));
+      DgAddObj(DoPopMatrix());
+      DgAddObj(DoDiffuseColor(DcRGB, green));
+      DgAddObj(DoPointList(DcRGB, DcLoc, 3, point_locs));
+   DgClose();
+
+   /* Assign studio and display groups to view */
+   DgAddObjToGroup(DvInqDefinitionGroup(view), defgroup);
+   DgAddObjToGroup(DvInqDisplayGroup(view), objgroup);
+
+   DdUpdate(device);
+   printf("Hit return to exit\en");
+   getchar();
+
+   DsTerminate();
+}
+.)m

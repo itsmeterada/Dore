@@ -1,0 +1,85 @@
+%!PS-Adobe-2.0
+%%Title: 7A.pict
+%%Creator: PrintMonitor
+%%CreationDate: Friday, December 22, 1989
+%%Pages: (atend)
+%%BoundingBox: ? ? ? ?
+%%PageBoundingBox: 30 31 582 761
+%%For: Paul Ausick
+%%IncludeProcSet: "(AppleDict md)" 66
+%%EndComments
+%%EndProlog
+%%BeginDocumentSetup
+md begin
+
+T T -31 -30 761 582 100 72 72 1 F F F F T T psu
+(Paul Ausick; document: 7A.pict)jn
+0 mf
+od
+%%EndDocumentSetup
+%%Page: ? 1
+op
+0 0 730 552 fr
+0 0 xl
+1 1 pen
+0 0 gm
+(nc 0 0 0 0 6 rc)kp
+(nc 0 0 720 540 6 rc)kp
+26 144 46 164 66 114 1 ar
+44 153 gm
+144 153 lin
+134 252 154 272 156 204 1 ar
+144 253 lin
+206 72 226 92 291 339 1 ar
+144 153 gm
+210 87 lin
+54 108 gm
+32<99CC663399CC6633>pat
+162 108 lin
+162 216 lin
+162 108 gm
+234 36 lin
+0 gr
+35 99 55 119 66 114 1 ar
+53 108 gm
+63 108 lin
+152 207 172 227 156 204 1 ar
+162 198 gm
+162 208 lin
+224 27 244 47 291 339 1 ar
+216 54 gm
+228 42 lin
+46 115 gm
+bu fc
+{}mark T /Helvetica-Oblique /|______Helvetica-Oblique 0 rf
+bn
+1 setTxMode
+2 fs
+12 fz
+bu fc
+2 F /|______Helvetica-Oblique fnt
+bn
+(Y)show
+48 166 gm
+0 gr
+(Y)show
+41 176 gm
+(1)show
+160 226 gm
+(X)show
+135 264 gm
+(X)show
+129 273 gm
+(1)show
+234 52 gm
+(Z)show
+218 100 gm
+(Z)show
+211 110 gm
+(1)show
+F T cp
+%%Trailer
+cd
+end
+%%Pages: 1 0
+%%EOF

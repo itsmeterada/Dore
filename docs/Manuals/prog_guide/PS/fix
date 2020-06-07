@@ -1,0 +1,8 @@
+#!/bin/sh
+
+for file in * 
+do
+	dest=`echo $file | sed 's/\.//' | sed 's/-/./'`
+	echo mv $file $dest
+	mv $file $dest
+done

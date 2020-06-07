@@ -1,0 +1,449 @@
+.\"#ident "%W%" %G%
+.\"
+.\" #
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  
+.\" # 
+.\" # KUBOTA GRAPHICS Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\" #
+.\"
+.sc
+.ds h1 14
+.\"
+.ds BT "\\*(Dd Developer's Guide
+.ds CT "Building the Sample Configurations
+.so ../macros/local.me
+.PN 205
+.nf
+.L1 B "UILDING  THE"
+.L2 S AMPLE 
+.L3 C ONFIGURATIONS
+.sp 1i
+.CH FOURTEEN
+The Portable \*(Dd source code distribution 
+includes several sample \*(Dd system configurations.
+They include a generic configuration that runs on systems that
+support the X11 window system and at least one configuration
+that runs on a particular graphics workstation with device specific
+code to utilize the graphics hardware of the platform.
+Your \f2\*(Dd System Guide\fP lists
+the configurations provided with your version of
+Portable \*(Dd. 
+.lp
+This chapter explains how you build and install the \*(Dd library.
+In particular, the chapter describes the steps for building
+the sample configurations provided with Portable \*(Dd.
+Similar steps are required for building your own port of \*(Dd.
+If you are not 
+interested in the sample configurations,
+turn  to Chapter 15, \f2Porting \*(Dd\fP.
+.H1 "Building \\*(Dd
+To facilitate building the \*(Dd source code on the 
+desired target machine,
+the Portable \*(Dd distribution provides several tools that
+allow automatic building of the \*(Dd library under UNIX.
+Other operating systems often have similar tools;
+if they are not UNIX compatible, however,
+the procedures described here must be adjusted accordingly.
+.lp
+Building \*(Dd consists of the following steps:
+.rs
+.sp -.5v
+.np
+Get \*(Dd from the distribution tape.
+.rs
+.sp -.5v
+.np
+Initialize the top level makefile.
+.rs
+.sp -.5v
+.np
+Build the \*(Dd library.
+.rs
+.sp -.5v
+.np
+Build the \*(Dd data files.
+.rs
+.sp -.5v
+.np
+Install the \*(Dd data files.
+.rs
+.sp -.5v
+.np
+Build and run test programs.
+.rs
+.sp -.5v
+.np
+Install \*(Dd on the target machine.
+.rs
+.sp -.5v
+.np
+Remove object files.
+.lp
+The following subsections describe each of these steps in more detail.
+.H1 "Step 1: Get \\*(Dd From the Distribution Tape
+The \*(Dd distribution is available on several forms of media,
+including cartridge tape and 9-track 1600 bpi reel tape.
+See your \f2\*(Dd System Guide\fP for instructions on how to load
+the distribution from the tape.
+.lp
+In all cases you will be asked to go to the directory where
+you want to create the \*(Dd source tree.
+.rs
+.sp -.25v
+.(m
+% cd /my_directory
+.)m
+.rs
+.sp -.25v
+A directory named \f2dore\fP will be created
+in the current directory, \f2/my_directory\fP,
+and it will contain all the files of the distribution.
+.lp
+The distribution requires about 10 MB of file system space.  
+To actually build \*(Dd, less than 10 MB of additional 
+space is required.
+The exact amount varies based on the machine being used.
+.H1 "Step 2: Initialize the Top Level Makefile
+Since the \*(Dd directories are set up to include source code and 
+object code for more than one system,
+the build and installation mechanisms must know which parts of the 
+code to include, where to put the compiled files and library, etc.
+All necessary control information is contained in a
+makefile, located in the main \f2dore\fP directory.
+The \f2dore\fP directory contains several different versions of the 
+makefile, one for each of the sample system configurations 
+provided with the distribution.
+These files are all named:
+.rs
+.sp -.25v
+.(m
+	mk.name
+.)m
+.rs
+.sp -.25v
+where \f2name\fP is the name of the system configuration it builds.
+For example, \f2mk.stdx\fP builds the standard X11 \*(Dd system
+configuration.
+Once you have decided which of the configurations you want to build, 
+copy the appropriate file to \f2makefile\fP.
+.lp
+The makefile contains several variables that control the build
+process. 
+These must all be set before the build process can start.
+Edit \f2makefile\fP and make sure the following variables are
+set:
+.ip DORE_LOC 
+must be set to the full
+path name of the directory containing the \f2dore\fP directory.  
+Using the example from above, this would appear as:
+.rs
+.sp -.25v
+.(m
+	DORE_LOC=/my_directory
+.)m
+.ip DORE_OBJTYPE 
+specifies the machine object type.
+This variable determines where the compiled object files and the 
+final \*(Dd library are placed.
+The exact name used is not important.  
+What matters is that for a new machine type you do not use a name 
+that is already being used for another type.
+Otherwise the object files for the new machine type may overwrite
+files built previously for another type.
+.lp
+Other variables that control the build process were assigned
+default values when you copied the makefile.
+The build process should proceed correctly with the default values.
+.H1 "Step 3: Build the \*(Dd Library"
+To start the build process:
+.rs
+.sp -.25v
+.(m
+% cd /my_directory/dore
+% make dore
+.)m
+.rs
+.sp -.25v
+.lp
+This will cause all of the \*(Dd source files to be compiled
+and the object code to be archived into a library.
+The object files that are created during compilation are put 
+in directories parallel to the source directories, 
+under the directory:
+.rs
+.sp -.25v
+.(m
+	dore/obj/objtype
+.)m
+.rs
+.sp -.25v
+where \f2objtype\fP is
+the machine object type as specified by the variable
+.SM \f2DORE_OBJTYPE\fP
+in \f2dore/makefile\fP.
+The object directory structure is created as necessary by the 
+build process.
+.lp
+The library (\f2libdore.a\fP)
+is put into the directory:
+.rs
+.sp -.25v
+.(m
+	dore/lib/objtype
+.)m
+.rs
+.sp -.25v
+where \f2objtype\fP is
+the object type as specified by the variable
+.SM \f2DORE_OBJTYPE\fP
+in \f2dore/makefile\fP.
+.rs
+.sp -.5v
+.H1 "Step 4: Build the \*(Dd Data Files
+The \*(Dd system uses binary format files for fonts.
+Distributed with Portable \*(Dd are the corresponding
+.SM ASCII
+data files, which must be converted to binary.
+The
+.SM ASCII
+files are in the directory:
+.rs
+.sp -.25v
+.(m
+	dore/src/data/fonts
+.)m
+.rs
+.sp -.25v
+Since the format of binary files is machine dependent, 
+the makefiles are set up
+to let you specify the target location for the binary files. 
+That way you do not overwrite files that were made for 
+another system.  
+The error message file used by \*(Dd for run-time messages
+is built from the error include file used by the source code.
+.lp
+To build the binary font files and the error message file do:
+.rs
+.sp -.25v
+.(m
+% cd /my_directory/dore
+% make data
+.)m
+.rs
+.sp -.25v
+The resulting binary font files will be located in:
+.rs
+.sp -.25v
+.(m
+    	dore/src/data/fonts/fontbin/fonttype
+.)m
+.rs
+.sp -.25v
+where \f2fonttype\fP is the binary type for fonts as specified
+by the variable
+.SM \f2DORE_FONTTYPE\fP .
+All the sample configurations use the same binary format 
+for the font files.
+If this is the first time the fonts are built in this file system, 
+the default value can be used.
+If you want to make sure the binary font files do not 
+overwrite existing ones you can set the variable
+.SM \f2DORE_FONTTYPE\fP
+in \f2dore/makefile\fP:
+.rs
+.sp -.25v
+.(m
+	DORE_FONTTYPE=newname
+.)m
+.rs
+.lp
+The error message file will be in:
+.rs
+.sp -.25v
+.(m
+    dore/src/data/errmsg
+.)m
+.H1 "Step 5: Install the Data Files
+All \*(Dd applications access the binary font files and 
+the error message file.
+If these are not located in the standard place assumed by \*(Dd, 
+an environment variable must be set in the shell before the 
+application program is run.
+Because of this, you may want to install the data files before 
+going on to building the test programs.
+Do this by:
+.rs
+.sp -.25v
+.(m
+% cd /my_directory/dore
+% make install_data
+.)m
+.rs
+.sp -.25v
+The binary font files built in the previous step will be moved
+to the subdirectory \f2fonts\fP of the directory specified by
+the variable 
+.SM \f2DORE_DATADIR\fP
+in \f2dore/makefile\fP.
+The error message file will be copied to the subdirectory
+\f2errmsg\fP.
+By default, the sample configuration
+makefiles set this variable to the standard location
+assumed by \*(Dd, i.e., \f2/usr/dore/data\fP. 
+If you decide not to use the default locations, set the 
+variable in \f2dore/makefile\fP:
+.rs
+.sp -.25v
+.(m
+	DORE_DATADIR=somedir
+.)m
+.rs
+.sp -.25v
+where \f2somedir\fP is the full path name of a directory that
+already exists.
+The subdirectories \f2fonts\fP and
+\f2errmsg\fP will be created as necessary.
+.H1 "Step 6: Build and Run Test Programs 
+Several test programs are provided in the \f2dore/test\fP directory.
+Use these to ensure that the \*(Dd library created by the 
+build process is working correctly.
+To compile and link them, first move to the test directory:
+.rs
+.sp -.25v
+.(m
+% cd /my_directory/dore/test
+.)m
+.rs
+.sp -.25v
+Then edit the appropriate makefile (depending on 
+your platform) to set the variables
+.SM \f2DORE_LOC\fP , 
+.SM \f2DORE_OBJTYPE\fP ,
+.SM \f2DORE_LIB_NAME\fP ,
+and
+.SM \f2LIBS\fP
+to the proper values.
+The first two are the location of the \f2dore\fP directory, 
+and the machine object type, as specified in \f2dore/makefile\fP.  
+.SM \f2DORE_LIB_NAME\fP
+is the name of the \*(Dd library (\f2libdore.a\fP for all
+the sample configurations).
+.SM \f2LIBS\fP
+specifies the libraries, other than the \*(Dd library, that need
+to be linked with the test programs, e.g.,
+.I \-lm ,
+.I \-lgl ,
+etc.
+Build the test programs using the makefile.
+.lp
+For details on how to run these test programs 
+see \f2dore/test/Readme\fP. 
+.lp
+Before you run the test programs you must ensure that
+\*(Dd has access to the font and error message files.
+If these data files were not installed under \f2/usr/dore/data\fP 
+in the previous step, the shell environment variables
+.SM \f2DORE_FONTDATA\fP 
+and
+.SM \f2DORE_ERRDATA\fP 
+must be set to the name of the directories containing the fonts
+and the error message file, respectively. 
+If you haven't moved the data files since they were built as
+described in \f2Step 4\fP, then set 
+.SM \f2DORE_FONTDATA\fP
+to:
+.rs
+.sp -.25v
+.(m
+     /my_directory/dore/src/data/fonts/fontbin/fonttype
+.)m
+.rs
+.sp -.25v
+where \f2fonttype\fP is the binary type for fonts as specified by
+the makefile variable 
+.SM DORE_FONTTYPE. 
+Set 
+.SM \f2DORE_ERRDATA\fP 
+to:
+.rs
+.sp -.25v
+.(m
+     /my_directory/dore/src/data/errmsg
+.)m
+.rs
+.sp -.25v
+.lp
+For more information on \*(Dd testing see Section V.
+.H1 "Step 7: Install \\*(Dd
+Once you have built \*(Dd and successfully run the
+test programs, the \*(Dd system can be installed.
+This is done by:
+.rs
+.sp -.25v
+.(m
+% cd /my_directory/dore
+% make install_dore
+.)m
+.rs
+.sp -.25v
+By default, the configuration makefiles are set up to 
+.BU hs
+move the \*(Dd library to \f2/usr/lib\fP
+.BU hs
+copy the user include files to \f2/usr/include\fP
+.lp
+To change the target locations
+set the following variables in \f2dore/makefile\fP:
+.rs
+.sp -.25v
+.(m
+	DORE_LIBDIR=libdir
+	DORE_INCDIR=incdir
+.)m
+.rs
+.sp -.25v
+where \f2libdir\fP and \f2incdir\fP are full path names of 
+directories that already exist.
+All \*(Fo include files are put in \f2incdir/fortran\fP
+and the include files needed when adding device drivers
+and renderers are put in \f2incdir/dore_develop\fP.
+The \f2fortran\fP and \f2dore_develop\fP
+subdirectories will be created as necessary.
+.H1 "Step 8: Remove Object Files"
+If you want to save space, you can delete the object files
+generated by the build process by:
+.rs
+.sp -.25v
+.(m
+% cd /my_directory/dore
+% make clean
+.)m
+.rs
+.sp -.25v
+This removes files
+from the object directory structure under:
+.rs
+.sp -.25v
+.(m
+        dore/obj/objtype
+.)m
+.rs
+.sp -.25v
+where \f2objtype\fP is the machine object type as defined by
+the variable
+.SM \f2DORE_OBJTYPE\fP
+in \f2dore/makefile\fP.
+All object files built from the generic part of the code are removed,
+as well as those built from the configuration directories
+specified in \f2dore/makefile\fP.
+

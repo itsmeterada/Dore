@@ -1,0 +1,65 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DsInitialize 3D  "Dore"
+.SH NAME
+DsInitialize \- Initialize Dor\o.\(aae.
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+void DsInitialize(processors)
+DtInt processors;
+.sp
+.in -.5i
+FORTRAN:
+.in +.5i
+CALL DSINIT(PROS)
+INTEGER*4 PROS
+.in -.5i
+.fi
+.IX  "DsInitialize"
+.IX  "DSINIT"
+.SH DESCRIPTION
+.I DsInitialize
+initializes the Dor\o.\(aae. system.
+This must be the first Dor\o.\(aae.  call made by an application.
+Successive calls to this function are ignored unless preceded by a call to 
+\f2DsTerminate\fP <\f2DSTERM\fP>.
+.PP
+The \f2processors\fP parameter specifies the multiprocessor usage
+of this run of Dore.  The allowable values are:
+.PP
+.nh
+.na
+.nf
+.ta 1.25i 1.5i 3i
+0	use only one processor
+positive number	run in multiprocessor mode, with the specified
+	number of processors
+.re
+.ad
+.hy
+.fi
+.PP
+Note that a value of 1 tells Dore to run in a multiprocessor mode,
+but with only one processor.
+This mode is useful for debugging purposes, but is
+generally less efficient than specifying 0 (true uniprocessor
+operation).
+.SH "SEE ALSO"
+DsTerminate(3D)

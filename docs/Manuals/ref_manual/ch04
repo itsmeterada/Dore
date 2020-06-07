@@ -1,0 +1,70 @@
+.\"#ident "%W%" %G%
+.\"
+.\" #
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  
+.\" # 
+.\" # KUBOTA GRAPHICS Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\" #
+.\"
+.so ../macros/local.me
+.PN 407
+.ds BT \*(Dd Reference Manual
+.ds CT \*(Fo Include Files
+.L1 F ORTRAN
+.L2 I NCLUDE
+.L3 F ILES
+.ds h1 4
+.CH FOUR
+This chapter contains a listing of the \*(Dd include files
+for use with application programs written in \*(Fo.
+These files define all of the \*(Dd variables and functions
+and are located in the \f2/usr/include/fortran\fP directory.
+.lp
+The following is a list of these \*(Fo include files with
+a description of the routines that should use these files.  The
+files are listed in the order in which they appear in this chapter:
+.ip \f2DORE\f1
+must be included by all application routines
+.ip \f2DORETEXT\f1
+must be included by those application routines that use
+text attributes
+.ip \f2DOREMETHODS\f1
+must be included by those application routines that
+implement user-defined primitives
+.lp
+There is one additional include file, \f2DORETYPES\f1. This file
+exists for compatibility with the 2.2 and earlier versions of
+\*(Dd. The contents of this file are not printed in this chapter.
+.bp
+.nf
+.H1 "Filename: DORE
+.rs
+.sp
+.(m
+.so Includes/DORE
+.)m
+.bp
+.H1 "Filename: DORETEXT
+.rs
+.sp
+.(m
+.so Includes/DORETEXT
+.)m
+.bp
+.H1 "Filename: DOREMETHODS
+.rs
+.sp
+.(m
+.so Includes/DOREMETHODS
+.)m
+.fi

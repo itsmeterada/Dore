@@ -1,0 +1,423 @@
+!md begin
+!/note {} def
+!/legal {} def
+!md /lnop known not { /lnop [ {} ] cvx def } if
+!/bigs [lnop lnop lnop lnop lnop lnop lnop lnop] def
+!/smalls [lnop lnop lnop lnop lnop lnop lnop lnop] def
+!/cp {pm restore pop pop} def
+!
+!T T -31 -30 761 582 100 72 72 1 F F F F T T psu
+!(Aaron Black; document: Unspecified)jn
+!0 mf
+!od
+!op
+!0 0 xl
+!-0.5 72 mul -0.5 72 mul translate
+!0.6 0.6 scale
+!1 1 pen
+!0 0 gm
+!(nc 0 0 720 540 6 rc)kp
+!64 gr
+!81 99 109 127 4 rc
+!0 gr
+!81.5 99.5 108.5 126.5 0 rc
+!64 gr
+!81 126 109 154 4 rc
+!0 gr
+!81.5 126.5 108.5 153.5 0 rc
+!64 gr
+!81 153 109 181 4 rc
+!0 gr
+!81.5 153.5 108.5 180.5 0 rc
+!64 gr
+!81 180 109 208 4 rc
+!0 gr
+!81.5 180.5 108.5 207.5 0 rc
+!64 gr
+!81 207 109 235 4 rc
+!0 gr
+!81.5 207.5 108.5 234.5 0 rc
+!64 gr
+!81 234 109 262 4 rc
+!0 gr
+!81.5 234.5 108.5 261.5 0 rc
+!64 gr
+!81 261 109 289 4 rc
+!0 gr
+!81.5 261.5 108.5 288.5 0 rc
+!64 gr
+!81 288 109 316 4 rc
+!0 gr
+!81.5 288.5 108.5 315.5 0 rc
+!64 gr
+!81 315 109 343 4 rc
+!0 gr
+!81.5 315.5 108.5 342.5 0 rc
+!64 gr
+!81 342 109 370 4 rc
+!0 gr
+!81.5 342.5 108.5 369.5 0 rc
+!64 gr
+!81 369 109 397 4 rc
+!0 gr
+!81.5 369.5 108.5 396.5 0 rc
+!64 gr
+!81 396 109 424 4 rc
+!0 gr
+!81.5 396.5 108.5 423.5 0 rc
+!64 gr
+!81 423 109 451 4 rc
+!0 gr
+!81.5 423.5 108.5 450.5 0 rc
+!64 gr
+!81 450 109 478 4 rc
+!0 gr
+!81.5 450.5 108.5 477.5 0 rc
+!64 gr
+!81 477 109 505 4 rc
+!0 gr
+!81.5 477.5 108.5 504.5 0 rc
+!64 gr
+!81 504 109 532 4 rc
+!0 gr
+!81.5 504.5 108.5 531.5 0 rc
+!64 gr
+!171 99 226 154 4 rc
+!0 gr
+!171.5 99.5 225.5 153.5 0 rc
+!64 gr
+!171 153 226 208 4 rc
+!0 gr
+!171.5 153.5 225.5 207.5 0 rc
+!64 gr
+!171 207 226 262 4 rc
+!0 gr
+!171.5 207.5 225.5 261.5 0 rc
+!64 gr
+!171 261 226 316 4 rc
+!0 gr
+!171.5 261.5 225.5 315.5 0 rc
+!64 gr
+!171 315 226 370 4 rc
+!0 gr
+!171.5 315.5 225.5 369.5 0 rc
+!64 gr
+!171 369 226 424 4 rc
+!0 gr
+!171.5 369.5 225.5 423.5 0 rc
+!64 gr
+!171 423 226 478 4 rc
+!0 gr
+!171.5 423.5 225.5 477.5 0 rc
+!64 gr
+!171 477 226 532 4 rc
+!0 gr
+!171.5 477.5 225.5 531.5 0 rc
+!nc ct 39 0 put
+!5 1 90 tp
+!-15 0 33 0 tc
+!102 96 gm
+!tt
+!bu fc
+!{}mark T /Helvetica-Bold /Helvetica-Bold 0 rf
+!bn
+!1 setTxMode
+!1 fs
+!49.91967 fz
+!bu fc
+!2 F /Helvetica-Bold fnt
+!bn
+!({)show
+!te
+!(nc 0 0 720 540 6 rc)kp
+!nc ct 39 0 put
+!5 1 90 tp
+!-15 0 33 0 tc
+!102 150 gm
+!tt
+!0 gr
+!({)show
+!te
+!(nc 0 0 720 540 6 rc)kp
+!nc ct 39 0 put
+!5 1 90 tp
+!-15 0 33 0 tc
+!102 204 gm
+!tt
+!({)show
+!te
+!(nc 0 0 720 540 6 rc)kp
+!nc ct 39 0 put
+!5 1 90 tp
+!-15 0 33 0 tc
+!102 258 gm
+!tt
+!({)show
+!te
+!(nc 0 0 720 540 6 rc)kp
+!nc ct 39 0 put
+!5 1 90 tp
+!-15 0 33 0 tc
+!102 312 gm
+!tt
+!({)show
+!te
+!(nc 0 0 720 540 6 rc)kp
+!nc ct 39 0 put
+!5 1 90 tp
+!-15 0 33 0 tc
+!102 366 gm
+!tt
+!({)show
+!te
+!(nc 0 0 720 540 6 rc)kp
+!nc ct 39 0 put
+!5 1 90 tp
+!-15 0 33 0 tc
+!102 420 gm
+!tt
+!({)show
+!te
+!(nc 0 0 720 540 6 rc)kp
+!nc ct 39 0 put
+!5 1 90 tp
+!-15 0 33 0 tc
+!102 474 gm
+!tt
+!({)show
+!te
+!(nc 0 0 720 540 6 rc)kp
+!nc ct 39 0 put
+!279 99 gm
+!pt
+!252 144 pl
+!279 144 pl
+!279 99 pl
+!ef
+!eu
+!(nc 0 0 720 540 6 rc)kp
+!nc ct 39 0 put
+!279 153 gm
+!pt
+!252 198 pl
+!279 198 pl
+!279 153 pl
+!ef
+!eu
+!(nc 0 0 720 540 6 rc)kp
+!nc ct 39 0 put
+!279 207 gm
+!pt
+!252 252 pl
+!279 252 pl
+!279 207 pl
+!ef
+!eu
+!(nc 0 0 720 540 6 rc)kp
+!38 61 gm
+!bu fc
+!{}mark T /Helvetica /Helvetica 0 rf
+!bn
+!0 fs
+!12 fz
+!bu fc
+!2 F /Helvetica fnt
+!bn
+!0.32815 0.(Shade)ashow
+!51 61 gm
+!0.16328 0.(Range)ashow
+!45 124 gm
+!(0)show
+!44 176 gm
+!(1)show
+!44 229 gm
+!(2)show
+!44 284 gm
+!(3)show
+!44 338 gm
+!(4)show
+!44 392 gm
+!(5)show
+!44 447 gm
+!(6)show
+!45 501 gm
+!(7)show
+!86 43 gm
+!0.41551 0.(SHADE)ashow
+!99 43 gm
+!0.08300 0.(RANGE)ashow
+!112 43 gm
+!0.24681 0.(TABLE)ashow
+!255 44 gm
+!0.32815 0.(Shade)ashow
+!268 44 gm
+!0.16328 0.(Range)ashow
+!236 120 gm
+!(0)show
+!236 173 gm
+!(1)show
+!236 230 gm
+!(2)show
+!236 283 gm
+!(3)show
+!236 338 gm
+!(4)show
+!236 392 gm
+!(5)show
+!236 446 gm
+!(6)show
+!237 499 gm
+!(7)show
+!166 100 gm
+!10 fz
+!bu fc
+!2 F /Helvetica fnt
+!bn
+!(0)show
+!169 141 gm
+!1.41799 0. 32 0.14179 0.(31 32)awidthshow
+!169 195 gm
+!1.41799 0. 32 0.14179 0.(63 64)awidthshow
+!169 249 gm
+!1.41799 0. 32 0.14179 0.(95 96)awidthshow
+!169 296 gm
+!1.79183 0. 32 0.17918 0.(127 128)awidthshow
+!169 349 gm
+!1.79183 0. 32 0.17918 0.(159 160)awidthshow
+!169 403 gm
+!1.79183 0. 32 0.17918 0.(191 192)awidthshow
+!169 458 gm
+!1.79183 0. 32 0.17918 0.(223 224)awidthshow
+!169 509 gm
+!0.66137 0.(255)ashow
+!225 153 gm
+!159 153 lin
+!225 207 gm
+!159 207 lin
+!225 261 gm
+!159 261 lin
+!225 315 gm
+!159 315 lin
+!225 369 gm
+!159 369 lin
+!225 423 gm
+!159 423 lin
+!225 477 gm
+!159 477 lin
+!225 531 gm
+!159 531 lin
+!0 0 gm
+!147 95 167 115 258 306 1 ar
+!115 113 gm
+!149 106 lin
+!0 0 gm
+!147 207 167 227 251 299 1 ar
+!113 220 gm
+!149 217 lin
+!0 0 gm
+!146 243 166 263 241 289 1 ar
+!113 248 gm
+!148 251 lin
+!99 111 gm
+!(0)show
+!99 135 gm
+!0.88183 0.(31)ashow
+!99 161 gm
+!0.88183 0.(32)ashow
+!99 187 gm
+!0.88183 0.(63)ashow
+!99 214 gm
+!0.88183 0.(64)ashow
+!99 242 gm
+!0.88183 0.(95)ashow
+!99 268 gm
+!0.88183 0.(96)ashow
+!99 293 gm
+!0.66137 0.(127)ashow
+!99 320 gm
+!0.66137 0.(128)ashow
+!99 346 gm
+!0.66137 0.(159)ashow
+!99 374 gm
+!0.66137 0.(160)ashow
+!99 400 gm
+!0.66137 0.(191)ashow
+!99 427 gm
+!0.66137 0.(192)ashow
+!99 456 gm
+!0.66137 0.(223)ashow
+!99 483 gm
+!0.66137 0.(224)ashow
+!98 509 gm
+!0.66137 0.(255)ashow
+!194 226 gm
+!12 fz
+!bu fc
+!2 F /Helvetica fnt
+!bn
+!0.65817 0.(32)ashow
+!207 214 gm
+!0.26460 0.(shades)ashow
+!194 173 gm
+!0.65817 0.(32)ashow
+!207 161 gm
+!0.26460 0.(shades)ashow
+!194 119 gm
+!0.65817 0.(32)ashow
+!207 107 gm
+!0.26460 0.(shades)ashow
+!299 109 gm
+!0.22038 0.(Gold)ashow
+!299 167 gm
+!(Red)show
+!299 216 gm
+!0.16508 0.(Green)ashow
+!299 272 gm
+!0.33044 0.(Blue)ashow
+!299 325 gm
+!0.66505 0.(Cyan)ashow
+!299 375 gm
+!0.53302 0.(Yellow)ashow
+!299 427 gm
+!0.38642 0.(Magenta)ashow
+!299 488 gm
+!0.08375 0.(White)ashow
+!272 204 gm
+!9 fz
+!bu fc
+!2 F /Helvetica fnt
+!bn
+!(0%)show
+!249 238 gm
+!-0.66990 0.(100%)ashow
+!271 151 gm
+!(0%)show
+!248 187 gm
+!-0.66990 0.(100%)ashow
+!272 94 gm
+!(0%)show
+!247 136 gm
+!-0.66990 0.(100%)ashow
+!0 0 gm
+!147 135 167 155 241 289 1 ar
+!114 140 gm
+!149 143 lin
+!0 0 gm
+!147 150 167 170 258 306 1 ar
+!115 168 gm
+!149 161 lin
+!0 0 gm
+!147 189 167 209 241 289 1 ar
+!114 194 gm
+!149 197 lin
+!194 41 gm
+!12 fz
+!bu fc
+!2 F /Helvetica fnt
+!bn
+!0.66726 0. 32 0.06672 0.(COLOR )awidthshow
+!207 41 gm
+!0.24681 0.(TABLE)ashow
+!F T cp
+!cd
+!end

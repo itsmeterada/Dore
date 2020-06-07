@@ -1,0 +1,177 @@
+XCOMM platform:  $XConsortium: NetBSD.cf,v 1.1 94/03/29 15:34:45 gildea Exp $
+XCOMM platform:  $XFree86: xc/config/cf/NetBSD.cf,v 3.10 1994/09/24 15:09:48 dawes Exp $
+
+#define OSName		NetBSD 1.0_BETA
+#define	OSVendor	/**/
+XCOMM operating system:  OSName
+#define OSMajorVersion    1
+#define OSMinorVersion    0
+/* 1 = A, 2 = B, 3 = C */
+#define OSTeenyVersion	  0
+
+/*
+ * C library features
+ */
+
+#define HasNdbm         	YES
+#define HasPutenv       	YES
+#define HasBSD44Sockets 	YES
+#define Malloc0ReturnsNull	NO
+#define SetTtyGroup     	YES
+#ifndef HasLibCrypt
+# define HasLibCrypt		YES
+#endif
+#ifndef HasShm
+# if OSMajorVersion == 0 && OSMinorVersion == 9 && OSTeenyVersion == 2
+/*
+ * Shm memory was removed in 0.9B because it was encumbered.
+ * A free version was added in 0.9C
+ */
+#  define HasShm          	NO
+# else
+#  define HasShm          	YES
+# endif
+#endif
+
+/*
+ * Compiler Features
+ */
+#undef HasGcc
+#define HasGcc			YES
+#define HasGcc2			YES
+#ifndef HasGcc2ForCplusplus
+#define HasGcc2ForCplusplus	YES
+#endif
+#define GccUsesGas		YES
+#define UseGas			YES
+#define GnuCpp			YES
+
+#define NeedConstPrototypes	YES
+#define NeedFunctionPrototypes	YES
+#define NeedNestedPrototypes	YES
+#define NeedVarargsPrototypes	YES
+#define NeedWidePrototypes	NO
+
+#define CppCmd          	/usr/libexec/cpp
+#define StandardCppDefines	-traditional
+#define PreProcessCmd   	CppCmd
+
+#undef CcCmd
+#define CcCmd 			gcc
+#define DefaultCCOptions 	/**/
+
+#define GccGasOption 		-DGCCUSESGAS
+#define AsmDefines 		-DUSE_GAS
+
+#ifdef i386Architecture
+# define OptimizedCDebugFlags 	-m486 -O2
+# define ServerOSDefines	-DDDXTIME
+#else
+# define OptimizedCDebugFlags 	-O2
+# define ServerOSDefines 	/**/
+#endif
+#ifdef i386Architecture
+#define ServerExtraDefines GccGasOption XFree86ServerDefines
+#else
+#define ServerExtraDefines GccGasOption
+#endif
+
+#define ExtraLibraries		-lgnumalloc
+
+/*
+ * Make & install Features
+ */
+
+#define AvoidNullMakeCommand 	YES
+#define StripInstalledPrograms	YES
+#define CompressAllFonts	YES
+#define DefaultUserPath		.:/bin:/usr/bin:/usr/local/bin:$(BINDIR)
+#define DefaultSystemPath	/sbin:/usr/sbin:/bin:/usr/bin:$(BINDIR)
+
+#ifdef  InstallCmd
+# undef  InstallCmd
+# define InstallCmd 		/usr/bin/install
+#endif
+
+#ifndef ExtraFilesToClean
+# define ExtraFilesToClean 	*.core
+#endif
+
+/*
+ * Documentation formatting
+ */
+#undef	TblCmd
+#define	TblCmd 			/usr/bin/tbl
+#undef	EqnCmd
+#define	EqnCmd 			/usr/bin/eqn -Tascii
+          COL = /usr/bin/col
+         NEQN = /usr/bin/neqn
+        NROFF = /usr/bin/nroff
+#define TroffCmd        	groff -Tps
+
+/*
+ * To use the NetBSD Aperture driver
+ */
+#if defined(i386Architecture)
+#ifndef HasNetBSDApertureDrv
+#define HasNetBSDApertureDrv	NO
+#endif
+#endif
+
+XCOMM Man pages need to be formatted when installed, so override the default
+XCOMM imake rules.
+
+#define ManSuffix		1
+#define ManSourcePath		$(MANPATH)/cat
+
+#define InstallManPageLong(file,destdir,dest)                           @@\
+all:: file.0								@@\
+									@@\
+file.0:: file.man							@@\
+	@if [ -f file.man ]; \						@@\
+	then \								@@\
+	cat file.man | $(NEQN) | $(TBL) | $(NROFF) -man | $(COL) >/tmp/$$$$.man; \	@@\
+	cp /tmp/$$$$.man file.0; \					@@\
+	$(RM) /tmp/$$$$.man; \						@@\
+	fi 								@@\
+									@@\
+file.man::								@@\
+									@@\
+install.man::                                                           @@\
+	MakeDir($(DESTDIR)destdir)					@@\
+	-@if [ -f file.0 ]; \						@@\
+	then \								@@\
+	$(INSTALL) -c $(INSTMANFLAGS) file.0 $(DESTDIR)destdir/dest.0; \@@\
+	fi
+
+#define InstallGenManPageLong(file,destdir,dest,suffix)			@@\
+	InstallManPageLong(file,destdir,dest)
+
+#define InstallMultipleManSuffix(list,dest,suff)                        @@\
+install.man:: 								@@\
+	MakeDir($(DESTDIR)dest)						@@\
+	case '${MFLAGS}' in *[i]*) set +e;; esac; \			@@\
+	for i in list; do \                                             @@\
+	  (set -x; \							@@\
+	  cat $$i.suff | $(NEQN) | $(TBL) | $(NROFF) -man | $(COL) >/tmp/$$$$.suff; \	@@\
+	  $(INSTALL) -c $(INSTMANFLAGS) /tmp/$$$$.suff $(DESTDIR)dest/$$i.0; \	@@\
+	  $(RM) /tmp/$$$$.suff); \						@@\
+	done
+
+#define InstallMultipleMan(list,dest)                                   @@\
+	InstallMultipleManSuffix(list,dest,man)
+
+#define InstallManPageAliases(file,destdir,aliases)                     @@\
+install.man:: 								@@\
+	@case '${MFLAGS}' in *[i]*) set +e;; esac; \                    @@\
+	for i in aliases; do \                                          @@\
+		(set -x; \						@@\
+		$(RM) $(DESTDIR)destdir/$$i.0;\  			@@\
+		(cd $(DESTDIR)/destdir; $(LN) file.0 $$i.0);\ 		@@\
+		); \							@@\
+	done
+
+#define InstallGenManPageAliases(file,destdir,suffix,aliases)		@@\
+	InstallManPageAliases(file,destdir,aliases)
+
+#include <bsdLib.rules>

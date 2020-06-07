@@ -1,0 +1,63 @@
+#ident "%W% %G%"
+ 
+/**************************************************************************
+# Copyright (C) 1994 Kubota Graphics Corp.
+# 
+# Permission to use, copy, modify, and distribute this material for
+# any purpose and without fee is hereby granted, provided that the
+# above copyright notice and this permission notice appear in all
+# copies, and that the name of Kubota Graphics not be used in
+# advertising or publicity pertaining to this material.  Kubota
+# Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+# OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+# "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+# PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+# EXPRESS OR IMPLIED.
+**************************************************************************/
+ 
+Following is a list of files required to built the render program,
+The second column indicates the SCCS revision number for each file.
+
+The set of files indicated in this list should always form a complete,
+`buildable' version of the render program.
+
+--------------------------------------------------------------------
+render program source 
+--------------------------------------------------------------------
+
+[in teak:/u/SCCS/dore/test/render]
+mk.alphaS	4.8
+mk.alphaD	4.8
+
+[in teak:/u/SCCS/dore/test/render/src]
+Trnsfrmr.c	4.1
+calbak.c	4.2
+g3crtemap.c     4.2
+makeobjs.c	4.2
+prsarg.c        4.1
+render.c	4.12
+render.h	4.3
+rstrlib.c	4.1
+trnsfrmr.h	4.1
+x11.c		4.3
+
+--------------------------------------------------------------------
+scene description files
+--------------------------------------------------------------------
+
+[in teak:/u/SCCS/local/src/scene]
+main.c		4.3
+makefile	4.3
+readprims.c	4.2
+scene.h		4.3
+yylex.l		4.1
+yyparse.y	4.1
+
+--------------------------------------------------------------------
+userprim files (used in libscene)
+--------------------------------------------------------------------
+
+[in teak:/u/SCCS/local/src/userpri]
+makefile		4.2
+subdivquad.c		4.2

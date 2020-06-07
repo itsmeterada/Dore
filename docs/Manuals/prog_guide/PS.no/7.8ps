@@ -1,0 +1,71 @@
+!/Dore 20 dict def
+!Dore begin
+!/Prgb { moveto -1 -1 rmoveto 2 0 rlineto
+!        0 2 rlineto -2 0 rlineto
+!        closepath setrgbcolor fill } def
+!/Lrgb { moveto lineto setrgbcolor stroke } def
+!/Trgb { moveto lineto lineto closepath
+!        setrgbcolor fill } def
+!/BGrgb { dup 3 -1 roll dup 5 -1 roll dup
+!         7 -1 roll dup 3 -1 roll moveto
+!         6 -1 roll lineto exch 4 -1 roll
+!         lineto lineto closepath setrgbcolor
+!         fill } def
+!/Pgray { moveto -1 -1 rmoveto 2 0 rlineto
+!         0 2 rlineto -2 0 rlineto
+!         closepath setgray fill } def
+!/Lgray { moveto lineto setgray stroke } def
+!/Tgray { moveto lineto lineto closepath
+!         setgray fill } def
+!/BGgray { dup 3 -1 roll dup 5 -1 roll dup
+!          7 -1 roll dup 3 -1 roll moveto
+!          6 -1 roll lineto exch 4 -1 roll
+!          lineto lineto closepath setgray
+!          fill } def
+!gsave
+!0 792 translate
+!0.5 -0.5 scale
+!1.000000 0 0 612 612 BGgray
+!0.000000 64 271 37 332 Lgray
+!0.000000 64 271 91 332 Lgray
+!0.000000 50 311 78 311 Lgray
+!0.000000 221 277 207 271 Lgray
+!0.000000 207 271 193 271 Lgray
+!0.000000 193 271 180 277 Lgray
+!0.000000 180 277 180 284 Lgray
+!0.000000 180 284 187 291 Lgray
+!0.000000 187 291 214 305 Lgray
+!0.000000 214 305 221 311 Lgray
+!0.000000 221 311 221 325 Lgray
+!0.000000 221 325 207 332 Lgray
+!0.000000 207 332 193 332 Lgray
+!0.000000 193 332 180 325 Lgray
+!0.000000 275 271 275 332 Lgray
+!0.000000 248 271 302 271 Lgray
+!0.000000 329 271 329 332 Lgray
+!0.000000 329 271 357 271 Lgray
+!0.000000 357 271 370 277 Lgray
+!0.000000 370 277 370 298 Lgray
+!0.000000 370 298 357 305 Lgray
+!0.000000 357 305 329 305 Lgray
+!0.000000 350 305 370 332 Lgray
+!0.000000 404 271 404 332 Lgray
+!0.000000 438 271 438 332 Lgray
+!0.000000 438 271 479 332 Lgray
+!0.000000 479 271 479 332 Lgray
+!0.000000 561 277 547 271 Lgray
+!0.000000 547 271 533 271 Lgray
+!0.000000 533 271 520 277 Lgray
+!0.000000 520 277 513 291 Lgray
+!0.000000 513 291 513 311 Lgray
+!0.000000 513 311 520 325 Lgray
+!0.000000 520 325 533 332 Lgray
+!0.000000 533 332 547 332 Lgray
+!0.000000 547 332 561 325 Lgray
+!0.000000 561 325 561 305 Lgray
+!0.000000 540 305 561 305 Lgray
+!0.000000 303 301 307 307 Lgray
+!0.000000 307 301 303 307 Lgray
+!grestore
+!showpage
+!end

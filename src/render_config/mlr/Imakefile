@@ -1,0 +1,7 @@
+#include <Dore.tmpl>
+#define	IHaveSubdirs
+
+SUBDIRS = cam geom lit matd math mlrd
+
+MakeSubdirs($(SUBDIRS))
+DependSubdirs($(SUBDIRS))

@@ -1,0 +1,91 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DoPrimSurf 3D  "Dore"
+.SH NAME
+DoPrimSurf \- Create a primitive surface primitive object
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+DtObject DoPrimSurf(surfacetype)
+DtSurface surfacetype;
+.sp
+.in -.5i
+FORTRAN:
+.in +.5i
+INTEGER*4 DOPMS(SRFTYP)
+INTEGER*4 SRFTYP
+.in -.5i
+.fi
+.SH DESCRIPTION
+.IX DOPMS
+.IX DoPrimSurf
+.I DoPrimSurf
+creates a primitive surface primitive object.  A primitive
+surface is the outer skin of a classic volume like a sphere, box, or
+cylinder.
+.PP
+The primitive surfaces are always defined in a standard local 
+position with a particular orientation.
+The user can change their form by applying geometric transformations.
+.PP
+The parameter \f2surfacetype\fP specifies the type of primitive surface.
+Possible values are:
+.IP "\f2DcSphere\fP <\f2DCSPHR\fP>"
+Sphere centered at the origin 
+with a radius of 1.0.
+.IP "\f2DcCylinder\fP <\f2DCCYL\fP>"
+Cylinder capped at both ends with flat circular plates
+in the XY-plane and a radius
+of 1.0.  The cylinder is 1.0 unit deep and extends in the positive
+Z-direction.
+.IP "\f2DcBox\fP <\f2DCBOX\fP>"
+Box with front face in the XY-plane.
+Its bottom left corner is at the origin and it extends
+1.0 unit in the positive X-, Y-, and Z-directions.
+.BP
+.IP "\f2DcCone\fP <\f2DCCONE\fP>"
+Cone with the base circular plate in the XY-plane
+and a radius of 1.0.
+The apex of the cone extends 1.0 unit in the positive Z-direction.
+.PP
+With some renderers, a primitive surface is decomposed into 
+smaller elements, such as triangles,
+before it is rendered.  The amount of decomposition
+performed is determined by the \f2DoSubDivSpec\fP <\f2DOSDS\fP>
+attribute.
+.PP
+When an object defines a closed surface or is oriented such that
+parts of it face away from the viewer, backface culling 
+will speed up the rendering time.
+.SH ERRORS
+.I DoPrimSurf
+will fail if an invalid primitive surface type is specified.
+.TP 15
+[WARNING - value out of range]
+.SH "SEE ALSO"
+.na
+.nh
+DoBackfaceCullSwitch(3D), DoBackfaceCullable(3D), 
+DoCompTextureUVSwitch(3D),
+DoPatch(3D),
+DoSphereList(3D),
+DoSubDivSpec(3D),
+DoTorus(3D)
+.ad
+.hy

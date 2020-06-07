@@ -1,0 +1,184 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DoDevice 3D  "Dore"
+.SH NAME
+DoDevice \- Open a device
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+DtObject DoDevice(devicetype, argstring)
+DtPtr devicetype;
+DtPtr argstring;
+.sp
+.in -.5i
+FORTRAN:
+.in +.5i
+INTEGER*4 DOD(DEVTYP, LDEV, ARGSTR, LARG)
+INTEGER*4 LDEV, LARG
+CHARACTER*LDEV DEVTYP
+CHARACTER*LARG ARGSTR
+.in -.5i
+.fi
+.SH DESCRIPTION
+.IX DOD
+.IX DoDevice
+.I DoDevice
+opens and initializes a Dore device of the indicated type.
+A device is an output mechanism used to display a frame.
+\f2DoDevice\fP returns an object handle to be used for further references
+to the device.
+.PP
+\f2devicetype\fP is a string that specifies the type of device
+to create.
+.PP
+\f2argstring\fP is a string with embedded device \f2options\fP.
+The options specify optional initialization values for the device.
+Options not specified will default to reasonable values. 
+An option takes one of the following forms:
+.BP
+.IP "-optionflag \f2optionvalue\fP"
+for options requiring values.
+.IP "-optionflag"
+for boolean flags where the presence of "-optionflag" means \f2true\fP and the
+absence of "-optionflag" means \f2false\fP.
+.PP
+Numeric option values must be specified by their decimal \s-1ASCII\s+1
+representations.
+Multiple options within \f2argstring\fP must be separated by at least one
+blank, tab, or comma, though all legal options may occur in any order within
+\f2argstring\fP.  If the same option is specified more than once in
+\f2argstring\fP, then only the last value for that option is used.  The legal
+options in \f2argstring\fP depend upon the \f2devicetype\fP parameter.
+.PP
+The following two examples list the allowable device options for two
+different devices.  The first example lists the options for a generic 
+raster Dore device, and the second example lists the options for a
+Standard X11 Dore device.  
+For a list of Dore-supported devices on your system,
+and for information regarding these devices, see the
+\f2Dore System Guide\fP for your particular system. 
+.PP
+\f3``rasterfile''\fP - a simple file format for full-color 
+pixel data output. The options are:
+         
+.nf
+	``-filename \f2name\fP''
+		where \f2name\fP is a string that specifies the 
+		name of the file into which the image should be
+		stored.
+
+	``-width \f2pixwidth\fP'' 
+		where \f2pixwidth\fP is the width in pixels of the 
+		image to be saved.  The default width is 512 
+		pixels if this parameter is not specified. 
+                 
+	``-height \f2pixheight\fP'' 
+		where \f2pixheight\fP is the height in pixels of 
+		the image to be saved.  The default height is 
+		512 pixels if this parameter is not specified.
+
+.fi
+\f3 ``stdx11''\fP - a standard X11 window device. The options
+are:
+.nf
+	``-noautosize''
+		This option prevents the device viewport from
+		automatically being set to the device extent when the
+		device extent changes.  By default, autosizing is on.
+
+	``-screen'' \f2number\fP
+		The X11 window will be opened on screen \f2number\fP.
+
+	``-depth'' \f2depth\fP
+		The driver will use a window of depth \f2depth\fP. The
+		depth is determined from the available X visuals matching
+		the other parameters if it is not specified.
+
+	``-defaultmap''
+		The driver will use the X11 default color map when it
+		creates the X11 window.
+
+	``-trueramp'' \f2red green blue\fP
+		The driver will use \f2red\fP values for red, \f2green\fP
+		values for green, and \f2blue\fP values for blue when it
+		uses the shade mode \f2DcComponent\fP or \f2DcRange\fP.
+
+	``-singlebuffered''
+		Requests a single buffered window.
+
+	``-geometry \f2geomstring\fP''
+		Requests a window with a particular position 
+		and size.  The format for \f2geomstring\fP is ``WxH+X+Y''
+		or ``WxH'' (where W, H, X, and Y are the integer
+		values for width, height, and the X,Y position
+		of the upper left corner of the window).  If
+		the ``WxH'' format is used, X and Y are assumed
+		to be zero.
+
+	``-visualtype \f2vtype\fP''
+		Requests a window of the given visual type 
+		(where \f2vtype\fP is \f2DcDirectColor\fP, \f2DcPseudoColor\fP, 
+		etc.).
+
+	``-window \f2xwindow\fP''
+		Requests that the x window handle \f2xwindow\fP
+		that was opened by the application be the
+		window in which Dore draws. When this option
+		is included, options of the previous three
+		types will be ignored.		
+
+	``-display \f2xdisplay\fP''
+		If a window option was specified, that window on 
+		the display \f2xdisplay\fP is used. Otherwise, Dore
+		opens a window on \f2xdisplay\fP.
+
+	``-zbuffer 
+		The device will use the software z-buffer.
+
+	``-dither 
+		Dithering will be enabled when using the z-buffer.
+
+.fi
+.PP
+After a call to \f2DoDevice\fP and until the device object is deleted,
+the device handle may be used by subsequent device functions to alter
+the characteristics of the actual device (such as causing it to display).
+Dore devices use right-handed 3\-D floating point coordinate systems
+with the origin in the back, lower, left corner of the actual device.
+.SH "FORTRAN SPECIFIC"
+.PP
+\f2DEVTYP\fP is a string \f2LDEV\fP bytes long containing the
+type of device to create.
+.PP
+\f2ARGSTR\fP is a string \f2LARG\fP bytes long containing
+device options.
+.BP
+.SH ERRORS
+.I DoDevice
+will fail if the specified device is unavailable
+or an illegal device type or option is specified.
+.TP 15
+[SEVERE - unable to allocate device]
+.PP
+.I DoDevice
+will fail if enough memory for the device cannot be allocated
+.TP 15
+[SEVERE - unable to allocate memory]
+.SH "SEE ALSO"
+DdUpdate(3D), DoFrame(3D), DdSetOptions(3D)

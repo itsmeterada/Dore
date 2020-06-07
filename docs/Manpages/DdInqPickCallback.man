@@ -1,0 +1,77 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DdInqPickCallback 3D "Dore"
+.SH NAME
+DdInqPickCallback \- Return the pick callback object of a device
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+DtObject DdInqPickCallback(device)
+DtObject device;
+.sp
+.in -.5i
+FORTRAN:
+.in +.5i
+INTEGER*4 DDQPC(DEVICE)
+INTEGER*4 DEVICE
+.in -.5i
+.fi
+.SH DESCRIPTION
+.IX DdInqPickCallback
+.IX DDQPC
+.I DdInqPickCallback
+returns the pick callback object used on the device, \f2device\fP.
+.PP
+Picking is a method of identifying displayable primitives that fall
+within a specified volume known as the device pick aperture.
+A pick is initiated by a call to \f2DdPickObjs\fP <\f2DDPO\fP>.
+The pick callback is a callback object that selects which
+primitives found within the pick aperture during a pick (known as
+"hits") will actually be returned.  
+Dore provides
+three standard pick callback objects that may be used; however users
+may also easily provide their own.  The standard callback objects are:
+.IP "\f2DcPickFirst\fP <\f2DCPKFR\fP>" 
+This callback causes \f2DdPickObjs\fP to accept only the first hit
+that it finds.
+.IP "\f2DcPickClosest\fP <\f2DCPKCL\fP>"
+This callback causes \f2DdPickObjs\fP to accept only the hit that was
+frontmost (closest to the viewer) in the pick aperture.
+.IP "\f2DcPickAll\fP <\f2DCPKAL\fP>"
+This callback causes \f2DdPickObjs\fP <\f2DDPO\fP> to add all hits found 
+to the hit list.
+.PP
+Users may include functions that accept or exclude only hits
+on certain types of objects or ones that only accept up to
+a maximum number of hits before terminating a search.
+See \f2DdSetPickCallback\fP for information on creating pick callbacks.
+.SH ERRORS
+.I DdInqPickCallback
+will fail if passed an invalid device handle; the value \f2DcNullObject\fP
+<\f2DCNULL\fP> is returned.
+.TP 15
+[WARNING - invalid device handle]
+.SH "SEE ALSO"
+.na
+.nh
+DdSetPickCallback(3D), DdPickObjs(3D), DdSetPickAperture(3D),
+DdInqPickAperture(3D), DdSetPickPathOrder(3D), DdInqPickPathOrder(3D),
+DoPickID(3D)
+.ad
+.hy

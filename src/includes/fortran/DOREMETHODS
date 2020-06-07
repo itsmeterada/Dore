@@ -1,0 +1,98 @@
+C **************************************************************************
+C Copyright (C) 1994 Kubota Graphics Corp.
+C 
+C Permission to use, copy, modify, and distribute this material for
+C any purpose and without fee is hereby granted, provided that the
+C above copyright notice and this permission notice appear in all
+C copies, and that the name of Kubota Graphics not be used in
+C advertising or publicity pertaining to this material.  Kubota
+C Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+C OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+C "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+C IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+C PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+C EXPRESS OR IMPLIED.
+C **************************************************************************
+C
+C**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~**
+C**                                                                        **
+C**  This file contains all the Dore FORTRAN method constant declarations. **
+C**                                                                        **
+C****************************************************************************
+
+C methods
+
+C DcMethodNull
+      INTEGER*4 DCMNUL
+      PARAMETER (DCMNUL =-1)	
+C DcMethodDestroy
+      INTEGER*4 DCMDST
+      PARAMETER (DCMDST =0)	
+C DcMethodAddReference
+      INTEGER*4 DCMADR
+      PARAMETER (DCMADR =1)
+C DcMethodRemoveReference
+      INTEGER*4 DCMRMR
+      PARAMETER (DCMRMR =2)
+C DcMethodPrint
+      INTEGER*4 DCMPRT
+      PARAMETER (DCMPRT =3)
+C DcMethodCheckGroup
+      INTEGER*4 DCMCKG
+      PARAMETER (DCMCKG =4)
+C DcMethodCmpBndVolume	
+      INTEGER*4 DCMCBV
+      PARAMETER (DCMCBV =5)
+C DcMethodIniPick
+      INTEGER*4 DCMINP
+      PARAMETER (DCMINP =6)
+C DcMethodPick
+      INTEGER*4 DCMPCK
+      PARAMETER (DCMPCK =7)
+C DcMethodInqGlbAttVal
+      INTEGER*4 DCMIGA
+      PARAMETER (DCMIGA =8)
+C DcMethodUpdStdAltObj
+      INTEGER*4 DCMSAO
+      PARAMETER (DCMSAO =9)
+C DcMethodStdRenderStudio
+      INTEGER*4 DCMSRS
+      PARAMETER (DCMSRS =10)
+C DcMethodStdRenderDisplay
+      INTEGER*4 DCMSRD
+      PARAMETER (DCMSRD =11)
+
+C DcMethodDynIniRender
+      INTEGER*4 DCMDIR
+      PARAMETER (DCMDIR =12)
+C DcMethodDynRender
+      INTEGER*4 DCMDR
+      PARAMETER (DCMDR =13)
+C DcMethodGlbrndIniRender
+      INTEGER*4 DCMGIR
+      PARAMETER (DCMGIR =14)
+C DcMethodGlbrndIniObjs
+      INTEGER*4 DCMGIO
+      PARAMETER (DCMGIO =15)
+C DcMethodGlbrndSpcboxOvr
+      INTEGER*4 DCMGSO
+      PARAMETER (DCMGSO =16)
+C DcMethodGlbrndRayint
+      INTEGER*4 DCMGRI
+      PARAMETER (DCMGRI =17)
+C DcMethodGlbrndUsrdat
+      INTEGER*4 DCMGUD
+      PARAMETER (DCMGUD =18)
+C DcMethodGlbrndWcsloc
+      INTEGER*4 DCMGWC
+      PARAMETER (DCMGWC =19)
+C DcMethodGlbrndWcsnrm
+      INTEGER*4 DCMGWM
+      PARAMETER (DCMGWM =20)
+C DcMethodGlbrndWldBnd
+      INTEGER*4 DCMGWB
+      PARAMETER (DCMGWB =21)
+
+C DcMethodUpdStdAltLineObj
+      INTEGER*4 DCMSAL
+      PARAMETER (DCMSAL =22)

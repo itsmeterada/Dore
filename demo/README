@@ -1,0 +1,180 @@
+/**************************************************************************
+# Copyright (C) 1994 Kubota Graphics Corp.
+# 
+# Permission to use, copy, modify, and distribute this material for
+# any purpose and without fee is hereby granted, provided that the
+# above copyright notice and this permission notice appear in all
+# copies, and that the name of Kubota Graphics not be used in
+# advertising or publicity pertaining to this material.  Kubota
+# Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+# OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+# "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+# PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+# EXPRESS OR IMPLIED.
+**************************************************************************/
+ 
+ 
+See also Chapter 16 on Testing Dore in the Dore Developer's Guide.
+
+
+Demonstration Programs
+----------------------
+
+
+-----------------------------------------------
+Building and Running the Demonstration Programs
+-----------------------------------------------
+
+The demonstration programs use the same main program and the same default 
+interaction controls.  The common source code resides in the directory 
+dui.  Other directories contain code and data that are specific 
+to a demonstration program.  These are:
+
+	breath
+	flag
+	lwave
+	trunk
+
+The Imake build will build these in the proper order. To build them,
+simply
+
+	make all
+
+To run one of these demonstrations, cd to its directory and run
+the binary there (breath, flag, lwave, or trunk). The following
+are the command-line options accepted by these demos:
+
+-dt devicetype
+    specifies the type of "hardware" that the Dore' graphics will
+    be output to;  this could be a plotter, a display screen, a
+    disk file, ... (eg. `prog -dt ardentx11' or `prog -dt rasterfile')
+-df device-file
+    (Xwindows geometry spec by default) specifies any 
+    device-specific information about the Dore' graphics output "hardware"
+    (eg. `prog -df "-geometry 640x480+0+0"' or `prog -df raster.file')
+-s val
+    echo input commands to stdout (use: prog -s 1 > scriptfile) used to
+    capture the command sequence for later replay (default is 0)
+-S val
+    indicated that stdin input is redirected from a file
+    (use: prog -S 1 < scriptfile)
+    used to control this program via commands from a file instead of 
+    from the keyboard; WARNING: this input is read via a poll command and
+    since polling doesn't support input from disk files, results from 
+    using this option seem to work, but are not guaranteed!! (default is 0)
+    (only true if compiled with HAS_POLL)
+-w windowid
+    use the specified, pre-existing Xwindow for the Dore' graphical output
+    output; this assumes that the user has already created an Xwindow and
+    has the id of it;  the id must be specified in decimal, not hexadecimal
+    (eg.- prog -w 15724386) (if not specified, this program will create
+    its own window via Dore')
+-model num
+    which (of multiple) models to display first (eg.- prog -model 5)
+    (default is 0)
+-procs num
+    set the number of processors (threads) to be used for Dore'
+    (eg.- prog -procs 0 or prog -procs 2) (default is 0)
+-d val
+    debug mode; if set to 1 turns debug printing on; 0 is off
+    (eg.- prog -d 1) (default is 0)
+
+The following environment variables are also used by this program:
+  DISPLAY ==> must be set to the Xwindows display being used -- normally
+      this will be 'unix:0' (used in module Ui.c)
+  DEMODIR ==> set to the full path name of the demo directory -- this is 
+	usually, but not necessarily, "~demo", the login directory of the demo 
+	user id.
+  PSEUDO ==> used to set the default value for the 'pseudo' variable 
+  SHADE ==> used to set the default value for the 'shade' variable 
+  SINGLEB ==> used to set the default value for the 'singleb' variable 
+
+
+-------------------------------------------
+Interacting with the Demonstration Programs
+-------------------------------------------
+
+Each demonstration program creates its own graphics window, and responds
+to control characters typed in that window, followed by a <cr>.
+
+The following controls are common to most of the demos:
+
+	A		toggle animation
+	a|a[x|y|z]	toggle rotation around axis(axes)
+	b r,g,b		set background color to r,g,b
+	c		toggle backface culling
+	C[012]		select color map
+				0: compression of RGB into 3, 3, and 2 bits
+				1: grey scale
+				2: 8 color intensity rams 
+	d		rotate through display representations:
+				surface, point, wireframe
+	h		toggle specular highlights
+	S number	set level of subdivision of patches, spheres, etc.
+	s		toggle shading style:
+				flat, gouraud
+	q, x		quit
+	help		print list similar to this one
+	debug		toggle debug
+	DRx number	rotate by the specified number of degrees in x
+	DRy number	rotate by the specified number of degrees in y
+	DRz number	rotate by the specified number of degrees in z
+	Dz number	zoom		
+	Dtx number	translate in x
+	Dty number	translate in y
+	Dtz number	translate in z
+	Dl number	change light intensity to the specified number
+	
+The demonstration programs are:
+
+breath
+	A breathing cube bounces around in a box.  The breathing is accomplished
+	by recomputing the geometry of the model for each time step.  After 
+	computing the new geometry, the Dore model is recreated and displayed.
+	Special control characters for this program:
+		B		toggle cube breathe
+		P		toggle cube bounce
+		C		toggle cage visibility
+
+
+flag
+  	This program simulates a flag waving in the wind.  It is a constraint 
+	based model, simulating the flag as a network of point masses connected 
+	by springs, and simulating the wind as an applied force.  There is also 
+	a gravitational force and the force applied by the flag pole at the two
+  	attachment points.  
+
+	In detail, the flag is actually represented as a grid of point
+	masses held together with springs.  These points and springs
+	follow all of the rules of Newtonian physics, but are otherwise
+	left alone.  No higher level mathematics need be done to solve
+	the 'flag equation', because this is a simulation, not just a
+	graphical representation of a mathematical solution.
+
+	Special control characters for this program:
+		f		release flag
+		1		release top of flag
+		2		release bottom
+		* number 	wind direction 
+		W number	wind speed (between 0. and 1.)
+
+lwave
+	This program demonstrates the wave equation applied to an L-shaped
+	membrane.  Each time step of the solution is calculated and displayed
+	interactively.  This involves solving a series of simultaneous
+	differential equations for each time step.
+	Special control characters for this program:
+		LM number	mode (between 1.0 and 12.0)
+		LH number    	height (between -1.0 and 1.0)
+		LP number	phase (between -1.0 and 1.0)
+		W number	speed (between -1000.0 and 1000.0)
+
+trunk
+  	An octopus tentacle gropes around the screen like a palm frond
+  	blowing in the wind.  Experience the thrill of controlling this beast.
+	Special control characters for this program:
+ 		Ux number	x bend (between 0. and 1.)
+ 		Uy number	y bend		"
+ 		Uz number	z bend		" 
+		Us number	speed (between 0. and 6.)

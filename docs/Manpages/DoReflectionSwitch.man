@@ -1,0 +1,72 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DoReflectionSwitch 3D  "Dore"
+.SH NAME
+DoReflectionSwitch \- Create a primitive attribute object for enabling or disabling the use of reflection
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+DtObject DoReflectionSwitch(switchvalue)
+DtSwitch switchvalue;
+.sp
+.in -.5i
+FORTRAN:
+.in +.5i
+INTEGER*4 DOREFS(SWVAL)
+INTEGER*4 SWVAL
+.in -.5i
+.fi
+.SH DESCRIPTION
+.IX DOREFS
+.IX DoReflectionSwitch
+.I DoReflectionSwitch
+creates a reflection switch primitive attribute object.
+.PP
+Reflection is the response of a surface to light from primitive objects
+in the environment where the reflected light is centered around the
+mirror direction.
+In computing the reflection component of a surface shade, a surface's response
+to reflected light will be determined by the
+specular color and the specular intensity
+attributes.
+Hence, the reflection color of the object will appear the same as
+its specular color except that its response is only to light
+reflected from primitive objects and not 
+directly from light sources.
+Note also that the specular factor (\f2DoSpecularFactor\fP <\f2DOSPCF\fP>)
+is not used for reflection component calculations.
+.PP
+The parameter \f2switchvalue\fP specifies whether the surfaces of
+subsequently executed primitive objects have a reflection component
+contribution.  Possible values are:
+.IP "\f2DcOff\fP <\f2DCOFF\fP>"
+The object will render itself without a reflection shading component
+regardless of the settings of the specular color and specular intensity
+attributes.  These attributes will continue to be updated even though they will
+be ignored.
+.IP "\f2DcOn\fP <\f2DCON\fP>"
+The object will render itself using reflections whenever possible.
+.SH DEFAULTS
+The default value for \f2DoReflectionSwitch\fP is \f2DcOff\fP <\f2DCOFF\fP>.
+.SH "SEE ALSO"
+.na
+.nh
+DoGlbRendRayLevel(3D), DoSpecularColor(3D), DoSpecularIntens(3D)
+.ad
+.hy

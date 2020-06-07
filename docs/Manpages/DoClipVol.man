@@ -1,0 +1,110 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DoClipVol 3D  "Dore"
+.SH NAME
+DoClipVol \- Create a primitive attribute object defining a model clipping volume
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+DtObject DoClipVol(operator, numhalfspaces, halfspaces)
+DtClipOperator operator;
+DtInt numhalfspaces ;
+DtHalfSpace halfspaces[\|] ;
+.sp
+.in -.5i
+FORTRAN:
+.in +.5i
+INTEGER*4 DOCV(OPRATR, NHLFSP, HLFSPS)
+INTEGER*4 OPRATR
+INTEGER*4 NHLFSP 
+REAL*8 HLFSPS(6*NHLFSP)
+.in -.5i
+.fi
+.SH DESCRIPTION
+.IX DOCV
+.IX DoClipVol
+.I DoClipVol
+creates a model clipping volume primitive attribute object.  This object
+is used to modify the volume against which subsequently executed primitive
+objects are clipped when model clipping (or sectioning) is enabled.
+.PP
+The arguments of \f2DoClipVol\fP are as follows:
+.IP "\f2operator\fP"
+Specifies how the volume defined by \f2halfspaces\fP will be combined
+with the current value of the model clipping volume primitive attribute.
+.IP "\f2numhalfspaces\fP"
+Specifies the number of elements in the array \f2halfspaces\fP.
+.IP "\f2halfspaces\fP"
+Specifies an array of half spaces or sectioning planes.
+.PP
+Each halfspace is defined by a point in model coordinates and a
+vector that is the normal to the plane defining the boundary of the half space.
+This normal points in the direction of the acceptance region.
+The half spaces intersect to define a clipping volume.
+During display execution, this computed clipping volume is transformed
+by the current transformation matrix and combined
+with the current model clipping volume based on the specified
+operator.  
+.PP
+The following table defines the available model clipping constants.  T
+denotes the current value of the model clipping volume attribute, and
+S denotes the volume defined by the halfspaces.
+.PP
+.na
+.nh
+.nf
+.ta .8i 1.4i 2.4i
+FORTRAN		Clipping Acceptance
+		Constant	Region
+.sp
+\f2DcClipAll\fP		\f2<DCCALL>\fP		everything clipped
+\f2DcClipAnd\fP		\f2<DCCAND>\fP		T and S
+\f2DcClipAndReverse\fP	\f2<DCCARV>\fP		T and (not S)
+\f2DcClipNoOp\fP		\f2<DCCNOP>\fP		T
+\f2DcClipAndInverted\fP	\f2<DCCAIN>\fP		(not T) and S
+\f2DcClipReplace\fP	\f2<DCCREP>\fP		S
+\f2DcClipXOr\fP		\f2<DCCXOR>\fP		T xor S
+\f2DcClipOr\fP		\f2<DCCOR>\fP		T or S
+\f2DcClipNor\fP		\f2<DCCNOR>\fP		(not T) and (not S)
+\f2DcClipEqv\fP		\f2<DCCEQV>\fP		T eqv S [i.e. not (T xor S)]
+\f2DcClipInvertVolume\fP	\f2<DCCIVV>\fP		not S
+\f2DcClipOrReverse\fP	\f2<DCCORR>\fP		T or (not S)
+\f2DcClipInvert\fP		\f2<DCCINV>\fP		not T
+\f2DcClipOrInverted\fP	\f2<DCCORI>\fP		(not T) or S
+\f2DcClipNAnd\fP		\f2<DCCNAN>\fP		(not T) or (not S)
+\f2DcClipNone\fP		\f2<DCCNON>\fP		nothing clipped
+.re
+.ad
+.hy
+.fi
+.PP
+Note that model clipping is considerably more powerful than clipping
+performed in the viewing operation for the following reasons:
+.IP
+Any number of clipping planes can be specified.
+.IP
+The model clipping planes are oriented arbitrarily with respect
+to each other and to the coordinate axes.
+.IP
+An arbitrary boolean operator can be used to combine the volume defined by 
+the specified set of half spaces and the current model clipping volume.
+.SH DEFAULTS
+The default \f2DoClipVol\fP is all of world space, i.e., no clipping.
+.SH "SEE ALSO"
+DoClipSwitch(3D)

@@ -1,0 +1,53 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DfInqViewGroup 3D  "Dore"
+.SH NAME
+DfInqViewGroup \- Return the handle for a frame's view group
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+DtObject DfInqViewGroup(frame)
+DtObject frame;
+.sp
+.in -.5i
+FORTRAN:
+.in +.5i
+INTEGER*4 DFQVG(FRAME)
+INTEGER*4 FRAME
+.in -.5i
+.fi
+.SH DESCRIPTION
+.IX DFQVG
+.IX DfInqViewGroup
+.I DfInqViewGroup
+returns the handle for a frame's view group.
+The view group is part of every frame and contains the view handles of
+all the views associated with the frame (see \f2DoView\fP).
+When the frame is updated, all views in its view group 
+are updated in order and
+all non-view objects found in its view group
+are ignored.
+.SH ERRORS
+.I DfInqViewGroup
+will fail if the frame handle is invalid; \f2DcNullObject\fP
+<\f2DCNULL\fP> is returned.
+.TP 15
+[WARNING - invalid frame handle]
+.SH "SEE ALSO"
+DoView(3D)

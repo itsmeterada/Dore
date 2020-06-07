@@ -1,0 +1,48 @@
+#ident "%W%" %G%
+ 
+/**************************************************************************
+# Copyright (C) 1994 Kubota Graphics Corp.
+# 
+# Permission to use, copy, modify, and distribute this material for
+# any purpose and without fee is hereby granted, provided that the
+# above copyright notice and this permission notice appear in all
+# copies, and that the name of Kubota Graphics not be used in
+# advertising or publicity pertaining to this material.  Kubota
+# Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+# OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+# "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+# PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+# EXPRESS OR IMPLIED.
+**************************************************************************/
+ 
+                           FRACTALS
+
+This program creates and displays a fractal landscape.
+To run type "render -input filename", where "filename" is
+a landspace data file.  Other options which may be used are
+"-smooth 0" to turn off the smoothing of the surface and
+"-l #" to specify the initial lake level.
+
+The program "gendata" generates new landscape data files.
+Gendata requires a recursion level specified when called. For example,
+"gendata 6 > data.6" requests recursion to 6 levels.
+It uses a random initial seed if none is given with the "-i #" option.
+If invoked with "gendata -i 123 7 > data.7" the value "123" is used as
+the initial seed.
+
+Other options are: The option "-g initfile" reads a file of initial
+height values from which to recurse.
+The option "-s #" takes a scale factor to be used at each level of
+recursion.  The default scale factor is 1.
+The option "-n" supresses the use of color, and "-v" causes the
+output to be written in the form that the "-g" option accepts.
+
+Once the render program has begun, it prompts for new water levels
+and then redraws at the new level. The water starts at level = -.75
+and reasonable values range from -2.0 to 1.0.
+
+For example, type:
+     gendata 6 > data.6
+     render -input data.6
+  

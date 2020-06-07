@@ -1,0 +1,442 @@
+.\"#ident "%W%" %G%
+.\"
+.\" Copyright (C) 1988, 1989, 1990, 1991 by Kubota Pacific Computer Inc.
+.\"         All Rights Reserved
+.\" This program is a trade secret of Kubota Pacific Computer Inc. and
+.\" it is not to be reproduced, published, disclosed to others, copied,
+.\" adapted, distributed, or displayed without the prior authorization
+.\" of Kubota Pacific Computer Inc.  Licensee agrees to attach or embed
+.\" this Notice on all copies of the program, including partial copies
+.\" or modified versions thereof.
+.\"
+.so ../macros/local.me
+.ds CT Raster Objects
+.ds BT \*(Dd Programmer's Guide
+.ds h1 14
+.PN 275
+.L1 R ASTER 
+.L2 O BJECTS
+.CH FOURTEEN
+.EQ
+delim $$
+.EN
+.rs
+.sp -.5v
+This chapter describes raster objects and the system functions for 
+reading, writing, and maintaining raster data.
+It also explains how to use raster objects for view backgrounds and
+texture maps.
+.H1 "Raster Objects
+\f2Raster objects\fP are \*(Dd objects that store and manipulate two-
+and three-dimensional image or raster data.
+There are two representations of raster data, a file representation
+(\f2DoFileRaster <DOFRS>\fP) and a memory representation (\f2DoRaster
+<DORS>\fP).
+.lp
+The raster data of a raster object is an array of \f2pixels\fP or
+\f2voxels\fP arranged in a rectangular grid. 
+A \f2pixel\fP (picture element) is the set of information associated
+with a specific point in a two-dimensional raster image.
+A \f2voxel\fP (volume element) is the three-dimensional analog of a
+pixel, and is used when referring to three-dimensional raster objects.
+In \*(Dd, a pixel or voxel typically consists of certain combinations
+of RGB, alpha, and Z image data.
+.H3 "RGB Data
+RGB color information describes the color of each pixel/voxel, and
+is represented by three 8-bit unsigned integer byte values.
+Each value represents the intensity of light for that color channel.
+A value of 0 means no light, and a value of 255 means full intensity light.
+.H3 "Alpha Data
+Alpha information describes the transparency of the pixel or voxel,
+and is represented as a single 8-bit unsigned-integer byte value.
+A value of 0 means the pixel or voxel is opaque,
+and a value of 255 means it is completely transparent.
+It is used in image compositing and transparency texture mapping.
+.H3 "Z Data
+The Z information describes the relative distance of the pixel or
+voxel from a point of reference,
+and is stored as a 32-bit unsigned integer.
+A value of 0 represents a distance as far away as possible,
+and a value of $2 sup 32~=~4,294,967,296$ represents a distance as close
+as possible.
+For example, if the image is a two-dimensional rendering of a
+three-dimensional space, then the z data is the relative distance of
+the visible surface from the back clipping plane.
+.lp
+See Chapter 8, \f2Raster File and Memory Formats\f1, in the \f2\*(Dd Reference
+Manual\fP for a complete discussion of organization of raster data.
+.H1 "Creating Raster Objects
+Raster objects can be created from files containing raster data or
+from raster data in memory.
+The \*(Dd functions used to create raster objects are detailed below.
+.H2 "DoFileRaster
+\f2DoFileRaster <DOFRS>\fP creates a raster object that has the name
+of a file containing raster data.
+The syntax for \f2DoFileRaster\fP is
+.(m
+DoFileRaster(filename, specialstring)
+.)m
+where
+.ip "\f3filename\fP 
+specifies the name of the file that contains the raster data.
+.ip "\f3specialstring\fP
+specifies the kind of raster data contained in \f2filename\fP.
+If \f2specialstring\fP is \f2DcNullPtr <DCNULL>\fP then \f2filename\fP
+will be interpreted as a standard \*(Dd raster file.
+Otherwise, \f2specialstring\fP indicates that the file is in a format
+that is renderer dependent.
+.H2 "DoRaster"
+\f2DoRaster <DORS>\fP creates a raster object that has a pointer to
+the raster data stored in memory.
+The syntax for \f2DoRaster\fP is
+.(m
+DoRaster(width, height, depth, type, typestring, data, 
+	 delcallback)
+.)m
+where
+.ip "\f3width, height, depth\fP"
+specify the dimensions of the raster in pixels.
+A depth of one means that the raster is a 2-D raster, while a depth
+greater than one indicates that it is a 3-D volume raster.
+.ip "\f3type    \fP"
+specifies what data and format is associated with each pixel/voxel and
+how the data is stored.
+For example, the type \f2DcRasterRGB <DCRRGB>\fP means that each pixel
+contains RGB data stored in consecutive bytes like:
+.sp .5v
+     <$red sub 1$> <$green sub 1$> <$blue sub 1$> <$red sub 2$> <$green sub 2$> 
+<$blue sub 2$> ...
+.sp .5v
+The type \f2DcRasterSpecial <DCRSPC>\fP indicates a nonstandard
+format.
+.ip "\f3typestring\fP"
+specifies the format of the data if \f2type\fP is \f2DcRasterSpecial
+<DCRSPC>\fP. 
+These special types are renderer dependent.
+.ip "\f3data    \fP"
+specifies a pointer to the pixel/voxel data.
+Note that \*(Dd does not copy the raster data pointed to by
+\f2data\fP, but uses it from the user space.
+.ip "\f3delcallback\fP"
+specifies a callback object.
+When the raster object is deleted by \*(Dd, the function associated
+with the callback object \f2delcallback\fP will be invoked.
+The calling sequence for this function is:
+.(m
+C code:
+.sp
+delfcn(data, rasterdata)
+DtPtr data;
+DtPtr rasterdata;
+.sp
+\*(Fo Code:
+.sp
+      SUBROUTINE DELFCN(DATA, RASDAT)
+      INTEGER*4 DATA
+      INTEGER*4 RASDAT
+.)m
+.ip
+where \f2rasterdata\fP is the raster data of the raster object.
+Often an application will not need the data pointed to by
+the object after the raster object is destroyed.
+\*(Dd provides a standard callback object, \f2DcDeleteData <DCDELD>\fP,
+which will deallocate the space pointed to by \f2data\fP.
+You can also define your own callback if you do not want the data to be
+unconditionally deallocated when this raster object is
+deleted.
+This is useful if, for example, the same data is used by other raster
+objects.
+.H1 "Updating Raster Data
+\f2DsRasterUpdate <DSRSU>\fP notifies \*(Dd that the data for a
+raster object has changed.
+\*(Dd does not keep its own copy of the data used to
+create a raster object.
+It may, however, keep an internal reformatted copy of
+the data which is more efficient for a particular renderer or
+device.
+\*(Dd should be notified when the data is changed.
+For example, if the data of a raster object is in \f2DcRasterRGBA
+<DCRRA>\fP format and the renderer being used does not use the alpha
+information, it may create another data array that just has the RGB
+information.
+.H1 "Raster Representations
+The two forms of raster objects, file rasters and memory
+rasters, are interrelated and \*(Dd provides tools
+to move between these two forms. 
+\*(FT shows the relationship between these two representations and the
+functions that convert between them.
+The following sections discuss how to acquire and use these two forms
+of raster data.
+.H2 "Creating Raster Data
+There are several ways that data for a raster object can be obtained.
+An application can generate the data dynamically at run time, it can
+be read in from a file, or it can be acquired from a \*(Dd device.
+.bp
+\ 
+.\" macroff -l -.75 -s .75 
+.(F ./PS/14.1ps 1.5i 0
+.)F "Raster Representations"
+.rs
+.sp -.5v
+The system function \f2DsFileRasterRead <DSFRSR>\fP will read
+standard \*(Dd raster files.
+The data returned from this call can be used directly in creating a
+memory raster object.
+For example:
+.(m
+C Code:
+.sp
+.\"#	ident "@(#)ch15.ex01.c	1.1"	5/6/91
+.\"
+    DtInt width, height, depth;
+    DtRasterType type;
+    DtPtr data;
+    DtObject raster;
+
+    if (DsFileRasterRead("myfile.aif", &width, &height, 
+			 &depth, &type, &data) != -1) {
+	raster = DoRaster(width, height, depth, type, 
+			  DcNullPtr, data, DcDeleteData);
+    } else {
+	printf ("could not read raster file\\\\n");
+    }
+
+.sp 
+\*(Fo Code:
+ 
+.\"#	ident "@(#)ch15.ex01.f	1.2"	5/15/91
+.\"
+       INTEGER*4 WIDTH
+       INTEGER*4 HEIGHT
+       INTEGER*4 DEPTH
+       INTEGER*4 TYPE
+       INTEGER*4 DATA
+       INTEGER*4 RASTER
+C
+       IF (DSFRSR('myfile.aif', 10, WIDTH, HEIGHT, DEPTH, 
+      1		  TYPE, DATA) .NE. -1) THEN
+	   RASTER = DORS(WIDTH, HEIGHT, DEPTH, TYPE,
+      1			 ' ', 1, DATA, DCDELD)
+       ELSE
+	   WRITE(6,*)'could not read raster file'
+       ENDIF
+.)m
+.lp
+Many \*(Dd devices can return the raster data representing the
+current image being displayed on the device.
+Thus, \*(Dd can be used to generate images that can later be used
+for texture maps or backgrounds.
+The following subroutine shows how the raster data of a device can
+be obtained using \f2DdInqPixelData <DDQPXD>\fP and then used to
+create a raster object. 
+.(m
+C code:
+.sp
+.\"#	ident "@(#)ch15.ex02.c	1.1"	5/6/91
+.\"
+DtObject
+get_raster(device)
+DtObject device;
+{
+    DtInt width, height;
+    DtRasterType type;
+    DtPtr data;
+    DtFlag userdelete;
+    DtObject raster;
+
+    if (DdInqPixelData (device, DcRasterRGB, &width, 
+			&height,&type, &data, 
+			&userdelete) != DcFalse) {
+	if (userdelete) {
+	    raster = DoRaster(width, height, 1, type,
+			   DcNullPtr, data, DcDeleteData);
+	} else {
+	    raster = DoRaster(width, height, 1, type,
+			      DcNullPtr, data, DcNullPtr);
+	}
+    } else {
+	printf ("could not get Pixel data of device\\\\n");
+	raster = DcNullObject;
+    }
+    return raster;
+}
+.sp
+\*(Fo Code:
+.sp
+.\"#	ident "@(#)ch15.ex02.f	1.2"	5/15/91
+.\"
+       INTEGER*4 FUNCTION GETRAS(DEVICE)
+C
+       INCLUDE '/usr/include/fortran/DORE'
+C
+       INTEGER*4 DEVICE
+       INTEGER*4 HEIGHT
+       INTEGER*4 DEPTH
+       INTEGER*4 TYPE
+       INTEGER*4 DATA
+       INTEGER*4 USRDEL
+
+       IF (DDQPXD(DEVICE, DCRRGB, WIDTH, HEIGHT, TYPE, 
+      1           DATA, USRDEL) .NE. DCFALS) THEN
+	    IF (USRDEL .EQ. DCTRUE) THEN
+		GETRAS = DORS(WIDTH, HEIGHT, 1, TYPE,
+      1			 ' ', 1, DATA, DCDELD)
+	    ELSE
+		GETRAS = DORS(WIDTH, HEIGHT, 1, TYPE,
+      1			 ' ', 1, DATA, DCNULL)
+	    ENDIF
+       ELSE
+	    WRITE(6,*) 'could not get Pixel data of device'
+	    GETRAS = DCNULL
+       ENDIF
+       RETURN
+       END
+.)m 
+.H2 "Writing Raster Files
+Often it is useful to create a file raster from a memory raster.
+The function \f2DsRasterWrite <DSRSW>\fP will write the data of a
+raster object to the named file.
+For example:
+.(m
+C code:
+.sp
+.\"#	ident "@(#)ch15.ex03.c	1.1"	5/6/91
+.\"
+    DtObject raster;
+
+    if (DsRasterWrite (raster, "myfile.aif") == -1) {
+	printf ("could not write raster\\\\n");
+    }
+.sp
+\*(Fo Code:
+.sp
+.\"#	ident "@(#)ch15.ex03.f	1.2"	5/15/91
+.\"
+       INTEGER*4 RASTER
+C
+       IF (DSRSW (RASTER, 'myfile.aif', 10) .EQ. -1) THEN
+	    WRITE(6,*) 'could not write raster'
+       ENDIF
+.)m
+.H1 "Using Raster Objects
+Raster objects are not directly viewable.
+They are used by other objects whose effects are directly viewable.
+Raster objects are used by texture objects and by views for
+backgrounds.
+.H3 "Texture Maps
+Raster objects are used by texture map objects like
+\f2DoTextureMapDiffuseColor <DOTMDC>\fP to modify the diffuse color of
+primitive objects.
+For example, once you have obtained raster data from a device and
+created a raster object (from the above example), you can use this
+raster object to create a texture for mapping the diffuse
+color of an object. 
+See Chapter 15 for more details on texture mapping. 
+.(m
+C code:
+.sp
+.\"#	ident "@(#)ch15.ex04.c	1.1"	5/6/91
+.\"
+    DtObject raster;
+    DtObject device;
+
+    raster = get_raster(device);
+
+    DgAddObj (DoTextureMapDiffuseColor(DcMapReplace, 
+			DcStdTableLookup, raster));
+.sp
+\*(Fo Code:
+.sp
+.\"#	ident "@(#)ch15.ex04.f	1.2"	5/15/91
+.\"
+       INTEGER*4 RASTER
+       INTEGER*4 DEVICE	
+C
+       RASTER = GETRAS(DEVICE)
+       CALL DGAO (DOTMDC(DCMRPL, DCSTLU, RASTER))
+.)m
+.H3 "View Backgrounds
+You may set the background of a view object to be a raster object.
+This raster object will be used to initialize the view each time
+the view is updated.
+.lp
+The coordinate system of a view is frame coordinates, not device
+coordinates, so it is not possible to know the direct mapping of the
+raster object on to the device.
+In other words there may not be a one to one correspondence between
+the pixels in the raster object and the pixels on the device.
+There are two ways to deal with this possible mismatch.
+.lp
+The view attribute \f2DvSetBackgroundJust <DVSBJ>\fP specifies how the
+raster image should be positioned on the device.
+The justification specifies where \f2white space\fP will be added if the
+raster is too small, or how the raster will be cropped if it is too
+large.
+.lp
+The \f2DvSetBackgroundRaster <DVSBR>\fP function includes a callback
+object that will be called if the dimensions of the raster are not the
+same as the dimensions of the view in device coordinates.
+The calling sequence for the callback function is:
+.(m
+C code:
+.sp
+DtObject resize(dataptr, raster, width, height)
+DtPtr dataptr;
+DtObject raster;
+DtInt width;
+DtInt height;
+.sp
+\*(Fo code:
+.sp
+      INTEGER*4 FUNCTION RESIZE(DATA, RASTER, WIDTH, HEIGHT)
+      INTEGER*4 DATA
+      INTEGER*4 RASTER
+      INTEGER*4 WIDTH
+      INTEGER*4 HEIGHT
+.)m
+The callback should return a raster object to be used with the
+dimensions of the view as mapped on the device.
+This callback allows you to adjust the raster object to fit the view.
+If you specify \f2DcNullPtr <DCNULL>\fP for the callback object then
+no resizing will be done.
+.lp
+The following example shows how a raster could be added to a view.
+The raster is read from a pre-existing rasterfile called
+\f2my_raster.aif\fP and will be justified so that it always starts at
+the upper left hand corner of the view.
+.(m 
+C code:
+.sp
+.\"#	ident "@(#)ch15.ex05.c	1.1"	5/6/91
+.\"
+    DtObject raster;
+    DtObject view;
+
+    view = DoView();
+
+    raster = DoFileRaster("my_raster.aif", DcNullPtr);
+    DvSetBackgroundRaster(view, raster, DcNullPtr);
+    DvSetBackgroundJust(view, 0.0, 1.0);
+.sp
+\*(Fo Code:
+.sp
+.\"#	ident "@(#)ch15.ex05.f	1.2"	5/15/91
+.\"
+       INTEGER*4 RASTER
+       INTEGER*4 VIEW
+C
+       VIEW = DOVW()
+       RASTER = DOFRS('my_raster.aif', 13, DCNULL, 0)
+       CALL DVSBR(VIEW, RASTER, DCNULL)
+       CALL DVSBJ(VIEW, 0.0D, 1.0D)
+.)m
+.H1 "Chapter Summary
+Chapter 14 describes a class of objects called \f2raster objects\fP.
+Raster objects contain raster data and have two
+different representations: file and memory.
+The data for raster objects can be obtained from programs, from files
+via \f2DsFileRasterRead <DSFRSR>\fP, or from \*(Dd devices via
+\f2DdInqPixelData <DDQPXD>\fP.
+.lp
+Raster objects are used to provide image data for texture mapping and
+the background image for a view.

@@ -1,0 +1,9 @@
+#include <Dore.tmpl>
+
+    SRCS = edit.c ogr_inqset.c ogr_obj.c ogr_util.c table.c
+    OBJS = edit.o ogr_inqset.o ogr_obj.o ogr_util.o table.o
+
+LibraryObjectRule()
+SubdirLibraryRule($(OBJS))
+
+DependTarget()

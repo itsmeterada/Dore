@@ -1,0 +1,68 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DoSpecularIntens 3D  "Dore"
+.SH NAME
+DoSpecularIntens \- Create a specular intensity primitive attribute object
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+DtObject DoSpecularIntens(intensity)
+DtReal intensity;
+.sp
+.in -.5i
+FORTRAN:
+.in +.5i
+INTEGER*4 DOSPCI(INTENS)
+REAL*8 INTENS
+.in -.5i
+.fi
+.SH DESCRIPTION
+.IX DOSPCI
+.IX DoSpecularIntens
+.I DoSpecularIntens
+creates a specular intensity primitive attribute object.  
+Specular reflection is the response of a surface to directed incident
+light where the reflected (specular) light is scattered primarily in
+the mirror direction.
+.PP
+The parameter
+\f2intensity\fP specifies a weighting factor for the
+specular response of a surface to light from 
+incident light sources in the environment.
+The specular intensity ranges from 0.0 to 1.0.
+.PP
+The specular intensity is only one of four qualities
+that give a surface shiny highlights.
+The other qualities are the color of the highlight
+(set with \f2DoSpecularColor\fP), the precision
+of the highlight (set with \f2DoSpecularFactor\fP),
+and the switch that turns the highlights on
+(set with \f2DoSpecularSwitch\fP).
+.PP
+\f2DoSpecularIntens\fP also affects the intensity
+of interobject reflections.
+.SH DEFAULTS
+The default \f2DoSpecularIntens\fP is 1.0.
+.SH "SEE ALSO"
+.na
+.nh
+DoReflectionSwitch(3D), DoSpecularColor(3D), 
+DoSpecularFactor(3D),  DoSpecularSwitch(3D)
+.ad
+.hy

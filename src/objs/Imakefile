@@ -1,0 +1,8 @@
+#include <Dore.tmpl>
+#define	IHaveSubdirs
+
+SUBDIRS = device frame geoatt glbatt group map misc pri priatt \
+          studio studioatt view
+
+MakeSubdirs($(SUBDIRS))
+DependSubdirs($(SUBDIRS))

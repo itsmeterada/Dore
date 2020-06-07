@@ -1,0 +1,63 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DoTextureMapDiffuseColorSwitch 3D "Dore"
+.SH NAME
+DoTextureMapDiffuseColorSwitch \- Create a primitive attribute object for enabling or disabling texture mapping of diffuse color
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+DtObject DoTextureMapDiffuseColorSwitch(switchvalue)
+DtSwitch switchvalue;
+.sp
+.in  -.5i
+FORTRAN:
+.in  +.5i
+INTEGER*4 DOTMDS(SWVAL)
+INTEGER*4 SWVAL
+.in  -.5i
+.fi 
+.IX "DoTextureMapDiffuseColorSwitch"
+.IX "DOTMDS"
+.SH DESCRIPTION
+.LP
+\f2DoTextureMapDiffuseColorSwitch\fP creates a primitive attribute object that
+enables or disables texture mapping of diffuse color.
+The \f2switchvalue\fP parameter is used to specify whether or not the 
+diffuse color of subsequent objects can be modified by texture mapping.
+.IP "\f2DcOff\fP <\f2DCOFF\fP>"
+The primitive object will ignore
+any diffuse color texture maps that have been defined with 
+\f2DoTextureMapDiffuseColor\fP <\f2DOTMDC\fP>.
+.IP "\f2DcOn\fP <\f2DCON\fP>"
+The diffuse color will be
+mapped as specified by the \f2DoTextureMapDiffuseColor\fP attribute
+whenever possible. 
+Note that the \f2DoDiffuseSwitch\fP primitive attribute 
+must be also be \f2DcOn\fP <\f2DCON\fP>.
+.SH DEFAULTS
+The default for \f2DoTextureMapDiffuseColorSwitch\fP
+is \f2DcOff\fP <\f2DCOFF\fP>.
+.SH SEE ALSO
+.na
+.nh
+DoDiffuseColor(3D), DoDiffuseSwitch(3D), 
+DoTextureMapDiffuseColor(3D)
+.ad
+.hy
+\&

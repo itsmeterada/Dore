@@ -1,0 +1,40 @@
+I've just finished uploading a much-improved interim release of Dore'
+onto sunsite. I have to apologize for the length of time this has taken
+(it's been a couple of weeks), but I hope you'll agree that it's
+worth the wait.
+
+This is version 6.01.
+
+Changes included in this release (off the top of my head):
++ now builds with Imake
+  + will build both shared and unshared libraries, at the same time!
+  + the NT build has been integrated
++ significantly cleaned up the source tree
++ manpages have been renamed to their longer names
++ renamed conflicting source files - more will be happening with this
++ unbundled the docs from the main distribution, to cut down on size
++ the demo code now supports poll() and select().
+  - I'm not sure how to approach this for NT.
++ PostScript versions of the manpages are available in the
+  documentation bundle.
+
+You can find the source and documentation on sunsite.unc.edu (the
+official Dore' archive) in pub/packages/development/graphics/Dore as
+dore601.tar.gz (~1.9MB) and dore601.docs.tar.gz (~2.9MB). There are 500k
+chunked versions available in the split/ directory.
+
+Make sure you read the README file and follow its instructions!
+Especially for determining the BOOTSTRAPCFLAGS and fiddling with
+the config/cf/site.def file.
+
+I've built the distribution on both NetBSD 1.0 and Solaris 2.3. Ther
+should be no problems building on any other Unix-type system.
+There may be slight build problems on NT. The modified macros at the
+top of config/cf/DoreLib.tmpl may need to be changed.
+
+Send patches, bug-reports, etc. to me.
+
+Thanks!
+
+PS: I realize I forgot to remove the Solaris'isms from config/cf/site.def.
+    These shouldn't make a diffeent though.

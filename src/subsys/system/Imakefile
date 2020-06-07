@@ -1,0 +1,9 @@
+#include <Dore.tmpl>
+
+    SRCS = other.c rstrio.c setinq.c
+    OBJS = other.o rstrio.o setinq.o
+
+LibraryObjectRule()
+SubdirLibraryRule($(OBJS))
+
+DependTarget()

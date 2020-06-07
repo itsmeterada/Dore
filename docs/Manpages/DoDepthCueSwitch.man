@@ -1,0 +1,52 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DoDepthCueSwitch 3D  "Dore"
+.SH NAME
+DoDepthCueSwitch \- Create a primitive attribute object for enabling or disabling depth cueing
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+DtObject DoDepthCueSwitch(switchvalue)
+DtSwitch switchvalue;
+.sp
+.in -.5i
+FORTRAN:
+.in +.5i
+INTEGER*4 DODCS(SWVAL)
+INTEGER*4 SWVAL
+.in -.5i
+.fi
+.SH DESCRIPTION
+.IX DODCS
+.IX DoDepthCueSwitch
+.I DoDepthCueSwitch
+creates a depth cue switch primitive attribute object. The \f2switchvalue\fP
+parameter is used to specify whether or not subsequent primitive objects will
+be depth cued.
+When the depth cue switch is enabled, a
+user-provided color is combined with that of any primitive object
+proportional to each part's distance from the viewer (i.e., Z-values
+in frame coordinates).  If the depth cue switch
+is disabled, then the primitive object's color is unaffected.
+Depth cueing is often used to make objects far from the
+viewer fade into the background.
+.SH DEFAULTS
+The default for \f2DoDepthCueSwitch\fP is \f2DcOff\fP <\f2DCOFF\fP>.
+.SH "SEE ALSO"
+DoDepthCue(3D)

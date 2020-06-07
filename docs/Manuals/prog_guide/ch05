@@ -1,0 +1,1097 @@
+.\"#ident "%W%" %G%
+.\"
+.\" Copyright (C) 1988, 1989, 1990, 1991 by Kubota Pacific Computer Inc.
+.\"         All Rights Reserved
+.\" This program is a trade secret of Kubota Pacific Computer Inc. and
+.\" it is not to be reproduced, published, disclosed to others, copied,
+.\" adapted, distributed, or displayed without the prior authorization
+.\" of Kubota Pacific Computer Inc.  Licensee agrees to attach or embed
+.\" this Notice on all copies of the program, including partial copies
+.\" or modified versions thereof.
+.\"
+.so ../macros/local.me
+.EQ
+delim $$
+.EN
+.ds BT \*(Dd Programmer's Guide
+.ds CT Primitive Attributes
+.ds h1 5
+.PN 93
+.L1 P RIMITIVE
+.L2 A TTRIBUTES
+.CH FIVE
+.rs
+.sp -1.5v
+This chapter describes attribute stacking in detail.  It includes
+examples of primitive attribute objects that affect a primitive
+object's surface properties and color.  Primitive attribute
+objects relating to the primitive object's display
+representation, such as \f2DoRepType <DOREPT>\f1 and
+\f2DoSubDivSpec <DOSDS>\f1,
+are also discussed.  Concepts and terms introduced in this
+chapter include primitive attribute objects; the pushing and
+popping of attributes; 
+representation type;
+subdivision level; subdivision; local antialiasing;
+ambient, diffuse, specular, transparent and reflection
+components of material properties;
+and interpolation type.
+.sp -.5v
+.H1 "Primitive Attributes"
+.rs
+.sp -.25v
+A \f2primitive attribute\f1 is an attribute used to affect how a
+primitive object looks.  Earlier chapters introduced a number of
+primitive attribute objects, including \f2DoDiffuseColor
+<DODIFC>,
+DoRepType <DOREPT>, \f1and \%\f2DoSpecularIntens <DOSPCI>\f1.
+.sp -.25v
+.lp
+The general primitive attribute category comprises several
+subgroups, including:
+.(l I
+Geometric transformation attributes (see Chapter 6)
+Text attributes (see Chapter 7)
+Attributes for texture mapping (see Chapter 15)
+.)l
+All primitive attribute object functions begin with the prefix
+\f2Do\f1 and are a subcategory of the \f2 object creation\f1
+functions.  All \f2Doxxx <DOXXX>\f1 functions create an object and return
+its handle.
+All \*(Dd functions in \*(Fo are uppercase.
+.sp -.5v
+.H1 "Rendering"
+.rs
+.sp -.25v
+Rendering of an image is triggered by one of the update functions
+(\f2DdUpdate <DDU>, DfUpdate <DFU>, DvUpdate <DVU>\f1).
+The update causes a traversal of the \*(Dd database,
+and the objects are rendered in order.
+The \f2rendering\f1 of an attribute object sets the current
+value for that attribute type.
+When a primitive object is rendered it is drawn 
+using all the current values for the
+attributes that apply to it.
+.sp -.25v
+.lp
+The rendering of a group object involves several steps:
+.sp -.5v
+.np
+Save the current values of all the attributes.
+.sp -.5v
+.np
+Render all the objects in the group in order.
+.sp -.5v
+.np
+Restore current values for all the attributes to what they
+were just before the group was rendered.
+.sp -.5v
+.lp
+The following sections detail this process.
+.sp -.5v
+.H1 "Attribute Stacking"
+.rs
+.sp -.25v
+Chapter 3, \f2Objects and Groups\fP describes in general
+terms how
+attribute values are inherited within groups and how attribute
+values are saved and restored at group boundaries.  The following
+paragraphs provide a conceptual explanation of how
+attributes stack in \*(Dd.  Actually, \*(Dd uses a much more
+efficient scheme to handle any number of attributes with very
+little overhead.  The effect of that method is described here.
+.sp -.25v
+.lp
+Every attribute in \*(Dd has a default value,
+and by definition every primitive object inherits every
+primitive attribute.  Certain primitive objects, however, are not
+affected by all of the primitive attributes.  For example,
+\f2DoPolygon <DOPGN>\f1 is not affected by the current text font, and
+\f2DoText <DOTXT>\f1 is not affected by the current subdivision level.
+.sp -.25v
+.lp
+When a rendering traversal occurs and a regular group is entered,
+a copy of each current attribute
+value is pushed onto the top of the attribute stacks, as shown in
+\*(FT.  If this group is at the top of the display tree, the
+default values are pushed onto the top of each stack.  (For
+convenience, this figure shows only a few of the attributes
+included in \*(Dd.)  \*(Dd keeps track of the previous stack tops
+because all the pushed attribute values, along with their
+subsequent modifications, will be popped when that group is
+exited.
+.(F " ./PS/5.1ps" .9i 0
+.)F "Pushing Attribute Values When a Group is Entered"
+.H2 "Modifying the Top of Stack"
+.rs
+.sp -.25v
+This new top of stack (the copy) is then modified by subsequent
+attribute objects in the group.  
+The following code fragment shows a group \f2obj_group <OBJGRP>\fP,
+which contains several primitive attribute objects and
+another group \f2post <POST>\fP  with more attribute objects.
+\*(FT shows the object diagram for these two groups.
+.sp -.25v
+.(m
+C code:
+
+.\"#	ident "%W%" %G%
+.\"
+DtObject post, obj_group;
+static DtReal yellow[] = {1.0, 1.0, 0.0};
+static DtReal magenta[] = {1.0, 0.0, 1.0};
+static DtReal sds[] = {0.03};
+
+post = DoGroup(DcTrue);
+     DgAddObj(DoDiffuseColor(DcRGB, yellow));
+     DgAddObj(DoSurfaceShade(DcShaderConstant));
+     DgAddObj(DoRepType(DcWireframe));
+     DgAddObj(DoPrimSurf(DcCylinder));
+DgClose();
+
+obj_group = DoGroup(DcTrue);
+     DgAddObj(DoRepType(DcSurface));
+     DgAddObj(DoSubDivSpec(DcSubDivRelative, sds));
+     DgAddObj(DoDiffuseColor(DcRGB, magenta));
+     DgAddObj(DoPrimSurf(DcCone));
+     DgAddObj(post);
+     DgAddObj(DoPrimSurf(DcSphere));
+DgClose();
+
+
+\*(Fo code:
+
+.\"#	ident "%W%" %G%
+.\"
+      INTEGER*4 POST, OBJGRP
+      DATA YELLOW /1.0D0, 1.0D0, 0.0D0/
+      DATA MAGENT /1.0D0, 0.0D0, 1.0D0/
+      DATA SDS /0.03D0/
+C
+      POST=DOG(DCTRUE)
+         CALL DGAO(DODIFC(DCRGB,YELLOW))
+         CALL DGAO(DOSRFS(DCSHCN))
+         CALL DGAO(DOREPT(DCWIRE))
+         CALL DGAO(DOPMS(DCCYL))
+      CALL DGCS()
+C
+.bp
+      OBJGRP=DOG(DCTRUE)
+         CALL DGAO(DOREPT(DCSURF))
+         CALL DGAO(DOSDS(DCSDRL,SDS))
+         CALL DGAO(DODIFC(DCRGB, MAGENT))
+         CALL DGAO(DOPMS(DCCONE))
+         CALL DGAO(POST)
+         CALL DGAO(DOPMS(DCSPHR))
+      CALL DGCS()
+.)m
+.(F "./PS/5.2ps" 2.1i 0
+.)F "The Groups obj_group and post"
+.rs
+.sp -1v
+Each primitive attribute object replaces the
+existing value on the top of the attribute stack.  
+(See \*(FT.)
+The cone object is rendered using the current values for each
+attribute.  The cone has a surface representation type, a
+relative subdivision specification, and a diffuse color of
+magenta.
+.(F "./PS/5.3ps" 1i 0
+.)F "Modifying Primitive Attribute Values"
+.rs
+.sp -1v
+Next, the \f2post\fP group is entered and 
+a copy is made of all the current attribute stack values. 
+(See \*(FT.)
+Again, \*(Dd keeps track of
+where the copied stack of attribute values begins because all the
+copied attribute values, along with their subsequent
+modifications, will be popped when the group is exited.
+.bp
+\ 
+.(F "./PS/5.4ps" 1.2i 0
+.)F "Entering the post Group"
+.sp -1v
+Within the \f2post\fP group, the diffuse color attribute is changed
+to yellow, as shown in \*(FT.  
+The representation type is also changed to wireframe,
+and the surface shader is changed to a constant shader.
+The cylinder inherits the rest of
+the attribute values from \f2obj_group\fP (including a large
+number of defaults not shown here).
+.(F "./PS/5.5ps" 1.4i 0
+.)F "Replacing Attribute Values within the post Group"
+.rs
+.sp -1v
+When the \f2post\fP group is exited, the attribute values are
+popped off their stacks to the level before the group
+was entered. (\*(FT.)
+.(F "./PS/5.6ps" 1i 0
+.)F "Popping Attribute Values When post is Exited"
+.sp -1v
+The sphere object is now executed using the current attribute
+values, including surface representation type, a relative
+subdivision specification, and a diffuse color of magenta.
+Notice how the sphere is not affected by the attributes set in
+the \f2post\fP group, since those values were popped from the attribute
+stacks when that group was exited.  
+(Notice also that the
+sphere and cone both inherit exactly the same primitive
+attributes set earlier in \f2obj_group\fP.)
+.lp
+When \f2obj_group\fP is exited, the attribute stacks are again
+popped to their level before the group was entered.
+(\*(FT.)
+.(F "./PS/5.7ps" .6i 0
+.)F "Popping Attribute Values When obj_group is Exited"
+.rs
+.sp -2v
+.H1 "DoPushAtts and DoPopAtts"
+.rs
+.sp -.25v
+You can also explicitly push and pop sets of attribute values
+using the functions \f2DoPushAtts <DOPUA>\f1 and
+\f2DoPopAtts <DOPPA>\f1 within a group.  However, since attribute
+.CL
+values are automatically pushed and popped at group boundaries,
+it is usually preferable to structure the \*(Dd database so that
+the group structure causes attributes to be pushed and popped
+\f2naturally\f1.
+.sp -.5v
+.H1 "Affecting an Object's Display Representation"
+.rs
+.sp -.25v
+The representation of an
+object as it is displayed can be referred to as its \f2display
+representation\f1.  
+This is not necessarily the same as the underlying 
+three-dimensional form of the object.
+This display representation is affected by several attributes
+including the representation type, subdivision specification, 
+backface culling attributes,
+and local antialiasing attributes, as described below.
+.sp -.25v
+.H2 "Representation Type"
+.rs
+.sp -.25v
+The \f2DoRepType <DOREPT>\f1 attribute
+specifies how subsequent primitive objects are
+displayed\(emwith corner points, edges, outlines, or solid
+surfaces.  
+The representation can be specified as
+.sp -.25v
+.ip "\f3DcPoints <DCPNTS>\fP"
+a series of points
+.sp -.25v
+.ip "\f3DcWireframe <DCWIRE>\fP"
+outlines of decomposed elements
+.sp -.25v
+.ip "\f3DcOutlines <DCOUTL>\fP"
+polygon outlines
+.sp -.25v
+.ip "\f3DcSurface <DCSURF>\fP"
+surfaces
+.sp -.25v
+.ip "\f3DcSurfaceWireframeEdges <DCSWEG>\fP"
+surfaces with colored edges on decomposed elements
+.sp -.25v
+.ip "\f3DcSurfaceOutlineEdges <DCSOEG>\fP"
+surfaces with colored edges on polygon outlines
+.sp -.25v
+.lp
+The various representation types of the simple polygon from Chapter 4
+are shown in \*(FT.
+.(F 
+.\"	PS/5.8ps 2.5i 0
+.sp 2.75i
+.)F "Representation Types"
+.H2 "Subdivision Specification"
+\f2DoSubDivSpec <DOSDS>\f1 specifies how to subdivide 
+subsequent primitive objects.
+Some primitive objects, such as spheres,
+cylinders, tori, and patches, are \f2analytic objects\f1. 
+With some renderers, these objects are decomposed into 
+triangles that are an \f2approximation\f1 of the
+analytic surface. 
+The more you divide up the surface of such
+objects, the closer you approximate the actual object.
+With other renderers,
+the true mathematical object is rendered, without approximation.
+The subdivision specification is then ignored.
+.lp
+The syntax for \f2DoSubDivSpec\f1 is
+.(m
+DoSubDivSpec (type, parms)
+.)m
+.lp
+The \f2parms\fP parameter is an array of floating point values.
+The number of elements in the array will depend on the
+type of subdivision.
+The \f2subdivision type\fP can be specified as
+.ip "\f3DcSubDivFixed <DCSDFX>\f1"
+For this type, the number of segments along an edge equals 
+$2 sup {parms[0]-1}$.
+In \*(FT, \f2parms[0]\f1 is equal to 3, so 4 line segments
+are used to approximate the curved surface.
+.(F "./PS/5.9ps" 2.0i -1
+.)F "Fixed Subdivision Level"
+.rs
+.sp -1v
+.ip "\f3DcSubDivSegments <DCSDSGL>\f1"
+For this type, the number of segments along an edge equals
+\f2parms[0]\fP, or as close to that number as possible.
+To get 4 segments as shown in the example for fixed
+subdivision, set \f2parms[0]\fP to 4.
+.ip "\f3DcSubDivAbsolute <DCSDAB>\f1"
+For this type, \f2parms[0]\f1 equals the maximum deviation
+allowed anywhere between the curved surface and the nearest plane
+in the planar approximation of the object.  In \*(FT,
+\f2parms[0]\f1 is equal to .1, which means that the curved
+surface cannot be more than .1 units away from any plane used to
+represent the curved surface.
+.bp
+\ 
+.(F "./PS/5.10ps" 1.7i -1
+.)F "Absolute Subdivision Level"
+.rs
+.sp -1v
+.ip "\f3DcSubDivRelative <DCSDRL>\f1"
+For this type, \f2parms[0]\f1 equals the ratio of the deviation
+to the length of the side of the approximating polygon.  In
+\*(FT, \f2parms[0]\f1 is equal to 0.03, which means that there
+can be no more than a 3 percent deviation between the curved
+surface and the approximating planar representation.  In general,
+specifying a deviation between 1.5 percent and 4 percent for
+relative subdivision will result in a reasonable representation
+of many objects.
+.(F "./PS/5.11ps" 2.0i -1
+.)F "Relative Subdivision Level"
+The wireframe car wheels in Chapter 3 use 
+a different subdivision level on each wheel.
+Take a close look at the spokes to see how much smaller the
+triangles are in the wheel on the right.
+.H2 "Backface Culling"
+.rs
+.sp -.25v
+Surfaces whose normals point away from the viewer are
+referred to as backfacing surfaces.
+For opaque, closed objects these surfaces cannot be seen.
+Backface culling is an efficiency technique in which 
+backfacing surfaces are not drawn at all.
+The actual method for determining which surfaces are backfacing
+depends on the renderer and/or device.
+Usually the geometric normal computed by \*(Dd 
+is used for backface culling.
+Some renderers and devices may use the user-specified vertex 
+normals to identify backfacing surfaces.
+.sp -.25v
+.lp
+The attribute \f2DoBackfaceCullable <DOBFC>\fP specifies 
+whether subsequent primitive objects can benefit from
+backface culling.
+The actual backface culling will take place only if
+the \f2DoBackfaceCullSwitch <DOBFCS>\fP is enabled.
+\*(FT shows an example of a sphere and a box
+rendered in wireframe with backface culling enabled.
+.(F 
+.\"	PS/5.12ps 2i 0
+.sp 1.65i
+.)F "Backface Culling"
+.rs
+.sp -.5v
+.H2 "Local Antialiasing"
+.sp -.25v
+Aliasing effects, or \f2jaggies\f1, can often be seen on object
+edges and outines when they are displayed on raster devices,
+such as a workstation screen.
+They are due to the fact that a continuous edge is being
+sampled at discrete pixel locations.
+Antialiasing is the application of techniques that clean up the jagged 
+appearance of object edges or outlines, giving them a smoother 
+appearance.  
+The local antialiasing attributes improve
+the appearance of the primitives on an object by object basis.
+See Chapter 8 for a description of camera attributes used
+to affect the sampling and filtering of a whole image.
+.sp -.25v
+.lp
+\f2DoLocalAntiAliasSwitch <DOLASW>\fP specifies whether subsequent 
+primitives are to be rendered using local antialiasing.  
+\f2DoLocalAntiAliasStyle <DOLAST>\fP specifies the style of local
+antialiasing to be used for subsequent primitive objects.  
+The style can be specified as
+.sp -.25v
+.ip "\f3DcLocalAntiAliasFast <DCLAAF>\fP"
+use the fastest available method of antialiasing.
+.sp -.25v
+.ip "\f3DcLocalAntiAliasIntermediate <DCLAAI>\fP"
+use a form of antialiasing that is a compromise
+between speed and effect.
+.sp -.25v
+.ip "\f3DcLocalAntiAliasBest <DCLAAB>\fP"
+use the method of antialiasing that will produce the 
+smoothest results regardless of speed.
+.sp -.25v
+.lp
+In the following code fragment,
+the first line would be rendered with aliases and the second line would 
+be rendered using the best available method of antialiasing.
+.(m
+C code:
+
+.\"#	ident "%W%" %G%
+.\"
+.\" Copyright (C) 1988, 1989, 1990, by Kubota Pacific Computer Inc.
+.\"         All Rights Reserved
+.\" This program is a trade secret of Kubota Pacific Computer Inc. and
+.\" it is not to be reproduced, published, disclosed to others, copied,
+.\" adapted, distributed, or displayed without the prior authorization
+.\" of Kubota Pacific Computer Inc.  Licensee agrees to attach or embed
+.\" this Notice on all copies of the program, including partial copies
+.\" or modified versions thereof.
+.\"
+DtReal line1[6], line2[6];
+
+DgAddObj(DoLineList(DcRGB, DcLoc, 1, line1));
+DgAddObj(DoLocalAntiAliasSwitch(DcOn));
+DgAddObj(DoLocalAntiAliasStyle(DcLocalAntiAliasBest));
+DgAddObj(DoLineList(DcRGB, DcLoc, 1, line2));
+
+\*(Fo code:
+
+.\"#	ident "%W%" %G%
+.\"
+.\" Copyright (C) 1988, 1989, 1990, by Kubota Pacific Computer Inc.
+.\"         All Rights Reserved
+.\" This program is a trade secret of Kubota Pacific Computer Inc. and
+.\" it is not to be reproduced, published, disclosed to others, copied,
+.\" adapted, distributed, or displayed without the prior authorization
+.\" of Kubota Pacific Computer Inc.  Licensee agrees to attach or embed
+.\" this Notice on all copies of the program, including partial copies
+.\" or modified versions thereof.
+.\"
+      REAL*8 LINE1(6), LINE2(6)
+C
+      CALL DGAO(DOLINL(DCRGB,DCL,1,LINE1))
+      CALL DGAO(DOLASW(DCON))
+      CALL DGAO(DOLAST(DCLAAB))
+      CALL DGAO(DOLINL(DCRGB,DCL,1,LINE2))
+.)m
+.rs
+.sp -1v
+.H1 "Object Material Properties"
+.rs
+.sp -.25v
+For an object to be visible it must reflect at least
+some of the light energy that falls on its surface.
+An object's material properties define how it 
+responds to light.
+Some materials reflect light equally in all directions.
+They appear dull, like a piece of chalk.
+Others are shiny and reflect light like a mirror.
+A surface may also transmit light.
+.sp -.25v
+.lp
+Many of the primitive attributes deal with an
+object's material properties.
+These attributes can be grouped into the following 
+components
+.BU hs
+The \f3ambient\fP component refers to the object's response
+to ambient light, which produces constant illumination
+on surfaces regardless of their position or orientation.
+.BU hs 
+The \f3diffuse\fP component controls how much incident light the
+object reflects diffusely; that is equally in all directions.
+.BU hs
+The \f3specular\fP component causes
+bright highlights on shiny surfaces.
+.BU hs
+The \f3transparent\fP component has to do with the light
+that is transmitted through the object.
+.BU hs
+The \f3reflection\fP component defines an object's response to 
+light reflected from other primitive objects.
+.sp -.25v
+.lp
+The following sections discuss the attributes that
+make up each of these components.
+.H2 "Ambient Component"
+.rs
+.sp -.25v
+The ambient primitive attributes are
+.sp -.25v
+.ip "\f3DoAmbientSwitch <DOAMBS>\fP"
+specifies whether the material properties of subsequent primitives
+include an ambient component.
+If you turn off the ambient component,
+portions of the object that are
+not otherwise lit will appear completely black.
+.sp -.25v
+.ip "\f3DoAmbientIntens <DOAMBI>\fP"
+specifies a weighting factor, 
+between 0.0 and 1.0, for the ambient component. 
+.H2 "Diffuse  Component"
+.rs
+.sp -.25v
+The diffuse primitive attributes are 
+.sp -.25v
+.ip "\f3DoDiffuseSwitch <DODIFS>\fP"
+specifies whether the material properties of subsequent primitives
+include a diffuse component.
+.sp -.25v
+.ip "\f3DoDiffuseIntens <DODIFI>\fP"
+specifies a weighting factor, 
+between 0.0 and 1.0, for the diffuse component. 
+Matte surfaces will have a high diffuse intensity.
+.sp -.25v
+.ip "\f3DoDiffuseColor <DOIFC>\fP"
+specifies the object's base color. 
+Note that as the object's base color, this attribute
+also affects the object's response to ambient light. 
+There is no separate attribute for specifying a color
+for the ambient component (see above).
+.H2 "Specular Component"
+.rs
+.sp -.25v
+The specular primitive attributes are 
+.sp -.25v
+.ip "\f3DoSpecularSwitch <DOSPCS>\fP"
+specifies whether the material properties of subsequent primitives
+include a specular component.
+If rendering speed is important, you can turn off the specular
+lighting component and use only the ambient and diffuse lighting
+components.  
+.sp -.25v
+.ip "\f3DoSpecularIntens <DOSPCI>\fP"
+specifies a weighting factor, 
+between 0.0 and 1.0, for the specular component. 
+Shiny surfaces will have a high specular intensity.
+.sp -.25v
+.ip "\f3DoSpecularColor <DOSPCC>\fP"
+specifies the color of the object's shiny highlights.
+Highlights on metallic surfaces are typically the
+same color as the object.
+Highlights on plastic surfaces usually take on the
+color of the light source.
+.sp -.25v
+.ip "\f3DoSpecularFactor <DOSPCF>\fP"
+controls the size of the highlights.
+Renderers and devices do not all use the specular factor 
+the same way.
+In general,
+values closer to 0 result in fuzzy, less precise highlights.
+High values (e.g. 200) result in smaller and sharper highlights. 
+.H2 "Transparent Component"
+The primitive attributes for controling the transparent component 
+include attributes for the basic transparent component and
+attributes for more advanced transparency features.
+.lp
+The primitive attributes for the basic transparent component are
+.sp -.25v
+.ip "\f3DoTranspSwitch <DOTS>\fP"
+specifies whether the material properties of subsequent primitives
+include a transparent component.
+.sp -.25v
+.ip "\f3DoTranspIntens <DOTI>\fP"
+specifies a weighting factor, 
+between 0.0 and 1.0, for the transparent component. 
+A value of 1.0 will make the object completely transparent.
+.sp -.25v
+.ip "\f3DoTranspColor <DOTC>\fP"
+specifies the \f2filter\fP color of the surface; 
+that is the color of light transmitted through the surface.
+Using the \f2DcRGB\f1 color model, a red
+object (1.0, 0.0, 0.0) that is behind a transparent object 
+with a transparent
+color of (0.0, 1.0, 1.0) would appear black, since no red light is
+transmitted through the object.  A yellow object would appear
+green when viewed from behind this object, as shown in \*(FT.
+.(F 
+.\"./PS/5.13ps" 2i -1
+.sp 2i
+.)F "Transparent (Filter) Color"
+.sp .5v
+In the real world, when light passes through a transparent
+material, the path of the light ray is altered by refraction.
+See, for example, how a stick looks bent when part of it 
+is submerged in water.
+In the world of computer graphics, transparency
+is often used to reveal the inside of an object, in
+which case refraction is not useful.
+There are two primitive attributes for controling refraction.
+They are
+.sp -.25v
+.ip "\f3DoRefractionSwitch <DORFRS>\fP"
+specifies whether subsequent transparent objects alter the
+path of light rays passing through them.
+.sp -.25v
+.ip "\f3DoRefractionIndex <DORFRI>\fP"
+specifies the index of refraction.
+How much a light ray is bent when it passes
+from one material through another depends on the ratio of the indices
+of refraction for the two materials.
+Vacuum has a refraction index of 1.0.
+.lp
+Additional realism in transparency is achieved through the
+use of orientation dependent transparency. 
+This means simply that the transparency of an object
+varies across the surface as you change your line of sight on it.
+For example, a smooth, thick
+glass bottle sitting in front of you will appear more transparent in the
+middle than at close to its edges.
+The orientation dependent transparency attributes are used
+in conjunction with the basic transparency attributes 
+described above.
+They are
+.ip "\f3DoTranspOrientSwitch <DOTOS>\fP"
+specifies whether the transparency of subsequent primitive 
+objects is orientation dependent.
+.ip "\f3DoTranspOrientIntens <DOTOI>\fP"
+specifies a weighting factor, the same as \f2DoTranspIntens <DOTI>\fP.
+This value is used at points on the surface where the object normal is
+perpendicular to the viewing direction.
+The \f2DoTranspIntens <DOTI>\fP value is used at
+points on the surface where the object normal is parallel to the
+viewing direction.
+The value is interpolated for points in between.
+.ip "\f3DoTranspOrientColor <DOTOC>\fP"
+specifies a filter color, the same as \f2DoTranspColor <DOTC>\fP.
+This value is used at points on the surface where the object normal is
+perpendicular to the viewing direction.
+The \f2DoTranspColor <DOTC>\fP value is used at
+points on the surface where the object normal is parallel to the
+viewing direction.
+The value is interpolated for points in between.
+.ip "\f3DoTranspOrientExp <DOTOE>\fP"
+specifies an exponent that controls the rate of change when 
+the transparent intensity and color are interpolated over 
+the object surface.
+.H2 "Reflection Component"
+.ip "\f3DoReflectionSwitch <DOREFS>\fP"
+specifies whether the material properties of subsequent primitives
+include a reflection component.
+The amount of reflection depends on the shininess of the object;
+that is the specular intensity and the specular color.
+.H2 "Using the Component Attributes"
+.rs
+.sp -.25v
+As a general rule of thumb, the sum of the diffuse intensity
+and the specular intensity values should be roughly 1.0.
+The ambient intensity should usually be small (less than 0.4).
+For a particular effect, however, you may want to experiment
+with intensity values and deviate from these typical values.
+.sp -.25v
+.lp
+When a component switch is off, the related attributes
+can still be modified.
+For example, if the specular intensity is set to a new 
+value while the specular switch is off, 
+the new value will be used when computing
+a subsequent object's reflection component.
+.sp -.5v
+.H1 "Shading"
+.rs
+.sp -.25v
+At rendering time the light information and
+the object geometry and material properties 
+are used to shade the primitive objects.
+To compute a unique shade for every pixel covered by an object,
+this information must be available for every point on the surface.
+Typically, object data is specified for the whole
+object (e.g. diffuse color), or at most for each vertex of 
+the object (e.g. vertex colors).
+The attribute \f2DoInterpType <DOIT>\fP specifies
+how to interpolate data to do the shading calculations.
+The interpolation type can be specified as
+.sp -.25v
+.ip "\f3DcConstantShade <DCCNSH>\f1"
+average the vertex information and compute
+a single shade for each face or edge of the object
+(essentially flat shading).
+.sp -.25v
+.ip "\f3DcVertexShade <DCVXSH>\f1"
+compute a shade for each vertex of the object
+and then linearly
+interpolate the vertex shade across the object (essentially
+Gouraud shading).
+.sp -.25v
+.ip "\f3DcSurfaceShade <DCSFSH>\f1"
+interpolate all vertex information 
+linearly across the object and then compute a shade for
+each pixel covered by the object (essentially Phong shading).
+.sp -.25v
+.lp
+The actual illumination model equations used to compute the shade, given
+all the object and light information, depend completely on the renderer.
+For more information on illumination models, see one of the graphics
+programming reference books cited in the Preface.
+For more information on the renderers provided with \*(Dd on your
+system, see your \f2\*(Dd System Guide\fP.
+.bp
+.rs
+.sp -2v
+.H1 "Example"
+The following example produces a picture of a food processor.
+Each part of the food processor is specified using a series of
+patch objects (omitted from this example for the sake of
+brevity).
+The arrays defining each color are included at the
+beginning of the example.
+.lp
+.(m
+C code:
+
+.\"#	ident "@(#)ch06.ex03	1.1" 9/11/90
+.\"
+DtObject button1, button2, button3, base, counter, 
+ 	 countertop, blade, cutter, plunger, pot,
+	 shaft, plate, object_group;
+
+/* definition of the objects is omitted for simplicity */
+DtObject BUTTON, BUTTON2, BUTTON3, BASE, BLADE, CUTTER,
+         PLUNGER, POT, SHAFT, PLATE;  /* patch objects */
+DtObject COUNTERTOP; /* array of black and white squares */
+
+static DtReal
+     yellow[] = {1.0, 1.0, 0.0},
+     orange[] = {1.0, 0.8, 0.0},
+     greenishyellow[] = {0.8, 1.0, 0.0},
+     white[] = {1.0, 1.0, 1.0},
+     blue_grey[] = {0.6, 0.7, 1.0},
+     green_blue[] = {0.5, 0.5, 1.0},
+     dull_white[] = {0.2, 0.2, 0.2},
+     parms[] = {.04};
+
+DsSetAngleUnits(DcAngleDegrees);  /* degrees not radians */
+
+/* creates and opens button1 group */
+button1 = DoGroup(DcTrue);  
+     DgAddObj(DoDiffuseColor(DcRGB, yellow));
+     DgAddObj(DoSpecularColor(DcRGB, yellow));
+     DgAddObj(DoTranspColor(DcRGB, yellow));
+     DgAddObj(DoTranspSwitch(DcOn));
+     DgAddObj(BUTTON); /* patch objects to make button1 */
+DgClose();
+
+/* creates and opens button2 group */
+button2 = DoGroup(DcTrue);  
+     DgAddObj(DoDiffuseColor(DcRGB, greenishyellow));
+     DgAddObj(DoSpecularColor(DcRGB, greenishyellow));
+     DgAddObj(DoTranspColor(DcRGB, greenishyellow));
+     DgAddObj(DoTranspSwitch(DcOn));
+     DgAddObj(BUTTON2); /* patch objects to make button2 */
+DgClose();
+
+
+
+/* creates and opens button3 group */
+button3 = DoGroup(DcTrue);  
+     DgAddObj(DoDiffuseColor(DcRGB, greenishyellow));
+     DgAddObj(DoSpecularColor(DcRGB, greenishyellow));
+     DgAddObj(DoTranspColor(DcRGB, greenishyellow));
+     DgAddObj(DoTranspSwitch(DcOn));
+     /* patch objects to make third button group */
+     DgAddObj(BUTTON3); 
+DgClose();
+
+/* creates and opens base group */
+base = DoGroup(DcTrue); 
+     DgAddObj(DoDiffuseColor(DcRGB, white));
+     DgAddObj(DoSpecularColor(DcRGB, white));
+     DgAddObj(BASE); /* patch objects to make the base */
+DgClose();
+
+/* creates and opens counter group */
+counter = DoGroup(DcTrue); 
+     DgAddObj(DoDiffuseColor(DcRGB, white));
+     /* lowers slab */
+     DgAddObj(DoTranslate(0.0, -3.5, 0.0)); 
+     /* stretches it out to origin */
+     DgAddObj(DoScale(12.0, 1.0, 12.0));   
+     DgAddObj(DoTranslate(-0.5, -0.5, -0.5))
+     DgAddObj(DoPrimSurf(DcBox));
+DgClose();
+
+/*creates and opens countertop group */
+countertop = DoGroup(DcTrue);   
+     DgAddObj(DoReflectionSwitch(DcOn));
+     DgAddObj(DoSpecularIntens(0.85));
+     DgAddObj(DoDiffuseIntens(0.5);
+     DgAddObj(DoBackfaceCullable(DcOn));
+     /* array of black and white squares forming
+        a checkerboard pattern on the counter */
+     DgAddObj(COUNTERTOP);  
+DgClose();
+
+/* creates and opens the blade group */
+blade = DoGroup(DcTrue); 
+     DgAddObj(DoDiffuseColor(DcRGB, blue_grey));
+     DgAddObj(DoSpecularColor(DcRGB, blue_grey));
+     DgAddObj(BLADE); /* patch objects to make blades */
+DgClose();
+
+/* creates and opens cutter group */
+cutter = DoGroup(DcTrue); 
+     DgAddObj(DoDiffuseColor(DcRGB, white));
+     DgAddObj(DoSpecularColor(DcRGB, white));
+     DgAddObj(CUTTER); /* patch objects to make cutter */
+DgClose();
+
+/* creates and opens plunger group */
+plunger = DoGroup(DcTrue); 
+     DgAddObj(DoDiffuseColor(DcRGB, white));
+     DgAddObj(DoSpecularColor(DcRGB, white));
+     DgAddObj(PLUNGER); /* patch objects to make plunger */
+DgClose();
+
+/* creates and opens the pot group */
+pot = DoGroup(DcTrue);   
+     /* turns on transparency */
+     DgAddObj(DoTranspSwitch(DcOn)); 
+     DgAddObj(DoDiffuseColor(DcRGB, white));
+     DgAddObj(DoSpecularColor(DcRGB, white));
+     DgAddObj(DoTranspColor(DcRGB, white));
+     DgAddObj(DoDiffuseIntens(0.2));
+     DgAddObj(DoTranspIntens(0.7));
+     DgAddObj(POT); /* patch objects to make the pot */
+DgClose();
+
+/* creates and opens the shaft group */
+shaft = DoGroup(DcTrue); 
+     DgAddObj(DoDiffuseColor(DcRGB, green_blue));
+     DgAddObj(DoSpecularColor(DcRGB, green_blue));
+     DgAddObj(DoTranspColor(DcRGB, green_blue));
+     DgAddObj(DoTranspSwitch(DcOn));
+     DgAddObj(SHAFT); /* patch objects to make shaft */
+DgClose();
+
+/*creates and opens the plate group */
+plate = DoGroup(DcTrue); 
+     DgAddObj(DoDiffuseColor(DcRGB, dull_white));
+     DgAddObj(DoSpecularColor(DcRGB, dull_white));
+     DgAddObj(PLATE); /* patch object to make plate */
+DgClose();
+
+/* creates and opens object group */
+object_group = DoGroup(DcTrue);
+     DgAddObj(DoRotate(DcYAxis, -90));
+     DgAddObj(DoRepType(DcSurface));
+     DgAddObj(DoInterpType(DcSurfaceShade));
+     DgAddObj(DoAmbientSwitch(DcOn));
+     DgAddObj(DoDiffuseSwitch(DcOn));
+     DgAddObj(DoSpecularSwitch(DcOn));
+     DgAddObj(DoShadowSwitch(DcOn));
+     DgAddObj(DoBackfaceCullSwitch(DcOn));
+     DgAddObj(DoSubDivSpec(DcSubDivRelative, parms));
+     DgAddObj(counter);
+     DgAddObj(countertop);
+     DgAddObj(base);
+     DgAddObj(button1);
+     DgAddObj(button2);
+     DgAddObj(button3);
+     DgAddObj(blade);
+     DgAddObj(plate);
+     DgAddObj(cutter);
+     DgAddObj(shaft);
+     DgAddObj(plunger);
+     DgAddObj(pot);
+DgClose();
+
+\*(Fo code:
+
+.\"#	ident "@(#)ch06.ex03.f	1.1" 9/11/90
+.\"
+      REAL*8 BTN1, BTN2, BTN3, BASE, CNTR, BLADE,
+     1       CTR, CNTRTOP, PLNGR, POT, SHAFT, PLATE, OBJGRP
+C            patch objects-definition omitted for simplicity
+      REAL*8 B1, B2, B3, BA, BLD, CUT, PLUNG, PT, SHFT, PLAT
+C            array of black and white squares-definition
+C            omitted for simplicity
+      REAL*8 CTOP
+      REAL*8 YELLOW(3), ORANGE(3), GRNYEL(3), WHITE(3),
+     1       GREY(3), BLUGRY(3), GREBLU(3), DULWHI(3), 
+     2       PARMS(1)
+       CHARACTER DUMMY
+C
+      DATA YELLOW / 1.0D0, 1.0D0, 0.0D0 /
+      DATA ORANGE / 1.0D0, 0.8D0, 0.0D0 /
+      DATA GRNYEL / 0.8D0, 1.0D0, 0.0D0 /
+      DATA WHITE  / 1.0D0, 1.0D0, 1.0D0 /
+      DATA BLUGRY / 0.6D0, 0.7D0, 1.0D0 /
+      DATA GREBLU / 0.5D0, 0.5D0, 1.0D0 /
+      DATA DULWHI / 0.2D0, 0.2D0, 0.2D0 /
+      DATA PARMS  / .04 /
+C  
+      CALL DSSAU(DCAD)
+C
+      BTN1=DOG(DCTRUE) ! creates and opens button1 group !
+         CALL DGAO(DODIFC(DCRGB, YELLOW))
+         CALL DGAO(DOSPCC(DCRGB, YELLOW))
+         CALL DGAO(DOTC(DCRGB, YELLOW))
+         CALL DGAO(DOTS(DCON))
+         CALL DGAO(B1) ! patch objects to make button1 !
+      CALL DGCS()
+C
+      BTN2=DOG(DCTRUE) ! creates and opens button2 group !
+         CALL DGAO(DODIFC(DCRGB, GRNYEL))
+         CALL DGAO(DOSPCC(DCRGB, GRNYEL))
+         CALL DGAO(DOTC(DCRGB, GRNYEL))
+         CALL DGAO(DOTS(DCON))
+         CALL DGAO(B2) ! patch objects to make button2 !
+      CALL DGCS()
+C
+      BTN3=DOG(DCTRUE) ! creates and opens button3 group!
+         CALL DGAO(DODIFC(DCRGB, GRNYEL))
+         CALL DGAO(DOSPCC(DCRGB, GRNYEL))
+         CALL DGAO(DOTC(DCRGB, GRENYEL))
+         CALL DGAO(DOTS(DCON))
+         CALL DGAO(B3) ! patch objects to make button3!
+      CALL DGCS()
+C
+     BASE=DOG(DCTRUE) ! creates and opens base group!
+         CALL DGAO(DODIFC(DCRGB, WHITE))
+         CALL DGAO(DOSPCC(DCRGB, WHITE))
+         CALL DGAO(BA) ! patch objects to make the base!
+      CALL DGCS()
+C
+      CNTR=DOG(DCTRUE) ! creates and opens counter group!
+         CALL DGAO(DODIFC(DCRGB, WHITE))
+C        lowers slab
+         CALL DGAO(DOXLT(0.0D0, -3.5D0, 0.0D0))
+C        stretches it to origin
+         CALL DGAO(DOSC(12.0D0, 1.0D0, 12.0D0)) 
+         CALL DGAO(DOXLT(-0.5D0, -0.5D0, -0.5D0))
+         CALL DGAO(DOPMS(DCBOX))
+      CALL DGCS()
+C
+     ! creates and opens the counter top group !
+      CNTRTOP=DOG(DCTRUE) 
+         CALL DGAO(DOREFS(DCON))
+         CALL DGAO(DOSPCI(0.85D0))
+         CALL DGAO(DODIFI(0.05D0))
+         CALL DGAO(DOBFC(DCON))
+         CALL DGAO(CTOP) ! array of black and white squares !
+      CALL DGCS()
+C
+      BLADE=DOG(DCTRUE) ! creates and opens blade group !
+         CALL DGAO(DODIFC(DCRGB, BLUGRY))
+         CALL DGAO(DOSPCC(DCRGB, BLUGRY))
+         CALL DGAO(BLD) ! patch objects to make the blades!
+      CALL DGCS()
+C
+      CTR = DOG(DCTRUE) ! creates and opens cutter group !
+         CALL DGAO(DODIFC(DCRGB, WHITE))
+         CALL DGAO(DOSPCC(DCRGB, WHITE))
+         CALL DGAO(CUT) ! patch objects to make the cutter !
+      CALL DGCS()
+C
+      
+      PLNGR = DOG(DCTRUE) ! creates and opens plunger group!
+         CALL DGAO(DODIFC(DCRGB, WHITE))
+         CALL DGAO(DOSPCC(DCRGB, WHITE))
+         CALL DGAO(PLUNG) ! patch objects to make plunger !
+      CALL DGCS()
+C
+      POT = DOG(DCTRUE) ! creates and opens the pot group !
+         CALL DGAO(DOTS(DCON))
+         CALL DGAO(DODIFC(DCRGB, WHITE))
+         CALL DGAO(DOSPCC(DCRGB, WHITE))
+         CALL DGAO(DOTC(DCRGB, WHITE))
+         CALL DGAO(DODIFI(0.2D0))
+         CALL DGAO(DOTI(0.7D0))
+         CALL DGAO(PT) ! patch objects to make the pot !
+      CALL DGCS()
+C
+      ! creates and opens the shaft group !
+      SHAFT = DOG(DCTRUE) 
+         CALL DGAO(DODIFC(DCRGB, GREBLU))
+         CALL DGAO(DOSPCC(DCRGB, GREBLU))
+         CALL DGAO(DOTC(DCRGB, GREYBLU))
+         CALL DGAO(DOTS(DCON))
+         CALL DGAO(SHFT) ! patch objects to make the shaft !
+      CALL DGCS()
+C
+     ! creates and opens the plate group !
+      PLATE = DOG(DCTRUE)  
+         CALL DGAO(DODIFC(DCRGB, DULWHI))
+         CALL DGAO(DOSPCC(DCRGB, DULWHI))
+         CALL DGAO(PLAT) ! patch objects to make the plate !
+C
+     ! creates and opens the object group !
+      OBJGRP = DOG(DCTRUE) 
+         CALL DGAO(DOROT(DCYAX, -90D0))
+         CALL DGAO(DOREPT(DCSURF))
+         CALL DGAO(DOIT(SFSH))
+         CALL DGAO(DOAMBS(DCON))
+         CALL DGAO(DODIFS(DCON))
+         CALL DGAO(DOSPCS(DCON))
+         CALL DGAO(DOSHAS(DCON))
+         CALL DGAO(DOBFCS(DCON))
+         CALL DGAO(DOSDS(DCSDRL, PARMS))
+         CALL DGAO(CNTR)
+         CALL DGAO(CNTRTOP)
+         CALL DGAO(BASE)
+         CALL DGAO(BTN1)
+         CALL DGAO(BTN2)
+         CALL DGAO(BTN3)
+         CALL DGAO(BLADE)
+         CALL DGAO(PLATE)
+         CALL DGAO(CTR)
+         CALL DGAO(SHAFT)
+         CALL DGAO(PLNGR)
+         CALL DGAO(POT)
+      CALL DGCS()
+.)m
+.rs
+.sp -1v
+.H1 "Chapter Summary"
+Chapter 5 describes \f2primitive attributes\f1, which are
+attributes used to affect how primitive objects look\(emfor
+example, their surface properties, color, and display
+representation.
+.lp
+When a primitive object is rendered, it uses the current value
+for each primitive attribute.  Attribute stacks are pushed and
+popped at group boundaries.  Within a group, primitive attribute
+objects modify the existing attribute value on the top of the stack.  
+.lp
+You can also push and pop sets of attribute values using the
+functions \f2DoPushAtts <DOPUA>\f1 and \f2DoPopAtts <DOPPA>\f1
+within a group.
+It is usually preferable, however, to structure the \*(Dd
+database so that the group structure causes attributes to be pushed
+and popped \f2naturally\f1.
+.lp
+An object's \f2display representation\f1 is affected by the
+object's representation type, its subdivision specification,
+the backface culling attributes,
+and the local antialiasing attributes.  
+Object \f2representation types\fP include points, wireframe
+and surfaces.
+The object's \f2subdivision specification\fP defines how
+to subdivide primitive objects that are an approximation
+of an analytic surface. Backface culling is an efficiency
+technique in which backfacing surfaces are not drawn at all.
+\f2Local antialiasing\fP attributes enable the application
+of techniques that clean up the jagged appearance of
+object edges and outlines.
+.lp
+An object's response to light has five basic components:
+ambient, diffuse, specular, transparent, and reflection.  
+The \f2ambient\f1 component refers to
+the object's response to ambient light, which is light that is
+everywhere in the scene.
+The \f2diffuse\f1 
+component refers to the response of a surface to incident
+(nonambient)
+light, where the reflected light is scattered equally in
+all directions.  
+The \f2specular\f1 component refers to the object's highlights.
+The \f2transparent\f1 component refers to the light
+transmitted through a surface.  
+\f2Refraction\fP and \f2orientation dependent transparency\fP
+provide additional realism in transparency.
+.lp
+An object's \f2interpolation type\fP specifies how data is
+interpolated across a surface for shading calculations.

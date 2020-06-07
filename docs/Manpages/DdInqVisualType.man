@@ -1,0 +1,79 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DdInqVisualType 3D  "Dore"
+.SH NAME
+DdInqVisualType \- Return the visual type of a device
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+DtVisualType DdInqVisualType(device)
+DtObject device;
+.sp
+.in -.5i
+FORTRAN:
+.in +.5i
+INTEGER*4 DDQVT(DEVICE)
+INTEGER*4 DEVICE
+.in -.5i
+.fi
+.SH DESCRIPTION
+.IX DDQVT
+.IX DdInqVisualType
+.I DdInqVisualType
+returns the visual type of the device named
+\f2device\fP.
+You can set the visual type with \f2DoDevice\fP <\f2DOD\fP>.
+Dor\o.\(aae. defines the following visual types:
+.IP "\f2DcPseudoColor\fP <\f2DCPSUC\fP>"
+A pixel value indexes a color map to determine
+the color to be displayed; the entries in the color map can be changed
+dynamically.
+.IP "\f2DcGreyScale\fP <\f2DCGRYS\fP>"
+These devices are the same as pseudocolor devices, 
+except that only the intensities of the entries specified in the lookup table 
+are displayed.
+.IP "\f2DcDirectColor\fP <\f2DCDRCC\fP>"
+A pixel value is decomposed into separate subfields,
+and each subfield separately indexes the color map for the corresponding value.
+The entries in the color map can be changed dynamically. 
+Typically, the color map is used for displaying false color or
+for performing gamma correction.
+.IP "\f2DcTrueColor\fP <\f2DCTRUC\fP>"
+A true color device is similar to a directcolor device
+except that the color map has predefined read-only values that provide a 
+(near-) linear ramp in each color coordinate (e.g. a direct RGB device).
+.IP "\f2DcStaticColor\fP <\f2DCSTCC\fP>"
+A static color device is similar to a pseudocolor
+device except that the color map has predefined read-only values that are
+device dependent (such as a fixed 16 color system).
+.IP "\f2DcStaticGrey\fP <\f2DCSTCG\fP>"
+A static grey scale device is similar to a static color device except
+that only a fixed set of device-dependent intensities is 
+supported.  (A "black and white only" display is of this type.)
+.SH ERRORS
+.I DdInqVisualType
+will fail if the device handle is invalid; the returned value is undefined.
+.TP 15
+[WARNING - invalid device handle]
+.SH "SEE ALSO"
+.na
+.nh
+DdInqColorEntries(3D), DdInqColorTableSize(3D), DoDevice(3D)
+.ad
+.hy

@@ -1,0 +1,56 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DvInqUpdateType 3D  "Dore"
+.SH NAME
+DvInqUpdateType \- Return the update type of a view
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+DtUpdateType DvInqUpdateType(view)
+DtObject view;
+.sp
+.in -.5i
+FORTRAN:
+.in +.5i
+INTEGER*4 DVQUT(VIEW)
+INTEGER*4 VIEW
+.in -.5i
+.fi
+.SH DESCRIPTION
+.IX DVQUT
+.IX DvInqUpdateType
+.I DvInqUpdateType
+returns the update type of the view specified by the parameter \f2view\fP.
+The possible update types are:
+.PP
+.IP "\f2DcUpdateAll\fP <\f2DCUALL\fP>"
+All objects, including cameras, lights, and display objects will be updated.
+This mode should be used if the cameras and lights have been modified
+since the last update of this view.
+.IP "\f2DcUpdateDisplay\fP <\f2DCUDIS\fP>"
+This mode causes only display objects to be updated. Camera and light
+information is the same as on previous updates.
+.SH ERRORS
+.I DvInqUpdateType
+will fail if the view handle is invalid; the returned value is
+undefined.
+.PP
+[WARNING - invalid view handle]
+.SH SEE ALSO
+DvSetUpdateType(3D)

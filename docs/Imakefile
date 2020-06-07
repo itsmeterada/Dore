@@ -1,0 +1,7 @@
+#include <Dore.tmpl>
+#define	IHaveSubdirs
+
+SUBDIRS = Manpages /* Manuals */
+
+MakeSubdirs($(SUBDIRS))
+DependSubdirs($(SUBDIRS))

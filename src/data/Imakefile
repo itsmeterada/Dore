@@ -1,0 +1,7 @@
+#include <Dore.tmpl>
+#define	IHaveSubdirs
+
+SUBDIRS = errmsg fonts
+
+MakeSubdirs($(SUBDIRS))
+DependSubdirs($(SUBDIRS))

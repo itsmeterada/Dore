@@ -1,0 +1,45 @@
+.\"#ident "%W%" %G%
+.\"
+.\" #
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  
+.\" # 
+.\" # KUBOTA GRAPHICS Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\" #
+.\"
+.ds BT \\*(Dd Reference Manual
+.ds CT C Include Files
+.ds h1 3
+.so ../macros/local.me
+.PN 377
+.L1 C
+.L2 I NCLUDE
+.L3 F ILES
+.CH THREE
+This chapter contains a listing of the \f2dore.h\fP header file,
+which must be included at the beginning of every \*(Dd C
+application.
+To include \f2dore.h\fP in your application, use this statement:  
+.(m
+	#include <dore.h>
+.)m 
+The file \f2dore.h\fP contains the declarations of all functions
+in the \*(Dd application interface and is located in the 
+directory \f2/usr/include\fP. 
+.nf
+.rs
+.sp
+.sp
+.(m
+.so Includes/dore.h
+.)m
+.fi

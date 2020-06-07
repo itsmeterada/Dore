@@ -1,0 +1,75 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DvInqRadiosityConvergence 3D  "Dore"
+.SH NAME
+DvInqRadiosityConvergence \- Return the radiosity convergence criterion for a view
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+void DvInqRadiosityConvergence(view, type, parms)
+DtObject view ;
+DtRadiosityConvType *type;
+DtReal parms[];
+.sp
+.in -.5i
+FORTRAN:
+.in +.5i
+CALL DVQRDC(VIEW,TYPE,PARMS)
+INTEGER*4 VIEW
+INTEGER*4 TYPE
+REAL*8 PARMS(*)
+.in -.5i
+.fi
+.SH DESCRIPTION
+.IX DVQRDC
+.IX DvInqRadiosityConvergence
+.I DvInqRadiosityConvergence
+returns the radiosity convergence criterion for the view specified by the parameter
+\f2view\fP.
+This applies to progressive radiosity techniques in which intermediate images
+are computed until a certain criterion or threshold is met.
+Possible type values are:
+.PP
+.IP "\f2DcConvFixedIterations\fP <\f2DCCVFI\fP>"
+Perform a fixed number of iterations specified in \f2parms[0]\fP.
+.IP "\f2DcConvGlobalRel\fP <\f2DCCVGR\fP>"
+Stop when the ratio of the total unshot energy 
+over the total energy in the scene is smaller or equal to \f2parms[0]\fP.
+.IP "\f2DcConvGlobalAbs\fP <\f2DCCVGA\fP>"
+Stop when the total unshot energy 
+in the scene is smaller or equal to \f2parms[0]\fP.
+.IP "\f2DcConvPatchRel\fP <\f2DCCVPR\fP>"
+Stop when the ratio of the
+unshot energy of the brightest patch
+over the total energy in the scene is smaller or equal to \f2parms[0]\fP.
+The brightest patch is the patch with the maximum unshot energy.
+.IP "\f2DcConvPatchAbs\fP <\f2DCCVPA\fP>"
+Stop when the unshot energy of the brightest patch
+in the scene is smaller or equal to \f2parms[0]\fP.
+.SH ERRORS
+.I DvInqRadiosityConvergence
+will fail if the view handle is invalid.
+.TP 15
+[WARNING - invalid view handle]
+.SH "SEE ALSO"
+.na
+.nh
+DvSetRadiosityConvergence(3D)
+.ad
+.hy

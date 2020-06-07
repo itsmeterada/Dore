@@ -1,0 +1,86 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DoTextureOp 3D "Dore"
+.SH NAME
+DoTextureOp \- Create a texture attribute object that controls how the texture value is combined with the current value
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+DtObject DoTextureOp(operator)
+DtTextureOperator operator;
+.sp
+.in  -.5i
+FORTRAN:
+.in  +.5i
+INTEGER*4 DOTOP(OP)
+INTEGER*4 OP
+.in  -.5i
+.fi 
+.IX "DoTextureOp"
+.IX "DOTOP"
+.SH DESCRIPTION
+.LP
+\f2DoTextureOp\fP creates a texture attribute object that controls how
+the computed texture value combines with the value already computed by
+the renderer.
+Note that another texture may already have affected the value computed
+by the renderer.
+The parameter \f2operator\fP specifies the combination rule.
+The possible values of \f2operator\fP are:
+.IX "DcTextureReplace"
+.IX "DCTREP"
+.IP "\f2DcTextureReplace\fP <\f2DCTREP\fP>"
+The value computed from the texture replaces the value already
+computed by the renderer.
+.IX "DcTextureMultiply"
+.IX "DCTMUL"
+.IP "\f2DcTextureMultiply\fP <\f2DCTMUL\fP>"
+The value computed from the texture is used to scale the value already
+computed by the renderer.
+.BP
+.IX "DcTextureBlend"
+.IX "DCTBLD"
+.IP "\f2DcTextureBlend\fP <\f2DCTBLD\fP>"
+This is only valid if the texture also includes an alpha channel.
+The value computed from the texture is combined, using alpha,
+with the value already computed by the renderer:
+.br
+.sp
+\f2new_value = computed_value*(1-alpha) + texture_value*alpha
+.IX "DcTextureAdd"
+.IX "DCTADD"
+.PP
+.IP "\f2DcTextureAdd\fP <\f2DCTADD\fP>"
+The value computed from the texture is added to the value already
+computed by the renderer.
+.LP
+Note that not all renderers will support all types of operators.
+.SH DEFAULTS
+The default value for \f2DoTextureOp\fP is \f2DcTextureReplace\fP
+<\f2DCTREP\fP>.
+.SH SEE ALSO
+.nh
+.na
+DoTextureMapDiffuseColor(3D),
+DoTextureMapEnviron(3D),
+DoTextureMapBump(3D),
+DoTextureMapTranspIntens(3D)
+.ad
+.hy
+\&

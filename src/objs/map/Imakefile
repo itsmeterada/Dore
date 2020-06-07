@@ -1,0 +1,19 @@
+#include <Dore.tmpl>
+
+    SRCS = mapdclrswi.c maptintswi.c omap_mapbmp.c omap_mapbmpswi.c \
+           omap_mapdifclr.c omap_mapenv.c omap_mapenvswi.c omap_maptrnint.c \
+	   omap_texaa.c omap_texextuv.c omap_texextuvw.c omap_texintsrf.c \
+	   omap_texmatuv.c omap_texmatuvw.c omap_texop.c omap_texuvidx.c \
+	   omap_texuvwidx.c omisc_fil.c omisc_filerstr.c texscluv.c \
+	   texscluvw.c textrnuv.c textrnuvw.c
+    OBJS = mapdclrswi.o maptintswi.o omap_mapbmp.o omap_mapbmpswi.o \
+           omap_mapdifclr.o omap_mapenv.o omap_mapenvswi.o omap_maptrnint.o \
+	   omap_texaa.o omap_texextuv.o omap_texextuvw.o omap_texintsrf.o \
+	   omap_texmatuv.o omap_texmatuvw.o omap_texop.o omap_texuvidx.o \
+	   omap_texuvwidx.o omisc_fil.o omisc_filerstr.o texscluv.o \
+	   texscluvw.o textrnuv.o textrnuvw.o
+
+LibraryObjectRule()
+SubdirLibraryRule($(OBJS))
+
+DependTarget()

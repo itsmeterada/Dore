@@ -1,0 +1,15 @@
+#include <Dore.tmpl>
+
+ERROR_SRC = $(BUILDINCDIR)/dore_develop/error.h
+
+AllTarget($(ERRMSGFILE))
+InstallNonExecFile($(ERRMSGFILE),$(ERRMSGDIR))
+
+$(ERRMSGFILE): $(ERROR_SRC)
+	RemoveFile($@)
+	awk -f error_filter < $(ERROR_SRC) > $@
+
+clean::
+	RemoveFile($(ERRMSGFILE))
+
+DependTarget()

@@ -1,0 +1,1252 @@
+.\"#ident "%W%" %G%
+.\"
+.\" Copyright (C) 1988, 1989, 1990, 1991 by Kubota Pacific Computer Inc.
+.\"         All Rights Reserved
+.\" This program is a trade secret of Kubota Pacific Computer Inc. and
+.\" it is not to be reproduced, published, disclosed to others, copied,
+.\" adapted, distributed, or displayed without the prior authorization
+.\" of Kubota Pacific Computer Inc.  Licensee agrees to attach or embed
+.\" this Notice on all copies of the program, including partial copies
+.\" or modified versions thereof.
+.\"
+.ds CT Objects and Groups
+.so ../macros/local.me
+.ds BT \*(Dd Programmer's Guide
+.ds h1 3
+.PN 27
+.L1 O BJECTS
+.L2 " " "AND"
+.L3 G ROUPS
+.CH THREE
+.rs
+.sp -1.5v
+This chapter defines what \*(Dd objects are and describes 
+the object-based nature of \*(Dd.  It also shows how to 
+create objects and how to create \%hierarchical models using groups.  
+Concepts and terms introduced in this chapter include 
+objects, object handles, 
+regular and in-line groups, group hierarchies, 
+group editing, element pointers, and labels.
+There are several code examples at the end of the chapter that
+illustrate these various concepts.
+.sp -.5v
+.H1 "What Is an Object?"
+Objects are the basic building blocks of the \*(Do.
+An \f2object\f1 is a collection of data, along with a set of
+methods (functions) that operate on the data.  Certain kinds of
+objects, such
+as \f2primitive objects\f1, represent three-dimensional shapes
+(cylinders, spheres, tori, polygons) that can be displayed.  Other
+objects, called \f2primitive attribute objects\f1, affect how
+primitive objects look\(emfor example, their coloring, how they
+respond to light, whether they can have shadows, and so on.
+\f2Geometric transformation objects\f1 are a type of attribute
+object that affect the shape and positioning of primitive objects
+in three-dimensional space.
+.lp
+Primitive objects and primitive attribute objects fall into a
+general
+category called \f2display objects\f1.  As their name suggests,
+display objects expect to be rendered and displayed.  If certain
+conditions are met (they are not invisible, they are not obscured
+by other objects), you will eventually be able to view the
+primitive objects in some form, and you will be able to notice
+the effects of their associated attribute objects.
+.H2 "Object Creation Functions"
+All \*(Dd functions beginning with the prefix \f2Do-\f1 are
+\f2object creation\f1 functions.  \*(TT lists the general categories
+of \*(Dd objects with the corresponding chapter(s) in which they are
+discussed.
+.(T "Object Categories"
+.TS
+tab(@);
+lf3p9 | lf3p9 | lf3p9
+lf1p9 | lf1p9 | lf1p9.
+Object Category@Example@Chapter(s)
+_
+.sp .5v
+primitive@DoLineList <DOLINL>@4, 7, 13
+primitive attribute@DoDiffuseColor <DODIFC>@5, 7
+studio@DoCamera <DOCM>@8
+studio attribute@DoParallel <DOPAR>@8
+geometric transformation@DoRotate <DOROT>@6
+organizational@DoView <DOVW>@2, 9 
+.TE
+.)T
+.H2 "Object Handles"
+All \f2Do-\f1 functions return a value of type \f2DtObject\f1 (in
+\*(Fo, an
+INTEGER*4) that is known as
+the \f2handle\f1 to the newly created
+object.  This handle is a unique number that represents a
+particular object and can be used in further references to it.
+You
+do not have direct access to the information stored in a \*(Dd
+object.  Instead, you refer to the object by its handle, using
+function calls such as \f2DgAddObjToGroup <DGAOG>\f1 or
+\f2DgReplaceObjInGroup <DGROG>\f1 which
+take object handles as arguments.
+In this sense, an object handle and the object data are analogous
+to a bank account number and the money you put into that account.
+You do not know exactly where your money is stored, and you cannot
+handle the money directly, but you can use your account number to
+obtain information about your account, or to retrieve some of the
+money when you need it.
+.lp
+You must immediately save or use the object handle returned 
+from an object creation function.  Otherwise, you have no way 
+to access the object, which resides in \*(Dd's private database.
+.sp .5v
+.H2 "Example of an Object"
+\*(FT shows a sample object, a triangle mesh.  The handle to this
+object has been saved in the user variable \f2my_mesh\f1.
+Code to create the object would follow the general form:
+.(m
+C code:
+
+.\"#	ident "%W%" %G%
+.\"
+DtObject my_mesh;
+my_mesh = DoTriangleMesh(...);
+
+
+\*(Fo code:
+
+.\"#	ident "%W%" %G%
+.\"
+INTEGER*4 MY_MESH
+MY_MESH = DOTRIM(...)
+.)m
+.(F "./qrail.epsi" 2i 0
+.)F "Sample Object"
+.sp -1.5v
+.H2 "Object Diagrams"
+Object diagrams can be very helpful in organizing a \*(Dd
+application
+or in trying to understand someone else's \*(Dd code.  Given an
+object diagram, it is simple to write the equivalent \*(Dd code.
+And given some \*(Dd code, it is simple to generate the diagram.
+.lp
+The figures in this manual use an oval shape to indicate objects.
+Anything written inside the oval represents information stored in
+that object.  
+Object handles are represented by boxes with arrows pointing to
+the objects.  In Figure 3-1, the object handle is a variable of type
+\f2DtObject\f1 (in \*(Fo, an INTEGER*4).  
+The figures in this manual also use the oval shape to represent
+groups, since groups are a type of object.  
+.H2 "Holding and Releasing Objects"
+Each object has a \f2reference count\f1 that is incremented by
+one each time the object is added to an organizational object
+(group, view, and so on).  The object's reference count is
+decremented by one each time the object is removed from the
+organizational object.  When the reference count reaches 0 (that
+is, there are no references to the object in the \*(Dd database),
+\*(Dd automatically reclaims that object's memory space by 
+deleting the object from the \*(Dd database.
+.lp
+If you do not want the object deleted, use the \f2DsHoldObj <DSHO>\f1
+function to retain the object in the \*(Dd database.  
+This method for holding objects in memory is useful, but should not be
+overused, since it is unwise to waste memory on the storage of
+unneeded objects.
+.lp
+Use \f2DsReleaseObj <DSRO>\f1 to cancel the hold on the object.  
+.H1 "What is a Group?"
+A \f2group\f1 is a \*(Dd object that contains an ordered list of
+object
+handles.  A group itself
+is also an object.  Once you have defined an object or a group of
+objects,
+you
+can refer to it any number of times in a particular scene
+database.  For example, you could model a bolt shape using a
+group
+containing polygons and a cylinder and then use
+that bolt a number of times in a single car wheel group.  Then
+you would be able to reference the basic wheel group four times
+in a complete car object.
+.lp
+There are two kinds of groups in \*(Dd:
+.(l I
+regular groups
+in-line groups
+.)l
+In this manual, any reference to "groups" implies "regular groups";
+in-line groups are mentioned explicitly.  Groups are discussed next 
+and in-line groups are discussed later in this chapter.
+.H2 "Example of a Group"
+Suppose you want to create a magenta sphere with a surface
+representation type.   \*(FT shows a simplified
+diagram of the objects included in this group.  Note that
+attribute objects \f2precede\f1 their associated primitive objects, 
+as shown.  The ordering of objects within a group is important 
+because the objects within a group are applied in order\(emin this 
+case: first the surface representation object, then the magenta object, 
+and finally the sphere primitive object in \f2obj_group\f1.
+.(F ./PS/3.2ps 1.5i 0
+.)F "Sphere Group" sphere
+The code to create this group is shown on the next page.
+.(m
+C code:
+
+.\"#	ident "%W%" %G%
+.\"
+DtObject magenta_obj, surf_obj, sphere_obj, obj_group;
+static DtReal magenta[3]={1.0, 0.0, 1.0};
+
+surf_obj=DoRepType(DcSurface);
+magenta_obj=DoDiffuseColor(DcRGB, magenta);
+sphere_obj=DoPrimSurf(DcSphere);
+
+obj_group=DoGroup(DcTrue);
+     DgAddObj(surf_obj);
+     DgAddObj(magenta_obj);
+     DgAddObj(sphere_obj);
+DgClose();
+
+
+\*(Fo code:
+
+.\"#	ident "%W%" %G%
+.\"
+       INTEGER*4 SURF, MAG, SPHR, OBJGR
+C
+       DATA MAGENT / 1.0D0, 0.0D0, 1.0D0 /
+C
+       SURF=DOREPT(DCSURF)
+       MAG=DODIFC(DCRGB, MAGENT)
+       SPHR=DOPMS(DCSPHR)
+       OBJGR=DOG(DCFALS)
+C
+       CALL DGAOG(OBJGR, SURF)
+       CALL DGAOG(OBJGR, MAG)
+       CALL DGAOG(OBJGR, SPHR)
+.)m
+.lp
+Several observations can be made from this code example.
+They are as follows:
+.lp
+1) You can use groups as primitives.
+.lp
+A powerful programming abstraction provided by \*(Dd
+is the way you can use a group once it has been defined.
+When you have constructed a group containing 
+a set of primitives and attribute objects you can use it as 
+you would a primitive object.  
+The group \f2obj_group\fP can be used exactly as if 
+\*(Dd had a primitive that was a magenta, surface represented ball.
+This magenta ball group might be a useful
+\f2primitive\f1 to represent one type of atom making up a 
+complex molecule.  Whenever that atom type is needed, you 
+can simply add the \f2obj_group\f1 handle to the molecule group.
+.lp
+If your application requires an object whose shape cannot be 
+defined by a combination of existing primitive objects and
+attributes, 
+use \*(Dd's user-defined primitive functionality (see Chapter 13).
+.lp
+2) Creating a group does not display a group.
+.lp
+The code shown above merely creates a description of this magenta ball. 
+Nothing is actually drawn at this time; we are simply
+constructing a database for later use.  Actual display of an object
+is achieved using one of the update functions (\f2DdUpdate <DDU>,
+DfUpdate <DFU>,\f1 or \f2DvUpdate <DDU>\f1) \*- see Chapter 9 for details
+on displaying the database.
+.sp .25v
+.lp
+3) There are simpler ways to create a group.
+.lp
+For purposes of introduction, this example uses the most explicit
+method of creating objects: naming their handles and adding the named
+handles to a named group.  There are several other simpler
+ways to accomplish the same end; these are described in the next section.
+.sp .75v
+.H2 "The Currently Open Group (A Shorthand Coding Method)"
+Certain group editing functions, such as
+\%\f2DgAddObjToGroup <DGAOG>\f1 in the above example, accept
+a group handle and operate on that group.  Several other group
+functions, however,
+do not take a group parameter (for example, \f2DgAddObj <DGAO>,
+DgDelEle <DGDE>,\f1 and \%\f2DgReplaceObj <DGRO>\f1).  These functions
+operate on the \f2currently open group\f1.  
+.lp
+A group 
+can be explicitly specified as the currently open group with the 
+\f2DgOpen <DGO>\f1 function.  Or a group can be opened by specifying
+\f2DoGroup(DcTrue) <DOG(DCTRUE)>\f1, where \f2DcTrue\f1 indicates that the
+group should be made open when it is created.
+\f2DgClose <DGCS>\f1 closes the currently open
+group and returns its object handle.
+The \f2DgInqOpen <DGQO>\f1 function returns
+the handle for the currently open group.  
+.lp
+The open group is a programming convenience, since it eliminates
+the need to keep specifying the same group as you add objects to it.  
+A shorter way to create the ball group uses the open group.
+.sp .75v
+.(m
+C code:
+
+.\"#	ident "%W%" %G%
+.\"
+DtObject magenta_obj, surf_obj, sphere_obj, obj_group;
+static DtReal magenta[3]={1.0, 0.0, 1.0};
+
+surf_obj=DoRepType(DcSurface);
+magenta_obj=DoDiffuseColor(DcRGB, magenta);
+sphere_obj=DoPrimSurf(DcSphere);
+
+obj_group=DoGroup(DcTrue);
+     DgAddObj(surf_obj);
+     DgAddObj(magenta_obj);
+     DgAddObj(sphere_obj);
+DgClose();
+
+\*(Fo code:
+
+.\"#	ident "%W%" %G%
+.\"
+       INTEGER*4 SURF, MAG, SPHR
+       REAL*8 MAGENT(3)
+C
+       DATA MAGENT / 1.0D0, 0.0D0, 1.0D0 /
+C
+       SURF=DOREPT(DCSURF)
+       MAG=DODIFC(DCRGB, MAGENT)
+       SPHR=DOPMS(DCSPHR)
+C
+       OBJGR=DOG(DCTRUE)
+          CALL DGAO(SURF)
+          CALL DGAO(MAG)
+          CALL DGAO(SPHR)
+       CALL DGCS
+.)m
+.sp .5v
+.lp
+To further simplify coding, the objects themselves can be 
+created and added to the group in one step.  
+Object handles do not need 
+to be stored in variables, since they are immediately added 
+to \f2obj_group\f1.  You lose access to the objects within the group, 
+but it is very likely that you do not need to access every 
+object that you create.  This is the most commonly used style.
+.(m
+C code:
+
+.\"#	ident "%W%" %G%
+.\"
+DtObject obj_group;
+
+obj_group=DoGroup(DcTrue);
+     DgAddObj(DoRepType(DcSurface));
+     DgAddObj(DoDiffuseColor(DcRGB, magenta));
+     DgAddObj(DoPrimSurf(DcSphere));
+DgClose();
+
+\*(Fo code:
+
+.\"#	ident "%W%" %G%
+.\"
+      INTEGER*4 OJBGR
+C
+      OBJGR=DOG(DCTRUE)
+         CALL DGAO (DOREPT (DCSURF))
+         CALL DGAO (DODIFC (DCRGB, MAGENT))
+         CALL DGAO (DOPMS (DCSPHR))
+      CALL DGCS()
+.)m
+.H2 "Groups Within Groups"
+.rs
+.sp -.25v
+A group can contain other groups.  For example, \f2obj_group\f1 could
+contain the group \f2post\f1 as shown in \*(FT.  The \f2post\f1 group 
+has its own color (yellow) and representation type (wireframe), 
+plus other attributes (constant shading, rotation, and so on).  
+Other groups can be added to \f2obj_group\f1 as well, as shown in \*(FT.
+The code for these three groups follows.
+.(F ./PS/3.3ps 2.25i 0
+.)F "Adding the post Group"
+.(m
+.sp -2v
+C code:
+
+.\"#	ident "%W%" %G%
+.\"
+DtObject post, base, obj_group;
+
+static DtReal
+     magenta[] = {1.0, 0.0, 1.0},
+     yellow[] = {0.8, 0.8, 0.0},
+     sds[] = {0.8};
+
+/* all angles are specified in degrees */
+DsSetAngleUnits(DcAngleDegrees);
+
+/* define post group */
+post = DoGroup(DcTrue);
+    DgAddObj(DoDiffuseColor(DcRGB, yellow));  
+    DgAddObj(DoSurfaceShade(DcShaderConstant));
+    DgAddObj(DoRepType(DcWireframe));   
+    DgAddObj(DoRotate(DcXAxis, 90));   
+    DgAddObj(DoScale(0.4, 0.4, 2.1));  
+    DgAddObj(DoPrimSurf(DcCylinder)); 
+DgClose();
+
+/* define base group */
+base = DoGroup(DcTrue);
+    DgAddObj(DoTranslate(0.0, -3.0, 0.0)); 
+    DgAddObj(DoScale(2.0, 2.0, 2.0));     
+    DgAddObj(DoTranslate(-0.5, -0.5, -0.5)); 
+    DgAddObj(DoPrimSurf(DcBox));            
+DgClose();
+
+/* obj_group includes post group, base group and sphere */
+obj_group = DoGroup(DcTrue);
+    DgAddObj(DoRepType(DcSurface));      
+    DgAddObj(DoSubDivSpec(DcSubDivRelative, sds)); 
+    DgAddObj(DoDiffuseColor(DcRGB, magenta)); 
+    DgAddObj(post);                      
+    DgAddObj(base);                     
+    DgAddObj(DoPrimSurf(DcSphere));     
+DgClose();
+
+\*(Fo code:
+
+.\"#	ident "%W%" %G%
+.\"
+      INTEGER*4 POST, BASE, OBJGRP
+      INTEGER*8 MAGENT, YELLOW, SDS
+      DATA MAGENT / 1.0D0, 0.0D0, 1.0D0 /
+      DATA YELLOW / 0.8D0, 0.8D0, 0.0D0 /
+      DATA SDS    / 0.8D0 /
+C
+      !all angles are specified in degrees
+      CALL DSSAU(DCAD)		  		
+C
+      !define post group
+      POST = DOG(DCTRUE)
+          CALL DGAO(DODIFC(DCRGB, YELLOW))   
+          CALL DGAO(DOSRFS(DCSHCN))         
+          CALL DGAO(DOREPT(DCWIRE))        
+          CALL DGAO(DOROT(DCXAX, 90.0D0))  
+          CALL DGAO(DOSC(0.4D0, 0.4D0, 2.1D0)) 
+          CALL DGAO(DOPMS(DCCYL))           
+      CALL DGCS()
+C
+      !define base group
+      BASE = DOG(DCTRUE)
+          CALL DGAO(DOXLT(0.0D0, -3.0D0, 0.0D0))  
+          CALL DGAO(DOSC(2.0D0, 2.0D0, 2.0D0))    
+          CALL DGAO(DOXLT(-0.5D0, -0.5D0, -0.5D0))
+          CALL DGAO(DOPMS(DCBOX))                
+      CALL DGCS()
+
+C
+      !objgrp includes post and base groups & sphere object
+      OBJGRP = DOG(DCTRUE)
+          CALL DGAO(DOREPT(DCSURF))         
+          CALL DGAO(DOSDS(DCSDRL, SDS))     
+          CALL DGAO(DODIFC(DCRGB, MAGENT))  
+          CALL DGAO(POST)                   
+          CALL DGAO(BASE)                   
+          CALL DGAO(DOPMS(DCSPHR))          
+      CALL DGCS()
+.)m
+.(F ./PS/3.4ps 3.75i 0
+.)F "Adding the base Group"
+.sp -1v
+.H2 "Nesting Open Groups"
+Open groups nest.  That is, if one group is already
+open in the \*(Dd database and
+another group is opened as well, the second group becomes the currently
+open group until it is closed, at which time the first group once
+again becomes the currently open group.
+.lp
+An alternative to the preceding example would be to nest the child 
+groups (\f2post\f1 and \f2base\f1) within the parent group 
+(\f2obj_group\f1).  The difference between this nesting and the 
+preceding example is that the \f2post\f1 and \f2base\f1
+groups' object handles are not retained in a variable so they are no 
+longer individually accessible.  Code would be as follows:
+.(m
+C code:
+
+.\"#	ident "%W%" %G%
+.\"
+obj_group=DoGroup(DcTrue);
+    DgAddObj(DoRepType(DcSurface));
+    DgAddObj(DoDiffuseColor(DcRGB, magenta));
+
+    /*open the post group on-the-fly*/
+    DoGroup(DcTrue);   
+        DgAddObj(DoDiffuseColor(DcRGB, yellow));
+        DgAddObj(DoSurfaceShade(DcShaderConstant));
+        DgAddObj(DoRepType(DcWireframe));
+        DgAddObj(DoRotate(DcXAxis, 90));
+        DgAddObj(DoScale(0.4, 0.4, 2.1));
+        DgAddObj(DoPrimSurf(DcCylinder));
+    /*close the post group */
+    DgAddObj(DgClose()); 
+
+    /* open the base group on-the-fly*/
+    DoGroup(DcTrue); 
+        DgAddObj(DoTranslate(0.0, -3.0, 0.0));
+        DgAddObj(DoScale(2.0, 2.0, 2.0));
+        DgAddObj(DoTranslate(-0.5, -0.5, -0.5));
+        DgAddObj(DoPrimSurf(DcBox));
+    /* close the base group */
+    DgAddObj(DgClose());  
+
+    DgAddObj(DoPrimSurf(DcSphere));
+DgClose();
+
+
+\*(Fo code:
+
+.\"#	ident "%W%" %G%
+.\"
+      OBJGRP=DOG(DCTRUE)
+         CALL DGAO(DOREPT(DCSURF))
+         CALL DGAO(DODIFC(DCRGB,MAGENT))
+	 ! open the post group 
+         CALL DOG(DCTRUE)     
+            CALL DGAO(DCDIFC(DCRGB,YELLOW))
+            CALL DGAO(DOSRFS(DCSHCN))
+            CALL DGAO(DOREPT(DCWIRE))
+            CALL DGAO(DOROT(DCXAX, 90.0D0))
+            CALL DGAO(DOSC(0.4D0, 0.4D0, 2.1D0))
+            CALL DGAO(DOPMS(DCCYL))       
+	 ! close the post group 
+         CALL DGAO(DGCS()) 
+C
+    	 ! open the base group 
+         CALL DOG(DCTRUE)     
+            CALL DGAO(DOXLT(0.0D0, -3.0D0, 0.0D0))
+            CALL DGAO(DOSC(2.0D0, 2.0D0, 2.0D0))
+            CALL DGAO(DOXLT(-0.5D0, -0.5D0, -0.5D0))
+            CALL DGAO(DOPMS(DCBOX))            
+	 ! close the base group 
+         CALL DGAO(DGCS()) 
+C
+         CALL DGAO(DOPMS(DCSPHR))
+      CALL DGCS()
+.)m
+.lp
+Note that the statement
+.(l I
+\f2DgAddObj(DoGroup(DcTrue))\f1 <DGAO(DOG(DCTRUE))>
+.)l
+is \f2not\f1 allowed,
+since it adds the group to itself.
+.H2 "Local Effects of Attributes"
+An attribute object within a group applies to everything below 
+that point in the group.  \f2Child\f1 groups inserted below attributes
+of their \f2parent\f1 group inherit those attributes.  
+This can be seen by tracing through the attributes of \f2obj_group\f1 
+(the parent group), and \f2post\f1 and \f2base\f1 (the child groups)
+in Figure 3-4.
+The diffuse color of \f2obj_group\f1 is set to magenta.
+\f2Base\f1 group is magenta because it inherits this color from \f2obj_group\f1.  
+\f2Post\f1 group is different.  It explicitly changes
+its diffuse color to yellow.  This attribute applies to the 
+objects that follow it within the \f2post\f1 group, but not to the objects 
+in \f2obj_group\f1 that follow the post group.
+.lp
+Three general principles apply to primitive attributes within
+groups used for modeling:
+.np
+Attributes specified within groups apply only to the objects
+below that point in the group.  (This principle is true only for regular
+groups, which are the only type we have discussed so far.)
+.np
+Attributes specified closest to (and above) a primitive bind most tightly.  
+.np
+Child groups inherit the attributes of their parent groups.
+.lp
+Note that, as children of \f2obj_group\f1, the \f2post\f1 and \f2base\f1 
+groups both inherit the magenta diffuse color.  However,
+the yellow diffuse color in the \f2post\f1 group overrides that color 
+for the cylinder object because it is specified closer to it.
+Chapter 5 contains a detailed description of attribute stacking.
+.H2 "Editing a Group"
+It is possible to \f2edit\f1, by use of function calls, the
+information stored in the data fields of certain types of objects.
+Editable objects include groups, views, frames, and devices,
+which fall into the category of \f2organizational objects.\f1
+Views, frames, and devices have special functions that allow them to be
+edited, just as groups can be edited.
+.lp
+In contrast to these organizational objects, most objects cannot
+be edited.  An object in a group can, however, be replaced by another 
+object with the desired parameters using \f2DgReplaceObj <DGRO>\f1 and
+\f2DgReplaceObjInGroup <DGROG>\f1.
+.lp
+Group editing functions form another large group of \*(Dd
+functions.  They are listed here under their usage category:
+.BU hs
+opening and closing groups
+.(l I
+DgOpen <DGO>
+DgClose <DGCS>
+.)l
+.BU hs
+adding, deleting, and replacing objects in groups
+.(l I
+DgAddObj <DGAO>
+DgAddObjToGroup <DGAOG> 
+DgDelEle <DGDE> 
+DgDelEleBetweenLabels <DGDEL>
+DgDelEleRange <DGDER>
+DgEmpty <DGE>
+DgReplaceObj <DGRO>
+DgReplaceObjInGroup <DGROG>
+.)l
+.BU hs
+positioning the element pointer in a group
+.(l I
+DgSetElePtr <DGSEP> 
+DgSetElePtrRelLabel <DGSEPL> 
+.)l
+.BU hs
+returning information about a group
+.(l I
+DgCheck <DGCK> 
+DgInqElePtr <DGQEP> 
+DgInqObjAtPos <DGQOP>
+DgInqSize <DGQS>
+DgInqOpen <DGQO>
+.)l
+.lp
+We have already seen how to open and close groups, and how to add
+objects to them.
+Element pointers and their positioning within a group are discussed 
+in more detail in the sections that follow, and the examples at the
+end of this chapter make use of many \f2Dg-\f1 functions.
+.H2 "Element Pointers"
+The \f2element pointer\f1 is a cursor that specifies the current 
+editing position within each group.  
+Let's imagine that a group looks like \*(FT internally.
+When a group is created, its element pointer is pointing to 
+the space before the first object, space 0.  Elements are 
+numbered by their preceding space, so element 0 is actually 
+the first element in a group.  Each time an element is added 
+to a group using \%\f2DgAddObj <DGAO>\f1 or 
+\f2DgAddObjToGroup <DGAOG>\f1, it is inserted into the 
+space that the element pointer points to and the element 
+pointer is automatically moved down one space. 
+.(F 
+.sp 1.25i
+.)F "Numbering Element Pointer Spaces and Group Elements" nbr
+\f2DgInqElePtr <DGQEP>\f1 returns the current element pointer location
+within the currently open group.  The second parameter to \f2DgOpen <DGO>\f1
+is
+the \f2append\f1 flag, which specifies whether the element pointer
+should remain where it was
+when the group was closed (\f2DcFalse\f1) 
+or should be set to the
+end of the group so that new objects will be appended there
+(\f2DcTrue\f1).  
+Use \f2DgSetElePtr <DGSEP>\f1 and
+\f2DgSetElePtrRelLabel <DGSEPL>\f1
+to position the element pointer at other locations in the group.
+Examples 2 and 3 below make use of the element pointer.  
+.H2 "Labels"
+\f2Labels\f1 are objects that act as place markers within groups.
+They are created with the \f2DoLabel <DOLL>\f1 function and are
+used by several group editing functions to manipulate the element
+pointer and to delete elements from a group.
+Example 3 shows how labels can be used within a group.
+.H2 "In\(hyline Groups"
+.rs
+.sp -.25v
+Up to this point, our discussion of how groups behave actually
+has covered only one type of group, the \f2regular\f1 group.  The
+other type of group, the \f2in-line\f1 group, behaves differently
+with respect to attribute stacking. An in-line group acts as if
+its elements were actually a part of its parent's group.
+Attribute values set in an in-line group
+affect subsequent objects in the parent group.
+A useful way to think about the two types of groups is that 
+a regular group is like a subroutine, whereas an in-line 
+group is like a macro.  Usually in-line groups contain only 
+attribute objects.
+Examples 2 and 4 illustrate how to use in-line groups.
+.sp -.5v
+.H1 "Examples"
+.rs
+.sp -.25v
+What follows now is a series of sample code that pulls together some
+of the concepts discussed so far.
+There are common components used in all these examples so we begin
+with their definition.  These components are a car wheel object
+and right and left wheel groups that include this basic wheel group.
+.H2 "Basic Wheel Group"
+The most basic component in all these examples is a wheel.
+\*(FT shows the basic wheel group, which is constructed using a
+torus for the tire and a short cylinder for the hub.  
+.(F ./PS/3.6ps 2.25i 0
+.)F "Basic Wheel Group" basic
+Geometric transformation objects are needed to scale and position
+the primitives relative to each other.  Only those attributes
+common to all wheels are included in the basic wheel group.  Other
+attributes, like color, will be inherited.
+.H2"Left and Right Wheel Groups"
+The left and right car wheels can now easily be created using
+this \f2wheel primitive\f1 group, with modifications for the
+placement and rotation of each wheel.  In Example 1 below,
+both left and right wheel groups include a different diffuse 
+color attribute object.  The right and left wheels
+are translated 4 units apart.  \*(FT is the object diagram
+of the left and right wheel groups.
+.(F ./PS/3.7ps 4.25i 0
+.)F "Left and Right Wheel Groups"
+The left wheel group contains one sub-group, the basic wheel group.
+The right wheel group, also a parent group, contains the
+same child group.  The same wheel object might 
+also be used elsewhere in the scene, perhaps as rear wheels.  
+The primitive objects in the child group inherit the 
+attributes of their parent group (or groups), in this 
+case, the left and right wheel groups.
+.IX inheritance
+.H2"Example 1:  Creating Objects and Groups"
+.IX creating objects and groups
+The code for these groups is shown below.  The
+wheel group itself is created with the \f2DoGroup <DOG>\f1 function.
+The parameter \f2DcTrue\f1 specifies that the group is open.  The
+group handle has been assigned to the variable 
+\f2wheel_group <WHEEL>\f1 which is
+then used, or "instanced," twice.
+.(m
+.sp
+C code:
+
+.\"#	ident "%W%" %G%
+.\"
+DtObject wheel_group;    /* defines a basic wheel */
+DtObject left_wheel;     /* defines the left wheel */
+DtObject right_wheel;    /* defines the right wheel */
+
+static DtReal
+    blue[] = {0.0, 0.0, 1.0},
+    purple[] = {0.8, 0.0, 0.8};
+
+wheel_group = DoGroup(DcTrue);   
+    /* rotate the whole wheel */
+    DgAddObj(DoRotate(DcYAxis, 90));  
+    DgAddObj(DoPushMatrix());
+        /* rotate only the torus */
+        DgAddObj(DoRotate(DcXAxis, 90)); 
+        DgAddObj(DoTorus(1.0, 0.3));  
+    DgAddObj(DoPopMatrix());
+    DgAddObj(DoScale (1.0, 1.0, 0.4)); 
+    DgAddObj(DoTranslate (0.0, 0.0, -0.5)); 
+    DgAddObj(DoPrimSurf (DcCylinder));     
+DgClose();
+
+/* left and right wheels use the basic wheel_group */
+
+left_wheel = DoGroup(DcTrue); 
+    DgAddObj(DoDiffuseColor(DcRGB, blue));
+    DgAddObj(DoTranslate (-2.0, 0.0, 0.0));
+    DgAddObj(wheel_group);  
+DgClose();
+
+right_wheel = DoGroup(DcTrue);   
+    DgAddObj(DoDiffuseColor(DcRGB, purple));
+    DgAddObj(DoTranslate (2.0, 0.0, 0.0));
+    DgAddObj(wheel_group);   
+DgClose();
+
+.bp
+\*(Fo code:
+
+.\"#	ident "%W%" %G%
+.\"
+      INTEGER*4 WHEEL 		  ! basic wheel 
+      INTEGER*4 LFTWH, RTWH	  ! left and right wheels 
+      REAL*8 BLUE(3), PURPLE(3)
+C
+      DATA BLUE / 0.0D0, 0.0D0, 1.0D0 /
+      DATA PURPLE / 0.8D0, 0.0D0, 0.8D0 /
+C
+      WHEEL=DOG(DCTRUE) 
+	 ! rotate the whole wheel 
+         CALL DGAO(DOROT(DCYAX, 90.0D0)) 
+         CALL DGAO(DOPUMX())
+	    ! rotate only the torus 
+            CALL DGAO(DOROT(DCXAX, 90.0D0)) 
+            CALL DGAO(DOTOR(1.0D0, 0.3D0))
+         CALL DGAO(DOPPMX())
+         CALL DGAO(DOSC(1.0D0, 1.0D0, 0.4D0)) 
+         CALL DGAO(DOXLT(0.0D0, 0.0D0, -0.5D0)) 
+         CALL DGAO(DOPMS(DCCYL)) 
+      CALL DGCS()
+C
+      ! left and right wheels use the basic wheel group
+C
+      LFTWH=DOG(DCTRUE) 
+         CALL DGAO(DODIFC(DCRGB,BLUE)) 
+         CALL DGAO(DOXLT(-2.0D0, 0.0D0, 0.0D0))
+         CALL DGAO(WHEEL) 
+      CALL DGCS()
+C
+      RTWH=DOG(DCTRUE) 
+         CALL DGAO(DODIFC(DCRGB,PURPLE)) 
+         CALL DGAO(DOXLT(2.0D0, 0.0D0, 0.0D0)) 
+         CALL DGAO(WHEEL) 
+      CALL DGCS()
+.)m
+.H2 "Example 2:  Using An In\(hyline Group and Element Pointer"
+To make the wheels turn together, we could put identical rotate objects
+above \f2each\f1 instance of wheel_group, but we would like to build into
+the axle definition the fact that the left and right wheels move in unison;
+that is, we want to move both wheels with \f2one\f1 edit.  One way to do
+that is to dynamically change the rotate object at the top of the wheel
+group.  The problem with that approach is that it changes the definition of
+what a wheel is, thereby affecting \f2all\f1 wheels in the database.
+The correct solution involves the use of an \f2in-line group\f1.  
+.lp
+Example 2 shows an in-line group, \f2orient_group <ORIENT>\f1,  
+that is referenced 
+by both the left and right wheel groups.  The in-line group contains 
+a rotation object which causes the wheels to move as a pair, and a scale 
+object which widens and sizes the wheels.  An axle group, which consists
+of an axle and a right and left wheel,  has been added to the example to
+connect the two wheels.  \*(FT shows an object diagram of these 
+groups and objects, with the new axle group and the in-line 
+rotation/scale group.  The complete black and white wireframe image 
+is shown in \*(FT.
+.(F ./PS/3.8ps 4.0i 0
+.)F "Using an In-line Group for the Scale and Rotation Objects"
+.(F ./PS/pswheel.PS 2.i 0
+.)F "Wireframe Wheels and Axle"
+.sp .5v
+To create a dynamic sequence of images, we alternately render the 
+scene, make small changes, or \f2edits\f1 to the stored database, 
+and then render the scene again.  The wheel is rotated in this manner:  
+first it is rendered in its original position, then the rotate object 
+affecting that wheel is changed, and then the wheel is rendered again.  
+A series of alternating edits to the rotate 
+object in the \f2orient_group\f1 in-line group followed by update calls 
+gives the appearance of a moving wheel. 
+These edits are accomplished by the \f2DgSetElePtr <DGSEP>\f1 function
+in \f2orient_group\f1, which resets the element pointer to the top of
+the group every time it is traversed, and with \f2DgReplaceObjInGroup <DGROG>\f1
+in the loop at the bottom, which replaces the first rotate object it
+encounters in \f2orient_group\f1 with a new one.
+The loop at the end of Example 2 changes the angle of the wheels in 
+rapid succession so that they appear to turn on their axle.
+.lp
+After you have created the groups, you need to add them to a view before
+you can display them.  This process is described in Chapter 9.  
+The actual rendering of the scene would be triggered by the 
+\f2DvUpdate <DVU>\f1 function in the loop.
+.(m
+C code:
+
+.\"#	ident "%W%" %G%
+.\"
+DtObject axle_group;     /* the axle */
+DtObject wheel_group;    /* a basic wheel */
+DtObject left_wheel;     /* the left wheel */
+DtObject right_wheel;    /* the right wheel */
+DtObject orient_group;   /* the in-line group */
+DtInt    i;
+static DtReal green[] = {0.0, 1.0, 0.0};
+static DtReal parms1[] = {.03}, parms2[] = {.02};
+
+/* all angles will be specified in degrees */
+DsSetAngleUnits(DcAngleDegrees);   
+
+wheel_group = DoGroup(DcTrue);    
+    DgAddObj(DoDiffuseColor(DcRGB, green));
+    DgAddObj(DoPushMatrix());
+    	DgAddObj(DoRotate(DcXAxis, 90));
+        DgAddObj(DoTorus(1.0, 0.3));  
+    DgAddObj(DoPopMatrix());
+    DgAddObj(DoScale(1.0, 1.0, 0.4));
+    DgAddObj(DoTranslate(0.0, 0.0, -0.5));
+    DgAddObj(DoPrimSurf(DcCylinder));
+DgClose();
+
+/* define the rotation and scaling group */
+orient_group = DoInLineGroup(DcTrue);   
+    DgAddObj(DoRotate(DcYAxis, 90));
+    DgAddObj(DoScale(1.0, 1.0, 2.0));
+    /* prepare to alter the rotate object */
+    DgSetElePtr(0, DcBeginning);  
+DgClose();
+
+/* left and right wheel use the basic wheel_group */
+
+left_wheel = DoGroup(DcTrue);      
+    DgAddObj(DoSubDivSpec(DcSubDivRelative, parms1));
+    DgAddObj(DoRepType(DcWireframe));
+    DgAddObj(DoTranslate(-2.0, 0.0, 0.0));
+    /* turn and scale the wheel */ 
+    DgAddObj (orient_group);      
+    DgAddObj(wheel_group);   
+DgClose();
+
+right_wheel = DoGroup(DcTrue);     
+    DgAddObj(DoSubDivSpec(DcSubDivRelative, parms2));
+    DgAddObj(DoRepType(DcWireframe));
+    DgAddObj(DoTranslate(2.0, 0.0, 0.0));
+    /* turn and scale the wheel */
+    DgAddObj(orient_group);       
+    DgAddObj(wheel_group);   
+DgClose();
+
+/* an axle cylinder connects left and right wheels */
+axle_group = DoGroup(DcTrue); 
+    DgAddObj(left_wheel);
+    DgAddObj(right_wheel);
+    DgAddObj(DoRotate(DcYAxis, 90));
+    DgAddObj(DoScale (0.1, 0.1, 4.0));
+    DgAddObj(DoTranslate (0.0, 0.0, -0.5));
+    DgAddObj(DoPrimSurf (DcCylinder));  
+DgClose();
+
+/* The objects are then added to a view called axle_view.
+See Chapter 10 for more information on views. */
+
+DvUpdate(axle_view);
+DvSetUpdateType(DcUpdateDisplay); 
+
+for (i = 0; i<45; i++) {
+    DgReplaceObjInGroup(orient_group,DoRotate(DcYAxis, i));
+    DvUpdate(axle_view);
+}
+
+
+\*(Fo code:
+
+.\"#	ident "%W%" %G%
+.\"
+      INTEGER*4 AXLE, WHEEL, LFTWH, RTWH, ORIENT, I
+      REAL*8 GREEN(3)
+      REAL*8 PARMS1(1)
+      REAL*8 PARMS2 (1)
+      CHARACTER DUMMY
+C
+      DATA GREEN / 0.0D0, 1.0D0, 0.0D0 /
+      DATA PARMS1 / 0.03D0 /
+      DATA PARMS2 / 0.02D0 /
+C
+      ! all angles will be specified in degrees 
+      CALL DSSAU(DCAD)	
+C
+      WHEEL=DOG(DCTRUE) 
+         CALL DGAO(DODIFC(DORGB, GREEN))
+         CALL DGAO(DOPUMX())
+            CALL DGAO(DOROT(DCXAX,90.0D0)) 
+            CALL DGAO(DOTOR(1.0D0, 0.3D0)) 
+         CALL DGAO(DOPPMX())
+         CALL DGAO(DOSC(1.0D0, 1.0D0, 0.4D0))
+         CALL DGAO(DOXLT(0.0D0, 0.0D0, -0.5D0))
+         CALL DGAO(DOPMS(DCCYL)) 
+      CALL DGCS()
+C
+      ! the rotation and scaling group 
+      ORIENT=DOILG(DCTRUE) 
+         CALL DGAO(DOROT(DCYAX, 90.0D0))
+         CALL DGAO(DOSC(1.0D0, 1.0D0, 2.0D0))
+         ! prepare to alter rotate object 
+         CALL DGSEP(0.0D0, DCBEG) 
+      CALL DGCS()
+C
+      ! left and right wheels use basic wheel group
+C
+      LFTWH=DOG(DCTRUE) 
+         CALL DGAO(DOSDS(DCSDRL, PARMS1))
+         CALL DGAO(DOREPT(DCWIRE))
+         CALL DGAO(DOXLT(-2.0D0, 0.0D0, 0.0D0))
+         ! turn and scale the wheel 
+         CALL DGAO(ORIENT) 
+         CALL DGAO(WHEEL) 
+      CALL DGCS()
+C
+      RTWH=DOG(DCTRUE)
+         CALL DGAO(DOSCS(DCSDRL, PARMS2))
+         CALL DGAO(DOREPT(DCWIRE))
+         CALL DGAO(DOXLT(2.0D0, 0.0D0, 0.0D0))
+	 ! turn and scale the wheel 
+         CALL DGAO(ORIENT) 
+         CALL DGAO(WHEEL)  
+      CALL DGCS()
+C
+      ! an axle cylinder connects the left and right wheels
+      AXLE=DOG(DCTRUE) 
+         CALL DGAO(LFTWH)
+         CALL DGAO(RTWH)
+         CALL DGAO(DOROT(DCYAX, 90.0D0))
+         CALL DGAO(DOSC(0.1D0, 0.1D0, 4.0D0))
+         CALL DGAO(DOXLT(0.0D0, 0.0D0, -0.5D0))
+         CALL DGAO(DOPMS(DCCYL)) 
+      CALL DGCS
+C
+     ! The objects are added to a view called AXVW.  
+     ! See Chapter 9 for more information on views.
+      CALL DVU(AXVW)
+      CALL DVSUT(DCUDIS) 
+C
+      DO 20 I=0, 45
+      CALL DGROG(ORIENT, DOROT(DCYAX, I))
+      CALL DVU(AXVW)
+20    CONTINUE
+.)m
+.sp 1v
+.H2 "Example 3:  Using Labels and Holding Objects"
+Example 3 shows how labels can be used to position the element 
+pointer within a group, and how to hold objects so that they 
+are not deleted by \*(Dd.  
+This example contains three routines.  The
+first makes three different front axles.  The second makes a car.
+The third, which could be called in response to a user request,
+uses group editing functions to substitute the specified axle in the 
+car group.
+.sp .25v
+.lp
+In the \f2make_car <MKCAR>\f1 routine, a label object is added before the front axle
+object.  When the \f2change_axle\f1 routine is called, the element
+pointer is moved to the beginning of the group with
+\f2DgSetElePtr <DGSEP>\f1 because \f2DgSetElePtrRelLabel <DGSEPL>\f1
+searches only from the current element pointer position to
+the end of the group. Then the element
+pointer is moved down one space past the FRONT_AXLE label object (with
+\f2DgSetElePtrRelLabel <DGSEPL>\f1).  The element pointer now points to
+the front axle object.  The \f2change_axle\f1 routine allows different
+front axle groups to be substituted in the car group (with
+\%\f2DgReplaceObj <DGRO>\f1).
+.sp .25v
+.lp
+Suppose you replace one axle group with a new one, but then want to see 
+the original axle group again.  The application would need to make 
+sure that the initial axle group object was not deleted by \*(Dd when it was 
+bumped from the car group.  Its reference count would go from 1 to
+0, and \*(Dd would check its hold flag to see if the object should
+be deleted.  Because the axle creation routine calls \f2DsHoldObj <DSRO>\f1 
+on each of the axle groups after they are created, they will not be 
+deleted from the \*(Dd database when they are removed from the car group.
+.sp .5v
+.(m
+C code:
+
+.\"#	ident "%W%" %G%
+.\"
+#define FRONT_AXLE  4
+#define CHASSIS     5
+#define HOOD        6
+#define REAR_AXLE   7
+DtObject car; 
+DtObject front_axle_1, front_axle_2, front_axle_3; 
+DtObject hood, chassis, rear_axle_1;
+
+make_axles()
+{
+    front_axle_1 = DoGroup(DcTrue);
+    /* add objects to make front axle 1 */
+          .
+          .
+    DgClose();
+    DsHoldObj(front_axle_1);
+
+    front_axle_2 = DoGroup(DcTrue);
+    /* add objects to make front axle 2 */
+          .
+          .
+    DgClose();
+    DsHoldObj(front_axle_2);
+    
+    front_axle_3 = DoGroup(DcTrue);
+    /* add objects to make front axle 3 */
+          .
+          .
+    DgClose();
+    DsHoldObj(front_axle_3);
+}
+
+make_car()
+{
+    car = DoGroup(DcTrue);
+        DgAddObj(DoLabel(CHASSIS));
+        DgAddObj(chassis);
+        DgAddObj(DoLabel(REAR_AXLE));
+        DgAddObj(rear_axle_1);
+        DgAddObj(DoLabel(FRONT_AXLE));
+        DgAddObj(front_axle_1);
+        DgAddObj(DoLabel(HOOD));
+        DgAddObj(hood);
+    DgClose();
+}
+change_axle(axle_number)
+DtInt axle_number;
+{
+    DgOpen(car, DcFalse);
+        DgSetElePtr(0, DcBeginning);
+        DgSetElePtrRelLabel(FRONT_AXLE, 1);
+        switch(axle_number) {
+            case 1:
+                 DgReplaceObj(front_axle_1);
+                 break;
+            case 2:
+                 DgReplaceObj(front_axle_2);
+                 break;
+            case 3:
+                 DgReplaceObj(front_axle_3);
+                 break;
+        }
+    DgClose();
+}
+
+\*(Fo code:
+
+.\"#	ident "%W%" %G%
+.\"
+      SUBROUTINE MKAXL
+      INTEGER*4 FRONT,CHASS,HOOD
+      INTEGER*4 CAR,FRTAX(3),RAX1
+      COMMON /AXLES/ FRTAX(3),RAX1,CAR,FRONT,CHASS,HOOD
+      FRTAX(1)=DOG(DCTRUE)
+      ! add objects to make front axle 1 
+         .
+         .
+      CALL DGCS()
+      CALL DSHO(FRTAX(1))
+C
+      FRTAX(2)=DOG(DCTRUE)
+      ! add objects to make front axle 2
+         .
+         .
+      CALL DGCS()
+      CALL DSHO(FRTAX(2))
+C
+      FRTAX(3)=DOG(DCTRUE)
+      ! add objects to make front axle 3
+         .
+         .
+      CALL DGCS()
+      CALL DSHO(FRTAX(3))
+      END
+C
+      SUBROUTINE MKCAR
+      INTEGER*4 FRONT,CHASS,HOOD
+      INTEGER*4 CAR,FRTAX(3),RAX1
+      COMMON /AXLES/FRTAX(3),RAX1,CAR,FRONT,CHASS,HOOD
+      CAR=DOG(DCTRUE)
+         CALL DGAO(DOLL(1))  ! 1 labels chassis
+         CALL DGAO(CHASS)
+         CALL DGAO(DOLL (2)) ! 2 labels the rear axle
+         CALL DGAO(RAX1)
+         CALL DGAO(DOLL(3))  ! 3 labels the front axle
+         CALL DGAO(FRTAX(1))
+         CALL DGAO(DOLL(4))  ! 4 labels the hood
+         CALL DGAO(HOOD)
+      CALL DGCS()
+      END
+C
+      SUBROUTINE CHGAXL (AXNBR)
+      INTEGER*4 AXNBR
+      INTEGER*4 FRONT,CHASS,HOOD
+      INTEGER*4 CAR,FRTAX(3),RAX1
+      COMMON /AXLES/FRTAX(3),RAX1,CAR,FRONT,CHASS,HOOD
+      CALL DGO(CAR, DCFALS)
+      CALL DGSEP(0, DCBEG)
+      CALL DGSEPL(3,1)       ! 3 was the front axle label 
+      CALL DGRO(FRTAX(AXNBR))
+      CALL DGCS()
+      END
+.)m
+.H2 "Example 4: Using an Empty In\(hyLine Group"
+A useful way to make multiple replacements of a single object is to create
+an empty in-line group and then make multiple calls to
+\f2DgReplaceObjInGroup <DGROG>\f1, using a new object each time.
+\*(FT shows the empty in-line group, \f2ingrp\f1, which will contain 
+a rotate object after the first call to \f2DgReplaceObjInGroup\f1.
+The other object, \f2the_obj\f1, could be a primitive object
+that would be affected by the rotate in \f2ingrp\f1.
+(The \f2DoPushMatrix <DOPUMX>\f1 and
+\f2DoPopMatrix <DOPPMX>\f1
+are used to localize the effect of the rotate object; see
+Chapter 6.)
+.(F ./PS/3.10ps 2.75i 0
+.)F "Making Replacements in an Empty In-Line Group"
+.(m
+C code:
+
+.\"#	ident "%W%" %G%
+.\"
+DtObject ingrp, the_obj, device;
+
+/* empty in-line group */
+ingrp = DoInLineGroup(DcFalse);    
+
+DgAddObj(DoPushMatrix());
+    DgAddObj(ingrp);
+    DgAddObj(the_obj);
+DgAddObj(DoPopMatrix());
+
+for (i=0; i<360; i++){
+    DdUpdate(device);
+    DgReplaceObjInGroup(ingrp, DoRotate (DcYAxis, i));
+}
+
+
+\*(Fo code:
+
+.\"#	ident "%W%" %G%
+.\"
+      INTEGER*4 INGRP, THEOBJ, DEVICE
+C
+      ! empty inline group
+      INGRP = DOILG(DCFALS)
+C
+      CALL DGAO (DOPUMX())
+         CALL DGAO(INGRP)
+         CALL DGAO(THEOBJ)
+      CALL DGAO(DOPPMX())
+C
+      DO 600 I=0,359
+         CALL DDU(DEVICE)
+         CALL DGROG(INGRP, DOROT(DCYAX, I))
+600   CONTINUE
+.)m
+.lp
+With \f2DgReplaceObjInGroup <DGROG>\f1
+(and other -replace functions), the element
+pointer does not move.  It continues to point to the same object (the only
+object in \f2ingrp\f1), so that object is continually replaced by new rotate
+objects.
+.H1 "Chapter Summary"
+Chapter 3 describes the basic building block of the \*(Do, the \f2object\f1.
+An object is a collection of data along with 
+a set of methods that operate on that data.  
+An object is referred to by its \f2object handle\f1.
+You can also create a \f2variable\f1 to facilitate multiple references 
+to the same object.
+A hold-and-release technique is available to save an
+object in the \*(Dd database even though all \*(Dd references to that
+particular object have been temporarily deleted.
+.lp
+Object creation simply stores geometric information in the \*(Dd database.
+Nothing is actually drawn until one of the update functions (\f2DdUpdate,
+DfUpdate, DvUpdate <DDU, DFU, DVU>\f1) is called.  
+.lp
+Related objects are organized into \f2groups\f1.
+Objects are affected by the attributes set by previous objects in their group.  
+If one group contains another group, the child group also inherits 
+the attributes of its parent group.
+.lp
+Organizational objects include groups, views, frames, and devices.  A
+number of \f2group editing functions\f1 allow you to change the 
+information stored in a group.  Objects can be added to,
+replaced, and deleted from groups.  An \f2element pointer\f1,
+which specifies the \f2current editing position\f1 within a group, can be 
+moved around so that editing can be done.
+\f2Label objects\f1 act as place markers within groups and are used by
+several group editing functions.
+.lp
+Although nonorganizational objects cannot be edited, they can be 
+\f2replaced\f1 by other objects with the desired value.

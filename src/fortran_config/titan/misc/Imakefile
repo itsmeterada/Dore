@@ -1,0 +1,11 @@
+#include <Dore.tmpl>
+
+    SRCS = fcalbak.c fdatptr.c fdatval.c fexeset.c ffil.c ffilerstr.c \
+           finpslt.c flbl.c fnamset.c fpckid.c fpopatt.c fpshatt.c frstr.c
+    OBJS = fcalbak.c fdatptr.c fdatval.c fexeset.c ffil.c ffilerstr.c \
+           finpslt.c flbl.c fnamset.c fpckid.c fpopatt.c fpshatt.c frstr.c
+
+LibraryObjectRule()
+SubdirLibraryRule($(OBJS))
+
+DependTarget()

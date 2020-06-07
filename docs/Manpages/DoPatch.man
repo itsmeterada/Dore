@@ -1,0 +1,125 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DoPatch 3D  "Dore"
+.SH NAME
+DoPatch \- Create a patch primitive object
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+DtObject DoPatch(colormodel, vertextype, matrixl, 
+	vertices, matrixr)
+DtColorModel colormodel;
+DtVertexType vertices;
+DtObject matrixl;
+DtObject matrixr;
+DtReal vertices[\|];
+.sp
+.in -.5i
+FORTRAN:
+.in +.5i
+INTEGER*4 DOPAT(COLMOD, VTXTYP, MATRXL, 
+	VTXS, MATRXR)
+INTEGER*4 COLMOD
+INTEGER*4 VTXTYP
+INTEGER*4 MATRXL
+INTEGER*4 MATRXR
+REAL*8 VTXS(*)
+.in -.5i
+.fi
+.SH DESCRIPTION
+.IX DOPAT
+.IX DoPatch
+.I DoPatch
+creates a patch primitive object.  The patch type is
+determined by the pair of matrices used.  These matrices could be
+\f2DcBezier4\fP <\f2DCMXB4\fP>,
+\f2DcHermite4\fP <\f2DCMXH4\fP>, or \f2DcBSpline4\fP
+<\f2DCMXBS\fP>.  The user
+may specify a non-standard matrix object with \f2DoMatrix\fP <\f2DOM\fP>.
+.PP
+The parameter \f2colormodel\fP specifies the color model if the control points
+specify color for shading purposes.  The parameter \f2vertextype\fP specifies
+the nature of the control points; only types \f2DcLoc\fP <\f2DCL\fP>
+and \f2DcLocClr\fP <\f2DCLC\fP> are allowed.  
+for more information, refer to Chapter 6, \f2\Dore Vertex Types\fP, 
+in the \f2\Dore Reference Manual\fP or to the \f2VertexTypes\fP 
+on-line manual page.) 
+.PP
+The patch is defined by the list of control points in the parameter
+\f2vertices\fP.  The area for the patch control points in control
+space is always 0.0 to 1.0 in each direction.
+.PP
+By allowing different matrices to be specified for both the left
+(\f2matrixl\fP) and right (\f2matrixr\fP) matrices, both the size
+and type of parameterization in each direction can be individually
+controlled.  If the same matrix type is specified for both matrices,
+then the entire patch will be of that type; the right matrix is
+internally transposed before use.  The order is determined by the
+dimension of each matrix, i.e, the number of vertices in that
+direction.  The degree will always be one less than this number.
+FORTRAN array element FOO(j+1,i+1).
+.PP
+The use of the matrices follows this equation:
+.if t \{\
+
+	P(u,v) = [1 u u\u\s-42\s+4\d u\u\s-43\s+4\d ... ] * \f2matrixl\fP * \f2vertices\fP * \f2matrixr\fP\u\s-4T\s+4\d * 
+	[1 v v\u\s-42\s+4\d v\u\s-43\s+4\d ... ]\u\s-4T\s+4\d
+
+.\}
+.if n \{\
+.sp
+.nf
+.cs 1 24
+
+               2  3
+P(u,v) = [1 u u  u  ... ] * \f2matrixl\fP * \f2vertices\fP *
+
+                            T         2  3      T
+                     \f2matrixr\fP  * [1 v v  v  ... ]
+
+.cs 1
+.fi
+.LP
+.\}
+If this primitive object defines a closed surface or will be oriented with
+backfacing parts of the surface away from the viewer, then backface culling may
+speed up the rendering time.  See \f2DoBackfaceCullable\fP and
+\f2DoBackfaceCullSwitch\fP.
+.SH ERRORS
+.I DoPatch
+will fail if the vertex type is not \f2DcLoc\fP or \f2DcLocClr\fP.
+.TP 15
+[WARNING - bad vertex type]
+.PP
+.I DoPatch
+will fail if an invalid matrix object is specified.
+.TP 15
+[WARNING - invalid matrix object handle]
+.PP
+.I DoPatch
+will fail if a non-square matrix is specified.
+.TP 15
+[WARNING - non square matrix]
+.SH "SEE ALSO"
+.na
+.nh
+DoBackfaceCullSwitch(3D), DoBackfaceCullable(3D),
+DoNURBSurf(3D), VertexTypes(3D)
+.ad
+.hy

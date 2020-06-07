@@ -1,0 +1,430 @@
+.\"#ident "%W%" %G%
+.\"
+.\" #
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  
+.\" # 
+.\" # KUBOTA GRAPHICS Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\" #
+.\"
+.sc
+.ds BT "\\*(Dd Developer's Guide
+.ds CT "Testing \\*(Dd
+.ds h1 16
+.so ../macros/local.me
+.PN 227
+.L1 T ESTING
+.L2 " D" OR\h'5p'\v'-8p'\(aa\v'8p'\h'-5p' "" "\h'-\w'\(aa'u'E
+.L3 
+.CH SIXTEEN
+.rs
+.sp -1.5v
+Several test programs are provided with Portable \*(Dd and the
+\*(Dd Developer's Toolkit.  Portable \*(Dd also comes with several
+platform-specific demonstration programs.  These programs
+have many functions:  they can be used to verify the installation 
+of Portable \*(Dd on a supported platform, to test a port to a
+new platform, or to verify the incorporation of any new renderers 
+or device drivers into \*(Dd as described in earlier chapters.
+This chapter describes how to build and use these programs.  
+.lp
+The first section of this chapter describes the test programs
+and explains how to build and run them.
+The last section discusses how to build and run the 
+additional \*(Dd demonstration programs for the \f2gl\f1 and \f2sunview_cxp\f1 
+device drivers.  
+.lp
+Additional details can be found in the online test and demonstration 
+\f2Readme\f1 files.
+.H1 "The Test Programs
+The test programs are located in the directory \f2dore/test\f1.
+The contents of this directory 
+.\" are shown in \*(FT 
+and the test code
+source files are described in some detail below.
+.ip "\f3sample.c\f1 and \f3fsample.f\f1"
+These files contain C and \*(Fo source code
+for the sample program provided in Chapter 2 of the 
+\f2\*(Dd Programmer's Guide\f1.  They are simple programs 
+that provide a quick test of your Portable \*(Dd 
+installation, and they also
+show the basic requirements of all \*(Dd programs.  The generated
+scene contains a blue cylinder, a magenta box, and a wireframe
+magenta sphere.
+.bp
+.\" .(F
+.\" .sp 1.75i
+.\" .)F "Contents of the dore/test Directory"
+.ip "\f3dynamic.c\f1 and \f3production.c\f1"
+These files contain the main programs used to construct tests that are ideal
+for the dynamic renderer and the standard production renderer, respectively.  
+Platform-specific routines and interaction routines 
+are also found in these files.
+The display objects and the camera and light objects are
+contained in \f2prims.c\f1, \f2temple.c\f1, \f2test.c\f1, \f2texture.c\f1,
+and \f2tree.c\f1.
+.ip "\f3prims.c\fP"
+The display object is a group containing a sphere,
+a cylinder, a box, and a torus.
+.ip "\f3temple.c\fP"
+The display object is a scene made out of the different primitive surfaces,
+including a cylinder with spheres inside.  A callback is included
+that will let you make the cylinder transparent.
+.\" Color Plate 1 shows this scene displayed by the 
+.\" standard production renderer, with the transparency enabled.
+.ip "\f3texture.c     \fP"
+The display object is a texture-mapped triangle mesh.  Several callbacks
+are included that allow you to alter the texture's position on 
+the mesh, how it is combined with the current properties of the
+mesh, and how it is antialiased.
+.ip "\f3tree.c     \fP"
+The display object is a tree, composed of cylinders and spheres, 
+that stands on a flat box.  The attributes of the box include a callback
+that lets you turn on reflections.  A callback is also included to 
+let you turn on shadows for the whole scene.
+.\" Color Plate 2 shows this scene displayed by the standard 
+.\" production renderer, with reflections and shadows enabled.
+.ip "\f3test.c    \fP"
+Depending on the values given to the command line flag \f2-testcase\fP,
+the displayed object is a triangle list, triangle mesh, triangle strip,
+line list, connected line list, point list, text or annotation text 
+(see \f2dore/test/Readme\fP).
+This is primarily intended for the individual testing of the different 
+primitive geometry types using the dynamic renderer.  
+.\" Color Plates 3, 4, and 5, show testcases 1, 3, 
+.\" and 6, i.e. a triangle mesh, a line list, and text.
+.ip "\f3callback.c\f1"
+This file contains the callback function definitions of the 
+display and studio objects.  These callbacks allow user keyboard 
+interaction to alter a running program's display and studio 
+objects on the fly.
+.lp
+There are several command line options that can
+be passed to the dynamic and production renderer tests.
+For example, you can actually run the dynamic renderer tests
+on some devices using the standard production renderer by specifying 
+\f2-rendstyle DcProductionTime\f1 when invoking a test.  These
+tests also have keyboard and mouse interaction.
+.lp
+You can also use the test programs to display your 
+own \*(Dd databases. (See  
+\f2Creating Your Own Test Objects\fP, later in this chapter.)
+The \f2Readme\f1 file provides details on how to build and run these
+test programs, and on how to add your own test modules.  
+.lp
+In addition to running the tests in \f2dore/test\fP you may want to 
+do some more general testing before installing \*(Dd.  
+If you have a \*(Dd application of your own, try building and running it.
+Portable \*(Dd also provides further tests for the \f2gl\f1 and 
+\f2sunview_cxp\f1 device drivers. (See
+\f2\*(Dd Demonstration Programs\fP, later in this chapter.)
+.H2 "Building the Tests
+Platform-specific makefiles in \f2dore/test\f1 are set up 
+to let you compile the source code in this directory.
+The programs \f2sample.c\f1 and \f2fsample.f\f1 are
+stand-alone programs.
+There are two main test programs,
+\f2dynamic.c\f1 and \f2production.c\f1.
+To build an executable, one of these two is linked
+together with \f2callback.c\f1 and one of the object creation routines
+(\f2prims.c\f1, \f2temple.c\f1, \f2texture.c\f1, \f2test.c\f1, or \f2tree.c\f1).
+The executables that can be built are:
+.(m
+	pro_prims
+	pro_temple
+	pro_tree
+	dyn_prims
+	dyn_temple
+	dyn_texture
+	dyn_tree
+	dyn_test
+.)m
+.lp
+The makefiles provided with Portable \*(Dd are \f2mk.iris\f1, 
+\f2mk.sun\f1, and \f2mk.stdx\f1.  These makefiles may
+need to be edited depending on the configuration of your
+machine.  Specifically, the environment variables
+.SM DORE_LOC, 
+.SM DORE_OBJTYPE , 
+.SM DORE_LIB_NAME ,
+and 
+.SM LIBS 
+need to be set appropriately.
+The first two are the location of the \f2dore\fP directory and
+the machine object type, respectively.
+.SM DORE_LIB_NAME
+should be set to \f2libdore.a\fP or whatever your \*(Do's
+name is.
+The last one specifies which libraries, other than
+the \*(Do, need to linked to the test program (for example,
+\f2-lm\f1, \f2-lgl\f1, etc).
+The makefile assumes that the \*(Dd object \f2libdore.a\fP has 
+not been moved or installed since the \*(Dd build and is still in
+\f2dore/lib/objtype\f1 (for example, in \f2dore/lib/iris\f1).
+.lp
+When a test program is built,
+the object files and executable will be placed in a 
+subdirectory with the same name as the machine object type specified
+by 
+.SM DORE_OBJTYPE.
+For example, to make and run the 
+\f2dyn_prims\fP program on a Silicon Graphics, Inc. (SGI) IRIS  (i.e.,
+.SM DORE_OBJTYPE 
+= iris):
+.(m
+% make -f mk.iris dyn_prims
+% iris/dyn_prims
+.)m
+If desired, you can build all the standard production renderer tests, 
+and then all the dynamic renderer tests by doing:
+.(m
+% make -f mk.iris pro_all
+% make -f mk.iris dyn_all
+.)m
+If you require a makefile for a different platform, simply
+copy and edit one of the provided makefiles as described above.
+Again, the \f2Readme\f1 file in the directory includes
+details of command line options and run-time keyboard controls 
+for the test programs.
+.lp
+Note that if you are testing a device driver or renderer that has
+not been linked with the \*(Do, you'll have to modify the 
+test code to install and select your driver/renderer.   
+\f2A Sample Application Program\f1 at the end of Chapter 7 shows how
+to install and select a renderer in a \*(Dd application program;
+and a code fragment of similar purpose for device drivers is shown in  
+\f2Step 4: Build and Test #1\f1 of Chapter 10.
+You'll also need to edit the makefile to incorporate your driver/renderer
+code into the executables.  
+.H2 "Displaying Production Renderer Rasterfile Output"
+.rs
+.sp -.25v
+The default output device for the standard
+production renderer test programs
+is the \f2rasterfile\f1 device, with the file name \f2test.img\f1.
+Tools are provided to 
+display this resulting file on various platforms.
+.rs
+.sp .5v
+.H3 dor2iris
+.rs
+.sp -.25v
+The program \f2dor2iris\fP is a filter that converts
+a \*(Dd rasterfile image to an SGI IRIS image format.
+Once an image has been converted, it can be displayed 
+using the tools provided by SGI.
+.rs
+.sp -.25v
+.lp
+To build the \f2dor2iris\f1 filter, type:
+.rs
+.sp -.25v
+.(m
+% make -f mk.iris dor2iris
+.)m
+.sp -.25v
+The executable will be put in a subdirectory with
+the same name as the machine object type specified by
+.SM DORE_OBJTYPE.
+.rs
+.sp -.25v
+.lp
+To create an image from the \*(Dd rasterfile \f2test.img\fP, do:
+.rs
+.sp -.25v
+.(m
+% dor2iris -if test.img -of iris.img
+.)m
+.rs
+.sp -.25v
+If no input and output file names are provided on the command line, 
+\f2dor2iris\f1 uses \f2test.img\f1 and \f2iris.img\f1, respectively.
+.rs
+.sp -.25v
+.lp
+To display the resulting image, do:
+.rs
+.sp -.25v
+.(m 
+% showimg iris.img
+.)m
+.rs
+.sp -.25v
+.H3 dor2sunras
+.rs
+.sp -.25v
+The program \f2dor2sunras\fP is a filter that converts
+a \*(Dd rasterfile image to the Sun standard rasterfile format.
+Once you have a Sun rasterfile image, 
+it can be displayed using the tools provided by Sun.
+.rs
+.sp -.25v
+.lp
+To build the \f2dor2sunras\f1 filter, type:
+.sp .5v
+\f5% make -f mk.sun dor2sunras\fP
+.lp
+The executable will be put in a subdirectory
+with the same name as the machine object type specified by 
+.SM DORE_OBJTYPE.
+.lp
+The program \f2dor2sunras\fP can be used to create an 8-bit
+color image or a greyscale image.
+To create a greyscale image \f2sun.img\f1 from the 
+\*(Dd file \f2test.img\f1, do: 
+.(m
+% dor2sunras \-shademode DcRange -if test.img -of sun.img
+.)m
+To create an 8-bit color image, do:
+.(m
+% dor2sunras \-shademode DcComponent -if test.img -of sun.img
+.)m
+If no input and output file names are provided on the command line,
+\f2dor2sunras\f1 uses \f2test.img\f1 and \f2sun.img\f1, respectively.
+.lp
+To display the resulting image on a color Sun, do:
+.(m
+% screenload sun.img
+.)m
+To display the image on a monochrome Sun, do:
+.(m
+% rasfilter8to1 \-d < sun.img | screenload
+.)m
+.rs
+.sp .5v
+.H3 dor2X11
+The program \f2dor2X11\fP is a filter that converts a
+\*(Dd rasterfile image to the X11 \f2xwud\fP format.
+Once you have an \f2xwud\f1 image, 
+it can be displayed using the X11 tools.
+.lp
+To build the \f2dor2X11\f1 filter, type:
+.(m 
+% make -f mk.objtype dor2X11
+.)m
+The executable will be put in a subdirectory
+with the same name as the machine object type specified by 
+.SM DORE_OBJTYPE.
+.lp
+To create an image, type:
+.(m
+% dor2X11 -if test.img -of xwud.img
+.)m
+If no input and output file names are provided on the command line, 
+\f2dor2X11\f1 uses \f2test.img\f1 and \f2xwud.img\f1, respectively.
+.lp
+To display the resulting image on a 24-bit color workstation, do:
+.(m 
+% xwud -in xwud.img
+.)m
+.H2 "Creating Your Own Test Objects"
+Both the main programs \f2dynamic.c\fP and \f2production.c\fP
+call the \f2makeobject()\fP and \f2makestudio()\fP routines
+to create the display object and the camera and light objects.
+You can display your own objects using the main
+test programs by providing your own
+\f2makeobject()\fP and \f2makestudio()\fP routines.
+Both routines must return a \f2DtObject\fP.  
+.lp
+The makefiles are set up to let you build your own tests.  If you put your 
+routines in a file named \f2myobjects.c\fP, then you can make a 
+production renderer test using those routines by doing:
+.(m
+% make -f mk.objtype my_pro
+.)m
+and an equivalent dynamic renderer test by doing:
+.(m
+% make -f mk.objtype my_dyn
+.)m
+Examine the files \f2prims.c\f1, \f2temple.c\f1, \f2tree.c\f1, \f2texture.c\f1,
+and \f2test.c\f1 to see how to use the
+callbacks provided to dynamically change the values of attributes.
+.H1 "\*(Dd Demonstration Programs"
+Various demonstration programs have been constructed to run with the
+Portable \*(Dd \f2gl\f1 and \f2sunview_cxp\f1 device drivers.
+These demonstration programs are located in the directory \f2dore/demo\f1.
+.\" The contents of this directory are shown in \*(FT.
+.lp
+Code for the individual demonstration programs is actually contained in the 
+\f2breath\f1, \f2flag\f1, \f2lwave\f1, and \f2trunk\f1 subdirectories
+of the \f2dore/demo\fP directory.  The user interface code common to all these
+demonstrations is in \f2dore/demo/dui\fP.  
+All the demonstration programs link in object files from the 
+appropriate platform's subdirectory in \f2dore/demo/dui\fP.
+.bp
+.\" .(F
+.\" .sp 1.75i
+.\" .)F "Contents of the dore/demo Directory"
+.H2 "Building the Demonstration Programs"
+The top-level makefiles, \f2mk.iris\f1 and \f2mk.suncxp\f1, are set up 
+to let you compile all demonstration programs from the \f2dore/demo\f1 directory.  
+To build the demonstrations, go to this directory and ensure that the variables
+.SM DORE_LOC ,
+.SM DORE_OBJTYPE ,
+and
+.SM DORE_LIB_NAME
+are set in the makefile that you'll be using.
+The first two variables are the location of the \f2dore\fP directory and
+the machine object type.
+.SM DORE_LIB_NAME
+should be set to \f2libdore.a\fP (or whatever your \*(Do's name is). 
+The top-level makefiles assume that the \*(Dd library
+has not been moved or installed since the \*(Dd build, and that it is
+still in \f2dore/lib/objtype\f1 (for example, \f2dore/lib/iris\f1).
+If this is not the case, you will need to edit the
+.SM DORLIB
+variable in the appropriate \f2dore/demo\f1 makefile.
+.lp
+These top-level makefiles invoke \f2makefile\f1 in each of the
+\f2breath\f1, \f2dui\f1, \f2flag\f1, \f2lwave\f1, and \f2trunk\f1 directories,
+passing in the variables just described, to actually build the code.
+So, for example, to build the demonstration programs on an SGI IRIS, do:
+.(m
+% cd dore/demo
+% make -f mk.iris all
+.)m
+.lp
+When a demonstration program is built, the object files and executable
+will be placed in a subdirectory within that demonstration directory, 
+and the subdirectory will have the same name as the machine object 
+type specified by
+.SM DORE_OBJTYPE .
+For example, the object files and executable for the \f2breath\f1
+demonstration built on an SGI IRIS would be located in 
+\f2dore/demo/breath/iris\f1.
+.lp
+To run the \f2breath\f1 demo on an SGI IRIS, change to the directory
+where it is located and type \f2runme\f1:
+.(m
+% cd dore/demo/breath/iris
+% runme
+.)m
+.lp
+It is possible to build the demonstrations one at a time.  To do this,
+change to the desired demonstration directory and ensure that the
+variables
+.SM DORE_LOC ,
+.SM DORE_OBJTYPE ,
+.SM DORE_LIB_NAME ,
+and
+.SM LIBS
+are set in \f2makefile\f1 before invoking it.
+Then, for example, 
+to build and run the \f2lwave\f1 demonstration on an SGI IRIS, type:
+.(m
+% cd dore/demo/lwave
+% make runme
+% iris/runme
+.)m
+.lp
+For detailed information on the various demonstrations, and how to 
+interact with them, see the \f2Readme\fP file in \f2dore/demo\f1.

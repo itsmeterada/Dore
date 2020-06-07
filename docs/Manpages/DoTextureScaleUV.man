@@ -1,0 +1,66 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DoTextureScaleUV 3D "Dore"
+.SH NAME
+DoTextureScaleUV \- Create a texture attribute object that sets the scale factors for primitive \f2uv\fP coordinates
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+DtObject DoTextureScaleUV(su, sv)
+DtReal su;
+DtReal sv;
+.sp
+.in  -.5i
+FORTRAN:
+.in  +.5i
+INTEGER*4 DOTSUV(SU, SV)
+REAL*8 SU
+REAL*8 SV
+.in  -.5i
+.fi 
+.IX "DoTextureScaleUV"
+.IX "DOTSUV"
+.SH DESCRIPTION
+.LP
+\f2DoTextureScaleUV\fP creates a texture attribute object that defines
+the scaling values to be applied to the \f2uv\fP coordinates of a primitive
+object before they are used to access a 2-dimensional texture.
+The parameter \f2su\fP is the scale factor in the \f2u\fP direction, and 
+\f2sv\fP is the scale factor in the \f2v\fP direction.
+.LP
+\f2DoTextureScaleUV\fP is used in conjunction with
+\f2DoTextureTranslateUV\fP <\f2DOTTUV\fP>to completely specify how a primitive
+object's \f2uv\fP coordinates are transformed before they are used to access
+the texture. 
+The \f2DoTextureScaleUV\fP is always applied before the 
+\f2DoTextureTranslateUV\fP, regardless of the sequence in the scene database.
+.SH DEFAULTS
+The default value for \f2DoTextureScaleUV\fP is (1.,1.).
+.SH SEE ALSO
+.na
+.nh
+DoTextureMapDiffuseColor(3D),
+DoTextureMapEnviron(3D),
+DoTextureMapBump(3D),
+DoTextureMapTranspIntens(3D),
+DoTextureScaleUVW(3D),
+DoTextureTranslateUV(3D)
+.ad
+.hy
+\&

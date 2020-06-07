@@ -1,0 +1,96 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DsHoldObj 3D  "Dore"
+.SH NAME
+DsHoldObj \- Place a hold on an object
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+DtObject DsHoldObj(object)
+DtObject object;
+.sp
+.in -.5i
+FORTRAN:
+.in +.5i
+INTEGER*4 DSHO(OBJECT)
+INTEGER*4 OBJECT
+.in -.5i
+.fi
+.SH DESCRIPTION
+.IX DSHO
+.IX DsHoldObj
+\f2DsHoldObj\fP places a hold on an object specified by the parameter
+\f2object\fP, and it returns the object handle.
+.PP
+There are two ways objects keep track of how they are being
+used.  First, every object maintains a \f2reference count\fP that
+indicates how many times it is referenced by other objects.
+Second, the object
+maintains a  hold flag that indicates whether the user has any
+references to it.  The user has explicit control over this flag.  If an
+object's reference count is 0, and its hold flag is \f2DcFalse\fP 
+<\f2DCFALS\fP>, then it is
+considered deletable: the object is removed from the database, its
+storage area is destroyed, and its object handle is no longer valid.
+.PP
+When an object is created, its reference count is 0, and its
+hold flag is  \f2DcFalse\fP <\f2DCFALS\fP>.  If the
+user adds the object to a group, its reference count is automatically 
+incremented, and it is \f2not\fP considered deletable by the database.
+If the user wishes to reference an object's handle outside of the
+current database and it is not referenced within the database,
+the user should call the \f2DsHoldObj\fP function with the object
+handle.  This causes the object's hold flag to be set to true.
+The corresponding routine \f2DsReleaseObj\fP <\f2DSRO\fP> releases 
+the hold on the object
+when the user has no further need of it.  The user 
+can determine whether a hold has been placed on the object by
+calling \f2DsInqHoldObj\fP <\f2DSQHO\fP>.
+.PP
+A common way to call the \f2DsHoldObj\fP function is:
+.nf
+
+	object = DsHoldObj(DoXXXX());
+.fi
+.PP
+where the \f2DoXXXX()\fP call creates and returns an object of type
+XXXX.  A hold is placed on the object through the \f2DsHoldObj\fP
+call.  One can also create an object through a separate call to a
+\f2DoXXXX\fP routine and then call the \f2DsHoldObj\fP routine with
+the object directly:
+.nf
+
+	object = DoXXXX();
+	DsHoldObj(object);
+.fi
+.PP
+The user may also call this function in the following manner:
+.nf
+	
+	DsHoldObj(object=DoXXXX());
+	
+.fi
+This will result in creating the object, setting the \f2object\fP
+variable to its handle, and placing a hold on the object.
+.SH ERRORS
+\f2DsHoldObj\fP will fail if passed an invalid object.
+.TP 15
+[WARNING - invalid or deleted object]
+.SH "SEE ALSO"
+DsInqHoldObj(3D), DsReleaseObj(3D)

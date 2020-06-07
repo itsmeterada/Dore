@@ -1,0 +1,377 @@
+.\"#ident "%W%" %G%
+.\"
+.\" #
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  
+.\" # 
+.\" # KUBOTA GRAPHICS Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\" #
+.\"
+.so ../macros/local.me
+.PN 467
+.ds BT "\\*(Dd Reference Manual
+.ds CT "Device Drivers and Renderers
+.ds h1 8
+.L1 D EVICE " D" RIVERS
+.L2 A ND
+.L3 R ENDERERS
+.CH EIGHT
+.rs
+.sp -2v
+A \f2device driver\fP links the \*(Dd renderers with 
+an output device.
+\*(Dd supports both multiple device drivers and 
+multiple renderers.
+The devices range from simple file output to sophisticated
+graphics hardware devices.
+The renderers range from dynamic renderers for interactive
+graphics to photo-realistic renderers for high-quality static
+images.
+.sp -.25v
+.lp
+Some device drivers and renderers are included with the
+\*(Dd installation, while others may come from third
+party vendors.
+Developers can also add new device drivers, and
+adapt their own renderers to the \*(Dd interface.
+.sp -.25v
+.lp
+Because of the differences in the types of devices and renderers,
+\*(Dd does not dictate how particular features
+in the library are implemented at the lowest level.
+Some \*(Dd functions may even be inappropriate and not
+implemented at all.
+The different renderers may use
+shading models of varying complexity.
+One graphics device may support true transparency, 
+while another may simply approximate a transparent effect.
+If a renderer or device does not support
+a particular feature, it does the best that it can.
+For example, if smooth shading is not supported,
+you may see only flat-shaded objects.
+If vertex colors are not supported, they will be ignored.
+.sp -.25v
+.lp
+Implementation details are omitted from general
+\*(Dd documentation such as this manual and
+the \f2\*(Dd Programmer's Guide\fP.
+The details of the device drivers and renderers
+provided with a particular version of \*(Dd are
+described in the \f2\*(Dd System Guide\fP for that version. 
+This chapter describes the connection between the
+renderers and the devices drivers, and lists the
+\*(Dd functions that depend on the underlying renderer
+and/or device.
+.sp -.5v
+.H1 "Device Driver Modules
+.rs
+.sp -.25v
+Each device driver consists of several modules;
+a required \f2device control module\fP,
+and one or more \f2output modules\fP.
+\*(Dd provides well-defined interfaces to these modules so that
+the renderers can access all device drivers in a similar manner.
+Currently, two types of output module interfaces are defined.
+.H3 "The Production Renderer Output Module Interface"
+The interface to the production renderer output module
+is a very simple one, intended for renderers that
+generate pixel data. These renderers typically generate images 
+through complex software algorithms and require minimal 
+support from the device.
+.H3 "The Dynamic Renderer Output Module Interface"
+The interface to the dynamic renderer output module provides
+high-level device access.
+It expects the device to perform the complex tasks
+associated with the graphics pipeline, including transformations,
+clipping, and shading.
+These functions can be implemented in either software, hardware,
+or some combination of both, depending on the underlying
+capabilites of the device.
+.H1 "Renderer Output
+A renderer displays output through a device driver
+using the device control module functions and one of
+the output module interfaces.
+A renderer can therefore work with any device driver that
+supports its required output module interface.
+For example, the standard production renderer uses the
+production renderer output module interface,
+which is supported by most devices.
+The dynamic renderer uses the dynamic renderer
+output module interface, which depends heavily on the
+underlying device.
+Some simple devices, such as a file output device,
+may not include a dynamic renderer output module, and thus cannot 
+be used for output from the dynamic renderer.
+.H1 "Renderer Dependent Functions
+The following subsections list the renderer-dependent
+functions of \*(Dd.
+Some renderers support only a subset of these functions,
+while others may support them all.
+Even when renderers do support a particular function, they
+may not all do so with the same results.
+See your \f2\*(Dd System Guide\fP for details on which 
+of these functions are supported by the renderers provided 
+with your version of \*(Dd.
+.lp
+Note that when a renderer relies heavily on the underlying device,
+as with the dynamic renderer, the implementation of the device
+driver is also important.
+Your \f2\*(Dd System Guide\fP also has details on which functions
+are supported by the devices on your \*(Dd system.
+.H2 "Studio Attributes 
+The studio attributes are classes of objects
+that affect the global environment in which the displayable
+objects are rendered.
+Studio attributes include 
+camera attributes, light attributes, and
+attributes for controling the rendering process.
+.H3 "Camera Attributes 
+The camera attributes include camera projections, sampling 
+attributes for image antialiasing, and stereo control.
+They are:
+.(l I
+\f2DoCameraMatrix <DOCM>
+DoParallel <DOPAR>
+DoPerspective <DOPER>
+DoProjection <DOPRJ>
+DoSampleAdaptive <DOSADP>
+DoSampleAdaptiveSwitch <DOSASW>
+DoSampleFilter <DOSFLT>
+DoSampleJitter <DOSJIT>
+DoSampleJitterSwitch <DOSJSW>
+DoSampleSuper <DOSSPR>
+DoSampleSuperSwitch <DOSSSW>
+DoStereo <DOSTER>
+DoStereoSwitch <DOSTES>\f1
+.)l
+The camera projection attributes are supported by most renderers.
+The sampling and stereo attributes are less common.
+.H3 "Light Attributes 
+The light attributes define the characteristics of the lights
+used in a scene.
+They are:
+.(l I
+\f2DoLightAttenuation <DOLTA>
+DoLightColor <DOLC>
+DoLightIntens <DOLI>
+DoLightSpreadAngles <DOLTSA>
+DoLightSpreadExp <DOLTSE>
+DoLightType <DOLTT>\f1
+.)l
+.bp
+Not all renderers simulate all light characteristics.
+Most renderers support at least light color, light intensity, and 
+a subset of light types.
+Some renderers do not use the light attribute parameters 
+exactly as defined.
+The attributes that are most likely to exhibit usage variations
+are \f2DoLightAttenuation\fP,
+\f2DoLightSpreadAngles\fP, and \f2DoLightSpreadExp\fP.
+.sp .5v
+.H3 "Rendering Control 
+The rendering control attributes are:
+.(l I
+\f2DoGlbRendMaxObjs <DOGRMO>
+DoGlbRendMaxSub <DOGRMS>
+DoGlbRendRayLevel <DOGRRL>\f1
+.)l 
+These attributes are used by renderers that use global ray-tracing.
+.sp .5v
+.H2 "Primitives
+The \*(Dd primitive objects are displayable geometric objects.
+\*(Dd has a wide variety of primitives,
+and most renderers can directly render only a subset of them.
+These are referred to as the \f2base\fP primitives for 
+a given renderer.
+Most \*(Dd primitives can generate a standard alternate 
+representation of themselves.  
+For example, polygons can be decomposed into triangle lists, and
+spheres can be approximated by triangle meshes.
+A renderer draws most primitives either directly or using
+the standard alternate representation.
+For some primitives a renderer may choose to generate a different
+alternate representation, or not draw it at all.
+For example, a ray-tracer might ignore all line primitives.
+.lp
+\*(TT lists the current set of primitive object classes and their
+standard alternate representations.
+Note that some primitives have more than one standard alternate
+representation. For example, text uses triangles or lines,
+depending on the text font.
+.sp .5v
+.H2 "Primitive Attributes 
+Primitive attribute classes constitute a large part of the \*(Dd
+system.  
+They are used to affect how a primitive object looks.
+Many primitive attributes relate directly to rendering.
+They include shading, texture mapping, and various other
+attributes.
+.bp
+\ 
+.(T "Primitive Classes"
+.TS
+tab (:) ;
+cBp-1 | cBp-1
+cBp-1 | cBp-1
+lp-1 | lp-1.
+:Standard Alternate
+Primitive Class:Representations
+_
+DoLineList <DOLINL>:none 
+DoAnnoText <DOANNT>:DoTriangleList <DOTRIL> and
+ :DoLineList <DOLINL>
+DoNURBSurf <DONRBS>:DoTriangleList <DOTRIL>
+DoPatch <DOPAT>:DoTriangleList <DOTRIL>
+DoPointList <DOPNTL>:none   
+DoPolygon <DOPGN>:DoTriangleList <DOTRIL>
+DoPolygonMesh <DOPGNM>:DoTriangleList <DOTRIL>
+DoPolyline <DOPL>:none   
+DoPolymarker <DOPM>:DoTriangleList <DOTRIL> and
+ :DoLineList <DOLINL>
+DoPrimSurf <DOPMS>:DoTriangleList <DOTRIL> and
+ :DoTriangleMesh <DOTRIM>
+DoSphereList <DOSPHL>:DoTriangleMesh <DOTRIM>
+DoSimplePolygon <DOSPGN>:DoTriangleList <DOTRIL>
+DoSimplePolygonMesh <DOSPM>:DoTriangleList <DOTRIL> 
+DoText <DOTXT>:DoTriangleList <DOTRIL> and
+ :DoLineList <DOLINL>
+DoTorus <DOTOR>:DoTriangleList <DOTRIL>
+DoTriangleList <DOTRIL>:none   
+DoTriangleMesh <DOTRIM>:none   
+DoTriangleStrip <DOTRIS>:none
+DoVarLineList <DOVLNL>:none   
+DoVarPointList <DOVPTL>:none   
+DoVarSimplePolygonMesh <DOVSPM>:DoVarTriangleMesh <DOVTRM>
+DoVarTriangleMesh <DOVTRM>:none
+DoVarTriangleStrip <DOVTRS>:none
+.TE
+.)T
+.H3 "Shading Attributes"
+The shading attributes control the material properties and
+other shading
+parameters for subsequently executed primitive objects.
+.(l I
+\f2DoAmbientIntens <DOAMBI>
+DoAmbientSwitch <DOAMBS>
+DoDepthCue <DODC>
+DoDepthCueSwitch <DODCS>
+DoDiffuseColor <DODIFC>
+DoDiffuseIntens <DODIFI>
+DoDiffuseSwitch <DODIFS>
+DoInterpType <DOIT>
+DoLightSwitch <DOLTS>
+DoReflectionSwitch <DOREFS>
+DoRefractionIndex <DORFRI>
+DoRefractionSwitch <DORFRS>
+DoShadeIndex <DOSI>
+DoShadowSwitch <DOSHAS>
+DoSpecularColor <DOSPCC>
+DoSpecularFactor <DOSPCF>
+DoSpecularIntens <DOSPCI>
+DoSpecularSwitch <DOSPCS>
+DoSurfaceEdgeColor <DOSEGC>
+DoSurfaceShade <DOSRFS>
+DoTranspColor <DOTC>
+DoTranspIntens <DOTI>
+DoTranspSwitch <DOTS>
+DoTranspOrientColor <DOTOC>
+DoTranspOrientExp <DOTOE>
+DoTranspOrientIntens <DOTOI>
+DoTranspOrientSwitch <DOTOS>\f1
+.)l
+Some shading attributes, such as diffuse color, 
+are supported by most renderers.
+Many other shading attributes, such as refraction, 
+depend on advanced shading features, which are
+not supported by all renderers.
+\*(Dd does not dictate a particular shading model.
+Each renderer uses the shading attributes as it sees fit.
+.H3 "Texture Maps
+The texture map objects modify some of 
+the standard shading attributes as a function of a
+parameterization of a primitive's surface.
+They are:
+.(l I
+\f2DoTextureMapBump <DOTMB>
+DoTextureMapBumpSwitch <DOTMBS>
+DoTextureMapDiffuseColor <DOTMDC>
+DoTextureMapDiffuseColorSwitch <DOTMDS>
+DoTextureMapEnviron <DOTME>
+DoTextureMapEnvironSwitch <DOTMES>
+DoTextureMapTranspIntens <DOTMTI>
+DoTextureMapTranspIntensSwitch <DOTMTS>\f1
+.)l
+\*(Dd provides many attributes that affect how a texture
+is mapped onto a primitive.
+They are listed in the section \f2Texture Attributes\fP.
+Texture mapping is an advanced feature, not supported
+by most renderers.
+.H3 "Miscellaneous
+Other renderer dependent primitive attributes are:
+.(l I
+\f2DoBackfaceCullSwitch <DOBFCS>
+DoBackfaceCullable <DOBFC>
+DoClipSwitch <DOCS>
+DoClipVol <DOCV>
+DoCompTextureUVCallback <DOCTVC>
+DoCompTextureUVSwitch <DOCTVS>
+DoHiddenSurfSwitch <DOHSS>
+DoInvisSwitch <DOINVS>
+DoLineType <DOLNT>
+DoLineWidth <DOLW>
+DoLocalAntiAliasStyle <DOLAST>
+DoLocalAntiAliasSwitch <DOLASW>
+DoRepType <DOREPT>\f1
+.)l
+Some of these attributes, such as representation type, are 
+supported by most renderers.
+Others, such as local antialiasing, are found only in
+more advanced renderers.
+.H2 "Texture Attributes
+The texture attributes affect how a given texture map is applied
+to a primitive object.
+The texture attribute values are bound to texture map objects
+during traversal.
+The texture map objects are attributes that are in turn 
+applied to the primitive objects.
+The texture attributes are:
+.(l I
+\f2DoTextureAntiAlias <DOTAA>
+DoTextureExtendUV <DOTXUV>
+DoTextureExtendUVW <DOTXW>
+DoTextureMatrixUV <DOTMUV>
+DoTextureMatrixUVW <DOTMW>
+DoTextureOp <DOTOP>
+DoTextureScaleUV <DOTSUV>
+DoTextureScaleUVW <DOTSW>
+DoTextureTranslateUV <DOTTUV>
+DoTextureTranslateUVW <DOTTW>
+DoTextureUVIndex <DOTUVI>
+DoTextureUVWIndex <DOTWI>\f1
+.)l
+Certain renderers may not be able to use all texture attributes, even
+if they do support some texture mapping.
+For example, a renderer that supports only 2\-D texture mapping
+ignores all 3\-D texture attributes.
+.H2 "View Functions
+\*(Dd has many functions that operate on view objects. 
+Most of these functions are renderer independent.
+A few of them do depend on the underlying renderer.
+They are: 
+.(l I
+\f2DvInqBackgroundColor <DVQBC>
+DvInqBackgroundJust <DVQBJ>
+DvInqBackgroundRaster <DVQBR>
+DvSetBackgroundColor <DVSBC>
+DvSetBackgroundJust <DVSBJ>
+DvSetBackgroundRaster <DVSBR>\f1
+.)l

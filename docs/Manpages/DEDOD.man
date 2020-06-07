@@ -1,0 +1,37 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DEDOD 3D "Dore"
+.SH NAME
+FORTRAN only)
+.SH SYNOPSIS
+.nf
+.ft 3 
+FORTRAN:
+.in  +.5i
+DEDOD(OBJECT)
+INTEGER*4 OBJECT
+.fi 
+.SH DESCRIPTION
+.IX DEDOD
+.LP
+\f2DEDOD\fP deallocates the space used by the private data
+of the object \f2OBJECT\fP.
+FORTRAN user-defined 
+primitive to delete the private
+data of the object with which it is called.
+.SH SEE ALSO
+DeCreateObject(3D), DEROD(3D), DEWOD(3D)

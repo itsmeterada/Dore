@@ -1,0 +1,108 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DoTextureAntiAlias 3D "Dore"
+.SH NAME
+DoTextureAntiAlias \- Create a texture attribute object that controls antialiasing of textures
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+DtObject DoTextureAntiAlias(mode)
+DtTextureAntiAliasMode mode;
+.sp
+.in  -.5i
+FORTRAN:
+.in  +.5i
+INTEGER*4 DOTAA(MODE)
+INTEGER*4 MODE
+.in  -.5i
+.fi 
+.IX "DoTextureAntiAlias"
+.IX "DOTAA"
+.SH DESCRIPTION
+.LP
+\f2DoTextureAntiAlias\fP creates a texture attribute object that
+controls the antialiasing of textures.
+The parameter \f2mode\fP specifies the type of antialiasing to be done.
+The possible values of \f2mode\fP are:
+.\"
+.IX "DcTextureAANone"
+.IX "DCTAAN"
+.IP "\f2DcTextureAANone\fP <\f2DCTAAN\fP>"
+No antialiasing of the texture is performed.
+.\"
+.IX "DcTextureAABilinear"
+.IX "DCTAAB"
+.IP "\f2DcTextureAABilinear\fP <\f2DCTAAB\fP>"
+The texture elements that correspond to the
+corners of a single pixel are bilinearly interpolated.
+.\"
+.IX "DcTextureAATrilinear"
+.IX "DCTAAT"
+.IP "\f2DcTextureAATrilinear\fP <\f2DCTAAT\fP>"
+The texture elements that correspond to the
+corners of a single pixel are trilinearly interpolated.
+.\"
+.IX "DcTextureAAMIP"
+.IX "DCTAAM"
+.IP "\f2DcTextureAAMIP\fP <\f2DCTAAM\fP>"
+MIP mapping is used to antialias the texture.
+.\"
+.IX "DcTextureAAMIP2Point"
+.IX "DCTA2P"
+.IP "\f2DcTextureAAMIP2Point\fP <\f2DCTA2P\fP>"
+Two points from the two best resolution adjacent MIP maps are linearly
+interpolated to antialias the texture.
+.\"
+.IX "DcTextureAAMIPBilinear"
+.IX "DCTAMB"
+.IP "\f2DcTextureAAMIPBilinear\fP <\f2DCTAMB\fP>"
+From the best resolution MIP map, the texture elements that 
+correspond to the corners of a single pixel are bilinearly
+interpolated to antialias the texture.
+.\"
+.IX "DcTextureAAMIP2Bilinear"
+.IX "DCTA2B"
+.IP "\f2DcTextureAAMIP2Bilinear\fP <\f2DCTA2B\fP>"
+From the two best resolution adjacent MIP maps, the texture elements that 
+correspond to the corners of a single pixel are bilinearly
+interpolated to antialias the texture.
+.\"
+.IX "DcTextureAASumArea"
+.IX "DCTAAS"
+.IP "\f2DcTextureAASumArea\fP <\f2DCTAAS\fP>" 
+A summed area table technique is used for
+texture antialiasing.
+.\"
+.IX "DcTextureAAAdaptive"
+.IX "DCTAAA"
+.IP "\f2DcTextureAAAdaptive\fP <\f2DCTAAA\fP>"
+Adaptive techniques are used to antialias the texture.
+.SH DEFAULTS
+The default value for \f2DoTextureAntiAlias\fP is
+\f2DcTextureAANone\fP <\f2DCTAAN\fP>.
+.SH SEE ALSO
+.na
+.nh
+DoTextureMapDiffuseColor(3D),
+DoTextureMapEnviron(3D),
+DoTextureMapBump(3D),
+DoTextureMapTranspIntens(3D)
+.ad
+.hy
+\&

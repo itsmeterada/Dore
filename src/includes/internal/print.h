@@ -1,0 +1,34 @@
+#ifndef DORE_PRINT_H
+#define DORE_PRINT_H
+ 
+/**************************************************************************
+# Copyright (C) 1994 Kubota Graphics Corp.
+# 
+# Permission to use, copy, modify, and distribute this material for
+# any purpose and without fee is hereby granted, provided that the
+# above copyright notice and this permission notice appear in all
+# copies, and that the name of Kubota Graphics not be used in
+# advertising or publicity pertaining to this material.  Kubota
+# Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+# OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+# "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+# PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+# EXPRESS OR IMPLIED.
+**************************************************************************/
+ 
+    /**************************************/
+    /***  Global Variable Declarations  ***/
+    /**************************************/
+
+extern dot_int16  doe_print_indent_value;
+extern dot_list  *doe_print_indent_stack;
+
+
+    /*******************************/
+    /***  Function Declarations  ***/
+    /*******************************/
+
+char *dor_print_get_line (void);
+
+#endif

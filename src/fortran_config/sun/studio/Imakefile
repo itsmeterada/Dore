@@ -1,0 +1,9 @@
+#include <Dore.tmpl>
+
+    SRCS = fcam.c flgt.c
+    OBJS = fcam.o flgt.o
+
+LibraryObjectRule()
+SubdirLibraryRule($(OBJS))
+
+DependTarget()

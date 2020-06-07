@@ -1,0 +1,11 @@
+#include <Dore.tmpl>
+
+SRCS = caddcls.c ccrtobj.c cdelobj.c cexealt.c ciniobjpck.c \
+       cinqpck.c cinqrnd.c
+OBJS = caddcls.o ccrtobj.o cdelobj.o cexealt.o ciniobjpck.o \
+       cinqpck.o cinqrnd.o
+
+LibraryObjectRule()
+SubdirLibraryRule($(OBJS))
+
+DependTarget()

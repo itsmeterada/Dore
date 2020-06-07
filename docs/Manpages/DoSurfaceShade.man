@@ -1,0 +1,57 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DoSurfaceShade 3D  "Dore"
+.SH NAME
+DoSurfaceShade \- Create a surface shading primitive attribute object
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+DtObject DoSurfaceShade(object)
+DtObject object;
+.sp
+.in -.5i
+FORTRAN:
+.in +.5i
+INTEGER*4 DOSRFS(OBJ)
+INTEGER*4 OBJ
+.in -.5i
+.fi
+.SH DESCRIPTION
+.IX DOSRFS
+.IX DoSurfaceShade
+.I DoSurfaceShade
+allows the shading model to be selected on an 
+object-by-object basis.  The call takes a
+single parameter, which is the object handle of the shader
+which you wish to apply to subsequent primitive objects. 
+.PP
+The two shaders provided for \f2DcRealTime\fP <\f2DCRLTM\fP> rendering are:
+.IP "\f2DcShaderConstant\fP <\f2DCSHCN\fP>"
+Shades objects with their diffuse colors.
+This is slightly faster than \f2DcShaderLightSource\fP
+in some cases, and provides a simple
+``draw'' mode as found in packages like
+.SM GKS
+and
+.SM PHIGS.
+.IP "\f2DcShaderLightSource\fP <\f2DCSHLS\fP>"
+Shades objects using light sources.
+.SH DEFAULTS
+By default, \f2DoSurfaceShade\fP is set to
+\f2DcShaderLightSource\fP <\f2DCSHLS\fP>.

@@ -1,0 +1,73 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DsInqObjViaInteger 3D  "Dore"
+.SH NAME
+DsInqObjViaInteger \- Return an integer-named object's handle
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+DtObject DsInqObjViaInteger (name, class_id)
+.in  +.5i
+DtInt name;
+DtInt class_id;
+.in  -.5i
+FORTRAN:
+.in  +.5i
+INTEGER*4 DSQOI(OBJNUM, CLASID)
+INTEGER*4 OBJNUM
+INTEGER*4 CLASID
+.in  -.5i
+.SH DESCRIPTION
+.IX DsInqObjViaInteger
+.fi
+.I DsInqObjViaInteger
+returns a handle to the object named with the given integer value.
+Objects are named with integers via the \f2DsSetObjNameInteger\fP function
+(they are not named automatically when created).
+.PP
+The parameter \f2class_id\fP contains an integer indicating the class
+(or type) of the object being queried.  The integer representing a
+particular class can be determined using
+\f2DsInqClassId(class_name)\fP where \f2class_name\fP is the C name of
+the \f2DoXXX\fP function used to create an object.  For example,
+\f2DsInqClassId("DoScale")\fP returns the integer class identification
+value for a scale object.
+.PP
+Note that object can also be assigned character string names; see
+DsSetObjNameString(3D).
+.SH "FORTRAN SPECIFIC"
+.LP
+Function \f2DSQOI\fP queries the handle of an object when
+the name is of type \f2DCNINT\fP.
+\f2OBJNUM\fP is the integer name of the object and \f2CLASID\fP is
+an integer value indicating the class (or type) of the object being queried.
+The integer representing a particular class can be determined using
+\f2DSQCI(CLSNME,N)\fP where \f2CLSNME\fP is the C name of the
+\f2DoXXXXX\fP function used to create an object and \f2N\fP is the length
+of the C name.  For example, \f2DSQCI('DoScale', 7)\fP returns the integer
+class value for a scale object.
+.SH ERRORS
+.I DsInqObjViaInteger
+will fail if no such named object exists.
+.TP 15
+[WARNING - invalid or deleted object]
+.SH "SEE ALSO"
+.nf
+DsInqObjNameType(3D), DsInqObjViaString(3D),
+DsSetObjNameInteger(3D), DsSetObjNameString(3D)

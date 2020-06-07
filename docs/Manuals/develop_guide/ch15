@@ -1,0 +1,978 @@
+.\"#ident "%W%" %G%
+.\"
+.\" #
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  
+.\" # 
+.\" # KUBOTA GRAPHICS Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\" #
+.\"
+.sc
+.ds BT "\\*(Dd Developer's Guide
+.ds CT Porting \\*(Dd
+.ds h1 15
+.so ../macros/local.me
+.PN 213
+.L1 P ORTING
+.L2 D OR\h'5p'\v'-8p'\(aa\v'8p'\h'-5p' "" "\h'-\w'\(aa'u'E
+.CH FIFTEEN
+.rs
+.sp -1.5v
+This chapter describes the porting process, including how
+to control the build process and how to copy template modules
+for new module implementations. 
+It also describes how to rebuild parts of a \*(Dd library.
+.rs
+.sp -.5v
+.H1 "Porting Process Steps
+.rs
+.sp -.25v
+In order to simplify the process of
+porting \*(Dd to different host platforms,
+the platform dependent portions of the \*(Dd implementation
+have been placed in modules in separate directories
+under \f2dore/src\fP.
+For most machine architectures,
+only these modules should require change in order 
+to accommodate hardware or
+system software differences during the port.
+.rs
+.sp -.25v
+.lp
+The modules which need to be examined and possibly modified 
+to complete a port to a new platform are the system module, 
+the utility module, device drivers for graphics output, 
+and the \*(Fo interface module.
+.rs
+.sp -.25v
+.lp
+The basic porting process consists of the following steps:
+.rs
+.sp -.35v
+.np
+Determine if the desired target system is appropriate for a
+\*(Dd port.
+.rs
+.sp -.35v
+.np
+Get \*(Dd from the distribution tape.
+.rs
+.sp -.35v
+.np
+Set up for an initial port using file output only.
+.rs
+.sp -.35v
+.np
+Initialize the top level makefile.
+.rs
+.sp -.35v
+.np
+Compile and build the initial minimal port.
+.rs
+.sp -.35v
+.np
+Build and run test programs.
+.rs
+.sp -.35v
+.np
+Determine if the sample ports include a device driver
+for a graphics device which is similar to yours.
+If there is one, it can be copied and used as a 
+starting point for the following step.  
+.rs
+.sp -.35v
+.np
+Implement new device driver.
+.rs
+.sp -.35v
+.np
+Rebuild \*(Dd with the new device driver.
+.rs
+.sp -.35v
+.np
+Build and run some tests using the new device.
+.rs
+.sp -.35v
+.np
+Determine if one of the \*(Fo interfaces provided 
+matches your compiler's convention for calling C routines from 
+\*(Fo.  
+If none of them do, implement the \*(Fo
+interface module, using one of the existing implementations 
+as a starting point.
+.rs
+.sp -.35v
+.np
+Add other device drivers and/or renderers to your
+\*(Dd configuration.
+.rs
+.sp -.35v
+.np
+Install \*(Dd.
+.rs
+.sp -.35v
+.np
+Remove object files.
+.rs
+.sp -.25v
+.lp
+The following subsections discuss each step in more detail.
+.rs
+.sp -.5v
+.H1 "Step 1: Determine if the Target Machine is Appropriate
+General guidelines for selecting an appropriate
+target platform are described in Chapter 12,
+\f2Introduction\fP, in the \f2Porting\fP section.
+If your target platform differs from the guidelines,
+the likelihood of an incomplete or unsatisfactory port
+may be significantly increased.
+.rs
+.sp -.5v
+.H1 "Step 2: Get \\*(Dd From the Distribution Tape
+The \*(Dd distribution is available on several forms of media,
+including cartridge tape and 9-track 1600 bpi reel tape.
+See your \f2\*(Dd System Guide\fP for instructions on how to load
+the distribution from the tape.
+.lp
+In all cases you will be asked to go to the directory where
+you want to create the \*(Dd source tree.
+.(m
+% cd /my_directory
+.)m
+A directory named \f2dore\fP will be created
+in the current directory, \f2/my_directory\fP,
+and it will contain all the files of the distribution.
+.lp
+The distribution requires approximately 10 Mb of file system space.
+To actually build \*(Dd, less than 10 Mb of additional
+space is required.
+The exact amount varies based on the machine being used.
+.rs
+.sp -.5v
+.H1 "Step 3: Set Up for an Initial Port
+When you port \*(Dd to a new platform, you will have to
+write a new device driver to take advantage of the graphics
+hardware available on that platform.
+Writing a new device driver is usually the most difficult 
+aspect of a new port.
+To ensure that all compiler and functional
+problems have been eliminated before
+you attempt the implementation of any required device drivers,
+you should  start with a minimal port. 
+This step helps you get started with a port 
+using just the standard production renderer and file output.
+.rs
+.sp -.25v
+.lp
+The system module specifies which renderers and device drivers
+are included in a \*(Dd configuration.
+All system modules are located in 
+the directory \f2dore/src/doresys_config\fP.
+The file \f2sample.c\fP contains a minimal system module that
+includes one device driver, \f2rasterfile\fP, a file output driver 
+supporting only the standard production renderer.
+Copy this sample system module to a new file to use as the
+system module for your port:
+.rs
+.sp -.35v
+.(m
+% cp sample.c newsystem.c
+.)m
+.rs
+.sp -.35v
+You can name your system module anything you want, just don't
+overwrite any existing modules.
+.rs
+.sp -.5v
+.H1 "Step 4: Initialize the Top Level Makefile
+.rs
+.sp -.25v
+Portable \*(Dd is set up to 
+manage machine dependent source and
+object code for several different machine architectures 
+in the same file system.
+It does this by maintaining separate directories 
+wherever there are differences,
+such as in the device dependent source and object code directories.
+.rs
+.sp -.25v
+.lp
+The configuration makefile in the \f2dore\fP directory must 
+reflect the new hardware and software configuration you are porting to,
+so that the build process will operate in the correct directories
+and use the proper compile and link options.
+.rs
+.sp -.25v
+.lp
+To get a starting point for the configuration makefile, 
+do the following:
+.rs
+.sp -.5v
+.lp
+\f5% cd /my_directory/dore
+.br
+% cp mk.sample makefile\fP
+.bp
+Be careful; if you also built one of the sample configurations 
+as described in the previous chapter, you
+may already have a file named \f2makefile\fP that you want to save.
+.lp
+Several control variables need to be set in \f2makefile\fP.  
+Some of them have default values set, but they may have to be
+changed, depending on your platform.
+.rs
+.sp -.5v
+.ip "DORE_LOC"
+must be set to the full path name of the directory containing the
+\f2dore\fP directory:
+.rs
+.sp -.25v
+.(m
+	DORE_LOC=/my_directory
+.)m
+.rs
+.sp -.75v
+.ip "DORE_OBJTYPE"
+must be set to the machine object type.
+This variable controls where the compiled object files 
+and the final \*(Dd library are placed.  
+The exact name used is not important.  
+What is important is that 
+you do not use a name that is already being used for 
+another machine type.
+Otherwise, the object files for the new machine type may
+overwrite files built previously for another type.
+.rs
+.sp -.5v
+.ip "DORE_LIB_NAME"
+specifies the name of the library to be created.
+The default in the sample makefile is \f2libdore.a\fP.
+.rs
+.sp -.5v
+.ip "CC and CFLAGS"
+specify the compile command and options for compiling
+the \*(Dd source.  The compile options should include either:
+.rs
+.sp -.5v
+.(m
+	DDORE_REAL_SINGLE
+.)m 
+.rs
+.sp -1v
+.ip
+or
+.rs
+.sp -1v
+.(m
+	-DDORE_REAL_DOUBLE
+.)m
+.rs
+.sp -.75v.
+.ip
+to set \f2DtReal\fP to \f2float\fP or \f2double\fP.
+.rs
+.sp -.5v
+.ip "LD and LDFLAGS"
+specify the load command and options for combining several object
+files into one.
+These are typically \f2ld\fP and \f2-r -s\fP.
+.rs
+.sp -.5v
+.ip "AR and ARFLAGS"
+specify the archive command and options for building the \*(Dd 
+library from the compiled source.
+Typically these are \f2ar\fP and \f2q\fP for quickly appending 
+the object files to the library without checking for duplicate names.
+.rs
+.sp -.5v
+.ip "DORE_LIBTOC"
+specifies the program (with options)
+your system uses to create a table of contents for libraries.
+The value will typically be \f2ranlib\fP
+or \f2ar ts\fP. 
+If this variable is not set, the table of contents will not be built.
+.rs
+.sp -.5v
+.ip "DORE_SYSTEM"
+specifies the name of the system module to be included in the build.
+It must be set to the name (without the \f2.c\fP) you used for your new
+system module in the previous step:
+.rs
+.sp -.5v
+.(m
+	DORE_SYSTEM=newsystem
+.)m
+.rs
+.sp -.75v
+.ip "DORE_RNDS"
+specifies the names of the renderer modules from 
+\f2dore/src/render_config\fP to be 
+included in the build.
+The sample configuration includes only the standard production
+renderer, \f2glbrnd\fP.
+.rs
+.sp -.5v
+.ip "DORE_DEVS  "
+specifies the names of the device driver modules from 
+\f2dore/src/device_config\fP to be 
+included in the build.
+The sample configuration includes only the rasterfile device
+driver, \f2rasterfile\fP.
+.rs
+.sp -.5v
+.ip "DORE_FORTRAN"
+specifies the name of the \*(Fo interface module to be 
+included in the build.
+The sample configuration does not include a \*(Fo interface module,
+so this variable is set to \f2none\fP.
+.rs
+.sp -.5v
+.ip "DORE_OS   "
+specifies the name of the utility module from 
+\f2dore/src/os_config\fP to be 
+included in the build.
+The sample configuration includes the \f2unix\fP utility
+module.
+.rs
+.sp -.5v
+.H1 "Step 5: Initial Compile and Build 
+.rs
+.sp -.25v
+To start the build process, type:
+.rs
+.sp -.25v
+.(m
+% cd /my_directory/dore
+% make dore
+.)m
+.rs
+.sp -.25v
+This will: 
+.BU
+Compile all of the machine independent \*(Dd code,
+the sample system module
+copied in the last step (\f2newsystem.c\fP), 
+the \*(Dd rasterfile device driver,
+and the standard production renderer.
+The object files that are created during compilation
+are put in directories parallel to the source directories,
+under the directory
+.rs
+.sp -.25v
+.(m
+	dore/obj/objtype
+.)m
+.rs
+.sp -1v
+.ip ""
+where \f2objtype\fP is the machine object type specified by the variable
+.SM \f2DORE_OBJTYPE\fP
+in \f2dore/makefile\fP.
+.BU 
+Build the library and put it in the directory
+.rs
+.sp -.25v
+.(m
+	dore/lib/objtype
+.)m
+.rs
+.sp -1v
+.ip ""
+where \f2objtype\fP is the machine object type specified by the variable
+.SM \f2DORE_OBJTYPE\fP
+in \f2dore/makefile\fP.
+.rs
+.sp -.25v
+.lp
+As described in the section on C portability issues in Chapter 13,
+\f2\*(Dd Implementation Conventions\fP,
+there are generally only a few special considerations
+to be taken into account before the source is compiled.
+If problems are encountered during compilation,
+they are most likely to be the result
+of minor differences between compilers,
+such as inability to compile complex expressions,
+small table sizes in the preprocessor, and so on.
+Appropriate steps must be taken to solve each of these
+problems, if any,
+as they occur.
+For example,
+complex expressions may be simplified by using intermediate
+results of the expression,
+and preprocessor problems can often be solved by utilizing public domain
+preprocessors in which table sizes can be adjusted.
+It is recommended that you notify Kubota Pacific Computer
+of any significant
+changes required, or special problems encountered due to
+system differences.  If they are common enough they can then 
+be folded into the \*(Dd source code with future Portable \*(Dd
+releases.
+.rs
+.sp -.25v
+.lp
+When you have successfully built the \*(Dd library,
+you should build the data files used by 
+\*(Dd, and install them. 
+See Chapter 14, sections \f2Step 4: Building
+the \*(Dd Data Files\fP, and \f2Step 5: Installing 
+the \*(Dd Data Files\fP.
+.rs
+.sp -.5v
+.H1 "Step 6: Build and Run Test Programs
+.rs
+.sp -.25v
+A few simple test programs are provided to test the standard
+production renderer.
+You may want to try one of them at this point. 
+If you want to try one of your own
+applications at this point, remember that the newly built \*(Dd library
+only handles standard production renderer output using the 
+device \f2rasterfile\fP.
+.rs
+.sp -.25v
+.lp
+Move to the test directory:
+.rs
+.sp -.25v
+.(m
+% cd /my_directory/dore/test
+.)m
+Edit the appropriate makefile (depending on your platform)
+to set the variables
+.SM \f2DORE_LOC\fP ,
+.SM \f2DORE_OBJTYPE\fP ,
+.SM \f2DORE_LIB_NAME\fP ,
+and
+.SM \f2LIBS\fP
+to the proper values.
+The first two are 
+the location of the \f2dore\fP directory, the machine
+object type, and the \*(Dd library name
+as specified in \f2dore/makefile\fP.
+.SM \f2LIBS\fP
+specifies which libraries, other than the \*(Dd library, need
+to be linked with the test programs, for example,
+.I \-lm ,
+.I \-lgl ,
+etc.
+.lp
+Then build one of the test programs using the makefile.
+.lp
+The executable will be located in a subdirectory with the same name as 
+the machine object type specified by the
+.SM \f2DORE_OBJTYPE\fP
+variable.
+For a more complete description of how to build and run the 
+standard production renderer test programs see the 
+\f2Readme\fP file in the test directory and Section V on
+\f2Testing\fP.
+.H1 "Step 7: Set Up for a New Device Driver 
+All device driver implementations are in subdirectories under 
+\f2dore/src/device_config\fP.
+Before you start implementing a new device driver examine the
+\f2Readme\fP file for each of the existing device drivers.
+If one of them lists a set of hardware features that is similar
+to the machine you are porting to, then you may want to use
+that driver as a starting point for your implementation.
+If none of the existing drivers are appropriate, a sample
+driver is provided. 
+.lp
+Next, choose a name for the new device driver.
+This name will be used as the name of the directory that will 
+contain the new device driver implementation.  
+Make sure you do not use the name of a directory
+that already exists in \f2dore/src/device_config\fP.
+.lp
+Then copy the driver you have selected as the starting point
+for your new implementation by going to
+the \f2dore\fP directory and typing:
+.(m
+% make copy_device TO_DEV=newdevice FROM_DEV=olddevice
+.)m
+where \f2newdevice\fP is the name you selected, and
+\f2olddevice\fP is either \f2sampledev\fP or the name of
+some other existing driver.
+The directory 
+.(m
+	dore/src/device_config/newdevice
+.)m
+will be created, and it will
+contain a copy of everything in the directory
+.(m
+	dore/src/device_config/olddevice
+.)m 
+If you mistakenly set
+.SM \f2TO_DEV\fP
+to an existing configuration, 
+a warning message will be printed and nothing will be copied.
+.lp
+All copies of routine names, external variable names, and type names
+are modified to use the name of the new device driver
+in places where \f2olddevice\fP occurs in the copied routines.
+The \f2makefiles\fP are also modified to reflect the new directory 
+structure.
+The only modification you have to make yourself at this point
+is to change the actual string name used to create device objects
+of this new type.
+Edit the file \f2extern.c\fP in \f2dore/src/device_config/newdevice\fP
+and look for the routine \f2ddr_newdevice_install_driver\fP.
+Change the default name and the description of the driver
+from "sample" and "Sample Device Driver" to names that are
+more descriptive for your driver.
+.lp
+Remember that when you use a copy of a driver for a 
+different machine,
+you may have many compile errors due to differences in the 
+support software on different machines.
+It is sometimes easier to incrementally develop the new device driver
+by starting with the sample driver, \f2sampledev\fP,
+and simply looking
+at the other device driver implementations for ideas and code sections
+as you fill out the code for your device.
+.H1 "Step 8: Implement New Device Driver"
+See Section III, \f2Device Drivers\fP, for details on how to implement
+a new device driver.
+.H1 "Step 9: Add the New Device Driver to \*(Dd
+To add your new device driver to the \*(Dd library, you must:
+.BU
+modify the system module to initialize your new driver
+.BU hs
+set the control variable in
+\f2dore/makefile\fP to include the new driver in the build
+.BU hs
+set the control variable in
+\f2dore/makefile\fP to include the dynamic renderer in the build
+.BU hs
+rebuild \*(Dd
+.lp
+First edit your system module file in \f2dore/src/doresys_config\fP.
+Add a call to your driver's initialization routine to the
+routine \f2dor_doresys_initialize_drivers()\fP.
+When you copied the device driver as suggested in \f2Step 7\fP,
+your driver's initialization routine was given the name
+\f2ddr_newdevice_install_driver\fP, where \f2newdevice\fP is
+the name you selected for the directory.
+.lp
+To include your new device driver in the build,
+the control variable 
+.SM \f2DORE_DEVS\fP
+in \f2dore/makefile\fP must be changed.
+It specifies the names of all device drivers to be included in 
+the build.
+It should be set 
+to include both the rasterfile driver and your new driver:
+.(m
+	DORE_DEVS=rasterfile newdevice
+.)m
+where \f2newdevice\fP is the name of the directory in 
+\f2dore/src/device_config\fP containing your new device driver.
+.lp
+Assuming your device driver supports dynamic renderer output, you
+will also want to add the dynamic renderer module to the \*(Dd
+configuration you build.
+You do that by setting the control variable
+.SM \f2DORE_RNDS\fP
+in \f2dore/makefile\fP: 
+.(m
+	DORE_RNDS=glbrnd dynrnd
+.)m
+Then build \*(Dd by doing:
+.(m
+% cd /my_directory/dore
+% make dore
+.)m
+The resulting library will be located in the directory
+.(m 
+	dore/lib/objtype
+.)m
+where \f2objtype\fP is the machine object type as defined by the variable
+.SM \f2DORE_OBJTYPE\fP
+in \f2dore/makefile\fP.
+Note that this overwrites the library that you built previously in
+\f2Step 5\fP.
+.H1 "Step 10: Test the New Device Driver"
+A few test programs are provided to test the dynamic renderer.
+You may want to try one of them at this point, assuming
+your new device driver supports the dynamic renderer.
+.lp
+First, move to the test directory:
+.(m
+% cd /my_directory/dore/test
+.)m
+If you have not already done so during testing of the 
+standard production renderer, 
+edit the appropriate makefile to set the variables 
+.SM \f2DORE_LOC\fP ,
+.SM \f2DORE_OBJTYPE\fP ,
+.SM \f2DORE_LIB_NAME\fP ,
+and
+.SM \f2LIBS\fP
+to the proper values.
+Then build one of the test programs using the makefile.
+.lp
+The executable file 
+will be located in a subdirectory with the same name as the
+machine object type specified by the
+.SM \f2DORE_OBJTYPE\fP
+variable.
+When you run the program, use the \f2-dt devicetype\fP 
+command line option to select your new device. 
+The argument
+\f2devicetype\fP would be the name of the driver as set in
+\f2Step 7\fP.
+.lp
+For more complete information on how to build and run the 
+dynamic renderer test 
+programs, see the \f2Readme\fP file in the test directory and 
+Section V on \f2Testing\fP.
+.H1 "Step 11: Select \*(Fo Interface Module
+Conventions for calling C routines from \*(Fo programs are not the
+same for all compilers.
+This affects the implementation of the \*(Fo bindings for
+the \*(Dd user routines.
+Included in the Portable \*(Dd release are \*(Fo user routines for
+two different conventions, that is, the convention used by the Sun 
+and Silicon Graphics compilers
+and the convention used by the Stardent 1500/3000 compiler.
+.lp
+The control variable 
+.SM \f2DORE_FORTRAN\fP
+in \f2dore/makefile\fP specifies which \*(Fo module to include
+in the \*(Dd build.
+The \*(Fo interface module is optional in the \*(Dd system,
+and by default the sample makefile does not include it:
+.(m
+	DORE_FORTRAN=none
+.)m
+If you choose to include a \*(Fo interface module, 
+and your platform uses
+the same calling convention between \*(Fo and C as the Sun, 
+Silicon Graphics or Stardent 1500/3000 compilers, then just
+set the 
+.SM DORE_FORTRAN 
+variable to the directory name containing the module
+you want: 
+.(m
+	DORE_FORTRAN=titan
+.)m
+.rs
+.sp -.5v
+or
+.rs
+.sp -.5v
+.(m
+	DORE_FORTRAN=sun
+.)m
+.rs
+Chances are that one of these two conventions is compatible with
+your compiler.
+However, if a different implementation of the \*(Fo interface module
+is required for your port, 
+one of the existing \*(Fo interface modules can be copied 
+and used as a template for the new module.
+First choose a name for your new \*(Fo interface module.
+This name will be used as the name for
+the directory that will contain the new \*(Fo bindings.  
+Make sure you 
+do not use the name of a directory that already exists in 
+\f2dore/src/fortran_config\fP.
+Then from the \f2dore\fP directory do
+.rs
+.sp -.25v
+.(m
+% make copy_fortran TO_FORTRAN=new FROM_FORTRAN=existing
+.)m
+.rs
+.sp -.5v
+where \f2new\fP is the name you selected,
+\f2existing\fP is the name of the existing \*(Fo interface module to 
+be copied (\f2titan\fP or \f2sun\fP).
+.rs
+.sp -.25v
+.lp
+The directory 
+.rs
+.sp -.25v
+.(m
+	dore/src/fortran_config/new
+.)m
+.rs
+.sp -.5v
+will contain all the directories and files that were copied, including
+modified makefiles.
+Then make the changes required for the conventions on your platform.
+Usually the differences between conventions are quite minor. 
+For example, one convention may require the name of a C routine
+called from \*(Fo to be defined in upper case, while another 
+convention may require lower case names.
+.rs
+.sp -.25v
+.lp
+Before you rebuild \*(Dd, set the
+.SM DORE_FORTRAN 
+variable to the name of your new directory:
+.rs
+.sp -.25v
+.(m
+     DORE_FORTRAN=new
+.)m
+.rs
+.sp -.5v
+Once you have set the 
+.SM DORE_FORTRAN
+variable and implemented a new \*(Fo interface module 
+if necessary, you can build \*(Dd by entering:
+.rs
+.sp -.25v
+.(m
+% make dore
+.)m
+.rs
+.sp -.5v
+and the selected \*(Fo interface module will be included in the build.
+The \f2dore/test\fP directory includes a \*(Fo sample program with
+which you can try out your new \*(Fo binding.
+.rs
+.sp -.75v
+.H1 "Step 12: Add Other Drivers and Renderers 
+.rs
+.sp -.25v
+Before you install your new \*(Dd library, you may want to add
+other device drivers and/or renderers to your configuration.
+For example, the Portable \*(Dd distribution includes a standard X11
+device driver (\f2stdx11\fP), and a simple PostScript driver (\f2ps\fP).
+They both use a software graphics pipeline implementation 
+(\f2soft_tools\fP),
+which is also included in the \f2dore/src/device_config\fP directory.
+To include these in your \*(Dd configuration, edit \f2dore/makefile\fP
+to add them to the set of device driver modules specified by
+.SM \f2DORE_DEVS\fP:
+.rs
+.sp -.25v
+.(m
+	DORE_DEVS=rasterfile newdevice stdx11 ps soft_tools
+.)m
+.rs
+.sp -.25v
+Once you have added them to \f2dore/makefile\fP,
+rebuild \*(Dd.
+.rs
+.sp -.5v
+.H1 "Step 13: Install \\*(Dd
+Once you are confident that you have a working \*(Dd system,
+it can be installed by:
+.(m
+% cd /my_directory/dore
+% make install_dore
+.)m
+.bp
+By default, the sample makefile you copied initially is set up to:
+.BU
+move the \*(Dd library to \f2/usr/lib\fP
+.BU hs
+copy the user include files to \f2/usr/include\fP
+.lp
+To change the target locations
+set the following variables in \f2dore/makefile\fP:
+.(m
+        DORE_LIBDIR=libdir
+        DORE_INCDIR=incdir
+.)m
+where \f2libdir\fP and \f2incdir\fP are full path names of
+directories that already exist.
+All \*(Fo include files are put in \f2incdir/fortran\fP
+The include files that are needed for adding device drivers
+and renderers are put in \f2incdir/dore_develop\fP.
+The subdirectories \f2fortran\fP and \f2dore_develop\fP 
+will be created as necessary.
+.H1 "Step 14: Remove Object Files"
+If you want to save space, you can delete the object files
+generated by the build process by entering:
+.rs
+.sp -.25v
+.(m
+% cd /my_directory/dore
+% make clean
+.)m
+.rs
+.sp -.25v
+This removes files
+from the object directory structure under
+.rs
+.sp -.25v
+.(m
+        dore/obj/objtype
+.)m
+.rs
+.sp -.25v
+where \f2objtype\fP is the machine object type as defined by
+the variable
+.SM \f2DORE_OBJTYPE\fP
+in \f2dore/makefile\fP.
+All object files built from the generic part of the code are removed,
+as well as those built from the configuration directories
+specified in \f2dore/makefile\fP.
+.rs
+.sp -.25v
+.lp
+You can also do a 
+.rs
+.sp -.25v
+.(m
+% make clean
+.)m
+.rs
+.sp -.25v
+before rebuilding \*(Dd after making changes to
+ensure that only the most recent versions of the source are
+being used.
+.rs
+.sp -.25v
+.lp
+To remove the \*(Dd library 
+in addition to the object files, do:
+.rs
+.sp -.25v
+.(m
+% make clobber
+.)m
+.rs
+.sp -.25v
+This will remove the library from
+.rs
+.sp -.25v
+.(m
+        dore/obj/objtype
+.)m
+.rs
+.sp -.25v
+where \f2objtype\fP is the machine object type as defined by
+the variable
+.SM \f2DORE_OBJTYPE\fP
+in \f2dore/makefile\fP.
+The installed \*(Dd library (see \f2Step 13\fP) is not removed.
+.rs
+.sp -.5v
+.H1 "Incremental Builds"
+.rs
+.sp -.25v
+Once a \*(Dd library has been built, you can rebuild 
+subpieces of it.
+To rebuild a module in one of the configuration directories:
+.rs
+.sp -.5v
+.(m
+	device_config
+	doresys_config
+	fortran_config
+	os_config
+	render_config
+.)m
+.rs
+.sp -.25v
+go to the top level directory of the module.
+For example, enter
+.rs
+.sp -.25v
+.(m
+% cd /my_directory/dore/src/device_config/newdevice
+.)m
+.rs
+.sp -.25v
+to prepare to rebuild your new device driver.
+You will be invoking \f2make\fP using the makefile in that 
+directory,
+but first you must set several shell environment variables that
+are used by the makefile.
+Normally, the control variables in \f2dore/makefile\fP
+take care of this when you build from the top.
+Set the following environment variables to be the same
+as they are in your \f2dore/makefile\fP:
+.rs
+.sp -.25v
+.(m
+	DORE_LOC
+	DORE_OBJTYPE
+	DORE_LIB_NAME
+	CC 
+	CCFLAGS
+	LD
+	LDFLAGS	
+	AR
+.)m
+.rs
+.sp -.25v
+Another variable 
+.SM \f2ARFLAGS\fP
+is the only one that should not be the same as in the top
+level makefile.
+Since we will be replacing object files in the \*(Dd
+library, 
+.SM \f2ARFLAGS\fP
+should be set to replace, instead of the default append.
+On most systems,
+.SM \f2ARFLAGS\fP 
+should be set to \f2r\fP.
+.lp
+Once all the shell environment variables have been set, you can do:
+.rs
+.sp -.25v
+.(m
+% make compile library
+.)m
+.rs
+.sp -.25v
+This will compile all the source files in the current directory and
+below that are out of date
+with respect to the corresponding object file under
+.rs
+.sp -.25v
+.(m
+	dore/obj/objtype
+.)m
+.rs
+.sp -.25v
+where \f2objtype\fP is the object type you specified with the
+.SM \f2DORE_OBJTYPE\fP
+environment variable.
+It will also
+combine all the object files for the module into one file with
+the same name as the module directory, and replace that file 
+in the library 
+.rs
+.sp -.25v
+.(m
+	dore/lib/objtype/libname	
+.)m
+.rs
+.sp -.25v
+where \f2objtype\fP is the object type you specified with the
+.SM \f2DORE_OBJTYPE\fP
+environment variable, and \f2libname\fP is the library name
+you specified with the 
+.SM \f2DORE_LIB_NAME\fP
+environment variable.
+If the module is a new one that is not yet part of the \*(Dd
+library, it will be appended to the end of the archive.
+.lp
+Similarly, you can rebuild parts of the library from the generic part
+of the code:
+.(m
+	C_interface
+	objs
+	subsys
+	util
+.)m
+You must set the same shell environment variables as above, but in the
+generic part of the code you have to
+invoke the \f2make\fP for every individual directory where there
+are changes.

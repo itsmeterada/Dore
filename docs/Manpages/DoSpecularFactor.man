@@ -1,0 +1,65 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DoSpecularFactor 3D  "Dore"
+.SH NAME
+DoSpecularFactor \- Create a specular factor primitive attribute object
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+DtObject DoSpecularFactor(factor)
+DtReal factor;
+.sp
+.in -.5i
+FORTRAN:
+.in +.5i
+INTEGER*4 DOSPCF(FACTOR)
+REAL*8 FACTOR
+.in -.5i
+.fi
+.SH DESCRIPTION
+.IX DOSPCF
+.IX DoSpecularFactor
+.I DoSpecularFactor
+creates a specular factor primitive attribute object.
+.PP
+Specular reflection is the response of a surface to incident light
+where the reflected (specular) light is scattered primarily in the mirror
+direction.  The specular factor determines the shape and size of the
+specular highlight.  The larger the value of the specular factor
+attribute, the more sharp and precise the highlight; the
+lower the value, the more fuzzy and less precise the highlight.
+.PP
+The parameter \f2factor\fP is an exponent in the shading equation
+Dore uses to calculate specular reflectance in a scene.
+.PP
+The specular factor is only one of four qualities 
+that give a surface shiny highlights.
+The other qualities are the specular color (set with 
+\f2DoSpecularColor\fP), the specular color's intensity
+(set with \f2DoSpecularIntens\fP), and the switch 
+that turns on specular highlights (set with 
+\f2DoSpecularSwitch\fP).
+.SH DEFAULTS
+The default \f2DoSpecularFactor\fP is 120.
+.SH "SEE ALSO"
+.na
+.nh
+DoSpecularColor(3D), DoSpecularIntens(3D), DoSpecularSwitch(3D)
+.ad
+.hy

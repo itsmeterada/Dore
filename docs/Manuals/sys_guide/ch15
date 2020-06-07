@@ -1,0 +1,334 @@
+.\"#ident "%W%" %G%
+.\"
+.\" #
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  
+.\" # 
+.\" # KUBOTA GRAPHICS Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\" #
+.\"
+.so ../macros/local.me
+.ds BT "\\*(Dd System Guide
+.ds CT "Titan 3000V Driver
+.ds h1 15
+.L1 T ITAN " 3000V"
+.L2 D RIVER
+.CH FIFTEEN
+.lp
+The Titan 3000V device driver provides access to the high performance VX 
+graphics subsystem of the Titan 3000V graphics supercomputer.
+.lp
+The VX graphics subsystem provides many advanced graphics features,
+including texture mapping, dynamic antialiased vectors and polygons,
+shadows, multi-pass "true" transparency, and 
+global antialiasing of entire scenes for exceptional image quality.
+\*(Dd users can easily construct highly realistic scenes
+by accessing the VX graphics subsystem through the Titan 3000V driver.
+The Titan 3000V, manufactured by Kubota Pacific Computer, Inc., 
+is a double buffered 24\-bit color workstation that runs the 
+X11R4 windowing system.
+.H1 "Using the Driver
+A Titan 3000V device object can be created using one of the following
+calls to \f2DoDevice\f1:
+.(m
+        DoDevice(devicetype, optionstring);
+.)m
+where \f2devicetype\f1 is the device type and \f2optionstring\f1 is
+a list of initialization options for the Titan 3000V driver.
+In this release, any of the \f2devicetype\f1 strings "\f2display\f1",
+"\f2localx11\f1", "\f2ardentx11\f1", or "\f2stardentx11\f1" can be used
+to open a Titan 3000V device object.
+The \f2DoDevice <DOD>\f1 and \f2DdSetOptions <DDSO>\f1
+manpages with Titan 3000V driver-specific
+information are provided in Section IV, \f2Manpages\f1, of this document.
+.H3 "Initialization Options
+The initialization options for the Titan 3000V device driver are:
+.ip "\-noautosize"
+specifies that the device viewport not automatically be set to the
+device extent when the device extent changes.
+.ip "\-singlebuffered"
+specifies a single buffered window.
+The default is a double buffered window.
+.ip "\-geometry \f2geomstring\fP"
+specifies a window with a particular position and size.
+The format for \f2geomstring\fP is ``WxH+X+Y'' or ``WxH'' (where W, H,
+X, and Y are the integer values for width, height, and the X, Y
+position of the upper left corner of the window). 
+If the ``WxH'' format is used, X and Y are assumed to be zero.
+The default geometry is a 512x512 window in the upper left corner
+of the screen.
+.ip "\-visualtype \f2vtype\fP"
+specifies a window with the given visual type.
+The possible values for \f2vtype\fP are \f2DcTrueColor\fP or
+\f2DcDirectColor\fP for a full 24\-bit color window, and
+\f2DcPseudoColor\fP for an 8\-bit pseudocolor window.  
+The default visual type is \f2DcTrueColor\fP.
+.ip "\-window \f2xwindow\fP"
+specifies that the X window handle \f2xwindow\fP be used for drawing.
+The application must open \f2xwindow\fP before creating the \*(Dd device.
+When using this option the \f2\-display\fP option should also be
+specified. 
+The \f2\-geometry\fP, \f2-singlebuffered\f1, and
+\f2\-visualtype\fP options will be ignored. 
+.ip "\-display \f2xdisplay\fP"
+specifies that the X display handle \f2xdisplay\fP be used as the
+X display device.
+The application must open \f2xdisplay\fP before creating the \*(Dd device.
+.ip "\-multipass_transparency"
+specifies that multipass transparency be used for transparent
+objects, instead of the default simpler two-pass transparency.
+This will result in "true" transparency but there is a performance
+penalty.
+.ip "\-texture_expand \f2method\fP"
+specifies that texture maps less than 256x256 be expanded to
+256x256 using the method \f2method\fP.
+Possible values for \f2method\fP are \f2bilinear\fP, 
+\f2replicate\fP, and \f2hybrid\fP.
+The default texture expansion method is \f2hybrid\fP.
+See the \f2Data Formats for Texture Maps\fP section for
+more information on texture expansion.
+.H3 "Modifying the Optional Values
+The Titan 3000V device driver allows modification of driver
+specific values through the \f2DdSetOptions\fP call.
+The following options can be changed via this call:
+.ip -multipass_transparency
+sets the transparency mode to the multipass "true" transparency.
+Note that the transparency mode should only be set between updates.
+.ip -two_pass_transparency
+sets the transparency mode to the simple two-pass transparency.
+This is the same as the transparency mode provided on 
+Titan 3000 systems without the VX graphics.
+Note that the transparency mode should only be set between updates.
+.ip "-texture_expand \f2method\fP"
+sets the texture expansion method for texture maps less than
+256x256 to \f2method\fP.
+Possible values for \f2method\fP
+are \f2bilinear\fP, \f2replicate\fP, and \f2hybrid\fP (the default).
+Note that the texture expansion method can be reset for every 
+texture map
+in a scene by calling \f2DdSetOptions\fP in a callback before
+each \f2DoTextureMapDiffuseColor\fP.
+.H1 "Output Modules
+The Titan 3000V device driver supports both the production
+renderer output module (PROM) interface and the dynamic renderer output
+module (DROM) interface. 
+.H1 "PROM Dependent Functions
+The interface to the PROM is a very simple one, intended for renderers
+that generate pixel data, such as the standard production renderer.
+The Titan 3000V PROM implements all functions of the PROM interface.
+As a result, any renderer that uses the PROM interface will be fully
+supported by the Titan 3000V device driver.
+.H1 "DROM Dependent Functions
+The Titan 3000V device driver uses most, but not all, of the
+\*(Dd attributes that are passed to the DROM.
+Refer to Appendix A, \f2Supported Functions\fP,
+for a list of the \*(Dd functions
+supported by the Titan 3000V DROM.
+.H1 "Notes
+.H3 "Use Local Antialiasing With DcWireframe <DCWIRE>"
+There is no performance penalty for enabling local antialiasing
+on triangles and polygons in \f2DcWireframe <DCWIRE>\fP mode.
+.H3 "Device Extents
+The device extent of the Titan 3000V device, as returned by
+\f2DdInqExtent\fP, has a Z range from 0 to 1.
+Note that in some previous releases it has been 0 to 65535.
+.H1 "Limitations
+The Titan 3000V DROM has the following limitations.
+What may appear to be a large set of limitations is actually
+a consequence of the extensive list of graphics features that the Titan 3000V
+computer offers.
+.BU
+Hardware spheres are available, but are not a supported feature.
+Use the \f2DoDevice <DOD>\f1 initialization option \f2-spheres\f1 
+to request that (\f2DoPrimSurf(DcSphere)\fP and 
+\f2DoSphereList\fP) spheres be drawn using the hardware spheres
+provided by the VX graphics hardware, instead of the
+default tesselated spheres.  After device initialization,
+use the \f2DdSetOptions <DDSO>\f1 options \f2-nospheres\f1 and 
+\f2-spheres\f1 to toggle the sphere mode between
+tesselated spheres and hardware spheres, respectively.
+Note that the sphere mode should only be set between updates.
+.BU
+It does not support the interpolation type \f2DcSurfaceShade\fP for
+\f2DoInterpType\fP.
+.BU
+The \f2operator\fP parameter of the \f2DoClipVol\fP function is
+ignored and is assumed to be \f2DcClipAnd\fP.
+.BU
+Only 20 clipping planes are supported.
+.BU
+Points and lines cannot cast shadows.
+.BU
+Lines cannot be transparent.
+.BU
+Only three line widths are supported for the \f2DoLineWidth\fP
+attribute, i.e. 1, 2 and 4. 
+If any other value is specified the driver will use
+the supported value which is closest to the specified value.
+.BU
+Wide lines, i.e. those that have widths of 2 or 4, may introduce
+artifacts such as missing or incorrectly shaded pixels.
+.BU
+Shadows are generated for point and spot light sources only.  
+The spread angle and exponent of a spot light source are ignored
+so that it behaves like a point light source when shadows are 
+being calculated.
+.BU
+To get consistent shading results, user-supplied normals of objects 
+that cross the Z=0 plane are constrained by the geometric normal,
+i.e., they must be on the same side of the triangle/polygon that the
+geometric normal is.  \*(Dd computes the geometric normal using the
+right-hand rule typically.  See the \f2\*(Dd Programmer's Guide\f1
+for details on how the geometric normal is computed for the various
+primitive objects.
+.BU
+The advanced graphics features provided on the Titan 3000V
+allocate memory depending on the size of the \*(Dd window.
+If your system only has 32 Mb of memory, your graphics application
+may abort with a warning about not being able to allocate enough space.
+In that case you may want to reduce the size of your window and
+try again.
+.H2 "Limitations on Texture Mapping
+The VX graphics subsystem of the Titan 3000V has some limitations
+on texture mapping and the texture mapping attributes.
+.BU
+Both 2D and 3D textures are supported;
+however, only one map can be applied to any object at a time. 
+Thus, the mapping operator is effectively always set to \f2DcMapReplace <DCMR>\fP.
+.BU
+Three-dimensional texture mapping should only be used in views with 
+parallel cameras, and to avoid artifacts use smaller triangles.
+.BU
+Two-dimensional texture mapping will be most accurate if the hither plane is
+as close to the object as possible.  Avoid unnecessarily
+small absolute values of hither;  a value of -1.0 is safe.
+.BU
+Only three of the antialiasing modes are supported for 2D texture mapping.
+They are \f2DcTextureAntiAliasNone <DCTAAN>\fP,
+\f2DcTextureAntiAliasBilinear <DCTAAB>\fP and
+\f2DcTextureAntiAliasSumArea <DCTAAS>\fP.  All other
+antialiasing modes will be interpreted as \f2DcTextureAntiAliasNone\f1.
+For 3D texture mapping, the only supported antialias mode is
+\f2DcTextureAntiAliasNone\f1.
+.BU
+Only two of the texture operators are supported.  
+They are \f2DcTextureReplace <DCTREP>\fP and \f2DcTextureMultiply <DCTMUL>\fP.
+All other operators will be interpreted as \f2DcTextureReplace\fP.
+.BU
+Vertex colors supplied with a texture mapped primitive will not 
+be displayed when the texture operator \f2DcTextureReplace <DCTREP>\fP 
+is used.  The primitive's diffuse color 
+(\f2DoDiffuseColor <DODIFC>\f1) will be used outside the [0, 1] 
+mapping range if the extend mode is \f2DcExtendNone <DCXNON>\f1.
+.BU
+If the extend mode is \f2DcExtendBlack <DCXBLK>\fP in one texture
+direction and \f2DcExtendNone <DCXNON>\fP in any other, the result
+will be \f2DcExtendNone <DCXNON>\fP in all directions.
+.BU
+For 2D texture mapping, the extend mode \f2DcExtendRepeat <DCXRP>\fP
+is guaranteed to work correctly only when the raster object has an 
+image size that is a power of 2.
+\f2DcExtendRepeat\fP is not available for 3D texture mapping.  
+Instead, this mode results in \f2DcExtendClamp <DCXCLP>\f1.
+.BU
+There is no limit on the width, height, or depth of the raster data 
+used for 3D diffuse color mapping, except for memory constraints.  However,
+the maximum precision of 3D texture mapping arithmetic is 256 counts
+in any dimension, and larger textures are subsampled during the rendering 
+process.  Consequently, textures that are greater than 256 in any dimension 
+use up memory without improving the quality of the image.
+.BU
+Because the 256 count precision applies across the entire surface of
+an object being 3D texture mapped, it is recommended that for maximum accuracy
+the ranges of \f2u\f1, \f2v\f1, and \f2w\f1 exceed the [0, 1] mapping range 
+as little as possible after the transformation of the \f2uvw\f1 texture
+attributes.
+.BU
+Artifacts may appear when a 2D texture is mapped such that all the 
+vertices of a triangle or quadrilateral share the same \f2u\f1 or \f2v\f1 
+value, with a shared value of exactly 0.0 or 1.0 (for example, the top, 
+bottom, and side seam of a cylinder).  Typically, the diffuse color of
+the primitive bleeds through the texture map when the extend mode
+is \f2DcExtendNone <DCXNON>\f1.  To avoid these artifacts,
+try adjusting the \f2hither\f1 and/or \f2yon\f1 values of the camera
+(see the \f2Titan 3000/3000V \*(Dd Usage Notes\f1 in 
+this guide), or setting the extend mode to \f2DcExtendClamp <DCXCLP>\fP.
+.H2 "Limitations on Attribute Combinations
+.lp
+The VX graphics subsystem of the Titan 3000V has some
+restrictions on which high level features can be used together on the
+same object or in the same scene.
+.lp
+Texture mapped and environment mapped objects cannot be transparent.
+The transparency attributes will be ignored for these objects.
+.lp
+A scene can have multiple texture maps (diffuse color maps, 
+environment maps), but not more than one map at a time can be applied 
+to any single object. 
+.H1 "Data Formats for Texture Maps
+The VX graphics subsystem of the Titan 3000V supports real-time
+diffuse color mapping and environment mapping.
+.H3 "Diffuse Color Maps
+The raster data used for diffuse color mapping can be of any one of the
+raster types supported by \*(Dd. 
+However, the data will be stored as \f2DcRasterABGR\fP and the driver
+will convert to that format if necessary. 
+It is therefore more efficient if the application provides the raster data 
+in the \f2DcRasterABGR\fP format.
+.lp
+The resolution of a 2D diffuse color map can be as great as 4096x4096.
+However, if a map is 256x256 or smaller it will be stored in the
+local memory of the VX graphics subsystem, resulting in much
+faster access.  3D texture maps are never stored in local memory.
+.lp
+If a 2D texture map is smaller than 256x256 it will be expanded
+to 256x256 by one of three user-selectable methods:
+\f2pixel replication\fP, \f2bilinear interpolation\fP,
+or a \f2combination\fP of both (the default).
+The combination method uses pixel replication if the texture
+width or height is less than 64, otherwise it will bilinearly interpolate.
+See the \f2Using the Driver\fP section on how to select a texture
+expansion method. 
+.H3 "Environment Maps
+A cubic mapping method is used for environment mapping.
+That means that the environment map is represented as a cube centered
+on the object on which the environment is to be reflected. 
+To generate the map data the scene must be rendered 6 times, once
+for every  face of the cube.
+.lp
+Note when generating an environment map the scene should \f2not\fP include
+the reflecting object.
+The images should be computed at 256x256 resolution.
+The 6 resulting images should be stored as the 6 levels of a raster object
+of depth 6 and type \f2DcRasterABGR\fP.
+The orientation of the views for the 6 images should be as listed in
+\*(TT. 
+A right-handed coordinate system is assumed.
+.lp
+Any renderer can be used to generate images for an environment map.
+That includes the dynamic renderer on devices that support the 
+\f2DdInqPixelData\fP call. 
+.(T "Orientations of Views for Environment Maps"
+.TS
+tab (@);
+c | c | c
+l | l | l.
+Level@Up Axis@Right Axis
+_
+   0@   +y@   -x
+   1@   +y@   -z
+   2@   +y@   +x
+   3@   +y@   +z
+   4@   +z@   +x
+   5@   -z@   +x
+.TE
+.)T

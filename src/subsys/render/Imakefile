@@ -1,0 +1,9 @@
+#include <Dore.tmpl>
+
+    SRCS = objdat.c ren_inq.c rnd.c
+    OBJS = objdat.o ren_inq.o rnd.o
+
+LibraryObjectRule()
+SubdirLibraryRule($(OBJS))
+
+DependTarget()

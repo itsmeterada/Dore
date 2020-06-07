@@ -1,0 +1,153 @@
+!md begin
+!/note {} def
+!/legal {} def
+!md /lnop known not { /lnop [ {} ] cvx def } if
+!/bigs [lnop lnop lnop lnop lnop lnop lnop lnop] def
+!/smalls [lnop lnop lnop lnop lnop lnop lnop lnop] def
+!/cp {pm restore pop pop} def
+!
+!T T -31 -30 761 582 100 72 72 1 F F F F T T psu
+!(Aaron Black; document: 6-10.pict.p)jn
+!0 mf
+!od
+!op
+!0 0 xl
+!1 72 mul -0.25 72 mul translate
+!0.65 0.65 scale
+!1 1 pen
+!145 37 gm
+!(nc 0 0 720 540 6 rc)kp
+!145 455 lin
+!145 37 gm
+!145 45 lin
+!145 55 gm
+!145 63 lin
+!145 73 gm
+!145 81 lin
+!145 91 gm
+!145 99 lin
+!145 109 gm
+!145 117 lin
+!145 127 gm
+!145 135 lin
+!145 145 gm
+!145 153 lin
+!145 163 gm
+!145 171 lin
+!145 181 gm
+!145 189 lin
+!145 199 gm
+!145 207 lin
+!145 217 gm
+!145 225 lin
+!145 235 gm
+!145 243 lin
+!145 253 gm
+!145 261 lin
+!145 271 gm
+!145 279 lin
+!145 289 gm
+!145 297 lin
+!145 307 gm
+!145 315 lin
+!145 325 gm
+!145 333 lin
+!145 343 gm
+!145 351 lin
+!145 361 gm
+!145 369 lin
+!145 379 gm
+!145 387 lin
+!145 397 gm
+!145 405 lin
+!145 415 gm
+!145 423 lin
+!145 433 gm
+!145 441 lin
+!145 451 gm
+!145 454 lin
+!2 2 pen
+!0 0 gm
+!47 8 413 483 0 ov
+!145 33 gm
+!73 125 lin
+!48 244 lin
+!47 246 gm
+!73 366 lin
+!74 367 gm
+!145 455 lin
+!1 1 pen
+!11 21 gm
+!bu fc
+!
+!{}mark T /Helvetica /Helvetica 0 rf
+!bn
+!1 setTxMode
+!0 fs
+!12 fz
+!bu fc
+!2 F /Helvetica fnt
+!bn
+!1.58859 0. 32 0.15885 0.(Curved Surface)awidthshow
+!24 21 gm
+!0 gr
+!0.35964 0. 32 0.03596 0.(  \(ideal\))awidthshow
+!nc ct 39 0 put
+!56 161 gm
+!bp
+!53 146 T qi
+!50 147 qc
+!47 149 qc
+!56 161 T qq
+!55 154 gm
+!qf
+!ef
+!6 ec
+!(nc 0 0 720 540 6 rc)kp
+!17 67 gm
+!50 147 lin
+!167 246 gm
+!48 246 lin
+!166 246 gm
+!158 246 lin
+!148 246 gm
+!140 246 lin
+!130 246 gm
+!122 246 lin
+!112 246 gm
+!104 246 lin
+!94 246 gm
+!86 246 lin
+!76 246 gm
+!68 246 lin
+!58 246 gm
+!50 246 lin
+!0 0 gm
+!64 gr
+!147 2 428 496 4 rc
+!179 5 gm
+!0 gr
+!-0.06665 0.(DtReal parms[1];)ashow
+!192 5 gm
+!-0.09660 0.(parms[0] = 3.0;)ashow
+!205 5 gm
+!2.19619 0. 32 0.21961 0.(DoSubDivSpec\(DcSubDivFixed, parms\);)awidthshow
+!183 331 gm
+!0.87966 0. 32 0.08796 0.(Planar Representation)awidthshow
+!nc ct 39 0 put
+!114 417 gm
+!bp
+!128 413 T qi
+!126 410 qc
+!125 407 qc
+!114 417 T qq
+!121 415 gm
+!qf
+!ef
+!6 ec
+!(nc 0 0 720 540 6 rc)kp
+!166 391 gm
+!126 410 lin
+!F T cp
+!cd
+!end

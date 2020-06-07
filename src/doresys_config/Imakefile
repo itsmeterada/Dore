@@ -1,0 +1,9 @@
+#include <Dore.tmpl>
+
+SRCS = $(DORE_SYSTEM).c
+OBJS = $(DORE_SYSTEM).o
+
+LibraryObjectRule()
+SubdirLibraryRule($(OBJS))
+
+DependTarget()

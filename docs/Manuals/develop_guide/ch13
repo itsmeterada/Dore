@@ -1,0 +1,487 @@
+.\"#ident "%W%" %G%
+.\"
+.\" #
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  
+.\" # 
+.\" # KUBOTA GRAPHICS Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\" #
+.\"
+.sc
+.ds BT "\\*(Dd Developer's Guide
+.ds CT "\\*(Dd Implementation Conventions
+.ds h1 13
+.so ../macros/local.me
+.PN 193
+.nf
+.L1 D OR\h'5p'\v'-8p'\(aa\v'8p'\h'-5p' "" "\h'-\w'\(aa'u'E
+.L2 I MPLEMENTATION 
+.L3 C ONVENTIONS
+.CH THIRTEEN
+.rs
+The Portable \*(Dd source code consists of
+about 160,000 lines of C code, and 85,000 lines of font data. 
+As in any project of this size, certain conventions were developed 
+to simplify the task of 
+maintaining the system.  
+This chapter explains 
+how the \*(Dd directories are organized and other
+coding conventions used by the \*(Dd implementation. 
+.rs
+.H1 "C Language Portability Issues
+The \*(Dd implementation uses standard Kernighan and Ritchie
+conventions for C programming with only a few exceptions.
+(See \f2The C Programming Language\fP,
+by B. Kernighan and D. Ritchie, published by Prentice-Hall.)
+\*(Dd should be easily portable to a 
+wide variety of C compilers and operating systems.
+There is one exception and one other item worthy of note from the
+standpoint of portability of the \*(Dd C implementation.
+.BU hs
+\f2long names\fP
+\(em \*(Dd procedure and variable names 
+can be arbitrarily long and may not be unique in the 
+first eight characters.  
+Most compilers deal properly with long names, 
+but if you have one that doesn't, one 
+course of action would be to use one of the public domain C 
+``name-crunchers'' that replaces long names in C source with 
+shorter unique names.
+.BU hs
+\f2size of pointers\fP
+\(em pointers are assumed to be the same size as \f2int\f1s by the 
+\*(Dd implementation.  
+If this is not true on your system
+then changing the type of \f2DtInt\fP
+in the 
+\f2dore.h\f1 include file to 
+\f2long\fP
+or some other appropriate type might help in clearing up the problem.
+.rs
+.sp -.5v
+.H1 "\\*(Dd Naming Conventions
+.rs
+.sp -.25v
+The \*(Dd implementation follows a regular naming
+convention that makes it easier to recognize the function
+of various items such as functions, variables, or types.
+.lp
+The \*(Dd system utilizes symbolic names beginning with 
+.BU hs
+\f2D\f1 for names in the application programmer's interface, 
+.BU hs
+\f2DD\f1 for names in the developer's interface, and
+.BU hs
+\f2do\f1 for internal names.
+.lp
+The following subsections describe in more detail the
+naming conventions for the latter two categories.
+Conventions for \*(Dd application interface names are 
+discussed in the \f2\*(Dd Programmer's Guide\fP and 
+the \f2\*(Dd Reference Manual\fP.
+.H2 "\*(Dd Developer's Interface
+All names of the developer's interface used by implementors
+of renderers and device drivers use mixed upper and lower
+case and one underscore.
+.lp
+Types and constants have the form:
+.rs
+.sp -.25v
+.(m
+	DD?_*
+.)m
+.rs
+.sp -.25v
+The third character is \f2t\fP for types or \f2c\fP for constants.
+It is followed by an underscore and then the descriptive part 
+of the name.  
+For example, \f2DDt_DCM\fP is the type that defines the device
+control module interface structure.
+.lp
+Routines have the form:
+.rs
+.sp -.25v
+.(m
+	DDidentifier_*
+.)m
+.rs
+.sp -.25v
+The \f2identifier\fP is all lower case and it identifies 
+the subsystem to which the routine provides access.
+For example, it is \f2render\fP for routines used to access the
+rendering control subsystem.
+The identifier is followed by an underscore, followed by the
+descriptive part of the name using concatenated words with the
+first character of each word in upper case.
+For example, \f2DDrender_AddRenderer\fP notifies \*(Dd of a
+new renderer to be added to the system.
+.H2 "Internal Names
+There is a convention for internal names
+that helps to indicate
+the function and usually the location of the internal
+names of the \*(Dd implementation.
+Knowing these conventions may be useful to those who
+read the \*(Dd source code. 
+.lp
+\*(Dd internal names use lower case characters and underscores,
+and have the form:
+.rs
+.sp -.35v
+.(m
+	do?_identifier_*
+.)m
+.rs
+.sp -.35v
+The third character is one of the following:
+.rs
+.sp -.5v
+.ip \f2r\fP
+indicates a routine.
+.rs
+.sp -.5v
+.ip \f2t\fP
+indicates a type.
+.rs
+.sp -.5v
+.ip \f2e\fP
+indicates an external variable.
+.rs
+.sp -.5v
+.ip \f2d\fP
+indicates a definition (such as a macro).
+.rs
+.sp -.25v
+.lp
+The \f2identifier\fP identifies the object type or the subsystem
+to which the name belongs.
+For example, it is \f2trimsh\fP for names used in the 
+implementation of triangle mesh objects, and \f2pick\fP
+for names in the picking control subsystem.
+The rest of the name indicates the function of the item.
+For example, \f2dor_trimsh_compute_bounding_volume\fP computes the
+bounding volume for a triangle mesh, and
+\f2doe_pick_data\fP is a global variable used
+by the picking control system to store picking state and data.
+.rs
+.sp -.25v
+.lp
+A similar convention is recommended for the internal names of
+renderers and device drivers, using \f2dr\fP and \f2dd\fP 
+as the first two characters. 
+Refer to Chapter 7, \f2Sample Renderer\fP, 
+and Chapter 11, \f2Sample Device Driver\fP, for details.
+.rs
+.sp -.5v
+.H1 "The \*(Dd Directory Structure"
+.rs
+.sp -.25v
+The \*(Dd directory structure is hierarchical and in some cases 
+is quite deeply nested.  
+As distributed with Portable \*(Dd release 5.0, 
+the \*(Dd source code includes 
+approximately 1350 files, organized into approximately 100 directories.
+Computer, except not all existing device driver implementations
+are included in Portable \*(Dd.
+.rs
+.sp -.25v
+.lp
+The directory structure was designed to support automatic 
+building and maintenance of \*(Dd source and object code, for 
+several different platforms simultaneously, using the UNIX 
+\f2make\fP tool.
+Note that one or more files 
+may need to be edited before automatic building will operate 
+properly (see Chapter 14, \f2Building the Sample Configurations\fP).
+.rs
+.sp -.25v
+.H2 "The dore Directory"
+.rs
+.sp -.25v
+When the \*(Dd software is loaded from the distribution tape,
+a directory called \f2dore\f1 is created and everything on
+the tape is stored under it.  The contents of the \f2dore\f1 
+directory itself are some makefiles, one for each of the sample
+configurations, and six directories.  
+.\" .(F
+.\" .sp 1.5i
+.\" .)F "Top Level \*(Dd Directories" figref
+.lp
+The contents of the directories are:
+.rs
+.sp -.25v
+.ip "\f3demo\f1    "
+sample \*(Dd demonstration programs.
+.rs
+.sp -.25v
+.ip "\f3include    \f1"
+include files used internally by the \*(Dd system and
+externally by application programmers and developers.
+.rs
+.sp -.25v
+.ip "\f3lib        \f1"
+directories to contain the \*(Dd libraries for the various platforms.
+.rs
+.sp -.25v
+.ip "\f3obj        \f1"
+directories to contain the results of source compilations for
+the various platforms.  
+The directory structure beneath a platform's object
+directory is parallel to the \f2dore/src\f1 directory structure.
+.rs
+.sp -.25v
+.ip "\f3src        \f1"
+the root directory for all \*(Dd source code.
+The contents of this directory are described in more detail in 
+the next section.
+.rs
+.sp -.25v
+.ip "\f3test      \f1"
+test programs.
+The contents of this directory are described in more detail in
+Section V.
+.H2 "The dore/src Directory"
+The \f2dore/src\f1 directory is the root directory under
+which all \*(Dd source code can be found.  
+This directory actually
+contains several subdirectories in which the source code
+is logically subdivided into more files and directories.
+Many of the directory names end with \f2_config\fP.
+These directories contain the \*(Dd configuration-dependent
+modules.  
+Depending on the values of several environment variables 
+in the top-level
+makefile, appropriate subdirectories from each configuration 
+directory are included when the \*(Dd library is built.
+Directories with names that do not end with \f2_config\fP
+contain platform independent code, which is included
+in all \*(Dd configurations.
+You do not have to touch these directories when performing
+a \*(Dd port.
+.lp
+The \f2dore/src\f1 directories contain:
+.ip "\f3data     \f1"
+font and error message data.
+.ip "\f3C_interface\f1"
+all C interface routines for \*(Dd users and developers.
+.ip "\f3objs     \f1"
+all code implementing \*(Dd objects, such as primitives and
+attributes.
+.ip "\f3subsys\f1"
+major subsystems, such as picking, the object control system,
+and other major functional bodies of code.
+.ip "\f3util     \f1"
+various utilities used by the machine independent parts of the 
+\*(Dd system, such as various math and matrix functions and
+polygon decomposition functions.
+.ip "\f3device_config\f1"
+all device driver modules.
+.ip "\f3doresys_config\f1"
+the system modules for the different \*(Dd configurations.
+.ip "\f3fortran_config\f1"
+all \*(Fo bindings for the application interface routines, 
+with implementations 
+for different calling conventions between \*(Fo and C.
+.ip "\f3os_config\f1"
+operating system dependent utilities, such as memory allocation
+and file I/O.
+.ip "\f3render_config\f1"
+the \*(Dd renderers, including 
+the standard production renderer, the dynamic renderer and 
+the sample renderer.
+.lp
+Some of these directories are discussed in more detail
+in the sections that follow.
+.H2 "dore/src/C_interface"
+The \f2dore/src/C_interface/user\f1 directory contains
+the C language bindings for all the \*(Dd routines used by 
+application programmers, as specified in the 
+\f2\*(Dd Reference Manual\f1.
+The contents of this 
+directory are almost parallel to the contents of the \f2dore/src/objs\f1
+directory.  
+Note that routines providing user extensibility to 
+\*(Dd, such as the user-defined primitives, are in 
+\f2dore/src/C_interface/user/userext\f1.
+.lp
+The \f2dore/src/C_interface/developer\f1 directory contains the C 
+language bindings for the \*(Dd developer's interface routines,
+as specified in the manpages.
+.H2 "dore/src/objs"
+This directory contains the implementations of the various
+\*(Dd object classes and related functions.
+The subdirectories of \f2dore/src/objs\fP are:
+.rs
+.sp -.25v
+.ip "\f3device     \f1"
+device class and related functions. 
+.rs
+.sp -.25v
+.ip "\f3frame     \f1"
+frame class and related functions. 
+.rs
+.sp -.25v
+.ip "\f3group     \f1"
+group class and related functions.
+.rs
+.sp -.25v
+.ip "\f3view     \f1"
+view class and related functions.
+.rs
+.sp -.25v
+.ip "\f3geoatt     \f1"
+geometric transformation attribute classes.
+.rs
+.sp -.25v
+.ip "\f3map     \f1"
+texture map primitive attribute classes and their texture attributes.
+.ip "\f3misc     \f1"
+miscellaneous classes, such as 
+callbacks, data values, 
+execution sets, rasters, and pick identifiers.
+.\" .(F
+.\" .sp 36 
+.\" .)F "The dore/src Directory and some Subdirectory Contents" figref
+.ip "\f3pri     \f1"
+primitive classes, i.e., the displayable 3D shapes.
+.ip "\f3priatt     \f1"
+primitive attribute classes.
+.ip "\f3studio     \f1"
+camera and light classes.
+.ip "\f3studioatt     \f1"
+studio attribute classes.
+.ip "\f3glbatt     \f1"
+global attribute classes that maintain the attribute state 
+during traversal.
+.H2 "dore/src/subsys"
+The source files and subdirectories of \f2dore/src/subsys\fP are:
+.ip "\f3condex.c\f1"
+conditional execution code, used to query the executability of objects.
+.ip "\f3dictionary.c\f1"
+hash table dictionaries, used by the object control system.
+.ip "\f3error.c   \f1"
+error handling code.
+.ip "\f3font.c    \f1"
+low-level text functions.
+.ip "\f3gas.c    \f1"
+global attribute stack control.
+.ip "\f3obj    \f1"
+object control system.
+.ip "\f3pick   \f1"
+picking functions (picking is currently done completely in software).
+.ip "\f3render  \f1"
+rendering control.
+.ip "\f3system \f1"
+system functions, including initialization and termination.
+.H2 "dore/src/device_config"
+The device drivers are located in the \f2dore/src/device_config\fP directory. 
+Each device driver is in a separate subdirectory.  
+In the Portable \*(Dd release 5.0 distribution, 
+\f2dore/src/device_config\fP contains
+the subdirectories:
+.(m
+	gl
+	ps
+	rasterfile
+	sampledev
+	stdx11
+	sunview_cxp
+	sunview_gen
+	soft_tools
+.)m
+Each device driver directory may contain directories for one or more of
+the dynamic renderer output module (\f2drom\f1), 
+the production renderer output module (\f2prom\f1), 
+and the device control module (\f2dcm\f1) for that device.
+The \f2soft_tools\fP directory is actually not a device driver 
+implementation; it contains tools used by the \f2ps\fP and \f2stdx11\fP 
+device drivers.
+.H2 "dore/src/doresys_config"
+The system module for each \*(Dd system configuration
+is located in a file in
+the \f2dore/src/doresys_config\fP directory.  
+In the Portable \*(Dd release 5.0 distribution, 
+\f2dore/src/doresys_config\fP contains
+the files:
+.(m
+	iris.c
+	sample.c
+	stdx.c
+	suncxp.c
+	sungen.c
+.)m
+.rs
+.sp -.5v
+.H2 "dore/src/fortran_config"
+\*(Fo language bindings are compiler dependent.  
+Each implementation 
+of the \*(Fo bindings will be in a separate subdirectory of
+\f2dore/src/fortran_config\fP.  
+Like the C bindings, each binding's 
+subdirectory will contain the same directory structure as
+\f2dore/src/C_interface/user\f1.
+.H1 "\*(Dd Makefiles"
+As you will see in the following chapters, one 
+makefile controls the \*(Dd build and installation process.
+Several versions of this makefile are provided in the \f2dore\fP
+directory.
+Before you build \*(Dd you will copy one of these files to
+\f2makefile\fP and edit it to set several control variables.
+Usually this is the only makefile you have to touch.
+However, if you make changes to the \*(Dd source code 
+for the port to your platform, you may have to update 
+or add makefiles.
+.lp
+If you add new source files to a directory, you will need to update
+the makefile in that directory, so that the automatic build process
+can continue to operate correctly.
+.lp
+If you add a new directory that includes source files, you must include
+a makefile in that directory. 
+Look at a makefile in one of the other directories to see what the
+automatic build process expects.
+You will notice that the makefiles in subdirectories under
+the configuration directories in \f2dore/src\fP:
+.(m
+	device_config
+	doresys_config
+	fortran_config
+	os_config
+	render_config
+.)m
+are not quite the same as the makefiles in the generic part of
+the code:
+.(m
+	C_interface
+	objs
+	subsys
+	util
+.)m
+All makefiles under the configuration directories are responsible
+for building the files in that directory \f2and\fP all files
+in its subdirectories.
+In the generic part of the \*(Dd source tree, each makefile just builds
+the files in that directory.
+The \*(Dd build process (see \f2dore/src/makefile\fP) will find
+and build all directories with a makefile in the generic part of the tree.
+Consequently,
+a directory with only subdirectories and no source files does not
+need a makefile.
+.lp
+You will also notice that most makefiles combine the compiled object
+files in the directory into one single object file to archive
+into the \*(Dd library.
+However, in some directories, such as the C and \*(Fo module
+directories and \f2dore/src/objs\fP, 
+each individual compiled object file is added to
+the archive.
+That way, only those functions used by the application are actually
+pulled into the executable at link time.

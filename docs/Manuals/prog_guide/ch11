@@ -1,0 +1,806 @@
+.\"#ident "%W%" %G%
+.\"
+.\" Copyright (C) 1988, 1989, 1990, 1991 by Kubota Pacific Computer Inc.
+.\"         All Rights Reserved
+.\" This program is a trade secret of Kubota Pacific Computer Inc. and
+.\" it is not to be reproduced, published, disclosed to others, copied,
+.\" adapted, distributed, or displayed without the prior authorization
+.\" of Kubota Pacific Computer Inc.  Licensee agrees to attach or embed
+.\" this Notice on all copies of the program, including partial copies
+.\" or modified versions thereof.
+.\"
+.so ../macros/local.me
+.ds CT Conditionals
+.ds BT \*(Dd Programmer's Guide
+.ds h1 11
+.PN 225
+.L1 C ONDITIONALS
+.CH ELEVEN
+.rs
+.sp -1v
+This chapter discusses the use of conditional elements to affect
+execution of the \*(Dd database.  \f2DoCallback <DOCB>\f1 causes
+\*(Dd to call out to user-written functions during execution.
+\f2DsExecuteObj <DSEO>\f1 causes the immediate execution of an object.
+\f2DsExecutionAbort <DSEA>\f1 and \f2DsExecutionReturn <DSER>\f1
+also affect execution of the \*(Dd database. The \f2executability set\f1
+allows you to \f2freeze\f1 certain attributes at their
+current values
+so that subsequent attribute objects of particular types do not
+execute. \f2Name sets\f1 and \f2filters\f1 provide high-level
+control over invisibility and pickability switches.
+\f2DoBoundingVol
+<DOBV>\f1 allows you to specify a simpler alternate object if a
+particular object
+falls below a minimum measurement.
+Concepts and terms introduced in this chapter include callback objects,
+immediate mode execution,
+the executability set, name sets and filters, and
+bounding volumes used as conditionals.
+.H1 "Callbacks"
+\f2DoCallback <DOCB>\f1 takes as arguments
+a pointer to a user-written function and an
+object containing some user data, and then adds a \f2callback object\f1
+to the \*(Dd database.
+When a callback object is executed, the
+user function is called and is passed the data.
+In \*(Fo, the user function can be either a \f2subroutine\f1 or a
+\f2function\f1.
+As described below, callbacks
+allow you to affect the
+shape of the display tree into which they are added.
+.H2 "Creation vs Execution Time"
+To realize how useful callback objects are, one must clearly understand
+the difference between object \f2creation time\f1 and object
+\f2execution time\f1. Typically, an application program is made of some
+standard C or \*(Fo code in addition to a number of \*(Dd function calls.
+When the application program is executed, every \f2Do- <DO->\f1 \*(Dd
+call \f2creates\f1 a \*(Dd object.
+To explicitly be stored in the database,
+an object must be added to the definition or display group of a view
+(through the \*(Dd \f2Dg- <DG->\f1 group functions).
+When an update function is called by the application program
+on a view, frame or device, a traversal of the database is triggered.
+At this time, every stored object is \f2executed\f1.
+As a result, primitive objects are
+rendered as they were previously stored, according to the value of
+their attributes.
+.lp
+A callback object is created when a \f2DoCallback <DOCB>\f1 function
+call is reached in the application program.
+Like other objects, it must be added to the database through one of the group
+functions.
+At traversal time, the execution
+of the callback object causes the specified user-written function to be called.
+Note that with rendering methods involving multiple traversals of the
+\*(Dd database, a single update may cause the callback objects of the
+database to be executed multiple times.
+.H2 "Immediate Execution Mode"
+User-written functions specified in callbacks
+may do any type of computation,
+and may also execute objects in \f2immediate mode\f1. With immediate
+mode execution, objects are both created and executed at traversal
+time, without previously being stored.
+If the parameters of the object creation routines
+are variables, their current
+values are used for execution. As a result,
+attributes such as the position or color of an object may vary
+between traversals, or
+a different set of primitives may be displayed
+depending on the current value of some variable of
+the application program.
+.lp
+An object is executed in immediate mode using
+\f2DsExecuteObj <DSEO>\f1.
+All objects created by callback functions
+must be executed in immediate mode. \f2DsExecuteObj <DSEO>\f1
+calls placed outside a callback function will have no effect.
+The current method, i.e. whatever method was executed on the callback function,
+is executed on any objects executed by the callback function.
+For example, if the rendering method were executing on
+the callback function, the rendering method will be executed on
+the objects executed by the callback function.
+.lp
+With immediate mode,
+the memory required
+to create and execute an object is
+deallocated immediately after that object's execution.
+This execution mode may therefore be used
+when the memory available to store the \*(Dd database is limited.
+However, since
+object creation is time-consuming, immediate mode is slower than
+executing a stored database. An alternative is to store frequently
+used parts of the \*(Dd database and create other parts on-the-fly
+using callbacks.
+.H2 "Other Functions Affecting Execution"
+Callback functions can call two other functions that affect
+execution of the \*(Dd database: \f2DsExecutionAbort <DSEA>\f1
+and \f2DsExecutionReturn <DSER>\f1. \f2DsExecutionAbort <DSEA>\f1 terminates
+execution of the database. \f2DsExecutionReturn <DSER>\f1 effectively
+\f2prunes\f1 the display tree. This function causes 
+the rest of the objects in the group where the callback object was added
+to be ignored. Execution of the database continues below that
+group in the display tree. \f2DsExecutionReturn <DSER>\f1 is
+sometimes used by pick callbacks to speed up picking.
+.H2 "Example"
+The following code fragment shows how \f2DoCallback <DOCB>\f1,
+\f2DsExecuteObj <DSEO>\f1 and \f2DsExecutionReturn <DSER>\f1 can
+be used to produce a short animated sequence.
+In this example, a yellow ball is initially positioned at one end of a table.
+An acceleration is specified for the ball such that with every time step,
+the ball moves along the table with increasing speed.
+The user-defined callback function \f2update_ball <UPDBAL>\f1
+is used to create a new \f2DoTranslate <DOXLT>\f1 object on-the-fly every time
+the device is updated with \f2DdUpdate <DDU>\f1.
+This causes 
+the position of the ball to vary in every image of the sequence.
+If the ball has reached
+the end of the table, \f2DsExecutionReturn <DSER>\f1 halts
+execution of the current group and
+therefore only the table is drawn.
+When the speed of the ball reaches a certain threshold, it
+becomes red.
+.IX callback function example
+.(m
+C code:
+
+.\"#	ident "@(#)ch11.ex01	1.1" 9/11/90
+.\"
+#define TABLE_LENGTH       50.0
+#define THRESHOLD_SPEED    3.0
+
+accelerating_ball()
+{
+    DtObject objgroup;
+    void update_ball();
+    static int i;
+    static DtReal blue[3] = {0.0, 0.0, 1.0};
+    static DtReal yellow[3] = {1.0, 1.0, 0.0};
+
+    objgroup = DoGroup(DcTrue);
+	DgAddObj(DoRepType(DcSurface));
+	
+
+
+
+        /* add table */
+	DgAddObj(DoDiffuseColor(DcRGB, blue));
+	DgAddObj(DoPushMatrix());
+	    /* move table below ball */
+	    DgAddObj(DoTranslate(0.0, -2.0, -1.0));
+	    DgAddObj(DoScale(TABLE_LENGTH, 1.0, 2.0));
+	    DgAddObj(DoPrimSurf(DcBox));
+	DgAddObj(DoPopMatrix());
+	/* position and add ball */
+	DgAddObj(DoDiffuseColor(DcRGB, yellow));
+	DgAddObj(DoCallback(update_ball, DcNullObject));
+	DgAddObj(DoPrimSurf(DcSphere));
+    DgClose();
+    .
+    .
+    .
+    /* display sequence of frames */
+    for (i=0; i<150; i++)
+	    DdUpdate(device);
+}
+
+update_ball(data)
+DtPtr data;
+{
+    static DtReal time=0.0;
+    static DtReal timestep=0.01;
+    static DtReal position=0.0;
+    static DtReal speed=0.0;
+    static DtReal acceleration=0.2;
+    static DtReal red[3]  = {1.0, 0.0, 0.0};
+
+    /* compute current ball's speed and position */
+    speed = speed + acceleration * time;
+    position = speed * time + position;
+
+    /* translate ball to new position */
+    DsExecuteObj(DoTranslate(position, 0.0, 0.0));
+
+    /* if ball has reached the end of the table, 
+       do not draw it */
+    if (position > TABLE_LENGTH)
+        DsExecutionReturn();
+
+    /* ball turns red if its speed has reached threshold */
+    if (speed > THRESHOLD_SPEED)
+        DsExecuteObj(DoDiffuseColor(DcRGB, red));
+
+    time += timestep;
+}
+
+
+
+
+\*(Fo code:
+
+      SUBROUTINE ACCBAL()
+C
+      INTEGER*4 OBJGR, I
+      REAL*8 TABLGT, MAXSPD
+      REAL*8 BLUE(3), YELLOW(3)
+      DATA TABLGT /50.0/
+      DATA MAXSPD /3.0D0 /
+      DATA BLUE   /0.0D0, 0.0D0, 1.0D0 /
+      DATA YELLOW /1.0D0, 1.0D0, 0.0D0 /
+      EXTERNAL UPDBAL
+      COMMON /BALCOM/ TABLGT, MAXSPD
+C
+      INCLUDE '/usr/include/fortran/DORE'
+C
+      OBJGR = DOG(DCTRUE)
+	  CALL DGAO (DOREPT (DCSURF))
+      ! add table
+	  CALL DGAO (DODIFC(DCRGB, BLUE))
+	  CALL DGAO (DOPUMX ())
+      ! move table below ball 
+	      CALL DGAO (DOXLT(0.0D0, -2.0D0, -1.0D0))
+	      CALL DGAO (DOSC(TABLGT, 1.0D0, 2.0D0))
+	      CALL DGAO (DOPMS (DCBOX))	
+	      CALL DGAO (DOPPMX ())
+      ! position and add ball
+	   CALL DGAO (DODIFC(DCRGB, YELLOW))
+	   CALL DGAO (DOCB (UPDBAL, DCNULL))
+	   CALL  DGAO (DOPMS (DCSPHR))
+	CALL DGCS ()
+	.
+	.
+        .
+      ! display sequence of frames 
+      DO 10 I=1, 150, 1
+	  CALL DDU (DEVICE)
+   10 CONTINUE
+      RETURN
+      END
+ 
+      SUBROUTINE UPDBAL(BDATA)
+      INCLUDE '/usr/include/fortran/DORE'
+C
+      INTEGER*4 BDATA
+      REAL*8 TIME, TIMSTP, POS, SPEED, ACCEL, RED(3)
+      REAL*8 TABLGT, MAXSPD
+      DATA TIME   /0.0D0/ 
+      DATA TIMSTP /0.01D0/
+      DATA POS    /0.0D0/
+      DATA SPEED  /0.0D0/
+      DATA ACCEL  /0.2D0/
+      DATA RED    /1.0D0, 0.0D0, 0.0D0 /
+      SAVE POS, SPEED, TIME  
+      COMMON /BALCOM/ TABLGT, MAXSPD
+C
+      ! compute current ball's speed and position 
+      SPEED = SPEED + ACCEL * TIME
+      POS = SPEED * TIME + POS
+C
+      ! translate ball to new position
+      CALL DSEO(DOXLT(POS, 0.0D0, 0.0D0)) 
+C
+      ! if ball has reached the end of the table, 
+      ! do not draw it
+      IF (POS.GT.TABLGT) CALL DSER()
+C  
+      ! ball turns red if its speed has reached threshold
+      IF (SPEED.GT.MAXSPD) CALL DSEO(DODIFC(DCRGB, RED))
+C
+      TIME = TIME + TIMSTP
+      RETURN
+      END
+.)m
+For our example,
+no user data was passed to the callback function.
+When the user function needs some data to be passed,
+\f2DoDataVal <DODV>\f1 and \f2DoDataPtr <DODP>\f1 must be used
+to convert the data to object format. If no data is needed,
+\f2DcNullObject <DCNULL>\f1 is passed to the callback function.
+.lp
+The important thing to realize from this example is that the
+value of the translate attribute object could not have been modified
+from one image to the next without the use of a callback.
+It should be clear to the reader that, in the program above, 
+the following C code line:
+.sp -.25v
+.(m
+   DgAddObj(DoCallback(update_ball, DcNullObject));
+.)m
+.rs
+.sp -.25v
+could \f2not\f1 have been replaced by the following set of lines
+in order to provide the same variation of the position of the ball: 
+.sp -.25v
+.(m
+   speed = speed + acceleration * time;
+   position = speed * time + position;
+   DgAddObj(DoTranslate(position, 0.0, 0.0));
+.)m
+.rs
+.sp -.25v
+This modified program would cause
+\f2position\f1 to be computed once and 
+the \f2DoTranslate\f1 object to be stored with that value of \f2position\f1
+at object creation time; subsequently, \f2DoTranslate\f1 would execute
+with this same value every time a traversal occurs. 
+.rs
+.H1 "Executability Set"
+\f2DoExecSet <DOES>\f1 modifies the executability set attribute.
+This attribute is actually a set consisting of all classes 
+(object types) in \*(Dd that are currently eligible to be executed.
+By default, the executability set consists of all defined \*(Dd
+classes.
+There are as many classes as there are \*(Dd functions
+starting with the prefix \f2Do <DO>\f1.
+.lp
+It is useful to control the executability set when you want to
+temporarily disable the use of a particular class,
+but do not want to remove all instances of it in the database.
+For example, you have a scene that uses many texture maps, and the
+renderer you are using is just too slow for interactive manipulation
+when it displays the texture maps.
+You could add a toggle in your program that uses the executability
+set to turn on and off all the texture maps.
+The code fragment below uses a callback and a global value to change
+the executability set.
+The function \f2DsInqClassId <DSQCI>\fP returns the
+class given the class name.
+The class name is always the name of the C routine used to create the
+object. (See Chapter 12 for more information.)
+.(m
+C Code:
+.sp
+toggle_texturemaps(data)
+DtPtr data;
+{
+    DtInt list[1];
+    extern DtFlag use_texturemaps;
+
+    list[0] = DsInqClassId("DoTextureMapDiffuseColor");
+
+    if (!use_texturemaps) {
+        DsExecuteObj(DoExecSet(1, list, DcSetDelete));
+    }
+}
+.sp
+\*(Fo Code:
+.sp
+      SUBROUTINE TTXTMP (DATA)
+
+      INTEGER*4 DATA
+      INCLUDE '/usr/include/fortran/DORE'
+
+      INTEGER*4 LIST(1)
+      INTEGER*4 TXTMAP
+      COMMON /TXTMAP/ TXTMAP
+
+      LIST(1) = DSQCI('DoTextureMapDiffuseColor', 24)
+
+      IF (.NOT. TXTMAP) THEN
+          CALL DSEO(DOES(1, LIST, DCSDEL))
+      ENDIF
+
+      RETURN
+      END
+.)m
+The subroutine \f2toggle_texturemaps <TTXTMP>\fP could be used in a
+callback object and included in the display group of the view.
+Then by changing the value of \f2use_texturemaps <TXTMAP>\fP the
+executability of texture maps would be turned on and off.
+.H2 "Switch Attributes vs. the Executability Set"
+The difference between switch attributes and the executability
+set is an important one.  When a switch attribute is turned off,
+its related attribute still pushes and pops its values at group
+boundaries, but subsequent primitive objects do not \f2use\f1
+this attribute.
+.lp
+The \f2DoExecSet <DOES>\f1 function, on the other hand, actually
+stops the execution of any object whose type is not included in its
+set.  Subsequent primitive objects still have all attributes and
+\f2use\f1 all attributes.  But objects whose type is omitted from
+the executability set \f2do not execute\f1.  If, for instance,
+\f2DoRepType <DOREPT>\f1 is omitted from the executability set, the
+current representation type attribute is frozen at its state when
+\f2DoRepType <DOREPT>\f1 was deleted from the executability set.  If you
+delete the patch type from the executability set, patches will
+not execute and thus will not render.  Similarly, if
+\f2DoInvisSwitch <DOINVS>\f1 is turned off, then omitted from the
+executability set, all primitive objects below this point in the
+display tree are visible, regardless of subsequent
+\f2DoInvisSwitch <DOINVS>\f1 attribute objects.
+.H1 "Name Sets and Filters"
+Name sets and filters provide high-level control over the
+invisibility and pickability switches.  If you use name sets and
+filters, then do not also use the low-level switch attribute
+objects \f2DoInvisSwitch <DOINVS>\f1 and \f2DoPickSwitch
+<DOPS>\f1.  When
+\f2invisibility\f1 is enabled, primitive objects are not
+displayed.  When \f2pickability\f1 is enabled, displayed
+primitive objects are eligible to be picked (see Chapter 10,
+\f2Methods\f1).
+.lp
+Invisible objects are not pickable.  Thus if an object has
+invisibility enabled, it will not be pickable, regardless of the
+state of the \%pickability attribute.
+.H2 "Name Sets"
+A \f2name set\f1 is a list of integers where each integer value has 
+been assigned a meaning by the application.
+It is possible to have up to 256 members in the current name set.
+The current name set for a particular point in a scene hierarchy
+enables you classify the following subtree.
+For example, given the member assignments in \*(TT, the name set (3, 11)
+would mean a brass coupling, while the name set (2, 10) would mean a
+copper pipe.
+.(T "Example Name Set Member Assignment
+.TS C
+tab(@);
+cbp9 | cbp9
+lp9 | lp9.
+Value@Meaning
+_
+1@stainless steel
+2@copper
+3@brass
+10@pipe
+11@coupling
+12@sheet
+.TE
+.)T
+It may also be useful to assign members to
+indicate certain parts of the database\(emparts belonging to the
+wheel group, parts of the axle group, the door group, the window
+group, and so on.
+.lp
+The function \f2DoNameSet <DONS>\f1 creates an object for
+modifying current name set. Name set attributes, in conjunction with
+filter attributes, provide a high-level control over the
+invisibility and pickability.  
+.H2 "Filters"
+There are four filters in \*(Dd:
+.(l I
+Invisibility exclusion and Invisibility inclusion
+Pickability exclusion and Pickability inclusion
+.)l
+The filter attribute object, created with \f2DoFilter <DOFL>\f1, is
+intended to be used at the top of the database tree, so that it
+affects everything that follows it, but you can change the
+attribute lower down in the tree if you wish.
+.rs
+.H2 "Example:  Invisibility Filter"
+.rs
+.sp -.25v
+This example uses the invisibility filter, but the principles
+apply to the pickability filter as well.  The combination of the
+two invisibility filters (\f2inclusion \f1and\f2 exclusion\f1)
+and the current name set indicates whether or not invisibility is
+enabled.
+.sp -.25v
+.lp
+Invisibility is enabled if
+.sp -.35v
+.np
+At least one member in the current name set is contained in the
+\f2invisibility inclusion\f1 filter \f3and\f1
+.sp -.35v
+.np
+\f2No\f1 members in the current name set are contained in the
+\f2invisibility exclusion\f1 filter
+.sp -.25v
+.lp
+In the following example, the invisibility inclusion filter (at
+the bottom of the code) contains the hardware, sheets, and
+equipment members.  The invisibility exclusion filter is empty
+(the default).  The result is that the hardware, sheets, and
+equipment groups are invisible.  Since the hardware group is invisible,
+objects below it in the tree inherit the invisibility (the
+cables, pulleys, and cleats).  The elements of the sheets group
+(long and short sheets) and the equipment group (anchor and life
+jackets) are also invisible.  The visible parts of
+the database are the hull and the sails.  \*(FT shows the display
+tree for the sailboat objects.  (For the sake of brevity, the
+example assumes that the main_sail, jib, long_sheets,
+short_sheets, cables, pulleys, cleats, anchor, life_jackets,
+deck, keel, and rudder objects have already been created.)
+.(F 
+.\"./PS/11.1ps" 2.6i 1
+.sp 2.6i
+.)F "Sailboat Display Tree"
+.rs
+.sp -1v
+.(m
+C code:
+
+.\"#	ident "@(#)ch11.ex02	1.2" 5/6/91
+.\"
+#define SAIL        0
+#define SHEETS      1
+#define HARDWARE    2
+#define RIGGING     3
+#define EQUIPMENT   4
+#define HULL        5
+#define SAILBOAT    6
+
+DtObject equipment, hardware, hull, inv_group, rigging,
+         sailboat, sheets, sails;
+DtInt temp[7];
+
+temp[0] = SAILS;
+sails = DoGroup(DcTrue);
+     DgAddObj(DoNameSet(1, temp, DcSetAdd));
+     DgAddObj(main_sail);
+     DgAddObj(jib);
+DgClose();
+
+temp[0] = SHEETS;
+sheets = DoGroup(DcTrue);
+     DgAddObj(DoNameSet(1, temp, DcSetAdd));
+     DgAddObj(long_sheets);
+     DgAddObj(short_sheets);
+DgClose();
+
+temp[0] = HARDWARE;
+hardware = DoGroup(DcTrue);
+     DgAddObj(DoNameSet(1, temp, DcSetAdd));
+     DgAddObj(cables);
+     DgAddObj(pulleys);
+     DgAddObj(cleats);
+DgClose():
+
+temp[0] = RIGGING;
+rigging = DoGroup(DcTrue);
+     DgAddObj(DoNameSet(1, temp, DcSetAdd));
+     DgAddObj(hardware);
+     DgAddObj(sheets);
+     DgAddObj(sails);
+DgClose();
+
+temp[0] = EQUIPMENT;
+equipment = DoGroup(DcTrue);
+     DgAddObj(DoNameSet(1, temp, DcSetAdd));
+     DgAddObj(anchor);
+     DgAddObj(life_jackets);
+DgClose();
+
+temp[0] = HULL;
+hull = DoGroup(DcTrue);
+     DgAddObj(DoNameSet(1, temp, DcSetAdd));
+     DgAddObj(deck);
+     DgAddObj(keel);
+     DgAddObj(rudder);
+DgClose();
+
+temp[0] = SAILBOAT;
+sailboat = DoGroup(DcTrue);
+     DgAddObj(DoNameSet(1, temp, DcSetAdd));
+     DgAddObj(hull);
+     DgAddObj(equipment);
+     DgAddObj(rigging);
+DgClose();
+
+temp[0] = HARDWARE;
+temp[1] = SHEETS;
+temp[2] = EQUIPMENT;
+
+inv_group = DoGroup(DcTrue);
+     DoFilter(DcInvisibilityInclusion, 3, temp, DcSetAdd);
+     DgAddObj(sailboat);
+DgClose();
+
+
+\*(Fo code:
+
+.\"#	ident "@(#)ch11.ex02.f	1.2" 5/15/91
+.\"
+      PARAMETER (ISAILS=0, ISHEETS=1, IHARDW=2, 
+     1		IRIG=3, IEQUIP=4 IHULL=5, ISLBT=6)
+      INTEGER*4 SAILS, SHEETS, HARDW, 
+     1		RIG, EQUIP, HULL, SLBT
+      INTEGER*4 TEMP(0:6)
+C
+      TEMP(1) = ISAILS
+      SAILS = DOG(DCTRUE)
+         CALL DGAO(DONS(1, TEMP, DCSADD))
+         CALL DGAO(MAINS)
+         CALL DGAO(JIB)
+      CALL DGCS()
+C
+      TEMP(1) = ISHEETS
+      SHEETS = DOG(DCTRUE)
+         CALL DGAO(DONS(1, TEMP, DCSADD))
+         CALL DGAO(LONGS)
+         CALL DGAO(SHORTS)
+      CALL DGCS()
+C
+
+
+      TEMP(1) = IHARDW
+      HARDW = DOG(DCTRUE)
+         CALL DGAO(DONS(1, TEMP, DCSADD))
+         CALL DGAO(CABLES)
+         CALL DGAO(PULLEYS)
+         CALL DGAO(CLEATS)
+      CALL DGCS()
+C
+      TEMP(1) = IRIG
+      RIG = DOG(DCTRUE)
+         CALL DGAO(DONS(1, TEMP, DCSADD))
+         CALL DGAO(HARDW)
+         CALL DGAO(SHEETS)
+         CALL DGAO(SAILS)
+      CALL DGCS() 
+C
+      TEMP(1) = IEQUIP
+      EQUIP = DOG(DCTRUE)
+         CALL DGAO(DONS(1, TEMP, DCSADD))
+         CALL DGAO(ANCHOR)
+         CALL DGAO(LIFEJAC)
+      CALL DGCS()
+C
+      TEMP(1) = IHULL
+      HULL = DOG(DCTRUE)
+         CALL DGAO(DONS(1, TEMP, DCSADD))
+         CALL DGAO(DECK)
+         CALL DGAO(KEEL)
+         CALL DGAO(RUDDER)
+      CALL DGCS()
+C
+      TEMP(1) = ISLBT
+      SLBT = DOG(DCTRUE)
+         CALL DGAO(DONS(1, TEMP, DCSADD))
+         CALL DGAO(HULL)
+         CALL DGAO(EQUIP)
+         CALL DGAO(RIG)
+      CALL DGCS()
+C
+      TEMP(1) = IHARDW
+      TEMP(2) = ISHEETS
+      TEMP(3) = IEQUIP
+C
+      INVGRP = DOG(DCTRUE)
+         CALL DOFL(DCINVI, 3, TEMP, DCSADD))
+         CALL DGAO(SLBT)
+      CALL DGCS()
+.)m
+.rs
+.sp -1.5v
+.H1 "Bounding Volumes as Conditionals"
+A \f2bounding volume\f1 is an nondisplayable object that specifies a
+rectangular
+volume assumed to enclose all objects below that object in the
+display tree.
+The concept of bounding volume was introduced earlier in Chapter 10,
+\f2Methods\f1, since the computation of bounding volumes
+is a method. In this section, we discuss
+how bounding volumes can speed up rendering by
+conditionally modifying the set of objects to be rendered.
+.lp
+A bounding volume object, created with \f2DoBoundingVol
+<DOBV>\f1, specifies how big an arbitrary object is. If the bounding volume
+switch, specified by \f2DoBoundingVolSwitch <DOBVS>\f1, is on
+(the default), \*(Dd first calculates whether the volume is within the
+device viewport or not. 
+If it is not, then execution of that
+portion of the display tree stops.
+.lp
+If the bounding volume is within the device viewport but falls
+below the \f2minimum bounding volume extent\f1,
+a simpler alternate representation
+of the object will be substituted for the original.
+The alternate object should be created the same
+size as the original object, but with less detail.
+The minimum bounding volume extent for an object is 
+specified in device coordinates,
+using \f2DoMinBoundingVolExt <DOMBVE>\f1.
+For example,
+a detailed aircraft image might acceptably be rendered as a
+simple box when viewed from a great distance.
+.(m
+C code:
+
+.\"#	ident "@(#)ch11.ex03	1.1" 9/11/90
+.\"
+obj = DoGroup(DcTrue);
+     DgAddObj(DoBoundingVol(&vol, box_obj));   
+     DgAddObj(airplane_object);
+DgClose();
+
+
+\*(Fo code:
+
+.\"#	ident "@(#)ch11.ex03.f	1.1" 9/11/90
+.\"
+      OBJ=DOG(DCTRUE)
+         CALL DGAO(DOBV(VOL, BOX))
+         CALL DGAO(PLNOBJ)
+      DGCS()
+.)m
+This example uses the default minimum
+bounding extent (2 pixels).
+You can also nest levels of alternate objects that have
+increasing levels of simplicity, as shown in the following code
+fragment.  Here, if \f2complex_plane\fP is below the first minimum
+bounding extent (15.0), then the alternate object
+is the \f2plane2\fP group.  \f2simple_plane\fP, which has less detail than
+\f2complex_plane\fP, will be drawn if the object is greater than the
+next minimum bounding extent (5.0).  But if the
+object is smaller than this second minimum size, the alternate
+object for this second group, the box, will be drawn instead.
+.(m
+C code:
+
+.\"#	ident "@(#)ch11.ex04	1.1" 9/11/90
+.\"
+DtObject plane1, plane2, box, complex_plane, simple_plane;
+
+box = DoGroup(DcTrue);
+     DgAddObj(DoScale(0.5, 0.5, 0.25));
+     DgAddObj(DoPrimSurf(DcBox));
+DgClose();
+
+plane2 = DoGroup(DcTrue);
+     DgAddObj(DoMinBoundingVolExt(5.0));
+     DgAddObj(DoBoundingVol(&vol, box));
+     DgAddObj(simple_plane);
+DgClose();
+
+plane1 = DoGroup(DcTrue);
+     DgAddObj(DoMinBoundingVolExt(15.0));
+     DgAddObj(DoBoundingVol(&vol, plane2));
+     DgAddObj(complex_plane);
+DgClose();
+
+
+\*(Fo code:
+      
+.\"#	ident "@(#)ch11.ex04.f	1.1" 9/11/90
+.\"
+      INTEGER*4 PLANE1, PLANE2, BOX, CMPXPN, SIMPN
+C
+      BOX = DOG(DCTRUE)
+         CALL DGAO(DOSC(0.5D0, 0.5D0, 0.25D0))
+         CALL DGAO(DOPMS(DCBOX))
+      CALL DGCS()
+C
+      PLANE2 = DOG(DCTRUE)
+         CALL DGAO(DOMBVE(5.0D0))
+         CALL DGAO(DOBV(VOL, BOX))
+         CALL DGAO(SIMPN)
+      CALL DGCS()
+C
+      PLANE1 = DOG(DCTRUE)
+         CALL DGAO(DOMBVE(15.0D0))
+         CALL DGAO(DOBV(VOL, PLANE2))
+         CALL DGAO(COMPXPN)
+      CALL DGCS()
+.)m
+.H1 "Chapter Summary"
+Chapter 11 describes how certain conditionals can be used to
+affect traversal of the \*(Dd database.
+The \f2DoCallback <DOCB>\f1 function takes a pointer to a user-written
+function and  user data.
+If the callback is used as a conditional, the user function can call
+\f2DsExecuteObj <DSEO>\f1 with an object.
+Such objects are executed with the same method that was used to
+execute the callback function itself.
+Callback functions can also call two other functions that affect
+traversal of the \*(Dd database:  \f2DsExecutionAbort <DSEA>\f1 and
+\f2DsExecutionReturn <DSER>\f1.
+.lp
+The \f2executability set\f1 includes all classes in \*(Dd
+that are eligible to be executed.
+If classes are omitted from the executability set, their objects
+do not execute; they are \f2frozen\f1 at their state when that class
+was eliminated from the executability set.
+.lp
+\f2Name sets\f1 and \f2filters\f1 provide high-level control over
+the invisibility and pickability switches.
+Name sets are used to identify portions of the scene hierarchy.
+Filters are generally used at the top of the database tree.
+\*(Dd includes four filters:  invisibility exclusion, invisibility
+inclusion, pickability exclusion, and pickability inclusion.
+.lp
+\f2Bounding volume\f1 objects are used to speed up rendering
+traversal of complex scenes.
+They allow the dynamic substitution of a simpler version of an
+object when the image of the complex one falls below a minimum
+size.

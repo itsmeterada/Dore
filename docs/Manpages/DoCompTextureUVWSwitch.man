@@ -1,0 +1,74 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DoCompTextureUVWSwitch 3D "Dore"
+.SH NAME
+DoCompTextureUVWSwitch \- Create a primitive attribute object 
+for enabling or disabling generation of 
+\f2uvw\fP texture coordinates 
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+DtObject DoCompTextureUVWSwitch(switchvalue)
+DtSwitch switchvalue;
+.sp
+.in  -.5i
+FORTRAN:
+.in  +.5i
+INTEGER*4 DOCTWS(SWVAL)
+INTEGER*4 SWVAL
+.in  -.5i
+.fi 
+.IX "DoCompTextureUVWSwitch"
+.IX "DOCTWS"
+.SH DESCRIPTION
+.LP
+\f2DoCompTextureUVWSwitch\fP creates a primitive attribute object that
+enables or disables the generation of \f2uvw\fP texture coordinates for 
+primitives that do not have user-provided vertex information.  Such
+primitives include \f2DoPrimSurf\f1, \f2DoTorus\f1, and \f2DoSphereList\f1
+primitives.
+.LP
+For some renderers certain primitive objects, such as spheres, are 
+tessellated into triangles before they are drawn.
+If a sphere is to be 3D texture mapped, the element vertices approximating
+the sphere may need to include \f2uvw\fP texture coordinates.
+On the other hand, if the sphere will never be texture mapped there is no
+need to generate and store that information.
+.LP
+The \f2switchvalue\fP parameter is used to specify whether or not 
+subsequent primitives will generate \f2uvw\fP coordinates for 
+texture mapping when they decompose themselves into elements.
+Possible values for \f2switchvalue\fP are:
+.IP "\f2DcOff\fP <\f2DCOFF\fP>"
+the primitive object will not generate any \f2uvw\fP information.
+.IP "\f2DcOn\fP <\f2DCON\fP>"
+the primitive object will generate \f2uvw\fP coordinates, 
+when possible, using the parameterization method set by 
+\f2DoCompTextureUVWCallback <DOCTWC>\f1.
+.SH DEFAULTS
+The default for \f2DoCompTextureUVWSwitch\fP is \f2DcOff\fP.
+.SH "SEE ALSO"
+.na
+.nh
+DoCompTextureUVWCallback(3D),
+DoTextureMapBump(3D), DoTextureMapDiffuseColor(3D), 
+DoTextureMapTranspIntens(3D)
+.ad
+.hy
+\&

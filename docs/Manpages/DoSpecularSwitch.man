@@ -1,0 +1,72 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DoSpecularSwitch 3D  "Dore"
+.SH NAME
+DoSpecularSwitch \- Create a primitive attribute object for enabling or disabling specular highlights
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+DtObject DoSpecularSwitch(switchvalue)
+DtSwitch switchvalue;
+.sp
+.in -.5i
+FORTRAN:
+.in +.5i
+INTEGER*4 DOSPCS(SWVAL)
+INTEGER*4 SWVAL
+.in -.5i
+.fi
+.SH DESCRIPTION
+.IX DOSPCS
+.IX DoSpecularSwitch
+.I DoSpecularSwitch
+creates a primitive attribute object
+for enabling or disabling specular highlights.  
+.PP
+Specular reflection is the response of a surface to directed incident
+light where the reflected (specular) light is scattered primarily in
+the mirror direction.
+.PP
+The parameter \f2switchvalue\fP
+specifies whether the surfaces of subsequent
+primitive objects have a specular component.  Possible values are:
+.IP "\f2DcOff\fP <\f2DCOFF\fP>"
+The object will render itself without specular 
+highlights regardless of the
+settings for specular color, specular intensity, and specular factor.
+.IP "\f2DcOn\fP <\f2DCON\fP>"
+The object will render itself using the specular attributes whenever possible.
+.PP
+The specular switch is only one of four qualities 
+that give a surface shiny highlights.
+The other qualities are the color of the highlight
+(set with \f2DoSpecularColor\fP),
+the intensity of the color (set with
+\f2DoSpecularIntens\fP), and the precision
+of the highlight (set with \f2DoSpecularFactor\fP).
+.SH DEFAULTS
+The default for \f2DoSpecularSwitch\fP is \f2DcOff\fP <\f2DCOFF\fP>.
+.SH "SEE ALSO"
+.na
+.nh
+DoSpecularColor(3D),
+DoSpecularIntens(3D),
+DoSpecularFactor(3D)
+.ad
+.hy

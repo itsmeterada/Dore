@@ -1,0 +1,9 @@
+#include <Dore.tmpl>
+
+    SRCS = tpl_dcm.c tpl_inq.c tpl_output.c tpl_set.c
+    OBJS = tpl_dcm.o tpl_inq.o tpl_output.o tpl_set.o
+
+LibraryObjectRule()
+SubdirLibraryRule($(OBJS))
+
+DependTarget()

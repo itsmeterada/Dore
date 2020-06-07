@@ -1,0 +1,123 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DsInqValuatorGroup 3D  "Dore"
+.SH NAME
+DsInqValuatorGroup \- Return the handle for an input slot's valuator group
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+DtObject DsInqValuatorGroup(slot)
+DtObject slot;
+.sp
+.in -.5i
+FORTRAN:
+.in +.5i
+INTEGER*4 DSQVG(SLOT)
+INTEGER*4 SLOT
+.in -.5i
+.fi
+.SH DESCRIPTION
+.IX DSQVG
+.IX DsInqValuatorGroup
+.I DsInqValuatorGroup
+returns the handle for an input slot's valuator group.
+A valuator group is part of every input slot.  The valuator group
+contains the object handles of all the valuator callback
+objects associated with the input slot.
+.PP
+When a value arrives at an input slot,
+all callback objects in its valuator group are triggered in order.
+Users are free to edit that group, with the group editing functions, to
+arrange their valuator callbacks in the order that they want them triggered.
+.PP
+When an input slot is triggered, all non-callback objects found in its
+valuator group are ignored and the callback functions that it refers
+to are called.
+Those functions must have the following C format:
+.nf
+
+	void UserValuatorFunction(data, slot, value)
+		DtPtr data;	/* if \f2data\fP is a pointer */
+		Dt32Bits data;	/* if \f2data\fP is a value */
+		DtObject slot;
+		DtReal   value;
+
+FORTRAN format:
+
+	SUBROUTINE VALUATORFCN(DATA, SLOT, VALUE)
+		INTEGER*4 DATA
+		INTEGER*4 SLOT
+		REAL*8 VALUE
+	
+.fi
+.PP
+The parameter \f2data\fP is the same data with which the
+valuator function was installed, the parameter \f2slot\fP is the slot
+at which the new value arrived, and the parameter \f2value\fP is the
+actual input value.
+.PP
+Valuators are usually used to achieve dynamic displays.
+There are two major ways to achieve dynamic displays.
+The most straightforward method is for the user valuator function to use the
+group editing routines to make lasting changes to the
+database.  
+If the desired result is to redefine a primitive, the valuator
+function only needs to create the new primitive and overwrite the old
+one using \f2DgReplaceObj\fP <\f2DGRO\fP> or \f2DgReplaceObjInGroup\fP
+<\f2DRGOG\fP>.
+The same technique can be used to modify an attribute.
+This can also be accomplished by creating an inline group that contains only
+the element to be affected.
+This inline group would be instanced at appropriate
+places in the database allowing several subtrees to inherit that attribute.
+.PP
+Another way to achieve dynamics is for the user valuator functions to
+modify some private data that will also be made known to user-supplied callback
+functions installed as group elements.
+When executed, these callback group elements can then perform
+\f2DsExecuteObj\fP <\f2DSEO\fP> calls on "DoXXXX" 
+functions with arguments that depend on the private
+data being maintained by user valuator functions.  Hence,
+immediate execution of those functions is achieved without storing
+them in the data base.
+.PP
+After an input value has arrived at an input slot
+and all valuators dependent upon it have been triggered,
+the views containing the affected objects need to
+be updated in order to efficiently achieve dynamics. 
+.PP
+A C example of creating a valuator is :
+.nf
+
+      DgAddObjToGroup(DsInqValuatorGroup(slot), 
+	callbackobj);
+.fi
+.SH ERRORS
+.I DsInqValuatorGroup
+will fail if the input slot handle is invalid.
+.TP 15
+[WARNING - invalid slot handle]
+.SH "SEE ALSO"
+.na
+.nh
+DgReplaceObj(3D), DgReplaceObjInGroup(3D), DoCallback(3D), DoInLineGroup(3D),
+DoInputSlot(3D), DsInputValue(3D),
+DsUpdateAllViews(3D), DsValuatorSwitch(3D)
+.ad
+.hy

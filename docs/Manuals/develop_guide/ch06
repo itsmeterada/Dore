@@ -1,0 +1,720 @@
+.\"#ident "%W%" %G%
+.\"
+.\" #
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  
+.\" # 
+.\" # KUBOTA GRAPHICS Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\" #
+.\"
+.sc
+.ds BT "\\*(Dd Developer's Guide
+.ds CT "Interfacing a Renderer
+.ds h1 6
+.so ../macros/local.me
+.PN 29
+.L1 I "NTERFACING  A"
+.L2 R ENDERER
+.CH SIX
+.rs
+.sp -1.5v
+This chapter explains how to interface a renderer to 
+the \*(Dd system.
+Access to \*(Dd source code is not necessary to do so.
+It is assumed that you already have a working renderer,
+or know how to implement one.
+The algorithms and concepts required to take a geometry
+description and generate an image are not discussed.
+.H1 "Steps to Interface a Renderer
+The major steps required to interface a rendering package to 
+the \*(Dd system are:
+.np 
+Determine the set of base primitive classes the renderer will use.
+.np
+Determine the set of attribute classes the renderer will use.
+.np
+Select a style for accessing the current values of attributes.
+.np
+Select a device output interface.
+.np
+Implement the main routine to install the renderer into the \*(Dd 
+system. This step includes creating new traversal methods, requesting
+additional data space for object classes if necessary,
+and informing \*(Dd of the new renderer.
+.np
+Implement any routines required to maintain additional object data.
+.np
+Implement method routines for classes used by the renderer.
+.np
+Implement the routines 
+to be called by the \*(Dd system to access
+the renderer.
+.lp
+The following sections describe each of these steps. 
+The next chapter takes an example renderer through these 
+steps, showing in detail the code necessary for each one.
+.H1 "Step 1: Determine the Set of Base Primitives 
+Each primitive class represents a type of geometry.
+Some classes represent low level forms of geometry like lines 
+or triangles, while
+others represent higher level forms like NURBS surfaces 
+or analytical surface primitives such as spheres.
+When interfacing a renderer to \*(Dd you need to
+determine which  \*(Dd primitives the renderer can draw directly,
+without using alternate representations.
+These primitives are called the \f2base primitives\f1 of
+the renderer. 
+Any other primitive will have
+to be decomposed into base primitives in order to be rendered.
+.lp
+There are ten primitive classes that are considered as standard
+base primitives in \*(Dd.
+They are:
+.(l
+point list (\f2DoPointList\fP)
+.sp .25v
+variable point list (\f2DoVarPointList\fP)
+.sp .25v
+line list (\f2DoLineList\fP)
+.sp .25v
+variable line list (\f2DoVarLineList\fP)
+.sp .25v
+connected line list (\f2DoPolyline\fP)
+.sp .25v
+triangle list (\f2DoTriangleList\fP)
+.sp .25v
+triangle mesh (\f2DoTriangleMesh\fP)
+.sp .25v
+variable triangle mesh (\f2DoVarTriangleMesh\fP)
+.sp .25v
+triangle strip (\f2DoTriangleStrip\fP)
+.sp .25v
+variable triangle strip (\f2DoVarTriangleStrip\fP)
+.)l
+.lp
+These primitive classes have null method routines for
+both the standard render method ("StdRenderDisplay")
+and the standard method for updating alternate objects 
+("UpdStdAlternateObj").
+It is assumed that the renderer will implement its own method
+routines for these primitives.
+.lp
+For all other primitive classes such as \f2DoPrimSurf\f1 or
+\f2DoNURBSurf\f1, \*(Dd provides method routines 
+for the standard methods "StdRenderDisplay"
+and "UpdStdAlternateObj".
+For these primitives the standard render method first 
+executes the "UpdStdAlternateObj" method to generate or update
+the approximating alternate object.  
+It then executes the current method on the resulting alternate
+object.
+.lp
+Many renderers can directly draw other primitives in addition
+to the ten standard base primitives.
+For example, renderers that use ray-tracing methods can usually
+draw spheres, cylinders and cones from the analytic description.
+These renders
+do not need the tessellated alternate representation.
+.lp
+If your renderer cannot directly draw all ten
+standard base primitives, it can still be used.
+First, determine the set of base primitives for
+your renderer.
+Then, refer to \f2Step 7: Implement Method Routines\fP for
+an explanation
+of adding or deleting primitives from the standard base set.
+.H1 "Step 2: Determine the Set of Attributes
+Each attribute class represents an attribute of a studio or primitive
+object.
+Attributes are bound to the objects they affect during traversal
+of the studio and display groups.
+.lp
+While there are many attributes in the \*(Dd system, some of them may
+not be relevant to your renderer. 
+You must determine which of the attributes 
+your renderer can and will use, and which ones will be ignored.
+See the
+\f2\*(Dd Reference Manual\fP for a complete list of \*(Dd attributes.
+.H1 "Step 3: Select a Style for Attribute Value Access
+Each attribute class has associated with it a global attribute
+class and one instance of that class.
+As discussed in Chapter 3, \f2Classes and Methods\fP,
+global attribute stacks are used to keep track of current
+attribute values.
+These global attribute stacks contain only the default values
+for the attributes outside of a traversal;
+during a traversal the attribute values are saved and
+restored using these stacks.
+It is during a traversal that
+the renderer needs the current values
+of attributes to apply to the primitive objects and the
+studio objects;
+for example, the color of an object and the light type.
+There are two ways that a renderer can access the current value 
+of an attribute:
+.BU hs
+Query for current value as needed with function calls that access the
+global attribute stack.
+.BU hs
+Receive notification of value changes through method execution.
+.lp
+Both access styles are described below.
+.H3 "Query Value
+\*(Dd provides a standard method named "InqGlobalValue"
+to inquire the current value of attributes.
+Every global attribute has a method routine for 
+"InqGlobalValue"
+which returns the current value from the top of the stack.
+The function \f2DDclass_InqMethod\fP returns a pointer to the
+method routine for a given method and a given class.
+For example, to obtain the pointer to the "InqGlobalValue" method routine
+for the representation type attribute, use:
+.(m
+DtPFI routine;
+routine = DDclass_InqMethod(DsInqClassId("AttRepType"),
+                           DsInqMethodId("InqGlobalValue"));
+.)m
+The string "AttRepType" is the name of the representation 
+type global attribute class.
+To call the returned method routine you must know the calling
+sequence for the inquire method for the representation type.
+Remember that there are different calling conventions for
+the various attributes.
+By referring to Appendix B, \f2Global Attribute Access\fP,
+you can see that to find the value of the representation
+type you use:
+.(m
+DtRepType reptype;
+(*routine) (&reptype);
+.)m
+.H3 "Notification of Value 
+Alternatively, you can install method routines
+so that the global attribute classes notify the renderer of
+changed attribute values.
+These method routines will be called as attribute values 
+change during traversal, including when a group is exited.
+The routines are responsible for notifying the renderer
+that the value of an attribute has changed. This involves
+updating data fields to which the renderer has access.
+This data space can be local to the renderer, or be part of
+some additional data space allocated for the view or device objects.
+This way, the renderer maintains a list of the current values of all
+attributes that it uses.
+The renderer simply looks at the appropriate data field 
+when it needs the value of an attribute.
+.H3 "Which Style to Select?"
+Renderers tend to use queries when the attributes are used less
+frequently and in only one central location in the code.
+For instance, the studio attributes associated with a camera or light
+only need to be queried when a camera or light object is executed.
+Attribute notification is typically used when the attribute values
+will be used by many different object classes.
+The primitive attributes fall into this category.
+Mostly the same set of primitive attributes are bound to each
+primitive class, so it 
+is easier to have these values collected in a central data
+structure.
+This also reduces unnecessary calls to query attributes that have not
+changed.
+In Chapter 7, \f2Sample Renderer\f1,
+code examples illustrate how both of these techniques are used.
+.H1 "Step 4: Select a Device Output Interface
+The device drivers serve as links between the renderers and 
+actual output devices.
+A renderer accesses an output device through an output
+module of the corresponding device driver.
+\*(Dd defines output module interfaces to provide access to
+the output modules of device drivers.
+There are currently two types of device driver output module 
+interfaces defined. 
+The first one, the production renderer output module (PROM) 
+interface, 
+is a very small interface that permits a renderer to write a 
+rectangular region of RGB pixel data.
+This is suitable for a renderer that performs all the computations 
+to determine
+the color of each pixel and therefore only needs the
+device to display the pixels.
+The second interface, the dynamic renderer output module
+(DROM) interface, 
+is a more complex interface that provides access to 3D graphics display
+hardware.
+This interface would be chosen by a renderer that does
+a relatively small amount of preliminary setup work and then 
+relies on the underlying device to perform a significant
+part of the graphics calculations.
+.lp
+The two output module interfaces are used by, and were named after,
+the \*(Dd standard production and dynamic renderers.
+However, they are intended to be used by other renderers
+as well.
+Most add-on renderers perform in software all calculations down 
+to the pixel level and use the PROM interface. 
+If needed, new output module interfaces can be written,
+although in most cases that should not be necessary.
+See Section III, \f2Device Drivers\fP, for detailed
+descriptions of \*(Dd device modules 
+and interfaces.
+.H1 "Step 5: Implement the Renderer Installation Routine
+Steps one through four involved determining how your renderer
+fits into the \*(Dd way of doing things.
+Now you are ready to start writing code.
+.lp
+Your renderer must provide a routine that performs several
+tasks necessary to install the renderer and the methods it
+uses into the \*(Dd system.
+You must provide the name and calling sequence of this routine
+to users of your renderer.
+.lp
+The renderer installation routine needs to:
+.BU hs
+Create the methods that will be used by the renderer for traversing
+the display and studio groups of a view.
+.BU hs
+Request that additional data space be installed in object classes, 
+if needed.
+.BU hs
+Inform the \*(Dd system of the new renderer.
+.lp
+Below is a description of each of these tasks.
+.H2 "Create New Traversal Methods
+.rs
+.sp -.25v
+A renderer uses at least two methods, one for traversing the studio
+group and the other for traversing the display group.
+Some renderers may also require the definition of other methods 
+such as ones for maintaining alternate objects.
+All these methods must be created.
+Recall that for each method, method routines must also be associated 
+with the object classes.
+.lp
+Each new method must be given a unique character string name, and
+will be assigned a numeric method identifier by the \*(Dd system.
+The renderer will use the new method identifiers to specify
+which method to use
+when it requests the \*(Dd system to traverse the studio group
+or the display group.
+.lp
+A new method can be created with the routine:
+.rs
+.sp -.25v
+.(m
+DtInt DDclass_AddMethod (DtPtr new_method_name)
+.)m
+.rs
+.sp -.25v
+which creates the method with the string name specified by 
+\f2new_method_name\fP and
+returns the method identifier assigned to it.
+Then, method routines must be associated with the classes of 
+interest for the new method, as described later in this section.
+.sp -.25v
+.lp
+Instead of creating a new method from scratch you can \f2derive\fP
+one from an existing method with:
+.rs
+.sp -.25v
+.(m
+DtInt DDclass_CopyMethod(DtInt method_id, 
+			 DtPtr new_method_name)
+.)m
+.rs
+.sp -.25v
+This routine creates the new method by
+copying all the method routines of the existing method \f2method_id\f1
+to the new method, and then returns the new method identifier.
+This is the easiest way of creating new rendering traversal routines
+for the studio and display groups.
+Use \f2DDclass_CopyMethod\fP to derive your new methods from the
+standard methods "StdRenderDisplay" and "StdRenderStudio".
+Then override selected method routines to fit the needs of your
+renderer.
+.sp -.25v
+.lp
+To associate a method routine with a class for a given method,
+use the function:
+.rs
+.sp -.25v
+.(m
+DDclass_SetMethod(DtInt class_id, 
+		  DtInt method_id, 
+		  DtPFI method_routine)
+.)m
+.rs
+.sp -.25v
+If a different routine was already associated with the class, the
+new routine replaces it.
+Note that you must \f2never\fP modify any of the method routines
+of the standard methods themselves.
+Remember that other renderers may be installed after yours, and they
+will assume that the standard methods are as described in the 
+\*(Dd documentation.
+.sp -.25v
+.lp
+In order for \f2DDclass_SetMethod\f1 to successfully
+insert a method routine for a class, the class itself must previously 
+have been initialized by the \*(Dd system. 
+Classes that are used by most, if not all \*(Dd applications, such 
+as the
+group, view, frame and device classes, are initialized at \*(Dd
+system initialization time. 
+Most other classes are initialized when they are first
+instanced, so that \*(Dd does not waste time or space on unused
+classes.
+This means that a class may not have been installed yet when 
+the renderer is installed, so the renderer must also
+provide a routine to install method routines for classes when
+they are initialized.
+\f2New Class Notification Routine\fP, later in Step 8, describes how
+to do this.
+You can use \f2DsInqClassId\f1 to find out whether a class has been 
+initialized yet or not. 
+.rs
+.sp -.5v
+.H2 "Allocate Additional Data Space
+.rs
+.sp -.25v
+\*(Dd provides means for renderers and other add-on packages to 
+add fields to the private data of an object class.
+For example, a method for maintaining an alternate object must
+be able to store the alternate representation object
+with the object it approximates.
+As suggested before,
+a renderer might also want to store the results of a studio
+traversal with the corresponding view object.
+.sp -.25v
+.lp
+The \*(Dd object data structure for all classes
+is defined in \f2dore.h\fP as:
+.rs
+.sp -.25v
+.(m
+typedef struct {
+   DtShort info;
+   DtShort ref_count;
+   DtPtr data;
+   DtPtr *additional_data;
+} DtObjectStructure;
+.)m
+The \f2data\f1 field of the object structure points to data
+specific to the object. For instance, for a \f2DoTriangleMesh\f1
+primitive object, \f2data\f1 will point to a structure containing all 
+the vertex data for the triangle mesh. 
+The \f2additional_data\f1 field of the structure is an array
+of pointers to additional arbitrary data required by a renderer or
+any of its methods.
+To store data with every object instance of a class,
+the renderer installation routine must request a slot in
+the additional data array for that class, by calling:
+.(m
+DtInt DDclass_AddObjectData(DtInt class_id, 
+			    DtPFI create_routine, 
+			    DtPFI print_routine, 
+			    DtPFI del_routine)
+.)m
+This function reserves a pointer in the \f2additional_data\f1 array
+and returns the index of that pointer in the array.
+Pointers to three routines must be provided as arguments
+to \f2DDclass_AddObjectData\fP.
+The routines will be called by \*(Dd to allocate space for the
+additional data, print the data, and deallocate the space.
+\f2Step 6: Implement Maintenance Routines for Additional Object Data\fP 
+describes these routines in more detail.
+.lp
+A class must have been
+initialized by the \*(Dd system before additional data can be added to it.
+\f2New Class Notification Routine\fP, later in Step 8, describes how
+to do this.
+You can use \f2DsInqClassId\f1 to find out whether a class has been 
+installed yet. 
+.H2 "Inform \\*(Dd of the New Renderer
+\*(Dd application programs select a renderer for a view by 
+setting the \f2rendering style\f1 with \f2DvSetRendStyle\fP.
+The rendering style for a renderer is actually the numeric
+renderer identifier associated with the renderer when it is installed.
+Rendering styles supplied by default with \*(Dd are defined in 
+\f2dore.h\fP.
+The renderer installation routine for your renderer should call the 
+following function to add it to the list of renderers available to an 
+application:
+.(m
+DtInt DDrender_AddRenderer(DtInt renderer_id, 
+			   DtPtr renderer_name, 
+			   DtPFI render_routine, 
+			   DtPFI del_renderer_routine,
+			   DtPFI new_class_routine, 
+			   DtPFI inq_wcstofcs_routine)
+.)m
+The parameter \f2renderer_id\fP indicates whether you want your renderer
+to be added to the current list of renderers or replace an existing 
+rendering style. 
+If another renderer was previously associated with
+\f2renderer_id\f1, that renderer will no longer be accessible from 
+the application.
+.lp
+Four routine pointers must be provided with \f2DDrender_AddRenderer\f1.
+The routines will be called by \*(Dd 
+to invoke the renderer on a view, 
+delete the renderer,
+perform the appropriate action when a class is initialized,
+and return the world-to-frustum transformation matrix.
+See \f2Step 8: Implement Renderer Access Routines\fP for more
+details on the implementation of each of these routines.
+.H1 "Step 6: Implement Maintenance Routines for Additional Object Data
+If the renderer installation routine adds data to particular object
+classes,
+routines need to be written to maintain these new data areas.
+Three routines are required: a
+create routine, a print routine, and a delete routine.
+Pointers to these routines are passed to \*(Dd when the additional
+data slot is requested with a call to
+\f2DDclass_AddObjectData\fP. 
+.lp
+The create routine should be of the form:
+.(m
+DtPtr create_routine(DtObject object)
+.)m
+It allocates space for the data, perhaps sets initial values, 
+and returns a pointer to the allocated data. 
+It will be called each time a new object instance of the class is created.
+.lp
+The print routine should be of the form:
+.(m
+void print_routine(DtObject object, DtPtr data)
+.)m
+.nh
+where \f2object\f1 is the object's handle and \f2data\f1 is a pointer
+to the additional data, as returned by \f2create_routine\f1.
+The print routine will be used 
+for printing the data when the object is requested to print itself as
+\f2DsPrintObj\fP is executed.
+.hy
+.lp
+Finally, the delete routine:
+.(m
+void del_routine(DtObject object, DtPtr data)
+.)m
+is for deallocating the space allocated by the create routine.
+It will be called when an object instance of the class is deleted.
+.rs
+.sp -.5v
+.H1 "Step 7: Implement Method Routines
+For every new method added by the renderer, you must implement a set 
+of method routines.
+Each method routine defines for a particular class the action to be taken
+when a method is executed on an object of that class.
+The complexity of the method routines will vary from class to class,
+and from method to method.
+For derived methods, you generally need new routines
+only for a subset of the classes.
+.sp -.25v
+.lp
+The studio traversal performs rendering initialization.
+It determines the environment (cameras and lights) in which the rendering takes
+place.
+Typically, the studio traversal method is derived from the standard
+method "StdRenderStudio".
+Method routines should be installed by the renderer for the light and
+camera object classes.
+If some or all of the studio attribute values are going to be accessed through
+notification (rather than be queried), method routines need to be installed
+for the corresponding global attribute classes.
+.sp -.25v
+.lp
+The display traversal performs the actual rendering.
+Typically, the display traversal method is derived from the standard
+method "StdRenderDisplay".
+In Step 1 you determined which of the primitives would be the
+base primitives for your renderer.
+For these primitives you \f2must\fP install method routines specific
+to your renderer.
+These routines will gather the relevant primitive attribute information 
+(color, transparency, etc.) and use the current viewing parameters
+to convert the geometry (perhaps with the assistance of the
+output module of the device driver) into a series of pixels.
+The method routines for other primitives like \f2DoPrimSurf\f1 or \f2DoNURBSurf\f1
+should update their alternate representation objects and execute them.
+This is what the standard method routines for these primitives do.
+If you determined in Step 1 that your renderer cannot
+directly draw all the \*(Dd \f2standard\fP base primitives,
+you must implement your
+own method routines to create, store, and execute an alternate
+representation object for those primitives.
+If some or all the primitive attribute values are going to be accessed through
+notification (rather than be queried), method routines need to be installed
+for the corresponding global attribute classes.
+.sp -.25v
+.lp
+All traversal method routines invoked by \*(Dd must be of the form:
+.(m
+void method_routine (object)
+DtObjectStructure *object;
+{
+   /* handle object execution for this class */
+}
+.)m
+The calling sequence can be arbitrary for other
+methods that are created by the renderer and only ever called by
+the renderer. 
+The private and additional data of the object is accessed through
+the \f2data\f1 and \f2additional_data\f1 fields of the object structure,
+respectively.
+For primitive objects, the private data includes information such as
+the vertex locations, normals and colors, the texture coordinates,
+and the coordinates of a bounding box tightly enclosing the object in space.
+Appendix C, \f2Object Data Structures\f1, describes in more detail the structure
+of the \f2data\f1 field for various \*(Dd objects.
+The \f2additional_data\f1 field corresponds to space allocated
+by the renderer to store information with each object, as 
+described previously in Steps 5 and 6.
+.rs
+.sp -.5v
+.H1 "Step 8: Implement Renderer Access Routines
+.sp -.25v
+When the renderer installation process informs \*(Dd of the new 
+renderer
+with \f2DDrender_AddRenderer\f1 
+(as described in \f2Inform \*(Dd of New Renderer\f1, earlier)
+it must provide four routines that will be called by the
+\*(Dd system to perform tasks on its behalf.
+These four routines are for:
+.BU hs
+invoking the renderer on a view
+.BU hs
+deleting the renderer
+.BU hs
+notifying the renderer when a new class is initialized
+.BU hs
+returning the world-to-frustum matrix for the current view
+.lp
+Each of these routines is now described in more detail.
+.rs
+.sp -.25v
+.H2 "Rendering Routine
+The first routine renders a view object.
+This is the main routine of the renderer.
+It will be called each time this renderer 
+is required to generate an image.
+The routine should determine the characteristics of the device,
+make requests to the \*(Dd system for
+studio and display traversals, and control rendering output
+through a device output interface.
+The calling sequence for this routine must be of the form:
+.(m
+render_routine(DtObject device, DtObject view, 
+	       DtFlag view_device_changed,
+               DtFlag studio_changed)
+.)m
+where
+\f2view\fP and \f2device\fP are handles to the objects to be used to
+generate the image.
+The \f2view\fP provides the graphical database and the \f2device\fP
+provides the mechanisms for output.
+The flags \f2view_device_changed\fP and \f2studio_changed\fP are maintained
+by \*(Dd.
+They indicate whether the view, device, or studio objects  
+have been modified 
+since the last time the scene was rendered.
+.sp -.25v
+.lp
+In Step 4 you selected a device output module interface.
+The renderer sends data to the device by calling routines of the
+device output module.
+\*(Dd provides a routine that will return a structure containing
+function pointers for the selected output module interface
+of the device:
+.rs
+.sp -.25v
+.(m
+DDdevice_InqInterfaceRoutines(DtObject device, 
+			      DtInt if_type, 
+			      DtPtr *rtns)
+.)m
+.rs
+.sp -.25v
+The interface type, \f2if_type\fP, would be \f2DDc_DROM\fP for
+the DROM interface and
+\f2DDc_PROM\fP for the PROM interface.
+.sp -.25v
+.lp
+The renderer requests a traversal by calling one of two routines,
+one for the studio group and one for the display group:
+.rs
+.sp -.25v
+.(m
+DtFlag DDview_TraverseStudio(DtObject view, 
+			     DtInt method_id)
+.)m
+.(m
+DtFlag DDview_TraverseDisplay(DtObject view, 
+			      DtInt method_id)
+.)m
+.rs
+.sp -.25v
+In both cases the method to be executed during the traversal is 
+specified using the method identifier.
+Recall that the method identifier is returned when a new
+method is created with \f2DDclass_AddMethod\fP or 
+\f2DDclass_CopyMethod\fP.
+.rs
+.sp -.25v
+.H2 "Renderer Deletion Routine
+.rs
+.sp -.25v
+The second access routine that must be provided by the renderer 
+installation routine 
+will be called to clean up when the renderer is no longer needed.
+The calling sequence of this routine is:
+.rs
+.sp -.25v
+.(m
+void del_renderer_routine()
+.)m
+.rs
+.sp -.25v
+This routine will be invoked when the \*(Dd system is shut down
+with a call to \f2DsTerminate\fP.
+It should free any space the renderer has allocated.
+This is important since the \*(Dd system may be initialized and
+terminated repeatedly within an application program.
+.rs
+.sp -.25v
+.H2 "New Class Notification Routine
+.rs
+.sp -.25v
+As mentioned earlier in \f2Create New Traversal Methods\f1,
+some classes are initialized by \*(Dd only when they are first instanced.
+The third access routine is called whenever a new class is initialized.
+This notification routine should know how to install
+method routines for classes that the renderer uses, other than the
+group, view, frame, device, and global attribute classes.
+Tasks such as requesting additional data space for an object class 
+also need to be done by the new class routine.
+It will often include \f2case\f1 or \f2if\f1 statements
+to select the appropriate action to take
+depending on which class was just initialized.
+The calling sequence for the new class notification routine is:
+.(m
+void new_class_routine(DtPtr class_name, DtInt class_id)
+.)m
+.H2 "World-to-Frustum Matrix Query Routine
+The fourth routine will be called when the \*(Dd system needs to know
+the matrix representing the mapping from world coordinates to 
+frustum coordinates for the view. 
+The calling sequence for the routine is:
+.(m
+void inq_wcstofcs_routine(DtMatrix4x4 matrix)
+.)m
+The world-to-frustum
+transformation matrix is computed by the renderer
+after studio traversal and stored in the additional data
+space allocated for the view.

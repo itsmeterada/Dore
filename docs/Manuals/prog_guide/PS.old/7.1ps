@@ -1,0 +1,125 @@
+!md begin
+!/note {} def
+!/legal {} def
+!md /lnop known not { /lnop [ {} ] cvx def } if
+!/bigs [lnop lnop lnop lnop lnop lnop lnop lnop] def
+!/smalls [lnop lnop lnop lnop lnop lnop lnop lnop] def
+!/cp {pm restore pop pop} def
+!
+!T T -46 -44 1136 869 67 72 72 1 F F F F T T psu
+!(TechPubs#1; document: 7-1EnteringConeGroup)jn
+!0 mf
+!od
+!op
+!0 0 xl
+!0 72 mul -1 72 mul translate
+!1 1 scale
+!1 1 pen
+!0 0 gm
+!(nc 0 0 1090 825 6 rc)kp
+!64 gr
+!72 194 109 253 4 rc
+!0 gr
+!72.5 194.5 108.5 252.5 0 rc
+!64 gr
+!108 194 145 253 4 rc
+!0 gr
+!108.5 194.5 144.5 252.5 0 rc
+!0 0 pen
+!0 0 lin
+!nc ct 39 0 put
+!1 1 pen
+!108 81 gm
+!pt
+!108 264 pl
+!rh
+!ef
+!eu
+!(nc 0 0 1090 825 6 rc)kp
+!0 0 pen
+!108 264 lin
+!1 1 pen
+!64 gr
+!85 72 104 154 2 rc
+!97 73 gm
+!(nc 85 72 104 154 6 rc)kp
+!bu fc
+!{}mark T /Helvetica /Helvetica 0 rf
+!bn
+!1 setTxMode
+!0 fs
+!12.47991 fz
+!bu fc
+!2 F /Helvetica fnt
+!bn
+!1.99462 0. 32 0.19946 0.(Top Of Stack)awidthshow
+!0 0 pen
+!116 73 gm
+!(nc 0 0 1090 825 6 rc)kp
+!0 gr
+!116 73 lin
+!nc ct 39 0 put
+!1 1 pen
+!90 192 gm
+!pr
+!90 192 pl
+!93 183 pl
+!87 183 pl
+!90 192 pl
+!1 ep
+!pr
+!90 192 pl
+!93 183 pl
+!87 183 pl
+!90 192 pl
+!0 ep
+!90 156 gm
+!pt
+!90 184 pl
+!rh
+!ef
+!eu
+!(nc 0 0 1090 825 6 rc)kp
+!0 0 pen
+!90 184 lin
+!1 1 pen
+!64 gr
+!80 211 99 239 2 rc
+!92 212 gm
+!(nc 80 211 99 239 6 rc)kp
+!1 setTxMode
+!-0.66999 0.(PTM)ashow
+!111 212 gm
+!(nc 0 0 1090 825 6 rc)kp
+!64 gr
+!116 211 135 239 2 rc
+!128 212 gm
+!(nc 116 211 135 239 6 rc)kp
+!0 gr
+!-0.66999 0.(PTM)ashow
+!147 212 gm
+!(nc 0 0 1090 825 6 rc)kp
+!64 gr
+!152 189 171 265 2 rc
+!164 190 gm
+!(nc 152 189 171 265 6 rc)kp
+!0 gr
+!bu fc
+!{}mark T /Helvetica-Bold /Helvetica-Bold 0 rf
+!bn
+!1 fs
+!bu fc
+!2 F /Helvetica-Bold fnt
+!bn
+!5.12039 0. 32 0.51203 0.(CTM Stack)awidthshow
+!116 110 gm
+!(nc 106 109 120 180 6 rc)kp
+!0 fs
+!9.35993 fz
+!bu fc
+!2 F /Helvetica fnt
+!bn
+!1.50314 0. 32 0.15031 0.(group boundary)awidthshow
+!F T cp
+!cd
+!end

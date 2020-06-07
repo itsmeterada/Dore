@@ -1,0 +1,72 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DsInqRaster 3D "Dore"
+.SH NAME
+DsInqRaster \- Return the data of a raster object
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+void DsInqRaster(raster, width, height, depth, type, 
+		typestring, data)
+DtObject raster;
+DtInt *width;
+DtInt *height;
+DtInt *depth;
+DtRasterType *type;
+DtPtr *typestring;
+DtPtr *data;
+.sp
+.in  -.5i
+FORTRAN:
+.in  +.5i
+CALL DSQR(RASTER, WIDTH, HEIGHT, DEPTH, 
+		TYPE, TYPESTR, TLEN, DATA)
+INTEGER*4 RASTER
+INTEGER*4 WIDTH
+INTEGER*4 HEIGHT
+INTEGER*4 DEPTH
+INTEGER*4 TYPE
+INTEGER*4 TLEN
+CHARACTER*TLEN TYPSTR
+INTEGER*4 DATA
+.in  -.5i
+.fi 
+.IX "DsInqRaster"
+.IX "DSQR"
+.SH DESCRIPTION
+.LP
+\f2DsInqRaster\fP queries the data of the raster object \f2raster\fP.
+\f2width\fP, \f2height\fP and \f2depth\fP are the dimensions of the
+raster.
+\f2type\fP is the type and format of the raster data.
+If the type is \f2DcRasterSpecial\fP then the character string
+\f2typestring\fP specifies the format of the data, otherwise it is ignored.
+A pointer to the raster data is returned in \f2data\fP.
+This pointer is the same pointer that was used to create the raster
+object.
+Raster objects do NOT copy the data, so modifying
+values in \f2data\fP will change the data of the raster
+object \f2raster\fP.
+.SH ERRORS
+\f2DsInqRaster\fP will fail if the raster handle is invalid.
+.TP 15
+[WARNING - invalid raster handle]
+.SH SEE ALSO
+DoRaster(3D), DoFileRaster(3D)
+\&

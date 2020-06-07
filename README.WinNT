@@ -1,0 +1,10 @@
+NOTE: The information here may be obsolete!
+
+Notes on building Dore' for Windows NT:
+
+1. You need to use NTFS for the long filenames. The Dore tree can have
+   some fairly long file names.
+
+2. The NT port hasn't been tested extensively. It seems to work. It 
+   uses the aux toolkit to open the device and such unlike the unix-opengl
+   port which uses glx. 

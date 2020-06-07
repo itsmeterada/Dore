@@ -1,0 +1,1699 @@
+.\"#ident "%W%" %G%
+.\"
+.\" Copyright (C) 1988, 1989, 1990, by Kubota Pacific Computer Inc.
+.\"         All Rights Reserved
+.\" This program is a trade secret of Kubota Pacific Computer Inc. and
+.\" it is not to be reproduced, published, disclosed to others, copied,
+.\" adapted, distributed, or displayed without the prior authorization
+.\" of Kubota Pacific Computer Inc.  Licensee agrees to attach or embed
+.\" this Notice on all copies of the program, including partial copies
+.\" or modified versions thereof.
+.\"
+.so ../macros/local.me
+.ds BT \*(Dd Programmer's Guide
+.ds CT Primitive Objects
+.ds h1 4
+.PN 57
+.L1 P RIMITIVE
+.L2 O BJECTS
+.CH FOUR
+.rs
+.sp -1v
+This chapter describes the major primitive objects available in
+the \*(Do and how to specify them.  Concepts and
+terms introduced in this chapter include color models, vertex
+types, geometric normals, vertex normals, mesh objects, the
+right-hand rule, the inside/out rule, and variable-data
+primitives.
+.sp -.5v
+.H1 "Primitive Objects"
+.rs
+.sp -.25v
+A \f2primitive object\f1 is a displayable geometric object,
+such as a line, triangle, polygon, or patch.
+Lines, triangles, polygons, meshes, and strips all
+use vertices explicitly to compose the primitive object.
+Spheres, cylinders, boxes, cones, and tori are examples
+of primitive objects which do not use explicit vertex data.
+Text is also classified as a primitive object \*- an entire 
+chapter is dedicated to it later in this manual (see Chapter 7).
+.sp -.25v
+.lp
+Primitive objects have attributes, like color, texture,
+and orientation.  
+When a method such as rendering or picking is applied to
+a primitive object, the applicable current attributes are used.
+Chapters 5 and 6 describe the primitive 
+attributes and geometric transformation attributes of a primitive, 
+respectively.  
+See Chapter 10 for a discussion on methods.
+.sp -.5v
+.H1 "DoPrimSurf"
+.rs
+.sp -.25v
+\f2DoPrimSurf\f1 creates a primitive object that defines
+a closed primitive surface such as a sphere or box.
+The syntax for \f2DoPrimSurf <DOPMS>\f1 is:
+.sp -.25v
+.(m
+DoPrimSurf (surfacetype)
+.)m
+.rs
+.sp -.25v
+where 
+.sp -.25v
+.ip "\f3surfacetype\f1"
+specifies the type of primitive surface.  
+.lp
+Possible values for \f3surfacetype\f1 are:
+.(l I
+DcSphere  <DCSPHR>
+DcCylinder  <DCCYL>
+DcBox  <DCBOX>
+DcCone  <DCCONE>
+.)l
+.sp -.25v
+.lp
+The primitive surface is defined in a standard location with a
+standard size and orientation, and you can apply geometric
+transformations to alter its form.  
+.sp -.5v
+.H1 "DoTorus"
+\f2DoTorus\f1 creates a primitive object that defines a
+doughnut-shaped surface.  The car wheel example in Chapter 3
+used a torus for the tire.  The syntax for \f2DoTorus <DOTOR>\f1 is
+.sp -.25v
+.(m
+DoTorus (bigradius, xsectionradius)
+.)m
+.rs
+.sp -.25v
+where
+.sp -.25v
+.ip "\f3bigradius\f1"
+specifies the distance from the center of the torus hole to the
+center of the ring.
+.sp -.25v
+.ip "\f3xsectionradius\f1"
+specifies the radius of the cross-section of the ring itself.
+.sp -.25v
+.lp
+The torus is centered at the origin and is in the \f2xz\f1 plane.
+Note that, although a torus is a classic volume like those 
+created by \f2DoPrimSurf <DOPMS>\f1, it requires more parameters 
+in order to be created with the same degree of flexibility.
+\*(FT shows a torus with its big radius and cross-section radius
+labeled.  
+.(F 
+.\"   "./PS/4.1ps" 1.75i 0 
+.sp 1.75i
+.)F "Torus"
+.H1 "DoSphereList"
+\f2DoSphereList\f1 creates a primitive object that defines a list 
+of any number of spheres.  The syntax for \f2DoSphereList <DOSPHL>\f1 is:
+.(m
+DoSphereList (colormodel, spherecount, locations, radii, 
+		colors)
+.)m
+where
+.ip "\f3colormodel\f1"
+specifies the color model to use.
+.ip "\f3spherecount\f1"
+is the number of spheres in the sphere list.
+.ip "\f3locations\f1"
+is a list of xyz triples that specify the location of each sphere in the list.
+.ip "\f3radii  \f1"
+is an array of radii, with one radius per sphere.
+.ip "\f3colors\f1"
+is a list of floating point values that specify each sphere's color.
+.H2 "Color Model"
+The parameter \f2colormodel\f1 is of type \f2DtColorModel <INTEGER*4>\f1.
+The \*(Dd include file lists the possible values for \f2colormodel\f1.  
+Currently, the \*(Do supports the RGB (red-green-blue) color model
+(\f2DcRGB <DCRGB>\f1).  
+Many of the primitives yet to
+be mentioned require this parameter as well.
+.H2 "Sphere List Example"
+A sphere list is useful for creating sets of spheres that are
+to be manipulated together, such as in molecular modeling.
+The sphere list in the following code example represents the 
+list of atoms needed to construct a water molecule.
+.(m
+C code:
+
+.\"#ident "@(#)ch04	5.1" 9/18/91
+.\"
+.\" Copyright (C) 1988, 1989, 1990, by Kubota Pacific Computer Inc.
+.\"         All Rights Reserved
+.\" This program is a trade secret of Kubota Pacific Computer Inc. and
+.\" it is not to be reproduced, published, disclosed to others, copied,
+.\" adapted, distributed, or displayed without the prior authorization
+.\" of Kubota Pacific Computer Inc.  Licensee agrees to attach or embed
+.\" this Notice on all copies of the program, including partial copies
+.\" or modified versions thereof.
+.\"
+/* Atom arrangement in the sphere list is 
+   { oxygen, hydrogen, hydrogen }. 
+   The angle between the two hydrogen atoms 
+   is 109 degrees.  */
+
+DtObject H2O;
+
+static DtReal locations[3][3] = 
+		{  0.0,      0.0,       0.0,	
+		   0.0,     -1.2,       0.0,
+		   1.185226, 0.1877214, 0.0 };
+
+static DtReal radii[3] = { 1.2, 0.9. 0.9 };
+
+static DtReal colors[3][3] = 	
+		{  1.0, 0.0, 0.0,
+		   1.0, 1.0, 1.0,
+		   1.0, 1.0, 1.0 };
+
+H2O = DoSphereList (DcRGB, 3, locations, radii, colors);
+
+
+\*(Fo code:
+
+.\"#ident "@(#)ch04	5.1" 9/18/91
+.\"
+.\" Copyright (C) 1988, 1989, 1990, by Kubota Pacific Computer Inc.
+.\"         All Rights Reserved
+.\" This program is a trade secret of Kubota Pacific Computer Inc. and
+.\" it is not to be reproduced, published, disclosed to others, copied,
+.\" adapted, distributed, or displayed without the prior authorization
+.\" of Kubota Pacific Computer Inc.  Licensee agrees to attach or embed
+.\" this Notice on all copies of the program, including partial copies
+.\" or modified versions thereof.
+.\"
+  ! Atom arrangement in the sphere list is 
+  ! { oxygen, hydrogen, hydrogen }.  
+  ! The angle between the two hydrogen atoms 
+  ! is 109 degrees.
+C
+      INTEGER*4 H2O
+      REAL *8 LOCS (9)
+      REAL *8 RADII (3)
+      REAL *8 COLORS (9)
+C
+      DATA LOCS   / 0.0D0,      0.0D0,       0.0D0,
+     1		    0.0D0,     -1.2D0,       0.0D0,
+     2		    1.185226D0,  .1877214D0, 0.0D0  /
+C
+      DATA RADII  / 1.2D0,      0.9D0,       0.9D0  /
+C
+      DATA COLORS /  1.0D0,     0.0D0,       0.0D0,
+     1		     1.0D0,     1.0D0,       1.0D0,
+     2		     1.0D0,     1.0D0,       1.0D0  /
+C
+      H2O=DOSPHL(DCRGB,3,LOCS,RADII,COLORS)
+.)m
+.H1 "DoLineList"
+\f2DoLineList\f1 creates a primitive object that defines
+a list
+of independent lines.  The syntax for \f2DoLineList <DOLINL>\f1 is
+.(m
+DoLineList (colormodel, vertextype, linecount, vertices)
+.)m
+where
+.ip "\f3vertextype\f1"
+specifies what type of information will be given for each vertex
+(location only, or whether information on vertex normals, 
+vertex colors, and/or values for texture mapping will be given as well)
+.ip "\f3linecount\f1"
+specifies the number of lines in the list, where each line has
+two vertices (endpoints).
+.ip "\f3vertices\f1"
+is an array of vertex data containing 2*\f2linecount\f1 vertices,
+specified as a sequence of floating point values.
+.lp
+(See above for a description of the parameter \f2colormodel\f1.)
+.lp
+As with \f2colormodel\f1, \f2vertextype\f1 and \f2vertices\f1
+are also used in many other primitive object
+functions, such as \f2DoTriangleList <DOTRIL>, DoSimplePolygon
+<DOSPGN>\f1, and \f2DoPolygon <DOPGN>\f1.
+More detail about \f2vertextype\f1 and \f2vertices\f1 follows.
+.H2 "Vertex Type"
+The \f2vertextype\f1 parameter, of type 
+\f2DtVertexType <INTEGER*4>\f1, can be one of the following:
+.ip "\f3DcLoc  <DCL>\f1"
+\f2vertices\f1 contains the location of each vertex in \f2x, y, z\f1.
+.ip "\f3DcLocNrm  <DCLN>\f1"
+\f2vertices\f1 contains locations plus vertex normals, where each
+vertex normal provides an \f2x, y, z\f1 direction that is used to 
+orient a surface of a primitive object.  See the next section, 
+\f2Vertices\f1, and Chapter 5 for a more detailed description of vertex 
+normals.
+.ip "\f3DcLocClr  <DCLC>\f1"
+\f2vertices\f1 contains locations plus vertex colors.  The next section,
+\f2Vertices\f1, and Chapter 5 describe how vertex colors are used 
+to shade a primitive object.
+.sp -.25v
+.ip "\f3DcLocNrmClr  <DCLNC>\f1"
+\f2vertices\f1 contains locations, normals, and colors for each vertex.
+.H3 "Texture Coordinates"
+.rs
+.sp -.25v
+It is also possible for vertices to have texture information associated
+with them.  In this case, \f2vertextype\f1 would be one of the above
+four mentioned types bitwise \f2or\f1'ed with the value returned from 
+\f2DsTextureUVCount <DSTUVC>\f1 and/or \f2DsTextureUVWCount <DSTWC>\f1.
+\f2Vertices\f1 would then contain locations and sets of \f2uv/uvw\f1 texture
+information, and may contain normals and/or colors depending on which of the 
+first four base \f2vertextype\f1 parameters is used.  
+For example, if \f2vertextype\f1 is:
+.sp -.25v
+.(m
+DcLocClr | DsTextureUVCount(2)   <IOR(DCLC,DSTUVC(2))>
+.)m
+.rs
+.sp -.25v
+the \f2vertices\f1 array contains locations, vertex colors, and
+two sets of \f2uv\f1 coordinates for each vertex.
+See Chapter 15 for more information regarding the use of texture
+coordinates.
+.H2 "Vertices"
+.sp -.25v
+\f2Vertices\f1 is an array containing the three dimensional vertex 
+locations of the primitive and, depending on \f2vertextype\f1, any 
+other necessary data.  
+The data in the array is vertex interleaved, that is all the
+data for the first vertex comes first, then all the data
+for the second vertex, and so on.
+For each vertex the data must be specified in the following order:
+.(l I
+vertex location
+vertex normal
+vertex color
+all uv coordinates for that vertex
+all uvw coordinates for that vertex
+.)l
+Each of these data fields is discussed below.
+Some sample code is provided.
+.H3 "Vertex Locations"
+.sp -.25v
+Vertex locations must always be provided in \f2vertices\f1, 
+regardless of \f2vertextype\f1.
+The simplest vertex type is \f2DcLoc <DCL>\f1, which consists of
+three floating point values that specify the location in modeling
+coordinates for each vertex.  The following example draws a line
+from the origin to point (1.0, 1.0, 1.0).  \f2LineLoc <LINELC>\f1 is an
+array of vertex locations that form the line segment.
+.(m
+C code:
+
+.\"#ident "@(#)ch04	5.1" 9/18/91
+.\"
+DtObject line;
+static DtReal LineLoc[] = 
+		{0.0, 0.0, 0.0,   /* location 0 */
+		 1.0, 1.0, 1.0};  /* location 1 */
+
+line = DoLineList (DcRGB, DcLoc, 1, LineLoc);
+
+
+\*(Fo code:
+
+.\"#ident "@(#)ch04	5.1" 9/18/91
+.\"
+      INTEGER*4 LINE
+      REAL*8 LINELC(6)
+C
+      DATA LINELC / 0.0D0, 0.0D0, 0.0D0,  ! location 1
+     1		    1.0D0, 1.0D0, 1.0D0 / ! location 2
+C
+      LINE=DOLINL(DCRGB,DCL,1,LINELC)
+.)m
+.H3 "Vertex Normals"
+.sp -.25v
+Vertices of type \f2DcLocNrm <DCLN>\f1 are specified by six
+values per vertex, in the order that follows:
+.sp -.25v
+.ip "\f3location\f1"
+is three floating point values for \f2x, y, z\f1 location.
+.sp -.25v
+.ip "\f3normal\f1"
+is three floating point values for \f2x, y, z\f1 direction.
+.sp -.25v
+.lp
+A vertex \f2normal\f1 is a vector of unit length that 
+is assumed to be perpendicular to the primitive object 
+at that point.  Vertex normals are used to shade an 
+object and may be used to avoid drawing surfaces of an 
+object that point away from the viewer (see Chapter 6 for details).
+.sp -.25v
+.lp
+When \f2DoInterpType <DOIT>\f1 is set to \f2DcVertexShade
+<DCVXSH>\f1 or
+\f2DcSurfaceShade <DCSFSH>\f1, the \*(Do uses vertex normals to
+calculate the shading across an object.  If you specify 
+\f2DcLoc <DCL>\f1 and do not include vertex normals in the 
+definition of the primitive object, in some cases \*(Dd will compute
+the vertex normals for you.  (See the description of the 
+\f2smoothflag\f1 parameter in \f2DoTriangleMesh <DOTRIM>\f1 section later
+in this chapter.)
+.H3 "Vertex Colors"
+Assuming the RGB color model is used, vertices of type \f2DcLocClr <DCLC>\f1 
+are specified by six values per vertex, in the order that follows:
+.ip "\f3location\f1"
+is three floating point values for \f2x, y, z\f1 location.
+.ip "\f3color   \f1"
+is three floating point values, between 0.0 and 1.0, for red, green, 
+and blue intensities respectively.
+.lp
+The following example draws one line with a red vertex at the
+origin and a blue vertex at (1.0, 1.0, 1.0).  If
+\f2DoInterpType <DOIT>\f1 is set to \f2DcConstantShade
+<DCCNSH>\f1 (which averages the vertex colors), the line appears magenta.
+.(m
+C code:
+
+.\"#ident "@(#)ch04	5.1" 9/18/91
+.\"
+DtObject line;
+DtInt    num_lines = 1;
+static DtReal LineVerts[] =
+	{0., 0., 0.,  1., 0., 0.,   /* vtx0 is red */
+	 1., 1., 1.,  0., 0., 1.};  /* vtx1 is blue */
+
+line = DoLineList(DcRGB, DcLocClr, num_lines, LineVerts);
+
+\*(Fo code:
+
+.\"#ident "@(#)ch04	5.1" 9/18/91
+.\"
+      INTEGER*4 LINE
+      INTEGER*4 NUMLIN
+      REAL*8 LVRTS(12)
+C
+      DATA LVRTS / 0.0D0, 0.0D0, 0.0D0,  ! vertex 0 loc
+     1		   1.0D0, 0.0D0, 0.0D0,  ! vertex 0 color
+     2             1.0D0, 1.0D0, 1.0D0,  ! vertex 1 loc
+     3		   0.0D0, 0.0D0, 1.0D0 / ! vertex 1 color
+C
+      NUMLIN = 1
+      LINE=DOLINL(DCRGB,DCLC,NUMLIN,LVRTS)
+.)m
+.lp
+If you create objects with vertex colors (with vertices of type
+\f2DcLocClr <DCLC>\f1 or \f2DcLocNrmClr <DCLNC>\f1),
+any colors specified by
+\f2DoDiffuseColor <DODIFC>\f1 are ignored by those objects.
+Vertex colors and normals are \f2attached\f1 to the 
+primitive object in a permanent way.
+.H3 "Vertex Normals and Colors"
+.rs
+.sp -.25v
+Assuming the RGB color model is used, vertices of type 
+\f2DcLocNrmClr <DCLNC>\f1 are specified by nine values per vertex, 
+in the order that follows:
+.sp -.25v
+.ip "\f3location\f1"
+is three floating point values for \f2x, y,\f1 and \f2z\f1 location.
+.sp -.25v
+.ip "\f3normal\f1"
+is three floating point values for \f2x, y,\f1 and \f2z\f1 direction.
+.sp -.25v
+.ip "\f3color   \f1"
+is three floating point values for red, green, and blue.
+.H3 "Texture Coordinates"
+.sp -.25v
+The \*(Dd functions \f2DsTextureUVCount\fP <\f2DSTUVC\fP> and
+\f2DsTextureUVWCount\fP <\f2DSTWC\fP> can be used in conjunction
+with one of the four base vertex types to specify a new vertex type
+that includes \f2uv\fP and/or \f2uvw\fP coordinates.
+In that case, the values for each vertex are as described above 
+for the base vertextype, followed by all \f2uv\fP values for the
+vertex and then all \f2uvw\fP values. 
+.sp -.25v
+.lp
+As an example, consider the following vertex type specification
+within a \f2DoLineList <DOLINL>\fP function:\f2
+.(m
+C code:
+
+.\"#ident "@(#)ch04	5.1" 9/18/91
+.\"
+.\" Copyright (C) 1988, 1989, 1990, by Kubota Pacific Computer Inc.
+.\"         All Rights Reserved
+.\" This program is a trade secret of Kubota Pacific Computer Inc. and
+.\" it is not to be reproduced, published, disclosed to others, copied,
+.\" adapted, distributed, or displayed without the prior authorization
+.\" of Kubota Pacific Computer Inc.  Licensee agrees to attach or embed
+.\" this Notice on all copies of the program, including partial copies
+.\" or modified versions thereof.
+.\"
+DtInt line_cnt = 1;
+static DtReal vertices[] =
+    { 0.,0.,0., .2,0., .7,0.,   /* vtx 1 with 2 uv sets */
+      1.,1.,1., .7,1., .2,1. }; /* vtx 2 with 2 uv sets */
+
+DoLineList(DcRGB, DcLocClr | DsTextureUVCount(2),
+                line_cnt, vertices)
+
+\*(Fo code:
+
+.\"#ident "@(#)ch04	5.1" 9/18/91
+.\"
+.\" Copyright (C) 1988, 1989, 1990, by Kubota Pacific Computer Inc.
+.\"         All Rights Reserved
+.\" This program is a trade secret of Kubota Pacific Computer Inc. and
+.\" it is not to be reproduced, published, disclosed to others, copied,
+.\" adapted, distributed, or displayed without the prior authorization
+.\" of Kubota Pacific Computer Inc.  Licensee agrees to attach or embed
+.\" this Notice on all copies of the program, including partial copies
+.\" or modified versions thereof.
+.\"
+      INTEGER*4  LINCNT
+      REAL*8  VERTS(14)
+
+      DATA VERTS / 
+     1	    0.0D0,0.0D0,0.0D0, 	        !vtx 1 and   !
+     2	    0.2D0,0.0D0,  0.7D0,0.0D0,  !  2 uv sets !
+     3      1.0D0,1.0D0,1.0D0, 	        !vtx 2 and   !
+     4	    0.7D0,1.0D0,  0.2D0,1.0D0 / !  2 uv sets !
+
+      LINCNT = 1
+      DOLINL(DCRGB, IOR(DCLC,DSTUVC(2)), LINCNT, VERTS)
+.)m
+In this function, the vertex type specifies that each vertex
+is defined by ten DtReal <REAL*8> values in the order that follows:
+.sp -.25v
+.ip "\f3location\f1"
+three floating point values for \f2x, y,\f1 and \f2z\f1 location
+.sp -.25v
+.ip "\f3color    \f1"
+is three floating point values for red, green, and blue.
+.sp -.25v
+.ip "\f3first set of uv texture coordinates\f1"
+is two floating point values for \f2u\fP and \f2v\fP. 
+.sp -.25v
+.ip "\f3second set of uv texture coordinates\f1"
+is two floating point values for \f2u\fP and \f2v\fP.
+.lp
+If the value of \f2line_cnt\f1 in this example were fifteen, the
+array \f2vertices\fP would contain:
+.sp -.25v
+.(m
+15 lines*(2 vertices/line)*(10 DtReals/vertex)=300 DtReals
+.)m
+.rs
+.sp -.25v
+See Chapter 15 for more information regarding the use
+of texture coordinates.
+.sp -.5v
+.H1 "DoPolyline"
+\f2DoPolyline\f1 creates a primitive object that defines a
+series
+of \f2connected\f1 line segments.  (For independent line
+segments, use \%\f2DoLineList <DOLINL>\f1.)  The syntax for
+\f2DoPolyLine <DOPL>\f1
+is
+.sp -.25v
+.(m
+DoPolyline (colormodel, vertextype, vertexcount, vertices)
+.)m
+.rs
+.sp -.25v
+where
+.rs
+.sp -.25v
+.ip "\f3vertexcount\f1"
+is the number of vertices specified in the \f2vertices\f1 array.
+.lp
+The other parameters for \f2DoPolyline <DOPL>\f1 are the same as those
+for \%\f2DoLineList <DOLINL>\f1, described above.
+.lp
+The first two vertices define the first line segment and
+each additional vertex adds one more segment to the polyline.
+The total number of line segments is (\f2vertexcount\fP - 1).
+.H2 "Polyline Example"
+The following example draws the pentagon shown in 
+\*(FT using a polyline.
+.(m
+C code:
+
+.\"#ident "@(#)ch04	5.1" 9/18/91
+.\"
+DtObject pentagon;
+
+static DtReal lineVerts[] = { 0.0,   -1.0,   0.0,
+                              0.951, -0.309, 0.0,
+                              0.587,  0.809, 0.0,
+                             -0.587,  0.809, 0.0,
+                             -0.951, -0.309, 0.0,
+                              0.0,   -1.0,   0.0 };
+
+pentagon = DoPolyline (DcRGB, DcLoc, 6, lineVerts);
+
+
+\*(Fo code:
+
+.\"#ident "@(#)ch04	5.1" 9/18/91
+.\"
+      INTEGER*4 PENT
+      REAL*8 LNVTX(18)
+C
+      DATA LNVTX /  0.0D0,   -1.0D0,   0.0D0,
+     1		    0.951D0, -0.309D0, 0.0D0,
+     2		    0.587D0,  0.809D0, 0.0D0,
+     3		   -0.587D0,  0.809D0, 0.0D0,
+     4		   -0.951D0, -0.309D0, 0.0D0,
+     5		    0.0D0,   -1.0D0,   0.0D0  /
+C
+      PENT=DOPL(DCRGB, DCL, 6, LNVTX)
+.)m
+.(F ./PS/4.2ps 1.2i 0
+.)F "Polyline Pentagon"
+.H1 "DoTriangleList"
+\f2DoTriangleList\f1 creates a primitive object that defines a
+list of independent triangles.  The syntax for
+\f2DoTriangleList <DOTRIL>\f1 is
+.(m
+DoTriangleList (colormodel, vertextype, trianglecount, 
+			vertices)
+.)m
+where
+.ip "\f3trianglecount\f1"
+is the number of triangles in the list.
+.ip "\f3vertices\f1
+is an array of vertex data containing 3*\f2trianglecount\f1 vertices
+that define \f2trianglecount\f1 triangles.
+.lp
+(See previous sections of this chapter for descriptions of the
+.I colormodel 
+and 
+.I vertextype 
+parameters.)
+.lp
+The order in which a triangle's vertices are specified may be 
+important to your application; the following subsections explain why.
+.bp
+.H2 "Geometric Normals and the Right-hand Rule"
+The \*(Do computes a \f2geometric normal\fP for triangles and
+polygons.
+This normal is often used to determine whether a 
+\f2backface cullable\fP surface points away from the viewer.
+(Backface culling is described in Chapter 5.)
+It is also sometimes used for shading purposes.
+.lp
+The geometric normal, which is computed by \*(Dd for a whole
+triangle (polygon), should not be confused with the vertex normals
+provided by the application for every vertex of a
+triangle (polygon). 
+.lp
+In almost all cases, the \*(Do computes the geometric normal 
+for you according to the \f2right-hand rule\f1 (the only exception
+currently is \f2DoTriangleStrip <DOTRIS>\f1 which is discussed later in
+this chapter).  The right-hand rule specifies that if the
+fingers of the right hand curl around and follow the boundary of
+the surfaces in the order the vertices are specified, then the
+outstretched thumb of the right hand points in the same
+direction as the normal calculated from the surface (see
+\%\*(FT).
+.lp
+In order to have front-facing normals, specify the vertices in a
+counterclockwise order relative to the viewer.  The polygon in
+Figure 4-3 is front-facing, according to the right-hand rule.
+.(F 
+.\"	"./PS/4.3ps" 2i -1
+.sp 2.0i
+.)F "Using the Right-hand Rule to Specify the Geometric Normal"
+.H2 "Triangle List Examples"
+The following example draws a triangle with vertices of type
+\f2DcLoc <DCL>\f1.  The \*(Do computes the geometric normal
+according
+to the right-hand rule, and the vertices are specified in
+counterclockwise order.
+.(m
+C code:
+
+.\"#ident "@(#)ch04	5.1" 9/18/91
+.\"
+DtObject tri;
+static DtReal  Verts[] =
+               {5.0, 0.0, 0.0,
+                0.0, 2.5, 0.0,
+               -6.0, 1.2, 0.0};
+
+tri = DoTriangleList (DcRGB, DcLoc, 1, Verts);
+
+\*(Fo code:
+
+.\"#ident "@(#)ch04	5.1" 9/18/91
+.\"
+      INTEGER*4 TRI
+      REAL*8 VERTS(9)
+C
+      DATA VERTS / 5.0D0, 0.0D0, 0.0D0,
+     1             0.0D0, 2.5D0, 0.0D0,
+     2            -6.0D0, 1.2D0, 0.0D0 /
+C
+      TRI=DOTRIL(DCRGB, DCL, 1, VERTS)
+.)m
+.lp
+The next example draws a triangle with vertices of type
+\f2DcLocNrm <DCLN>\f1.
+.(m
+C code:
+
+.\"#ident "@(#)ch04	5.1" 9/18/91
+.\"
+DtObject trilist;
+static DtReal  Verts[] =
+               {5.0, 0.0, 0.0,   -1.0,  1.0, 0.0,
+                0.0, 2.5, 0.0,   -1.0, -1.0, 0.0,
+               -6.0, 1.2, 0.0,    1.0, -1.0, 0.0};
+
+trilist = DoTriangleList (DcRGB, DcLocNrm, 1, Verts);
+
+
+\*(Fo code:
+
+.\"#ident "@(#)ch04	5.1" 9/18/91
+.\"
+      INTEGER*4 TRILST
+      REAL*8 VERTS (18)
+C
+      DATA VERTS / 5.0D0, 0.0D0, 0.0D0,   ! vtx 1 location
+     1	  	  -1.0D0, 1.0D0, 0.0D0,   ! vtx 1 normal
+     2             0.0D0, 2.5D0, 0.0D0,   ! vtx 2 location
+     3		  -1.0D0, -1.0D0, 0.0D0,  ! vtx 2 normal
+     4            -6.0D0, 1.2D0, 0.0D0,   ! vtx 3 location
+     5		   1.0D0, -1.0D0, 0.0D0 / ! vtx 3 normal
+C
+      TRILST=DOTRIL(DCRGB, DCLN, 1, VERTS)
+.)m
+.H1 "DoTriangleStrip"
+\f2DoTriangleStrip\f1 creates a primitive object that defines 
+a strip of connected triangles.
+The syntax for \f2DoTriangleStrip <DOTRIS>\f1 is
+.(m
+DoTriangleStrip (colormodel, vertextype, vertexcount, 
+			vertices)
+.)m
+where
+.ip "\f3vertexcount\f1"
+is the number of vertices in the triangle strip.
+.ip "\f3vertices\f1"
+is an array of vertex data, given as floating point values.
+.lp
+(See previous sections of this chapter for descriptions of the
+.I colormodel 
+and 
+.I vertextype 
+parameters.)
+.lp
+The first three vertices in
+.I vertices
+define the first triangle and each additional vertex adds one 
+more triangle to the strip. So, the first triangle is defined by
+\f2vertices[0]\f1, \f2vertices[1]\f1, and \f2vertices[2]\f1;
+the second triangle is define by
+\f2vertices[1]\f1, \f2vertices[2]\f1, and \f2vertices[3]\f1;
+and so forth.  From this, you can see that the total number of triangles
+in the strip is (\f2vertexcount\f1 - 2).  
+.H2 "Vertices and Handedness Rules"
+As discussed above, the order
+in which you specify vertices affects the geometric normal
+calculated by the \*(Do.  For triangle strips, the \*(Do 
+calculates the geometric normal to each triangle using different handedness
+rules depending on that triangle's location in the strip.  The right-hand rule 
+is used for odd triangles (triangles 1, 3, 5, etc) and the left-hand rule is 
+used for even triangles (triangles 2, 4, 6, etc).  To have front-facing normals,
+specify the vertices such that the vertex traversal direction is counterclockwise
+for odd numbered triangles and is clockwise for even numbered triangles.
+.H2 "Triangle Strip Example"
+The triangle strip constructed from the following code example is shown in
+\*(FT.  The direction of the arrow in each triangle indicates the vertex 
+traversal direction used to construct that triangle such that the entire
+strip's geometric normals are front facing.
+.(m
+C code:
+
+DtObject tristrip;
+static DtReal vertices[] = {
+                -0.5,   0.5, 0.0,
+                -0.5,  -0.5, 0.0,
+                -0.25,  0.5, 0.0,
+                -0.25, -0.5, 0.0,
+                 0.0,   0.5, 0.0,
+                 0.0,  -0.5, 0.0,
+                 0.25,  0.5, 0.0,
+                 0.25, -0.5, 0.0,
+                 0.5,   0.5, 0.0,
+                 0.5,  -0.5, 0.0 };
+
+tristrip = DoTriangleStrip (DcRGB, DcLoc, 10, vertices);
+
+
+\*(Fo code:
+.\"
+      INTEGER*4 TRIS
+      REAL *8 VERTS (30)
+C
+      DATA VERTS / -.5D0,   .5D0, 0.0D0,
+     1		   -.5D0,  -.5D0, 0.0D0,
+     2		   -.25D0,  .5D0, 0.0D0,
+     3		   -.25D0, -.5D0, 0.0D0,
+     4		   0.0D0,   .5D0, 0.0D0,
+     5		   0.0D0,  -.5D0, 0.0D0,
+     6		    .25D0,  .5D0, 0.0D0,
+     7		    .25D0, -.5D0, 0.0D0,
+     8		    .5D0,   .5D0, 0.0D0,
+     9		    .5D0,  -.5D0, 0.0D0  /
+C
+
+      TRIS=DOTRIS(DCRGB,DCL,10,VERTS)
+.)m
+.(F 
+.\"	PS/4.4ps 1.25i 0
+.sp 1.25i
+.)F "Triangle Strip"
+.sp -.5v
+.H1 "DoSimplePolygon"
+\f2DoSimplePolygon\f1 creates a primitive object that defines a
+simple polygon.  A \f2simple polygon\f1 is a planar collection of
+vertices that form a single, connected contour.  The polygon can
+contain any number of vertices, and it can be convex, concave, or
+self-intersecting.
+.sp -.25v
+.lp
+The syntax for \f2DoSimplePolygon <DOSPGN>\f1 is
+.sp -.25v
+.(m
+DoSimplePolygon (colormodel, vertextype, vertexcount, 
+			vertices, shape)
+.)m
+.rs
+.sp -.25v
+where
+.sp -.25v
+.ip "\f3vertexcount\f1"
+is the number of vertices.
+.sp -.25v
+.ip "\f3vertices\f1"
+is an array listing all data for each vertex of the polygon
+as floating point numbers.
+.sp -.25v
+.ip "\f3shape  \f1"
+provides a hint about the geometry of the simple polygon.
+.sp -.25v
+.lp
+Possible values for \f2shape\f1 are
+.sp -.25v
+.ip "\f3DcConvex  <DCCNVX>\f1"
+contour is wholly convex; that is, all interior angles
+of the polygon are less than 180 degrees.
+.sp -.25v
+.ip "\f3DcConcave  <DCCNCV>\f1"
+contour is not self-intersecting but is not wholly convex.
+A concave polygon has at least one interior angle that is greater
+than 180 degrees.
+.sp -.25v
+.ip "\f3DcComplex  <DCCPLX>\f1"
+contour may be self-intersecting.
+.sp -.25v
+.lp
+(See previous sections for descriptions of the
+.I colormodel
+and
+.I vertextype 
+parameters.)
+.sp -.25v
+.lp
+Correct specification of the contour shape can speed up
+rendering.  Any polygon will render correctly if you specify
+\f2DcComplex <DCCPLX>\f1.  If the polygon is one of the simpler
+types (\f2DcConvex <DCCNVX>\f1 or \f2DcConcave <DCCNCV>\f1),
+it will render more quickly
+if you specify the correct type.  In some cases, for example if
+you specify  \f2DcConvex <DCCNVX>\f1, and the polygon is actually
+\f2DcComplex\f1, the results are undefined.  \*(FT shows examples of
+convex, concave, and self-intersecting polygons.
+.sp -.25v
+.lp
+\f2DoSimplePolygon <DOSPGN>\f1 is undefined when a
+nonplanar collection of vertices is specified.
+.(F ./ PS/4.5ps 1.25i 0 
+.sp 1.25i
+.)F "Polygon Shapes"
+.rs
+.H2 "Vertices and the Right-hand Rule"
+For simple polygons, the \*(Do uses the first
+three noncolinear points to determine the geometric normal.  
+To have front-facing normals,
+specify the vertices in a counterclockwise order.
+.sp .25i
+.H2 "Simple Polygon Example"
+.rs
+.sp -.25v
+The pentagon shown in \*(FT is generated with 
+\f2DoSimplePolygon <DOSPGN>\f1 as follows:
+.sp -.25v
+.(m
+C code:
+
+.\"#ident "@(#)ch04	5.1" 9/18/91
+.\"
+DtObject poly;
+static DtReal pentagon[] =  {  0.0,   -1.0,    0.0,
+           		       0.951, -0.309,  0.0,
+           		       0.587,  0.809,  0.0,
+            		      -0.587,  0.809,  0.0,
+            		      -0.951, -0.309,  0.0};
+
+poly = DoSimplePolygon(DcRGB, DcLoc, 5, pentagon, DcConvex);
+
+\*(Fo code:
+
+.\"#ident "@(#)ch04	5.1" 9/18/91
+.\"
+      INTEGER*4 POLY
+      REAL *8 PENT (15)
+C
+      DATA PENT / 0.0D0,     -1.0D0,   0.0D0,
+     1             .951D0,   -.309D0,  0.0D0,
+     2             .587D0,    .809D0,  0.0D0,
+     3            -.587D0,    .809D0,  0.0D0,
+     4            -.951D0,   -.309D0,  0.0D0 /
+C
+      POLY=DOSPGN(DCRGB,DCL,5,PENT,DCCNVX)
+.)m
+.(F PS/4.6ps 1i 0
+.)F "Simple Polygon Pentagon"
+.H1 "DoPolygon"
+\f2DoPolygon\f1 creates a primitive object that defines a
+planar polygon that may have more than one contour\(emfor example, 
+an outer boundary or boundaries plus interior holes or islands.  
+The contours can be self-intersecting and can intersect each 
+other.  For polygons with only one contour, use
+\f2DoSimplePolygon <DOSPGN>\f1.
+.lp
+The syntax for \f2DoPolygon <DOPGN>\f1 is
+.(m
+DoPolygon (colormodel, vertextype, contourcount, contours,
+           vertices, shape);
+.)m
+.lp
+where
+.ip "\f3contourcount\f1"
+is the number of contours in the polygon.
+.ip "\f3contours\f1"
+is an array of \f2contourcount\f1 integers that specifies
+how many vertices each contour contains.
+.ip "\f3vertices\f1"
+is an array of all the vertices for each contour of the polygon,
+beginning with the first vertex of the first contour and ending with
+the last vertex of the last contour.  The last vertex of a contour is
+implicitly connected to the first vertex of that contour.
+.lp
+(See previous sections for descriptions of the \f2colormodel, vertextype\f1,
+and \f2shape\f1 parameters.)
+.lp
+\f2DoPolygon <DOPGN>\f1 is undefined when a
+nonplanar collection of vertices is specified.
+.H2 "Vertices and the Right-hand Rule"
+For polygons, the \*(Do uses the first
+three noncolinear points to determine the geometric normal.  
+For polygons with multiple contours, the first contour is
+used to compute the geometric normal.
+To have front-facing normals,
+specify the vertices in a counterclockwise order.
+.H2 "Polygon Example"
+\*(FT shows the complex polygon created by the following function
+call.
+.(m
+C code:
+
+.\"#ident "@(#)ch04	5.1" 9/18/91
+.\"
+DtObject poly;
+static DtReal Verts [] =
+     { 3.0, 3.0, 0.0,
+      -3.0, 3.0, 0.0,
+      -3.0,-3.0, 0.0,
+       3.0,-3.0, 0.0,
+
+       5.0, 5.0, 0.0,
+      -5.0, 5.0, 0.0,
+      -5.0,-5.0, 0.0,
+       5.0,-5.0, 0.0,
+
+       7.0, 7.0, 0.0,
+      -7.0, 7.0, 0.0,
+      -7.0,-7.0, 0.0,
+       7.0,-7.0, 0.0,
+
+       9.0, 9.0, 0.0,
+      -9.0, 9.0, 0.0,
+      -9.0,-9.0, 0.0,
+       9.0,-9.0, 0.0,
+
+       1.0, 1.0, 0.0,
+      -1.0, 1.0, 0.0,
+       6.0,-13.0, 0.0,
+      -6.0,-13.0, 0.0};
+
+static DtInt Conts[] = {4, 4, 4, 4, 4};
+
+poly = DoPolygon(DcRGB, DcLoc, 5, Conts, Verts, DcComplex);
+
+
+\*(Fo code:
+
+.\"#ident "@(#)ch04	5.1" 9/18/91
+.\"
+      INTEGER*4 POLY
+      REAL*8 VERTS (60)
+      INTEGER*4 CONTS(5)
+C
+      DATA VERTS / 3.0D0, 3.0D0, 0.0D0,
+     1            -3.0D0, 3.0D0, 0.0D0,
+     2            -3.0D0,-3.0D0, 0.0D0,
+     3             3.0D0,-3.0D0, 0.0D0,
+C
+     4             5.0D0, 5.0D0, 0.0D0,
+     5            -5.0D0, 5.0D0, 0.0D0,
+     6            -5.0D0,-5.0D0, 0.0D0,
+     7             5.0D0,-5.0D0, 0.0D0,
+C
+     8             7.0D0, 7.0D0, 0.0D0,
+     9            -7.0D0, 7.0D0, 0.0D0,
+     1            -7.0D0,-7.0D0, 0.0D0,
+     2             7.0D0,-7.0D0, 0.0D0,
+C
+     3             9.0D0, 9.0D0, 0.0D0,
+     4            -9.0D0, 9.0D0, 0.0D0,
+     5            -9.0D0,-9.0D0, 0.0D0,
+     6             9.0D0,-9.0D0, 0.0D0,
+C
+     7             1.0D0, 1.0D0, 0.0D0,
+     8            -1.0D0, 1.0D0, 0.0D0,
+     9             6.0D0,-13.0D0, 0.0D0,
+     1            -6.0D0,-13.0D0, 0.0D0 /
+C
+     DATA CONTS / 4, 4, 4, 4, 4 /
+C
+     POLY = DOPGN(DCRGB, DCL, 5, CONTS, VERTS, DCCPLX)
+.)m
+.(F "./PS/4.7ps" 2.25i -1
+.)F "Complex Polygon" complex
+.H2 "Inside/Out Rule"
+For a set of contours such as those shown in Figure 4-7,
+it is not obvious at first glance whether a given point is inside
+the polygon.  For polygons use the inside/out
+rule, as follows.  Starting at the point in question, draw a line
+out of the polygon.  Then count the number of contours it
+intersects.  If it crosses an odd number of contours, the point
+is \f2in\f1 the polygon (for example, points \f2a\f1 and \f2b\f1
+in  Figure 4-7).  If it crosses an even number of contours, the
+point is outside the polygon (point \f2c\f1 in Figure 4-7).
+.H1 "Mesh Objects"
+In \*(Dd, there are a number of primitive object functions
+that have corresponding mesh object functions; these functions
+are listed in \*(TT.
+.(T "Mesh Object Functions"
+.TS
+tab(@);
+lf3p9 | lf3p9
+lf1p9 | lf1p9.
+Primitive Function@Corresponding Mesh Function
+_
+.sp .5v
+DoTriangleList@DoTriangleMesh 
+  <DOTRIL>@  <DOTRIM>
+DoSimplePolygon@DoSimplePolygonMesh 
+  <DOSPGN>@  <DOSPM>
+DoPolygon@DoPolygonMesh 
+  <DOPGN>@  <DOPGNM>
+.TE
+.)T
+In general, mesh objects are useful because they
+.BU hs
+consume less memory than would be consumed if their components
+were specified individually
+.BU hs
+can be rendered more quickly than a set of individual primitives
+.BU hs
+can be used to approximate a smooth surface
+.BU hs
+can guarantee that contiguous mesh elements are adjacent, with no
+\*(lqcracks\*(rq between them.
+.lp
+(Triangle strips are useful for the same reasons just outlined.)
+.H1 "DoTriangleMesh"
+\f2DoTriangleMesh\f1 creates a primitive object that
+defines a
+collection of triangles.  Normally, the triangles are
+interconnected, forming a surface, but they need not all be in
+one piece.
+.lp
+The syntax for \f2DoTriangleMesh <DOTRIM>\f1 is
+.(m
+DoTriangleMesh (colormodel, vertextype, vertexcount, 
+	vertices, trianglecount, triangles, smoothflag)
+.)m
+.lp
+where
+.ip "\f3vertexcount\f1"
+is the number of vertices.
+.ip "\f3vertices\f1"
+is an array listing all data for each vertex,
+as floating point values.  Each vertex need be listed
+only once.
+.ip "\f3trianglecount\f1"
+is the number of triangles in the mesh.
+.ip "\f3triangles\f1"
+is an array containing three indices for each triangle.  These
+indices correspond to the mesh vertex numbers for the three
+coordinates of each triangle.  The vertices
+are numbered in the order specified in \f2vertices\f1, starting
+with 0. The last vertex
+referenced is assumed to connect back to the first.
+.ip "\f3smoothflag\f1"
+indicates whether the object is intended to approximate a smooth
+surface.  If \f2smoothflag\f1 is \f2DcTrue <DCTRUE>\f1 and if vertex
+normals were not provided, the geometric normals from a vertex's
+adjacent surfaces are averaged, and the result is used for
+shading.  If \f2smoothflag\f1 is \f2DcFalse <DCFALS>\f1, vertex normals
+are not generated.
+.lp
+(See previous sections for descriptions of the
+.I colormodel 
+and
+.I vertextype 
+parameters.)
+.H2 "Triangle Mesh Examples"
+The following example draws the same pentagon shape drawn earlier
+by breaking it into triangles and using a triangle mesh.  Note that
+the order of vertex traversal for all triangles is counterclockwise,
+as per the right-hand rule, for front-facing geometric normals.  
+The wireframe representation of this pentagon is shown in \*(FT.
+.(m
+C code:
+
+.\"#ident "@(#)ch04	5.1" 9/18/91
+.\"
+.\" Copyright (C) 1988, 1989, 1990, by Kubota Pacific Computer Inc.
+.\"         All Rights Reserved
+.\" This program is a trade secret of Kubota Pacific Computer Inc. and
+.\" it is not to be reproduced, published, disclosed to others, copied,
+.\" adapted, distributed, or displayed without the prior authorization
+.\" of Kubota Pacific Computer Inc.  Licensee agrees to attach or embed
+.\" this Notice on all copies of the program, including partial copies
+.\" or modified versions thereof.
+.\"
+DtObject pentagon;
+
+static DtReal vertices[] = 
+		{  0.0,   -1.0,   0.0,
+                   0.951, -0.309, 0.0,
+                   0.587,  0.809, 0.0,
+                  -0.587,  0.809, 0.0,
+                  -0.951, -0.309, 0.0  };
+
+static DtInt triangles[] = 	
+		{  0,  1,  2,
+                   0,  2,  3,
+                   0,  3,  4  };
+
+pentagon = DoTriangleMesh(DcRGB, DcLoc, 5, vertices,
+		3, triangles, DcFalse);
+
+
+\*(Fo code:
+
+.\"#ident "@(#)ch04	5.1" 9/18/91
+.\"
+.\" Copyright (C) 1988, 1989, 1990, by Kubota Pacific Computer Inc.
+.\"         All Rights Reserved
+.\" This program is a trade secret of Kubota Pacific Computer Inc. and
+.\" it is not to be reproduced, published, disclosed to others, copied,
+.\" adapted, distributed, or displayed without the prior authorization
+.\" of Kubota Pacific Computer Inc.  Licensee agrees to attach or embed
+.\" this Notice on all copies of the program, including partial copies
+.\" or modified versions thereof.
+.\"
+      INTEGER*4 PENT
+      REAL*8    VERTS(15)
+      INTEGER*4 TRIS(9)
+C
+      DATA VERTS /  0.0D0,   -1.0D0,   0.0D0,
+     1		    0.951D0, -0.309D0, 0.0D0,
+     2		    0.587D0,  0.809D0, 0.0D0,
+     3		   -0.587D0,  0.809D0, 0.0D0,
+     4		   -0.951D0, -0.309D0, 0.0D0  /
+C
+      DATA TRIS /  0,  1,  2,
+     1		   0,  2,  3,
+     2		   0,  3,  4  /
+
+      PENT=DOTRIM(DCRGB,DCL,5,VERTS,3,TRIS,DCFALS)
+.)m
+.(F 
+.\"	PS/4.8ps 1.25i 0
+.sp 1.25i
+.)F "Triangle Mesh Pentagon"
+This next example is a more complex triangle mesh that 
+creates an icosahedron.
+.(m
+C code:
+
+.\"#ident "@(#)ch04	5.1" 9/18/91
+.\"
+DtObject trimesh;
+static DtReal Vertices[] =
+	{ 0.0,      1.0,      1.618034, /* vertex 0 */
+          0.0,      1.0,     -1.618034, /* vertex 1 */
+          0.0,     -1.0,      1.618034, /* vertex 2 */
+          0.0,     -1.0,     -1.618034,
+          1.0,      1.618034, 0.0,
+          1.0,     -1.618034, 0.0,
+         -1.0,      1.618034, 0.0,
+         -1.0,     -1.618034, 0.0,
+          1.618034, 0.0,      1.0,
+          1.618034, 0.0,     -1.0,
+         -1.618034, 0.0,      1.0,
+         -1.618034, 0.0,     -1.0};     /* vertex 11 */
+
+static DtInt TriList[] =
+	{  0,  4,  6,   /* vertices for 1st triangle */
+           6,  4,  1,
+           1,  4,  9,
+           9,  4,  8,
+           8,  4,  0,
+           8,  0,  2,
+           2,  0, 10,
+          10,  0,  6,
+          10,  6, 11,
+          11,  6,  1,
+          11,  1,  3,
+           3,  1,  9,
+           3,  9,  5,
+           5,  9,  8,
+           5,  8,  2,
+           5,  2,  7,
+           7,  2, 10,
+           7, 10, 11,
+           7, 11,  3,
+           7,  3,  5};
+
+trimesh = DoTriangleMesh (DcRGB, DcLoc, 12, Vertices, 
+		20, TriList, DcFalse);
+
+\*(Fo code:
+
+.\"#ident "@(#)ch04	5.1" 9/18/91
+.\"
+      INTEGER*4 TRIMSH
+      REAL*8 VERTS (36)
+      INTEGER*4 TRILST(60)
+C
+      DATA VERTS /
+     1    0.0D0, 1.0D0,      1.618034D0,      ! vertex 0
+     2    0.0D0,      1.0D0,     -1.618034D0, ! vertex 1
+     3    0.0D0,     -1.0D0,      1.618034D0, ! vertex 2
+     4    0.0D0,     -1.0D0,     -1.618034D0,
+     5    1.0D0,      1.618034D0, 0.0D0,
+     6    1.0D0,     -1.618034D0, 0.0D0,
+     7   -1.0D0,      1.618034D0, 0.0D0,
+     8   -1.0D0,     -1.618034D0, 0.0D0,
+     9    1.618034D0, 0.0D0,      1.0D0,
+     1    1.618034D0, 0.0D0,     -1.0D0,
+     2   -1.618034D0, 0.0D0,      1.0D0,
+     3   -1.618034D0, 0.0D0,     -1.0D0 /     ! vertex 11
+C
+      DATA TRILST / 
+     1    0,  4,  6,    ! vertices for first triangle
+     2    6,  4,  1,
+     3    1,  4,  9,
+     4    9,  4,  8,
+     5    8,  4,  0,
+     6    8,  0,  2,
+     7    2,  0, 10,
+     8   10,  0,  6,
+     9   10,  6, 11,
+     1   11,  6,  1,
+     2   11,  1,  3,
+     3    3,  1,  9,
+     4    3,  9,  5,
+     5    5,  9,  8,
+     6    5,  8,  2,
+     7    5,  2,  7,
+     8    7,  2, 10,
+     9    7, 10, 11,
+     1    7, 11,  3,
+     2    7,  3,  5 /
+C
+     TRIMSH=DOTRIM(DCRGB,DCL,12,VERTS,20,TRILST,DCFALS)
+.)m
+.H1 "DoSimplePolygonMesh"
+\f2DoSimplePolygonMesh\f1 creates a primitive object that
+defines
+a collection of simple polygons.  Normally, the polygons are
+interconnected, but they need not all be in one piece.  The
+syntax for \f2DoSimplePolygonMesh <DOSPM>\f1 is
+.(m
+DoSimplePolygonMesh(colormodel, vertextype, vertexcount,
+	vertices, polygoncount, contours, vertexlist,
+	shape, smoothflag)
+.)m
+.lp
+where
+.ip "\f3vertexcount\f1"
+is the total number of vertices.
+.ip "\f3vertices\f1"
+is an array listing all data for each vertex of the mesh
+as floating point numbers.
+.ip "\f3polygoncount\f1"
+is the number of polygons in the mesh.
+.ip "\f3contours\f1"
+is an array of \f2polygoncount\f1 integers that says how many
+vertices are used to define each simple polygon.
+.ip "\f3vertexlist\f1"
+specifies the connectivity of the vertices.  \f2Vertexlist\f1 is
+a one-dimensional array of integers that index the \f2vertices\fP 
+array.
+The first polygon in the mesh begins with the vertex specified by
+\f2vertexlist[0]\f1 and continues using the vertices specified by
+the following entries in \f2vertexlist\f1.  The last vertex of a
+contour is implicitly connected to its first vertex.  The next
+polygon begins with the vertex specified next in the \f2vertexlist\f1
+array.
+.lp
+(See previous sections for descriptions of the
+.I colormodel ,
+.I vertextype ,
+.I shape ,
+and
+.I smoothflag
+parameters.)
+.H2 "Simple Polygon Mesh Example"
+.rs
+.sp -.25v
+\*(FT shows the simple polygon mesh created by the following
+function call:
+.sp -.25v
+.(m
+C code:
+
+.\"#ident "@(#)ch04	5.1" 9/18/91
+.\"
+DtObject spmesh;
+
+static DtReal verts []=
+     { 10.0,  0.0,   0.0,
+       10.0, 10.0,   0.0,
+        0.0, 10.0,   0.0,
+        0.0,  0.0,   0.0,
+        0.0, 10.0, -10.0,
+        0.0,  0.0, -10.0,
+       10.0,  0.0, -10.0,
+       10.0, 10.0, -10.0};
+static DtInt contours [] = {4,4,4,4,4,4};
+static DtInt vlist [] =
+     {0,1,2,3,	/* vertices of 1st polygon in mesh */
+      3,2,4,5,  /* vertices of 2nd polygon in mesh */
+      5,4,7,6,					 .
+      6,7,1,0,					 .
+      0,3,5,6,					 .
+      1,7,4,2};
+
+spmesh = DoSimplePolygonMesh(DcRGB, DcLoc, 8, verts,
+        6, contours, vlist, DcConvex, DcFalse);
+
+\*(Fo code:
+
+.\"#ident "@(#)ch04	5.1" 9/18/91
+.\"
+      INTEGER*4 SPMESH, CONTS(6), VLIST(24)
+      REAL*8 VERTS(24)
+C
+      DATA VERTS / 10.0D0,  0.0D0,   0.0D0,
+     1             10.0D0, 10.0D0,   0.0D0,
+     2              0.0D0, 10.0D0,   0.0D0,
+     3              0.0D0,  0.0D0,   0.0D0,
+     4              0.0D0, 10.0D0, -10.0D0,
+     5              0.0D0,  0.0D0, -10.0D0,
+     6             10.0D0,  0.0D0, -10.0D0,
+     7             10.0D0, 10.0D0, -10.0D0 /
+C
+      DATA CONTS / 4,4,4,4,4,4 /
+C
+      DATA VLIST / 0,1,2,3,
+     1             3,2,4,5,
+     2             5,4,7,6,
+     3             6,7,1,0,
+     4             0,3,5,6,
+     5             1,7,4,2 /
+C
+      SPMESH=DOSPM(DCRGB, DCL, 8, VERTS, 6, CONTS,
+     1             VLIST, DCCNVX, DCFALS)
+.)m
+.(F "./PS/4.9ps" .75i 0
+.)F "Example of a Simple Polygon Mesh"
+.sp -2v
+.H1 "Variable Data Primitives"
+.rs
+.sp -.25v
+As described in Chapter 4, standard \*(Dd primitives copy all
+data used to create an object into the object's private data
+space.  Since the application program no longer has access to
+this private data, it cannot modify the object.
+In contrast, \f2variable data primitives\f1 do not copy vertex data
+into the object's private space.  They maintain pointers to the
+vertex data, which remains in user data space.  An application
+can thus efficiently modify the object, without the overhead of
+copying the data.  
+Once the data is modified, the application needs to notify
+\*(Dd of the change by using the \f2Dp- <DP->\f1 routine that
+corresponds with the variable primitive data that was changed.
+.sp -.25v
+.lp
+\*(TT is a list of the variable data primitive functions along with
+their corresponding standard and update functions.
+Triangle strips and meshes, and simple polygon meshes have separate
+\f2Dp- <DP->\f1 update functions for informing \*(Dd of changes
+to their texture coordinates.
+.(T "Variable Data Primitives and their Update Functions"
+.TS
+tab(@);
+lf3p9 | lf3p9
+lf3p9 | lf3p9
+lf1p9 | lf1p9.
+Standard Primitive@Variable Primitive and
+Function@Update Functions
+_
+.sp .5v
+DoPointList@DoVarPointList 
+  <DOPNTL>@  <DOVPTL>
+@DpUpdVarPointList 
+@  <DPUVPL>
+.TE
+.)T
+.(T
+.TS
+tab(@);
+lf3p9 | lf3p9
+lf3p9 | lf3p9
+lf1p9 | lf1p9.
+Standard Primitive@Variable Primitive and
+Function@Update Functions
+_
+.sp .5v
+DoLineList@DoVarLineList 
+  <DOLINL>@  <DOVLNL>
+@DpUpdVarLineList 
+@  <DPUVLL>
+_
+DoTriangleMesh@DoVarTriangleMesh 
+  <DOTRIM>@  <DOVTRM>
+@DpUpdVarTriangleMesh 
+@  <DPUVTM>
+@DpUpdVarTriangleMeshUV 
+@  <DPUTMV>
+@DpUpdVarTriangleMeshUVW 
+@  <DPUTMW>
+_
+DoTriangleStrip@DoVarTriangleStrip 
+  <DOTRIS>@  <DOVTRS>
+@DpUpdVarTriangleStrip 
+@  <DPUVTS>
+@DpUpdVarTriangleStripUV 
+@  <DPUTSV>
+@DpUpdVarTriangleStripUVW 
+@  <DPUTSW>
+_
+DoSimplePolygonMesh@DoVarSimplePolygonMesh 
+  <DOSPM>@  <DOVSPM>
+@DpUpdVarSimplePolygonMesh 
+@  <DPUVSM>
+@DpUpdVarSimplePolygonMeshUV 
+@  <DPUSMV>
+@DpUpdVarSimplePolygonMeshUVW 
+@  <DPUSMW>
+.TE
+.)T
+Details regarding each of the variable data primitives are as follows:
+.ip "\f3DoVarPointList <DOVPTL>\f1"
+variable point list; allows the application to modify the number
+of points, vertex locations, normals, and colors.
+.ip "\f3DoVarLineList <DOVLNL>\f1"
+variable line list; allows the application to modify the number of
+lines, vertex locations, normals, and colors.
+.sp -.25v
+.ip "\f3DoVarTriangleMesh <DOVTRM>\f1"
+variable triangle mesh; allows the application to modify vertex
+locations, normals, colors, and \f2uv/uvw\f1 coordinates (but does not allow the
+application to modify the number of triangles in the mesh or the 
+connectivity of the mesh).
+.sp -.25v
+.ip "\f3DoVarTriangleStrip <DOVTRS>\f1"
+variable triangle strip; allows the application to modify vertex
+locations, normals, colors, and \f2uv/uvw\f1 coordinates (but does not allow the
+application to modify the number of triangles in the strip).
+.sp -.25v
+.ip "\f3DoVarSimplePolygonMesh <DOVSPM>\f1"
+variable simple polygon mesh; allows the application to modify
+vertex locations, normals, colors,
+and \f2uv/uvw\f1 coordinates (but does not allow the
+application to modify the number of polygons in the mesh or the 
+connectivity of the mesh).
+.sp -.25v
+.H2 "Advantages of Using Variable Data Primitives"
+.rs
+.sp -.25v
+Variable data primitives are most useful for objects that change
+often.  For example, a mesh object might change its vertex
+locations or colors dynamically.  If you use a variable data
+primitive to create the mesh object, the object does not need to
+be recreated each time its data changes.  The data can simply be
+updated with the primitive update calls.
+Variable data primitives are also useful for very large
+primitives, even if they are not changing often.  In this case,
+use of a variable data primitive saves the time and space
+required when \*(Dd copies the data of a standard primitive into
+\*(Dd's private space.
+.sp -.25v
+.lp
+The tradeoff, of course, is that you, the programmer, rather than
+\*(Dd, are in complete control of the data for the primitive.
+For standard primitives, \*(Dd manages the data.  For variable
+data primitives, you are responsible for ensuring that the data
+is managed properly.
+.sp -.25v
+.H2 "Variable Data Primitive Example"
+.rs
+.sp -.25v
+The following example shows how to use the variable triangle mesh
+functions.  The variable triangle mesh is created with the call
+.sp -.25v
+.(m
+DoVarTriangleMesh (colormodel, vertexcount, vlocs, vnorms,
+                   vcolors, tricount, triangles, smoothflag)
+.)m
+.rs
+.sp -.5v
+where
+.sp -.25v
+.ip "\f3vertexcount\f1"
+specifies the number of vertices in the mesh.
+.ip "\f3vlocs, vnorms, vcolors\f1"
+specify separate arrays for vertex locations, normals, and
+colors.  (In other \*(Dd primitives, there is only one array
+for all three.)  If vertex normals are not supplied, specify \f2DcNullPtr
+<DCNULL>\f1 for \f2vnorms\f1.  Similarly, if vertex colors are
+not supplied, specify \f2DcNullPtr <DCNULL>\f1 for \f2vcolors\f1.
+.ip "\f3tricount\f1"
+specifies the number of triangles in the mesh.
+.ip "\f3triangles\f1"
+specifies the connectivity of the vertices.  \f2triangles\f1 is a
+one-dimensional array containing \f2tricount\f1 triplets of
+integers.  Each triplet is an ordered list of mesh vertex numbers
+for the three vertices of the triangle.
+.lp
+(See previous sections for descriptions of the
+.I colormodel 
+and
+.I smoothflag
+parameters.)
+.lp
+The variable triangle mesh is updated with the call
+\f2DpUpdVarTriangleMesh <DPUVTM>\f1.  The syntax is
+.(m
+DpUpdVarTriangleMesh (object, vlocs, vnorms, vcolors,
+			recompute_norms)
+.)m
+where
+.ip "\f3object\f1"
+is the handle to the variable triangle mesh primitive object.
+.ip "\f3vlocs, vnorms, vcolors\f1"
+are \f2DcNullPtr <DCNULL>\f1 for arrays that have not changed, or a
+pointer to the data that has changed.
+.ip "\f3recompute_norms\f1"
+specifies whether normals should be recomputed if \f2vlocs\f1 is
+not null.  The vertex normals will be recomputed only if
+\f2smoothflag\f1 was set to true when the object was created and
+if the shading needs them.
+.lp
+The following code example shows the modification of an existing vertex
+location array.  In this case, the update call specifies to
+recompute the normals.
+.(m
+C code:
+
+.\"#ident "@(#)ch04	5.1" 9/18/91
+.\"
+static DtRealTriple vlocs[] = {
+     		 0.0,  0.0, 0.0,   /* center point */
+    		-1.0, -1.0, 0.0, 
+     		 1.0, -1.0, 0.0,
+     		 1.0,  1.0, 0.0, 
+    		-1.0,  1.0, 0.0  };
+
+static DtRealTriple vcolors[] = {
+    		 1.0, 1.0, 1.0, 
+		 1.0, 0.0, 0.0, 
+		 0.0, 1.0, 0.0,
+    		 0.0, 0.0, 1.0, 
+		 1.0, 0.0, 1.0  };
+     
+DtObject vartrimsh, device, object_group;
+DtReal new_z_value;
+static DtInt triangles = { 
+		 1, 2, 0, 
+		 2, 3, 0, 
+		 3, 4, 0, 
+		 4, 1, 0  };
+      
+vartrimsh = DoVarTriangleMesh (DcRGB, 5, vlocs, 
+		DcNullPtr, vcolors, 4, triangles, DcTrue);
+DsHoldObj(vartrimsh);
+
+DsSetAngleUnits(DcAngleDegrees);
+object_group = DoGroup(DcTrue);
+     DgAddObj(DoRotate(DcXAxis, -80));
+     DgAddObj(DoRepType(DcSurface));
+     DgAddObj(vartrimsh);
+DgClose();
+
+DsHoldObj(object_group);
+DgAddObjToGroup(DvInqDisplayGroup(view); object_group);
+DdUpdate(device);
+getchar();
+
+while (/*something*/)  {
+    /*  Calculate a new z-value for the center point 
+	and use this new z-value. */
+    new_z_value = compute_new_z(...);
+    vlocs[0][2] = new_z_value;
+    DpUpdVarTriangleMesh(vartrimsh, vlocs, DcNullPtr, 
+			DcNullPtr, DcTrue);
+    DdUpdate(device);
+    getchar();
+}
+
+
+\*(Fo code:
+
+.\"#ident "@(#)ch04	5.1" 9/18/91
+.\"
+      REAL*8 VLOCS(3,5), VCOLOR(3,5),NEWZ
+      INTEGER*4 VARTRI,TRIS(3,4),OBJGRP, DEVICE
+      CHARACTER*1 DUMMY
+C
+      DATA VLOCS / 0.0D0, 0.0D0, 0.0D0,
+     1             -1.0D0,-1.0D0, 0.0D0,
+     2              1.0D0,-1.0D0, 0.0D0,
+     3              1.0D0, 1.0D0, 0.0D0,
+     4             -1.0D0, 1.0D0, 0.0D0/
+C
+      DATA VCOLOR/ 1.0D0, 1.0D0, 1.0D0,
+     1              1.0D0, 0.0D0, 0.0D0,
+     2              0.0D0, 1.0D0, 0.0D0,
+     3              0.0D0, 0.0D0, 1.0D0,
+     4              1.0D0, 0.0D0, 1.0D0/
+C
+      DATA TRI/ 1,2,0,   2,3,0,   3,4,0,    4,1,0 /
+C
+C
+      CALL DSINIT
+      VARTRI=DOVTM(DCRGB,5,VLOCS,DCNULL,VCOLOR,4,TRIS,DCTRUE)
+      CALL DSHO(VARTRI)
+C
+      CALL DSSAU(DCADEG)
+      OBJGRP=DOG(DCTRUE)
+		CALL DGAO(DOROT(DCXAX, -80.0D0))
+		CALL DGAO(DOREPT(DCSURF))
+		CALL DGAO(VARTRI)
+      CALL DGCS
+C
+      CALL DSHO(OBJGRP)
+      CALL DSAOG(DVQIG(VIEW),OBJGRP)
+      CALL DDU(DEVICE)
+      READ(5,*)DUMMY
+C
+10    CONTINUE      !Loop to here based on user condition
+C         CALCULATE NEW Z-VALUE FOR CENTER POINT
+	  !Your computation goes here
+          NEWZ = CALCZ(...) 
+          VLOCS(3,1)= NEWZ	
+          CALL DPUVTM(VARTRI,VLOCS,DCNULL,DCNULL,DCTRUE)
+          CALL DDU(DEVICE)
+          READ(5,*)DUMMY
+      IF(NOT_DONE_YET) GO TO 10  !Your condition goes here
+C
+      CALL DSTERM
+.)m
+\*(FT shows 
+several variations of the variable triangle mesh used in the above example.
+.(F "./PS/4.10ps" 3.0i 0 
+.)F "Changing Vertex Locations in a Variable Data Primitive"
+.H1 "Chapter Summary"
+Chapter 4 describes the major primitive objects available in the
+\*(Do and how to specify them.  \f2Primitive objects\f1 are
+displayable geometric objects such as lines, triangles, polygons, patches,
+spheres, sphere lists, cylinders, boxes, cones, and tori.
+.lp
+Lines, triangles, polygons, and meshes all use \f2vertices\f1
+explicitly to compose the primitive object.  Each vertex consists
+of three values that specify the \f2location\f1 of the vertex in
+modeling coordinates.  Depending on the vertex type, the vertex
+can also include a \f2vertex normal\f1, used for shading
+calculations, a \f2vertex color\f1, and/or values for \f2texture mapping\f1.
+.lp
+The \f2geometric normal\f1 for a primitive object is assumed to
+be perpendicular to the surface of the object.  \*(Dd computes
+the geometric normal according to the \f2right-hand rule\f1
+except in the case of triangle strips, where it alternates
+between the right-hand rule and the left-hand rule for each
+triangle.
+.lp
+Simple polygons, created with \f2DoSimplePolygon <DOSPGN>\f1, consist of a
+single contour and can be convex, concave, or self-intersecting.
+Polygons, created with \f2DoPolygon <DOPGN>\f1, can have more than one
+contour.  For polygons with more than one contour, the
+\f2inside/out
+rule\f1 is used to determine whether a given point is inside or
+outside the polygon.
+.lp
+\*(Dd provides \f2mesh objects\f1 such as \f2DoTriangleMesh\f1,
+\f2DoSimplePolygonMesh\f1, and \f2DoPolygonMesh 
+<DOTRIM, DOSPM, DOPGNM>\f1,
+and \f2strip objects\f1 such as \f2DoTriangleStrip <DOTRIS>\f1, for specifying
+collections of interconnected primitive objects. 
+These objects provide an
+efficient way to describe collections of triangles or
+polygons and can be used to approximate smooth surfaces.
+.lp
+\f2Variable data primitives\f1, in contrast to standard primitives, do not copy
+vertex data into the private data space of the object.  They  are useful
+for very large primitives and for primitives whose data changes rapidly.
+Although variable data primitives are more efficient than the
+equivalent standard \*(Dd primitives, their use places an additional 
+burden on the programmer.  The programmer is
+completely responsible for the management of the object data when variable
+data primitives are used.

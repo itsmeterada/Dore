@@ -1,0 +1,14 @@
+#include <Dore.tmpl>
+#define IHaveSubdirs
+
+ SUBDIRS = glbshd methods rayint recrnd
+    SRCS = glb_data.c glb_extern.c glb_ini.c glb_render.c mat.c
+    OBJS = glb_data.o glb_extern.o glb_ini.o glb_render.o mat.o
+
+LibraryObjectRule()
+SubdirLibraryRule($(OBJS))
+
+MakeSubdirs($(SUBDIRS))
+DependSubdirs($(SUBDIRS))
+
+DependTarget()

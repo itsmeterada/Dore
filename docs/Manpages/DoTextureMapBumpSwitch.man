@@ -1,0 +1,56 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DoTextureMapBumpSwitch 3D "Dore"
+.SH NAME
+DoTextureMapBumpSwitch \- Create a primitive attribute object for enabling or disabling bump mapping
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+DtObject DoTextureMapBumpSwitch(switchvalue)
+DtSwitch switchvalue;
+.sp
+.in  -.5i
+FORTRAN:
+.in  +.5i
+INTEGER*4 DOTMBS(SWVAL)
+INTEGER*4 SWVAL
+.in  -.5i
+.fi 
+.IX "DoTextureMapBumpSwitch"
+.IX "DOTMBS"
+.SH DESCRIPTION
+.LP
+\f2DoTextureMapBumpSwitch\fP creates a primitive attribute object that
+enables or disables bump mapping, that is, perturbing shading normals 
+by using a texture map.
+The \f2switchvalue\fP parameter is used to specify whether or not the 
+shading normal of subsequent primitive objects can be modified 
+by bump mapping.
+.IP "\f2DcOff\fP <\f2DCOFF\fP>" 
+The primitive object will ignore any bump maps that have been defined with 
+\f2DoTextureMapBump\fP <\f2DOTMDC\fP>.
+.IP "\f2DcOn\fP <\f2DCON\fP>"
+The primitive object will be bump mapped
+as specified by the \f2DoTextureMapBump\fP attribute,
+whenever possible. 
+.SH DEFAULTS
+The default for \f2DoTextureMapBumpSwitch\fP is \f2DcOff\fP <\f2DCOFF\fP>.
+.SH SEE ALSO
+DoTextureMapBump(3D)
+\&

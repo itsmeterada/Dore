@@ -1,0 +1,15 @@
+#include <Dore.tmpl>
+
+    SRCS = mp_lylin.c smp_cam.c smp_difclr.c smp_difint.c smp_difswi.c \
+           smp_lcswcs.c smp_lgt.c smp_linlst.c smp_pntlst.c smp_reptyp.c \
+	   smp_trilst.c smp_trimsh.c smp_tristrip.c smp_varlinlst.c \
+	   smp_varpntlst.c smp_vartrimsh.c smp_vartristrp.c
+    OBJS = mp_lylin.o smp_cam.o smp_difclr.o smp_difint.o smp_difswi.o \
+           smp_lcswcs.o smp_lgt.o smp_linlst.o smp_pntlst.o smp_reptyp.o \
+	   smp_trilst.o smp_trimsh.o smp_tristrip.o smp_varlinlst.o \
+	   smp_varpntlst.o smp_vartrimsh.o smp_vartristrp.o
+
+LibraryObjectRule()
+SubdirLibraryRule($(OBJS))
+
+DependTarget()

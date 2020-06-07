@@ -1,0 +1,53 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DoBoundingVolSwitch 3D  "Dore"
+.SH NAME
+DoBoundingVolSwitch \- Create a primitive attribute object for enabling or disabling the use of bounding volumes
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+DtObject DoBoundingVolSwitch(switchvalue)
+DtSwitch switchvalue;
+.sp
+.in -.5i
+FORTRAN:
+.in +.5i
+INTEGER*4 DOBVS(SWVAL)
+INTEGER*4 SWVAL
+.in -.5i
+.fi
+.SH DESCRIPTION
+.IX DOBVS
+.IX DoBoundingVolSwitch
+.I DoBoundingVolSwitch
+returns a bounding volume switch primitive attribute object.
+The bounding volume switch takes one of the following values:
+.IP "\f2DcOn\fP <\f2DCON\fP>"
+Enable use of bounding volumes.
+.IP "\f2DcOff\fP <\f2DCOFF\fP>"
+Disable use of bounding volumes and ignore all bounding volumes encountered.
+.PP
+.SH DEFAULTS
+The default \f2DoBoundingVolSwitch\fP is \f2DcOn\fP <\f2DCON\fP>.
+.SH "SEE ALSO"
+.na
+.nh
+DoBoundingVol(3D), DoMinBoundingVolExt(3D), DsCompBoundingVol(3D)
+.ad
+.hy

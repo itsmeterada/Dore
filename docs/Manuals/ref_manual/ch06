@@ -1,0 +1,736 @@
+.\"#ident "%W%" %G%
+.\"
+.\" #
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  
+.\" # 
+.\" # KUBOTA GRAPHICS Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\" #
+.\"
+.\" Process this file by using the command 
+.\"		dpx.dieqn FILENAME
+.\" which is identical to /techp/bin/dpx, but with the references
+.\" to 'eqn' replaced by references to 'dieqn'
+.ds h1 6
+.so ../macros/local.me
+.PN 445
+.ds BT \*(Dd Reference Manual
+.ds CT \*(Dd Transformation Matrices
+.L1  D "OR\h'5p'\v'-8p'\(aa\v'8p'\h'-5p'\h'-\w'\(aa'u'E"
+.L2 "T" \s-2RANSFO\h'-1p'RMA\h'-2p'TIO\h'-1p'N\s+2
+.L3 "M" "\s-2ATRICES\s+2" 
+.CH SIX
+This chapter documents the specific matrix forms that
+the \*(Do uses.
+It describes matrices for the transformation
+pipeline (including matrices for modeling and viewing
+transformations) and matrices for transforming texture 
+map coordinates.     
+.H1 "Matrix Format"
+\*(Dd uses homogeneous coordinates, which means that a
+point in 3-space (x, y, z) is actually represented by a 4-vector
+in homogeneous space (wx, wy, wz, w).
+The fourth component is a nonzero scale factor.
+A homogeneous point (a, b, c, w) is converted back into ordinary
+three-dimensional coordinates by dividing each point
+by the scale factor, as in 
+a/w, b/w, c/w.
+.lp
+Transformations are represented as 4x4 matrices.
+\*(Dd uses column vectors to represent points so 
+the general form to transform a point is:
+.sp
+.EQ L
+delim $$
+left [ cpile { p sub x ' above p sub y ' above p sub z ' above p sub w ' }
+right ]~=~left ( ~matrix {
+ccol { m sub 00 above m sub 10 above m sub 20 above m sub 30 }
+ccol { m sub 01 above m sub 11 above m sub 21 above m sub 31 }
+ccol { m sub 02 above m sub 12 above m sub 22 above m sub 32 }
+ccol { m sub 03 above m sub 13 above m sub 23 above m sub 33 }
+} right )~times~left [ cpile { p sub x above p sub y above p sub z 
+above p sub w  } right ]
+.EN
+.lp
+Matrices are multiplied to form one combined matrix
+representing a composite transformation.
+\f2Preconcatenating\fP matrix $A bar$ to matrix $B bar$ 
+means that the matrices are combined such
+that transformation $A bar$ is effectively applied
+to the points before transformation $B bar$.
+When column vectors are used, as is the case in \*(Dd,
+preconcatenating matrix $A bar$ to matrix $B bar$
+implies multiplying $B bar~times~A bar$.
+Conversely, \f2postconcatenation\fP implies
+$A bar~times~B bar$.
+.lp
+Note that \*(Dd uses right-handed coordinate systems for
+both modeling and viewing.
+.rs
+.sp -.5v
+.H1 "Transformation Pipeline"
+.rs
+.sp -.25v
+The complete transformation pipeline is:
+.sp .5v
+.EQ L
+left [ cpile { p sub x ' above p sub y ' above p sub z ' above p sub w ' }
+right ]~=~V bar~times~C bar~times~CTM bar~times~
+left [ cpile { p sub x above p sub y above p sub z above p sub w  } right ]
+.EN
+.sp .5v
+where:
+.sp -.5v
+.ip $CTM bar$ 
+is the current transformation matrix, that is,
+the composite modeling transformation
+.sp -.5v
+.ip $C bar$ 
+is the camera positioning transformation
+.sp -.5v
+.ip $V bar$ 
+is the viewing transformation
+.fi
+.sp -.25v
+.lp
+The camera positioning transformation $C bar$ is determined during
+rendering initialization, and is the current transformation matrix
+at the time the \f2DoCamera <DOCM>\f1 object is executed.  It can be
+formed by any combination of geometric transformation objects, but is
+usually done with the \f2DoLookAtFrom <DOLAF>\f1 command.
+The current transformation matrix $CTM bar$ is discussed in the next section.
+Transformation $V bar$ is discussed later in the section on \f2Viewing
+Transformation.\f1
+.sp -.5v
+.H1 "Geometric Transformation Attributes"
+.rs
+.sp -.25v
+The geometric transformation attributes modify the modeling 
+coordinate system.
+A transformation matrix is created for each 
+geometric transformation object (DoTranslate, etc.).
+When these objects are executed during 
+traversal they cause their matrix
+to be preconcatenated to the current transformation matrix.
+For instance, if an
+object that generates a matrix $X bar$ 
+is executed
+during traversal of the \*(Dd database, 
+the matrix $X bar$ is preconcatenated to the
+current transformation matrix $CTM bar$ to create the new current
+transformation matrix $CTM bar '$.  In symbols this is 
+$CTM bar '~=~CTM bar~times~X bar$.
+.sp -.25v
+.lp
+The following sections describe the matrices created for
+each type of geometric transformation attribute.
+.H3 "DoTranslate <DOXLT>
+$DoTranslate~(t sub x ,~ t sub y ,~ t sub z )$ 
+causes a translation by $t sub x$, $t sub y$, and $t sub z$,
+in the \f2x, y\fP and \f2z\fP directions respectively.
+The corresponding matrix is $T bar$, where:
+.sp
+.EQ L
+T bar~=~
+left ( ~matrix {
+ccol { 1 above 0 above 0 above 0 }
+ccol { 0 above 1 above 0 above 0 }
+ccol { 0 above 0 above 1 above 0 }
+ccol { t sub x above t sub y above t sub z above 1 }
+} ~right )
+.EN
+.H3 "DoScale <DOSC>"
+$DoScale~(s sub x ,~ s sub y ,~ s sub z )$ 
+causes a scale by $s sub x$, $s sub y$, and $s sub z$,
+in the \f2x, y\fP and \f2z\fP directions respectively.
+The corresponding matrix is $S bar$, where:
+.\"$S bar$, where:
+.sp
+.EQ L
+S bar~=~
+left ( ~matrix {
+ccol { s sub x above 0 above 0 above 0 }
+ccol { 0 above s sub y above 0 above 0 }
+ccol { 0 above 0 above s sub z above 0 }
+ccol { 0 above 0 above 0 above 1 }
+} ~right )
+.EN
+.H3 "DoRotate <DOROT>"
+$DoRotate~(axis,~theta )$ 
+causes a rotation by\f2 $theta$ \f1about the specified axis.
+The corresponding matrix $R bar$ depends on the axis:
+.sp
+.EQ L
+R bar~=~left { matrix {
+lcol { { R sub x } bar above { R sub y } bar above { R sub z } bar }
+lcol { if~axis~==~DcXAxis~<DCXAX> above 
+if~axis~==~DcYAxis~<DCYAX> above
+if~axis~==~DcZAxis~<DCZAX> } }
+.EN
+and
+.sp
+.EQ L
+{ R sub x } bar~=~
+left ( ~matrix {
+ccol { 1 above 0 above 0 above 0 }
+ccol { 0 above cos( theta ) above sin( theta ) above 0 }
+ccol { 0 above -sin( theta ) above cos( theta ) above 0 }
+ccol { 0 above 0 above 0 above 1 }
+} ~right )
+.EN
+.sp
+.EQ L
+{ R sub y } bar~=~
+left ( ~matrix {
+ccol { cos( theta ) above 0 above -sin( theta ) above 0 }
+ccol { 0 above 1 above 0 above 0 }
+ccol { sin( theta ) above 0 above cos( theta ) above 0 }
+ccol { 0 above 0 above 0 above 1 }
+} ~right )
+.EN
+.sp
+.EQ L
+{ R sub z } bar~=~
+left ( ~matrix {
+ccol { cos( theta ) above sin( theta ) above 0 above 0 }
+ccol { -sin( theta ) above cos( theta ) above 0 above 0 }
+ccol { 0 above 0 above 1 above 0 }
+ccol { 0 above 0 above 0 above 1 }
+} ~right )
+.EN
+.H3 "DoShear <DOSHR>"
+$DoShear~(plane,~d sub 1 ,~d sub 2 )$ 
+causes a directional shear by $d sub 1$ and $d sub 2$
+about the specified major plane.
+The corresponding matrix $Sh bar$ depends on the major plane:
+.sp
+.EQ L
+Sh bar~=~left { matrix {
+lcol { { Sh sub yz } bar above { Sh sub xz } bar above { Sh sub xy }
+bar }
+lcol { if~plane~==~DcYZ~<DCYZ> above 
+if~plane~==~DcXZ~<DCXZ> above
+if~plane~==~DcXY~<DCXY> } }
+.EN
+and
+.sp
+.EQ L
+{ Sh sub yz } bar~=~
+left ( ~matrix {
+ccol { 1 above d sub 1 above d sub 2 above 0 }
+ccol { 0 above 1 above 0 above 0 }
+ccol { 0 above 0 above 1 above 0 }
+ccol { 0 above 0 above 0 above 1 }
+} ~right )
+.EN
+.sp
+.EQ L
+{ Sh sub xz } bar~=~
+left ( ~matrix {
+ccol { 1 above 0 above 0 above 0 }
+ccol { d sub 1 above 1 above d sub 2 above 0 }
+ccol { 0 above 0 above 1 above 0 }
+ccol { 0 above 0 above 0 above 1 }
+} ~right )
+.EN
+.sp
+.EQ L
+{ Sh sub xy} bar~=~
+left ( ~matrix {
+ccol { 1 above 0 above 0 above 0 }
+ccol { 0 above 1 above 0 above 0 }
+ccol { d sub 1 above d sub 2 above 1 above 0 }
+ccol { 0 above 0 above 0 above 1 }
+} ~right )
+.EN
+.H3 "DoTransformMatrix <DOTMX>"
+$DoTransformMatrix~( X bar ,~comptype)$ 
+causes transformation matrix $X bar$ to be combined with the current
+transformation matrix $CTM bar$, given the specified combination
+type:
+.sp
+.EQ L
+CTM bar '~=~left { matrix {
+lcol { X bar above CTM bar~times~X bar above X bar~times~CTM bar }
+lcol { if~comptype~==~DcReplace~<DCREP> above
+if~comptype~==~DcPreConcatenate~<DCPREC> above
+if~comptype~==~DcPostConcatenate~<DCPSTC> } }
+.EN
+.lp
+Note that this is the only geometric transformation attribute 
+that allows the user to replace the
+current transformation matrix or to postconcatenate a matrix
+to the current transformation matrix.  All other commands only
+preconcatenate a matrix to the current transformation matrix.
+.lp
+Remember, because \*(Dd uses column vectors,
+\f2DcPreConcatenate <DCPREC>\fP means
+the matrix $X bar$ is the second operand when multiplied with
+the composite matrix $CTM bar$.
+Conversely, with \f2DcPostConcatenate <DCPSTC>\fP, the matrix $X bar$ is
+the first operand of the multiplication (see the equations above).
+.H3 "DoLookAtFrom <DOLAF>"
+$DoLookAtFrom~( at bar ,~ "from" bar ,~ "up" bar )$
+specifies a transformation that combines a translation
+and a series of rotations.
+$DoLookAtFrom$
+transforms the current coordinate system 
+so that it forms a right-handed coordinate system with 
+$"from" bar$ at the origin, $"up" bar$ aligned to the positive $y$ axis
+and $ ("from" bar~-~at bar )$ aligned to the positive $z$ axis.
+The corresponding transformation matrix $L bar$ is:
+.sp
+.EQ L
+L bar~=~
+left ( ~matrix {
+ccol { u sub x above u sub y above u sub z above 0 }
+ccol { v sub x above v sub y above v sub z above 0 }
+ccol { n sub x above n sub y above n sub z above 0 }
+ccol { "from" sub x above "from" sub y above "from" sub z above 1 }
+} ~right )
+.EN
+where:
+.sp
+.in .5i
+.nf
+$n bar~=~"from" bar ~-~ at bar$
+$u bar~=~ "up" bar~ times ~n bar$
+$v bar~=~ n bar~ times ~ u bar$
+.in 0
+.fi
+.sp
+This command is especially useful for positioning lights and cameras.
+.H1 "Viewing Transformation"
+.lp
+The viewing transformation defines the volume of world
+space visible in the final image, the \f2frustum space\f1.
+.lp
+.\"A point $p$ in world space is included in frustum space
+.\"if the following three equations are satisfied:
+The frustum space encloses all points $p$ for which
+the following three equations are satisfied:
+.in .5i
+.sp 
+.nf
+$-p sub w '~<=~p sub x '~<=~p sub w '$ 
+$-p sub w '~<=~p sub y '~<=~p sub w '$ 
+$-p sub w '~<=~p sub z '~<=~0$
+.fi
+.in 0
+.lp
+where 
+.ip "$p$      "
+ is a point in world space.
+.ip "$p '~=~V bar~times~C bar~times~CTM bar~times~ p~ = ~(p sub x ', p sub y ', p sub z ', p sub w ')$"
+is the resulting point after applying the complete transformation pipeline
+to $p$ (see \f2Transformation Pipeline\fP at the beginning of this chapter).
+.lp
+The viewing matrix $V bar$
+depends 
+on the type of camera
+projection (\f2DoParallel <DOPAR>, DoPerspective <DOPER>,
+DoProjection <DOPRJ>, DoCameraMatrix <DOCMX>\fP).
+For parallel and perspective projections, $V bar$ also depends on
+the aspect ratio specified for the \*(Dd view.
+The following sections describe the viewing transformation $V bar$ created for
+each type of camera projection.
+.H2 "View Aspect Ratio"
+For both the perspective and parallel camera projections,
+the camera projection matrices are preconcatenated with an additional
+scaling matrix 
+${ S sub v} bar$ to handle the aspect ratio of the view, where:
+.BP
+.EQ L
+{ S sub v } bar~=~left { matrix {
+ccol { { S sub { y/x } } bar above { S sub { x/y } } bar }
+ccol { { if~viewsize sub x~>~ viewsize sub y } above 
+{ if~viewsize sub x~<=~ viewsize sub y } } 
+}
+.EN
+and
+.nf
+.Pu
+.@C 1
+.EQ L
+{ S sub { y/x } } bar~=~
+left ( "\v'1P'" ~matrix {
+ccol { { viewsize sub y } over { viewsize sub x } above 0 above 0 above 0 }
+ccol { 0 above 1 above 0 above 0 }
+ccol { 0 above 0 above 1 above 0 }
+ccol { 0 above 0 above 0 above 1 }
+} "\v'-1P'" ~right )
+.EN
+.Po
+.sp 1v
+.nf
+.Pu
+.@C 1
+.EQ L
+{ S sub { x/y } } bar~=~
+left ( "\v'1P'" ~matrix {
+ccol { 1 above 0 above 0 above 0 }
+ccol { 0 above { viewsize sub x } over { viewsize sub y } above 0 above 0 }
+ccol { 0 above 0 above 1 above 0 }
+ccol { 0 above 0 above 0 above 1 }
+} "\v'-1P'" ~right )
+.EN
+.in +1i
+.Po
+.sp
+.in .5i
+.nf
+$viewsize sub x~=~fur sub x~-~bll sub x$
+$viewsize sub y~=~fur sub y~-~bll sub y$
+.fi
+.in 0
+.lp
+.sp
+$fur bar$ and $bll bar$ are fields of the view boundary returned
+by $DvInqBoundary$. They define the extent of the rectangular view
+volume.
+.sp .5v
+.H2 "Projection Types"
+.rs
+.sp .5v
+A different expression for the viewing transformation matrix $V bar$
+corresponds to each camera projection type.
+.sp .5v
+.H3 "DoPerspective <DOPER>
+.rs
+.sp .5v
+$DoPerspective~(fov,~ hither,~ yon)$ creates an object that 
+generates a camera projection matrix.
+When multiplied by the scaling matrix ${ S sub v} bar$,
+the resulting viewing transformation matrix 
+$V bar$ is:
+.sp 
+.nf
+.Pu
+.@C 1
+.EQ L
+V bar~=~left (  "\v'2P'" ~matrix {
+ccol { 1 over { tan left ( fov over 2 right ) } above 0 above 0 above 0 }
+ccol { 0 above 1 over { tan left ( fov over 2 right ) } above 0 above 0 }
+ccol { 0 above 0 above 1 over { 1~-~hither over yon } above -1 }
+ccol { 0 above 0 above -hither over { 1~-~hither over yon } above 0 }
+} "\v'-2P'" ~right )~times~{ S sub v} bar
+.EN
+.Po
+.sp
+Note that both \f2hither\fP and \f2yon\fP must be negative.
+.H3 "DoParallel <DOPAR>
+$DoParallel~(winsize,~ hither,~ yon)$ creates an object that generates
+a camera projection matrix.
+When multiplied by the scaling matrix ${ S sub v} bar$,
+the resulting viewing transformation matrix
+$V bar$ is:
+
+.sp 2v
+.EQ L
+V bar~=~left ( ~matrix {
+ccol { 2 over winsize above 0 above 0 above 0 }
+ccol { 0 above 2 over winsize above 0 above 0 }
+ccol { 0 above 0 above 1 over { hither~-~yon } above 0 }
+ccol { 0 above 0 above 0 above 1 }
+} ~right ) ~times~ 
+left ( ~matrix {
+ccol { 1 above 0 above 0 above 0 }
+ccol { 0 above 1 above 0 above 0 }
+ccol { 0 above 0 above 1 above 0 }
+ccol { 0 above 0 above -hither above 1 }
+} ~right ) ~times~{ S sub v} bar
+.EN
+.lp
+.H3 "DoProjection <DOPRJ>"
+$DoProjection~(window,~type,~prp,~plane,~hither,~yon)$ creates an
+object that generates a viewing transformation matrix $V bar$.  
+In this case, the viewing transformation matrix corresponds to the
+camera projection matrix.
+Note that both $hither$ and $yon$ must be negative.
+$ll bar$ and $ur bar$ are fields of the parameter $window$. They define
+an arbitrary rectangular region on the viewing plane.
+
+.sp 2v
+.EQ L
+V bar~=~
+left {
+matrix {
+lcol { { { V sub perspective } bar~times~M bar } above
+{ { V sub parallel } bar~times~M bar } }
+lcol { { if~type~==~roman DcPerspective } above 
+{ if~type~==~roman DcParallel } } }
+.EN
+.sp
+where:
+.nf
+.Pu
+.@C 1
+.EQ L
+M bar~=~
+left ( "\v'3P'" ~matrix {
+ccol { 1 above 0 above 0 above 0 }
+ccol { 0 above 1 above 0 above 0 }
+ccol { { left ( - ~{ (ll sub x~+~ur sub x ) } over 2~-~
+prp sub x right ) } over vp above 
+{ left ( - ~{ (ll sub y~+~ur sub y ) } over 2~-~
+prp sub y right ) } over vp above 1 above 0 }
+ccol { 0 above 0 above 0 above 1 }
+} "\v'-3P'" ~right )~times~
+left ( ~matrix {
+ccol { 1 above 0 above 0 above 0 }
+ccol { 0 above 1 above 0 above 0 }
+ccol { 0 above 0 above 1 above 0 }
+ccol { -prp sub x above -prp sub y above -prp sub z above 1 }
+} ~right )
+.EN
+.Po
+.sp 1v
+.EQ L
+{ V sub perspective } bar~mark =~left ( ~matrix {
+ccol { vp over { xur sub x } above 0 above 0 above 0 }
+ccol { 0 above vp over { xur sub y } above 0 above 0 }
+ccol { 0 above 0 above 1 over { 1~-~h over y } above -1 }
+ccol { 0 above 0 above -h over { 1~-~h over y } above 0 }
+} right )
+.EN
+.sp 2v
+.nf
+.Pu
+.@C 1
+.EQ L
+{ V sub parallel } bar~lineup = ~left ( "\v'1P'" ~matrix {
+ccol { 1 over { xur sub x } above 0 above 0 above 0 }
+ccol { 0 above 1 over { xur sub y } above 0 above 0 }
+ccol { 0 above 0 above 1 over { h~-~y } above 0 }
+ccol { 0 above 0 above -h over { h~-~y } above 1 }
+} "\v'-1P'" ~right )
+.EN
+.Po
+.sp 2
+and
+.in .5i
+.nf
+$vp~=~prp sub z ~-~plane$
+$h~=~hither~-~prp sub z$
+$y~=~yon~-~prp sub z$
+.sp 
+$left [ lpile { xur sub x above xur sub y above xur sub z above 1 } 
+right ]~=~ M bar~times~ left [ lpile { ur sub x above ur sub y above
+plane above 1 } right ]$
+.sp
+.fi
+.in 0
+.H3 "DoCameraMatrix <DOCMX>
+$DoCameraMatrix~( V bar )$ creates an object that sets
+the camera projection matrix (which is the same as the viewing
+transformation matrix in this case)
+to the user-defined matrix $V bar$.
+.H1 "Program Examples"
+The following two examples show how additional types of 
+composite transformations
+could be created using the \*(Dd transformation objects.
+.H2 "Example 1: RotateAxis"
+The first example is a complete subroutine
+that returns a \f2DoTransformMatrix\f1 object that rotates about an
+arbitrary axis passing through the origin.
+.lp
+$RotateAxis~(x,y,z,~ theta )$ generates the matrix:
+.ps 9
+.(D
+.EQ L
+left ( ~matrix {
+ccol { x sup 2 ~+~(1~-~x sup 2 )~cos( theta ) above
+xy(1~-~cos( theta ))~+~z~sin( theta ) above
+xz(1~-~cos( theta ))~-~y~sin( theta ) above 0 }
+ccol { xy(1~-~cos( theta ))~-~z~sin( theta ) above
+y sup 2 ~+~(1~-~y sup 2 )~cos( theta ) above
+yz(1~-~cos( theta ))~+~x~sin( theta ) above 0 }
+ccol { xz(1~-~cos( theta ))~+~y~sin( theta ) above 
+yz(1~-~cos( theta ))~-~x~sin( theta ) above
+z sup 2 ~+~(1~-~z sup 2 )~cos( theta ) above 0 }
+ccol { 0 above 0 above 0 above 1 }
+} ~right )
+.EN
+.)D
+.ps 10
+The C code is as follows:
+.(m
+#include <dore.h>
+#include <math.h>
+
+DtObject RotateAxis (x, y, z, theta)
+DtReal x, y, z;
+DtReal theta;
+{
+   
+
+   DtReal costheta;
+   DtReal sintheta;
+   DtMatrix4x4 matrix;
+
+   costheta = cos (theta);
+   sintheta = sin (theta);
+
+   matrix[0][0] = x*x + (1 - x*x)*costheta;
+   matrix[0][1] = x*y*(1 - costheta) - z*sintheta;
+   matrix[0][2] = x*z*(1 - costheta) + y*sintheta;
+   matrix[0][3] = 0.0;
+
+   matrix[1][0] = x*y*(1 - costheta) + z*sintheta;
+   matrix[1][1] = y*y + (1 - y*y)*costheta;
+   matrix[1][2] = y*z*(1 - costheta) - x*sintheta;
+   matrix[1][3] = 0.0;
+
+   matrix[2][0] = x*z*(1 - costheta) - y*sintheta;
+   matrix[2][1] = y*z*(1 - costheta) + x*sintheta;
+   matrix[2][2] = z*z + (1 - z*z)*costheta;
+   matrix[2][3] = 0.0;
+
+   matrix[3][0] = 0.0;
+   matrix[3][1] = 0.0;
+   matrix[3][2] = 0.0;
+   matrix[3][3] = 1.0;
+
+   return (DoTransformMatrix (matrix, DcPreConcatenate));
+}
+
+
+The \*(Fo code for the same operation is:
+      
+      INTEGER*4 FUNCTION ROTAX(X,Y,Z,THETA)
+C
+      INCLUDE '/usr/include/fortran/DORE'
+      INCLUDE '/usr/include/fortran/DORETYPES'
+C
+      REAL*8 CTHETA
+      REAL*8 STHETA
+      REAL*8 MATRIX(4,4)
+C
+      CTHETA = COS(THETA)
+      STHETA = SIN(THETA)
+C
+      MATRIX(1,1) = X*X+(1-X*X)*CTHETA
+      MATRIX(2,1) = X*Y*(1-CTHETA)-Z*STHETA
+      MATRIX(3,1) = X*Z*(1-CTHETA)+Y*STHETA
+      MATRIX(4,1) = 0.0
+
+
+C
+      MATRIX(1,2) = X*Y*(1-CTHETA)+Z*STHETA
+      MATRIX(2,2) = Y*Y+(1-Y*Y)*CTHETA
+      MATRIX(3,2) = Y*Z*(1-CTHETA)-X*STHETA
+      MATRIX(4,2) = 0.0
+C
+      MATRIX(1,3) = X*Z*(1-CTHETA)-Y*STHETA
+      MATRIX(2,3) = Y*Z*(1-CTHETA)+X*STHETA
+      MATRIX(3,3) = Z*Z+(1-Z*Z)*CTHETA
+      MATRIX(4,3) = 0.0
+C
+      MATRIX(1,4) = 0.0
+      MATRIX(2,4) = 0.0
+      MATRIX(3,4) = 0.0
+      MATRIX(4,4) = 1.0
+C
+      ROTAX = DOTMX (MATRIX, DCPREC)
+C
+      RETURN
+      END	
+.)m
+.H2 "Example 2: RotateCenter"
+.lp
+The second example shows how \*(Dd transformations can be
+combined to
+allow an object centered at $c=(c sub x, c sub y, {c sub z} )$
+to be rotated about the $x$, $y$, and $z$ axes in the same way it would
+be rotated if it were centered at the origin.
+This transformation is generated in \*(Dd by the following sequence
+in C:
+.lp
+.(m
+DgAddObj (DoTranslate ($c sub x ,~c sub y ,~c sub z$));
+DgAddObj (DoRotate (DcZAxis, $r sub z$));
+DgAddObj (DoRotate (DcYAxis, $r sub y$));
+DgAddObj (DoRotate (DcXAxis, $r sub x$));
+DgAddObj (DoTranslate ($-c sub x ,~-c sub y ,~-c sub z$));
+.)m
+.lp
+The corresponding \*(Fo sequence is:
+.(m
+     CALL DGAO (DOXLT (CX, CY, CZ))
+     CALL DGAO (DOROT (DCZAX, RZ))
+     CALL DGAO (DOROT (DCYAX, RY))
+     CALL DGAO (DOROT (DCXAX, RX))
+     CALL DGAO (DOXLT (-CX, -CY, -CZ))
+.)m
+.H1 "Texture Coordinate Transformation Matrices"
+The texture matrices transform a primitive object's texture 
+coordinates before they are used to access a texture.
+Unlike the general transformation attributes inherited by the primitive
+and studio objects (\f2DoTranslate <DOXLT>\f1, etc.), the texture
+attributes for transforming texture coordinates are not cumulative.
+Each texture map object inherits the texture matrix bound most
+closely to it.  Texture matrices are outside of the transformation 
+pipeline and are instead passed directly to the renderer.
+.H3 "DoTextureMatrixUV <DOTMUV>" 
+\f2DoTextureMatrixUV $ ({TM sub 2d} bar$) \f1 creates an object
+that establishes
+a 2-dimensional texture matrix.   The matrix is 
+an arbitrary 3x3 matrix with the general format:
+.sp
+.EQ L
+{ TM sub 2d } bar~=~
+left ( ~matrix {
+ccol { m sub 00 above m sub 10 above m sub 20 }
+ccol { m sub 01 above m sub 11 above m sub 21 }
+ccol { m sub 02 above m sub 12 above m sub 22 }
+} ~right )
+.EN
+.sp
+The transformation values of the texture matrix are applied to 
+subsequent primitive object's (\f2u,v,w\f1) coordinates before they are 
+used to access a 2-dimensional texture.  Subsequent calls to
+\f2DoTextureScaleUV <DOTSUV>\f1
+alter positions $m sub 00$ and $m sub 11$; and 
+\f2DoTextureTranslateUV <DOTTUV\fP> alters positions $m sub 02$ 
+and $m sub 12$.  However, because \f2DoTextureScaleUV\f1 can 
+alter any rotations previously stored in the texture matrix
+by \f2DoTextureMatrixUV\f1, it is recommended that you use either 
+\f2DoTextureMatrixUV\f1 by itself or 
+\f2DoTextureScaleUV\f1 with \f2DoTextureTranslateUV\f1.
+.H3 "DoTextureMatrixUVW <DOTMW>"
+\f2DoTextureMatrixUVW $ ({TM sub 3d} bar$) \f1creates 
+an object that establishes
+a 3-dimensional texture matrix.  The matrix  
+is an arbitrary 4x4 matrix with the general format:
+.sp
+.EQ L
+{ TM sub 3d } bar~=~
+left ( ~matrix {
+ccol { m sub 00 above m sub 10 above m sub 20 above m sub 30 }
+ccol { m sub 01 above m sub 11 above m sub 21 above m sub 31 }
+ccol { m sub 02 above m sub 12 above m sub 22 above m sub 32 }
+ccol { m sub 03 above m sub 13 above m sub 23 above m sub 33 }
+} ~right )
+.EN
+.LP
+.sp
+The transformation values of the texture matrix are applied to the 
+subsequent primitive object's \f2(u,v,w)\f1 coordinates before they are 
+used to access a 3-dimensional texture.  
+Subsequent calls to \f2DoTextureScaleUVW <DOTSW>\f1 
+alter positions $m sub 00$, $m sub 11$, and $m sub 22$; and 
+\f2DoTextureTranslateUVW <DOTTW\fP> alters positions $m sub 03$, 
+$m sub 13$, and $m sub 23$.  However, because \f2DoTextureScaleUVW\f1 may 
+alter any rotations previously stored in the texture matrix by 
+\f2DoTextureMatrixUVW\f1, it is recommended that you use either 
+\f2DoTextureMatrixUVW\f1 by itself or
+\f2DoTextureScaleUVW\f1 with \f2DoTextureTranslateUVW\f1.

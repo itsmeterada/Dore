@@ -1,0 +1,762 @@
+.\"#ident "%W%" %G%
+.\"
+.\" #
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  
+.\" # 
+.\" # KUBOTA GRAPHICS Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\" #
+.\"
+.sc
+.ds BT "\\*(Dd Developer's Guide
+.ds CT "Global Attribute Access
+.ds h1 B
+.so ../macros/local.me
+.PN 365
+.L1 G LOBAL
+.L2 A TTRIBUTE
+.L3 A CCESS
+.CH app
+This appendix contains the calling sequences for
+the method routines of the standard method "InqGlobalValue".
+This method is used during traversal
+to query the current value of attributes.
+.H1 "Attributes and Global Attributes"
+\*(Dd uses a stacking mechanism for keeping track of current
+values of the attributes.
+The stack of values for a particular attribute is 
+implemented as an instance of a global attribute class.
+There is one global attribute class for each attribute class,
+with just a few exceptions:
+.BU
+All geometric transformation attributes (\f2DoRotate, DoScale, DoTranslate,
+DoShear, DoLookAtFrom,\fP
+\f2DoTransformMatrix\f1, \f2DoPushMatrix\fP, and \f2DoPopMatrix\fP)
+affect the same global attribute object, "AttLcstowcsmat".
+.BU hs
+All camera projection attributes (\f2DoParallel\fP, \f2DoPerspective\fP,
+\f2DoProjection\fP, and \f2DoCameraMatrix\fP) affect the
+same global attribute object, "AttCameraMatrix". 
+.BU hs
+All \f2uv\f1 texture attributes
+(\f2DoTextureTranslateUV\fP, \f2DoTextureScaleUV\fP,
+and \f2DoTextureMatrixUV\fP)
+affect the same global attribute object, "AttTextureMatrixUV".
+.BU hs
+All \f2uvw\f1 texture attributes
+(\f2DoTextureTranslateUVW\fP, \f2DoTextureScaleUVW\fP,
+and \f2DoTextureMatrixUVW\fP)
+affect the same global attribute object, "AttTextureMatrixUVW".
+.lp
+See Chapter 3 for more information on global attributes.
+.bp
+.H1 "Querying Current Attribute Values 
+The standard method "InqGlobalValue" is implemented
+for all the global attribute classes.
+It is used to query the current value of an attribute type.
+To use it 
+you first call \f2DDclass_InqMethod\fP to get a pointer to the
+method routine for the attribute in question.
+Then invoke the method routine using the appropriate calling sequence.
+For example:
+.(m
+DtPFI routine;
+DtCameraMatrixType camtyp;
+DtMatrix4x4 matrix;
+
+routine = DDclass_InqMethod (DsInqClassId("AttCameraMatrix"),
+			     DsInqMethodId("InqGlobalValue");
+(*routine) (&camtyp, matrix);
+.)m
+The following subsections list the calling sequences of the 
+"InqGlobalValue" method routines for all the
+global attribute classes.
+.H2 "Studio Attributes"
+.nf
+class name: \f3AttCameraMatrix\fP
+.(m
+(*routine) (type, matrix)
+     DtCameraMatrixType *type;
+     DtMatrix4x4 matrix;
+.)m
+.nf
+class name: \f3AttGlbRendMaxObjs\fP
+.(m
+(*routine) (maxobjs)
+     DtInt *maxobjs;
+.)m
+.nf
+class name: \f3AttGlbRendMaxSub\fP
+.(m
+(*routine) (maxsub)
+     DtInt *maxsub;
+.)m
+.nf
+class name: \f3AttGlbRendRayLevel\fP
+.(m
+(*routine) (level)
+     DtInt *level;
+.)m
+.nf
+class name: \f3AttLightAttenuation\fP
+.(m
+(*routine) (c1, c2)
+     DtReal *c1;
+     DtReal *c2;
+.)m
+.nf
+class name: \f3AttLightColor\fP
+.(m
+(*routine) (colormodel, color)
+     DtColorModel *colormodel;
+     DtReal color[3];
+.)m
+.nf
+class name: \f3AttLightIntens\fP
+.(m
+(*routine) (value)
+     DtReal *value;
+.)m
+.nf
+class name: \f3AttLightSpreadAngles\fP
+.(m
+(*routine) (total, delta)
+     DtReal *total;
+     DtReal *delta;
+.)m
+.nf
+class name: \f3AttLightSpreadExp\fP
+.(m
+(*routine) (exponent)
+     DtReal *exponent;
+.)m
+.nf
+class name: \f3AttLightType\fP
+.(m
+(*routine) (value)
+     DtObject *value;
+.)m
+.nf
+class name: \f3AttSampleAdaptive\fP
+.(m
+(*routine) (value)
+     DtReal *value;
+.)m
+.nf
+class name: \f3AttSampleAdaptiveSwitch\fP
+.(m
+(*routine) (switchvalue)
+     DtSwitch *switchvalue;
+.)m
+\ 
+.bp
+\ 
+.nf
+class name: \f3AttSampleFilter\fP
+.(m
+(*routine) (filter, xwidth, ywidth)
+     DtObject *filter;
+     DtReal *xwidth;
+     DtReal *ywidth;
+.)m
+.nf
+class name: \f3AttSampleJitter\fP
+.(m
+(*routine) (value)
+     DtReal *value;
+.)m
+.nf
+class name: \f3AttSampleJitterSwitch\fP
+.(m
+(*routine) (switchvalue)
+     DtSwitch *switchvalue;
+.)m
+.nf
+class name: \f3AttSampleSuper\fP
+.(m
+(*routine) (xsamples, ysamples)
+     DtReal *xsamples;
+     DtReal *ysamples;
+.)m
+.nf
+class name: \f3AttSampleSuperSwitch\fP
+.(m
+(*routine) (switchvalue)
+     DtSwitch *switchvalue;
+.)m
+.nf
+class name: \f3AttStereo\fP
+.(m
+(*routine) (eyeseparation, distance)
+     DtReal *eyeseparation;
+     DtReal *distance;
+.)m
+.nf
+class name: \f3AttStereoSwitch\fP
+.(m
+(*routine) (switchvalue)
+     DtSwitch *switchvalue;
+.)m
+\ 
+.bp
+.H2 "Geometric Transformations"
+.nf
+class name: \f3AttLcstowcsmat\fP
+.(m
+(*routine) (matrix)
+     DtMatrix4x4 matrix;
+.)m
+.H2 "Primitive Attributes"
+.nf
+class name: \f3AttAmbientIntens\fP
+.(m
+(*routine) (value)
+     DtReal *value;
+.)m
+.nf
+class name: \f3AttAmbientSwitch\fP
+.(m
+(*routine) (switchvalue)
+     DtSwitch *switchvalue;
+.)m
+.nf
+class name: \f3AttBackfaceCullable\fP
+.(m
+(*routine) (switchvalue)
+     DtSwitch *switchvalue;
+.)m
+.nf
+class name: \f3AttBackfaceCullSwitch\fP
+.(m
+(*routine) (switchvalue)
+     DtSwitch *switchvalue;
+.)m
+.nf
+class name: \f3AttBoundingVolSwitch\fP
+.(m
+(*routine) (switchvalue)
+     DtSwitch *switchvalue;
+.)m
+.nf
+class name: \f3AttClipSwitch\fP
+.(m
+(*routine) (switchvalue)
+     DtSwitch *switchvalue;
+.)m
+\ 
+.bp
+.nf
+class name: \f3AttClipVol\fP
+.(m
+(*routine) (count, point, vector, plneqn)
+     DtInt *count;
+     DtPoint3 *point;
+     DtVector3 *vector;
+     DtPoint4 *plneqn;
+.)m
+.nf
+class name: \f3AttCompTextureUVCallback\fP
+.(m
+(*routine) (value)
+     DtObject *value;
+.)m
+.nf
+class name: \f3AttCompTextureUVSwitch\fP
+.(m
+(*routine) (switchvalue)
+     DtSwitch *switch;
+.)m
+class name: \f3AttDepthCue\fP
+.(m
+(*routine) (zfront, zback, sfront, sback, colormodel, color)
+     DtReal *zfront, *zback;
+     DtReal *sfront, *sback;
+     DtColorModel *colormodel;
+     DtReal color[3];
+.)m
+.nf
+class name: \f3AttDepthCueSwitch\fP
+.(m
+(*routine) (switchvalue)
+     DtSwitch *switch;
+.)m
+.nf
+class name: \f3AttDiffuseColor\fP
+.(m
+(*routine) (colormodel, color)
+     DtColorModel *colormodel;
+     DtReal color[3];
+.)m
+.nf
+class name: \f3AttDiffuseIntens\fP
+.(m
+(*routine) (value)
+     DtReal *value;
+.)m
+\ 
+.bp
+.nf
+class name: \f3AttDiffuseSwitch\fP
+.(m
+(*routine) (switchvalue)
+     DtSwitch *switchvalue;
+.)m
+.nf
+class name: \f3AttHiddenSurfSwitch\fP
+.(m
+(*routine) (switchvalue)
+     DtSwitch *switchvalue;
+.)m
+.nf
+class name: \f3AttInterpType\fP
+.(m
+(*routine) (interptype)
+     DtInterpType *interptype;
+.)m
+.nf
+class name: \f3AttInvisSwitch\fP
+.(m
+(*routine) (switchvalue)
+     DtSwitch *switchvalue;
+.)m
+.nf
+class name: \f3AttLightSwitch\fP
+.(m
+(*routine) (count, list, lstsize)
+     DtInt *count;
+     DtPtr *list;
+     DtInt listsize;
+.)m
+class name: \f3AttLineType\fP
+.(m
+(*routine) (value)
+     DtLineType *value;
+.)m
+.nf
+class name: \f3AttLineWidth\fP
+.(m
+(*routine) (value)
+     DtReal *value;
+.)m
+.nf
+class name: \f3AttLocalAntiAliasStyle\fP
+.(m
+(*routine) (value)
+     DtLocalAntiAliasStyle *value;
+.)m
+\ 
+.bp
+.nf
+class name: \f3AttLocalAntiAliasSwitch\fP
+.(m
+(*routine) (switchvalue)
+     DtSwitch *switchvalue;
+.)m
+.nf
+class name: \f3AttMarkerFont\fP
+.(m
+(*routine) (mkrfnt)
+     DtInt *mkrfnt;
+.)m
+.nf
+class name: \f3AttMarkerGlyph\fP
+.(m
+(*routine) (mkrgly)
+     DtInt *mkrgly;
+.)m
+.nf
+class name: \f3AttMarkerScale\fP
+.(m
+(*routine) (value)
+     DtReal *value;
+.)m
+.nf
+class name: \f3AttMinBoundingVolExt\fP
+.(m
+(*routine) (value)
+     DtReal *value;
+.)m
+.nf
+class name: \f3AttPickID\fP
+.(m
+(*routine) (pickid)
+     DtInt *pickid;
+.)m
+.nf
+class name: \f3AttPickSwitch\fP
+.(m
+(*routine) (switchvalue)
+     DtSwitch *switchvalue;
+.)m
+.nf
+class name: \f3AttReflectionSwitch\fP
+.(m
+(*routine) (switchvalue)
+     DtSwitch *switchvalue;
+.)m
+.nf 
+class name: \f3AttRefractionIndex\fP
+.(m
+(*routine) (value)
+     DtReal *value;
+.)m
+.nf 
+class name: \f3AttRefractionSwitch\fP
+.(m
+(*routine) (switchvalue)
+    DtSwitch *switchvalue;
+.)m
+.nf
+class name: \f3AttRepType\fP
+.(m
+(*routine) (reptype)
+     DtRepType *reptype;
+.)m
+.nf
+class name: \f3AttShadeIndex\fP
+.(m
+(*routine) (shdidx)
+     DtInt *shdidx;
+.)m
+.nf
+class name: \f3AttShadowSwitch\fP
+.(m
+(*routine) (switchvalue)
+     DtSwitch *switchvalue;
+.)m
+.nf
+class name: \f3AttSpecularColor\fP
+.(m
+(*routine) (colormodel, color)
+     DtColorModel *colormodel;
+     DtReal color[3];
+.)m
+.nf
+class name: \f3AttSpecularFactor\fP
+.(m
+(*routine) (value)
+     DtReal *value;
+.)m
+.nf
+class name: \f3AttSpecularIntens\fP
+.(m
+(*routine) (value)
+     DtReal *value;
+.)m
+.nf
+class name: \f3AttSpecularSwitch\fP
+.(m
+(*routine) (switchvalue)
+     DtSwitch *switchvalue;
+.)m
+\ 
+.bp
+.nf
+class name: \f3AttSubDivSpec\fP
+.(m
+(*routine) (type, parms)
+     DtInt *type;
+     DtReal *parms;
+.)m
+.nf
+class name: \f3AttSurfaceEdgeColor\fP
+.(m
+(*routine) (colormodel, color)
+     DtColorModel *colormodel;
+     DtReal color[3];
+.)m
+.nf
+class name: \f3AttSurfaceShade\fP
+.(m
+(*routine) (value)
+     DtObject *value;
+.)m
+.nf
+class name: \f3AttTextAlign\fP
+.(m
+(*routine) (halign, valign)
+     DtTextAlignHorizontal *halign;
+     DtTextAlignVertical *valign;
+.)m
+.nf
+class name: \f3AttTextExpFactor\fP
+.(m
+(*routine) (value)
+     DtReal *value;
+.)m
+.nf
+class name: \f3AttTextFont\fP
+.(m
+(*routine) (txtfnt)
+     DtInt *txtfnt;
+.)m
+.nf
+class name: \f3AttTextHeight\fP
+.(m
+(*routine) (value)
+     DtReal *value;
+.)m
+.nf
+class name: \f3AttTextPath\fP
+.(m
+(*routine) (textpath)
+     DtTextPath *textpath;
+.)m
+\ 
+.bp
+.nf
+class name: \f3AttTextPrecision\fP
+.(m
+(*routine) (txtprc)
+     DtTextPrecision *txtprc;
+.)m
+.nf
+class name: \f3AttTextSpace\fP
+.(m
+(*routine) (value)
+     DtReal *value;
+.)m
+.nf
+class name: \f3AttTextUpVector\fP
+.(m
+(*routine) (xup, yup)
+     DtReal *xup;
+     DtReal *yup;
+.)m
+.nf
+class name: \f3AttTextureMapBump\fP
+.(m
+(*routine) (max_textures, num_textures, mapping, raster,
+	    max_attr_size, attributes, attributes_size)
+     DtInt max_textures;
+     DtInt *num_textures;
+     DtObject mapping[];
+     DtObject raster[];
+     DtInt max_attr_size;
+     unsigned char attributes[];
+     DtInt attributes_size[];
+.)m
+.nf
+class name: \f3AttTextureMapBumpSwitch\fP
+.(m
+(*routine) (switchvalue)
+     DtSwitch *switchvalue;
+.)m
+.nf
+class name: \f3AttTextureMapDiffuseColor\fP
+.(m
+(*routine) (max_textures, num_textures, mapping, raster,
+	    max_attr_size, attributes, attributes_size)
+     DtInt max_textures;
+     DtInt *num_textures;
+     DtObject mapping[];
+     DtObject raster[];
+     DtInt max_attr_size;
+     unsigned char attributes[];
+     DtInt attributes_size[];
+.)m
+\ 
+.bp
+.nf
+class name: \f3AttTextureMapDiffuseColorSwitch\fP
+.(m
+(*routine) (switchvalue)
+     DtSwitch *switchvalue;
+.)m
+.nf
+class name: \f3AttTextureMapEnviron\fP
+.(m
+(*routine) (max_textures, num_textures, mapping, raster,
+	    max_attr_size, attributes, attributes_size)
+     DtInt max_textures;
+     DtInt *num_textures;
+     DtObject mapping[];
+     DtObject raster[];
+     DtInt max_attr_size;
+     unsigned char attributes[];
+     DtInt attributes_size[];
+.)m
+.nf
+class name: \f3AttTextureMapEnvironSwitch\fP
+.(m
+(*routine) (switchvalue)
+     DtSwitch *switchvalue;
+.)m
+.nf
+class name: \f3AttTextureMapTranspIntens\fP
+.(m
+(*routine) (max_textures, num_textures, mapping, raster,
+	    max_attr_size, attributes, attributes_size)
+     DtInt max_textures;
+     DtInt *num_textures;
+     DtObject mapping[];
+     DtObject raster[];
+     DtInt max_attr_size;
+     unsigned char attributes[];
+     DtInt attributes_size[];
+.)m
+.nf
+class name: \f3AttTextureMapTranspIntensSwitch\fP
+.(m
+(*routine) (switchvalue)
+     DtSwitch *switchvalue;
+.)m
+.nf
+class name: \f3AttTranspColor\fP
+.(m
+(*routine) (colormodel, color)
+     DtColorModel *colormodel;
+     DtReal color[3];
+.)m
+\ 
+.bp
+.nf
+class name: \f3AttTranspIntens\fP
+.(m
+(*routine) (value)
+     DtReal *value;
+.)m
+.nf
+class name: \f3AttTranspOrientColor\fP
+.(m
+(*routine) (colormodel, color)
+     DtColorModel *colormodel;
+     DtReal color[3];
+.)m
+.nf
+class name: \f3AttTranspOrientExp\fP
+.(m
+(*routine) (value)
+     DtReal *value;
+.)m
+.nf
+class name: \f3AttTranspOrientIntens\fP
+.(m
+(*routine) (value)
+     DtReal *value;
+.)m
+.nf
+class name: \f3AttTranspOrientSwitch\fP
+.(m
+(*routine) (switchvalue)
+     DtSwitch *switchvalue;
+.)m
+.nf
+class name: \f3AttTranspSwitch\fP
+.(m
+(*routine) (switchvalue)
+     DtSwitch *switchvalue;
+.)m
+.H2 "Texture Attributes"
+Texture attributes (\f2DoTextureAntiAlias, DoTextureExtendUV\f1, etc.)
+are inherited by the texture mapping objects
+(\f2DoTextureMapBump\fP, \f2DoTextureMapDiffuseColor\fP,  
+\f2DoTextureMapEnviron\fP, and \f2DoTextureMapTranspIntens\fP).
+Consequently, the global attributes corresponding to the texture 
+mapping objects
+store not only the values of the texture mapping objects themselves, 
+but also the current values of all the texture attributes. 
+The current texture attribute values are stored in the
+\f2attribute\f1 field of the global attributes for texture mapping
+(i.e. "AttTextureMapBump", "AttTextureMapDiffuseColor",
+"AttTextureMapEnviron', and "AttTextureMapTranspIntens").
+Therefore, add-on modules such as new renderers do not need to
+query the global attribute value of a texture attribute.
+Instead, they access the \f2attributes\fP field of the
+global attribute corresponding to the texture mapping objects.
+The \f2attributes\fP field is a generic pointer, and the structure
+of the data it points to depends on the method routine for the
+global attribute.
+The standard methods use the following structure for \f2attributes\fP:
+.(m
+typedef struct {
+     DtTextureAntiAliasMode aamode;
+     DtTextureOperator	operator;
+     DtObject		surface_object;
+     Dt2PartProjType	projection_type;
+     struct {
+          DtInt 	idx;
+          DtExtendMode 	extend[2];
+          DtMatrix3x3 	matrix;
+     } uv;
+     struct {
+          DtInt 	idx;
+          DtExtendMode	extend[3];
+          DtMatrix4x4 	matrix;
+     }uvw;
+} dot_stdtexatt;
+.)m
+Some renderers may implement their own method routines for the
+texture mapping objects, for example if they want to store 
+additional information with each one.
+Those method routines would then have to access the
+current values of the texture attributes and store them
+in a similar structure to \f2dot_stdtexatt\fP.
+.lp
+.nf
+class name: \f3AttTextureAntiAlias\fP
+.(m
+(*routine) (value)
+     DtTextureAntiAliasMode *value;
+.)m
+.nf
+class name: \f3AttTextureExtendUV\fP
+.(m
+(*routine) (umode, vmode)
+     DtExtendMode *umode;
+     DtExtendMode *vmode;
+.)m
+.nf
+class name: \f3AttTextureExtendUVW\fP
+.(m
+(*routine) (umode, vmode, wmode)
+     DtExtendMode *umode;
+     DtExtendMode *vmode;
+     DtExtendMode *wmode;
+.)m
+.nf
+class name: \f3AttTextureIntermediateSurf\fP
+.(m
+(*routine) (surface_object, projection_type)
+    DtObject *surface_object;
+    Dt2PartProjType *projection_type;
+.)m
+.nf
+class name: \f3AttTextureMatrixUV\fP
+.(m
+(*routine) (matrix)
+     DtMatrix3x3 matrix;
+.)m
+.nf
+class name: \f3AttTextureMatrixUVW\fP
+.(m
+(*routine) (matrix)
+     DtMatrix4x4 matrix;
+.)m
+.nf
+class name: \f3AttTextureOp\fP
+.(m
+(*routine) (value)
+     DtTextureOperator *value;
+.)m
+.nf
+class name: \f3AttTextureUVIndex\fP
+.(m
+(*routine) (index)
+     DtInt *index;
+.)m
+.nf
+class name: \f3AttTextureUVWIndex\fP
+.(m
+(*routine) (index)
+     DtInt *index;
+.)m

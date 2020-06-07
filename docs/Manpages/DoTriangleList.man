@@ -1,0 +1,63 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DoTriangleList 3D  "Dore"
+.SH NAME
+DoTriangleList \- Create a triangle list primitive object
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+DtObject DoTriangleList(colormodel, vertextype, 
+		trianglecount, vertices)
+DtColorModel colormodel;
+DtVertexType vertextype;
+DtInt trianglecount;
+DtReal vertices[\|];
+.sp
+.in -.5i
+FORTRAN:
+.in +.5i
+INTEGER*4 DOTRIL(COLMOD, VTXTYP, TRICNT, 
+		VTXS)
+INTEGER*4 COLMOD
+INTEGER*4 VTXTYP
+INTEGER*4 TRICNT
+REAL*8 VTXS(*)
+.in -.5i
+.fi
+.SH DESCRIPTION
+.IX DOTRIL
+.IX DoTriangleList
+.I DoTriangleList
+creates a primitive object that defines a list of independent triangles.
+The parameter \f2colormodel\fP specifies the color model used if the vertices
+contain color information for shading.
+The parameter \f2vertextype\fP specifies the exact nature of the vertices.
+for more information, refer to Chapter 6, \f2Dore Vertex Types\fP,
+in the \f2Dore Reference Manual\fP or 
+to the \f2VertexTypes\fP on-line manual page.)
+The parameter \f2vertices\fP is an array of vertex data.
+It must contain data for 3*\f2trianglecount\fP vertices.
+.PP
+The geometric normal to each triangle is calculated using the right-hand rule
+(when the fingers of the right hand point in the order of the vertices, 
+the thumb points toward of the normal).  
+Dore uses these normals for backface culling
+and facet shading.
+.SH "SEE ALSO"
+DoTriangleMesh(3D), DoTriangleStrip(3D), VertexTypes(3D)

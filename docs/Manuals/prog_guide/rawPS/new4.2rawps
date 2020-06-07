@@ -1,0 +1,57 @@
+%!PS-Adobe-2.0
+%%Title: Unspecified
+%%Creator: MacDraw
+%%CreationDate: Monday, September 11, 1989
+%%Pages: (atend)
+%%BoundingBox: ? ? ? ?
+%%PageBoundingBox: 30 31 582 761
+%%For: Aaron Black
+%%IncludeProcSet: "(AppleDict md)" 66
+%%EndComments
+%%EndProlog
+%%BeginDocumentSetup
+md begin
+
+T T -31 -30 761 582 100 72 72 1 F F F F T T psu
+(Aaron Black; document: Unspecified)jn
+0 mf
+od
+%%EndDocumentSetup
+%%Page: ? 1
+op
+0 0 xl
+1 1 pen
+0 0 gm
+(nc 0 0 720 540 6 rc)kp
+54.5 0.5 76.5 112.5 26.5 26.5 0 rr
+10 78 gm
+64 gr
+0 23 13 80 2 rc
+10 26 gm
+bu fc
+{}mark T /Helvetica /|______Helvetica 0 rf
+bn
+1 setTxMode
+0 fs
+12 fz
+bu fc
+2 F /|______Helvetica fnt
+bn
+(my_mesh)show
+0 0 gm
+0 gr
+15.5 27.5 31.5 77.5 0 rc
+21 49 28 56 4 ov
+21.5 49.5 27.5 55.5 0 ov
+44 43 64 63 246 294 1 ar
+25 52 gm
+46 52 lin
+70 14 gm
+1 setTxMode
+1.36260 0. 32 0.13626 0.(Triangle Mesh)awidthshow
+F T cp
+%%Trailer
+cd
+end
+%%Pages: 1 0
+%%EOF

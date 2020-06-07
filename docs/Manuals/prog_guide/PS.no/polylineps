@@ -1,0 +1,249 @@
+!md begin
+!/note {} def
+!/legal {} def
+!md /lnop known not { /lnop [ {} ] cvx def } if
+!/bigs [lnop lnop lnop lnop lnop lnop lnop lnop] def
+!/smalls [lnop lnop lnop lnop lnop lnop lnop lnop] def
+!/cp {pm restore pop pop} def
+!
+!T T -40 -38 988 756 77 72 72 1 F F F F T T psu
+!(TechPubs#1; document: SamplePolyline)jn
+!0 mf
+!od
+!op
+!0 0 xl
+!-1.5 72 mul -1.5 72 mul translate
+!0.8 0.8 scale
+!0.5 0.5 pen
+!0 0 gm
+!(nc 0 0 948 718 6 rc)kp
+!0 0 pen
+!0 0 lin
+!nc ct 39 0 put
+!0.5 0.5 pen
+!239 149 gm
+!64 gr
+!qf
+!pt
+!275 185 pl
+!239 221 pl
+!239 149 pl
+!ef
+!0 gr
+!eu
+!(nc 0 0 948 718 6 rc)kp
+!0 0 pen
+!0 gr
+!239 149 lin
+!0.5 0.5 pen
+!64 gr
+!167 149 240 222 4 rc
+!0 gr
+!167.5 149.5 239.5 221.5 0 rc
+!0 0 pen
+!239 149 lin
+!nc ct 39 0 put
+!0.5 0.5 pen
+!167 221 gm
+!pt
+!239 149 pl
+!ef
+!eu
+!(nc 0 0 948 718 6 rc)kp
+!0 0 pen
+!239 149 lin
+!239 149 lin
+!nc ct 39 0 put
+!0.5 0.5 pen
+!167 149 gm
+!pt
+!239 221 pl
+!ef
+!eu
+!(nc 0 0 948 718 6 rc)kp
+!0 0 pen
+!239 221 lin
+!239 221 lin
+!nc ct 39 0 put
+!0.5 0.5 pen
+!167 221 gm
+!pt
+!131 185 pl
+!ef
+!eu
+!(nc 0 0 948 718 6 rc)kp
+!0 0 pen
+!131 185 lin
+!131 185 lin
+!nc ct 39 0 put
+!0.5 0.5 pen
+!131 186 gm
+!pt
+!97 207 pl
+!ef
+!eu
+!(nc 0 0 948 718 6 rc)kp
+!0 0 pen
+!97 207 lin
+!97 207 lin
+!nc ct 39 0 put
+!0.5 0.5 pen
+!97 206 gm
+!pt
+!82 237 pl
+!ef
+!eu
+!(nc 0 0 948 718 6 rc)kp
+!0 0 pen
+!82 237 lin
+!82 237 lin
+!nc ct 39 0 put
+!0.5 0.5 pen
+!82 238 gm
+!pt
+!87 268 pl
+!ef
+!eu
+!(nc 0 0 948 718 6 rc)kp
+!0 0 pen
+!87 268 lin
+!87 268 lin
+!nc ct 39 0 put
+!0.5 0.5 pen
+!pt
+!110 287 pl
+!ef
+!eu
+!(nc 0 0 948 718 6 rc)kp
+!0 0 pen
+!110 287 lin
+!110 287 lin
+!nc ct 39 0 put
+!0.5 0.5 pen
+!pt
+!148 299 pl
+!ef
+!eu
+!(nc 0 0 948 718 6 rc)kp
+!0 0 pen
+!148 299 lin
+!148 299 lin
+!nc ct 39 0 put
+!0.5 0.5 pen
+!pt
+!192 289 pl
+!ef
+!eu
+!(nc 0 0 948 718 6 rc)kp
+!0 0 pen
+!192 289 lin
+!192 289 lin
+!nc ct 39 0 put
+!0.5 0.5 pen
+!194 289 gm
+!pt
+!289 224 pl
+!ef
+!eu
+!(nc 0 0 948 718 6 rc)kp
+!0 0 pen
+!289 224 lin
+!289 224 lin
+!nc ct 39 0 put
+!0.5 0.5 pen
+!290 223 gm
+!pt
+!311 185 pl
+!ef
+!eu
+!(nc 0 0 948 718 6 rc)kp
+!0 0 pen
+!311 185 lin
+!311 185 lin
+!nc ct 39 0 put
+!0.5 0.5 pen
+!131 184 gm
+!pt
+!97 163 pl
+!ef
+!eu
+!(nc 0 0 948 718 6 rc)kp
+!0 0 pen
+!97 163 lin
+!97 163 lin
+!nc ct 39 0 put
+!0.5 0.5 pen
+!97 164 gm
+!pt
+!82 133 pl
+!ef
+!eu
+!(nc 0 0 948 718 6 rc)kp
+!0 0 pen
+!82 133 lin
+!82 133 lin
+!nc ct 39 0 put
+!0.5 0.5 pen
+!82 132 gm
+!pt
+!86 102 pl
+!ef
+!eu
+!(nc 0 0 948 718 6 rc)kp
+!0 0 pen
+!86 102 lin
+!86 102 lin
+!nc ct 39 0 put
+!0.5 0.5 pen
+!pt
+!109 83 pl
+!ef
+!eu
+!(nc 0 0 948 718 6 rc)kp
+!0 0 pen
+!109 83 lin
+!109 83 lin
+!nc ct 39 0 put
+!0.5 0.5 pen
+!pt
+!148 71 pl
+!ef
+!eu
+!(nc 0 0 948 718 6 rc)kp
+!0 0 pen
+!148 71 lin
+!148 71 lin
+!nc ct 39 0 put
+!0.5 0.5 pen
+!pt
+!192 81 pl
+!ef
+!eu
+!(nc 0 0 948 718 6 rc)kp
+!0 0 pen
+!192 81 lin
+!192 81 lin
+!nc ct 39 0 put
+!0.5 0.5 pen
+!194 81 gm
+!pt
+!289 146 pl
+!ef
+!eu
+!(nc 0 0 948 718 6 rc)kp
+!0 0 pen
+!289 146 lin
+!289 146 lin
+!nc ct 39 0 put
+!0.5 0.5 pen
+!290 147 gm
+!pt
+!311 185 pl
+!ef
+!eu
+!(nc 0 0 948 718 6 rc)kp
+!0 0 pen
+!311 185 lin
+!F T cp
+!cd
+!end

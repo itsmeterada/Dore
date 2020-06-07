@@ -1,0 +1,73 @@
+.\"#ident "%W%" %G%
+.\"
+.\"
+.so ../macros/local.me
+.ds BT "\\*(Dd System Guide
+.ds CT "Preface
+.L1 P REFACE
+.PN 9 i
+.CH
+This document describes the contents of Portable \*(Dd release 5.0.
+It also describes the renderers and device drivers that are available 
+with release 5.0.
+.H1 "Chapter Summaries
+The chapters of this guide are grouped into four main sections:
+.sp
+\f3Section I, Introduction\f1
+.BU hs
+Chapter 1, \f2Introduction\f1, describes the contents of
+Portable \*(Dd release 5.0.
+.lp
+\f3Section II, Renderers\f1
+.lp
+This section describes the renderers provided with release 5.0 and
+lists the renderer dependent functions of \*(Dd used by these
+renderers.  One chapter is dedicated to each renderer:
+.BU hs
+Chapter 2, \f2Renderers Section Introduction\fP
+.BU hs
+Chapter 3, \f2Standard Production Renderer\f1
+.BU hs
+Chapter 4, \f2Dynamic Renderer\f1
+.rs
+.lp
+\f3Section III, Device Drivers\f1
+.lp
+This section contains detailed information about the supported device drivers
+in Portable \*(Dd release 5.0.  One chapter is dedicated to each driver:
+.BU hs
+Chapter 5, \f2Device Drivers Section Introduction\fP
+.BU hs
+Chapter 6, \f2GL Driver\f1
+.BU hs
+Chapter 7, \f2PostScript Driver\f1
+.BU hs
+Chapter 8, \f2\*(Dd Raster Driver\f1
+.BU hs
+Chapter 9, \f2Standard X11 Driver\f1
+.BU hs
+Chapter 10, \f2SunView CXP Driver\f1
+.BU hs
+Chapter 11, \f2Generic SunView Driver\f1
+.lp
+\f3Section IV, Titan Drivers\f1
+.BU hs
+Chapter 12, \f2Titan G2 Driver\f1
+.lp
+.BU hs
+Chapter 13, \f2XFDI Driver\f1
+.lp
+.BU hs
+Chapter 14, \f2Titan 3000 Driver\f1
+.lp
+.BU hs
+Chapter 15, \f2Titan 3000V Driver\f1
+.rs
+.lp
+\f3Section V, Appendices\f1
+.lp
+.BU hs
+Appendix A, \f2Supported Functions\f1
+.lp
+.BU hs
+Appendix B, \f2Template Renderer\f1

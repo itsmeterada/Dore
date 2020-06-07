@@ -1,0 +1,1078 @@
+.\"#ident "%W%" %G%
+.\"
+.\" Copyright (C) 1988, 1989, 1990, 1991 by Kubota Pacific Computer Inc.
+.\"         All Rights Reserved
+.\" This program is a trade secret of Kubota Pacific Computer Inc. and
+.\" it is not to be reproduced, published, disclosed to others, copied,
+.\" adapted, distributed, or displayed without the prior authorization
+.\" of Kubota Pacific Computer Inc.  Licensee agrees to attach or embed
+.\" this Notice on all copies of the program, including partial copies
+.\" or modified versions thereof.
+.\"
+.so ../macros/local.me
+.ds CT User-defined Primitives  
+.ds BT \\*(Dd Programmer's Guide  
+.ds h1 13
+.PN 253
+.L1 U SER-DEFINED   
+.L2 P RIMITIVES  
+.CH THIRTEEN   
+.rs
+.sp -1v
+This chapter explains why you might want to create a new \*(Dd 
+primitive.  It outlines in detail the implementation components 
+of \*(Dd primitives. 
+Steps for creating a user-defined primitive are explained, along 
+with simple examples.  
+.lp 
+Concepts and terms discussed in this chapter include base 
+primitives, alternate representations, class identifiers, and naming 
+conventions for user-defined primitives.
+.H1 "Why Define Your Own Primitives?" 
+\*(Dd comes with a standard set of primitives, described in
+Chapter 4.  
+If an application requires only   
+standard primitive types, or groupings of them,    
+there is no need to create new primitives.   
+Once you have  
+defined a group of objects, you can refer to it as necessary. 
+For 
+example,  
+you could create one bolt and then use that bolt a number of
+times in 
+a   
+wheel group.  Then when modeling a car you would   
+reference the basic wheel group four times.   
+If the same grouping is used repeatedly by many applications, you
+could  
+generate the group in a subroutine and have the different 
+applications use the   
+same subroutine.   
+.lp  
+On the other hand, you may want to consider adding your own 
+primitive if an application requires objects whose shape or 
+function cannot be defined  
+by a simple combination of existing primitives\(ema special kind
+of 
+curve, for example.    
+.lp  
+Another case where you probably want to add a new primitive is if
+you often create objects that have things in common, but differ
+on 
+parameters   
+that are known only at creation time.   
+For example, you could define a primitive that defines  
+a general L-bracket shape whose dimensions are specified when   
+objects are created.  
+.bp
+A third case where you might want to add a new primitive is if
+you 
+want a variable parameter that can only be 
+determined during traversal of the database to affect the shape
+or 
+behavior of an object.  
+For example if you want an  
+object to be cube shaped or sphere shaped depending on the state 
+of a button   
+in the user interface,  
+you could add a primitive whose rendering method would check the   
+state of the button and change the representation 
+accordingly.  
+.lp 
+Or you might want a curve that is a curved line when rendered
+with 
+the dynamic renderer and a curved tube when rendered with the 
+production renderer.  In this case, a simple subroutine is not 
+sufficient, since you want \f2either\f1 a line list \f2or\f1 a 
+group of cylinders, depending on the rendering method. 
+.lp 
+In summary, when the shape or behavior of an object is not the
+same as that of any existing \*(Dd primitive or group of 
+primitives, user-defined primitives are the solution. 
+.H1 "Base Primitives and Alternate Representations" 
+Each \*(Dd renderer can directly render only a subset of the 
+standard \*(Dd primitives.  
+This subset of directly drawable primitives for a
+given renderer is referred to as the \f2base primitives\f1 for
+that renderer.  
+Most \*(Dd primitives also compile \f2alternate 
+representations\f1 of themselves, which are ultimately compiled 
+into and rendered as base primitives.  
+.lp
+The set of base primitives varies with the 
+type of renderer and the graphics hardware.  
+For example, the dynamic renderer on most platforms cannot
+directly draw spheres. 
+Instead, a triangle mesh approximating the sphere is compiled and
+rendered.  
+The standard production renderer, on the other hand, does
+render spheres directly and doesn't use the sphere
+alternate representation.
+In some cases, a primitive may actually be ignored by
+a renderer.
+For example, the standard production renderer does not
+currently draw any line or point primitives.
+See your \f2\*(Dd System Guide\fP for information
+how the renderers provided with your \*(Dd
+handle the various primitives.
+.lp  
+At this time, all user-defined primitives need to compile an 
+alternate representation of themselves.  
+They are not drawn directly by the renderers.  
+In most cases, the alternate representation compiled by a 
+primitive will be an object of one of 
+the base primitive types directly drawable by a renderer. 
+.lp   
+The alternate representation does not have to be a base
+primitive, however.  
+It can be a primitive object that in turn will compile 
+an alternate representation.  
+For example, an L-bracket primitive might generate a simple
+polygon mesh, which in turn generates a triangle list.  
+.lp  
+The alternate representation may also be a group of objects.    
+Take for example, a primitive shape that  
+has a spherical part and a cylindrical part. 
+Instead of creating an alternate representation that is one triangle 
+list that includes both parts of the object, the
+alternate representation might be
+a group containing a primitive surface sphere object and a   
+primitive surface cylinder object.  
+.lp  
+An object can also have more than one alternate representation,
+as in the example mentioned above of a primitive that could
+be represented as a curved line when rendered by the 
+dynamic renderer and as a curved tube when rendered by the  
+production renderer. 
+.H1 "Components of a \*(Dd Primitive Class"  
+Each \*(Dd object is a collection of private data and a set of
+methods that  operate on the data.
+An object is an instance of a particular object type, or \f2class\fP.
+To add a new \*(Dd primitive, you define a new class,
+and provide routines called by \*(Dd that implement the \*(Dd
+methods for objects of the new class.
+The class implementation defines the structure of the private data,
+and the function of the methods.
+Specifically, the implementation of each \*(Dd primitive class
+consists of the following elements:
+.BU hs 
+A definition of the private data structure
+.BU hs 
+A class string name and numerical identifier 
+.BU hs 
+An initialization routine 
+.BU hs 
+A creation routine
+.BU hs 
+A set of routines that define the methods
+.H2 "Private Data" 
+For primitive objects, the private data is the three-dimensional 
+shape information, or  
+information sufficient to compile the three-dimensional structure.  
+The private data of user-defined primitives always includes
+at least one pointer to an alternate representation object.
+.H2 "Class Name and Identifier" 
+Each \*(Dd primitive class has a string name and an integer
+identifier that uniquely identify the class.
+The string name is specified in the implementation of the class,
+and the identifier is assigned by \*(Dd.
+Sometimes application programs need to access the class identifier, 
+for example when using
+functions such as \f2DoExecSet <DOEX>, DoNameSet <DONS>\f1, and 
+\f2DoFilter <DOFL>\f1. 
+The function \f2DsInqClassId <DSQCI>\f1 returns the class identifier
+given the string name. 
+.H2 "Initialization Routine" 
+Recall from Chapter 10 that a method 
+is a function defined across all classes.  
+Each method has one symbolic name, 
+and each class has its own implementation of the method. 
+The initialization routine tells \*(Dd the actual routine names 
+that the primitive class uses for the methods.
+An array sets up the correspondence between the 
+\*(Dd symbolic method names and the actual routine names. 
+The initialization routine also specifies the class string name.
+(See also the subsection below on \f2Methods\fP.)  
+.H2 "Creation Routine" 
+The creation routine is called by the application program.  It 
+returns a handle to the created object, just like the routines
+that create standard \*(Dd objects.  
+The creation routine sets the values in the
+private data structure and calls
+\f2DeCreateObject <DECO>\f1 to create an internal \*(Dd object.  
+.H2 "Methods" 
+Each \*(Dd method has a symbolic name that is the same across
+all primitive classes.  
+The \*(Dd symbolic names for the 
+primitive methods are as follows:  
+.ip "\f3DcMethodPrint <DCMPRT>\fP" 
+print information about an object.  Used by \f2DsPrintObj <DSPO>\f1. 
+.ip "\f3DcMethodDestroy <DCMDST>\f1"  
+deallocate space used by an object and its private data.
+.ip "\f3DcMethodCmpBndVolume <DCMCBV>\f1"  
+compute bounding volume box.
+Used by \f2DsCompBoundingVol <DSCBV>\f1. 
+.ip "\f3DcMethodPick <DCMPCK>\fP"  
+determine if an object has been picked.
+.ip "\f3DcMethodUpdStdAltObj <DCMSAO>\f1 
+update the alternate object
+.ip "\f3DcMethodStdRenderDisplay <DCMSRD>\f1 
+render the alternate object.
+.ip "\f3DcMethodDynRender <DCMDR>\fP"  
+dynamic rendering, if different than \f2DcMethodStdRenderDisplay\fP.
+.ip "\f3DcMethodGlbrndIniObjs <DCMGIO>\fP"  
+standard production rendering, 
+if different than \f2DcMethodStdRenderDisplay\fP.
+.lp
+When adding a new primitive class, you implement routines for each
+of   these methods.  
+The symbolic method names are then associated with the
+routine names  when the primitive type is initialized.  
+Some of the routines will merely pass the work on to the
+alternate object  using \f2DeExecuteAlternate <DEEA>\f1.  
+In some cases, they may do some processing first.  
+In others, they may check for  
+certain conditions, and perhaps execute  different alternate 
+objects depending  on the result.
+For example, they may check the state of an 
+interactive input device.  
+.H1 "A Simple Example:  The L\(hybracket Primitive" 
+The steps necessary to create a user-defined primitive are 
+illustrated below with both C and \*(Fo code examples.  This
+new 
+primitive lets you create L-bracket objects, with the dimensions 
+specified at object creation time.  
+\*(FT shows the L-bracket parameters. 
+.lp
+The implementation of a user-defined primitive class involves 
+five basic steps.  
+Each step is described in detail. 
+.np 
+Define the private data structure. 
+.np 
+Implement an initialization routine for the primitive class. 
+.np 
+Implement a routine to create an object of the primitive
+class. 
+.np 
+Implement the method routines.
+.np 
+Install the new primitive class. 
+.(F ./PS/13.1ps 1.5i 0 
+.)F "L-bracket Parameters"  
+.rs
+.sp -1v
+.H2 "Step 1:  Define the Private Data Structure
+The actual structure of an object's private data depends, of 
+course, on the nature of the primitive.   
+A \*(Dd line list, for example, stores the line count, 
+vertex  
+information (type, locations, normals, colors, uv/uvw coordinates), 
+and bounding box information.  
+.lp 
+In addition to the 3D shape information, all user-defined  
+primitive objects also store at least one 
+alternate representation object.  
+.lp  
+For example, the private data of an L-bracket primitive could
+look like this:  
+
+.(m  
+C code: 
+ 
+.\"#	ident "@(#)ch14.ex01	1.2" 5/15/91
+.\"
+struct lbrackStruct {  
+        DtReal side1;  
+        DtReal side2;  
+        DtReal width;  
+        DtReal thickness;  
+        DtObject alternate_object;  
+ 
+ };  
+
+
+
+\*(Fo code: 
+ 
+.\"#	ident "@(#)ch14.ex01.f	1.2" 5/15/91
+.\"
+C......THIS IS THE INCLUDE FILE LBRACKET_DATA. 
+        REAL*8 LBRACK(5) 
+        REAL*8 SIDE1, SIDE2, WIDTH, THICK 
+        INTEGER*4 ALTOBJ 
+        EQUIVALENCE (SIDE1, LBRACK(1)), (SIDE2, LBRACK(2)) 
+        EQUIVALENCE (WIDTH, LBRACK(3)), (THICK, LBRACK(4)) 
+        EQUIVALENCE (ALTOBJ, LBRACK(5)) 
+C
+ 	DATA LBSIZE /36/		 
+.)m 
+.H2 "Step 2: Initialize the Primitive Class" 
+The first time an object creation routine is called, 
+it checks to see if the primitive has been 
+initialized.  If the primitive  
+has not been initialized, it does so. 
+.lp  
+When a primitive class is initialized, the names of actual
+C or \*(Fo routines are associated   
+with the \*(Dd symbolic method names.  
+The class is also given a string name, and a   
+primitive class identification number is set by \*(Dd.  
+All this is done with one call to \f2DeAddClass <DEAC>\f1. 
+The class identification number is used by   
+the method routines and the object creation routine, so
+it must be defined as a global variable in the class implementation.
+.lp  
+The initialization routine will be very similar for all 
+user-defined primitives.  
+The initialization routine for the L-bracket example looks like 
+this:  
+.(m  
+C code: 
+ 
+.\"#	ident "@(#)ch14.ex02	1.2" 5/15/91
+.\"
+/* primitive class id number */ 
+static DtInt du_lbrackClassId;  
+ 
+extern du_lbrackPrint(); 
+extern du_lbrackDestroy(); 
+extern du_lbrackCmpBndVolume(); 
+extern du_lbrackPick(); 
+extern du_lbrackUpdStdAltObj(); 
+extern du_lbrackStdRender(); 
+extern du_lbrackDynRender(); 
+ 
+static DtInt methods[] = { 
+    DcMethodPrint, 	  (DtInt)du_lbrackPrint, 
+    DcMethodDestroy, 	  (DtInt)du_lbrackDestroy, 
+    DcMethodCmpBndVolume, (DtInt)du_lbrackCmpBndVolume, 
+    DcMethodPick, 	  (DtInt)du_lbrackPick, 
+    DcMethodUpdStdAltObj, (DtInt)du_lbrackUpdStdAltObj, 
+    DcMethodStdRenderDisplay, 
+		          (DtInt)du_lbrackStdRenderDisplay,
+    DcMethodDynRender, 	  (DtInt)du_lbrackDynRender, 
+}; 
+ 
+du_lbrackInitialize() 
+{ 
+    du_lbrackClassId = 
+	DeAddClass("DUoLbracket", 7, methods, DcNullPtr); 
+}
+
+
+\*(Fo code: 
+ 
+.\"#	ident "@(#)ch14.ex02.f	1.2" 5/15/91
+.\"
+     SUBROUTINE DUBINI 
+C 
+     INCLUDE '/usr/include/fortran/DOREMETHODS' 
+     INCLUDE '/usr/include/fortran/DORE' 
+     INTEGER*4 MTHARR(14) 
+     EXTERNAL DUBPRT 
+     EXTERNAL DUBDST 
+     EXTERNAL DUBCBV 
+     EXTERNAL DUBPCK 
+     EXTERNAL DUBSAO 
+     EXTERNAL DUBSRN
+     EXTERNAL DUBDRN 
+     INTEGER*4 DUBCID
+     COMMON DUBCID
+C 
+     CALL DEAMTH(MTHARR, DCMPRT, DUBPRT, 0) 
+     CALL DEAMTH(MTHARR, DCMDST, DUBDST, 1) 
+     CALL DEAMTH(MTHARR, DCMCBV, DUBCBV, 2) 
+     CALL DEAMTH(MTHARR, DCMPCK, DUBPCK, 3) 
+     CALL DEAMTH(MTHARR, DCMSAO, DUBSAO, 4) 
+     CALL DEAMTH(MTHARR, DCMSRD, DUBSRN, 5) 
+     CALL DEAMTH(MTHARR, DCMDR,  DUBDRN, 6) 
+     DUBCID = DEAC('DUOLBR', 6, 7, MTHARR, DCNULL) 
+     RETURN 
+     END 
+.)m  
+.lp 
+In \*(Fo, the method list is built using
+.I DEAMTH .
+The calling routine allocates space for the method
+list (twice as many elements as methods to be inserted).
+.I DEAMTH 
+is called once for every method/routine pair to be added to the 
+method list.
+.I DEAMTH
+takes as parameters the name of the array, the 
+symbolic method name, the routine name to be associated with that
+method, 
+and the number of elements that have already been added to the 
+list. 
+.lp  
+The last argument passed to \f2DeAddClass <DEAC>\f1 is the default
+routine to be  
+used for methods that are not explicitly specified in the list of
+methods.  
+Here we have chosen a null routine as the default method,
+which means that nothing will be done when those
+methods are executed for the new primitive.  
+Note that the   
+default method must be specified even though all the methods 
+are included in the list of methods.
+You can use the default method to help you when you
+implement your first user-defined primitive class.
+Use a debugging print routine as the default method.
+Then try out your new primitive even before you implement
+any of the method routines, and see if it prints out the
+information when and how you expect it.
+.lp
+Note that the \*(Fo initialization routine must include the
+file \f2/usr/include/fortran/DOREMETHODS\fP 
+in addition to the standard \f2DORE\fP include files.
+.H3 "Naming Conventions" 
+Each primitive class name must be unique. 
+By convention, the class name is the same as the name
+of the creation routine.
+It is recommended that the name begin with \f2DUo <DUO>\f1 
+(standard \*(Dd object creation 
+routines begin with \f2Do\f1; just insert the U for
+User).  
+In our example, we used \f2DUoLbracket\f1 
+\f2<DUOLBR>\f1 
+for both the string name and the object creation routine name. 
+.lp
+By convention, all routine names and other external names in 
+the class implementation start with \f2du_ <DU>\fP.
+.H2 "Step 3:  Create an Object of the New Primitive Class" 
+The following code creates an L-bracket object.   The private  
+data is set from the input parameters, 
+and the alternate representation object is initialized to
+a null object before \f2DeCreateObject <DECO>\f1 is called.   
+.lp 
+In C, the routine \f2DeCreateObject\f1 is used to create an 
+internal \*(Dd object.  You pass it the identification number for
+the primitive class (from the initialization routine)
+and a pointer to the private data structure for the object 
+you are creating. 
+It passes back a handle to the object,
+which you pass back to the application program. 
+The class implementation can later access the private 
+data values through the \f2data\fP field of the \*(Dd
+object structure.
+.lp 
+The calling sequence for creating an object is different in
+\*(Fo and C.  
+In \*(Fo, 
+you cannot directly access an object's private data the same way
+you do in C.  
+Instead, \*(Dd copies the private data values into its own space,
+and provides access to them 
+through functions that read (\f2DEROD\fP), write (\f2DEWOD\fP)
+and delete (\f2DEDOD\fP) the object data.
+To create an object, use
+.I DECO ,
+which takes as parameters the class identification number, 
+an array of private data values for the object (here
+\f2LBRACK\f1), and the number of bytes to allocate for copying the 
+private data (here, LBSIZE=36 bytes).
+.I DECO
+allocates space for the 
+private data of the object and copies 36 bytes from 
+\f2LBRACK\f1 to the newly allocated space. 
+.(m  
+C code: 
+
+.\"#	ident "@(#)ch14.ex03	1.2" 5/15/91
+.\"
+DtObject DUoLbracket(side1, side2, width, thickness) 
+DtReal side1; 
+DtReal side2; 
+DtReal width; 
+DtReal thickness; 
+ 
+{ 
+    struct lbrackStruct *lbracket; 
+    DtObject lbracket_object; 
+    static DtFlag initialize = DcTrue; 
+ 
+    if (initialize) { 
+        du_lbrackInitialize(); 
+        initialize = DcFalse; 
+    } 
+ 
+    lbracket = 
+	(struct lbrackStruct *)malloc(sizeof *lbracket); 
+ 
+    lbracket->side1 = side1; 
+    lbracket->side2 = side2; 
+    lbracket->width = width; 
+    lbracket->thickness = thickness; 
+    lbracket->alternate_object = DcNullPtr;
+    lbracket_object = 
+	DeCreateObject(du_lbrackClassId, lbracket); 
+ 
+    return(lbracket_object); 
+} 
+  
+
+\*(Fo code:
+
+.\"#	ident "@(#)ch14.ex03.f	1.2" 5/15/91
+.\"
+       INTEGER*4 FUNCTION DUOLBR(S1, S2, W, T) 
+       REAL*8 S1 
+       REAL*8 S2 
+       REAL*8 W 
+       REAL*8 T 
+C 
+       INCLUDE '/usr/include/fortran/DORE' 
+       INCLUDE 'LBRACKET_DATA' 
+       INTEGER*4 OBJECT 
+       INTEGER*4 DUBCID 
+       COMMON DUBCID 
+       INTEGER INITIALIZE 
+       DATA INITIALIZE/DCTRUE/ 
+C 
+       IF (INITIALIZE .EQ. DCTRUE) THEN 
+            CALL DUBINI 
+            INITIALIZE = DCFALS 
+       ENDIF 
+       SIDE1 = S1 
+       SIDE2 = S2 
+       WIDTH = W 
+       THICK = T 
+       ALTOBJ = DCNULL
+       DUOLBR = DECO(DUBCID, LBRACK, LBSIZE) 
+C
+       RETURN  
+       END 
+.)m  
+.H2 "Step 4:  Implement the Methods Routines"
+All the methods take one argument (in C, a pointer to a 
+\f2DtObjectStructure\f1; in \*(Fo, an INTEGER*4).  
+Other implementation details of the method routines depend on the 
+nature of the primitive. 
+In most cases, the routines are short and simple.  
+Typically, the routine that creates and updates the alternate
+object is the only one that is more than just a few lines of code.
+The same routine can be used for more than one method.    
+A null routine can be used for a method, in which case nothing
+is done when that method is executed. 
+.lp  
+The global variable \f2du_lbrackClassId <DUBCID>\f1, which is used by 
+some of the following  
+L-bracket method routines, is the primitive class identification 
+number that was set in  
+the primitive class initialization routine.  (See Step 2, above.) 
+.H3 "DcMethodPrint <DCMPRT>" 
+This routine prints the object information when the application invokes 
+\f2DsPrintObj <DSPO>\fP.  
+Typically, the private data values passed into the object
+creation routine are printed.
+.(m  
+C code: 
+ 
+.\"#	ident "@(#)ch14.ex08	1.2" 5/15/91
+.\"
+du_lbrackPrint(object)  
+DtObjectStructure *object;  
+{  
+    struct lbrackStruct *lbracket;  
+
+    lbracket = (struct lbrackStruct *)(object->data);  
+    if (lbracket == (struct lbrackStruct *)0 ) { 
+           printf ("L-bracket is NULL\en"); 
+           return; 
+    } 
+    printf ("L-bracket data:"); 
+    printf (" side1 %f side2 %f width %f  thickness %f\en",
+       		lbracket->side1, lbracket->side2, 
+           	lbracket->width, lbracket->thickness); 
+}  
+
+
+
+\*(Fo code: 
+
+.\"#	ident "@(#)ch14.ex08.f	1.2" 5/15/91
+.\"
+       SUBROUTINE DUBPRT(OBJECT) 
+       INTEGER*4 OBJECT 
+C 
+       INCLUDE 'LBRACKET_DATA' 
+C 
+       CALL DEROD(OBJECT, LBRACK, LBSIZE) 
+       PRINT *, 'LBRACKET DATA:'
+       PRINT *, 'SIDE1 ', SIDE1 
+       PRINT *, 'SIDE2 ', SIDE2 
+       PRINT *, 'WIDTH ', WIDTH 
+       PRINT *, 'THICKNESS ', THICK 
+       RETURN 
+       END 
+.)m  
+In \*(Fo, the routine
+.I DEROD
+is used to obtain access to the 
+private data of the object. 
+\f2DEROD\fP copies the object private data values from \*(Dd space
+to user space.
+It takes as parameters the handle to the object, the name of the 
+space to which the object data is to be copied (here, 
+\f2LBRACK\f1), and the number of bytes of data to copy 
+(here, LBSIZE=36 bytes).  
+Once the private data has been copied to \f2LBRACK\f1,
+the method routine can print out the values.
+.H3 "DcMethodDestroy <DCMDST>"  
+This routine frees up the space used by the object and its private data.  
+The \*(Dd routine \f2DeDeleteObject <DEDO>\f1 should be used to
+deallocate the space used by an alternate object.  
+In C, use \f2free\f1 to deallocate space that was dynamically
+allocated with \f2malloc\f1 for any of the private data.  
+.(m  
+C code: 
+ 
+.\"#	ident "@(#)ch14.ex05	1.2" 5/15/91
+.\"
+du_lbrackDestroy(object)  
+DtObjectStructure *object;  
+{  
+    struct lbrackStruct *lbracket;  
+
+    lbracket = (struct lbrackStruct *)(object->data);  
+    DeDeleteObject(lbracket->alternate_object);  
+    free(lbracket);  
+}  
+
+\*(Fo code: 
+ 
+.\"#	ident "@(#)ch14.ex05.f	1.2" 5/15/91
+.\"
+       SUBROUTINE DUBDST(OBJECT) 
+       INTEGER*4 OBJECT 
+C
+       INCLUDE 'LBRACKET_DATA' 
+C 
+       CALL DEROD(OBJECT, LBRACK, LBSIZE) 
+       CALL DEDO(ALTOBJ) 
+       CALL DEDOD(OBJECT) 
+       RETURN 
+       END 
+.)m  
+In C, the L-bracket private data does not have any dynamically 
+allocated fields, so  
+all that needs to be done is delete the alternate object using 
+\f2DeDeleteObject <DEDO>\f1  
+and then free up the space used by the Lbracket structure.  
+.lp 
+In \*(Fo,
+.I DEROD
+is used to obtain access to the private 
+data of the object (including the alternate object).
+.I DEDO
+deletes the alternate object.
+Then
+.I DEDOD
+deallocates the space used by \*(Dd for 
+the object's private data. 
+.br
+.ne 8v
+.H3 "DcMethodCmpBndVolume <DCMCBV>"  
+This routine computes the bounding volume box for an object.  
+If the object bounding volume is the same as the bounding volume 
+of the alternate   
+object, the work should be passed on to the alternate object by 
+invoking  
+\f2DeExecuteAlternate <DEEA>\f1.  
+If the desired result is a volume that bounds the union of many 
+alternate objects,  
+each of those alternate objects should be executed in turn.  
+
+.(m  
+C code: 
+
+.\"#	ident "@(#)ch14.ex04	1.2" 5/15/91
+.\"
+du_lbrackCmpBndVolume(object)  
+DtObjectStructure *object;  
+{  
+    struct lbrackStruct *lbracket;  
+                   
+    lbracket = (struct lbrackStruct *)(object->data);  
+    DeExecuteAlternate(lbracket->alternate_object);  
+} 
+
+
+
+\*(Fo code: 
+ 
+.\"#	ident "@(#)ch14.ex04.f	1.2" 5/15/91
+.\"
+       SUBROUTINE DUBCBV(OBJECT) 
+       INTEGER*4 OBJECT 
+C 
+       INCLUDE 'LBRACKET_DATA' 
+C 
+       CALL DEROD(OBJECT, LBRACK, LBSIZE) 
+       CALL DEEA(ALTOBJ) 
+       RETURN 
+       END 
+.)m  
+In the L-bracket case, the bounding volume of the L-bracket is
+the 
+same as the bounding volume    
+of the simple polygon mesh used as the alternate object, so 
+invoking   
+\f2DeExecuteAlternate <DEEA>\f1 is all that is done in C. 
+.lp 
+In \*(Fo, the private data is copied to \f2LBRACK\fP with 
+\f2DEROD\fP,
+and then \f2DEEA\fP is called to execute the alternate object. 
+.sp .5v
+.H3 "DcMethodPick <DCMPCK>" 
+This routine determines if the object has been picked.
+If picking is not enabled for this primitive type, or if the 
+primitive type is not executable, nothing needs to be done.  
+Otherwise picking must be initialized for this   
+particular object by invoking \f2DeInitializeObjPick <DEIOP>\f1.  
+If there are multiple alternate objects,
+\f2DeInitializeObjPick <DEIOP>\f1 
+need only be invoked once.  
+Then the work is passed on to the alternate  
+object by invoking \f2DeExecuteAlternate <DEEA>\f1.  
+Again, \*(Fo requires the additional step of calling
+.I DEROD
+to obtain access to an object's private data. 
+.(m  
+C code:  
+ 
+.\"#	ident "@(#)ch14.ex07	1.2" 5/15/91
+.\"
+du_lbrackPick(object)  
+DtObjectStructure *object;  
+{  
+    struct lbrackStruct *lbracket;  
+           
+    if (!DeInqPickable(du_lbrackClassId)) return;  
+    lbracket = (struct lbrackStruct *)(object->data);  
+    DeInitializeObjPick(object);  
+    DeExecuteAlternate (lbracket->alternate_object); 
+}  
+
+ 
+\*(Fo code: 
+ 
+ 
+.\"#	ident "@(#)ch14.ex07.f	1.2" 5/15/91
+.\"
+       SUBROUTINE DUBPCK(OBJECT) 
+       INTEGER*4 OBJECT 
+C 
+       INCLUDE '/usr/include/fortran/DORE' 
+       INCLUDE 'LBRACKET_DATA' 
+       INTEGER*4 DUCID 
+       COMMON DUCID 
+C 
+       IF (DEQP(DUCID)) THEN  
+          CALL DEIOP(OBJECT) 
+          CALL DEROD(OBJECT, LBRACK, LBSIZE) 
+          CALL DEEA(ALTOBJ) 
+       ENDIF 
+       RETURN 
+       END 
+.)m  
+.sp .5v
+.H3 "DcMethodUpdStdAltObj <DCMSAO> 
+This routine creates and returns the standard alternate representation object
+for the primitive object.
+Sometimes the alternate representation can change during
+the lifetime of the primitive object.
+For example, the shape of the object may depend on
+the value of some global variable.
+In that case, this method could also check for changes
+to that variable and update the alternate representation
+accordingly.
+.lp
+In the L-bracket example the alternate object does
+not change once it has been created.
+The routine for \f2DcMethodUpdStdAltObj <DCMSAO>\fP
+just checks to see if the alternate object has already
+been created, and then creates it if it has not.
+.(m
+C code: 
+ 
+.\"#	ident "@(#)ch14.ex09	1.2" 5/15/91
+.\"
+DtObject  
+du_lbrackUpdStdAltObj(object) 
+DtObjectStructure *object; 
+{ 
+    struct lbrackStruct *lbracket; 
+    DtReal vtx[14][3];  
+    DtInt contours[10];  
+    DtInt vlist[40];  
+ 
+    lbracket = (struct lbrackStruct *)(object->data); 
+ 
+    if (lbracket->alternate_object == DcNullObject) {
+      	/*   
+            Determine vertex locations from   
+            L-bracket dimension data   
+                   .  
+                   .  
+            Set up data structures needed to   
+            create a polygon mesh  
+                   .  
+                   .  
+        */  
+                   
+	lbracket->alternate_object = 
+		DoSimplePolygonMesh(DcRGB, DcLoc, 14, vtx,
+			10, contours, vlist, DcConvex, 
+			DcFalse);  
+    } 
+    return (lbracket->alternate_object); 
+} 
+
+  
+
+\*(Fo code:
+     
+.\"#	ident "@(#)ch14.ex09.f	1.2" 5/15/91
+.\"
+     	INTEGER*4 FUNCTION DUBSAO(OBJECT) 
+     	INTEGER*4 OBJECT 
+C 
+     	INCLUDE '/usr/include/fortran/DORE' 
+     	INCLUDE 'LBRACKET_DATA' 
+        REAL*8 VTX(42) 
+        INTEGER*4 CNTRS(10) 
+        INTEGER*4 VLIST (40) 
+C 
+     	CALL DEROD(OBJECT, LBRACK, LBSIZE) 
+     	IF (ALTOBJ .EQ. DCNULL) THEN 
+        ! determine vertex locations from L-bracket
+	! dimension data.
+	! set up data structures needed to create poly mesh
+            ALTOBJ = DOSPM(DCRGB, DCL, VTX, 10, CNTRS, 
+      1			VLIST, DCCNVX, DCFALS) 
+            CALL DEWOD(OBJECT, LBRACK, LBSIZE) 
+     	ENDIF 
+     	DUBSAO = ALTOBJ 
+     	RETURN 
+     	END 
+.)m
+It is more efficient to use base primitives as alternate
+objects than it is to use primitives that will in turn 
+compile alternate objects.
+For maximum efficiency we could have created a
+triangle list instead of using a simple polygon mesh.
+.sp .5v
+.H3 "DcMethodStdRenderDisplay <DCMSRD>"
+These routines render the object by executing the standard alternate
+object, after checking for executability and
+invisibility through a call to \f2DeInqRenderable <DEQR>\f1.
+This method will be used by both the dynamic renderer
+and the production renderer, unless overridden
+by \f2DcMethodDynRender <DCMDR>\fP and
+\f2DcMethodGlbrndIniObjs <DCMGIO>\fP.
+Other renderers installed in the \*(Dd system may also
+use this routine for their rendering methods.
+.(m  
+C code: 
+ 
+.\"#	ident "@(#)ch14.ex10	1.2" 5/15/91
+.\"
+du_lbrackStdRenderDisplay(object)
+DtObjectStructure *object;
+{
+    struct lbrackStruct *lbracket;  
+      
+    lbracket = (struct lbrackStruct *)(object->data);
+    if (!DeInqRenderable(du_lbrackClassId)) return;
+    du_lbrackUpdStdAltObj(object); 
+		/* see DcMethodUpdStdAltObj */
+    if (lbracket->alternate_object != DcNullObject) {
+    	DeExecuteAlternate(lbracket->alternate_object);
+    }
+}
+
+
+\*(Fo code:  
+ 
+.\"#	ident "@(#)ch14.ex10.f	1.2" 5/15/91
+.\"
+	SUBROUTINE DUBSRN(OBJECT)
+	INTEGER*4 OBJECT
+C
+	
+        INCLUDE '/usr/include/fortran/DORE'
+	EXTERNAL DUBSAO
+	INTEGER*4 DUBSAO
+	INTEGER*4 ALT
+C
+	IF (DEQR(DUCID)) THEN
+	    ALT = DUBSAO(OBJECT)  ! SEE DCMSAO
+	    IF (ALT .NE. DCNULL) THEN
+	    	CALL DEEA(ALT)
+	    ENDIF
+	ENDIF
+	RETURN
+	END
+.)m  
+.H3 "DcMethodDynRender <DCMDR> and DcMethodGlbrndIniObjs <DCMGIO>"
+This routine renders the object for the dynamic renderer and
+the standard production renderer, respectively, overriding
+the standard rendering method \f2DcMethodStdRenderDisplay <DCMSRD>\fP.
+For most primitives, the standard rendering method is used 
+for both renderers, in which case these methods need not be
+implemented. 
+.lp
+For the sake of example, the L-bracket primitive class
+implements a routine for \f2DcMethodDynRender <DCMDR>\fP.
+It is the same as the standard rendering method, except it
+also prints out a message.
+A routine is not defined for \f2DcMethodGlbrndIniObjs <DCMGIO>\fP, 
+which means the standard rendering method is used for
+the standard production rendering.
+.(m
+C code:
+
+du_lbrackDynRender(object)
+DtObjectStructure *object;
+{
+    struct lbrackStruct *lbracket;  
+   
+    lbracket = (struct lbrackStruct *)(object->data);
+    printf ("This is the dynamic render method\en");
+
+    if (!DeInqRenderable(du_lbrackClassId)) return;
+
+    du_lbrackUpdStdAltObj(object); 
+			/* see DcMethodUpdStdAltObj */
+    if (lbracket->alternate_object != DcNullObject) {
+    	DeExecuteAlternate(lbracket->alternate_object);
+    }
+}
+
+
+\*(Fo code:  
+ 
+	SUBROUTINE DUBDRN(OBJECT)
+	INTEGER*4 OBJECT
+C
+	INCLUDE '/usr/include/fortran/DORE'
+	EXTERNAL DUBSAO
+	INTEGER*4 DUBSAO
+	INTEGER*4 ALT
+C
+	PRINT *, 'THIS IS THE DYNAMIC RENDER METHOD'
+	IF (DEQR) THEN
+	    ALT = DUBSAO(OBJECT)  ! SEE DCMSAO
+	    IF (ALT .NE. DCNULL) THEN
+	    	CALL DEEA(ALT)
+	    ENDIF
+	ENDIF
+	RETURN
+	END
+.)m  
+.H2 "Step 5:  Install the New Primitive Class" 
+When all the code described above has been written, it must be 
+compiled and made available to application users.  
+If the code is in more than one file, or if you want to combine 
+several user-defined primitives,  
+use the loader or the library utility to combine the objects into
+one   object module or library.  
+Application programs will link to the object module for the new 
+primitives in addition to the \*(Dd object module or library.  
+For example,
+.(m  
+% cc -c myapplication.c  
+% cc myapplication.o userprimitives.o -ldore -o myapplication  
+.)m  
+.H1 "Using a New Primitive" 
+.lp 
+The application program will use \f2DUoLbracket <DUOLBR>\f1 to 
+create L-bracket objects,  
+just as it would use the object creation routine for a standard 
+\*(Dd primitive.  
+.(m  
+C code:  
+  
+.\"#	ident "@(#)ch14.ex11	1.2" 5/15/91
+.\"
+#include <dore.h> 
+  
+main() 
+{ 
+            . 
+            . 
+    DsInitialize(0); 
+            . 
+            . 
+    DgAddObj(DoPrimSurf(DcSphere)); 
+            . 
+            . 
+    DgAddObj(DUoLbracket(5., 10., 5., 1.5)); 
+            . 
+            . 
+}
+
+
+\*(Fo code:
+
+.\"#	ident "@(#)ch14.ex11.f	1.2" 5/15/91
+.\"
+     	PROGRAM MAIN 
+C	
+	INCLUDE '/usr/include/fortran/DORE'
+            . 
+            . 
+     	CALL DSINIT(0) 
+            . 
+            . 
+     	CALL DGAO(DOPMS(DCSPH)) 
+            . 
+            . 
+     	CALL DGAO(DUOLBR(5.0D0, 10.0D0, 5.0D0, 1.50D0)) 
+            . 
+            . 
+     	STOP 
+     	END 
+.)m  
+.rs
+.sp -1v
+.H1 "Chapter Summary" 
+Chapter 13 describes
+\f2user-defined primitives\fP, which can be added to \*(Dd
+when the shape or behavior of a required primitive is not the same 
+as that of any existing \*(Dd primitive or group of primitives. 
+.lp 
+Each \*(Dd renderer can directly render only a subset of the
+standard \*(Dd primitives.  
+This subset of directly drawable primitives for 
+a given renderer is referred to as the \f2base primitives\f1 for
+that renderer.  
+Most primitives, including user-defined
+primitives, compile \f2alternate representations\f1
+of themselves, 
+which are ultimately compiled into and  
+rendered as base primitives. 
+.lp 
+The alternate representation for a user-defined primitive can be
+an object of any other primitive type,
+or a group of objects.  
+An object can also have several alternate
+representations, each used under different circumstances.  
+.lp 
+All \*(Dd primitives consist of private data, a class name
+and identifier,
+an initialization routine, an object creation routine, 
+and a set of method routines.  
+This chapter includes C 
+and \*(Fo examples for each element of a primitive
+class implementation. 
+.lp 
+Each \*(Dd class must have a unique string name.  
+The object creation routine name must also be unique.  
+The recommended naming convention is to use  
+the prefix \f2DUo <DUO>\f1 for the user-defined object creation
+routine.  
+Use this same name for the class string name as well. 
+Other external names should use the prefix \f2du_ <DU>\fP.

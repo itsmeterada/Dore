@@ -1,0 +1,158 @@
+.\"#ident "%W%" %G%
+.\"
+.\" #
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  
+.\" # 
+.\" # KUBOTA GRAPHICS Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\" #
+.\"
+.so ../macros/local.me
+.ds BT "\\*(Dd System Guide
+.ds CT "\\s-1TITAN\\s+1 G2 Driver
+.ds h1 12
+.L1 T ITAN " G2"
+.L2 D RIVER
+.CH TWELVE
+.H1 "Overview
+The \s-1TITAN\s+1 G2 device driver provides access to the
+high performance 3D graphics of the Stardent 1500 graphics supercomputers.
+The Stardent 1500, manufactured by Stardent Computer, is a double
+buffered 24\-bit color workstation that runs the X11+ windowing
+system.
+.H1 "Using the Driver
+The initialization options for the \s-1TITAN\s+1 G2 device driver 
+are:
+.ip "\-noautosize"
+requests that the device viewport not be automatically be set to the
+device extent when the device extent changes.
+.ip "\-singlebuffered"
+requests a single buffered window.
+The default is a double buffered window.
+.ip "\-geometry \f2geomstring\fP"
+requests a window with a particular position and size.
+The format for \f2geomstring\fP is ``WxH+X+Y'' or ``WxH''
+(where W, H, X, and Y are the integer values for width, height,
+and the X, Y position of the upper left corner of the window).
+If the ``WxH'' format is used, X and Y are assumed to be zero.
+.ip "\-visualtype \f2vtype\fP"
+requests a window with the given visual type.
+The possible values for \f2vtype\fP are \f2DcDirectColor\fP for a full 24\-bit
+color window or \f2DcPseudoColor\fP for an 8\-bit pseudocolor window.
+.ip "\-window \f2xwindow\fP"
+requests that the X window handle \f2xwindow\fP that the application
+has opened be used for drawing.
+When using this option, the \f2\-display\fP option should also be
+specified. 
+The \f2\-singlebuffered\fP, \f2\-geometry\fP, and
+\f2\-visualtype\fP options are ignored when a window is specified.
+.ip "\-display \f2xdisplay\fP"
+requests that the X display handle \f2xdisplay\fP that the application
+has opened be used as the X display device.
+.ip "\-stereo"
+requests a stereo window.
+.H1 "Output Modules
+The \s-1TITAN\s+1 G2 device driver supports both the Production Renderer Output Module
+Interface and the Dynamic Renderer Output Module Interface.
+.lp
+The Production Renderer Output Module Interface is very simple, and
+all functions are supported.
+.lp
+The \s-1TITAN\s+1 G2 device driver uses most, but not all, of the
+\*(Dd attributes that are passed to the Dynamic Renderer Output Module.
+.H1 "DROM Dependent Functions
+The following subsections list the renderer/DROM specific functions that
+are supported by the \s-1TITAN\s+1 G2 DROM.
+.H2 "Studio Attributes
+The studio attributes are attributes that will be executed during a
+studio traversal.
+Studio attributes include camera attributes, light attributes.
+The DROM does not use any of the rendering control attributes.
+.H3 "Camera Attributes
+The camera attributes supported by the DROM are:
+.(l I
+DoCameraMatrix <DOCM>
+DoParallel <DOPAR>
+DoPerspective <DOPER>
+DoProjection <DOPRJ>
+DoStereo <DOSTER>
+DoStereoSwitch <DOSTES>
+.)l
+.H3 "Lighting Attributes
+The light attributes define the characteristics of the lights
+used in a scene.
+They are:
+.(l I
+DoLightColor <DOLC>
+DoLightIntens <DOLI>
+DoLightType <DOLTT>
+.)l
+.H2 "Primitives
+The \s-1TITAN\s+1 G2 DROM supports the \f2base\fP primitives of the DROM
+interface.
+.H2 "Primitive Attributes
+The primitive attribute classes fall into several categories, they
+include shading, texture mapping and miscellaneous.
+.H3 "Shading Attributes
+The shading attributes supported by the DROM are:
+.(l I
+DoAmbientIntens <DOAMBI>
+DoAmbientSwitch <DOAMBS>
+DoDepthCue <DODC>
+DoDepthCueSwitch <DODCS>
+DoDiffuseColor <DODIFC>
+DoDiffuseIntens <DODIFI>
+DoDiffuseSwitch <DODIFS>
+DoInterpType <DOIT>
+DoLightSwitch <DOLTS>
+DoShadeIndex <DOSI>
+DoSpecularColor <DOSPCC>
+DoSpecularFactor <DOSPCF>
+DoSpecularIntens <DOSPCI>
+DoSpecularSwitch <DOSPCS>
+DoSurfaceShade <DOSRFS>
+DoTranspIntens <DOTI>
+DoTranspSwitch <DOTS>
+.)l
+.H3 "Miscellaneous
+Other renderer dependent primitive attributes used by the DROM
+are:
+.(l I
+DoBackfaceCullSwitch <DOBFCS>
+DoBackfaceCullable <DOBFC>
+DoClipSwitch <DOCS>
+DoClipVol <DOCV>
+DoHiddenSurfSwitch <DOHSS>
+DoInvisSwitch <DOINVS>
+DoRepType <DOREPT>
+.)l
+.H2 "View Functions
+The \s-1TITAN\s+1 G2 device driver supports background color for
+views through the call:
+.(l I
+DvSetBackgroundColor <DVSBC>
+.)l
+.H1 "Limitations
+The \s-1TITAN\s+1 G2 device driver has the following limitations.
+.BU
+supports only ambient and infinite light types.
+All other types will be approximated by one of these two types.
+.BU
+does not support the interpolation type \f2DcSurfaceShade\fP for
+\f2DoInterpType\fP.
+.BU
+the \f2operator\fP parameter of the \f2DoClipVol\fP function is
+ignored and is assumed to be \f2DcClipAnd\fP.
+.BU
+Only 8 clipping planes are supported.
+.BU
+Lines cannot be transparent.

@@ -1,0 +1,9 @@
+#include <Dore.tmpl>
+
+    SRCS = smp_dcm.c smp_inq.c smp_output.c smp_set.c
+    OBJS = smp_dcm.o smp_inq.o smp_output.o smp_set.o
+
+LibraryObjectRule()
+SubdirLibraryRule($(OBJS))
+
+DependTarget()

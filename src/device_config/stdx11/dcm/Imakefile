@@ -1,0 +1,9 @@
+#include <Dore.tmpl>
+
+    SRCS = x11_dcm.c x11_inq.c x11_output.c x11_set.c
+    OBJS = x11_dcm.o x11_inq.o x11_output.o x11_set.o
+
+LibraryObjectRule()
+SubdirLibraryRule($(OBJS))
+
+DependTarget()

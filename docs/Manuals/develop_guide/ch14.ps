@@ -1,0 +1,1257 @@
+%!PS-Adobe-3.0
+%%Creator: groff version 1.06
+%%DocumentNeededResources: font Helvetica
+%%+ font Helvetica-Bold
+%%+ font Palatino-Roman
+%%+ font Palatino-Italic
+%%+ font Helvetica-BoldOblique
+%%+ font Courier
+%%DocumentSuppliedResources: procset grops 1.06 0
+%%Pages: 8
+%%PageOrder: Ascend
+%%Orientation: Portrait
+%%EndComments
+%%BeginProlog
+%%BeginResource: procset grops 1.06 0
+%!PS-Adobe-3.0 Resource-ProcSet
+
+/setpacking where {
+	pop
+	currentpacking
+	true setpacking
+} if
+
+/grops 120 dict dup begin 
+
+% The ASCII code of the space character.
+/SC 32 def
+
+/A /show load def
+/B { 0 SC 3 -1 roll widthshow } bind def
+/C { 0 exch ashow } bind def
+/D { 0 exch 0 SC 5 2 roll awidthshow } bind def
+/E { 0 rmoveto show } bind def
+/F { 0 rmoveto 0 SC 3 -1 roll widthshow } bind def
+/G { 0 rmoveto 0 exch ashow } bind def
+/H { 0 rmoveto 0 exch 0 SC 5 2 roll awidthshow } bind def
+/I { 0 exch rmoveto show } bind def
+/J { 0 exch rmoveto 0 SC 3 -1 roll widthshow } bind def
+/K { 0 exch rmoveto 0 exch ashow } bind def
+/L { 0 exch rmoveto 0 exch 0 SC 5 2 roll awidthshow } bind def
+/M { rmoveto show } bind def
+/N { rmoveto 0 SC 3 -1 roll widthshow } bind def
+/O { rmoveto 0 exch ashow } bind def
+/P { rmoveto 0 exch 0 SC 5 2 roll awidthshow } bind def
+/Q { moveto show } bind def 
+/R { moveto 0 SC 3 -1 roll widthshow } bind def
+/S { moveto 0 exch ashow } bind def
+/T { moveto 0 exch 0 SC 5 2 roll awidthshow } bind def
+
+% name size font SF -
+
+/SF {
+	findfont exch
+	[ exch dup 0 exch 0 exch neg 0 0 ] makefont
+	dup setfont
+	[ exch /setfont cvx ] cvx bind def
+} bind def
+
+% name a c d font MF -
+
+/MF {
+	findfont
+	[ 5 2 roll
+	0 3 1 roll % b
+	neg 0 0 ] makefont
+	dup setfont
+	[ exch /setfont cvx ] cvx bind def
+} bind def
+
+/level0 0 def
+/RES 0 def
+/PL 0 def
+/LS 0 def
+
+% Guess the page length.
+% This assumes that the imageable area is vertically centered on the page.
+% PLG - length
+
+/PLG {
+	gsave newpath clippath pathbbox grestore
+	exch pop add exch pop
+} bind def
+
+% BP -
+
+/BP {
+	/level0 save def
+	1 setlinecap
+	1 setlinejoin
+	72 RES div dup scale
+	LS {
+		90 rotate
+	} {
+		0 PL translate
+	} ifelse
+	1 -1 scale
+} bind def
+
+/EP {
+	level0 restore
+	showpage
+} bind def
+
+
+% centerx centery radius startangle endangle DA -
+
+/DA {
+	newpath arcn stroke
+} bind def
+
+% x y SN - x' y'
+% round a position to nearest (pixel + (.25,.25))
+
+/SN {
+	transform 
+	.25 sub exch .25 sub exch
+	round .25 add exch round .25 add exch
+	itransform
+} bind def
+	
+% endx endy startx starty DL -
+% we round the endpoints of the line, so that parallel horizontal
+% and vertical lines will appear even
+
+/DL {
+	SN
+	moveto
+	SN
+	lineto stroke
+} bind def
+
+% centerx centery radius DC -
+
+/DC {
+	newpath 0 360 arc closepath
+} bind def
+
+
+/TM matrix def
+
+%  width height centerx centery DE -
+
+/DE {
+	TM currentmatrix pop
+	translate scale newpath 0 0 .5 0 360 arc closepath
+	TM setmatrix
+} bind def
+
+% these are for splines
+
+/RC /rcurveto load def
+/RL /rlineto load def
+/ST /stroke load def
+/MT /moveto load def
+/CL /closepath load def
+
+% fill the last path
+
+% amount FL -
+
+/FL {
+	currentgray exch setgray fill setgray
+} bind def
+
+% fill with the ``current color''
+
+/BL /fill load def
+
+/LW /setlinewidth load def
+% new_font_name encoding_vector old_font_name RE -
+
+/RE {
+	findfont
+	dup maxlength dict begin
+	{
+		1 index /FID ne { def } { pop pop } ifelse
+	} forall
+	/Encoding exch def
+	dup /FontName exch def
+	currentdict end definefont pop
+} bind def
+
+/DEFS 0 def
+
+% hpos vpos EBEGIN -
+
+/EBEGIN {
+	moveto
+	DEFS begin
+} bind def
+
+/EEND /end load def
+
+/CNT 0 def
+/level1 0 def
+
+% llx lly newwid wid newht ht newllx newlly PBEGIN -
+
+/PBEGIN {
+	/level1 save def
+	translate
+	div 3 1 roll div exch scale
+	neg exch neg exch translate
+	% set the graphics state to default values
+	0 setgray
+	0 setlinecap
+	1 setlinewidth
+	0 setlinejoin
+	10 setmiterlimit
+	[] 0 setdash
+	/setstrokeadjust where {
+		pop
+		false setstrokeadjust
+	} if
+	/setoverprint where {
+		pop
+		false setoverprint
+	} if
+	newpath
+	/CNT countdictstack def
+	userdict begin
+	/showpage {} def
+} bind def
+
+/PEND {
+	clear
+	countdictstack CNT sub { end } repeat
+	level1 restore
+} bind def
+
+end def
+
+/setpacking where {
+	pop
+	setpacking
+} if
+%%EndResource
+%%EndProlog
+%%BeginSetup
+%%IncludeResource: font Helvetica
+%%IncludeResource: font Helvetica-Bold
+%%IncludeResource: font Palatino-Roman
+%%IncludeResource: font Palatino-Italic
+%%IncludeResource: font Helvetica-BoldOblique
+%%IncludeResource: font Courier
+grops begin/DEFS 1 dict def DEFS begin/u{.001 mul}bind def end/RES 72 def/PL
+792 def/LS false def/ENC0[/asciicircum/asciitilde/Scaron/Zcaron/scaron/zcaron
+/Ydieresis/trademark/quotesingle/.notdef/.notdef/.notdef/.notdef/.notdef
+/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef
+/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/space
+/exclam/quotedbl/numbersign/dollar/percent/ampersand/quoteright/parenleft
+/parenright/asterisk/plus/comma/hyphen/period/slash/zero/one/two/three/four
+/five/six/seven/eight/nine/colon/semicolon/less/equal/greater/question/at/A/B/C
+/D/E/F/G/H/I/J/K/L/M/N/O/P/Q/R/S/T/U/V/W/X/Y/Z/bracketleft/backslash
+/bracketright/circumflex/underscore/quoteleft/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q
+/r/s/t/u/v/w/x/y/z/braceleft/bar/braceright/tilde/.notdef/quotesinglbase
+/guillemotleft/guillemotright/bullet/florin/fraction/perthousand/dagger
+/daggerdbl/endash/emdash/ff/fi/fl/ffi/ffl/dotlessi/dotlessj/grave/hungarumlaut
+/dotaccent/breve/caron/ring/ogonek/quotedblleft/quotedblright/oe/lslash
+/quotedblbase/OE/Lslash/.notdef/exclamdown/cent/sterling/currency/yen/brokenbar
+/section/dieresis/copyright/ordfeminine/guilsinglleft/logicalnot/minus
+/registered/macron/degree/plusminus/twosuperior/threesuperior/acute/mu
+/paragraph/periodcentered/cedilla/onesuperior/ordmasculine/guilsinglright
+/onequarter/onehalf/threequarters/questiondown/Agrave/Aacute/Acircumflex/Atilde
+/Adieresis/Aring/AE/Ccedilla/Egrave/Eacute/Ecircumflex/Edieresis/Igrave/Iacute
+/Icircumflex/Idieresis/Eth/Ntilde/Ograve/Oacute/Ocircumflex/Otilde/Odieresis
+/multiply/Oslash/Ugrave/Uacute/Ucircumflex/Udieresis/Yacute/Thorn/germandbls
+/agrave/aacute/acircumflex/atilde/adieresis/aring/ae/ccedilla/egrave/eacute
+/ecircumflex/edieresis/igrave/iacute/icircumflex/idieresis/eth/ntilde/ograve
+/oacute/ocircumflex/otilde/odieresis/divide/oslash/ugrave/uacute/ucircumflex
+/udieresis/yacute/thorn/ydieresis]def/Courier@0 ENC0/Courier RE
+/Helvetica-BoldOblique@0 ENC0/Helvetica-BoldOblique RE/Palatino-Italic@0 ENC0
+/Palatino-Italic RE/Palatino-Roman@0 ENC0/Palatino-Roman RE/Helvetica-Bold@0
+ENC0/Helvetica-Bold RE/Helvetica@0 ENC0/Helvetica RE
+%%EndSetup
+%%Page: 1 1
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 99 46.8 63 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 243 46.8 207 46.8 DL 279 46.8 243 46.8 DL 315 46.8 279 46.8 DL 351
+46.8 315 46.8 DL 387 46.8 351 46.8 DL 437.4 46.8 401.4 46.8 DL 464.4 46.8 428.4
+46.8 DL 500.4 46.8 464.4 46.8 DL 536.4 46.8 500.4 46.8 DL 1.44 LW 81 756 63 756
+DL 99 756 81 756 DL 117 756 99 756 DL 135 756 117 756 DL 153 756 135 756 DL 171
+756 153 756 DL 189 756 171 756 DL 207 756 189 756 DL 225 756 207 756 DL 243 756
+225 756 DL 261 756 243 756 DL 279 756 261 756 DL 297 756 279 756 DL 315 756 297
+756 DL 333 756 315 756 DL 351 756 333 756 DL 369 756 351 756 DL 387 756 369 756
+DL 419.4 756 401.4 756 DL 428.4 756 410.4 756 DL 446.4 756 428.4 756 DL 464.4
+756 446.4 756 DL 482.4 756 464.4 756 DL 500.4 756 482.4 756 DL 518.4 756 500.4
+756 DL 536.4 756 518.4 756 DL/F0 9/Helvetica@0 SF
+(Building the Sample Con\214gur)246.528 768.96 Q(ations)-.09 E(Dore)432.309
+768.96 Q 3.506<b444>447.811 768.96 S -2.187 -.27(ev e)460.812 768.96 T(loper')
+.27 E 2.502(sG)-.45 G(uide)510.384 768.96 Q/F1 9/Helvetica-Bold@0 SF(1)4.002 E
+EP
+%%Page: 205 2
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 99 46.8 63 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 243 46.8 207 46.8 DL 279 46.8 243 46.8 DL 315 46.8 279 46.8 DL 351
+46.8 315 46.8 DL 387 46.8 351 46.8 DL 437.4 46.8 401.4 46.8 DL 464.4 46.8 428.4
+46.8 DL 500.4 46.8 464.4 46.8 DL 536.4 46.8 500.4 46.8 DL/F0 42
+/Palatino-Roman@0 SF(B)63 91 Q/F1 36/Palatino-Roman@0 SF 9(UILDING THE)B F0(S)
+63 133 Q F1(AMPLE)A F0(C)63 175 Q F1(ONFIGURA)A(TIONS)288.006 175 Q/F2 12
+/Helvetica@0 SF(CHAPTER FOUR)406.752 175 Q(TEEN)-.36 E 99 186 63 186 DL 135 186
+99 186 DL 171 186 135 186 DL 207 186 171 186 DL 243 186 207 186 DL 279 186 243
+186 DL 315 186 279 186 DL 351 186 315 186 DL 387 186 351 186 DL 437.4 186 401.4
+186 DL 464.4 186 428.4 186 DL 500.4 186 464.4 186 DL 536.4 186 500.4 186 DL/F3
+11/Palatino-Roman@0 SF .966(The Portable Dore)63 252 R 4.519<b473>149.148 252 S
+(our)161.994 252 Q .966(ce code distribution includes several sam-)-.198 F .106
+(ple Dore)63 265.2 R 3.659<b473>100.605 265.2 S .105(ystem con\214gurations.)
+112.591 265.2 R .105(They include a generic con\214gura-)5.605 F 1.998
+(tion that r)63 278.4 R 1.998(uns on systems that support the X1)-.088 F 4.749
+(1w)-.605 G 1.999(indow system)316.735 278.4 R 1.469
+(and at least one con\214guration that r)63 291.6 R 1.469
+(uns on a particular graphics)-.088 F .455
+(workstation with device speci\214c code to utilize the graphics har)63 304.8 R
+(d-)-.198 E(war)63 318 Q 3.749(eo)-.198 G 3.749(ft)96.845 318 S .999
+(he platform.)107.843 318 R -1.012(Yo)6.498 G(ur)1.012 E/F4 11
+/Palatino-Italic@0 SF(Dore)3.748 E 4.056<b453>220.222 318 S .998(ystem Guide)
+234.057 318 R F3 .998(lists the con\214gura-)3.748 F(tions pr)63 331.2 Q
+(ovided with your version of Portable Dore)-.198 E .803<b42e>302.536 331.2 S
+1.01(This chapter explains how you build and install the Dore)63 356.4 R 4.564
+<b46c>344.453 356.4 S(ibrary)355.881 356.4 Q(.)-1.221 E .528(In particular)63
+369.6 R 3.278(,t)-.814 G .527
+(he chapter describes the steps for building the sam-)132.993 369.6 R .543
+(ple con\214gurations pr)63 382.8 R .544(ovided with Portable Dore)-.198 F
+1.688 .803(\264. S)292.506 382.8 T .544(imilar steps ar)-.803 F(e)-.198 E -.198
+(re)63 396 S(quir).198 E .504(ed for building your own port of Dore)-.198 F
+1.648 .803(\264. I)277.464 396 T 3.254(fy)-.803 G .503(ou ar)307.424 396 R
+3.253(en)-.198 G .503(ot inter)347.887 396 R(-)-.198 E 2.22
+(ested in the sample con\214gurations, turn)63 409.2 R 2.22(to Chapter 15,)7.72
+F F4(Porting)4.971 E(Dore)63 422.4 Q<b4>81.029 422.4 Q F3(.).308 E .16 LW 65
+448.4 63 448.4 DL 67 448.4 65 448.4 DL 69 448.4 67 448.4 DL 71 448.4 69 448.4
+DL 73 448.4 71 448.4 DL 75 448.4 73 448.4 DL 77 448.4 75 448.4 DL 79 448.4 77
+448.4 DL 81 448.4 79 448.4 DL 83 448.4 81 448.4 DL 85 448.4 83 448.4 DL 87
+448.4 85 448.4 DL 89 448.4 87 448.4 DL 91 448.4 89 448.4 DL 93 448.4 91 448.4
+DL 95 448.4 93 448.4 DL 97 448.4 95 448.4 DL 99 448.4 97 448.4 DL 101 448.4 99
+448.4 DL 103 448.4 101 448.4 DL 105 448.4 103 448.4 DL 107 448.4 105 448.4 DL
+109 448.4 107 448.4 DL 111 448.4 109 448.4 DL 113 448.4 111 448.4 DL 115 448.4
+113 448.4 DL 117 448.4 115 448.4 DL 119 448.4 117 448.4 DL 121 448.4 119 448.4
+DL 123 448.4 121 448.4 DL 125 448.4 123 448.4 DL 127 448.4 125 448.4 DL 129
+448.4 127 448.4 DL 131 448.4 129 448.4 DL 133 448.4 131 448.4 DL 135 448.4 133
+448.4 DL 137 448.4 135 448.4 DL 139 448.4 137 448.4 DL 141 448.4 139 448.4 DL
+143 448.4 141 448.4 DL 145 448.4 143 448.4 DL 147 448.4 145 448.4 DL 149 448.4
+147 448.4 DL 151 448.4 149 448.4 DL 153 448.4 151 448.4 DL 155 448.4 153 448.4
+DL 157 448.4 155 448.4 DL 159 448.4 157 448.4 DL 161 448.4 159 448.4 DL 163
+448.4 161 448.4 DL 165 448.4 163 448.4 DL 167 448.4 165 448.4 DL 169 448.4 167
+448.4 DL 171 448.4 169 448.4 DL 173 448.4 171 448.4 DL 175 448.4 173 448.4 DL
+177 448.4 175 448.4 DL 179 448.4 177 448.4 DL 181 448.4 179 448.4 DL 183 448.4
+181 448.4 DL 185 448.4 183 448.4 DL 187 448.4 185 448.4 DL 189 448.4 187 448.4
+DL 191 448.4 189 448.4 DL 193 448.4 191 448.4 DL 195 448.4 193 448.4 DL 197
+448.4 195 448.4 DL 199 448.4 197 448.4 DL 201 448.4 199 448.4 DL 203 448.4 201
+448.4 DL 205 448.4 203 448.4 DL 207 448.4 205 448.4 DL 209 448.4 207 448.4 DL
+211 448.4 209 448.4 DL 213 448.4 211 448.4 DL 215 448.4 213 448.4 DL 217 448.4
+215 448.4 DL 219 448.4 217 448.4 DL 221 448.4 219 448.4 DL 223 448.4 221 448.4
+DL 225 448.4 223 448.4 DL 227 448.4 225 448.4 DL 229 448.4 227 448.4 DL 231
+448.4 229 448.4 DL 233 448.4 231 448.4 DL 235 448.4 233 448.4 DL 237 448.4 235
+448.4 DL 239 448.4 237 448.4 DL 241 448.4 239 448.4 DL 243 448.4 241 448.4 DL
+245 448.4 243 448.4 DL 247 448.4 245 448.4 DL 249 448.4 247 448.4 DL 251 448.4
+249 448.4 DL 253 448.4 251 448.4 DL 255 448.4 253 448.4 DL 257 448.4 255 448.4
+DL 259 448.4 257 448.4 DL 261 448.4 259 448.4 DL 263 448.4 261 448.4 DL 265
+448.4 263 448.4 DL 267 448.4 265 448.4 DL 269 448.4 267 448.4 DL 271 448.4 269
+448.4 DL 273 448.4 271 448.4 DL 275 448.4 273 448.4 DL 277 448.4 275 448.4 DL
+279 448.4 277 448.4 DL 281 448.4 279 448.4 DL 283 448.4 281 448.4 DL 285 448.4
+283 448.4 DL 287 448.4 285 448.4 DL 289 448.4 287 448.4 DL 291 448.4 289 448.4
+DL 293 448.4 291 448.4 DL 295 448.4 293 448.4 DL 297 448.4 295 448.4 DL 299
+448.4 297 448.4 DL 301 448.4 299 448.4 DL 303 448.4 301 448.4 DL 305 448.4 303
+448.4 DL 307 448.4 305 448.4 DL 309 448.4 307 448.4 DL 311 448.4 309 448.4 DL
+313 448.4 311 448.4 DL 315 448.4 313 448.4 DL 317 448.4 315 448.4 DL 319 448.4
+317 448.4 DL 321 448.4 319 448.4 DL 323 448.4 321 448.4 DL 325 448.4 323 448.4
+DL 327 448.4 325 448.4 DL 329 448.4 327 448.4 DL 331 448.4 329 448.4 DL 333
+448.4 331 448.4 DL 335 448.4 333 448.4 DL 337 448.4 335 448.4 DL 339 448.4 337
+448.4 DL 341 448.4 339 448.4 DL 343 448.4 341 448.4 DL 345 448.4 343 448.4 DL
+347 448.4 345 448.4 DL 349 448.4 347 448.4 DL 351 448.4 349 448.4 DL 353 448.4
+351 448.4 DL 355 448.4 353 448.4 DL 357 448.4 355 448.4 DL 359 448.4 357 448.4
+DL 361 448.4 359 448.4 DL 363 448.4 361 448.4 DL 365 448.4 363 448.4 DL 367
+448.4 365 448.4 DL 369 448.4 367 448.4 DL 371 448.4 369 448.4 DL 373 448.4 371
+448.4 DL 375 448.4 373 448.4 DL 377 448.4 375 448.4 DL 379 448.4 377 448.4 DL
+381 448.4 379 448.4 DL 383 448.4 381 448.4 DL 385 448.4 383 448.4 DL 387 448.4
+385 448.4 DL 1.44 LW 419.4 448.9 401.4 448.9 DL 428.4 448.9 410.4 448.9 DL
+446.4 448.9 428.4 448.9 DL 464.4 448.9 446.4 448.9 DL 482.4 448.9 464.4 448.9
+DL 500.4 448.9 482.4 448.9 DL 518.4 448.9 500.4 448.9 DL 536.4 448.9 518.4
+448.9 DL/F5 12/Helvetica-BoldOblique@0 SF(Building)488.4 462.9 Q(Dore)509.064
+476.9 Q<b4>531.066 476.9 Q F3 3.612 -1.012(To f)63 477 T 1.588
+(acilitate building the Dore)1.012 F 5.141<b473>210.163 477 S(our)223.631 477 Q
+1.588(ce code on the desir)-.198 F 1.587(ed tar)-.198 F(get)-.198 E .049
+(machine, the Portable Dore)63 490.2 R 3.602<b464>191.076 490.2 S .049
+(istribution pr)205.062 490.2 R .049(ovides several tools that)-.198 F .921
+(allow automatic building of the Dore)63 503.4 R 4.474<b46c>243.198 503.4 S
+.921(ibrary under UNIX.)254.536 503.4 R(Other)6.421 E 1.455
+(operating systems often have similar tools; if they ar)63 516.6 R 4.205(en)
+-.198 G 1.455(ot UNIX)344.46 516.6 R 4.219(compatible, however)63 529.8 R 6.969
+(,t)-.814 G 4.219(he pr)181.944 529.8 R(ocedur)-.198 E 4.219(es described her)
+-.198 F 6.968(em)-.198 G 4.218(ust be)353.797 529.8 R(adjusted accor)63 543 Q
+(dingly)-.198 E(.)-1.221 E(Building Dore)63 568.2 Q 3.553<b463>127.614 568.2 S
+(onsists of the following steps:)139.714 568.2 Q 13.75(\(1\) Get)68.5 586.8 R
+(Dore)2.75 E 3.553<b466>137.492 586.8 S -.198(ro)148.371 586.8 S 2.75(mt).198 G
+(he distribution tape.)174.573 586.8 Q 13.75(\(2\) Initialize)68.5 605.4 R
+(the top level make\214le.)2.75 E 13.75(\(3\) Build)68.5 624 R(the Dore)2.75 E
+3.553<b46c>164.728 624 S(ibrary)175.145 624 Q(.)-1.221 E 13.75(\(4\) Build)68.5
+642.6 R(the Dore)2.75 E 3.553<b464>164.728 642.6 S(ata \214les.)178.665 642.6 Q
+13.75(\(5\) Install)68.5 661.2 R(the Dore)2.75 E 3.553<b464>168.512 661.2 S
+(ata \214les.)182.449 661.2 Q 13.75(\(6\) Build)68.5 679.8 R(and r)2.75 E
+(un test pr)-.088 E(ograms.)-.198 E 13.75(\(7\) Install)68.5 698.4 R(Dore)2.75
+E 3.553<b46f>150.505 698.4 S 2.75(nt)163.727 698.4 S(he tar)176.465 698.4 Q
+(get machine.)-.198 E 81 756 63 756 DL 99 756 81 756 DL 117 756 99 756 DL 135
+756 117 756 DL 153 756 135 756 DL 171 756 153 756 DL 189 756 171 756 DL 207 756
+189 756 DL 225 756 207 756 DL 243 756 225 756 DL 261 756 243 756 DL 279 756 261
+756 DL 297 756 279 756 DL 315 756 297 756 DL 333 756 315 756 DL 351 756 333 756
+DL 369 756 351 756 DL 387 756 369 756 DL 419.4 756 401.4 756 DL 428.4 756 410.4
+756 DL 446.4 756 428.4 756 DL 464.4 756 446.4 756 DL 482.4 756 464.4 756 DL
+500.4 756 482.4 756 DL 518.4 756 500.4 756 DL 536.4 756 518.4 756 DL/F6 9
+/Helvetica@0 SF(Building the Sample Con\214gur)246.528 768.96 Q(ations)-.09 E
+(Dore)409.296 768.96 Q 3.506<b444>424.798 768.96 S -2.187 -.27(ev e)437.799
+768.96 T(loper').27 E 2.502(sG)-.45 G(uide)487.371 768.96 Q/F7 9
+/Helvetica-Bold@0 SF(14-205)4.002 E EP
+%%Page: 206 3
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 108 46.8 72 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 257.4 46.8 221.4 46.8 DL 293.4 46.8 257.4 46.8 DL 329.4 46.8 293.4
+46.8 DL 365.4 46.8 329.4 46.8 DL 401.4 46.8 365.4 46.8 DL 437.4 46.8 401.4 46.8
+DL 473.4 46.8 437.4 46.8 DL 509.4 46.8 473.4 46.8 DL 545.4 46.8 509.4 46.8 DL
+/F0 10/Helvetica-BoldOblique@0 SF(Building Dore)72 57.6 Q<b4>133.115 57.6 Q/F1
+10/Helvetica@0 SF(\(contin)72 68.4 Q(ued\))-.1 E/F2 11/Palatino-Roman@0 SF
+13.75(\(8\) Remove)227 109.2 R(object \214les.)2.75 E 2.325
+(The following subsections describe each of these steps in mor)221.5 134.4 R(e)
+-.198 E(detail.)221.5 147.6 Q .16 LW 223.4 173.6 221.4 173.6 DL 225.4 173.6
+223.4 173.6 DL 227.4 173.6 225.4 173.6 DL 229.4 173.6 227.4 173.6 DL 231.4
+173.6 229.4 173.6 DL 233.4 173.6 231.4 173.6 DL 235.4 173.6 233.4 173.6 DL
+237.4 173.6 235.4 173.6 DL 239.4 173.6 237.4 173.6 DL 241.4 173.6 239.4 173.6
+DL 243.4 173.6 241.4 173.6 DL 245.4 173.6 243.4 173.6 DL 247.4 173.6 245.4
+173.6 DL 249.4 173.6 247.4 173.6 DL 251.4 173.6 249.4 173.6 DL 253.4 173.6
+251.4 173.6 DL 255.4 173.6 253.4 173.6 DL 257.4 173.6 255.4 173.6 DL 259.4
+173.6 257.4 173.6 DL 261.4 173.6 259.4 173.6 DL 263.4 173.6 261.4 173.6 DL
+265.4 173.6 263.4 173.6 DL 267.4 173.6 265.4 173.6 DL 269.4 173.6 267.4 173.6
+DL 271.4 173.6 269.4 173.6 DL 273.4 173.6 271.4 173.6 DL 275.4 173.6 273.4
+173.6 DL 277.4 173.6 275.4 173.6 DL 279.4 173.6 277.4 173.6 DL 281.4 173.6
+279.4 173.6 DL 283.4 173.6 281.4 173.6 DL 285.4 173.6 283.4 173.6 DL 287.4
+173.6 285.4 173.6 DL 289.4 173.6 287.4 173.6 DL 291.4 173.6 289.4 173.6 DL
+293.4 173.6 291.4 173.6 DL 295.4 173.6 293.4 173.6 DL 297.4 173.6 295.4 173.6
+DL 299.4 173.6 297.4 173.6 DL 301.4 173.6 299.4 173.6 DL 303.4 173.6 301.4
+173.6 DL 305.4 173.6 303.4 173.6 DL 307.4 173.6 305.4 173.6 DL 309.4 173.6
+307.4 173.6 DL 311.4 173.6 309.4 173.6 DL 313.4 173.6 311.4 173.6 DL 315.4
+173.6 313.4 173.6 DL 317.4 173.6 315.4 173.6 DL 319.4 173.6 317.4 173.6 DL
+321.4 173.6 319.4 173.6 DL 323.4 173.6 321.4 173.6 DL 325.4 173.6 323.4 173.6
+DL 327.4 173.6 325.4 173.6 DL 329.4 173.6 327.4 173.6 DL 331.4 173.6 329.4
+173.6 DL 333.4 173.6 331.4 173.6 DL 335.4 173.6 333.4 173.6 DL 337.4 173.6
+335.4 173.6 DL 339.4 173.6 337.4 173.6 DL 341.4 173.6 339.4 173.6 DL 343.4
+173.6 341.4 173.6 DL 345.4 173.6 343.4 173.6 DL 347.4 173.6 345.4 173.6 DL
+349.4 173.6 347.4 173.6 DL 351.4 173.6 349.4 173.6 DL 353.4 173.6 351.4 173.6
+DL 355.4 173.6 353.4 173.6 DL 357.4 173.6 355.4 173.6 DL 359.4 173.6 357.4
+173.6 DL 361.4 173.6 359.4 173.6 DL 363.4 173.6 361.4 173.6 DL 365.4 173.6
+363.4 173.6 DL 367.4 173.6 365.4 173.6 DL 369.4 173.6 367.4 173.6 DL 371.4
+173.6 369.4 173.6 DL 373.4 173.6 371.4 173.6 DL 375.4 173.6 373.4 173.6 DL
+377.4 173.6 375.4 173.6 DL 379.4 173.6 377.4 173.6 DL 381.4 173.6 379.4 173.6
+DL 383.4 173.6 381.4 173.6 DL 385.4 173.6 383.4 173.6 DL 387.4 173.6 385.4
+173.6 DL 389.4 173.6 387.4 173.6 DL 391.4 173.6 389.4 173.6 DL 393.4 173.6
+391.4 173.6 DL 395.4 173.6 393.4 173.6 DL 397.4 173.6 395.4 173.6 DL 399.4
+173.6 397.4 173.6 DL 401.4 173.6 399.4 173.6 DL 403.4 173.6 401.4 173.6 DL
+405.4 173.6 403.4 173.6 DL 407.4 173.6 405.4 173.6 DL 409.4 173.6 407.4 173.6
+DL 411.4 173.6 409.4 173.6 DL 413.4 173.6 411.4 173.6 DL 415.4 173.6 413.4
+173.6 DL 417.4 173.6 415.4 173.6 DL 419.4 173.6 417.4 173.6 DL 421.4 173.6
+419.4 173.6 DL 423.4 173.6 421.4 173.6 DL 425.4 173.6 423.4 173.6 DL 427.4
+173.6 425.4 173.6 DL 429.4 173.6 427.4 173.6 DL 431.4 173.6 429.4 173.6 DL
+433.4 173.6 431.4 173.6 DL 435.4 173.6 433.4 173.6 DL 437.4 173.6 435.4 173.6
+DL 439.4 173.6 437.4 173.6 DL 441.4 173.6 439.4 173.6 DL 443.4 173.6 441.4
+173.6 DL 445.4 173.6 443.4 173.6 DL 447.4 173.6 445.4 173.6 DL 449.4 173.6
+447.4 173.6 DL 451.4 173.6 449.4 173.6 DL 453.4 173.6 451.4 173.6 DL 455.4
+173.6 453.4 173.6 DL 457.4 173.6 455.4 173.6 DL 459.4 173.6 457.4 173.6 DL
+461.4 173.6 459.4 173.6 DL 463.4 173.6 461.4 173.6 DL 465.4 173.6 463.4 173.6
+DL 467.4 173.6 465.4 173.6 DL 469.4 173.6 467.4 173.6 DL 471.4 173.6 469.4
+173.6 DL 473.4 173.6 471.4 173.6 DL 475.4 173.6 473.4 173.6 DL 477.4 173.6
+475.4 173.6 DL 479.4 173.6 477.4 173.6 DL 481.4 173.6 479.4 173.6 DL 483.4
+173.6 481.4 173.6 DL 485.4 173.6 483.4 173.6 DL 487.4 173.6 485.4 173.6 DL
+489.4 173.6 487.4 173.6 DL 491.4 173.6 489.4 173.6 DL 493.4 173.6 491.4 173.6
+DL 495.4 173.6 493.4 173.6 DL 497.4 173.6 495.4 173.6 DL 499.4 173.6 497.4
+173.6 DL 501.4 173.6 499.4 173.6 DL 503.4 173.6 501.4 173.6 DL 505.4 173.6
+503.4 173.6 DL 507.4 173.6 505.4 173.6 DL 509.4 173.6 507.4 173.6 DL 511.4
+173.6 509.4 173.6 DL 513.4 173.6 511.4 173.6 DL 515.4 173.6 513.4 173.6 DL
+517.4 173.6 515.4 173.6 DL 519.4 173.6 517.4 173.6 DL 521.4 173.6 519.4 173.6
+DL 523.4 173.6 521.4 173.6 DL 525.4 173.6 523.4 173.6 DL 527.4 173.6 525.4
+173.6 DL 529.4 173.6 527.4 173.6 DL 531.4 173.6 529.4 173.6 DL 533.4 173.6
+531.4 173.6 DL 535.4 173.6 533.4 173.6 DL 537.4 173.6 535.4 173.6 DL 539.4
+173.6 537.4 173.6 DL 541.4 173.6 539.4 173.6 DL 543.4 173.6 541.4 173.6 DL
+545.4 173.6 543.4 173.6 DL 1.44 LW 90 174.1 72 174.1 DL 99 174.1 81 174.1 DL
+117 174.1 99 174.1 DL 135 174.1 117 174.1 DL 153 174.1 135 174.1 DL 171 174.1
+153 174.1 DL 189 174.1 171 174.1 DL 207 174.1 189 174.1 DL/F3 12
+/Helvetica-BoldOblique@0 SF(Step 1: Get Dore)72 188.1 Q 4.674<b446>160.686
+188.1 S -.24(ro)176.688 188.1 S(m).24 E(the Distrib)72 202.1 Q(ution T)-.24 E
+(ape)-.96 E F2 3.273(The Dore)221.5 202.2 R 6.826<b464>265.605 202.2 S 3.272
+(istribution is available on several forms of media,)282.815 202.2 R 1.093
+(including cartridge tape and 9-track 1600 bpi r)221.5 215.4 R 1.093(eel tape.)
+-.198 F 1.093(See your)6.593 F/F4 11/Palatino-Italic@0 SF(Dore)221.5 228.6 Q
+3.64<b453>239.529 228.6 S .582(ystem Guide)252.948 228.6 R F2 .582(for instr)
+3.332 F .581(uctions on how to load the distribution)-.088 F(fr)221.5 241.8 Q
+(om the tape.)-.198 E 1.865(In all cases you will be asked to go to the dir)
+221.5 267 R 1.866(ectory wher)-.198 F 4.616(ey)-.198 G(ou)532.861 267 Q
+(want to cr)221.5 280.2 Q(eate the Dore)-.198 E 3.553<b473>330.334 280.2 S(our)
+342.214 280.2 Q(ce tr)-.198 E(ee.)-.198 E/F5 9/Courier@0 SF 5.4(%c)221.5 299.9
+S 5.4(d/)237.7 299.9 S(my_directory)253.9 299.9 Q F2 4.739(Ad)221.5 321.8 S(ir)
+241.518 321.8 Q 1.989(ectory named)-.198 F F4(dor)4.739 E(e)-.198 E F2 1.988
+(will be cr)4.738 F 1.988(eated in the curr)-.198 F 1.988(ent dir)-.198 F
+(ectory)-.198 E(,)-1.221 E F4(/my_dir)221.5 335 Q(ectory)-.198 E F2 2.75(,a)C
+(nd it will contain all the \214les of the distribution.)295.035 335 Q 2.206
+(The distribution r)221.5 360.2 R(equir)-.198 E 2.206
+(es about 10 MB of \214le system space.)-.198 F -1.012(To)7.707 G 4.284
+(actually build Dore)221.5 373.4 R 2.678 .803(\264, l)319.696 373.4 T 4.284
+(ess than 10 MB of additional space is)-.803 F -.198(re)221.5 386.6 S(quir).198
+E 4.694(ed. The)-.198 F 1.944(exact amount varies based on the machine being)
+4.694 F(used.)221.5 399.8 Q .16 LW 223.4 425.8 221.4 425.8 DL 225.4 425.8 223.4
+425.8 DL 227.4 425.8 225.4 425.8 DL 229.4 425.8 227.4 425.8 DL 231.4 425.8
+229.4 425.8 DL 233.4 425.8 231.4 425.8 DL 235.4 425.8 233.4 425.8 DL 237.4
+425.8 235.4 425.8 DL 239.4 425.8 237.4 425.8 DL 241.4 425.8 239.4 425.8 DL
+243.4 425.8 241.4 425.8 DL 245.4 425.8 243.4 425.8 DL 247.4 425.8 245.4 425.8
+DL 249.4 425.8 247.4 425.8 DL 251.4 425.8 249.4 425.8 DL 253.4 425.8 251.4
+425.8 DL 255.4 425.8 253.4 425.8 DL 257.4 425.8 255.4 425.8 DL 259.4 425.8
+257.4 425.8 DL 261.4 425.8 259.4 425.8 DL 263.4 425.8 261.4 425.8 DL 265.4
+425.8 263.4 425.8 DL 267.4 425.8 265.4 425.8 DL 269.4 425.8 267.4 425.8 DL
+271.4 425.8 269.4 425.8 DL 273.4 425.8 271.4 425.8 DL 275.4 425.8 273.4 425.8
+DL 277.4 425.8 275.4 425.8 DL 279.4 425.8 277.4 425.8 DL 281.4 425.8 279.4
+425.8 DL 283.4 425.8 281.4 425.8 DL 285.4 425.8 283.4 425.8 DL 287.4 425.8
+285.4 425.8 DL 289.4 425.8 287.4 425.8 DL 291.4 425.8 289.4 425.8 DL 293.4
+425.8 291.4 425.8 DL 295.4 425.8 293.4 425.8 DL 297.4 425.8 295.4 425.8 DL
+299.4 425.8 297.4 425.8 DL 301.4 425.8 299.4 425.8 DL 303.4 425.8 301.4 425.8
+DL 305.4 425.8 303.4 425.8 DL 307.4 425.8 305.4 425.8 DL 309.4 425.8 307.4
+425.8 DL 311.4 425.8 309.4 425.8 DL 313.4 425.8 311.4 425.8 DL 315.4 425.8
+313.4 425.8 DL 317.4 425.8 315.4 425.8 DL 319.4 425.8 317.4 425.8 DL 321.4
+425.8 319.4 425.8 DL 323.4 425.8 321.4 425.8 DL 325.4 425.8 323.4 425.8 DL
+327.4 425.8 325.4 425.8 DL 329.4 425.8 327.4 425.8 DL 331.4 425.8 329.4 425.8
+DL 333.4 425.8 331.4 425.8 DL 335.4 425.8 333.4 425.8 DL 337.4 425.8 335.4
+425.8 DL 339.4 425.8 337.4 425.8 DL 341.4 425.8 339.4 425.8 DL 343.4 425.8
+341.4 425.8 DL 345.4 425.8 343.4 425.8 DL 347.4 425.8 345.4 425.8 DL 349.4
+425.8 347.4 425.8 DL 351.4 425.8 349.4 425.8 DL 353.4 425.8 351.4 425.8 DL
+355.4 425.8 353.4 425.8 DL 357.4 425.8 355.4 425.8 DL 359.4 425.8 357.4 425.8
+DL 361.4 425.8 359.4 425.8 DL 363.4 425.8 361.4 425.8 DL 365.4 425.8 363.4
+425.8 DL 367.4 425.8 365.4 425.8 DL 369.4 425.8 367.4 425.8 DL 371.4 425.8
+369.4 425.8 DL 373.4 425.8 371.4 425.8 DL 375.4 425.8 373.4 425.8 DL 377.4
+425.8 375.4 425.8 DL 379.4 425.8 377.4 425.8 DL 381.4 425.8 379.4 425.8 DL
+383.4 425.8 381.4 425.8 DL 385.4 425.8 383.4 425.8 DL 387.4 425.8 385.4 425.8
+DL 389.4 425.8 387.4 425.8 DL 391.4 425.8 389.4 425.8 DL 393.4 425.8 391.4
+425.8 DL 395.4 425.8 393.4 425.8 DL 397.4 425.8 395.4 425.8 DL 399.4 425.8
+397.4 425.8 DL 401.4 425.8 399.4 425.8 DL 403.4 425.8 401.4 425.8 DL 405.4
+425.8 403.4 425.8 DL 407.4 425.8 405.4 425.8 DL 409.4 425.8 407.4 425.8 DL
+411.4 425.8 409.4 425.8 DL 413.4 425.8 411.4 425.8 DL 415.4 425.8 413.4 425.8
+DL 417.4 425.8 415.4 425.8 DL 419.4 425.8 417.4 425.8 DL 421.4 425.8 419.4
+425.8 DL 423.4 425.8 421.4 425.8 DL 425.4 425.8 423.4 425.8 DL 427.4 425.8
+425.4 425.8 DL 429.4 425.8 427.4 425.8 DL 431.4 425.8 429.4 425.8 DL 433.4
+425.8 431.4 425.8 DL 435.4 425.8 433.4 425.8 DL 437.4 425.8 435.4 425.8 DL
+439.4 425.8 437.4 425.8 DL 441.4 425.8 439.4 425.8 DL 443.4 425.8 441.4 425.8
+DL 445.4 425.8 443.4 425.8 DL 447.4 425.8 445.4 425.8 DL 449.4 425.8 447.4
+425.8 DL 451.4 425.8 449.4 425.8 DL 453.4 425.8 451.4 425.8 DL 455.4 425.8
+453.4 425.8 DL 457.4 425.8 455.4 425.8 DL 459.4 425.8 457.4 425.8 DL 461.4
+425.8 459.4 425.8 DL 463.4 425.8 461.4 425.8 DL 465.4 425.8 463.4 425.8 DL
+467.4 425.8 465.4 425.8 DL 469.4 425.8 467.4 425.8 DL 471.4 425.8 469.4 425.8
+DL 473.4 425.8 471.4 425.8 DL 475.4 425.8 473.4 425.8 DL 477.4 425.8 475.4
+425.8 DL 479.4 425.8 477.4 425.8 DL 481.4 425.8 479.4 425.8 DL 483.4 425.8
+481.4 425.8 DL 485.4 425.8 483.4 425.8 DL 487.4 425.8 485.4 425.8 DL 489.4
+425.8 487.4 425.8 DL 491.4 425.8 489.4 425.8 DL 493.4 425.8 491.4 425.8 DL
+495.4 425.8 493.4 425.8 DL 497.4 425.8 495.4 425.8 DL 499.4 425.8 497.4 425.8
+DL 501.4 425.8 499.4 425.8 DL 503.4 425.8 501.4 425.8 DL 505.4 425.8 503.4
+425.8 DL 507.4 425.8 505.4 425.8 DL 509.4 425.8 507.4 425.8 DL 511.4 425.8
+509.4 425.8 DL 513.4 425.8 511.4 425.8 DL 515.4 425.8 513.4 425.8 DL 517.4
+425.8 515.4 425.8 DL 519.4 425.8 517.4 425.8 DL 521.4 425.8 519.4 425.8 DL
+523.4 425.8 521.4 425.8 DL 525.4 425.8 523.4 425.8 DL 527.4 425.8 525.4 425.8
+DL 529.4 425.8 527.4 425.8 DL 531.4 425.8 529.4 425.8 DL 533.4 425.8 531.4
+425.8 DL 535.4 425.8 533.4 425.8 DL 537.4 425.8 535.4 425.8 DL 539.4 425.8
+537.4 425.8 DL 541.4 425.8 539.4 425.8 DL 543.4 425.8 541.4 425.8 DL 545.4
+425.8 543.4 425.8 DL 1.44 LW 90 426.3 72 426.3 DL 99 426.3 81 426.3 DL 117
+426.3 99 426.3 DL 135 426.3 117 426.3 DL 153 426.3 135 426.3 DL 171 426.3 153
+426.3 DL 189 426.3 171 426.3 DL 207 426.3 189 426.3 DL F3(Step 2: Initializ)72
+440.3 Q 3.336(et).12 G(he)170.148 440.3 Q -.96(To)72 454.3 S 3.336(pL).96 G
+-.18(ev)103.704 454.3 S(el Make\214le).18 E F2 1.532(Since the Dore)221.5 454.4
+R 5.085<b464>290.52 454.4 S(ir)305.989 454.4 Q 1.532(ectories ar)-.198 F 4.282
+(es)-.198 G 1.531(et up to include sour)378.705 454.4 R 1.531(ce code and)-.198
+F 1.557(object code for mor)221.5 467.6 R 4.307(et)-.198 G 1.557
+(han one system, the build and installation)332.745 467.6 R .231
+(mechanisms must know which parts of the code to include, wher)221.5 480.8 R(e)
+-.198 E 2.094(to put the compiled \214les and library)221.5 494 R 4.844(,e)
+-1.221 G 4.844(tc. All)420.693 494 R 2.094(necessary contr)4.844 F(ol)-.198 E
+1.948(information is contained in a make\214le, located in the main)221.5 507.2
+R F4(dor)4.697 E(e)-.198 E F2(dir)221.5 520.4 Q(ectory)-.198 E 6.093(.T)-1.221
+G(he)280.14 520.4 Q F4(dor)3.343 E(e)-.198 E F2(dir)3.343 E .593
+(ectory contains several dif)-.198 F(fer)-.198 E .594(ent versions of)-.198 F
+2.386(the make\214le, one for each of the sample system con\214gurations)221.5
+533.6 R(pr)221.5 546.8 Q(ovided with the distribution.)-.198 E
+(These \214les ar)5.5 E 2.75(ea)-.198 G(ll named:)454.942 546.8 Q F5(mk.name)
+264.7 566.5 Q F2(wher)221.5 588.4 Q(e)-.198 E F4(name)3.269 E F2 .52
+(is the name of the system con\214guration it builds.)3.269 F(For)6.02 E
+(example,)221.5 601.6 Q F4(mk.stdx)3.725 E F2 .974(builds the standar)3.725 F
+3.724(dX)-.198 G 2.184 -.605(11 D)415.583 601.6 T(ore).605 E 4.527<b473>449.37
+601.6 S .974(ystem con\214gura-)462.224 601.6 R 5.448(tion. Once)221.5 614.8 R
+2.698(you have decided which of the con\214gurations you)5.448 F
+(want to build, copy the appr)221.5 628 Q(opriate \214le to)-.198 E F4
+(make\214le)2.75 E F2(.)A .578
+(The make\214le contains several variables that contr)221.5 653.2 R .577
+(ol the build pr)-.198 F(o-)-.198 E 3.11(cess. These)221.5 666.4 R .361
+(must all be set befor)3.11 F 3.111(et)-.198 G .361(he build pr)391.994 666.4 R
+.361(ocess can start.)-.198 F(Edit)5.861 E F4(make\214le)221.5 679.6 Q F2
+(and make sur)2.75 E 2.75(et)-.198 G(he following variables ar)337.77 679.6 Q
+2.75(es)-.198 G(et:)470.969 679.6 Q 90 756 72 756 DL 99 756 81 756 DL 117 756
+99 756 DL 135 756 117 756 DL 153 756 135 756 DL 171 756 153 756 DL 189 756 171
+756 DL 207 756 189 756 DL 239.4 756 221.4 756 DL 257.4 756 239.4 756 DL 275.4
+756 257.4 756 DL 293.4 756 275.4 756 DL 311.4 756 293.4 756 DL 329.4 756 311.4
+756 DL 347.4 756 329.4 756 DL 365.4 756 347.4 756 DL 383.4 756 365.4 756 DL
+401.4 756 383.4 756 DL 419.4 756 401.4 756 DL 437.4 756 419.4 756 DL 455.4 756
+437.4 756 DL 473.4 756 455.4 756 DL 491.4 756 473.4 756 DL 509.4 756 491.4 756
+DL 527.4 756 509.4 756 DL 545.4 756 527.4 756 DL/F6 9/Helvetica-Bold@0 SF
+(14-206)72 768.96 Q/F7 9/Helvetica@0 SF(Dore)6.504 E 3.506<b444>122.023 768.96
+S -2.187 -.27(ev e)135.024 768.96 T(loper').27 E 2.502(sG)-.45 G(uide)184.596
+768.96 Q(Building the Sample Con\214gur)221.4 768.96 Q(ations)-.09 E EP
+%%Page: 207 4
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 99 46.8 63 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 243 46.8 207 46.8 DL 279 46.8 243 46.8 DL 315 46.8 279 46.8 DL 351
+46.8 315 46.8 DL 387 46.8 351 46.8 DL 437.4 46.8 401.4 46.8 DL 464.4 46.8 428.4
+46.8 DL 500.4 46.8 464.4 46.8 DL 536.4 46.8 500.4 46.8 DL/F0 10
+/Helvetica-BoldOblique@0 SF(Step 2: Initializ)422.63 57.6 Q 2.78(et).1 G(he T)
+504.42 57.6 Q(op)-.8 E(Le)468.74 68.4 Q(vel Make\214le)-.15 E/F1 10/Helvetica@0
+SF(\(contin)486.48 79.2 Q(ued\))-.1 E/F2 11/Palatino-Roman@0 SF(DORE_LOC)63
+109.2 Q .714(must be set to the full path name of the dir)88 122.4 R .713
+(ectory containing)-.198 F(the)88 135.6 Q/F3 11/Palatino-Italic@0 SF(dor)2.896
+E(e)-.198 E F2(dir)2.896 E(ectory)-.198 E 5.646(.U)-1.221 G .146
+(sing the example fr)187.801 135.6 R .147(om above, this would)-.198 F
+(appear as:)88 148.8 Q/F4 9/Courier@0 SF(DORE_LOC=/my_directory)156.2 168.5 Q
+F2(DORE_OBJTYPE)63 193.7 Q 1.666(speci\214es the machine object type.)88 206.9
+R 1.665(This variable determines)7.165 F(wher)88 220.1 Q 3.22(et)-.198 G .471
+(he compiled object \214les and the \214nal Dore)125.067 220.1 R 4.024<b46c>
+328.385 220.1 S .471(ibrary ar)339.273 220.1 R(e)-.198 E 2.929(placed. The)88
+233.3 R .178(exact name used is not important.)2.929 F .178(What matters)5.678
+F .492(is that for a new machine type you do not use a name that is)88 246.5 R
+(alr)88 259.7 Q 2.171(eady being used for another type.)-.198 F 2.171
+(Otherwise the object)7.671 F .772
+(\214les for the new machine type may overwrite \214les built pr)88 272.9 R(e-)
+-.198 E(viously for another type.)88 286.1 Q 4.092(Other variables that contr)
+63 311.3 R 4.091(ol the build pr)-.198 F 4.091(ocess wer)-.198 F 6.841(ea)-.198
+G(ssigned)349.963 311.3 Q 1.28(default values when you copied the make\214le.)
+63 324.5 R 1.281(The build pr)6.781 F(ocess)-.198 E(should pr)63 337.7 Q
+(oceed corr)-.198 E(ectly with the default values.)-.198 E .16 LW 65 363.7 63
+363.7 DL 67 363.7 65 363.7 DL 69 363.7 67 363.7 DL 71 363.7 69 363.7 DL 73
+363.7 71 363.7 DL 75 363.7 73 363.7 DL 77 363.7 75 363.7 DL 79 363.7 77 363.7
+DL 81 363.7 79 363.7 DL 83 363.7 81 363.7 DL 85 363.7 83 363.7 DL 87 363.7 85
+363.7 DL 89 363.7 87 363.7 DL 91 363.7 89 363.7 DL 93 363.7 91 363.7 DL 95
+363.7 93 363.7 DL 97 363.7 95 363.7 DL 99 363.7 97 363.7 DL 101 363.7 99 363.7
+DL 103 363.7 101 363.7 DL 105 363.7 103 363.7 DL 107 363.7 105 363.7 DL 109
+363.7 107 363.7 DL 111 363.7 109 363.7 DL 113 363.7 111 363.7 DL 115 363.7 113
+363.7 DL 117 363.7 115 363.7 DL 119 363.7 117 363.7 DL 121 363.7 119 363.7 DL
+123 363.7 121 363.7 DL 125 363.7 123 363.7 DL 127 363.7 125 363.7 DL 129 363.7
+127 363.7 DL 131 363.7 129 363.7 DL 133 363.7 131 363.7 DL 135 363.7 133 363.7
+DL 137 363.7 135 363.7 DL 139 363.7 137 363.7 DL 141 363.7 139 363.7 DL 143
+363.7 141 363.7 DL 145 363.7 143 363.7 DL 147 363.7 145 363.7 DL 149 363.7 147
+363.7 DL 151 363.7 149 363.7 DL 153 363.7 151 363.7 DL 155 363.7 153 363.7 DL
+157 363.7 155 363.7 DL 159 363.7 157 363.7 DL 161 363.7 159 363.7 DL 163 363.7
+161 363.7 DL 165 363.7 163 363.7 DL 167 363.7 165 363.7 DL 169 363.7 167 363.7
+DL 171 363.7 169 363.7 DL 173 363.7 171 363.7 DL 175 363.7 173 363.7 DL 177
+363.7 175 363.7 DL 179 363.7 177 363.7 DL 181 363.7 179 363.7 DL 183 363.7 181
+363.7 DL 185 363.7 183 363.7 DL 187 363.7 185 363.7 DL 189 363.7 187 363.7 DL
+191 363.7 189 363.7 DL 193 363.7 191 363.7 DL 195 363.7 193 363.7 DL 197 363.7
+195 363.7 DL 199 363.7 197 363.7 DL 201 363.7 199 363.7 DL 203 363.7 201 363.7
+DL 205 363.7 203 363.7 DL 207 363.7 205 363.7 DL 209 363.7 207 363.7 DL 211
+363.7 209 363.7 DL 213 363.7 211 363.7 DL 215 363.7 213 363.7 DL 217 363.7 215
+363.7 DL 219 363.7 217 363.7 DL 221 363.7 219 363.7 DL 223 363.7 221 363.7 DL
+225 363.7 223 363.7 DL 227 363.7 225 363.7 DL 229 363.7 227 363.7 DL 231 363.7
+229 363.7 DL 233 363.7 231 363.7 DL 235 363.7 233 363.7 DL 237 363.7 235 363.7
+DL 239 363.7 237 363.7 DL 241 363.7 239 363.7 DL 243 363.7 241 363.7 DL 245
+363.7 243 363.7 DL 247 363.7 245 363.7 DL 249 363.7 247 363.7 DL 251 363.7 249
+363.7 DL 253 363.7 251 363.7 DL 255 363.7 253 363.7 DL 257 363.7 255 363.7 DL
+259 363.7 257 363.7 DL 261 363.7 259 363.7 DL 263 363.7 261 363.7 DL 265 363.7
+263 363.7 DL 267 363.7 265 363.7 DL 269 363.7 267 363.7 DL 271 363.7 269 363.7
+DL 273 363.7 271 363.7 DL 275 363.7 273 363.7 DL 277 363.7 275 363.7 DL 279
+363.7 277 363.7 DL 281 363.7 279 363.7 DL 283 363.7 281 363.7 DL 285 363.7 283
+363.7 DL 287 363.7 285 363.7 DL 289 363.7 287 363.7 DL 291 363.7 289 363.7 DL
+293 363.7 291 363.7 DL 295 363.7 293 363.7 DL 297 363.7 295 363.7 DL 299 363.7
+297 363.7 DL 301 363.7 299 363.7 DL 303 363.7 301 363.7 DL 305 363.7 303 363.7
+DL 307 363.7 305 363.7 DL 309 363.7 307 363.7 DL 311 363.7 309 363.7 DL 313
+363.7 311 363.7 DL 315 363.7 313 363.7 DL 317 363.7 315 363.7 DL 319 363.7 317
+363.7 DL 321 363.7 319 363.7 DL 323 363.7 321 363.7 DL 325 363.7 323 363.7 DL
+327 363.7 325 363.7 DL 329 363.7 327 363.7 DL 331 363.7 329 363.7 DL 333 363.7
+331 363.7 DL 335 363.7 333 363.7 DL 337 363.7 335 363.7 DL 339 363.7 337 363.7
+DL 341 363.7 339 363.7 DL 343 363.7 341 363.7 DL 345 363.7 343 363.7 DL 347
+363.7 345 363.7 DL 349 363.7 347 363.7 DL 351 363.7 349 363.7 DL 353 363.7 351
+363.7 DL 355 363.7 353 363.7 DL 357 363.7 355 363.7 DL 359 363.7 357 363.7 DL
+361 363.7 359 363.7 DL 363 363.7 361 363.7 DL 365 363.7 363 363.7 DL 367 363.7
+365 363.7 DL 369 363.7 367 363.7 DL 371 363.7 369 363.7 DL 373 363.7 371 363.7
+DL 375 363.7 373 363.7 DL 377 363.7 375 363.7 DL 379 363.7 377 363.7 DL 381
+363.7 379 363.7 DL 383 363.7 381 363.7 DL 385 363.7 383 363.7 DL 387 363.7 385
+363.7 DL 1.44 LW 419.4 364.2 401.4 364.2 DL 428.4 364.2 410.4 364.2 DL 446.4
+364.2 428.4 364.2 DL 464.4 364.2 446.4 364.2 DL 482.4 364.2 464.4 364.2 DL
+500.4 364.2 482.4 364.2 DL 518.4 364.2 500.4 364.2 DL 536.4 364.2 518.4 364.2
+DL/F5 12/Helvetica-BoldOblique@0 SF(Step)510.396 378.2 Q(3:)525.732 392.2 Q
+(Build)506.4 406.2 Q(the)518.4 420.2 Q(Dore)509.064 434.2 Q<b4>531.066 434.2 Q
+-3.216(Librar y)495.6 448.2 R F2 2.024 -1.012(To s)63 392.3 T
+(tart the build pr)1.012 E(ocess:)-.198 E F4 5.4(%c)63 412 S 5.4(d/)79.2 412 S
+(my_directory/dore)95.4 412 Q 5.4(%m)63 423 S(ake dore)79.2 423 Q F2 .671
+(This will cause all of the Dore)63 456.9 R 4.224<b473>206.759 456.9 S(our)
+219.31 456.9 Q .672(ce \214les to be compiled and the)-.198 F 1.173
+(object code to be ar)63 470.1 R 1.173(chived into a library)-.198 F 6.673(.T)
+-1.221 G 1.173(he object \214les that ar)277.457 470.1 R(e)-.198 E(cr)63 483.3
+Q 1.98(eated during compilation ar)-.198 F 4.731(ep)-.198 G 1.981(ut in dir)
+230.553 483.3 R 1.981(ectories parallel to the)-.198 F(sour)63 496.5 Q(ce dir)
+-.198 E(ectories, under the dir)-.198 E(ectory:)-.198 E F4(dore/obj/objtype)
+106.2 516.2 Q F2(wher)63 538.1 Q(e)-.198 E F3(objtype)3.952 E F2 1.201
+(is the machine object type as speci\214ed by the vari-)3.952 F(able)63 551.3 Q
+/F6 10/Palatino-Italic@0 SF(DORE_OBJTYPE)2.969 E F2(in)2.969 E F3(dor)2.969 E
+(e/make\214le)-.198 E F2 5.719(.T)C .219(he object dir)250.085 551.3 R .22
+(ectory str)-.198 F(uctur)-.088 E(e)-.198 E(is cr)63 564.5 Q
+(eated as necessary by the build pr)-.198 E(ocess.)-.198 E(The library \()63
+589.7 Q F3(libdor)A(e.a)-.198 E F2 2.75(\)i)C 2.75(sp)170.569 589.7 S
+(ut into the dir)184.594 589.7 Q(ectory:)-.198 E F4(dore/lib/objtype)106.2
+609.4 Q F2(wher)63 631.3 Q(e)-.198 E F3(objtype)6.845 E F2 4.095
+(is the object type as speci\214ed by the variable)6.845 F F6(DORE_OBJTYPE)63
+644.5 Q F2(in)2.75 E F3(dor)2.75 E(e/make\214le)-.198 E F2(.)A 81 756 63 756 DL
+99 756 81 756 DL 117 756 99 756 DL 135 756 117 756 DL 153 756 135 756 DL 171
+756 153 756 DL 189 756 171 756 DL 207 756 189 756 DL 225 756 207 756 DL 243 756
+225 756 DL 261 756 243 756 DL 279 756 261 756 DL 297 756 279 756 DL 315 756 297
+756 DL 333 756 315 756 DL 351 756 333 756 DL 369 756 351 756 DL 387 756 369 756
+DL 419.4 756 401.4 756 DL 428.4 756 410.4 756 DL 446.4 756 428.4 756 DL 464.4
+756 446.4 756 DL 482.4 756 464.4 756 DL 500.4 756 482.4 756 DL 518.4 756 500.4
+756 DL 536.4 756 518.4 756 DL/F7 9/Helvetica@0 SF
+(Building the Sample Con\214gur)246.528 768.96 Q(ations)-.09 E(Dore)409.296
+768.96 Q 3.506<b444>424.798 768.96 S -2.187 -.27(ev e)437.799 768.96 T(loper')
+.27 E 2.502(sG)-.45 G(uide)487.371 768.96 Q/F8 9/Helvetica-Bold@0 SF(14-207)
+4.002 E EP
+%%Page: 208 5
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 108 46.8 72 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 257.4 46.8 221.4 46.8 DL 293.4 46.8 257.4 46.8 DL 329.4 46.8 293.4
+46.8 DL 365.4 46.8 329.4 46.8 DL 401.4 46.8 365.4 46.8 DL 437.4 46.8 401.4 46.8
+DL 473.4 46.8 437.4 46.8 DL 509.4 46.8 473.4 46.8 DL 545.4 46.8 509.4 46.8 DL
+.16 LW 223.4 110 221.4 110 DL 225.4 110 223.4 110 DL 227.4 110 225.4 110 DL
+229.4 110 227.4 110 DL 231.4 110 229.4 110 DL 233.4 110 231.4 110 DL 235.4 110
+233.4 110 DL 237.4 110 235.4 110 DL 239.4 110 237.4 110 DL 241.4 110 239.4 110
+DL 243.4 110 241.4 110 DL 245.4 110 243.4 110 DL 247.4 110 245.4 110 DL 249.4
+110 247.4 110 DL 251.4 110 249.4 110 DL 253.4 110 251.4 110 DL 255.4 110 253.4
+110 DL 257.4 110 255.4 110 DL 259.4 110 257.4 110 DL 261.4 110 259.4 110 DL
+263.4 110 261.4 110 DL 265.4 110 263.4 110 DL 267.4 110 265.4 110 DL 269.4 110
+267.4 110 DL 271.4 110 269.4 110 DL 273.4 110 271.4 110 DL 275.4 110 273.4 110
+DL 277.4 110 275.4 110 DL 279.4 110 277.4 110 DL 281.4 110 279.4 110 DL 283.4
+110 281.4 110 DL 285.4 110 283.4 110 DL 287.4 110 285.4 110 DL 289.4 110 287.4
+110 DL 291.4 110 289.4 110 DL 293.4 110 291.4 110 DL 295.4 110 293.4 110 DL
+297.4 110 295.4 110 DL 299.4 110 297.4 110 DL 301.4 110 299.4 110 DL 303.4 110
+301.4 110 DL 305.4 110 303.4 110 DL 307.4 110 305.4 110 DL 309.4 110 307.4 110
+DL 311.4 110 309.4 110 DL 313.4 110 311.4 110 DL 315.4 110 313.4 110 DL 317.4
+110 315.4 110 DL 319.4 110 317.4 110 DL 321.4 110 319.4 110 DL 323.4 110 321.4
+110 DL 325.4 110 323.4 110 DL 327.4 110 325.4 110 DL 329.4 110 327.4 110 DL
+331.4 110 329.4 110 DL 333.4 110 331.4 110 DL 335.4 110 333.4 110 DL 337.4 110
+335.4 110 DL 339.4 110 337.4 110 DL 341.4 110 339.4 110 DL 343.4 110 341.4 110
+DL 345.4 110 343.4 110 DL 347.4 110 345.4 110 DL 349.4 110 347.4 110 DL 351.4
+110 349.4 110 DL 353.4 110 351.4 110 DL 355.4 110 353.4 110 DL 357.4 110 355.4
+110 DL 359.4 110 357.4 110 DL 361.4 110 359.4 110 DL 363.4 110 361.4 110 DL
+365.4 110 363.4 110 DL 367.4 110 365.4 110 DL 369.4 110 367.4 110 DL 371.4 110
+369.4 110 DL 373.4 110 371.4 110 DL 375.4 110 373.4 110 DL 377.4 110 375.4 110
+DL 379.4 110 377.4 110 DL 381.4 110 379.4 110 DL 383.4 110 381.4 110 DL 385.4
+110 383.4 110 DL 387.4 110 385.4 110 DL 389.4 110 387.4 110 DL 391.4 110 389.4
+110 DL 393.4 110 391.4 110 DL 395.4 110 393.4 110 DL 397.4 110 395.4 110 DL
+399.4 110 397.4 110 DL 401.4 110 399.4 110 DL 403.4 110 401.4 110 DL 405.4 110
+403.4 110 DL 407.4 110 405.4 110 DL 409.4 110 407.4 110 DL 411.4 110 409.4 110
+DL 413.4 110 411.4 110 DL 415.4 110 413.4 110 DL 417.4 110 415.4 110 DL 419.4
+110 417.4 110 DL 421.4 110 419.4 110 DL 423.4 110 421.4 110 DL 425.4 110 423.4
+110 DL 427.4 110 425.4 110 DL 429.4 110 427.4 110 DL 431.4 110 429.4 110 DL
+433.4 110 431.4 110 DL 435.4 110 433.4 110 DL 437.4 110 435.4 110 DL 439.4 110
+437.4 110 DL 441.4 110 439.4 110 DL 443.4 110 441.4 110 DL 445.4 110 443.4 110
+DL 447.4 110 445.4 110 DL 449.4 110 447.4 110 DL 451.4 110 449.4 110 DL 453.4
+110 451.4 110 DL 455.4 110 453.4 110 DL 457.4 110 455.4 110 DL 459.4 110 457.4
+110 DL 461.4 110 459.4 110 DL 463.4 110 461.4 110 DL 465.4 110 463.4 110 DL
+467.4 110 465.4 110 DL 469.4 110 467.4 110 DL 471.4 110 469.4 110 DL 473.4 110
+471.4 110 DL 475.4 110 473.4 110 DL 477.4 110 475.4 110 DL 479.4 110 477.4 110
+DL 481.4 110 479.4 110 DL 483.4 110 481.4 110 DL 485.4 110 483.4 110 DL 487.4
+110 485.4 110 DL 489.4 110 487.4 110 DL 491.4 110 489.4 110 DL 493.4 110 491.4
+110 DL 495.4 110 493.4 110 DL 497.4 110 495.4 110 DL 499.4 110 497.4 110 DL
+501.4 110 499.4 110 DL 503.4 110 501.4 110 DL 505.4 110 503.4 110 DL 507.4 110
+505.4 110 DL 509.4 110 507.4 110 DL 511.4 110 509.4 110 DL 513.4 110 511.4 110
+DL 515.4 110 513.4 110 DL 517.4 110 515.4 110 DL 519.4 110 517.4 110 DL 521.4
+110 519.4 110 DL 523.4 110 521.4 110 DL 525.4 110 523.4 110 DL 527.4 110 525.4
+110 DL 529.4 110 527.4 110 DL 531.4 110 529.4 110 DL 533.4 110 531.4 110 DL
+535.4 110 533.4 110 DL 537.4 110 535.4 110 DL 539.4 110 537.4 110 DL 541.4 110
+539.4 110 DL 543.4 110 541.4 110 DL 545.4 110 543.4 110 DL 1.44 LW 90 110.5 72
+110.5 DL 99 110.5 81 110.5 DL 117 110.5 99 110.5 DL 135 110.5 117 110.5 DL 153
+110.5 135 110.5 DL 171 110.5 153 110.5 DL 189 110.5 171 110.5 DL 207 110.5 189
+110.5 DL/F0 12/Helvetica-BoldOblique@0 SF(Step 4: Build the Dore)72 124.5 Q<b4>
+192.018 124.5 Q(Data Files)72 138.5 Q/F1 11/Palatino-Roman@0 SF 1.952(The Dore)
+221.5 138.6 R 5.505<b473>264.284 138.6 S 1.953
+(ystem uses binary format \214les for fonts.)278.116 138.6 R(Distributed)7.453
+E 1.156(with Portable Dore)221.5 151.8 R 4.709<b461>311.977 151.8 S 1.552 -.198
+(re t)325.849 151.8 T 1.156(he corr).198 F(esponding)-.198 E/F2 10
+/Palatino-Roman@0 SF(ASCII)3.906 E F1 1.156(data \214les, which)3.906 F
+(must be converted to binary)221.5 165 Q 5.5(.T)-1.221 G(he)372.156 165 Q F2
+(ASCII)2.75 E F1(\214les ar)2.75 E 2.75(ei)-.198 G 2.75(nt)459.593 165 S
+(he dir)472.331 165 Q(ectory:)-.198 E/F3 9/Courier@0 SF(dore/src/data/fonts)
+264.7 184.7 Q F1 1.204
+(Since the format of binary \214les is machine dependent, the make-)221.5 206.6
+R .678(\214les ar)221.5 219.8 R 3.428(es)-.198 G .677
+(et up to let you specify the tar)267.725 219.8 R .677
+(get location for the binary)-.198 F 5.169(\214les. That)221.5 233 R 2.42
+(way you do not overwrite \214les that wer)5.169 F 5.17(em)-.198 G 2.42
+(ade for)508.826 233 R .428(another system.)221.5 246.2 R .428(The err)5.928 F
+.427(or message \214le used by Dore)-.198 F 3.98<b466>477.942 246.2 S .427
+(or r)489.248 246.2 R(un-time)-.088 E 1.876(messages is built fr)221.5 259.4 R
+1.876(om the err)-.198 F 1.877(or include \214le used by the sour)-.198 F(ce)
+-.198 E(code.)221.5 272.6 Q 2.024 -1.012(To b)221.5 297.8 T
+(uild the binary font \214les and the err)1.012 E(or message \214le do:)-.198 E
+F3 5.4(%c)221.5 317.5 S 5.4(d/)237.7 317.5 S(my_directory/dore)253.9 317.5 Q
+5.4(%m)221.5 328.5 S(ake data)237.7 328.5 Q F1(The r)221.5 350.4 Q
+(esulting binary font \214les will be located in:)-.198 E F3
+(dore/src/data/fonts/fontbin/fonttype)264.7 370.1 Q F1(wher)221.5 392 Q(e)-.198
+E/F4 11/Palatino-Italic@0 SF(fonttype)3.215 E F1 .464
+(is the binary type for fonts as speci\214ed by the vari-)3.215 F(able)221.5
+405.2 Q/F5 10/Palatino-Italic@0 SF(DORE_FONTTYPE)6.497 E F1 9.247(.A)C 3.747
+(ll the sample con\214gurations use the)354.175 405.2 R 1.524
+(same binary format for the font \214les.)221.5 418.4 R 1.523
+(If this is the \214rst time the)7.024 F .463(fonts ar)221.5 431.6 R 3.213(eb)
+-.198 G .463(uilt in this \214le system, the default value can be used.)273.246
+431.6 R(If)5.964 E .179(you want to make sur)221.5 444.8 R 2.928(et)-.198 G
+.178(he binary font \214les do not overwrite exist-)340.05 444.8 R .209
+(ing ones you can set the variable)221.5 458 R F5(DORE_FONTTYPE)2.96 E F1(in)
+2.96 E F4(dor)2.96 E(e/make\214le)-.198 E F1(:)A F3(DORE_FONTTYPE=newname)264.7
+477.7 Q F1(The err)221.5 514.9 Q(or message \214le will be in:)-.198 E F3
+(dore/src/data/errmsg)243.1 534.6 Q .16 LW 223.4 560.6 221.4 560.6 DL 225.4
+560.6 223.4 560.6 DL 227.4 560.6 225.4 560.6 DL 229.4 560.6 227.4 560.6 DL
+231.4 560.6 229.4 560.6 DL 233.4 560.6 231.4 560.6 DL 235.4 560.6 233.4 560.6
+DL 237.4 560.6 235.4 560.6 DL 239.4 560.6 237.4 560.6 DL 241.4 560.6 239.4
+560.6 DL 243.4 560.6 241.4 560.6 DL 245.4 560.6 243.4 560.6 DL 247.4 560.6
+245.4 560.6 DL 249.4 560.6 247.4 560.6 DL 251.4 560.6 249.4 560.6 DL 253.4
+560.6 251.4 560.6 DL 255.4 560.6 253.4 560.6 DL 257.4 560.6 255.4 560.6 DL
+259.4 560.6 257.4 560.6 DL 261.4 560.6 259.4 560.6 DL 263.4 560.6 261.4 560.6
+DL 265.4 560.6 263.4 560.6 DL 267.4 560.6 265.4 560.6 DL 269.4 560.6 267.4
+560.6 DL 271.4 560.6 269.4 560.6 DL 273.4 560.6 271.4 560.6 DL 275.4 560.6
+273.4 560.6 DL 277.4 560.6 275.4 560.6 DL 279.4 560.6 277.4 560.6 DL 281.4
+560.6 279.4 560.6 DL 283.4 560.6 281.4 560.6 DL 285.4 560.6 283.4 560.6 DL
+287.4 560.6 285.4 560.6 DL 289.4 560.6 287.4 560.6 DL 291.4 560.6 289.4 560.6
+DL 293.4 560.6 291.4 560.6 DL 295.4 560.6 293.4 560.6 DL 297.4 560.6 295.4
+560.6 DL 299.4 560.6 297.4 560.6 DL 301.4 560.6 299.4 560.6 DL 303.4 560.6
+301.4 560.6 DL 305.4 560.6 303.4 560.6 DL 307.4 560.6 305.4 560.6 DL 309.4
+560.6 307.4 560.6 DL 311.4 560.6 309.4 560.6 DL 313.4 560.6 311.4 560.6 DL
+315.4 560.6 313.4 560.6 DL 317.4 560.6 315.4 560.6 DL 319.4 560.6 317.4 560.6
+DL 321.4 560.6 319.4 560.6 DL 323.4 560.6 321.4 560.6 DL 325.4 560.6 323.4
+560.6 DL 327.4 560.6 325.4 560.6 DL 329.4 560.6 327.4 560.6 DL 331.4 560.6
+329.4 560.6 DL 333.4 560.6 331.4 560.6 DL 335.4 560.6 333.4 560.6 DL 337.4
+560.6 335.4 560.6 DL 339.4 560.6 337.4 560.6 DL 341.4 560.6 339.4 560.6 DL
+343.4 560.6 341.4 560.6 DL 345.4 560.6 343.4 560.6 DL 347.4 560.6 345.4 560.6
+DL 349.4 560.6 347.4 560.6 DL 351.4 560.6 349.4 560.6 DL 353.4 560.6 351.4
+560.6 DL 355.4 560.6 353.4 560.6 DL 357.4 560.6 355.4 560.6 DL 359.4 560.6
+357.4 560.6 DL 361.4 560.6 359.4 560.6 DL 363.4 560.6 361.4 560.6 DL 365.4
+560.6 363.4 560.6 DL 367.4 560.6 365.4 560.6 DL 369.4 560.6 367.4 560.6 DL
+371.4 560.6 369.4 560.6 DL 373.4 560.6 371.4 560.6 DL 375.4 560.6 373.4 560.6
+DL 377.4 560.6 375.4 560.6 DL 379.4 560.6 377.4 560.6 DL 381.4 560.6 379.4
+560.6 DL 383.4 560.6 381.4 560.6 DL 385.4 560.6 383.4 560.6 DL 387.4 560.6
+385.4 560.6 DL 389.4 560.6 387.4 560.6 DL 391.4 560.6 389.4 560.6 DL 393.4
+560.6 391.4 560.6 DL 395.4 560.6 393.4 560.6 DL 397.4 560.6 395.4 560.6 DL
+399.4 560.6 397.4 560.6 DL 401.4 560.6 399.4 560.6 DL 403.4 560.6 401.4 560.6
+DL 405.4 560.6 403.4 560.6 DL 407.4 560.6 405.4 560.6 DL 409.4 560.6 407.4
+560.6 DL 411.4 560.6 409.4 560.6 DL 413.4 560.6 411.4 560.6 DL 415.4 560.6
+413.4 560.6 DL 417.4 560.6 415.4 560.6 DL 419.4 560.6 417.4 560.6 DL 421.4
+560.6 419.4 560.6 DL 423.4 560.6 421.4 560.6 DL 425.4 560.6 423.4 560.6 DL
+427.4 560.6 425.4 560.6 DL 429.4 560.6 427.4 560.6 DL 431.4 560.6 429.4 560.6
+DL 433.4 560.6 431.4 560.6 DL 435.4 560.6 433.4 560.6 DL 437.4 560.6 435.4
+560.6 DL 439.4 560.6 437.4 560.6 DL 441.4 560.6 439.4 560.6 DL 443.4 560.6
+441.4 560.6 DL 445.4 560.6 443.4 560.6 DL 447.4 560.6 445.4 560.6 DL 449.4
+560.6 447.4 560.6 DL 451.4 560.6 449.4 560.6 DL 453.4 560.6 451.4 560.6 DL
+455.4 560.6 453.4 560.6 DL 457.4 560.6 455.4 560.6 DL 459.4 560.6 457.4 560.6
+DL 461.4 560.6 459.4 560.6 DL 463.4 560.6 461.4 560.6 DL 465.4 560.6 463.4
+560.6 DL 467.4 560.6 465.4 560.6 DL 469.4 560.6 467.4 560.6 DL 471.4 560.6
+469.4 560.6 DL 473.4 560.6 471.4 560.6 DL 475.4 560.6 473.4 560.6 DL 477.4
+560.6 475.4 560.6 DL 479.4 560.6 477.4 560.6 DL 481.4 560.6 479.4 560.6 DL
+483.4 560.6 481.4 560.6 DL 485.4 560.6 483.4 560.6 DL 487.4 560.6 485.4 560.6
+DL 489.4 560.6 487.4 560.6 DL 491.4 560.6 489.4 560.6 DL 493.4 560.6 491.4
+560.6 DL 495.4 560.6 493.4 560.6 DL 497.4 560.6 495.4 560.6 DL 499.4 560.6
+497.4 560.6 DL 501.4 560.6 499.4 560.6 DL 503.4 560.6 501.4 560.6 DL 505.4
+560.6 503.4 560.6 DL 507.4 560.6 505.4 560.6 DL 509.4 560.6 507.4 560.6 DL
+511.4 560.6 509.4 560.6 DL 513.4 560.6 511.4 560.6 DL 515.4 560.6 513.4 560.6
+DL 517.4 560.6 515.4 560.6 DL 519.4 560.6 517.4 560.6 DL 521.4 560.6 519.4
+560.6 DL 523.4 560.6 521.4 560.6 DL 525.4 560.6 523.4 560.6 DL 527.4 560.6
+525.4 560.6 DL 529.4 560.6 527.4 560.6 DL 531.4 560.6 529.4 560.6 DL 533.4
+560.6 531.4 560.6 DL 535.4 560.6 533.4 560.6 DL 537.4 560.6 535.4 560.6 DL
+539.4 560.6 537.4 560.6 DL 541.4 560.6 539.4 560.6 DL 543.4 560.6 541.4 560.6
+DL 545.4 560.6 543.4 560.6 DL 1.44 LW 90 561.1 72 561.1 DL 99 561.1 81 561.1 DL
+117 561.1 99 561.1 DL 135 561.1 117 561.1 DL 153 561.1 135 561.1 DL 171 561.1
+153 561.1 DL 189 561.1 171 561.1 DL 207 561.1 189 561.1 DL F0
+(Step 5: Install the Data)72 575.1 Q(Files)72 589.1 Q F1 2.384(All Dore)221.5
+589.2 R 5.937<b461>261.262 589.2 S 2.383
+(pplications access the binary font \214les and the err)276.362 589.2 R(or)
+-.198 E 4.247(message \214le.)221.5 602.4 R 4.247(If these ar)9.747 F 6.998(en)
+-.198 G 4.248(ot located in the standar)372.185 602.4 R 6.998(dp)-.198 G(lace)
+526.646 602.4 Q .056(assumed by Dore)221.5 615.6 R -1.55 .803(\264, a)302.143
+615.6 T 2.806(ne)-.803 G(nvir)332.142 615.6 Q .055
+(onment variable must be set in the shell)-.198 F(befor)221.5 628.8 Q 4.121(et)
+-.198 G 1.371(he application pr)259.644 628.8 R 1.371(ogram is r)-.198 F 4.121
+(un. Because)-.088 F 1.372(of this, you may)4.121 F 1.37
+(want to install the data \214les befor)221.5 642 R 4.12(eg)-.198 G 1.37
+(oing on to building the test)407.255 642 R(pr)221.5 655.2 Q 2.75(ograms. Do)
+-.198 F(this by:)2.75 E 90 756 72 756 DL 99 756 81 756 DL 117 756 99 756 DL 135
+756 117 756 DL 153 756 135 756 DL 171 756 153 756 DL 189 756 171 756 DL 207 756
+189 756 DL 239.4 756 221.4 756 DL 257.4 756 239.4 756 DL 275.4 756 257.4 756 DL
+293.4 756 275.4 756 DL 311.4 756 293.4 756 DL 329.4 756 311.4 756 DL 347.4 756
+329.4 756 DL 365.4 756 347.4 756 DL 383.4 756 365.4 756 DL 401.4 756 383.4 756
+DL 419.4 756 401.4 756 DL 437.4 756 419.4 756 DL 455.4 756 437.4 756 DL 473.4
+756 455.4 756 DL 491.4 756 473.4 756 DL 509.4 756 491.4 756 DL 527.4 756 509.4
+756 DL 545.4 756 527.4 756 DL/F6 9/Helvetica-Bold@0 SF(14-208)72 768.96 Q/F7 9
+/Helvetica@0 SF(Dore)6.504 E 3.506<b444>122.023 768.96 S -2.187 -.27(ev e)
+135.024 768.96 T(loper').27 E 2.502(sG)-.45 G(uide)184.596 768.96 Q
+(Building the Sample Con\214gur)221.4 768.96 Q(ations)-.09 E EP
+%%Page: 209 6
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 99 46.8 63 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 243 46.8 207 46.8 DL 279 46.8 243 46.8 DL 315 46.8 279 46.8 DL 351
+46.8 315 46.8 DL 387 46.8 351 46.8 DL 437.4 46.8 401.4 46.8 DL 464.4 46.8 428.4
+46.8 DL 500.4 46.8 464.4 46.8 DL 536.4 46.8 500.4 46.8 DL/F0 10
+/Helvetica-BoldOblique@0 SF(Step 5: Install the Data Files)403.58 57.6 Q/F1 10
+/Helvetica@0 SF(\(contin)486.48 68.4 Q(ued\))-.1 E/F2 9/Courier@0 SF 5.4(%c)63
+107 S 5.4(d/)79.2 107 S(my_directory/dore)95.4 107 Q 5.4(%m)63 118 S
+(ake install_data)79.2 118 Q/F3 11/Palatino-Roman@0 SF 1.45
+(The binary font \214les built in the pr)63 139.9 R 1.451
+(evious step will be moved to)-.198 F 2.344(the subdir)63 153.1 R(ectory)-.198
+E/F4 11/Palatino-Italic@0 SF(fonts)5.094 E F3 2.344(of the dir)5.094 F 2.343
+(ectory speci\214ed by the variable)-.198 F/F5 10/Palatino-Italic@0 SF(DORE_DA)
+63 166.3 Q -.92(TA)-.55 G(DIR).92 E F3(in)5.524 E F4(dor)5.524 E(e/make\214le)
+-.198 E F3 8.274(.T)C 2.774(he err)237.148 166.3 R 2.774
+(or message \214le will be)-.198 F .294(copied to the subdir)63 179.5 R(ectory)
+-.198 E F4(errmsg)3.044 E F3 5.794(.B)C 3.044(yd)240.811 179.5 S .294
+(efault, the sample con\214gu-)256.692 179.5 R .344
+(ration make\214les set this variable to the standar)63 192.7 R 3.094(dl)-.198
+G .345(ocation assumed)305.156 192.7 R 1.833(by Dore)63 205.9 R .227 .803
+(\264, i)99.45 205.9 T(.e.,)-.803 E F4(/usr/dor)4.583 E(e/data)-.198 E F3 7.333
+(.I)C 4.583(fy)208.459 205.9 S 1.832(ou decide not to use the default)222.821
+205.9 R(locations, set the variable in)63 219.1 Q F4(dor)2.75 E(e/make\214le)
+-.198 E F3(:)A F2(DORE_DATADIR=somedir)106.2 238.8 Q F3(wher)63 260.7 Q(e)-.198
+E F4(somedir)5.011 E F3 2.262(is the full path name of a dir)5.011 F 2.262
+(ectory that alr)-.198 F(eady)-.198 E 3.667(exists. The)63 273.9 R(subdir)3.667
+E(ectories)-.198 E F4(fonts)3.667 E F3(and)3.667 E F4(errmsg)3.667 E F3 .917
+(will be cr)3.667 F .917(eated as nec-)-.198 F(essary)63 287.1 Q(.)-1.221 E .16
+LW 65 313.1 63 313.1 DL 67 313.1 65 313.1 DL 69 313.1 67 313.1 DL 71 313.1 69
+313.1 DL 73 313.1 71 313.1 DL 75 313.1 73 313.1 DL 77 313.1 75 313.1 DL 79
+313.1 77 313.1 DL 81 313.1 79 313.1 DL 83 313.1 81 313.1 DL 85 313.1 83 313.1
+DL 87 313.1 85 313.1 DL 89 313.1 87 313.1 DL 91 313.1 89 313.1 DL 93 313.1 91
+313.1 DL 95 313.1 93 313.1 DL 97 313.1 95 313.1 DL 99 313.1 97 313.1 DL 101
+313.1 99 313.1 DL 103 313.1 101 313.1 DL 105 313.1 103 313.1 DL 107 313.1 105
+313.1 DL 109 313.1 107 313.1 DL 111 313.1 109 313.1 DL 113 313.1 111 313.1 DL
+115 313.1 113 313.1 DL 117 313.1 115 313.1 DL 119 313.1 117 313.1 DL 121 313.1
+119 313.1 DL 123 313.1 121 313.1 DL 125 313.1 123 313.1 DL 127 313.1 125 313.1
+DL 129 313.1 127 313.1 DL 131 313.1 129 313.1 DL 133 313.1 131 313.1 DL 135
+313.1 133 313.1 DL 137 313.1 135 313.1 DL 139 313.1 137 313.1 DL 141 313.1 139
+313.1 DL 143 313.1 141 313.1 DL 145 313.1 143 313.1 DL 147 313.1 145 313.1 DL
+149 313.1 147 313.1 DL 151 313.1 149 313.1 DL 153 313.1 151 313.1 DL 155 313.1
+153 313.1 DL 157 313.1 155 313.1 DL 159 313.1 157 313.1 DL 161 313.1 159 313.1
+DL 163 313.1 161 313.1 DL 165 313.1 163 313.1 DL 167 313.1 165 313.1 DL 169
+313.1 167 313.1 DL 171 313.1 169 313.1 DL 173 313.1 171 313.1 DL 175 313.1 173
+313.1 DL 177 313.1 175 313.1 DL 179 313.1 177 313.1 DL 181 313.1 179 313.1 DL
+183 313.1 181 313.1 DL 185 313.1 183 313.1 DL 187 313.1 185 313.1 DL 189 313.1
+187 313.1 DL 191 313.1 189 313.1 DL 193 313.1 191 313.1 DL 195 313.1 193 313.1
+DL 197 313.1 195 313.1 DL 199 313.1 197 313.1 DL 201 313.1 199 313.1 DL 203
+313.1 201 313.1 DL 205 313.1 203 313.1 DL 207 313.1 205 313.1 DL 209 313.1 207
+313.1 DL 211 313.1 209 313.1 DL 213 313.1 211 313.1 DL 215 313.1 213 313.1 DL
+217 313.1 215 313.1 DL 219 313.1 217 313.1 DL 221 313.1 219 313.1 DL 223 313.1
+221 313.1 DL 225 313.1 223 313.1 DL 227 313.1 225 313.1 DL 229 313.1 227 313.1
+DL 231 313.1 229 313.1 DL 233 313.1 231 313.1 DL 235 313.1 233 313.1 DL 237
+313.1 235 313.1 DL 239 313.1 237 313.1 DL 241 313.1 239 313.1 DL 243 313.1 241
+313.1 DL 245 313.1 243 313.1 DL 247 313.1 245 313.1 DL 249 313.1 247 313.1 DL
+251 313.1 249 313.1 DL 253 313.1 251 313.1 DL 255 313.1 253 313.1 DL 257 313.1
+255 313.1 DL 259 313.1 257 313.1 DL 261 313.1 259 313.1 DL 263 313.1 261 313.1
+DL 265 313.1 263 313.1 DL 267 313.1 265 313.1 DL 269 313.1 267 313.1 DL 271
+313.1 269 313.1 DL 273 313.1 271 313.1 DL 275 313.1 273 313.1 DL 277 313.1 275
+313.1 DL 279 313.1 277 313.1 DL 281 313.1 279 313.1 DL 283 313.1 281 313.1 DL
+285 313.1 283 313.1 DL 287 313.1 285 313.1 DL 289 313.1 287 313.1 DL 291 313.1
+289 313.1 DL 293 313.1 291 313.1 DL 295 313.1 293 313.1 DL 297 313.1 295 313.1
+DL 299 313.1 297 313.1 DL 301 313.1 299 313.1 DL 303 313.1 301 313.1 DL 305
+313.1 303 313.1 DL 307 313.1 305 313.1 DL 309 313.1 307 313.1 DL 311 313.1 309
+313.1 DL 313 313.1 311 313.1 DL 315 313.1 313 313.1 DL 317 313.1 315 313.1 DL
+319 313.1 317 313.1 DL 321 313.1 319 313.1 DL 323 313.1 321 313.1 DL 325 313.1
+323 313.1 DL 327 313.1 325 313.1 DL 329 313.1 327 313.1 DL 331 313.1 329 313.1
+DL 333 313.1 331 313.1 DL 335 313.1 333 313.1 DL 337 313.1 335 313.1 DL 339
+313.1 337 313.1 DL 341 313.1 339 313.1 DL 343 313.1 341 313.1 DL 345 313.1 343
+313.1 DL 347 313.1 345 313.1 DL 349 313.1 347 313.1 DL 351 313.1 349 313.1 DL
+353 313.1 351 313.1 DL 355 313.1 353 313.1 DL 357 313.1 355 313.1 DL 359 313.1
+357 313.1 DL 361 313.1 359 313.1 DL 363 313.1 361 313.1 DL 365 313.1 363 313.1
+DL 367 313.1 365 313.1 DL 369 313.1 367 313.1 DL 371 313.1 369 313.1 DL 373
+313.1 371 313.1 DL 375 313.1 373 313.1 DL 377 313.1 375 313.1 DL 379 313.1 377
+313.1 DL 381 313.1 379 313.1 DL 383 313.1 381 313.1 DL 385 313.1 383 313.1 DL
+387 313.1 385 313.1 DL 1.44 LW 419.4 313.6 401.4 313.6 DL 428.4 313.6 410.4
+313.6 DL 446.4 313.6 428.4 313.6 DL 464.4 313.6 446.4 313.6 DL 482.4 313.6
+464.4 313.6 DL 500.4 313.6 482.4 313.6 DL 518.4 313.6 500.4 313.6 DL 536.4
+313.6 518.4 313.6 DL/F6 12/Helvetica-BoldOblique@0 SF(Step)510.396 327.6 Q(6:)
+525.732 341.6 Q(Build)506.4 355.6 Q(and)515.064 369.6 Q(Run)513.072 383.6 Q
+-.72(Te)512.448 397.6 S(st).72 E(Pr)480.624 411.6 Q(ograms)-.24 E F3 1.097
+(Several test pr)63 341.7 R 1.097(ograms ar)-.198 F 3.847(ep)-.198 G -.198(ro)
+199.696 341.7 S 1.097(vided in the).198 F F4(dor)3.847 E(e/test)-.198 E F3(dir)
+3.847 E(ectory)-.198 E 6.597(.U)-1.221 G(se)377.067 341.7 Q .947
+(these to ensur)63 354.9 R 3.697(et)-.198 G .947(hat the Dore)144.843 354.9 R
+4.5<b46c>202.65 354.9 S .946(ibrary cr)214.014 354.9 R .946
+(eated by the build pr)-.198 F(ocess)-.198 E .965(is working corr)63 368.1 R
+(ectly)-.198 E 6.465(.T)-1.221 G 3.715(oc)175.818 368.1 S .966
+(ompile and link them, \214rst move to the)190.423 368.1 R(test dir)63 381.3 Q
+(ectory:)-.198 E F2 5.4(%c)63 401 S 5.4(d/)79.2 401 S(my_directory/dore/test)
+95.4 401 Q F3 .734(Then edit the appr)63 422.9 R .733
+(opriate make\214le \(depending on your platform\))-.198 F .684
+(to set the variables)63 436.1 R F5(DORE_LOC)3.434 E F3(,)A F5(DORE_OBJTYPE)
+3.434 E F3(,)A F5(DORE_LIB_NAME)3.434 E F3(,)A(and)63 449.3 Q F5(LIBS)3.053 E
+F3 .303(to the pr)3.053 F .303(oper values.)-.198 F .302(The \214rst two ar)
+5.803 F 3.052(et)-.198 G .302(he location of the)302.461 449.3 R F4(dor)63
+462.5 Q(e)-.198 E F3(dir)7.602 E(ectory)-.198 E 7.603(,a)-1.221 G 4.853
+(nd the machine object type, as speci\214ed in)148.253 462.5 R F4(dor)63 475.7
+Q(e/make\214le)-.198 E F3(.)A F5(DORE_LIB_NAME)5.691 E F3 .191
+(is the name of the Dore)2.941 F 3.744<b46c>325.327 475.7 S .19(ibrary \()
+335.935 475.7 R F4(lib-)A(dor)63 488.9 Q(e.a)-.198 E F3 5.362
+(for all the sample con\214gurations\).)8.111 F F5(LIBS)293.742 488.9 Q F3
+5.362(speci\214es the)8.112 F 1.185(libraries, other than the Dore)63 502.1 R
+4.738<b46c>203.722 502.1 S(ibrary)215.324 502.1 Q 3.935(,t)-1.221 G 1.184
+(hat need to be linked with)253.964 502.1 R 2.74(the test pr)63 515.3 R 2.74
+(ograms, e.g.,)-.198 F F4(\255lm)5.491 E F3(,)A F4(\255lgl)5.491 E F3 5.491(,e)
+C 5.491(tc. Build)245.125 515.3 R 2.741(the test pr)5.491 F(ograms)-.198 E
+(using the make\214le.)63 528.5 Q .369(For details on how to r)63 553.7 R .369
+(un these test pr)-.088 F .369(ograms see)-.198 F F4(dor)3.119 E(e/test/Readme)
+-.198 E F3(.)A(Befor)63 578.9 Q 3.809(ey)-.198 G 1.059(ou r)104 578.9 R 1.059
+(un the test pr)-.088 F 1.06(ograms you must ensur)-.198 F 3.81(et)-.198 G 1.06
+(hat Dore)323.192 578.9 R 4.613<b468>362.158 578.9 S(as)376.836 578.9 Q .825
+(access to the font and err)63 592.1 R .825(or message \214les.)-.198 F .824
+(If these data \214les wer)6.324 F(e)-.198 E 2.393(not installed under)63 605.3
+R F4(/usr/dor)5.144 E(e/data)-.198 E F3 2.394(in the pr)5.144 F 2.394
+(evious step, the shell)-.198 F(envir)63 618.5 Q 5.177(onment variables)-.198 F
+F5(DORE_FONTDA)7.927 E -.92(TA)-.55 G F3(and)8.847 E F5(DORE_ERRDA)7.926 E -.92
+(TA)-.55 G F3 .306(must be set to the name of the dir)63 631.7 R .307
+(ectories containing the fonts and)-.198 F .231(the err)63 644.9 R .231
+(or message \214le, r)-.198 F(espectively)-.198 E 5.731(.I)-1.221 G 2.98(fy)
+242.762 644.9 S .23(ou haven't moved the data)255.521 644.9 R 4.699
+(\214les since they wer)63 658.1 R 7.449(eb)-.198 G 4.7(uilt as described in)
+188.32 658.1 R F4 4.7(Step 4)7.45 F F3 7.45(,t)C 4.7(hen set)347.958 658.1 R F5
+(DORE_FONTDA)63 671.3 Q -.92(TA)-.55 G F3(to:)3.67 E 81 756 63 756 DL 99 756 81
+756 DL 117 756 99 756 DL 135 756 117 756 DL 153 756 135 756 DL 171 756 153 756
+DL 189 756 171 756 DL 207 756 189 756 DL 225 756 207 756 DL 243 756 225 756 DL
+261 756 243 756 DL 279 756 261 756 DL 297 756 279 756 DL 315 756 297 756 DL 333
+756 315 756 DL 351 756 333 756 DL 369 756 351 756 DL 387 756 369 756 DL 419.4
+756 401.4 756 DL 428.4 756 410.4 756 DL 446.4 756 428.4 756 DL 464.4 756 446.4
+756 DL 482.4 756 464.4 756 DL 500.4 756 482.4 756 DL 518.4 756 500.4 756 DL
+536.4 756 518.4 756 DL/F7 9/Helvetica@0 SF(Building the Sample Con\214gur)
+246.528 768.96 Q(ations)-.09 E(Dore)409.296 768.96 Q 3.506<b444>424.798 768.96
+S -2.187 -.27(ev e)437.799 768.96 T(loper').27 E 2.502(sG)-.45 G(uide)487.371
+768.96 Q/F8 9/Helvetica-Bold@0 SF(14-209)4.002 E EP
+%%Page: 210 7
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 108 46.8 72 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 257.4 46.8 221.4 46.8 DL 293.4 46.8 257.4 46.8 DL 329.4 46.8 293.4
+46.8 DL 365.4 46.8 329.4 46.8 DL 401.4 46.8 365.4 46.8 DL 437.4 46.8 401.4 46.8
+DL 473.4 46.8 437.4 46.8 DL 509.4 46.8 473.4 46.8 DL 545.4 46.8 509.4 46.8 DL
+/F0 10/Helvetica-BoldOblique@0 SF(Step 6: Build and Run T)72 57.6 Q(est)-.6 E
+(Pr)72 68.4 Q(ograms)-.2 E/F1 10/Helvetica@0 SF(\(contin)72 79.2 Q(ued\))-.1 E
+/F2 9/Courier@0 SF(/my_directory/dore/src/data/fonts/fontbin/fonttype)248.5 107
+Q/F3 11/Palatino-Roman@0 SF(wher)221.5 128.9 Q(e)-.198 E/F4 11
+/Palatino-Italic@0 SF(fonttype)5.59 E F3 2.841
+(is the binary type for fonts as speci\214ed by the)5.59 F(make\214le variable)
+221.5 142.1 Q/F5 10/Palatino-Roman@0 SF(DORE_FONTTYPE.)2.75 E F3(Set)5.5 E/F6
+10/Palatino-Italic@0 SF(DORE_ERRDA)2.75 E -.92(TA)-.55 G F3(to:)3.67 E F2
+(/my_directory/dore/src/data/errmsg)248.5 161.8 Q F3(For mor)221.5 195.7 Q 2.75
+(ei)-.198 G(nformation on Dore)271.803 195.7 Q 3.553<b474>364.203 195.7 S
+(esting see Section V)375.005 195.7 Q(.)-1.419 E .16 LW 223.4 221.7 221.4 221.7
+DL 225.4 221.7 223.4 221.7 DL 227.4 221.7 225.4 221.7 DL 229.4 221.7 227.4
+221.7 DL 231.4 221.7 229.4 221.7 DL 233.4 221.7 231.4 221.7 DL 235.4 221.7
+233.4 221.7 DL 237.4 221.7 235.4 221.7 DL 239.4 221.7 237.4 221.7 DL 241.4
+221.7 239.4 221.7 DL 243.4 221.7 241.4 221.7 DL 245.4 221.7 243.4 221.7 DL
+247.4 221.7 245.4 221.7 DL 249.4 221.7 247.4 221.7 DL 251.4 221.7 249.4 221.7
+DL 253.4 221.7 251.4 221.7 DL 255.4 221.7 253.4 221.7 DL 257.4 221.7 255.4
+221.7 DL 259.4 221.7 257.4 221.7 DL 261.4 221.7 259.4 221.7 DL 263.4 221.7
+261.4 221.7 DL 265.4 221.7 263.4 221.7 DL 267.4 221.7 265.4 221.7 DL 269.4
+221.7 267.4 221.7 DL 271.4 221.7 269.4 221.7 DL 273.4 221.7 271.4 221.7 DL
+275.4 221.7 273.4 221.7 DL 277.4 221.7 275.4 221.7 DL 279.4 221.7 277.4 221.7
+DL 281.4 221.7 279.4 221.7 DL 283.4 221.7 281.4 221.7 DL 285.4 221.7 283.4
+221.7 DL 287.4 221.7 285.4 221.7 DL 289.4 221.7 287.4 221.7 DL 291.4 221.7
+289.4 221.7 DL 293.4 221.7 291.4 221.7 DL 295.4 221.7 293.4 221.7 DL 297.4
+221.7 295.4 221.7 DL 299.4 221.7 297.4 221.7 DL 301.4 221.7 299.4 221.7 DL
+303.4 221.7 301.4 221.7 DL 305.4 221.7 303.4 221.7 DL 307.4 221.7 305.4 221.7
+DL 309.4 221.7 307.4 221.7 DL 311.4 221.7 309.4 221.7 DL 313.4 221.7 311.4
+221.7 DL 315.4 221.7 313.4 221.7 DL 317.4 221.7 315.4 221.7 DL 319.4 221.7
+317.4 221.7 DL 321.4 221.7 319.4 221.7 DL 323.4 221.7 321.4 221.7 DL 325.4
+221.7 323.4 221.7 DL 327.4 221.7 325.4 221.7 DL 329.4 221.7 327.4 221.7 DL
+331.4 221.7 329.4 221.7 DL 333.4 221.7 331.4 221.7 DL 335.4 221.7 333.4 221.7
+DL 337.4 221.7 335.4 221.7 DL 339.4 221.7 337.4 221.7 DL 341.4 221.7 339.4
+221.7 DL 343.4 221.7 341.4 221.7 DL 345.4 221.7 343.4 221.7 DL 347.4 221.7
+345.4 221.7 DL 349.4 221.7 347.4 221.7 DL 351.4 221.7 349.4 221.7 DL 353.4
+221.7 351.4 221.7 DL 355.4 221.7 353.4 221.7 DL 357.4 221.7 355.4 221.7 DL
+359.4 221.7 357.4 221.7 DL 361.4 221.7 359.4 221.7 DL 363.4 221.7 361.4 221.7
+DL 365.4 221.7 363.4 221.7 DL 367.4 221.7 365.4 221.7 DL 369.4 221.7 367.4
+221.7 DL 371.4 221.7 369.4 221.7 DL 373.4 221.7 371.4 221.7 DL 375.4 221.7
+373.4 221.7 DL 377.4 221.7 375.4 221.7 DL 379.4 221.7 377.4 221.7 DL 381.4
+221.7 379.4 221.7 DL 383.4 221.7 381.4 221.7 DL 385.4 221.7 383.4 221.7 DL
+387.4 221.7 385.4 221.7 DL 389.4 221.7 387.4 221.7 DL 391.4 221.7 389.4 221.7
+DL 393.4 221.7 391.4 221.7 DL 395.4 221.7 393.4 221.7 DL 397.4 221.7 395.4
+221.7 DL 399.4 221.7 397.4 221.7 DL 401.4 221.7 399.4 221.7 DL 403.4 221.7
+401.4 221.7 DL 405.4 221.7 403.4 221.7 DL 407.4 221.7 405.4 221.7 DL 409.4
+221.7 407.4 221.7 DL 411.4 221.7 409.4 221.7 DL 413.4 221.7 411.4 221.7 DL
+415.4 221.7 413.4 221.7 DL 417.4 221.7 415.4 221.7 DL 419.4 221.7 417.4 221.7
+DL 421.4 221.7 419.4 221.7 DL 423.4 221.7 421.4 221.7 DL 425.4 221.7 423.4
+221.7 DL 427.4 221.7 425.4 221.7 DL 429.4 221.7 427.4 221.7 DL 431.4 221.7
+429.4 221.7 DL 433.4 221.7 431.4 221.7 DL 435.4 221.7 433.4 221.7 DL 437.4
+221.7 435.4 221.7 DL 439.4 221.7 437.4 221.7 DL 441.4 221.7 439.4 221.7 DL
+443.4 221.7 441.4 221.7 DL 445.4 221.7 443.4 221.7 DL 447.4 221.7 445.4 221.7
+DL 449.4 221.7 447.4 221.7 DL 451.4 221.7 449.4 221.7 DL 453.4 221.7 451.4
+221.7 DL 455.4 221.7 453.4 221.7 DL 457.4 221.7 455.4 221.7 DL 459.4 221.7
+457.4 221.7 DL 461.4 221.7 459.4 221.7 DL 463.4 221.7 461.4 221.7 DL 465.4
+221.7 463.4 221.7 DL 467.4 221.7 465.4 221.7 DL 469.4 221.7 467.4 221.7 DL
+471.4 221.7 469.4 221.7 DL 473.4 221.7 471.4 221.7 DL 475.4 221.7 473.4 221.7
+DL 477.4 221.7 475.4 221.7 DL 479.4 221.7 477.4 221.7 DL 481.4 221.7 479.4
+221.7 DL 483.4 221.7 481.4 221.7 DL 485.4 221.7 483.4 221.7 DL 487.4 221.7
+485.4 221.7 DL 489.4 221.7 487.4 221.7 DL 491.4 221.7 489.4 221.7 DL 493.4
+221.7 491.4 221.7 DL 495.4 221.7 493.4 221.7 DL 497.4 221.7 495.4 221.7 DL
+499.4 221.7 497.4 221.7 DL 501.4 221.7 499.4 221.7 DL 503.4 221.7 501.4 221.7
+DL 505.4 221.7 503.4 221.7 DL 507.4 221.7 505.4 221.7 DL 509.4 221.7 507.4
+221.7 DL 511.4 221.7 509.4 221.7 DL 513.4 221.7 511.4 221.7 DL 515.4 221.7
+513.4 221.7 DL 517.4 221.7 515.4 221.7 DL 519.4 221.7 517.4 221.7 DL 521.4
+221.7 519.4 221.7 DL 523.4 221.7 521.4 221.7 DL 525.4 221.7 523.4 221.7 DL
+527.4 221.7 525.4 221.7 DL 529.4 221.7 527.4 221.7 DL 531.4 221.7 529.4 221.7
+DL 533.4 221.7 531.4 221.7 DL 535.4 221.7 533.4 221.7 DL 537.4 221.7 535.4
+221.7 DL 539.4 221.7 537.4 221.7 DL 541.4 221.7 539.4 221.7 DL 543.4 221.7
+541.4 221.7 DL 545.4 221.7 543.4 221.7 DL 1.44 LW 90 222.2 72 222.2 DL 99 222.2
+81 222.2 DL 117 222.2 99 222.2 DL 135 222.2 117 222.2 DL 153 222.2 135 222.2 DL
+171 222.2 153 222.2 DL 189 222.2 171 222.2 DL 207 222.2 189 222.2 DL/F7 12
+/Helvetica-BoldOblique@0 SF(Step 7: Install Dore)72 236.2 Q<b4>175.362 236.2 Q
+F3 .571(Once you have built Dore)221.5 250.3 R 4.124<b461>344.498 250.3 S .572
+(nd successfully r)357.785 250.3 R .572(un the test pr)-.088 F(ograms,)-.198 E
+(the Dore)221.5 263.5 Q 3.553<b473>259.175 263.5 S(ystem can be installed.)
+271.055 263.5 Q(This is done by:)5.5 E F2 5.4(%c)221.5 283.2 S 5.4(d/)237.7
+283.2 S(my_directory/dore)253.9 283.2 Q 5.4(%m)221.5 294.2 S(ake install_dore)
+237.7 294.2 Q F3(By default, the con\214guration make\214les ar)221.5 316.1 Q
+2.75(es)-.198 G(et up to)435.12 316.1 Q 18.334<836d>221.5 335.3 S(ove the Dore)
+256.213 335.3 Q 3.553<b46c>314.128 335.3 S(ibrary to)324.545 335.3 Q F4
+(/usr/lib)2.75 E F3 18.334<8363>221.5 354.5 S(opy the user include \214les to)
+251.384 354.5 Q F4(/usr/include)2.75 E F3 6.102 -1.012(To c)221.5 379.7 T 4.078
+(hange the tar)1.012 F 4.078(get locations set the following variables in)-.198
+F F4(dor)221.5 392.9 Q(e/make\214le)-.198 E F3(:)A F2(DORE_LIBDIR=libdir)264.7
+412.6 Q(DORE_INCDIR=incdir)264.7 423.6 Q F3(wher)221.5 445.5 Q(e)-.198 E F4
+(libdir)5.928 E F3(and)5.928 E F4(incdir)5.928 E F3(ar)5.928 E 5.928(ef)-.198 G
+3.179(ull path names of dir)369.137 445.5 R 3.179(ectories that)-.198 F(alr)
+221.5 458.7 Q 1.44(eady exist.)-.198 F(All)6.94 E F5(FOR)4.19 E(TRAN)-.37 E F3
+1.439(include \214les ar)4.189 F 4.189(ep)-.198 G 1.439(ut in)456.393 458.7 R
+F4(incdir/fortran)4.189 E F3 .454
+(and the include \214les needed when adding device drivers and r)221.5 471.9 R
+(en-)-.198 E(der)221.5 485.1 Q 1.538(ers ar)-.198 F 4.288(ep)-.198 G 1.538
+(ut in)282.018 485.1 R F4(incdir/dor)4.288 E(e_develop)-.198 E F3 7.038(.T)C
+(he)413.935 485.1 Q F4(fortran)4.288 E F3(and)4.288 E F4(dor)4.288 E(e_develop)
+-.198 E F3(subdir)221.5 498.3 Q(ectories will be cr)-.198 E(eated as necessary)
+-.198 E(.)-1.221 E .16 LW 223.4 524.3 221.4 524.3 DL 225.4 524.3 223.4 524.3 DL
+227.4 524.3 225.4 524.3 DL 229.4 524.3 227.4 524.3 DL 231.4 524.3 229.4 524.3
+DL 233.4 524.3 231.4 524.3 DL 235.4 524.3 233.4 524.3 DL 237.4 524.3 235.4
+524.3 DL 239.4 524.3 237.4 524.3 DL 241.4 524.3 239.4 524.3 DL 243.4 524.3
+241.4 524.3 DL 245.4 524.3 243.4 524.3 DL 247.4 524.3 245.4 524.3 DL 249.4
+524.3 247.4 524.3 DL 251.4 524.3 249.4 524.3 DL 253.4 524.3 251.4 524.3 DL
+255.4 524.3 253.4 524.3 DL 257.4 524.3 255.4 524.3 DL 259.4 524.3 257.4 524.3
+DL 261.4 524.3 259.4 524.3 DL 263.4 524.3 261.4 524.3 DL 265.4 524.3 263.4
+524.3 DL 267.4 524.3 265.4 524.3 DL 269.4 524.3 267.4 524.3 DL 271.4 524.3
+269.4 524.3 DL 273.4 524.3 271.4 524.3 DL 275.4 524.3 273.4 524.3 DL 277.4
+524.3 275.4 524.3 DL 279.4 524.3 277.4 524.3 DL 281.4 524.3 279.4 524.3 DL
+283.4 524.3 281.4 524.3 DL 285.4 524.3 283.4 524.3 DL 287.4 524.3 285.4 524.3
+DL 289.4 524.3 287.4 524.3 DL 291.4 524.3 289.4 524.3 DL 293.4 524.3 291.4
+524.3 DL 295.4 524.3 293.4 524.3 DL 297.4 524.3 295.4 524.3 DL 299.4 524.3
+297.4 524.3 DL 301.4 524.3 299.4 524.3 DL 303.4 524.3 301.4 524.3 DL 305.4
+524.3 303.4 524.3 DL 307.4 524.3 305.4 524.3 DL 309.4 524.3 307.4 524.3 DL
+311.4 524.3 309.4 524.3 DL 313.4 524.3 311.4 524.3 DL 315.4 524.3 313.4 524.3
+DL 317.4 524.3 315.4 524.3 DL 319.4 524.3 317.4 524.3 DL 321.4 524.3 319.4
+524.3 DL 323.4 524.3 321.4 524.3 DL 325.4 524.3 323.4 524.3 DL 327.4 524.3
+325.4 524.3 DL 329.4 524.3 327.4 524.3 DL 331.4 524.3 329.4 524.3 DL 333.4
+524.3 331.4 524.3 DL 335.4 524.3 333.4 524.3 DL 337.4 524.3 335.4 524.3 DL
+339.4 524.3 337.4 524.3 DL 341.4 524.3 339.4 524.3 DL 343.4 524.3 341.4 524.3
+DL 345.4 524.3 343.4 524.3 DL 347.4 524.3 345.4 524.3 DL 349.4 524.3 347.4
+524.3 DL 351.4 524.3 349.4 524.3 DL 353.4 524.3 351.4 524.3 DL 355.4 524.3
+353.4 524.3 DL 357.4 524.3 355.4 524.3 DL 359.4 524.3 357.4 524.3 DL 361.4
+524.3 359.4 524.3 DL 363.4 524.3 361.4 524.3 DL 365.4 524.3 363.4 524.3 DL
+367.4 524.3 365.4 524.3 DL 369.4 524.3 367.4 524.3 DL 371.4 524.3 369.4 524.3
+DL 373.4 524.3 371.4 524.3 DL 375.4 524.3 373.4 524.3 DL 377.4 524.3 375.4
+524.3 DL 379.4 524.3 377.4 524.3 DL 381.4 524.3 379.4 524.3 DL 383.4 524.3
+381.4 524.3 DL 385.4 524.3 383.4 524.3 DL 387.4 524.3 385.4 524.3 DL 389.4
+524.3 387.4 524.3 DL 391.4 524.3 389.4 524.3 DL 393.4 524.3 391.4 524.3 DL
+395.4 524.3 393.4 524.3 DL 397.4 524.3 395.4 524.3 DL 399.4 524.3 397.4 524.3
+DL 401.4 524.3 399.4 524.3 DL 403.4 524.3 401.4 524.3 DL 405.4 524.3 403.4
+524.3 DL 407.4 524.3 405.4 524.3 DL 409.4 524.3 407.4 524.3 DL 411.4 524.3
+409.4 524.3 DL 413.4 524.3 411.4 524.3 DL 415.4 524.3 413.4 524.3 DL 417.4
+524.3 415.4 524.3 DL 419.4 524.3 417.4 524.3 DL 421.4 524.3 419.4 524.3 DL
+423.4 524.3 421.4 524.3 DL 425.4 524.3 423.4 524.3 DL 427.4 524.3 425.4 524.3
+DL 429.4 524.3 427.4 524.3 DL 431.4 524.3 429.4 524.3 DL 433.4 524.3 431.4
+524.3 DL 435.4 524.3 433.4 524.3 DL 437.4 524.3 435.4 524.3 DL 439.4 524.3
+437.4 524.3 DL 441.4 524.3 439.4 524.3 DL 443.4 524.3 441.4 524.3 DL 445.4
+524.3 443.4 524.3 DL 447.4 524.3 445.4 524.3 DL 449.4 524.3 447.4 524.3 DL
+451.4 524.3 449.4 524.3 DL 453.4 524.3 451.4 524.3 DL 455.4 524.3 453.4 524.3
+DL 457.4 524.3 455.4 524.3 DL 459.4 524.3 457.4 524.3 DL 461.4 524.3 459.4
+524.3 DL 463.4 524.3 461.4 524.3 DL 465.4 524.3 463.4 524.3 DL 467.4 524.3
+465.4 524.3 DL 469.4 524.3 467.4 524.3 DL 471.4 524.3 469.4 524.3 DL 473.4
+524.3 471.4 524.3 DL 475.4 524.3 473.4 524.3 DL 477.4 524.3 475.4 524.3 DL
+479.4 524.3 477.4 524.3 DL 481.4 524.3 479.4 524.3 DL 483.4 524.3 481.4 524.3
+DL 485.4 524.3 483.4 524.3 DL 487.4 524.3 485.4 524.3 DL 489.4 524.3 487.4
+524.3 DL 491.4 524.3 489.4 524.3 DL 493.4 524.3 491.4 524.3 DL 495.4 524.3
+493.4 524.3 DL 497.4 524.3 495.4 524.3 DL 499.4 524.3 497.4 524.3 DL 501.4
+524.3 499.4 524.3 DL 503.4 524.3 501.4 524.3 DL 505.4 524.3 503.4 524.3 DL
+507.4 524.3 505.4 524.3 DL 509.4 524.3 507.4 524.3 DL 511.4 524.3 509.4 524.3
+DL 513.4 524.3 511.4 524.3 DL 515.4 524.3 513.4 524.3 DL 517.4 524.3 515.4
+524.3 DL 519.4 524.3 517.4 524.3 DL 521.4 524.3 519.4 524.3 DL 523.4 524.3
+521.4 524.3 DL 525.4 524.3 523.4 524.3 DL 527.4 524.3 525.4 524.3 DL 529.4
+524.3 527.4 524.3 DL 531.4 524.3 529.4 524.3 DL 533.4 524.3 531.4 524.3 DL
+535.4 524.3 533.4 524.3 DL 537.4 524.3 535.4 524.3 DL 539.4 524.3 537.4 524.3
+DL 541.4 524.3 539.4 524.3 DL 543.4 524.3 541.4 524.3 DL 545.4 524.3 543.4
+524.3 DL 1.44 LW 90 524.8 72 524.8 DL 99 524.8 81 524.8 DL 117 524.8 99 524.8
+DL 135 524.8 117 524.8 DL 153 524.8 135 524.8 DL 171 524.8 153 524.8 DL 189
+524.8 171 524.8 DL 207 524.8 189 524.8 DL F7(Step 8: Remo)72 538.8 Q(ve Object)
+-.24 E(Files)72 552.8 Q F3 .209
+(If you want to save space, you can delete the object \214les generated)221.5
+552.9 R(by the build pr)221.5 566.1 Q(ocess by:)-.198 E F2 5.4(%c)221.5 585.8 S
+5.4(d/)237.7 585.8 S(my_directory/dore)253.9 585.8 Q 5.4(%m)221.5 596.8 S
+(ake clean)237.7 596.8 Q F3(This r)221.5 618.7 Q(emoves \214les fr)-.198 E
+(om the object dir)-.198 E(ectory str)-.198 E(uctur)-.088 E 2.75(eu)-.198 G
+(nder:)487.337 618.7 Q F2(dore/obj/objtype)264.7 638.4 Q F3(wher)221.5 660.3 Q
+(e)-.198 E F4(objtype)3.029 E F3 .278
+(is the machine object type as de\214ned by the variable)3.029 F F6
+(DORE_OBJTYPE)221.5 673.5 Q F3(in)6.368 E F4(dor)6.368 E(e/make\214le)-.198 E
+F3 9.118(.A)C 3.618(ll object \214les built fr)397.575 673.5 R 3.619(om the)
+-.198 F 1.111(generic part of the code ar)221.5 686.7 R 3.861(er)-.198 G 1.11
+(emoved, as well as those built fr)367.063 686.7 R(om)-.198 E
+(the con\214guration dir)221.5 699.9 Q(ectories speci\214ed in)-.198 E F4(dor)
+2.75 E(e/make\214le)-.198 E F3(.)A 90 756 72 756 DL 99 756 81 756 DL 117 756 99
+756 DL 135 756 117 756 DL 153 756 135 756 DL 171 756 153 756 DL 189 756 171 756
+DL 207 756 189 756 DL 239.4 756 221.4 756 DL 257.4 756 239.4 756 DL 275.4 756
+257.4 756 DL 293.4 756 275.4 756 DL 311.4 756 293.4 756 DL 329.4 756 311.4 756
+DL 347.4 756 329.4 756 DL 365.4 756 347.4 756 DL 383.4 756 365.4 756 DL 401.4
+756 383.4 756 DL 419.4 756 401.4 756 DL 437.4 756 419.4 756 DL 455.4 756 437.4
+756 DL 473.4 756 455.4 756 DL 491.4 756 473.4 756 DL 509.4 756 491.4 756 DL
+527.4 756 509.4 756 DL 545.4 756 527.4 756 DL/F8 9/Helvetica-Bold@0 SF(14-210)
+72 768.96 Q/F9 9/Helvetica@0 SF(Dore)6.504 E 3.506<b444>122.023 768.96 S -2.187
+-.27(ev e)135.024 768.96 T(loper').27 E 2.502(sG)-.45 G(uide)184.596 768.96 Q
+(Building the Sample Con\214gur)221.4 768.96 Q(ations)-.09 E EP
+%%Page: 211 8
+%%BeginPageSetup
+BP
+%%EndPageSetup
+2.88 LW 99 46.8 63 46.8 DL 135 46.8 99 46.8 DL 171 46.8 135 46.8 DL 207 46.8
+171 46.8 DL 243 46.8 207 46.8 DL 279 46.8 243 46.8 DL 315 46.8 279 46.8 DL 351
+46.8 315 46.8 DL 387 46.8 351 46.8 DL 437.4 46.8 401.4 46.8 DL 464.4 46.8 428.4
+46.8 DL 500.4 46.8 464.4 46.8 DL 536.4 46.8 500.4 46.8 DL/F0 10
+/Helvetica-BoldOblique@0 SF(Step 8: Remo)402.11 57.6 Q(ve Object Files)-.2 E/F1
+10/Helvetica@0 SF(\(contin)486.48 68.4 Q(ued\))-.1 E 1.44 LW 81 756 63 756 DL
+99 756 81 756 DL 117 756 99 756 DL 135 756 117 756 DL 153 756 135 756 DL 171
+756 153 756 DL 189 756 171 756 DL 207 756 189 756 DL 225 756 207 756 DL 243 756
+225 756 DL 261 756 243 756 DL 279 756 261 756 DL 297 756 279 756 DL 315 756 297
+756 DL 333 756 315 756 DL 351 756 333 756 DL 369 756 351 756 DL 387 756 369 756
+DL 419.4 756 401.4 756 DL 428.4 756 410.4 756 DL 446.4 756 428.4 756 DL 464.4
+756 446.4 756 DL 482.4 756 464.4 756 DL 500.4 756 482.4 756 DL 518.4 756 500.4
+756 DL 536.4 756 518.4 756 DL/F2 9/Helvetica@0 SF
+(Building the Sample Con\214gur)246.528 768.96 Q(ations)-.09 E(Dore)409.296
+768.96 Q 3.506<b444>424.798 768.96 S -2.187 -.27(ev e)437.799 768.96 T(loper')
+.27 E 2.502(sG)-.45 G(uide)487.371 768.96 Q/F3 9/Helvetica-Bold@0 SF(14-211)
+4.002 E EP
+%%Trailer
+end
+%%EOF

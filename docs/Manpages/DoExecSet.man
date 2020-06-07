@@ -1,0 +1,113 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DoExecSet 3D  "Dore"
+.SH NAME
+DoExecSet \- Create an object that modifies the executability of objects
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+DtObject DoExecSet(n, list, setop)
+DtInt n;
+DtInt list[\|];
+DtSetOperation setop;
+.sp
+.in -.5i
+FORTRAN:
+.in +.5i
+INTEGER*4 DOES(N, LIST, SETOP)
+INTEGER*4 N
+INTEGER*4 LIST(N)
+INTEGER*4 SETOP
+.in -.5i
+.fi
+.SH DESCRIPTION
+.IX DOES
+.IX DoExecSet
+.I DoExecSet
+creates an organizational object that modifies the executability set. 
+The executability set is a set of classes (object types) that 
+are currently eligible to be executed as definition or display objects.  
+By default, all classes are included in this set.
+.PP
+The parameter \f2list\fP is a list of class identifiers. A
+class identifier is determined from the class name with
+\f2DsInqClassId <DSQCI>\fP.
+ \f2n\fP is the
+number of elements in the list.  Each element of the list refers to a
+member of the executability set (a class) to be
+affected.  The argument \f2setop\fP specifies how the status of those
+members are to be affected.  Possible choices for \f2setop\fP are:
+.IP "\f2DcSetAdd\fP <\f2DCSADD>"
+Adds the classes listed in \f2list\fP to the current
+executability set.
+.IP "\f2DcSetDelete\fP <\f2DCSDEL\fP>"
+Removes the classes listed in \f2list\fP from the current
+executability set.
+.IP "\f2DcSetInvert\fP <\f2DCSINV\fP>"
+Causes all classes referred to in \f2list\fP to
+take on the opposite of their current status. In other words, if the
+given classes are not members of the current executability set,
+they will be added; if they currently are included, they will
+be removed.
+.IP "\f2DcSetReplace\fP <\f2DCSREP\fP>"
+Replaces the current executability set with one that includes
+only the classes given in \f2list\fP.
+.PP
+When a class is non-executable, the effect is the same as if no
+objects of that type existed below that point in the
+tree until that class is made executable again.  This is
+useful for making a temporary global change to an
+entire subtree.
+.PP
+For instance, imagine a complex scene containing hundreds of
+objects that are defined with many different representation types.
+To render either the entire scene or some
+portion of it all in the same representation type would require extensive
+editing of the scene.  The same could be accomplished using \f2DoExecSet\fP
+by adding just two new group elements at the beginning of the group to be
+affected: a \f2DoRepType\fP <\f2DOREPT\fP> to set the desired
+representation type and a \f2DoExecSet\fP to remove
+representation type from the current executability set.
+Other classes subject to this form of manipulation
+include any of the appearance attributes.  In fact,
+some very bizarre effects can
+result from disabling other group element types like geometric
+attributes.
+.PP
+Note that this is a useful, flexible, and powerful function but capable of
+disastrous effects if not used carefully.  It is
+highly recommended that this be used only to
+\f2temporarily\fP disable executability of one or more attribute
+objects for a single subtree.  It is further advised that
+\f2DcSetDelete\fP <\f2DCSDEL\fP> be the only \f2setop\fP used as above;
+the other set operations exist mainly for the sake of consistency.
+.SH ERRORS
+.I DoExecSet
+will fail if the \f2setop\fP value is invalid.
+.TP 15
+[FATAL - invalid set operation]
+.SH DEFAULTS
+The default \f2DoExecSet\fP includes all currently defined
+objects that can be placed in the database.
+.SH "SEE ALSO"
+.na
+.nh
+DoNameSet(3D), DoFilter(3D), DoRepType(3D) DsInqClassId(3d)
+.ad
+.hy

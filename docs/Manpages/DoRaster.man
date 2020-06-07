@@ -1,0 +1,155 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DoRaster 3D "Dore"
+.SH NAME
+DoRaster \- Create a raster object 
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+DtObject DoRaster(width, height, depth, type, typestring, 
+	data, delcallback)
+DtInt width;
+DtInt height;
+DtInt depth;
+DtRasterType type;
+DtPtr typestring;
+DtPtr data;
+DtObject delcallback;
+.sp
+.in  -.5i
+FORTRAN:
+.in  +.5i
+INTEGER*4
+    DORS(WIDTH, HEIGHT, DEPTH, TYPE, TYPSTR, 
+	TLEN, DATA, DELCBK)
+INTEGER*4 WIDTH
+INTEGER*4 HEIGHT
+INTEGER*4 DEPTH
+INTEGER*4 TYPE
+INTEGER*4 TLEN
+CHARACTER*TLEN TYPSTR
+INTEGER*4 DATA
+INTEGER*4 DELCBK
+.in  -.5i
+.fi 
+.IX "DoRaster"
+.IX "DORS"
+.SH DESCRIPTION
+.LP
+\f2DoRaster\fP creates a raster object. 
+Raster objects can, for example, be used as texture maps or as 
+backgrounds for views.
+.LP
+The parameter \f2data\fP is a pointer to the actual raster data in memory.
+The data may be for a one-, two- or three-dimensional raster.
+The parameters \f2width\fP, \f2height\fP, and \fPdepth\fP specify the
+dimensions of the raster.
+Note that Dore does not copy the raster data pointed to by \f2data\fP,
+but uses it from the user space.
+The data in user space can be modified at any time, but Dore must be
+notified (See \f2DsRasterUpdate\fP).
+.LP
+The parameter \f2type\fP indicates the type and format of the raster data.
+Possible values for \f2type\fP are:
+.IX DcRasterRGB
+.IX DCRRGB
+.IP "\f2DcRasterRGB\fP <\f2DCRRGB\fP>"
+Each point in the raster has red, green and blue information.
+.IX DcRasterRGBA
+.IX DCRRA
+.IP "\f2DcRasterRGBA\fP <\f2DCRRA\fP>"
+Each point in the raster has red, green, blue and alpha information.
+.IX DcRasterRGBAZ
+.IX DCRRAZ
+.IP "\f2DcRasterRGBAZ\fP <\f2DCRRAZ\fP>"
+Each point in the raster has red, green, blue, alpha and z information.
+.IX DcRasterRGBZ
+.IX DCRRZ
+.IP "\f2DcRasterRGBZ\fP <\f2DCRRZ\fP>"
+Each point in the raster has red, green, blue and z information.
+.IX DcRasterA
+.IX DCRA
+.IP "\f2DcRasterA\fP <\f2DCRA\fP>"
+Each point in the raster has alpha information.
+.IX DcRasterABGR
+.IX DCRAR
+.IP "\f2DcRasterABGR\fP <\f2DCRAR\fP>"
+Each point in the raster has alpha, blue, green and red information.
+.IX DcRasterZ
+.IX DCRZ
+.IP "\f2DcRasterZ\fP <\f2DCRZ\fP>"
+Each point in the raster has z information.
+.IX DcRasterSpecial
+.IX DCRSPC
+.IP "\f2DcRasterSpecial\fP <\f2DCRSPC\fP>"
+The data type is not one of the standard Dore types.
+.BP
+\ \ 
+.LP
+The standard Dore types assume that the data is pixel interleaved.
+For more information on the standard Dore raster data formats
+see \f2Chapter 8: Raster
+File and Memory Formats\fP in \f2Dore Reference Manual\fP.
+.LP
+If a renderer requires a format that is not one of the standard Dore ones,
+then the type should be set to be \f2DcRasterSpecial\fP <\f2DCRSPC\fP>.
+In that case,
+the character string \f2typestring\fP specifies the format of the data.
+The parameter \f2typestring\fP is ignored if the \f2type\fP is not 
+\f2DcRasterSpecial\fP <\f2DCRSPC\fP>.
+.LP
+The parameter \f2delcallback\fP is a callback object.
+When the raster object created by \f2DoRaster\fP is deleted by
+Dore the function defined by \f2delcallback\fP will be invoked.
+A callback function takes the following form:
+.nf
+
+	my_del callback_fcn (callback_data, ras_dataptr)
+	DtPtr callback_data;	/* if \f2data\fP is a pointer to data */
+	Dt32Bits callback_data;	/* if \f2data\fP is a value */
+	DtPtr ras_dataptr;  	/* pointer to raster data  */
+
+.fi
+Often an application will not need the data pointed to by \f2data\fP
+after the raster object is destroyed.
+Dore provides a standard callback object, \f2DcDeleteData\fP
+<\f2DCDELD\fP>, which will deallocate the space pointed to by \f2data\fP. 
+The application can define its own callback if
+it does not want the data to be unconditionally deallocated 
+when this raster object is deleted, for example, if the same data is used by
+other raster objects.
+.SH FORTRAN SPECIFIC
+The parameter \f2TYPSTR\fP is an optional format string that is \f2TLEN\fP
+characters long.
+.SH ERRORS
+\f2DoRaster\fP will fail if passed an invalid delete callback object.
+.TP 15
+[WARNING - invalid callback object ]
+.SH SEE ALSO
+.na
+.nh
+DoFileRaster(3D),
+DsFileRasterRead(3D),
+DsRasterWrite(3D),
+DsInqRaster(3D),
+DsRasterUpdate(3D),
+DsRasterWrite(3D)
+.ad
+.hy
+\&

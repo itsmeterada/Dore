@@ -1,0 +1,69 @@
+#ident "%W% %G%"
+
+==========================================================================
+
+		     Dore' Device Driver Summary
+		     ====  ====== ====== =======
+==========================================================================
+
+Device Driver Default Name:	ps
+Hardware supported:		PostScript file output
+Library Dependencies:		none
+
+Supported Module Interfaces
+	DCM:			yes
+	PROM:			no
+	DROM:			yes
+	DROMMethods:		no
+
+Originator
+	Company/Institution:	Kubota Pacific Computer Inc.
+	Name:			Advanced Graphics Software Group
+	Phone:			(408) 727-8100
+	Email:			
+	Address:		2630 Walsh Avenue
+				Santa Clara, CA 95051-0905
+	Date Completed:		??
+
+Maintainer (most recent first)
+	Company/Institution:	Kubota Pacific Computer Inc.
+	Name:			Advanced Graphics Software Group
+	Phone:			(408) 727-8100
+	Email:			
+	Address:		2630 Walsh Avenue
+				Santa Clara, CA 95051-0905
+	Date Completed:		??
+
+==========================================================================
+
+			 DCM Characteristics
+
+==========================================================================
+
+	Version Number:			1
+	Stereo:				no
+	Double Buffered:		no
+	VisualTypes:			DcStaticGrey and DcTrueColor
+	ColorMaps:			none
+	Return Pixel Data:		no
+	Clipping list handling:		n.a.
+	Operation while obscured:	n.a.
+	geometry update handling
+	    size:			n.a.
+	    overlap change:		n.a.
+
+
+==========================================================================
+
+			 DROM Characteristics
+
+==========================================================================
+
+See: soft_tools/softpipe/Readme
+
+==========================================================================
+
+			     Limitations
+
+==========================================================================
+

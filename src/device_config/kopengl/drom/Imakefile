@@ -1,0 +1,9 @@
+#include <Dore.tmpl>
+
+    SRCS = kopengl_extern.c kopengl_math.c kopengl_matrix.c
+    OBJS = kopengl_extern.o kopengl_math.o kopengl_matrix.o
+
+LibraryObjectRule()
+SubdirLibraryRule($(OBJS))
+
+DependTarget()

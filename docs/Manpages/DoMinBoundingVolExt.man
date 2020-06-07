@@ -1,0 +1,74 @@
+.\"#ident "%W% %G%"
+.\"
+.\" # Copyright (C) 1994 Kubota Graphics Corp.
+.\" # 
+.\" # Permission to use, copy, modify, and distribute this material for
+.\" # any purpose and without fee is hereby granted, provided that the
+.\" # above copyright notice and this permission notice appear in all
+.\" # copies, and that the name of Kubota Graphics not be used in
+.\" # advertising or publicity pertaining to this material.  Kubota
+.\" # Graphics Corporation MAKES NO REPRESENTATIONS ABOUT THE ACCURACY
+.\" # OR SUITABILITY OF THIS MATERIAL FOR ANY PURPOSE.  IT IS PROVIDED
+.\" # "AS IS", WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING THE
+.\" # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+.\" # PURPOSE AND KUBOTA GRAPHICS CORPORATION DISCLAIMS ALL WARRANTIES,
+.\" # EXPRESS OR IMPLIED.
+.\"
+.TH DoMinBoundingVolExt 3D  "Dore"
+.SH NAME
+DoMinBoundingVolExt \- Create an attribute object which specifies the minimum renderable bounding extent
+.SH SYNOPSIS
+.nf
+.ft 3
+C:
+.in  +.5i
+DtObject DoMinBoundingVolExt(extension)
+DtReal extension;
+.sp
+.in -.5i
+FORTRAN:
+.in +.5i
+INTEGER*4 DOMBVE(EXTENS)
+REAL*8 EXTENS
+.in -.5i
+.fi
+.SH DESCRIPTION
+.IX DOMBVE
+.IX DoMinBoundingVolExt
+.I DoMinBoundingVolExt
+creates an attribute object which specifies
+the minimum renderable bounding extent.
+The parameter \f2extension\fP specifies a length in device
+coordinates (pixels). 
+A bounding volume (specified with \f2DoBoundingVol\fP 
+<\f2DOBV\fP>) 
+will be compared with this length
+to determine whether an alternate object (also specified
+with \f2DoBoundingVol\fP <\f2DOBV\fP> will be rendered
+instead of the remaining objects in the current group.
+.PP
+The bounding volume object's intersection with the display
+volume is computed when a bounding volume object is executed.
+If the intersection is empty, that is if the
+bounding volume is not currently visible, then execution of the
+current group is aborted, and nothing else in the group will
+be drawn.
+If the intersection is not empty, then a further test is made.
+First, the smallest right rectangle that can enclose the projection of the
+bounding volume on the device is computed.  Then, if the length of the
+diagonal of that rectangle is less than the current minimum bounding
+extension, then execution of the current group will be aborted and
+the alternate object 
+specified by \f2DoBoundingVol <DOBV>\fP 
+will be executed in its place.
+.PP
+See \f2DoBoundingVol\fP for more information on the process used to determine
+whether an object or its alternate representation should be rendered.
+.SH DEFAULTS
+The default value for \f2DoMinBoundingVolExt\fP is 2.0 pixels.
+.SH "SEE ALSO"
+.na
+.nh
+DoBoundingVol(3D), DoBoundingVolSwitch(3D), DsCompBoundingVol(3D)
+.ad
+.hy

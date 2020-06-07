@@ -1,0 +1,17 @@
+#include <Dore.tmpl>
+
+    SRCS = calbck.c hcr_sphlst.c shr_group.c shr_method.c shr_ply.c \
+           shr_plymsh.c shr_prisrf.c shr_quadgrid.c shr_quadlst.c \
+	   shr_quadmsh.c shr_simply.c shr_simplymsh.c shr_torus.c \
+	   shr_trilst.c shr_trimsh.c shr_tristrip.c shr_varquadgrd.c \
+	   shr_varquadmsh.c shr_varsplymsh.c shr_vartrimsh.c shr_vartristrp.c
+    OBJS = calbck.o hcr_sphlst.o shr_group.o shr_method.o shr_ply.o \
+           shr_plymsh.o shr_prisrf.o shr_quadgrid.o shr_quadlst.o \
+	   shr_quadmsh.o shr_simply.o shr_simplymsh.o shr_torus.o \
+	   shr_trilst.o shr_trimsh.o shr_tristrip.o shr_varquadgrd.o \
+	   shr_varquadmsh.o shr_varsplymsh.o shr_vartrimsh.o shr_vartristrp.o
+
+LibraryObjectRule()
+SubdirLibraryRule($(OBJS))
+
+DependTarget()

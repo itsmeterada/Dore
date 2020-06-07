@@ -1,0 +1,31 @@
+#include <Dore.tmpl>
+
+    SRCS =  fambint.c fambswi.c fbakculswi.c fbckcul.c fbndvol.c \
+           fbndvolswi.c fclpswi.c fclpvol.c fcmptuvcbk.c fcmptuvswi.c \
+	   fcmptwcbk.c fcmptwswi.c fdepcue.c fdepcueswi.c fdifclr.c \
+	   fdifint.c fdifswi.c femisclr.c femisfct.c femisswi.c fgentexuv.c \
+	   fhidsrfswi.c finttyp.c finvswi.c flclaasty.c flclaaswi.c \
+	   flgtswi.c flintyp.c flinwid.c fminbndext.c fmkrfnt.c fmkrgly.c \
+	   fmkrscl.c fpckswi.c fradambswi.c fradswi.c frefridx.c \
+	   frefrswi.c frefswi.c freptyp.c fshaswi.c fshdidx.c fspcclr.c \
+	   fspcfct.c fspcint.c fspcswi.c fsrfedgclr.c fsrfshd.c fsubdivspc.c \
+	   ftrnclr.c ftrnint.c ftrnorclr.c ftrnorexp.c ftrnorint.c \
+	   ftrnorswi.c ftrnswi.c ftxtali.c ftxtexpfct.c ftxtfnt.c \
+	   ftxthgt.c ftxtpat.c ftxtprc.c ftxtspc.c ftxtupvec.c
+    OBJS = fambint.o fambswi.o fbakculswi.o fbckcul.o fbndvol.o fbndvolswi.o \
+           fclpswi.o fclpvol.o fcmptuvcbk.o fcmptuvswi.o fcmptwcbk.o \
+	   fcmptwswi.o fdepcue.o fdepcueswi.o fdifclr.o fdifint.o \
+	   fdifswi.o femisclr.o femisfct.o femisswi.o fgentexuv.o \
+	   fhidsrfswi.o finttyp.o finvswi.o flclaasty.o flclaaswi.o \
+	   flgtswi.o flintyp.o flinwid.o fminbndext.o fmkrfnt.o fmkrgly.o \
+	   fmkrscl.o fpckswi.o fradambswi.o fradswi.o frefridx.o \
+	   frefrswi.o frefswi.o freptyp.o fshaswi.o fshdidx.o fspcclr.o \
+	   fspcfct.o fspcint.o fspcswi.o fsrfedgclr.o fsrfshd.o fsubdivspc.o \
+	   ftrnclr.o ftrnint.o ftrnorclr.o ftrnorexp.o ftrnorint.o \
+	   ftrnorswi.o ftrnswi.o ftxtali.o ftxtexpfct.o ftxtfnt.o \
+	   ftxthgt.o ftxtpat.o ftxtprc.o ftxtspc.o ftxtupvec.o
+
+LibraryObjectRule()
+SubdirLibraryRule($(OBJS))
+
+DependTarget()

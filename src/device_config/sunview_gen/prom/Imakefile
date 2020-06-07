@@ -1,0 +1,9 @@
+#include <Dore.tmpl>
+
+    SRCS = svgen_prom.c
+    OBJS = svgen_prom.o
+
+LibraryObjectRule()
+SubdirLibraryRule($(OBJS))
+
+DependTarget()

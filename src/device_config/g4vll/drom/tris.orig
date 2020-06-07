@@ -1,0 +1,50 @@
+/*
+  ======================================================================
+  Functions:
+	void ddr_g4vll_drom_tristrip_render (object)
+
+  ======================================================================
+ */
+#include "drom.h"
+#include "dore_develop/private/tristrip.h"
+
+/*
+ ======================================================================
+ */
+
+static DtInt classid = -1;
+
+/*
+  ======================================================================
+ */
+void
+ddr_g4vll_drom_tristrip_render(object)
+dot_object *object;
+{
+    struct tristrip *tristrip;
+
+    if (classid == -1) 
+	    classid = DsInqClassId("DoTriangleStrip");
+
+    if (!DDcondex_QueryRender(classid))
+	    return;
+
+    tristrip = (struct tristrip *)(object->data);
+
+    doe_system_timing_strip_triangles_drawn += tristrip->vertex_count - 2;
+
+    ddr_g4vll_drom_render_triangle_strip (DcRGB,
+				        tristrip->bounding_box_pts,
+				        tristrip->vertex_count,
+				        tristrip->vertex_location,
+				        tristrip->vertex_normal,
+				        tristrip->vertex_color,
+				        tristrip->element_normal,
+				        tristrip->uv_count,
+				        tristrip->uv_list,
+				        tristrip->uvw_count,
+				        tristrip->uvw_list);
+}
+/*
+  ======================================================================
+ */
